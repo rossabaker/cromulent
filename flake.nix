@@ -58,12 +58,10 @@
     # Home configurations
     # Accessible via 'home-manager --flake'
     homeConfigurations = {
-      # TODO: Replace with your username@hostname
-      "you@cool-computer" = home-manager.lib.homeManagerConfiguration rec {
-        # TODO: Replace with your username
-        username = "you";
-        homeDirectory = "/home/${username}";
-        system = "x86_64-linux";
+      "ross.baker@C02Z721ZLVCG" = home-manager.lib.homeManagerConfiguration rec {
+        username = "ross.baker";
+        homeDirectory = "/Users/${username}";
+        system = "x86_64-darwin";
 
         configuration = ./home.nix;
         extraModules = [
