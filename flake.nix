@@ -13,6 +13,11 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+    # nix-darwin flake
+    nixpkgs-darwin.url = "github:nixos/nixpkgs/nixpkgs-21.11-darwin";
+    darwin.url = "github:LnL7/nix-darwin/master";
+    darwin.inputs.nixpkgs.follows = "nixpkgs-darwin";
+
     # Extra community flakes
     # Add any cool flakes you need
     # nur.url = "github:nix-community/NUR"; # User contributed pkgs and modules
@@ -20,7 +25,7 @@
     # nix-colors.url = "github:misterio77/nix-colors"; # Color schemes for usage with home-manager
   };
 
-  outputs = { self, nixpkgs, home-manager, utils, ... }@inputs: {
+  outputs = { self, darwin, nixpkgs, home-manager, utils, ... }@inputs: {
     # Overlayed packages
     overlay = (import ./overlays);
 
@@ -69,6 +74,13 @@
         ];
         # Pass our flake inputs into the config
         extraSpecialArgs = { inherit inputs; };
+      };
+    };
+
+    darwinConfigurations = {
+      C02Z721ZLVCG = darwin.lib.darwinSystem {
+        system = "x86_64-darwin";
+	modules = [ ./darwin-configuration.nix ];
       };
     };
   }
