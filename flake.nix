@@ -19,13 +19,10 @@
     darwin.inputs.nixpkgs.follows = "nixpkgs-darwin";
 
     # Extra community flakes
-    # Add any cool flakes you need
-    # nur.url = "github:nix-community/NUR"; # User contributed pkgs and modules
-    # impermanence.url = "github:riscadoa/impermanence"; # Utilities for opt-in persistance
-    # nix-colors.url = "github:misterio77/nix-colors"; # Color schemes for usage with home-manager
+    emacs-overlay.url = "github:nix-community/emacs-overlay";
   };
 
-  outputs = { self, darwin, nixpkgs, home-manager, utils, ... }@inputs: {
+  outputs = { self, darwin, emacs-overlay, nixpkgs, home-manager, utils, ... }@inputs: {
     # Overlayed packages
     overlay = (import ./overlays);
 
@@ -33,7 +30,7 @@
     # If you want to use packages from flakes that are not nixpkgs (such as NUR), add their overlays here.
     overlays = [
       self.overlay
-      # nur.overlay
+      emacs-overlay.overlay
     ];
 
     # System configurations

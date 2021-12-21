@@ -21,6 +21,21 @@
         "type": "github"
       }
     },
+    "emacs-overlay": {
+      "locked": {
+        "lastModified": 1640055816,
+        "narHash": "sha256-W0OWBjkyQMkcxtHDjn3QOOfMudJasPaTv5aeIPQgAc0=",
+        "owner": "nix-community",
+        "repo": "emacs-overlay",
+        "rev": "78bbc5bf6840ef8c64c6f3856d3c77b3e904050e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "emacs-overlay",
+        "type": "github"
+      }
+    },
     "hardware": {
       "locked": {
         "lastModified": 1639986101,
@@ -91,6 +106,7 @@
     "root": {
       "inputs": {
         "darwin": "darwin",
+        "emacs-overlay": "emacs-overlay",
         "hardware": "hardware",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
