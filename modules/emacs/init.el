@@ -23,6 +23,10 @@
   ("C-z" . nil)				; Previously suspend-frame
   )
 
+(use-package hl-line
+  :config
+  (global-hl-line-mode))
+
 (use-package scroll-bar
   :config
   (scroll-bar-mode -1))
