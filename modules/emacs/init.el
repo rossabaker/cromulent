@@ -4,6 +4,7 @@
 ;;; UI
 
 (use-package emacs
+  :no-require
   :custom
   (use-dialog-box nil)
   :custom-face
