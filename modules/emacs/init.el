@@ -8,3 +8,6 @@
 (use-package frame
   :config
   (blink-cursor-mode -1))
+
+(use-package magit
+  :ensure)
