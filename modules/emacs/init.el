@@ -27,6 +27,11 @@
   :config
   (scroll-bar-mode -1))
 
+(use-package simple
+  :no-require
+  :config
+  (column-number-mode))
+
 (use-package startup
   :no-require
   :custom
