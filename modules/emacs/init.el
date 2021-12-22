@@ -77,6 +77,17 @@
 
 ;;; Tools
 
+(use-package helpful
+  :ensure
+  :bind
+  ([remap describe-command] . helpful-command)
+  ([remap describe-function] . helpful-callable)
+  ([remap describe-key] . helpful-key)
+  ([remap describe-symbol] . helpful-symbol)
+  ([remap describe-variable] . helpful-variable)
+  ([remap Info-goto-emacs-command-node] . helpful-function)
+  ("C-h (" . helpful-macro))
+
 (use-package magit
   :ensure)
 
