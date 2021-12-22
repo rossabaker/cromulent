@@ -1,6 +1,12 @@
 (eval-when-compile
   (require 'use-package))
 
+(use-package no-littering
+  :ensure
+  :init
+  (setq no-littering-etc-directory "~/.cache/emacs/etc/"
+	no-littering-var-directory "~/.cache/emacs/var/"))
+
 ;;; Core
 
 (use-package emacs
