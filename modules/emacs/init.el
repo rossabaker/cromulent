@@ -6,6 +6,7 @@
 (use-package startup
   :no-require
   :custom
+  (initial-scratch-message nil)
   (inhibit-startup-screen t))
 
 ;;; UI
