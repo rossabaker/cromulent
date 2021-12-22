@@ -5,7 +5,7 @@
     enable = true;
     package = pkgs.emacsWithPackagesFromUsePackage {
       config = ./init.el;
-      package = pkgs.emacs;
+      package = pkgs.emacsGcc;
     };
     extraPackages = epkgs: [ epkgs.use-package ];      
   };
