@@ -69,3 +69,8 @@
 
 (use-package magit
   :ensure)
+
+;;; Languages
+
+(use-package nix-mode
+  :ensure)
