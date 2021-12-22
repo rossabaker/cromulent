@@ -7,6 +7,7 @@
   :no-require
   :custom
   (initial-scratch-message nil)
+  (inhibit-startup-echo-area-message t)
   (inhibit-startup-screen t))
 
 ;;; UI
