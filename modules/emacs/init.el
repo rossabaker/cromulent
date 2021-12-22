@@ -31,6 +31,15 @@
   :config
   (global-hl-line-mode))
 
+(use-package modus-themes
+  :ensure
+  :init
+  (modus-themes-load-themes)
+  :config
+  (modus-themes-load-operandi)
+  :bind
+  ("C-c T t" . modus-themes-toggle))
+
 (use-package scroll-bar
   :config
   (scroll-bar-mode -1))
