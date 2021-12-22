@@ -1,6 +1,12 @@
 (eval-when-compile
   (require 'use-package))
 
+;;; Core
+
+(use-package files
+  :custom
+  (confirm-kill-emacs 'yes-or-no-p))
+
 ;;; UI
 
 (use-package emacs
