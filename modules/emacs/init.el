@@ -7,6 +7,10 @@
   :custom
   (confirm-kill-emacs 'yes-or-no-p))
 
+(use-package minibuf-eldef
+  :config
+  (minibuffer-electric-default-mode))
+
 ;;; UI
 
 (use-package emacs
