@@ -8,6 +8,10 @@
   :custom
   (echo-keystrokes 0.01))
 
+(use-package delsel
+  :config
+  (delete-selection-mode))
+
 (use-package files
   :custom
   (confirm-kill-emacs 'yes-or-no-p))
