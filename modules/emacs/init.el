@@ -18,7 +18,10 @@
 
 (use-package frame
   :config
-  (blink-cursor-mode -1))
+  (blink-cursor-mode -1)
+  :bind
+  ("C-z" . nil)				; Previously suspend-frame
+  )
 
 (use-package scroll-bar
   :config
