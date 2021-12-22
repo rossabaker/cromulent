@@ -1,6 +1,13 @@
 (eval-when-compile
   (require 'use-package))
 
+;;; Core
+
+(use-package startup
+  :no-require
+  :custom
+  (inhibit-startup-screen t))
+
 ;;; UI
 
 (use-package emacs
