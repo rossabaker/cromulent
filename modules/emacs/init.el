@@ -4,6 +4,8 @@
 ;;; UI
 
 (use-package emacs
+  :custom
+  (use-dialog-box nil)
   :custom-face
   (default ((t :height 140))))
 
