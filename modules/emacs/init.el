@@ -53,6 +53,12 @@
   :config
   (global-hl-line-mode))
 
+(use-package minibuf
+  :custom
+  (minibuffer-prompt-properties '(read-only t cursor-intangible t face minibuffer-prompt))
+  :hook
+  (minibuffer-setup-hook . cursor-intangible-mode))
+
 (use-package modus-themes
   :ensure
   :init
