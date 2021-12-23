@@ -27,6 +27,10 @@
   :config
   (minibuffer-electric-default-mode))
 
+(use-package savehist
+  :config
+  (savehist-mode))
+
 ;;; UI
 
 (use-package emacs
