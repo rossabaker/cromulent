@@ -93,5 +93,15 @@
 
 ;;; Languages
 
+;;;; Nix
+
 (use-package nix-mode
+  :ensure)
+
+;;;; Scala
+
+(use-package sbt-mode
+  :ensure)
+
+(use-package scala-mode
   :ensure)

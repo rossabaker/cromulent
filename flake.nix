@@ -65,7 +65,7 @@
           # Adds your overlay and packages to nixpkgs
           { nixpkgs.overlays = self.overlays; }
           # Adds your custom home-manager modules
-          ./modules/home-manager
+          ./modules/work
         ];
         # Pass our flake inputs into the config
         extraSpecialArgs = { inherit inputs; };

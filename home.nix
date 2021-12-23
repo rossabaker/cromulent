@@ -11,6 +11,7 @@
 
     # Feel free to split up your configuration and import pieces of it here.
     ./modules/emacs
+    ./modules/scala
   ];
 
   # Comment out if you wish to disable unfree packages for your system
@@ -18,7 +19,7 @@
 
   # Add stuff for your user as you see fit:
   # programs.neovim.enable = true;
-  # home.packages = with pkgs; [ steam ];
+  home.packages = [];
 
   programs.home-manager.enable = true;
 
