@@ -19,7 +19,9 @@
 
   # Add stuff for your user as you see fit:
   # programs.neovim.enable = true;
-  home.packages = [];
+  home.packages = [
+    pkgs.gomod2nix
+  ];
 
   programs.home-manager.enable = true;
 

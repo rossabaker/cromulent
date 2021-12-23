@@ -20,6 +20,7 @@
 
     # Extra community flakes
     emacs-overlay.url = "github:nix-community/emacs-overlay";
+    gomod2nix.url = "github:tweag/gomod2nix";
 
     hocon-mode.url = "github:jxq0/hocon-mode";
     hocon-mode.flake = false;
@@ -28,6 +29,7 @@
   outputs = { self,
               darwin,
               emacs-overlay,
+              gomod2nix,
               hocon-mode,
               home-manager,
               nixpkgs,
@@ -41,6 +43,7 @@
     overlays = [
       self.overlay
       emacs-overlay.overlay
+      gomod2nix.overlay
     ];
 
     # System configurations
