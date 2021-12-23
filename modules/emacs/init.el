@@ -83,6 +83,11 @@
   :config
   (tool-bar-mode -1))
 
+(use-package vertico
+  :ensure
+  :config
+  (vertico-mode))
+
 ;;; Tools
 
 (use-package helpful
