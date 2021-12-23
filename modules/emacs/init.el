@@ -124,6 +124,9 @@
 (use-package magit
   :ensure)
 
+(use-package restclient
+  :ensure)
+
 ;;; Languages
 
 ;;;; Groovy
