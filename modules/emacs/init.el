@@ -116,6 +116,16 @@
 
 ;;; Languages
 
+;;;; Groovy
+
+(use-package groovy-mode
+  :ensure
+  :hook
+  (groovy-mode-hook . subword-mode))
+
+(use-package jenkinsfile-mode
+  :ensure)
+
 ;;;; Nix
 
 (use-package nix-mode
