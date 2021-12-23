@@ -36,6 +36,12 @@
   :custom-face
   (default ((t :height 140))))
 
+(use-package display-line-numbers
+  :custom
+  (display-line-numbers-widen t)
+  :hook
+  ((prog-mode-hook conf-mode-hook) . display-line-numbers-mode))
+
 (use-package frame
   :config
   (blink-cursor-mode -1)
