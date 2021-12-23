@@ -69,7 +69,8 @@
 (use-package simple
   :no-require
   :config
-  (column-number-mode))
+  (column-number-mode)
+  (size-indication-mode))
 
 (use-package startup
   :no-require
