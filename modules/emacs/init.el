@@ -36,6 +36,11 @@
   :config
   (savehist-mode))
 
+(use-package ws-butler
+  :ensure
+  :hook
+  ((prog-mode-hook text-mode-hook conf-mode-hook) . ws-butler-mode))
+
 ;;; UI
 
 (use-package emacs
