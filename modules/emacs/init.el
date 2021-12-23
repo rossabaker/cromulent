@@ -1,4 +1,5 @@
 (eval-when-compile
+  (setq use-package-hook-name-suffix nil)
   (require 'use-package))
 
 (use-package no-littering
@@ -96,7 +97,9 @@
 ;;;; Nix
 
 (use-package nix-mode
-  :ensure)
+  :ensure
+  :hook
+  (nix-mode-hook . subword-mode))
 
 ;;;; Scala
 
@@ -106,7 +109,11 @@
   ("/reference\\.conf\\'" . hocon-mode))
 
 (use-package sbt-mode
-  :ensure)
+  :ensure
+  :hook
+  (sbt-mode-hook . subword-mode))
 
 (use-package scala-mode
-  :ensure)
+  :ensure
+  :hook
+  (scala-mode-hook . subword-mode))
