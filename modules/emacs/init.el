@@ -13,7 +13,12 @@
 (use-package emacs
   :no-require
   :custom
-  (echo-keystrokes 0.01))
+  (echo-keystrokes 0.01)
+  :config
+  (defun ross/show-trailing-whitespace ()
+    (setq show-trailing-whitespace t))
+  :hook
+  ((prog-mode-hook text-mode-hook conf-mode-hook) . ross/show-trailing-whitespace))
 
 (use-package delsel
   :config
