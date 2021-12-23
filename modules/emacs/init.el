@@ -17,8 +17,14 @@
   :config
   (defun ross/show-trailing-whitespace ()
     (setq show-trailing-whitespace t))
+  (defun ross/scratch ()
+    "Pop to the scratch buffer, receating it if necessary."
+    (interactive)
+    (pop-to-buffer (get-buffer-create "*scratch*")))
   :hook
-  ((prog-mode-hook text-mode-hook conf-mode-hook) . ross/show-trailing-whitespace))
+  ((prog-mode-hook text-mode-hook conf-mode-hook) . ross/show-trailing-whitespace)
+  :bind
+  ("C-c b x" . ross/scratch))
 
 (use-package delsel
   :config
