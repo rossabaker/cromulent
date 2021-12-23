@@ -20,9 +20,19 @@
 
     # Extra community flakes
     emacs-overlay.url = "github:nix-community/emacs-overlay";
+
+    hocon-mode.url = "github:jxq0/hocon-mode";
+    hocon-mode.flake = false;
   };
 
-  outputs = { self, darwin, emacs-overlay, nixpkgs, home-manager, utils, ... }@inputs: {
+  outputs = { self,
+              darwin,
+              emacs-overlay,
+              hocon-mode,
+              home-manager,
+              nixpkgs,
+              utils,
+              ... }@inputs: {
     # Overlayed packages
     overlay = (import ./overlays);
 

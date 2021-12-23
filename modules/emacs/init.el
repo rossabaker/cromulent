@@ -100,6 +100,11 @@
 
 ;;;; Scala
 
+(use-package hocon-mode
+  :mode
+  ("/application\\.conf\\'" . hocon-mode)
+  ("/reference\\.conf\\'" . hocon-mode))
+
 (use-package sbt-mode
   :ensure)
 
