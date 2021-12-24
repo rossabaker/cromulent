@@ -145,6 +145,11 @@
 (use-package jenkinsfile-mode
   :ensure)
 
+;;;; Markdown
+
+(use-package markdown-mode
+  :ensure)
+
 ;;;; Nix
 
 (use-package nix-mode
