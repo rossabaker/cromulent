@@ -145,6 +145,11 @@
 (use-package jenkinsfile-mode
   :ensure)
 
+;;;; JSON
+
+(use-package json-mode
+  :ensure)
+
 ;;;; Markdown
 
 (use-package markdown-mode
