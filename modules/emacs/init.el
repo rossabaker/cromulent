@@ -148,7 +148,9 @@
 ;;;; JSON
 
 (use-package json-mode
-  :ensure)
+  :ensure
+  :mode
+  ("/flake\\.lock\\'" . json-mode))
 
 ;;;; Markdown
 
