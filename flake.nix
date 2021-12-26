@@ -38,14 +38,6 @@
     # Overlayed packages
     overlay = (import ./overlays);
 
-    # This repo's overlay plus any other overlays you use
-    # If you want to use packages from flakes that are not nixpkgs (such as NUR), add their overlays here.
-    overlays = [
-      self.overlay
-      emacs-overlay.overlay
-      gomod2nix.overlay
-    ];
-
     # System configurations
     # Accessible via 'nixos-rebuild --flake'
     nixosConfigurations = {
@@ -56,7 +48,7 @@
         modules = [
           ./configuration.nix
           # Adds your overlay and packages to nixpkgs
-          { nixpkgs.overlays = self.overlays; }
+          { nixpkgs.overlays = [ self.overlay ]; }
           # Adds your custom nixos modules
           ./modules/nixos
         ];
@@ -76,7 +68,7 @@
         configuration = ./home.nix;
         extraModules = [
           # Adds your overlay and packages to nixpkgs
-          { nixpkgs.overlays = self.overlays; }
+          { nixpkgs.overlays = [ self.overlay emacs-overlay.overlay gomod2nix.overlay ]; }
           # Adds your custom home-manager modules
           ./modules/work
         ];
@@ -94,7 +86,7 @@
   }
   // utils.lib.eachDefaultSystem (system:
     let
-      pkgs = import nixpkgs { inherit system; overlays = self.overlays; };
+      pkgs = import nixpkgs { inherit system; overlays = [ self.overlay ]; };
       nix = pkgs.writeShellScriptBin "nix" ''
         exec ${pkgs.nixFlakes}/bin/nix --experimental-features "nix-command flakes" "$@"
       '';
@@ -103,9 +95,7 @@
     {
       # Your custom packages, plus nixpkgs and overlayed stuff
       # Accessible via 'nix build .#example' or 'nix build .#nixpkgs.example'
-      packages = {
-        nixpkgs = pkgs;
-      } // (import ./pkgs { inherit pkgs; });
+      packages = import ./pkgs { inherit pkgs; };
 
       # Devshell for bootstrapping plus editor utilities (fmt and LSP)
       # Accessible via 'nix develop'
