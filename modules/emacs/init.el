@@ -109,6 +109,27 @@
   :config
   (tool-bar-mode -1))
 
+;;; Completion
+
+(use-package consult
+  :ensure
+  :custom
+  (consult-narrow-key (kbd "C-+"))
+  (xref-show-xrefs-function #'consult-xref)
+  (xref-show-definitions-function #'consult-xref)
+  :config
+  (advice-add #'completing-read-multiple :override #'consult-completing-read-multiple)
+  :bind
+  ([remap switch-to-buffer] . consult-buffer)
+  ([remap switch-to-buffer-other-window] . consult-buffer-other-window)
+  ([remap switch-to-buffer-other-frame] . consult-buffer-other-frame)
+  ([remap yank] . consult-yank-from-kill-ring)
+  ([remap goto-line] . consult-goto-line)
+  ([remap repeat-complex-command] . consult-history)
+  ([remap apropros] . consult-apropos)
+  ([remap man] . consult-man)
+  ([remap isearch-edit-string] . consult-isearch-history))
+
 (use-package vertico
   :ensure
   :config
