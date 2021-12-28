@@ -26,6 +26,10 @@
   :bind
   ("C-c b x" . ross/scratch))
 
+(use-package advice
+  :custom
+  (ad-redefinition-action 'accept))
+
 (use-package delsel
   :config
   (delete-selection-mode))
