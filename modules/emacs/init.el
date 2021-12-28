@@ -64,6 +64,11 @@
   :custom-face
   (default ((t :height 140))))
 
+(use-package default-text-scale
+  :ensure
+  :config
+  (default-text-scale-mode))
+
 (use-package display-line-numbers
   :custom
   (display-line-numbers-widen t)
