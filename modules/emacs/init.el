@@ -56,6 +56,7 @@
 (use-package emacs
   :no-require
   :custom
+  (cursor-type 'bar)
   (use-dialog-box nil)
   :custom-face
   (default ((t :height 140))))
