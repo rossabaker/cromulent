@@ -57,6 +57,8 @@
   :no-require
   :custom
   (cursor-type 'bar)
+  (scroll-conservatively 101)
+  (scroll-margin 2)
   (use-dialog-box nil)
   :custom-face
   (default ((t :height 140))))
