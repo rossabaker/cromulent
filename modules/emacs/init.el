@@ -46,6 +46,16 @@
   :config
   (savehist-mode))
 
+(use-package simple
+  :requires cl-lib
+  :config
+  (defun ross/ad-keyboard-escape-quit (fun &rest args)
+    (cl-letf (((symbol-function 'one-window-p) (lambda (&rest _) t)))
+      (apply fun args)))
+  (advice-add 'keyboard-escape-quit :around #'ross/ad-keyboard-escape-quit)
+  :bind
+  ("<escape>" . keyboard-escape-quit))
+
 (use-package whole-line-or-region
   :ensure
   :config
