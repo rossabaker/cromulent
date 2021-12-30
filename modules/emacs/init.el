@@ -178,6 +178,11 @@
   ([remap man] . consult-man)
   ([remap isearch-edit-string] . consult-isearch-history))
 
+(use-package orderless
+  :ensure
+  :custom
+  (completion-styles '(orderless)))
+
 (use-package vertico
   :ensure
   :config
