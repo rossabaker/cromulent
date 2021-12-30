@@ -75,7 +75,7 @@
   (scroll-conservatively 101)
   (scroll-margin 2)
   (use-dialog-box nil)
-  (visible-bell t)
+  (visible-bell nil)
   (window-combination-resize t)
   :custom-face
   (default ((t :height 140))))
@@ -90,6 +90,17 @@
   (display-line-numbers-widen t)
   :hook
   ((prog-mode-hook conf-mode-hook) . display-line-numbers-mode))
+
+(use-package faces
+  :custom
+  (ring-bell-function 'ross/flash-mode-line)
+  :config
+  (defun ross/flash-mode-line ()
+    (let ((old-fg (face-foreground 'mode-line)))
+      (set-face-foreground 'mode-line "red")
+      (run-with-idle-timer 0.1 nil
+			   (lambda (fg) (set-face-foreground 'mode-line fg))
+			   old-fg))))
 
 (use-package frame
   :config
