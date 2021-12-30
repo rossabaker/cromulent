@@ -46,6 +46,11 @@
   :config
   (savehist-mode))
 
+(use-package whole-line-or-region
+  :ensure
+  :config
+  (whole-line-or-region-global-mode))
+
 (use-package ws-butler
   :ensure
   :hook
