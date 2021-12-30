@@ -2,11 +2,19 @@
   (setq use-package-hook-name-suffix nil)
   (require 'use-package))
 
+;;; Things to run early
+
 (use-package no-littering
   :ensure
   :init
   (setq no-littering-etc-directory "~/.cache/emacs/etc/"
 	no-littering-var-directory "~/.cache/emacs/var/"))
+
+(use-package exec-path-from-shell
+  :ensure
+  :if (eq system-type 'darwin)
+  :config
+  (exec-path-from-shell-initialize))
 
 ;;; Core
 
