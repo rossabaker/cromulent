@@ -209,6 +209,11 @@
 
 ;;; Languages
 
+;;;; Git
+
+(use-package git-modes
+  :ensure)
+
 ;;;; Groovy
 
 (use-package groovy-mode
