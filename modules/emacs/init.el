@@ -75,6 +75,7 @@
   (scroll-conservatively 101)
   (scroll-margin 2)
   (use-dialog-box nil)
+  (visible-bell t)
   (window-combination-resize t)
   :custom-face
   (default ((t :height 140))))
