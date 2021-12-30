@@ -27,6 +27,7 @@
 
   programs.git = {
     enable = true;
+    ignores = [ ".metals/" ];
     userName = "Ross A. Baker";
     userEmail = "ross@rossabaker.com";
   };
