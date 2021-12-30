@@ -152,7 +152,7 @@
   ([remap switch-to-buffer] . consult-buffer)
   ([remap switch-to-buffer-other-window] . consult-buffer-other-window)
   ([remap switch-to-buffer-other-frame] . consult-buffer-other-frame)
-  ([remap yank] . consult-yank-from-kill-ring)
+  ([remap yank-pop] . consult-yank-pop)
   ([remap goto-line] . consult-goto-line)
   ([remap repeat-complex-command] . consult-history)
   ([remap apropros] . consult-apropos)
