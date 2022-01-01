@@ -4,6 +4,13 @@
 
 ;;; Things to run early
 
+(use-package emacs
+  :no-require
+  :custom
+  ;; These are duplicated with the git config in Nix...
+  (user-full-name "Ross A. Baker")
+  (user-mail-address "ross@rossabaker.com"))
+
 (use-package no-littering
   :ensure
   :init
