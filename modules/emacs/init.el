@@ -28,6 +28,7 @@
 (use-package emacs
   :no-require
   :custom
+  (create-lockfiles nil)
   (echo-keystrokes 0.01)
   :config
   (defun ross/show-trailing-whitespace ()
