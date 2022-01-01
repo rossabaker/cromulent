@@ -201,6 +201,11 @@
   ([remap Info-goto-emacs-command-node] . helpful-function)
   ("C-h (" . helpful-macro))
 
+(use-package flycheck
+  :ensure
+  :config
+  (global-flycheck-mode))
+
 (use-package magit
   :ensure)
 
