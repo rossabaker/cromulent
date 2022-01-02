@@ -111,6 +111,9 @@
   :bind
   ("<escape>" . keyboard-escape-quit))
 
+(use-package wgrep
+  :ensure)
+
 (use-package whole-line-or-region
   :ensure
   :delight whole-line-or-region-local-mode
