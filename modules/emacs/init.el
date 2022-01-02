@@ -61,6 +61,11 @@
   :custom
   (ad-redefinition-action 'accept))
 
+(use-package auth-source
+  :custom
+  ;; .gpg suffix encrypts it.  The default uses plaintext ~/.authinfo.  Yuck!
+  (auth-sources (list (expand-file-name "authinfo.gpg" no-littering-etc-directory))))
+
 (use-package delsel
   :config
   (delete-selection-mode))
