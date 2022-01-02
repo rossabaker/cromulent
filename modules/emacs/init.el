@@ -166,6 +166,11 @@
   :config
   (global-hl-line-mode))
 
+(use-package hl-todo
+  :ensure
+  :hook
+  ((prog-mode-hook conf-mode-hook) . hl-todo-mode))
+
 (use-package minibuf
   :custom
   (minibuffer-prompt-properties '(read-only t cursor-intangible t face minibuffer-prompt))
