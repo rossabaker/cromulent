@@ -1,4 +1,13 @@
+;;; init.el -- Ross A. Baker's Emacs Configuration
+
+;;; Commentary:
+
+;; Tastes great with ./default.nix.
+
+;;; Code:
+
 (eval-when-compile
+  (defvar use-package-hook-name-suffix)
   (setq use-package-hook-name-suffix nil)
   (require 'use-package))
 
@@ -13,12 +22,14 @@
 
 (use-package no-littering
   :ensure
+  :defines no-littering-etc-directory no-littering-var-directory
   :init
   (setq no-littering-etc-directory "~/.cache/emacs/etc/"
 	no-littering-var-directory "~/.cache/emacs/var/"))
 
 (use-package exec-path-from-shell
   :ensure
+  :functions exec-path-from-shell-initialize
   :if (eq system-type 'darwin)
   :config
   (exec-path-from-shell-initialize))
@@ -64,6 +75,7 @@
 
 (use-package simple
   :requires cl-lib
+  :functions ross/ad-keyboard-escape-quit
   :config
   (defun ross/ad-keyboard-escape-quit (fun &rest args)
     (cl-letf (((symbol-function 'one-window-p) (lambda (&rest _) t)))
@@ -74,6 +86,7 @@
 
 (use-package whole-line-or-region
   :ensure
+  :functions whole-line-or-region-global-mode
   :config
   (whole-line-or-region-global-mode))
 
@@ -98,6 +111,7 @@
 
 (use-package default-text-scale
   :ensure
+  :functions default-text-scale-mode
   :config
   (default-text-scale-mode))
 
@@ -137,6 +151,7 @@
 
 (use-package modus-themes
   :ensure
+  :functions modus-themes-load-themes modus-themes-load-operandi
   :init
   (modus-themes-load-themes)
   :config
@@ -169,6 +184,7 @@
 
 (use-package consult
   :ensure
+  :functions consult-completing-read-multiple
   :custom
   (consult-narrow-key (kbd "C-+"))
   (xref-show-xrefs-function #'consult-xref)
@@ -193,6 +209,7 @@
 
 (use-package vertico
   :ensure
+  :functions vertico-mode
   :config
   (vertico-mode))
 
@@ -211,6 +228,7 @@
 
 (use-package flycheck
   :ensure
+  :functions global-flycheck-mode
   :config
   (global-flycheck-mode))
 
@@ -273,3 +291,6 @@
   :ensure
   :hook
   (scala-mode-hook . subword-mode))
+
+(provide 'init)
+;;; init.el ends here
