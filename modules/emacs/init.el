@@ -239,6 +239,20 @@
   ([remap man] . consult-man)
   ([remap isearch-edit-string] . consult-isearch-history))
 
+(use-package embark
+  :ensure
+  :custom
+  (prefix-help-command #'embark-prefix-help-command)
+  :bind
+  ("C-." . embark-act)
+  ("M-." . embark-dwim)
+  ([remap describe-bindings] . embark-bindings))
+
+(use-package embark-consult
+  :ensure
+  :after (embark consult)
+  :demand t)
+
 (use-package marginalia
   :ensure
   :functions marginalia-mode
