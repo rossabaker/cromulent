@@ -239,6 +239,12 @@
   ([remap man] . consult-man)
   ([remap isearch-edit-string] . consult-isearch-history))
 
+(use-package marginalia
+  :ensure
+  :functions marginalia-mode
+  :config
+  (marginalia-mode))
+
 (use-package orderless
   :ensure
   :custom
