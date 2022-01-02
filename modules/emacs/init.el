@@ -11,6 +11,10 @@
   (setq use-package-hook-name-suffix nil)
   (require 'use-package))
 
+;;; State
+
+(defconst ross/is-mac (eq system-type 'darwin))
+
 ;;; Things to run early
 
 (use-package emacs
@@ -30,7 +34,7 @@
 (use-package exec-path-from-shell
   :ensure
   :functions exec-path-from-shell-initialize
-  :if (eq system-type 'darwin)
+  :if ross/is-mac
   :config
   (exec-path-from-shell-initialize))
 
