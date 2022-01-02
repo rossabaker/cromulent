@@ -85,6 +85,10 @@
   :config
   (minibuffer-electric-default-mode))
 
+(use-package recentf
+  :config
+  (recentf-mode))
+
 (use-package savehist
   :config
   (savehist-mode))
