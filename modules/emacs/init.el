@@ -8,7 +8,9 @@
 
 (eval-when-compile
   (defvar use-package-hook-name-suffix)
+  (defvar use-package-compute-statistics)
   (setq use-package-hook-name-suffix nil)
+  (setq use-package-compute-statistics t)
   (require 'use-package))
 
 ;;; State
