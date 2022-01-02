@@ -351,7 +351,7 @@
   :mode
   ("/application\\.conf\\'" . hocon-mode)
   ("/reference\\.conf\\'" . hocon-mode)
-  ("/scala-steward.conf\\'" . hocon-mode))
+  ("/\\.scala-steward\\.conf\\'" . hocon-mode))
 
 (use-package sbt-mode
   :ensure
