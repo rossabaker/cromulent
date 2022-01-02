@@ -18,6 +18,10 @@ let
   hocon-mode = compile "hocon-mode" inputs.hocon-mode;
 in
 {
+  home.packages = [
+    pkgs.pythonPackages.pyhocon
+  ];
+
   programs.emacs = {
     enable = true;
     package = pkgs.emacsWithPackagesFromUsePackage {

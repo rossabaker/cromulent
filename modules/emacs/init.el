@@ -348,6 +348,20 @@
 ;;;; Scala
 
 (use-package hocon-mode
+  :defines flycheck-checkers ross/hocon-pyhocon
+  :functions flycheck-define-checker
+  :config
+  (flycheck-define-checker ross/hocon-pyhocon
+    "A HOCON checker using the pyhocon tool."
+    :command ("pyhocon" "-i" source "-o" null-device)
+    :error-patterns
+    ((error line-start
+            "pyparsing.ParseSyntaxException: "
+            (message (one-or-more anychar))
+            "(line:" line ", col:" column ")"
+            line-end))
+    :modes (hocon-mode))
+  (add-to-list 'flycheck-checkers 'ross/hocon-pyhocon)
   :mode
   ("/application\\.conf\\'" . hocon-mode)
   ("/reference\\.conf\\'" . hocon-mode)
