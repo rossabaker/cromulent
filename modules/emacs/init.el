@@ -110,6 +110,7 @@
   :no-require
   :custom
   (cursor-type 'bar)
+  (fast-but-imprecise-scrolling t)
   (scroll-conservatively 101)
   (scroll-margin 2)
   (use-dialog-box nil)
