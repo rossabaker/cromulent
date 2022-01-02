@@ -40,6 +40,9 @@
   :config
   (exec-path-from-shell-initialize))
 
+(use-package delight
+  :ensure)
+
 ;;; Core
 
 (use-package emacs
@@ -68,6 +71,9 @@
   ;; .gpg suffix encrypts it.  The default uses plaintext ~/.authinfo.  Yuck!
   (auth-sources (list (expand-file-name "authinfo.gpg" no-littering-etc-directory))))
 
+(use-package autorevert
+  :delight auto-revert-mode)
+
 (use-package delsel
   :config
   (delete-selection-mode))
@@ -78,6 +84,7 @@
 
 (use-package gcmh
   :ensure
+  :delight
   :hook
   (after-init-hook . gcmh-mode))
 
@@ -106,12 +113,14 @@
 
 (use-package whole-line-or-region
   :ensure
+  :delight whole-line-or-region-local-mode
   :functions whole-line-or-region-global-mode
   :config
   (whole-line-or-region-global-mode))
 
 (use-package ws-butler
   :ensure
+  :delight
   :hook
   ((prog-mode-hook text-mode-hook conf-mode-hook) . ws-butler-mode))
 
@@ -244,6 +253,7 @@
 (use-package which-key
   :ensure
   :functions which-key-mode
+  :delight
   :custom
   (which-key-show-early-on-C-h t)
   (which-key-idle-delay 10000)
