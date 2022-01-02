@@ -74,6 +74,11 @@
   :custom
   (confirm-kill-emacs 'yes-or-no-p))
 
+(use-package gcmh
+  :ensure
+  :hook
+  (after-init-hook . gcmh-mode))
+
 (use-package minibuf-eldef
   :config
   (minibuffer-electric-default-mode))
