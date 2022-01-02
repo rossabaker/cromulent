@@ -111,6 +111,7 @@
   :custom
   (cursor-type 'bar)
   (fast-but-imprecise-scrolling t)
+  (frame-inhibit-implied-resize t)
   (scroll-conservatively 101)
   (scroll-margin 2)
   (use-dialog-box nil)
