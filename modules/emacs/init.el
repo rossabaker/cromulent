@@ -8,9 +8,7 @@
 
 (eval-when-compile
   (defvar use-package-hook-name-suffix)
-  (defvar use-package-compute-statistics)
   (setq use-package-hook-name-suffix nil)
-  (setq use-package-compute-statistics t)
   (require 'use-package))
 
 ;;; State
@@ -28,14 +26,12 @@
 
 (use-package no-littering
   :ensure
-  :defines no-littering-etc-directory no-littering-var-directory
   :init
   (setq no-littering-etc-directory "~/.cache/emacs/etc/"
 	no-littering-var-directory "~/.cache/emacs/var/"))
 
 (use-package exec-path-from-shell
   :ensure
-  :functions exec-path-from-shell-initialize
   :if ross/is-mac
   :config
   (exec-path-from-shell-initialize))
@@ -102,7 +98,6 @@
 
 (use-package simple
   :requires cl-lib
-  :functions ross/ad-keyboard-escape-quit
   :config
   (defun ross/ad-keyboard-escape-quit (fun &rest args)
     (cl-letf (((symbol-function 'one-window-p) (lambda (&rest _) t)))
@@ -117,7 +112,6 @@
 (use-package whole-line-or-region
   :ensure
   :delight whole-line-or-region-local-mode
-  :functions whole-line-or-region-global-mode
   :config
   (whole-line-or-region-global-mode))
 
@@ -146,7 +140,6 @@
 
 (use-package default-text-scale
   :ensure
-  :functions default-text-scale-mode
   :config
   (default-text-scale-mode))
 
@@ -191,7 +184,6 @@
 
 (use-package modus-themes
   :ensure
-  :functions modus-themes-load-themes modus-themes-load-operandi
   :init
   (modus-themes-load-themes)
   :config
@@ -224,7 +216,6 @@
 
 (use-package consult
   :ensure
-  :functions consult-completing-read-multiple
   :custom
   (consult-narrow-key (kbd "C-+"))
   (xref-show-xrefs-function #'consult-xref)
@@ -258,7 +249,6 @@
 
 (use-package marginalia
   :ensure
-  :functions marginalia-mode
   :config
   (marginalia-mode))
 
@@ -269,13 +259,11 @@
 
 (use-package vertico
   :ensure
-  :functions vertico-mode
   :config
   (vertico-mode))
 
 (use-package which-key
   :ensure
-  :functions which-key-mode
   :delight
   :custom
   (which-key-show-early-on-C-h t)
@@ -299,7 +287,8 @@
 
 (use-package flycheck
   :ensure
-  :functions global-flycheck-mode
+  :custom
+  (flycheck-emacs-lisp-initialize-packages nil)
   :config
   (global-flycheck-mode))
 
@@ -348,8 +337,6 @@
 ;;;; Scala
 
 (use-package hocon-mode
-  :defines flycheck-checkers ross/hocon-pyhocon
-  :functions flycheck-define-checker
   :config
   (flycheck-define-checker ross/hocon-pyhocon
     "A HOCON checker using the pyhocon tool."
