@@ -152,6 +152,10 @@ environment."
   :bind
   ("<escape>" . keyboard-escape-quit))
 
+(use-package string-inflection
+  ;; This deserves some keybindings
+  :ensure)
+
 (use-package subword
   :delight)
 
