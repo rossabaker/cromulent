@@ -34,6 +34,7 @@ in
           ./patches/benchmark-init/pr00016.diff
           ./patches/benchmark-init/pr00017.diff
         ];
+        fill-sentences-correctly = compile "fill-sentences-correctly" inputs.fill-sentences-correctly;
         hocon-mode = compile "hocon-mode" inputs.hocon-mode;
         scala-mode = compile "scala-mode" inputs.scala-mode;
       };

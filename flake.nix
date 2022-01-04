@@ -22,6 +22,11 @@
     emacs-overlay.url = "github:nix-community/emacs-overlay";
     gomod2nix.url = "github:tweag/gomod2nix";
 
+    fill-sentences-correctly = {
+      url = "github:duckwork/fill-sentences-correctly.el";
+      flake = false;
+    };
+
     hocon-mode.url = "github:jxq0/hocon-mode";
     hocon-mode.flake = false;
 
@@ -34,6 +39,7 @@
   outputs = { self,
               darwin,
               emacs-overlay,
+              fill-sentences-correctly,
               gomod2nix,
               hocon-mode,
               home-manager,

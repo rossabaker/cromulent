@@ -36,6 +36,22 @@
         "type": "github"
       }
     },
+    "fill-sentences-correctly": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1641087826,
+        "narHash": "sha256-4hPcdkHJKwNqJKgG/5JPxkNnBakHHCzqjaPceaI2YZI=",
+        "owner": "duckwork",
+        "repo": "fill-sentences-correctly.el",
+        "rev": "ef59da0c913d01763a928f23aba4ca0248907b47",
+        "type": "github"
+      },
+      "original": {
+        "owner": "duckwork",
+        "repo": "fill-sentences-correctly.el",
+        "type": "github"
+      }
+    },
     "gomod2nix": {
       "inputs": {
         "nixpkgs": "nixpkgs",
@@ -158,6 +174,7 @@
       "inputs": {
         "darwin": "darwin",
         "emacs-overlay": "emacs-overlay",
+        "fill-sentences-correctly": "fill-sentences-correctly",
         "gomod2nix": "gomod2nix",
         "hardware": "hardware",
         "hocon-mode": "hocon-mode",

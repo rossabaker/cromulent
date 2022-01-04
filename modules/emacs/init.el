@@ -105,6 +105,16 @@ environment."
   (require 'editorconfig-core)		;unclear why this isn't happening for free
   (editorconfig-mode))
 
+(use-package fill-sentences-correctly
+  ;; I'm a double spacer.  It works better with abbreviations.  It
+  ;; looks better in monospace.  It collapses by default in most
+  ;; proportional contexts.  And the rest of the world just doesn't
+  ;; get it.  Ergo...
+  :ensure
+  :delight
+  :config
+  (fill-sentences-correctly-mode))
+
 (use-package ffap
   :custom
   (ffap-machine-p-known 'reject)	; speeds up load, and it sounds terrifying
