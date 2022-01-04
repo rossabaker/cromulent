@@ -216,6 +216,10 @@ environment."
   :bind
   ("C-c T t" . modus-themes-toggle))
 
+(use-package paren
+  :custom
+  (show-paren-delay 0))
+
 (use-package scroll-bar
   :config
   (scroll-bar-mode -1))
