@@ -27,6 +27,7 @@ in
       package = emacs;
       override = epkgs: epkgs // {
         hocon-mode = compile "hocon-mode" inputs.hocon-mode;
+        scala-mode = compile "scala-mode" inputs.scala-mode;
       };
     };
     extraPackages = epkgs: [

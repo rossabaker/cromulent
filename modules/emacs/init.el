@@ -185,6 +185,7 @@
 
 (use-package modus-themes
   :ensure
+  :demand t
   :init
   :config
   (modus-themes-load-themes)

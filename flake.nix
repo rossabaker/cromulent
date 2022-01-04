@@ -24,6 +24,11 @@
 
     hocon-mode.url = "github:jxq0/hocon-mode";
     hocon-mode.flake = false;
+
+    scala-mode = {
+      url = "github:Kazark/emacs-scala-mode?ref=scala3";
+      flake = false;
+    };
   };
 
   outputs = { self,
@@ -33,6 +38,7 @@
               hocon-mode,
               home-manager,
               nixpkgs,
+              scala-mode,
               utils,
               ... }@inputs: {
     # Overlayed packages
