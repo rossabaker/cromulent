@@ -1,0 +1,18 @@
+Fix sorting by total ms
+https://github.com/dholm/benchmark-init-el/pull/17
+
+diff --git a/benchmark-init-modes.el b/benchmark-init-modes.el
+index 1a5f8c5..763caf3 100644
+--- a/benchmark-init-modes.el
++++ b/benchmark-init-modes.el
+@@ -79,8 +79,8 @@
+    ("ms" 7 (lambda (a b) (< (string-to-number (aref (cadr a) 2))
+                             (string-to-number (aref (cadr b) 2))))
+     :right-align t)
+-   ("total ms" 7 (lambda (a b) (< (string-to-number (aref (cadr a) 2))
+-                                  (string-to-number (aref (cadr b) 2))))
++   ("total ms" 7 (lambda (a b) (< (string-to-number (aref (cadr a) 3))
++                                  (string-to-number (aref (cadr b) 3))))
+     :right-align t)]
+   "Benchmark list format.")
+ 

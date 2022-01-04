@@ -31,6 +31,7 @@ in
       override = epkgs: epkgs // {
         benchmark-init = withPatches epkgs.benchmark-init [
           ./patches/benchmark-init/pr00016.diff
+          ./patches/benchmark-init/pr00017.diff
         ];
         hocon-mode = compile "hocon-mode" inputs.hocon-mode;
         scala-mode = compile "scala-mode" inputs.scala-mode;
