@@ -92,6 +92,11 @@ environment."
   :config
   (delete-selection-mode))
 
+(use-package ffap
+  :custom
+  (ffap-machine-p-known 'reject)	; speeds up load, and it sounds terrifying
+  )
+
 (use-package files
   :custom
   (confirm-kill-emacs 'yes-or-no-p))
