@@ -88,6 +88,10 @@ environment."
 (use-package autorevert
   :delight auto-revert-mode)
 
+(use-package cus-edit
+  :custom
+  (custom-file null-device))
+
 (use-package delsel
   :config
   (delete-selection-mode))
