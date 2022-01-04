@@ -333,6 +333,11 @@ environment."
 
 ;;; Languages
 
+;;;; Emacs Lisp
+
+(use-package eldoc
+  :delight)
+
 ;;;; Git
 
 (use-package git-modes
