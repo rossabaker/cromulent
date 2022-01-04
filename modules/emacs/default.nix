@@ -14,8 +14,6 @@ let
       install *.el* $out/share/emacs/site-lisp
     '';
   };
-
-  hocon-mode = compile "hocon-mode" inputs.hocon-mode;
 in
 {
   home.packages = [
@@ -27,10 +25,12 @@ in
     package = pkgs.emacsWithPackagesFromUsePackage {
       config = ./init.el;
       package = emacs;
+      override = epkgs: epkgs // {
+        hocon-mode = compile "hocon-mode" inputs.hocon-mode;
+      };
     };
     extraPackages = epkgs: [
       epkgs.use-package
-      hocon-mode
     ];
   };
 

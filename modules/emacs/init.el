@@ -7,8 +7,9 @@
 ;;; Code:
 
 (eval-when-compile
-  (defvar use-package-hook-name-suffix)
-  (setq use-package-hook-name-suffix nil)
+  (setq use-package-hook-name-suffix nil
+	use-package-ensure-function #'ignore ; Always managed by Nix
+	)
   (require 'use-package))
 
 ;;; State
@@ -185,8 +186,8 @@
 (use-package modus-themes
   :ensure
   :init
-  (modus-themes-load-themes)
   :config
+  (modus-themes-load-themes)
   (modus-themes-load-operandi)
   :bind
   ("C-c T t" . modus-themes-toggle))
@@ -337,6 +338,7 @@
 ;;;; Scala
 
 (use-package hocon-mode
+  :ensure
   :config
   (flycheck-define-checker ross/hocon-pyhocon
     "A HOCON checker using the pyhocon tool."

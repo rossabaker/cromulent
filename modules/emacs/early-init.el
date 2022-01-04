@@ -8,5 +8,9 @@
 
 (setq gc-cons-threshold most-positive-fixnum)
 
+;; All our packages come from Nix
+(setq package-enable-at-startup nil
+      package-archives nil)
+
 (provide 'early-init)
 ;;; early-init.el ends here
