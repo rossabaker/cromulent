@@ -7,8 +7,15 @@
 ;;; Code:
 
 (eval-when-compile
-  (setq use-package-hook-name-suffix nil
-	use-package-ensure-function #'ignore ; Always managed by Nix
+  (defun ross/use-package-ensure-already-installed
+      (_name _ensure state &optional _context)
+    "Value for `use-package-ensure-function` that assumes the
+package is already installed.  This is true in our Nix
+environment."
+    t)
+  (setq use-package-always-demand t
+	use-package-hook-name-suffix nil
+	use-package-ensure-function #'ross/use-package-ensure-already-installed
 	)
   (require 'use-package))
 
@@ -178,6 +185,7 @@
   ((prog-mode-hook conf-mode-hook) . hl-todo-mode))
 
 (use-package minibuf
+  :no-require
   :custom
   (minibuffer-prompt-properties '(read-only t cursor-intangible t face minibuffer-prompt))
   :hook
