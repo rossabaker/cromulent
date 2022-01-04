@@ -3,6 +3,9 @@
 let
   emacs = pkgs.emacsGcc;
 
+  withPatches = pkg: patches:
+    pkg.overrideAttrs(attrs: { inherit patches; });
+
   compile = name: src: pkgs.stdenv.mkDerivation {
     inherit name src;
     buildInputs = [ emacs ];
@@ -26,6 +29,9 @@ in
       config = ./init.el;
       package = emacs;
       override = epkgs: epkgs // {
+        benchmark-init = withPatches epkgs.benchmark-init [
+          ./patches/benchmark-init/pr00016.diff
+        ];
         hocon-mode = compile "hocon-mode" inputs.hocon-mode;
         scala-mode = compile "scala-mode" inputs.scala-mode;
       };

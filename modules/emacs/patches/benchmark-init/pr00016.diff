@@ -1,0 +1,28 @@
+https://github.com/dholm/benchmark-init-el/pull/16
+
+diff --git a/benchmark-init-modes.el b/benchmark-init-modes.el
+index 1a5f8c5..eb87e10 100644
+--- a/benchmark-init-modes.el
++++ b/benchmark-init-modes.el
+@@ -209,7 +209,7 @@
+ ;; Obsolete functions
+ 
+ (define-obsolete-function-alias 'benchmark-init/show-durations
+-  'benchmark-init/show-durations-tabulated)
++  'benchmark-init/show-durations-tabulated "2014-04-05")
+ 
+ (provide 'benchmark-init-modes)
+ ;;; benchmark-init-modes.el ends here
+diff --git a/benchmark-init.el b/benchmark-init.el
+index 90a69df..4a6aca1 100644
+--- a/benchmark-init.el
++++ b/benchmark-init.el
+@@ -189,7 +189,7 @@ Slots:
+ ;; Obsolete functions
+ 
+ (define-obsolete-function-alias 'benchmark-init/install
+-  'benchmark-init/activate)
++  'benchmark-init/activate "2014-03-17")
+ 
+ (provide 'benchmark-init)
+ ;;; benchmark-init.el ends here
