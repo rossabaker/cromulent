@@ -21,6 +21,7 @@ in
 {
   home.packages = [
     pkgs.pythonPackages.pyhocon
+    pkgs.ripgrep
   ];
 
   programs.emacs = {
