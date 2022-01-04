@@ -272,6 +272,10 @@ is already installed.  This is true in our Nix environment."
   :config
   (tool-bar-mode -1))
 
+(use-package tooltip
+  :config
+  (tooltip-mode -1))
+
 ;;; Completion
 
 (use-package consult
