@@ -251,6 +251,10 @@ is already installed.  This is true in our Nix environment."
   :custom
   (show-paren-delay 0))
 
+(use-package project
+  :config
+  (project-remember-projects-under "~/src"))
+
 (use-package scroll-bar
   :config
   (scroll-bar-mode -1))
