@@ -188,11 +188,11 @@
     "scala-mode": {
       "flake": false,
       "locked": {
-        "lastModified": 1640894974,
-        "narHash": "sha256-uCOpqsEwc5t37sW//QwU/1nzi9N65C6e/iDaKjX6CPY=",
+        "lastModified": 1641325538,
+        "narHash": "sha256-xFNJ6MGTyitjjPjMFC40mcN8iNdyIEPNlW5P2XyZ8vE=",
         "owner": "Kazark",
         "repo": "emacs-scala-mode",
-        "rev": "c8a7bbafcd55409d031413bd80148a65dccbbbe1",
+        "rev": "1ef3ce5dc4750d396276a2331411c42983127906",
         "type": "github"
       },
       "original": {
