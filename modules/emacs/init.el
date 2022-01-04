@@ -117,8 +117,8 @@ is already installed.  This is true in our Nix environment."
   (fill-sentences-correctly-mode))
 
 (use-package ffap
-  :custom
-  (ffap-machine-p-known 'reject)	; speeds up load, and it sounds terrifying
+  :init
+  (setq ffap-machine-p-known 'reject)	;default slows load and sounds terrifying
   )
 
 (use-package files
