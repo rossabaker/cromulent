@@ -96,6 +96,15 @@ environment."
   :config
   (delete-selection-mode))
 
+(use-package editorconfig
+  :ensure
+  :delight
+  :custom
+  (editorconfig-trim-whitespaces-mode 'ws-butler-mode)
+  :config
+  (require 'editorconfig-core)		;unclear why this isn't happening for free
+  (editorconfig-mode))
+
 (use-package ffap
   :custom
   (ffap-machine-p-known 'reject)	; speeds up load, and it sounds terrifying
