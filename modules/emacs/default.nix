@@ -10,7 +10,10 @@ let
     inherit name src;
     buildInputs = [ emacs ];
     buildPhase = ''
-      ${emacs}/bin/emacs -Q -nw -L . --batch -f batch-byte-compile *.el
+      rm -f ${name}-pkg.el # We don't load 'package
+      autoloads=${name}-autoloads.el
+      [ -f $autoloads] || ${emacs}/bin/emacs --batch -Q -L . --eval "(make-directory-autoloads \".\" \"$autoloads\")"
+      ${emacs}/bin/emacs --batch -Q -L . -f batch-byte-compile *.el
     '';
     installPhase = ''
       mkdir -p $out/share/emacs/site-lisp

@@ -8,13 +8,13 @@
 
 (eval-when-compile
   (defun ross/use-package-ensure-already-installed
-      (_name _ensure state &optional _context)
-    "Value for `use-package-ensure-function` that assumes the
-package is already installed.  This is true in our Nix
-environment."
-    t)
-  (setq use-package-always-demand t
-	use-package-hook-name-suffix nil
+      (name _ensure state &optional _context)
+    "Value for `use-package-ensure-function` that assumes the package
+is already installed.  This is true in our Nix environment."
+    (let ((autoloads-file-name (format "%s-autoloads" name)))
+      (with-demoted-errors "Error loading autoloads: %s"
+	(load autoloads-file-name nil t))))
+  (setq use-package-hook-name-suffix nil
 	use-package-ensure-function #'ross/use-package-ensure-already-installed
 	)
   (require 'use-package))
@@ -64,6 +64,7 @@ environment."
   :custom
   (create-lockfiles nil)
   (echo-keystrokes 0.01)
+  (load-prefer-newer t)
   :config
   (defun ross/show-trailing-whitespace ()
     (setq show-trailing-whitespace t))
