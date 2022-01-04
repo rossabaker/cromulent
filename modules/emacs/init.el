@@ -416,5 +416,10 @@ environment."
   :hook
   (scala-mode-hook . subword-mode))
 
+;;;; YAML
+
+(use-package yaml-mode
+  :ensure)
+
 (provide 'init)
 ;;; init.el ends here
