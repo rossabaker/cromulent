@@ -27,7 +27,12 @@
 
   programs.git = {
     enable = true;
-    ignores = [ ".metals/" ];
+    ignores = [
+      ".bsp/"
+      ".direnv/"
+      ".metals/"
+      "metals.sbt"
+    ];
     userName = "Ross A. Baker";
     userEmail = "ross@rossabaker.com";
   };
