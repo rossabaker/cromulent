@@ -133,6 +133,9 @@ environment."
   :bind
   ("<escape>" . keyboard-escape-quit))
 
+(use-package subword
+  :delight)
+
 (use-package wgrep
   :ensure)
 
