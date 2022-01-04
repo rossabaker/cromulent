@@ -19,6 +19,17 @@ environment."
 	)
   (require 'use-package))
 
+;;; Benchmark init
+
+;; https://github.com/dholm/benchmark-init-el/issues/15#issuecomment-766010566
+(cl-letf (((symbol-function 'define-obsolete-function-alias) #'defalias))
+  (use-package benchmark-init
+    :ensure
+    :demand
+    :config
+    (require 'benchmark-init-modes)                                     ; explicitly required
+    (add-hook 'after-init-hook #'benchmark-init/deactivate)))
+
 ;;; State
 
 (defconst ross/is-mac (eq system-type 'darwin))
