@@ -440,7 +440,27 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
 ;;;; Markdown
 
 (use-package markdown-mode
-  :ensure)
+  :ensure
+  :config
+  ;; This function is dedicated to Rob Norris.
+  (defun ross/migrate-tut ()
+    "Migrate the *.md files in `default-directory` from tut to mdoc."
+    (interactive)
+    (let ((files (directory-files default-directory nil "\\.md$"))
+	  (mstart (make-hash-table :test 'eq)))
+      (fileloop-initialize
+       files
+       (lambda ()
+	 (save-excursion
+	   (when (re-search-forward "```tut" nil t)
+             (puthash (current-buffer) (match-beginning 0) mstart))))
+       (lambda ()
+	 (save-excursion
+	   (goto-char (gethash (current-buffer) mstart (point-min)))
+	   (while (re-search-forward "```tut\\(?::book\\)?" nil t)
+	     (replace-match "```scala mdoc" nil nil))
+	   t)))
+      (fileloop-continue))))
 
 ;;;; Nix
 
