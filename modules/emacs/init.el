@@ -254,9 +254,16 @@ is already installed.  This is true in our Nix environment."
   :custom
   (show-paren-delay 0))
 
-(use-package project
+(use-package projectile
+  :ensure
+  :custom
+  (projectile-project-search-path '("~/src"))
   :config
-  (project-remember-projects-under "~/src"))
+  (projectile-mode)
+  :bind (:map projectile-mode-map
+	      ("C-c p" . projectile-command-map))
+  :hook
+  (after-init-hook . projectile-discover-projects-in-search-path))
 
 (use-package scroll-bar
   :config

@@ -23,6 +23,7 @@ let
 in
 {
   home.packages = [
+    pkgs.fd
     pkgs.pythonPackages.pyhocon
     pkgs.ripgrep
   ];
