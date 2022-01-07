@@ -21,6 +21,7 @@
   # programs.neovim.enable = true;
   home.packages = [
     pkgs.gomod2nix
+    pkgs.nixpkgs-fmt
   ];
 
   programs.home-manager.enable = true;
