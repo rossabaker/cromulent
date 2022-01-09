@@ -106,6 +106,11 @@ is already installed.  This is true in our Nix environment."
   (require 'editorconfig-core)		;unclear why this isn't happening for free
   (editorconfig-mode))
 
+(use-package envrc
+  :ensure
+  :config
+  (envrc-global-mode))
+
 (use-package fill-sentences-correctly
   ;; I'm a double spacer.  It works better with abbreviations.  It
   ;; looks better in monospace.  It collapses by default in most
