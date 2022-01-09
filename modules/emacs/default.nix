@@ -4,7 +4,7 @@ let
   emacs = pkgs.emacsGcc;
 
   withPatches = pkg: patches:
-    pkg.overrideAttrs(attrs: { inherit patches; });
+    pkg.overrideAttrs (attrs: { inherit patches; });
 
   compile = name: src: pkgs.stdenv.mkDerivation {
     inherit name src;

@@ -36,67 +36,69 @@
     };
   };
 
-  outputs = { self,
-              darwin,
-              emacs-overlay,
-              fill-sentences-correctly,
-              gomod2nix,
-              hocon-mode,
-              home-manager,
-              nixpkgs,
-              scala-mode,
-              utils,
-              ... }@inputs: {
-    # Overlayed packages
-    overlay = (import ./overlays);
+  outputs =
+    { self
+    , darwin
+    , emacs-overlay
+    , fill-sentences-correctly
+    , gomod2nix
+    , hocon-mode
+    , home-manager
+    , nixpkgs
+    , scala-mode
+    , utils
+    , ...
+    }@inputs: {
+      # Overlayed packages
+      overlay = (import ./overlays);
 
-    # System configurations
-    # Accessible via 'nixos-rebuild --flake'
-    nixosConfigurations = {
-      # TODO: Replace with your hostname
-      cool-computer = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
+      # System configurations
+      # Accessible via 'nixos-rebuild --flake'
+      nixosConfigurations = {
+        # TODO: Replace with your hostname
+        cool-computer = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
 
-        modules = [
-          ./configuration.nix
-          # Adds your overlay and packages to nixpkgs
-          { nixpkgs.overlays = [ self.overlay ]; }
-          # Adds your custom nixos modules
-          ./modules/nixos
-        ];
-        # Pass our flake inputs into the config
-        specialArgs = { inherit inputs; };
+          modules = [
+            ./configuration.nix
+            # Adds your overlay and packages to nixpkgs
+            { nixpkgs.overlays = [ self.overlay ]; }
+            # Adds your custom nixos modules
+            ./modules/nixos
+          ];
+          # Pass our flake inputs into the config
+          specialArgs = { inherit inputs; };
+        };
       };
-    };
 
-    # Home configurations
-    # Accessible via 'home-manager --flake'
-    homeConfigurations = {
-      "ross.baker@C02Z721ZLVCG" = home-manager.lib.homeManagerConfiguration rec {
-        username = "ross.baker";
-        homeDirectory = "/Users/${username}";
-        system = "x86_64-darwin";
+      # Home configurations
+      # Accessible via 'home-manager --flake'
+      homeConfigurations = {
+        "ross.baker@C02Z721ZLVCG" = home-manager.lib.homeManagerConfiguration rec {
+          username = "ross.baker";
+          homeDirectory = "/Users/${username}";
+          system = "x86_64-darwin";
 
-        configuration = ./home.nix;
-        extraModules = [
-          # Adds your overlay and packages to nixpkgs
-          { nixpkgs.overlays = [ self.overlay emacs-overlay.overlay gomod2nix.overlay ]; }
-          # Adds your custom home-manager modules
-          ./modules/work
-        ];
-        # Pass our flake inputs into the config
-        extraSpecialArgs = { inherit inputs; };
+          configuration = ./home.nix;
+          extraModules = [
+            # Adds your overlay and packages to nixpkgs
+            { nixpkgs.overlays = [ self.overlay emacs-overlay.overlay gomod2nix.overlay ]; }
+            # Adds your custom home-manager modules
+            ./modules/work
+          ];
+          # Pass our flake inputs into the config
+          extraSpecialArgs = { inherit inputs; };
+        };
       };
-    };
 
-    darwinConfigurations = {
-      C02Z721ZLVCG = darwin.lib.darwinSystem {
-        system = "x86_64-darwin";
-	modules = [ ./darwin-configuration.nix ];
+      darwinConfigurations = {
+        C02Z721ZLVCG = darwin.lib.darwinSystem {
+          system = "x86_64-darwin";
+          modules = [ ./darwin-configuration.nix ];
+        };
       };
-    };
-  }
-  // utils.lib.eachDefaultSystem (system:
+    }
+    // utils.lib.eachDefaultSystem (system:
     let
       pkgs = import nixpkgs { inherit system; overlays = [ self.overlay ]; };
       nix = pkgs.writeShellScriptBin "nix" ''
