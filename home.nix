@@ -1,4 +1,3 @@
-
 # This is your home-manager configuration file
 # Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
 
@@ -23,6 +22,12 @@
     pkgs.gomod2nix
     pkgs.nixpkgs-fmt
   ];
+
+  programs.direnv = {
+    enable = true;
+    enableBashIntegration = true;
+    enableZshIntegration = true;
+  };
 
   programs.home-manager.enable = true;
 
