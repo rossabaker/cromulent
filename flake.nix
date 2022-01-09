@@ -19,6 +19,7 @@
     darwin.inputs.nixpkgs.follows = "nixpkgs-darwin";
 
     # Extra community flakes
+    devshell.url = "github:numtide/devshell";
     emacs-overlay.url = "github:nix-community/emacs-overlay";
     gomod2nix.url = "github:tweag/gomod2nix";
 
@@ -39,6 +40,7 @@
   outputs =
     { self
     , darwin
+    , devshell
     , emacs-overlay
     , fill-sentences-correctly
     , gomod2nix
@@ -51,6 +53,12 @@
     }@inputs: {
       # Overlayed packages
       overlay = (import ./overlays);
+
+      overlays = [
+        emacs-overlay.overlay
+        devshell.overlay
+        self.overlay
+      ];
 
       # System configurations
       # Accessible via 'nixos-rebuild --flake'
@@ -100,7 +108,7 @@
     }
     // utils.lib.eachDefaultSystem (system:
     let
-      pkgs = import nixpkgs { inherit system; overlays = [ self.overlay ]; };
+      pkgs = import nixpkgs { inherit system; overlays = self.overlays; };
       nix = pkgs.writeShellScriptBin "nix" ''
         exec ${pkgs.nixFlakes}/bin/nix --experimental-features "nix-command flakes" "$@"
       '';
@@ -113,8 +121,19 @@
 
       # Devshell for bootstrapping plus editor utilities (fmt and LSP)
       # Accessible via 'nix develop'
-      devShell = pkgs.mkShell {
-        buildInputs = with pkgs; [ nix nixfmt rnix-lsp hm ];
+      devShell = pkgs.devshell.mkShell {
+        name = "nix-config";
+
+        commands = [{
+          name = "hm-switch";
+          help = "switch the home-manager config";
+          command = "${hm}/bin/home-manager switch --flake $PRJ_ROOT";
+        }];
+
+        packages = [
+          hm
+          pkgs.nix
+        ];
       };
     });
 }
