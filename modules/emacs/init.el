@@ -107,6 +107,7 @@ is already installed.  This is true in our Nix environment."
   (editorconfig-mode))
 
 (use-package envrc
+  :delight
   :ensure
   :config
   (envrc-global-mode))
