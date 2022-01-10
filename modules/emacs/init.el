@@ -352,6 +352,7 @@ is already installed.  This is true in our Nix environment."
   (which-key-show-early-on-C-h t)
   (which-key-idle-delay 10000)
   (which-key-idle-secondary-delay 0.05)
+  (which-key-sort-order 'which-key-key-order-alpha)
   :config
   (which-key-mode))
 
