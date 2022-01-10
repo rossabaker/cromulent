@@ -168,6 +168,11 @@ is already installed.  This is true in our Nix environment."
 (use-package subword
   :delight)
 
+(use-package unmodified-buffer
+  :ensure
+  :config
+  (unmodified-buffer-mode))
+
 (use-package wgrep
   :ensure)
 

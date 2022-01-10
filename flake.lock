@@ -198,6 +198,7 @@
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-darwin": "nixpkgs-darwin",
         "scala-mode": "scala-mode",
+        "unmodified-buffer": "unmodified-buffer",
         "utils": "utils_2"
       }
     },
@@ -215,6 +216,22 @@
         "owner": "Kazark",
         "ref": "scala3",
         "repo": "emacs-scala-mode",
+        "type": "github"
+      }
+    },
+    "unmodified-buffer": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1641563261,
+        "narHash": "sha256-FA9ViPpU7e8XliLYxhJLJoQfjG7SSNOVisfu247HVxU=",
+        "owner": "arthurcgusmao",
+        "repo": "unmodified-buffer",
+        "rev": "ef45773113646c3670d2cda59e5e99468a0c7571",
+        "type": "github"
+      },
+      "original": {
+        "owner": "arthurcgusmao",
+        "repo": "unmodified-buffer",
         "type": "github"
       }
     },

@@ -23,6 +23,7 @@
     emacs-overlay.url = "github:nix-community/emacs-overlay";
     gomod2nix.url = "github:tweag/gomod2nix";
 
+    # Emacs packages
     fill-sentences-correctly = {
       url = "github:duckwork/fill-sentences-correctly.el";
       flake = false;
@@ -33,6 +34,11 @@
 
     scala-mode = {
       url = "github:Kazark/emacs-scala-mode?ref=scala3";
+      flake = false;
+    };
+
+    unmodified-buffer = {
+      url = "github:arthurcgusmao/unmodified-buffer";
       flake = false;
     };
   };
@@ -48,6 +54,7 @@
     , home-manager
     , nixpkgs
     , scala-mode
+    , unmodified-buffer
     , utils
     , ...
     }@inputs: {
