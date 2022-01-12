@@ -89,6 +89,10 @@ is already installed.  This is true in our Nix environment."
 (use-package autorevert
   :delight auto-revert-mode)
 
+(use-package comint
+  :custom
+  (comint-prompt-read-only t))
+
 (use-package cus-edit
   :custom
   (custom-file null-device))
