@@ -13,7 +13,7 @@
 is already installed.  This is true in our Nix environment."
     (let ((autoloads-file-name (format "%s-autoloads" name)))
       (with-demoted-errors "Error loading autoloads: %s"
-	(load autoloads-file-name nil t))))
+	(load autoloads-file-name t t))))
   (setq use-package-hook-name-suffix nil
 	use-package-ensure-function #'ross/use-package-ensure-already-installed
 	)
