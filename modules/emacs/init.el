@@ -350,7 +350,6 @@ is already installed.  This is true in our Nix environment."
   :ensure
   :config
   (vertico-mode)
-
   (use-package vertico-directory
     :ensure
     :bind (:map vertico-map
@@ -359,7 +358,11 @@ is already installed.  This is true in our Nix environment."
 		("M-DEL" . vertico-directory-delete-word))
     ;; I don't know what this does, but it's recommended
     :hook
-    (rfn-eshadow-update-overlay-hook . vertico-directory-tidy)))
+    (rfn-eshadow-update-overlay-hook . vertico-directory-tidy))
+  (use-package vertico-indexed
+    :ensure
+    :config
+    (vertico-indexed-mode)))
 
 (use-package which-key
   :ensure
