@@ -261,7 +261,19 @@ is already installed.  This is true in our Nix environment."
 
 (use-package hl-line
   :config
-  (global-hl-line-mode))
+  (defvar ross/hl-line-restore nil)
+  (defun ross/hl-line-activate-mark-h ()
+    (when hl-line-mode
+      (setq ross/hl-line-restore t)
+      (setq hl-line-mode nil)))
+  (defun ross/hl-line-deactivate-mark-h ()
+    (when ross/hl-line-restore
+      (setq hl-line-mode t)))
+  :hook
+  (activate-mark-hook . ross/hl-line-activate-mark-h)
+  (deactivate-mark-hook . ross/hl-line-deactivate-mark-h)
+  ;; We don't use global-hl-line-mode, because it doesn't control hl-line-mode!
+  ((prog-mode-hook text-mode-hook conf-mode-hook) . hl-line-mode))
 
 (use-package hl-todo
   :ensure
