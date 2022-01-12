@@ -349,7 +349,17 @@ is already installed.  This is true in our Nix environment."
 (use-package vertico
   :ensure
   :config
-  (vertico-mode))
+  (vertico-mode)
+
+  (use-package vertico-directory
+    :ensure
+    :bind (:map vertico-map
+		("RET" . vertico-directory-enter)
+		;; I don't like vertico-directory-delete-char
+		("M-DEL" . vertico-directory-delete-word))
+    ;; I don't know what this does, but it's recommended
+    :hook
+    (rfn-eshadow-update-overlay-hook . vertico-directory-tidy)))
 
 (use-package which-key
   :ensure
