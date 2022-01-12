@@ -211,6 +211,10 @@ is already installed.  This is true in our Nix environment."
   :custom-face
   (default ((t :height 140))))
 
+(use-package ansi-color
+  :custom
+  (ansi-color-for-comint-mode t))
+
 (use-package default-text-scale
   :ensure
   :config
