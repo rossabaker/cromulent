@@ -204,6 +204,7 @@ is already installed.  This is true in our Nix environment."
   (frame-resize-pixelwise t)
   (scroll-conservatively 101)
   (scroll-margin 2)
+  (scroll-preserve-screen-position t)
   (use-dialog-box nil)
   (visible-bell nil)
   (window-combination-resize t)
