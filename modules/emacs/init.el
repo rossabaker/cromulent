@@ -95,7 +95,8 @@ is already installed.  This is true in our Nix environment."
 
 (use-package compile
   :custom
-  (compilation-always-kill t))
+  (compilation-always-kill t)
+  (compilation-scroll-output 'first-error))
 
 (use-package cus-edit
   :custom
