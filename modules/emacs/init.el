@@ -94,9 +94,15 @@ is already installed.  This is true in our Nix environment."
   (comint-prompt-read-only t))
 
 (use-package compile
+  :config
+  (defun ross/compile-colorize-buffer ()
+    (with-silent-modifications
+      (ansi-color-apply-on-region compilation-filter-start (point))))
   :custom
   (compilation-always-kill t)
-  (compilation-scroll-output 'first-error))
+  (compilation-scroll-output 'first-error)
+  :hook
+  (compilation-filter-hook . ross/compile-colorize-buffer))
 
 (use-package cus-edit
   :custom
