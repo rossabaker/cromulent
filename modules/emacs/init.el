@@ -93,6 +93,10 @@ is already installed.  This is true in our Nix environment."
   :custom
   (comint-prompt-read-only t))
 
+(use-package compile
+  :custom
+  (compilation-always-kill t))
+
 (use-package cus-edit
   :custom
   (custom-file null-device))
