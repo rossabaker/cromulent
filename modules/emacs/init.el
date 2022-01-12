@@ -299,7 +299,9 @@ is already installed.  This is true in our Nix environment."
 
 (use-package paren
   :custom
-  (show-paren-delay 0))
+  (show-paren-delay 0)
+  (show-paren-when-point-inside-paren t)
+  (show-paren-when-point-in-periphery t))
 
 (use-package projectile
   :ensure
