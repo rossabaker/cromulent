@@ -144,6 +144,10 @@ is already installed.  This is true in our Nix environment."
   :config
   (minibuffer-electric-default-mode))
 
+(use-package mouse
+  :custom
+  (mouse-yank-at-point t))
+
 (use-package recentf
   :config
   (recentf-mode))
