@@ -437,6 +437,8 @@ is already installed.  This is true in our Nix environment."
   :ensure
   :init
   (setq lsp-keymap-prefix "C-c l")
+  :custom
+  (lsp-enable-dap-auto-configure nil)
   :hook
   (lsp-mode-hook . lsp-enable-which-key-integration)
   :commands (lsp lsp-deferred))
