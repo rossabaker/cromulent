@@ -389,7 +389,6 @@ is already installed.  This is true in our Nix environment."
   :config
   (vertico-mode)
   (use-package vertico-directory
-    :ensure
     :bind (:map vertico-map
 		("RET" . vertico-directory-enter)
 		;; I don't like vertico-directory-delete-char
@@ -398,7 +397,7 @@ is already installed.  This is true in our Nix environment."
     :hook
     (rfn-eshadow-update-overlay-hook . vertico-directory-tidy))
   (use-package vertico-indexed
-    :ensure
+    :disabled
     :config
     (vertico-indexed-mode)))
 
