@@ -389,6 +389,7 @@ is already installed.  This is true in our Nix environment."
   :config
   (vertico-mode)
   (use-package vertico-directory
+    :disabled
     :bind (:map vertico-map
 		("RET" . vertico-directory-enter)
 		;; I don't like vertico-directory-delete-char
@@ -431,6 +432,22 @@ is already installed.  This is true in our Nix environment."
   (flycheck-emacs-lisp-initialize-packages nil)
   :config
   (global-flycheck-mode))
+
+(use-package lsp-mode
+  :ensure
+  :init
+  (setq lsp-keymap-prefix "C-c l")
+  :hook
+  (lsp-mode-hook . lsp-enable-which-key-integration)
+  :commands (lsp lsp-deferred))
+
+(use-package lsp-treemacs
+  :ensure
+  :commands lsp-treemacs-errors-list)
+
+(use-package lsp-ui
+  :ensure
+  :commands lsp-ui-mode)
 
 (use-package magit
   :ensure)
@@ -559,6 +576,16 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
   ("/reference\\.conf\\'" . hocon-mode)
   ("/\\.scala-steward\\.conf\\'" . hocon-mode)
   ("/\\.scalafmt\\.conf\\'" . hocon-mode))
+
+(use-package lsp-metals
+  :ensure t
+  :custom
+  ;; Metals claims to support range formatting by default but it supports range
+  ;; formatting of multiline strings only. You might want to disable it so that
+  ;; emacs can use indentation provided by scala-mode.
+  (lsp-metals-server-args '("-J-Dmetals.allow-multiline-string-formatting=off"))
+  :hook
+  (scala-mode-hook . lsp-deferred))
 
 (use-package sbt-mode
   :ensure
