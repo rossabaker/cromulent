@@ -34,6 +34,7 @@
   programs.git = {
     enable = true;
     ignores = [
+      ".DS_Store"
       ".bsp/"
       ".direnv/"
       ".metals/"
