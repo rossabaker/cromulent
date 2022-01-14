@@ -15,8 +15,6 @@
 {{ define "footer" }}
 
 <hr>
-{{ with site.Params.source }}
-    <a href="{{ .url }}">Source code repo</a>
-{{ end }}
+{{ partial "source_code" (dict "page" .) }}
 
 {{ end }}

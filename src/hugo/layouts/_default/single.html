@@ -59,8 +59,6 @@ git checkout {{ $commit }}
 
 <hr>
 <a href="../">Go Up</a> | <a href="{{ site.BaseURL }}">Back to Home</a>
-{{ with site.Params.source }}
-    | <a href="{{ .url }}">Source code repo</a>
-{{ end }}
+{{ partial "source_code" (dict "page" . "prefix" "|") }}
 
 {{ end }}
