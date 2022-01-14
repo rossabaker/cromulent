@@ -17,21 +17,31 @@
 {{ define "footer" }}
 
 {{ $page := .Page }}
-{{ $commit := .GitInfo.Hash }}
 
-<div style="color: green;">
+{{ $commit := "" }}
+{{ with .GitInfo }}
+    {{ $commit = .Hash }}
+{{ else }}
     {{ with site.Params.source }}
-        {{ $url := .url }}
-        {{ $url_splits := path.Split $url }}
-        <h3>To reproduce this page/issue</h3>
-        <pre>
+        {{ $commit = .default_branch | default "main" }}
+    {{ end }}
+{{ end }}
+
+{{ if $commit }}
+    <div style="color: green;">
+        {{ with site.Params.source }}
+            {{ $url := .url }}
+            {{ $url_splits := path.Split $url }}
+            <h3>To reproduce this page/issue</h3>
+            <pre>
 git clone {{ $url }}
 cd {{ $url_splits.File }}
 git checkout {{ $commit }}
 ./srv.sh
-        </pre>
-    {{ end }}
-</div>
+            </pre>
+        {{ end }}
+    </div>
+{{ end }}
 
 <div style="color: grey;">
     {{ with .File }}
