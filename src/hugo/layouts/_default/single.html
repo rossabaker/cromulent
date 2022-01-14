@@ -18,14 +18,7 @@
 
 {{ $page := .Page }}
 
-{{ $commit := "" }}
-{{ with .GitInfo }}
-    {{ $commit = .Hash }}
-{{ else }}
-    {{ with site.Params.source }}
-        {{ $commit = .default_branch | default "main" }}
-    {{ end }}
-{{ end }}
+{{ $commit := (partial "get_commit" $page) }}
 
 {{ if $commit }}
     <div style="color: green;">
