@@ -1,0 +1,21 @@
+{{ define "main" }}
+
+<h1>{{ .Title }}</h1>
+
+<h2>Posts</h2>
+
+{{ range site.RegularPages.ByLastmod.Reverse }}
+    {{ .Render "summary"}}
+{{ end }}
+
+{{ end }}
+
+
+{{ define "footer" }}
+
+<hr>
+{{ with site.Params.source }}
+    <a href="{{ .url }}">Source code repo</a>
+{{ end }}
+
+{{ end }}

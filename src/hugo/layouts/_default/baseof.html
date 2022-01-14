@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
+    <head>
+        <link href="https://gmpg.org/xfn/11" rel="profile">
+        <meta charset="utf-8">
+
+        <!-- Enable responsiveness on mobile devices-->
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+
+        <!-- No referrer: https://webbkoll.dataskydd.net/en/ -->
+        <meta name="referrer" content="no-referrer">
+
+        <title>
+            {{ printf "%s | %s" .Title site.Title }}
+        </title>
+        {{ block "head" . }}{{ end }}
+    </head>
+
+    <body lang="{{ site.Language.Lang }}">
+
+        {{ block "main" . }}{{ end }}
+
+        {{ block "footer" . }}{{ end }}
+    </body>
+</html>
