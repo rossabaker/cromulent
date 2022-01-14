@@ -35,6 +35,7 @@
     enable = true;
     ignores = [
       ".DS_Store"
+      ".bloop/"
       ".bsp/"
       ".direnv/"
       ".metals/"
