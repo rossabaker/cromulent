@@ -345,6 +345,7 @@ is already installed.  This is true in our Nix environment."
   :ensure
   :custom
   (consult-narrow-key (kbd "C-+"))
+  (consult-project-root-function #'projectile-project-root)
   (xref-show-xrefs-function #'consult-xref)
   (xref-show-definitions-function #'consult-xref)
   :config
