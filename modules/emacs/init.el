@@ -177,6 +177,8 @@ is already installed.  This is true in our Nix environment."
 
 (use-package simple
   :requires cl-lib
+  :custom
+  (save-interprogram-paste-before-kill t)
   :config
   (defun ross/ad-keyboard-escape-quit (fun &rest args)
     (cl-letf (((symbol-function 'one-window-p) (lambda (&rest _) t)))
