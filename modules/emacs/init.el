@@ -155,6 +155,10 @@ is already installed.  This is true in our Nix environment."
 (use-package hydra
   :ensure)
 
+(use-package menu-bar
+  :bind
+  ("C-x k" . kill-this-buffer))
+
 (use-package minibuf-eldef
   :config
   (minibuffer-electric-default-mode))
