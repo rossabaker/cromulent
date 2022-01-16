@@ -5,7 +5,7 @@
   # $ nix-env -qaP | grep wget
   environment.systemPackages =
     [
-      pkgs.vim
+      pkgs.cachix
     ];
 
   # Use a custom configuration.nix location.
@@ -15,6 +15,14 @@
   # Auto upgrade nix package and the daemon service.
   # services.nix-daemon.enable = true;
   nix = {
+    binaryCaches = [
+      "https://nix-community.cachix.org/"
+      "https://rossabaker.cachix.org/"
+    ];
+    binaryCachePublicKeys = [
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      "rossabaker.cachix.org-1:KK/CQTeAGEurCUBy3nDl9PdR+xX+xtWQ0C/GpNN6kuw="
+    ];
     package = pkgs.nixFlakes;
     extraOptions = ''
       experimental-features = nix-command flakes
