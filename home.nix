@@ -20,6 +20,7 @@
   # programs.neovim.enable = true;
   home.packages = [
     pkgs.gomod2nix
+    pkgs.jq
     pkgs.nixpkgs-fmt
   ];
 
