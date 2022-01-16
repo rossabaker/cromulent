@@ -315,8 +315,11 @@ is already installed.  This is true in our Nix environment."
   (projectile-project-search-path '("~/src"))
   :config
   (projectile-mode)
-  :bind (:map projectile-mode-map
-	      ("C-c p" . projectile-command-map))
+  :bind
+  (:map projectile-mode-map
+	("C-c p" . projectile-command-map))
+  (:map projectile-command-map
+	("s" . projectile-ripgrep))
   :hook
   (after-init-hook . projectile-discover-projects-in-search-path))
 
@@ -365,7 +368,8 @@ is already installed.  This is true in our Nix environment."
   ([remap repeat-complex-command] . consult-history)
   ([remap apropros] . consult-apropos)
   ([remap man] . consult-man)
-  ([remap isearch-edit-string] . consult-isearch-history))
+  ([remap isearch-edit-string] . consult-isearch-history)
+  ([remap projectile-ripgrep] . consult-ripgrep))
 
 (use-package embark
   :ensure
