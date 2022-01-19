@@ -24,6 +24,7 @@ in
 {
   home.packages = [
     pkgs.fd
+    pkgs.mdl
     pkgs.metals
     pkgs.pythonPackages.pyhocon
     pkgs.ripgrep
