@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }:
+{ inputs, pkgs, config, ... }:
 
 let
   emacs = pkgs.emacsGcc;
@@ -20,6 +20,14 @@ let
       install *.el* $out/share/emacs/site-lisp
     '';
   };
+
+  # https://discourse.nixos.org/t/emacs-exwm-home-manager-and-loading-new-emacs-modules/10097/3
+  load-path = pkgs.writeText "load-path.el" ''
+    (let ((default-directory (file-name-as-directory
+                              "${config.programs.emacs.finalPackage.deps}/share/emacs/site-lisp/"))
+          (normal-top-level-add-subdirs-inode-list nil))
+    (normal-top-level-add-subdirs-to-load-path))
+  '';
 in
 {
   home.packages = [
@@ -54,5 +62,6 @@ in
   xdg.configFile = {
     "emacs/early-init.el".source = ./early-init.el;
     "emacs/init.el".source = ./init.el;
+    "emacs/load-path.el".source = load-path;
   };
 }
