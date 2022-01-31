@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 {
-  home.sessionVariables = {
-    SBT_CREDENTIALS = "$HOME/.sbt/banno-credentials.properties";
+  home.file = {
+    ".sbt/1.0/work.sbt".source = ./work.sbt;
   };
 }
