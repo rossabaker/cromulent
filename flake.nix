@@ -19,6 +19,7 @@
             echo $TMPDIR
             export HOME=$TMPDIR
             ${pkgs.emacs}/bin/emacs -Q --script publish.el $HOME/html
+            echo 'rossabaker.com' > $HOME/html/CNAME
           '';
           installPhase = ''
             mkdir $out
