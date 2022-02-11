@@ -5,7 +5,8 @@
   (or (car command-line-args-left) (expand-file-name "../html")))
 
 (setq org-export-with-section-numbers nil
-      org-export-with-toc nil)
+      org-export-with-toc nil
+      org-html-validation-link nil)
 
 (setq org-publish-project-alist
       `(("pages"
