@@ -20,4 +20,5 @@ jobs:
       with:
         name: rossabaker
         authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+        signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
     - run: nix -L build
