@@ -1,20 +1,23 @@
 (require 'ox-publish)
 (require 'ox-html)
 
+(defun rossabaker.com/out ()
+  (or (car command-line-args-left) (expand-file-name "../html")))
+
 (setq org-export-with-section-numbers nil
       org-export-with-toc nil)
 
 (setq org-publish-project-alist
-      '(("pages"
-	 :base-directory "~/src/rossabaker.com/org/"
+      `(("pages"
+	 :base-directory ,(expand-file-name "org/")
 	 :base-extension "org"
 	 :recursive nil
-	 :publishing-directory "~/src/rossabaker.com/html/"
+	 :publishing-directory ,(rossabaker.com/out)
 	 :publishing-function org-html-publish-to-html)
 	("blog"
-	 :base-directory "~/src/rossabaker.com/org/blog/"
+	 :base-directory ,(expand-file-name "org/blog/")
 	 :base-extension "org"
-	 :publishing-directory "~/src/rossabaker.com/html/blog/"
+	 :publishing-directory ,(concat (rossabaker.com/out) "/blog/")
 	 :publishing-function org-html-publish-to-html
 	 :auto-sitemap t
 	 :sitemap-title "Blog Posts"
@@ -22,7 +25,4 @@
 	 :sitemap-sort-files anti-chronologically)
 	("rossabaker.com" :components ("blog" "pages"))))
 
-(delete-directory "~/src/rossabaker.com/html" t t)
-(make-directory "~/src/rossabaker.com/html")
-(make-directory "~/src/rossabaker.com/html/blog")
-(org-publish "rossabaker.com" t)
+(org-publish-all t)
