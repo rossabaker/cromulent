@@ -22,3 +22,7 @@ jobs:
         authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
         signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
     - run: nix -L build
+    - uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./result
