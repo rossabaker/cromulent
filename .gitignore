@@ -1,3 +1,8 @@
 result
 *.qcow2
 flycheck_init.el
+
+pkgs/website/html/
+pkgs/website/src/org/blog/index.org
+
+result
