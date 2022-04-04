@@ -31,6 +31,30 @@
         <!-- Enable HTTP/2 Push -->
         <link rel="preload" href="{{ $css.RelPermalink }}" as="style">
 
+        <!-- Override default CSS -->
+        <style type="text/css">
+         // Credit: https://bettermotherfuckingwebsite.com/
+         body {
+             margin: 40px auto;
+             max-width: 650px;
+             line-height: 1.6;
+             font-size: 18px;
+             padding: 0 10px;
+         }
+         h1, h2, h3 {
+             line-height: 1.2;
+         }
+         //
+
+         main {
+             margin: 40px auto;
+             max-width: 650px;
+         }
+         code {
+             padding: 0;
+         }
+        </style>
+
         <!-- RSS -->
         <!-- https://gohugo.io/templates/rss/#reference-your-rss-feed-in-head -->
         {{ range .AlternativeOutputFormats -}}
