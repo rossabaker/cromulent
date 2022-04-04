@@ -1,0 +1,51 @@
+{{ define "main" }}
+<main>
+    {{ if .IsHome }}
+        <h1>{{ site.Title }}</h1>
+        {{ with site.Params.Description }}
+            <p class="byline">{{ . }} </p>
+        {{ end }}
+
+        <ul class="posts">
+            {{ range site.RegularPages.ByLastmod.Reverse }}
+                <li>
+                    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+                    <small>
+                        — <time datetime="{{ dateFormat "Jan 2, 2006" .Date }}" itemprop="datePublished">
+                        {{ dateFormat "Jan 2, 2006" .Date }}
+                        </time>
+                    </small>
+                </li>
+            {{ end }}
+        </ul>
+    {{ else }}
+        <h1>Posts in ‘{{ .Section }}’</h1>
+
+        <ul>
+            {{ range site.RegularPages.ByLastmod.Reverse }}
+                <li>
+                    <a href="{{ .Permalink }}">{{ .Title }}</a>
+                    <time datetime="{{ dateFormat "Jan 2, 2006" .Date }}">
+                        {{ dateFormat "Jan 2, 2006" .Date }}
+                    </time>
+                </li>
+            {{ end }}
+        </ul>
+    {{ end }}
+
+    {{ with .Content }}
+        {{ . }}
+    {{ end }}
+</main>
+
+{{ range .AlternativeOutputFormats }}
+    {{ $name_upper := .Name | upper }}
+    {{ if (or (eq $name_upper "RSS") (eq $name_upper "ATOM")) }}
+        <footer>
+            --
+            <br>
+            {{ printf `<a href="%s">%s</a>` .Permalink $name_upper | safeHTML }}
+        </footer>
+    {{ end }}
+{{ end }}
+{{ end }}

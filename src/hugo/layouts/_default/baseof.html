@@ -10,6 +10,11 @@
         <!-- No referrer: https://webbkoll.dataskydd.net/en/ -->
         <meta name="referrer" content="no-referrer">
 
+        <!-- Below fixes the favicon.ico 404 error
+             https://stackoverflow.com/a/43791570/1219634
+        -->
+        <link rel="shortcut icon" href="#" />
+
         {{- if .IsHome }}
             <title>{{ site.Title }}</title>
             {{ with site.Params.Description }}

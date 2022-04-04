@@ -1,0 +1,26 @@
+{{ define "main" }}
+<main>
+    <a href="{{ site.BaseURL }}" class="posts-item-brand">{{ site.Title }}</a>
+
+    <article itemscope itemtype="http://schema.org/BlogPosting">
+        <h1 class="posts-item-title" itemprop="name headline">
+            {{ .Title }}
+        </h1>
+
+        <div class="posts-item-byline">
+            Published on
+            <time datetime="{{ dateFormat "Jan 2, 2006" .Date }}" itemprop="datePublished">
+                {{ dateFormat "Jan 2, 2006" .Date }}
+            </time>
+        </div>
+
+        <div itemprop="articleBody">
+            {{ .Content }}
+        </div>
+    </article>
+</main>
+
+<footer>
+    <a href="{{ site.BaseURL }}">← archive</a>
+</footer>
+{{ end }}
