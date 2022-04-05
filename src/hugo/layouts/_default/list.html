@@ -3,16 +3,17 @@
     {{ if .IsHome }}
         <h1>{{ site.Title }}</h1>
         {{ with site.Params.Description }}
-            <p class="byline">{{ . }} </p>
+            <p>{{ . }} </p>
         {{ end }}
 
-        <ul class="posts">
+        <ul>
             {{ range site.RegularPages.ByLastmod.Reverse }}
                 <li>
-                    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+                    <a href="{{ .Permalink }}">{{ .Title }}</a>
                     <small>
-                        — <time datetime="{{ dateFormat "Jan 2, 2006" .Date }}" itemprop="datePublished">
-                        {{ dateFormat "Jan 2, 2006" .Date }}
+                        —
+                        <time datetime="{{ dateFormat "Jan 2, 2006" .Date }}">
+                            {{ dateFormat "Jan 2, 2006" .Date }}
                         </time>
                     </small>
                 </li>
@@ -37,13 +38,14 @@
         {{ . }}
     {{ end }}
 </main>
+{{ end }}
 
+{{ define "footer" }}
 {{ range .AlternativeOutputFormats }}
     {{ $name_upper := .Name | upper }}
     {{ if (or (eq $name_upper "RSS") (eq $name_upper "ATOM")) }}
+        <hr>
         <footer>
-            --
-            <br>
             {{ printf `<a href="%s">%s</a>` .Permalink $name_upper | safeHTML }}
         </footer>
     {{ end }}
