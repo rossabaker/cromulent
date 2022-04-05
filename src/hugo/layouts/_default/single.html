@@ -5,10 +5,12 @@
     <article>
         <h1>{{ .Title }}</h1>
 
-        Published on
-        <time datetime="{{ dateFormat "Jan 2, 2006" .Date }}">
-            {{ dateFormat "Jan 2, 2006" .Date }}
-        </time>
+        {{ if (not .Date.IsZero) }}
+            Published on
+            <time datetime="{{ dateFormat "Jan 2, 2006" .Date }}">
+                {{ dateFormat "Jan 2, 2006" .Date }}
+            </time>
+        {{ end }}
 
         {{ .Content }}
     </article>

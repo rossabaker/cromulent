@@ -10,12 +10,14 @@
             {{ range site.RegularPages.ByLastmod.Reverse }}
                 <li>
                     <a href="{{ .Permalink }}">{{ .Title }}</a>
-                    <small>
-                        —
-                        <time datetime="{{ dateFormat "Jan 2, 2006" .Date }}">
-                            {{ dateFormat "Jan 2, 2006" .Date }}
-                        </time>
-                    </small>
+                    {{ if (not .Date.IsZero) }}
+                        <small>
+                            —
+                            <time datetime="{{ dateFormat "Jan 2, 2006" .Date }}">
+                                {{ dateFormat "Jan 2, 2006" .Date }}
+                            </time>
+                        </small>
+                    {{ end }}
                 </li>
             {{ end }}
         </ul>
@@ -26,9 +28,11 @@
             {{ range site.RegularPages.ByLastmod.Reverse }}
                 <li>
                     <a href="{{ .Permalink }}">{{ .Title }}</a>
-                    <time datetime="{{ dateFormat "Jan 2, 2006" .Date }}">
-                        {{ dateFormat "Jan 2, 2006" .Date }}
-                    </time>
+                    {{ if (not .Date.IsZero) }}
+                        <time datetime="{{ dateFormat "Jan 2, 2006" .Date }}">
+                            {{ dateFormat "Jan 2, 2006" .Date }}
+                        </time>
+                    {{ end }}
                 </li>
             {{ end }}
         </ul>
