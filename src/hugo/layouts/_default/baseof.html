@@ -26,7 +26,8 @@
         {{- end }}
 
         <!-- CSS -->
-        {{ $css := resources.Get "css/style.css" | minify | fingerprint }}
+        {{ $css_asset_path := printf "css/%s" (site.Params.css | default "bmfw.css") }}
+        {{ $css := resources.Get $css_asset_path | minify | fingerprint }}
         <link rel="stylesheet" href="{{ $css.RelPermalink }}">
         <!-- Enable HTTP/2 Push -->
         <link rel="preload" href="{{ $css.RelPermalink }}" as="style">
