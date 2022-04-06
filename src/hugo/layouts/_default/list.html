@@ -42,9 +42,11 @@
 
 {{ define "main" }}
 <main>
-    {{ with .Content }}
-        {{ . }}
-    {{ end }}
+    <section>
+        {{ with .Content }}
+            {{ . }}
+        {{ end }}
+    </section>
 </main>
 {{ end }}
 
