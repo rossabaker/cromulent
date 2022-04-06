@@ -5,43 +5,38 @@
         {{ with site.Params.Description }}
             <p>{{ . }} </p>
         {{ end }}
-
-        <ul>
-            {{ range site.RegularPages.ByLastmod.Reverse }}
-                <li>
-                    <a href="{{ .Permalink }}">{{ .Title }}</a>
-                    {{ if (not .Date.IsZero) }}
-                        <small>
-                            —
-                            <time datetime="{{ dateFormat "Jan 2, 2006" .Date }}">
-                                {{ dateFormat "Jan 2, 2006" .Date }}
-                            </time>
-                        </small>
-                    {{ end }}
-                </li>
-            {{ end }}
-        </ul>
     {{ else }}
         <h1>Posts in ‘{{ .Section }}’</h1>
-
-        <ul>
-            {{ range site.RegularPages.ByLastmod.Reverse }}
-                <li>
-                    <a href="{{ .Permalink }}">{{ .Title }}</a>
-                    {{ if (not .Date.IsZero) }}
-                        <time datetime="{{ dateFormat "Jan 2, 2006" .Date }}">
-                            {{ dateFormat "Jan 2, 2006" .Date }}
-                        </time>
-                    {{ end }}
-                </li>
-            {{ end }}
-        </ul>
     {{ end }}
 </header>
 {{ end }}
 
 {{ define "main" }}
 <main>
+    <section>
+        <ul>
+            {{ range site.RegularPages.ByLastmod.Reverse }}
+                <li>
+                    <a href="{{ .Permalink }}">{{ .Title }}</a>
+                    {{ if (not .Date.IsZero) }}
+                        {{ if .IsHome }}
+                            <small>
+                                —
+                                <time datetime="{{ dateFormat "Jan 2, 2006" .Date }}">
+                                    {{ dateFormat "Jan 2, 2006" .Date }}
+                                </time>
+                            </small>
+                        {{ else }}
+                            <time datetime="{{ dateFormat "Jan 2, 2006" .Date }}">
+                                {{ dateFormat "Jan 2, 2006" .Date }}
+                            </time>
+                        {{ end }}
+                    {{ end }}
+                </li>
+            {{ end }}
+        </ul>
+    </section>
+
     <section>
         {{ with .Content }}
             {{ . }}
@@ -51,13 +46,16 @@
 {{ end }}
 
 {{ define "footer" }}
-{{ range .AlternativeOutputFormats }}
-    {{ $name_upper := .Name | upper }}
-    {{ if (or (eq $name_upper "RSS") (eq $name_upper "ATOM")) }}
-        <hr>
-        <footer>
-            {{ printf `<a href="%s">%s</a>` .Permalink $name_upper | safeHTML }}
-        </footer>
+<footer>
+    {{ if (not .IsHome) }}
+        <a href="{{ site.BaseURL }}">← home</a>
     {{ end }}
-{{ end }}
+    <hr>
+    {{ range .AlternativeOutputFormats }}
+        {{ $name_upper := .Name | upper }}
+        {{ if (or (eq $name_upper "RSS") (eq $name_upper "ATOM")) }}
+            {{ printf `<a href="%s">%s</a>` .Permalink $name_upper | safeHTML }}
+        {{ end }}
+    {{ end }}
+</footer>
 {{ end }}
