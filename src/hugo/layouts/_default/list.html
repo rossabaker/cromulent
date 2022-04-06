@@ -1,5 +1,5 @@
-{{ define "main" }}
-<main>
+{{ define "header" }}
+<header>
     {{ if .IsHome }}
         <h1>{{ site.Title }}</h1>
         {{ with site.Params.Description }}
@@ -37,7 +37,11 @@
             {{ end }}
         </ul>
     {{ end }}
+</header>
+{{ end }}
 
+{{ define "main" }}
+<main>
     {{ with .Content }}
         {{ . }}
     {{ end }}

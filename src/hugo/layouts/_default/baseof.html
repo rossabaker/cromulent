@@ -40,6 +40,9 @@
     </head>
 
     <body>
+        {{ block "header" . }}
+        {{ end }}
+
         {{ block "main" . }}
         {{ end }}
 
