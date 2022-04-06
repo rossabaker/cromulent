@@ -1,21 +1,22 @@
 {{ define "header" }}
 <header>
     <a href="{{ site.BaseURL }}">{{ site.Title }}</a>
-
-    <h1>{{ .Title }}</h1>
-
-    {{ if (not .Date.IsZero) }}
-        Published on
-        <time datetime="{{ dateFormat "Jan 2, 2006" .Date }}">
-            {{ dateFormat "Jan 2, 2006" .Date }}
-        </time>
-    {{ end }}
 </header>
 {{ end }}
 
 {{ define "main" }}
 <main>
     <article>
+        <header>
+            <h1>{{ .Title }}</h1>
+
+            {{ if (not .Date.IsZero) }}
+                Published on
+                <time datetime="{{ dateFormat "Jan 2, 2006" .Date }}">
+                    {{ dateFormat "Jan 2, 2006" .Date }}
+                </time>
+            {{ end }}
+        </header>
         <a id="top"></a>
         {{ .Content }}
     </article>
