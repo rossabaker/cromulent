@@ -32,6 +32,13 @@
         <!-- Enable HTTP/2 Push -->
         <link rel="preload" href="{{ $css.RelPermalink }}" as="style">
 
+        <style>
+         /* Hide bullets in TOC when headings are numbered. */
+         .toc.has-section-numbers ul {
+             list-style: none;
+         }
+        </style>
+
         <!-- RSS -->
         <!-- https://gohugo.io/templates/rss/#reference-your-rss-feed-in-head -->
         {{ range .AlternativeOutputFormats -}}
