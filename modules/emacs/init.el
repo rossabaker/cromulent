@@ -426,6 +426,12 @@ is already installed.  This is true in our Nix environment."
 
 ;;; Tools
 
+(use-package ox-reveal
+  :ensure)
+
+(use-package htmlize
+  :ensure)
+
 (use-package helpful
   :ensure
   :bind
