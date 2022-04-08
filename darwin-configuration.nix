@@ -6,7 +6,19 @@
   environment.systemPackages =
     [
       pkgs.cachix
+      pkgs.podman
+      pkgs.qemu
+      pkgs.xz
     ];
+
+  environment.shellAliases = {
+    docker = "podman";
+  };
+
+  environment.etc."containers/containers.conf.d/99-gvproxy-path.conf".text = ''
+    [engine]
+    helper_binaries_dir = ["${pkgs.gvproxy}/bin"]
+  '';
 
   # Use a custom configuration.nix location.
   # $ darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin/configuration.nix
