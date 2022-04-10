@@ -1,0 +1,21 @@
+#+TITLE: Algebrae in Scala
+#+AUTHOR: Ross A. Baker
+#+DATE:	<2019-12-02 Mon>
+
+Delivered at the December, 2019 meetup of IndyScala.
+
+* Abstract
+
+Scala developers like to talk about "algebras". Or when they're
+feeling particularly precious, "algebrae." Ross gives an overview, and
+promises any references to "F-algebra" are not a taunt about your
+ninth grade report card.
+
+* Slides
+
+#+begin_export html
+<iframe width="756" height="567" src="http://indyscala.org/algebras/#1" title="Slides"></iframe>
+#+end_export
+
+- [[http://indyscala.org/algebras/#1][Download]]
+- [[https://github.com/indyscala/algebras][Source]]

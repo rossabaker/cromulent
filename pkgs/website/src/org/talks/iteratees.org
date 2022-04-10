@@ -1,0 +1,17 @@
+#+TITLE: Iteratees
+#+AUTHOR: Ross A. Baker
+#+DATE:	<2013-06-03 Mon>
+
+Delivered at the June, 2013 meetup of IndyScala.
+
+* Abstract
+
+Iteratees support composable, asynchronous stream processing, and are becoming more widespread in Scala.
+
+* Slides
+
+#+begin_export html
+<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vS4sZxjzPAjprkDhJvg8HGEikuoCiTH8JJER_dkXrUWQD3BYD24uxluTR33BbBExw6xLu6080jjd8ly/embed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="749" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+#+end_export
+
+- [[https://github.com/indyscala/iteratee][Examples]]

@@ -3,7 +3,7 @@
 #+AUTHOR: Ross A. Baker
 #+DATE:	<2018-03-20 Tue>
 
-Delivered at the [[https://typelevel.org/event/2018-03-summit-boston/][2018 Typelevel Summit, Boston]].
+Debuted at the March, 2018 IndyScala.  Delivered at the [[https://typelevel.org/event/2018-03-summit-boston/][2018 Typelevel Summit, Boston]].
 
 * Abstract
 

@@ -1,0 +1,10 @@
+#+TITLE: Functor, Foldable, Traverse
+#+AUTHOR: Ross A. Baker
+#+DATE:	<2017-05-01 Mon>
+
+Delivered at the May, 2017 meetup of IndyScala as a companion to [[https://github.com/indyscala/typeclass-intro][Brad
+Fritz' Introduction to Type Classes in Scala.]]
+
+* Slides
+
+- [[https://github.com/indyscala/traverse][Source]]

@@ -1,0 +1,14 @@
+#+TITLE: Akka IO and Netty
+#+AUTHOR: Ross A. Baker
+#+DATE:	<2013-11-04 Mon>
+
+Delivered at the November, 2013 meetup of IndyScala.
+
+* Slides
+
+#+begin_export html
+<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vTHfXGS_6znbV9fLyGSqWkc-Oc0YJGIHGOsKKs-cKBTZQmEOmPHypBm4SD14oXhE-_1gfSSECyz_GxK/embed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="749" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+#+end_export
+
+- [[https://github.com/indyscala/akka-io-demo/raw/master/slides.pdf][Download]]
+- [[https://github.com/indyscala/algebras][Source]]

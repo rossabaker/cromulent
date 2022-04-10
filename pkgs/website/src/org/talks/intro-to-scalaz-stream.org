@@ -1,0 +1,9 @@
+#+TITLE: Introduction to scalaz-stream
+#+AUTHOR: Ross A. Baker
+#+DATE:	<2014-12-08 Mon>
+
+Delivered at the December, 2014 meetup of IndyScala.
+
+* Slides
+
+- [[https://github.com/indyscala/scalaz-stream-intro][Source]]

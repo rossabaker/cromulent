@@ -1,0 +1,14 @@
+#+TITLE: Cassandra and Akka
+#+AUTHOR: Ross A. Baker
+#+DATE:	<2013-08-05 Mon>
+
+Delivered at the August, 2013 meetup of IndyScala.
+
+* Slides
+
+#+begin_export html
+<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vTg-pzMydtiRY4-PPy8e8SYNIj3t-6utoABJsFmjDCf7cnp7qW4JiJXPDl4ou8wfWxxUnv_SAKUkTkI/embed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="749" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+#+end_export
+
+- [[https://github.com/indyscala/cassandra-demo/raw/master/slides.pdf][Download]]
+- [[https://github.com/indyscala/cassandra-demo][Source]]

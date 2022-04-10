@@ -1,0 +1,13 @@
+#+TITLE: Dependency Injection
+#+AUTHOR: Ross A. Baker
+#+DATE:	<2015-12-07 Mon>
+
+Delivered at the December, 2015 meetup of IndyScala.
+
+* Abstract
+
+A talk about dependency injection in Scala.
+
+* Slides
+
+- [[https://github.com/indyscala/dependency-injection][Source]]

@@ -1,0 +1,14 @@
+#+TITLE: Doobie
+#+AUTHOR: Ross A. Baker
+#+DATE:	<2018-12-03 Mon>
+
+Delivered at the December, 2018 meetup of IndyScala.
+
+* Slides
+
+#+begin_export html
+<iframe width="756" height="567" src="http://indyscala.org/doobie/#1" title="Slides"></iframe>
+#+end_export
+
+- [[http://indyscala.org/doobie/#1][Download]]
+- [[https://github.com/indyscala/doobie][Source]]

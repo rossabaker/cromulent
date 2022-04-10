@@ -1,0 +1,11 @@
+#+TITLE: Delimited Continuations
+#+AUTHOR: Ross A. Baker
+#+DATE:	<2011-06-11 Mon>
+
+Delivered at the June, 2012 meetup of IndyScala.
+
+* Slides
+
+#+begin_export html
+<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vRKRhb72cDsjr4ZgzsUpCsOMk4sICu9XkmjH6pTnglG-rWDitVEuOBToBmIPLNPbXk8GkvbOmLrcVh7/embed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="749" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+#+end_export
