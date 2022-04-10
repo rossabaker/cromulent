@@ -24,6 +24,15 @@
 	 :sitemap-title "Blog Posts"
 	 :sitemap-filename "index.org"
 	 :sitemap-sort-files anti-chronologically)
-	("rossabaker.com" :components ("blog" "pages"))))
+	("talks"
+	 :base-directory ,(expand-file-name "org/talks/")
+	 :base-extension "org"
+	 :publishing-directory ,(concat (rossabaker.com/out) "/talks/")
+	 :publishing-function org-html-publish-to-html
+	 :auto-sitemap t
+	 :sitemap-title "Talks"
+	 :sitemap-filename "index.org"
+	 :sitemap-sort-files anti-chronologically)
+	("rossabaker.com" :components ("blog" "talks" "pages"))))
 
 (org-publish-all t)
