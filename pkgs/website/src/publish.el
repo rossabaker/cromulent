@@ -14,13 +14,7 @@
 	 :base-extension "org"
 	 :recursive nil
 	 :publishing-directory ,(rossabaker.com/out)
-	 :publishing-function org-html-publish-to-html
-   	 :html-head "<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/typebase.css/0.5.1/typebase.min.css\">
-           <link href=\"http://fonts.googleapis.com/css?family=Source+Sans+Pro:300|Cantata+One\" rel=\"stylesheet\" type=\"text/css\">
-           <style>
-             #content { max-width: 50em; }
-             html { font-family: \"Source Sans Pro\", sans-serif; }
-           </style>")
+	 :publishing-function org-html-publish-to-html)
 	("blog"
 	 :base-directory ,(expand-file-name "org/blog/")
 	 :base-extension "org"
@@ -29,13 +23,7 @@
 	 :auto-sitemap t
 	 :sitemap-title "Blog Posts"
 	 :sitemap-filename "index.org"
-	 :sitemap-sort-files anti-chronologically
-   	 :html-head "<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/typebase.css/0.5.1/typebase.min.css\">
-           <link href=\"http://fonts.googleapis.com/css?family=Source+Sans+Pro:300|Cantata+One\" rel=\"stylesheet\" type=\"text/css\">
-           <style>
-             #content { max-width: 50em; }
-             html { font-family: \"Source Sans Pro\", sans-serif; }
-           </style>")
+	 :sitemap-sort-files anti-chronologically)
 	("rossabaker.com" :components ("blog" "pages"))))
 
 (org-publish-all t)
