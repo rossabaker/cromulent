@@ -514,6 +514,9 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
   :bind
   ("C-c g m" . ross/hydra-smerge/body))
 
+(use-package simple-httpd
+  :ensure)
+
 ;;; Languages
 
 ;;;; Emacs Lisp
