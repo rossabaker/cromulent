@@ -4,8 +4,6 @@
 A noble spirit embiggens the smallest blog.
 #+END_QUOTE
 
-Please excuse the complete absence of typography.  I'm still moving in.
-
 # * Blog posts
 # #+HTML: <div class="blog-entries">
 # #+INCLUDE: "blog/index.org" :lines "3-"

@@ -1,0 +1,24 @@
+body {
+    font-family: 'Fira Sans', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #900;
+    font-family: 'Bitter', sans-serif;
+}
+
+a {
+    color: #006298;
+}
+
+nav ul {
+    background-color: #edebeb;
+}
+
+nav ul li {
+    font-family: 'Fira Code', monospace;
+    text-transform: uppercase;
+    display: inline-block;
+    margin-right: 2em;
+    color:  #4a3c31;
+}

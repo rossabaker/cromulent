@@ -517,6 +517,9 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
 (use-package simple-httpd
   :ensure)
 
+(use-package esxml
+  :ensure)
+
 ;;; Languages
 
 ;;;; Emacs Lisp
