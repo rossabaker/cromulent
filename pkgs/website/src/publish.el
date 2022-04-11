@@ -18,7 +18,7 @@
    '(nav ()
      (ul ()
       (li () (a ((href . "/")) "Home"))
-      (li () (a ((href . "/talks")) "Talks"))))))
+      (li () (a ((href . "/talks/")) "Talks"))))))
 
 (setq org-export-with-section-numbers nil
       org-export-with-toc nil
