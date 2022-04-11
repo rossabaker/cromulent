@@ -52,7 +52,7 @@
 	 :sitemap-filename "index.org"
 	 :sitemap-sort-files anti-chronologically)
 	("assets"
-	 :base-directory ,(expand-file-name "assets/")
+	 :base-directory ,(expand-file-name "org/")
 	 :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf"
 	 :publishing-directory ,(rossabaker.com/out)
 	 :publishing-function org-publish-attachment
