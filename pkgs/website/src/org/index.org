@@ -4,6 +4,9 @@
 A noble spirit embiggens the smallest blog.
 #+END_QUOTE
 
+#+attr_html: alt="Bender from Futurama yelling, 'Yeah, well, I'm going to go build my own blog. With Emacs! And Nix! In fact, forget the blog.'"
+[[./img/build-my-own-blog.jpg]]
+
 # * Blog posts
 # #+HTML: <div class="blog-entries">
 # #+INCLUDE: "blog/index.org" :lines "3-"
