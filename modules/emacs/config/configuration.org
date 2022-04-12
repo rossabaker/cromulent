@@ -1,3 +1,4 @@
+#+begin_src emacs-lisp :tangle default.el
 ;;; init.el -- Ross A. Baker's Emacs Configuration
 
 ;;; Commentary:
@@ -629,3 +630,4 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
 
 (provide 'init)
 ;;; init.el ends here
+#+end_src

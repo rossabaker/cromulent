@@ -6,6 +6,21 @@ let
   withPatches = pkg: patches:
     pkg.overrideAttrs (attrs: { inherit patches; });
 
+  emacs-config = pkgs.stdenv.mkDerivation {
+    name = "emacs-config";
+    src = ./config;
+    buildInputs = [
+      emacs
+    ];
+    buildPhase = ''
+      ${emacs}/bin/emacs -Q -nw configuration.org --batch -f org-babel-tangle --kill
+    '';
+    installPhase = ''
+      mkdir -p $out/share/emacs/site-lisp
+      install *.el* $out/share/emacs/site-lisp
+    '';
+  };
+
   compile = name: src: pkgs.stdenv.mkDerivation {
     inherit name src;
     buildInputs = [ emacs ];
@@ -41,7 +56,7 @@ in
   programs.emacs = {
     enable = true;
     package = pkgs.emacsWithPackagesFromUsePackage {
-      config = ./init.el;
+      config = builtins.readFile "${emacs-config}/share/emacs/site-lisp/default.el";
       package = emacs;
       override = epkgs: epkgs // {
         benchmark-init = withPatches epkgs.benchmark-init [
@@ -56,12 +71,12 @@ in
     };
     extraPackages = epkgs: [
       epkgs.use-package
+      emacs-config
     ];
   };
 
   xdg.configFile = {
     "emacs/early-init.el".source = ./early-init.el;
-    "emacs/init.el".source = ./init.el;
     "emacs/load-path.el".source = load-path;
   };
 }
