@@ -32,3 +32,9 @@ figure img {
 figure figcaption {
     text-align: center;
 }
+
+#wordmark {
+    font-size: 2em;
+    color: #999;
+    font-family: 'Fira Code', monospace;
+}

@@ -16,10 +16,11 @@
 (defun rossabaker.com/preamble (info)
   (esxml-to-xml
    '(nav ()
-     (ul ()
-	 (li () (a ((href . "/")) "Home"))
-	 (li () (a ((href . "/talks/")) "Talks"))
-	 (li () (a ((href . "/config/")) "Config"))))))
+	 (a ((href . "/") (id . "wordmark")) "~rossabaker/")
+	 (ul ()
+	     (li () (a ((href . "/")) "Home"))
+	     (li () (a ((href . "/talks/")) "Talks"))
+	     (li () (a ((href . "/config/")) "Config"))))))
 
 (setq org-export-with-section-numbers nil
       org-export-with-toc nil
