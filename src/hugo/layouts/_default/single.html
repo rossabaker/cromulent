@@ -25,9 +25,9 @@
 
 {{ define "footer" }}
 <footer>
-    <a href="{{ site.BaseURL }}">← home</a>
-
     <hr>
-    {{ (printf `<small><a href="https://html5.validator.nu/?doc=%s&showsource=yes">HTML5 Validator</a></small>` .Permalink) | safeHTML }}
+    <a href="../">Go Up</a>
+    | <a href="{{ site.BaseURL }}">Home</a>
+    | {{ (printf `<a href="https://html5.validator.nu/?doc=%s&showsource=yes">HTML5 Validator</a>` .Permalink) | safeHTML }}
 </footer>
 {{ end }}

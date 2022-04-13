@@ -43,15 +43,18 @@
 
 {{ define "footer" }}
 <footer>
-    {{ if (not .IsHome) }}
-        <a href="{{ site.BaseURL }}">← home</a>
-    {{ end }}
     <hr>
+    {{ if (not .IsHome) }}
+        <a href="../">Go Up</a>
+        | <a href="{{ site.BaseURL }}">Home</a>
+        |
+    {{ end }}
     {{ range .AlternativeOutputFormats }}
         {{ $name_upper := .Name | upper }}
         {{ if (or (eq $name_upper "RSS") (eq $name_upper "ATOM")) }}
             {{ printf `<a href="%s">%s</a>` .Permalink $name_upper | safeHTML }}
         {{ end }}
     {{ end }}
+    | {{ (printf `<a href="https://html5.validator.nu/?doc=%s&showsource=yes">HTML5 Validator</a>` .Permalink) | safeHTML }}
 </footer>
 {{ end }}
