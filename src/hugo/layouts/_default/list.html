@@ -1,39 +1,60 @@
-{{ define "main" }}
-
-{{ if .IsHome }}
-    <h1>{{ .Title }}</h1>
-    <div style="margin-top: -1.5rem; font-weight: bold; color: grey;">{{ site.Param "subTitle" }}</div>
-
-    <h2>Posts</h2>
-
-    {{ range site.RegularPages.ByLastmod.Reverse }}
-        {{ .Render "summary"}}
+{{ define "header" }}
+<header>
+    {{ if .IsHome }}
+        <h1>{{ site.Title }}</h1>
+        {{ with site.Params.Description }}
+            <p>{{ . }} </p>
+        {{ end }}
+    {{ else }}
+        <h1>Posts in ‘{{ .Section }}’</h1>
     {{ end }}
-{{ else }}
-    <h1>Posts in ‘{{ .Section }}’</h1>
+</header>
+{{ end }}
 
+{{ define "main" }}
+<main>
     <ul>
-        {{ range .RegularPages }}
+        {{ range site.RegularPages.ByLastmod.Reverse }}
             <li>
-                <a href='{{ .Permalink }}'> {{ .Title }}</a>
-                {{ .Description | markdownify }}
+                <a href="{{ .Permalink }}">{{ .Title }}</a>
+                {{ if (not .Date.IsZero) }}
+                    {{ if .IsHome }}
+                        <small>
+                            —
+                            <time datetime="{{ dateFormat "Jan 2, 2006" .Date }}">
+                                {{ dateFormat "Jan 2, 2006" .Date }}
+                            </time>
+                        </small>
+                    {{ else }}
+                        <time datetime="{{ dateFormat "Jan 2, 2006" .Date }}">
+                            {{ dateFormat "Jan 2, 2006" .Date }}
+                        </time>
+                    {{ end }}
+                {{ end }}
             </li>
         {{ end }}
     </ul>
-{{ end }}
 
-{{ with .Content }}
-    {{ . }}
-{{ end }}
-
+    {{ with .Content }}
+        {{ . }}
+    {{ end }}
+</main>
 {{ end }}
 
 {{ define "footer" }}
-
-<hr>
-{{ if not .IsHome }}
-    <a href="{{ site.BaseURL }}">Back to Home</a> |
-{{ end }}
-{{ partial "source_code" (dict "page" .) }}
-
+<footer>
+    {{ if (not .IsHome) }}
+        <a href="../">Go Up</a>
+        | <a href="{{ site.BaseURL }}">Home</a>
+        |
+    {{ end }}
+    {{ range .AlternativeOutputFormats }}
+        {{ $name_upper := .Name | upper }}
+        {{ if (or (eq $name_upper "RSS") (eq $name_upper "ATOM")) }}
+            {{ printf `<a href="%s">%s</a>` .Permalink $name_upper | safeHTML }}
+        {{ end }}
+    {{ end }}
+    | {{ (printf `<a href="https://html5.validator.nu/?doc=%s&showsource=yes">HTML5 Validator</a>` .Permalink) | safeHTML }}
+    | {{ partial "source_code" (dict "page" .) }}
+</footer>
 {{ end }}

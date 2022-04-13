@@ -1,26 +1,36 @@
+{{ define "header" }}
+<header>
+    <a href="{{ site.BaseURL }}">{{ site.Title }}</a>
+</header>
+{{ end }}
+
 {{ define "main" }}
-
-<h1>{{ .Title }}</h1>
-
-{{ with .Description }}
-    <blockquote style="color: gray;">
-        {{ . | markdownify }}
-    </blockquote>
-{{ end }}
-
-{{ with .Content }}
-    {{ . }}
-{{ end }}
-
+<main>
+    <article>
+        <header>
+            <h1>{{ .Title }}</h1>
+            {{ with .Description }}
+                <blockquote>
+                    {{ . | markdownify | emojify }}
+                </blockquote>
+            {{ end }}
+            {{ if (not .Date.IsZero) }}
+                Published on
+                <time datetime="{{ dateFormat "Jan 2, 2006" .Date }}">
+                    {{ dateFormat "Jan 2, 2006" .Date }}
+                </time>
+            {{ end }}
+        </header>
+        <a id="top"></a>
+        {{ .Content }}
+    </article>
+</main>
 {{ end }}
 
 {{ define "footer" }}
+<footer>
+    {{ $commit := (partial "get_commit" .Page) }}
 
-{{ $page := .Page }}
-
-{{ $commit := (partial "get_commit" $page) }}
-
-{{ if $commit }}
     <div style="color: green;">
         {{ with site.Params.source }}
             {{ $url := .url }}
@@ -34,31 +44,33 @@ git checkout {{ $commit }}
             </pre>
         {{ end }}
     </div>
-{{ end }}
 
-<div style="color: grey;">
-    {{ with .File }}
-        {{ with .Path }}
-            {{ $path := . }}
-            {{ with site.Params.source }}
-                {{ $md_dir := .md_dir | default "content" }}
-                ✱ <i>Markdown <a href="{{ .url }}/-/raw/{{ $commit }}/{{ $md_dir }}/{{ $path }}"> source</a> of this page</i>
-                |
+    <a href="../">Go Up</a>
+    | <a href="{{ site.BaseURL }}">Home</a>
+    | {{ (printf `<a href="https://html5.validator.nu/?doc=%s&showsource=yes">HTML5 Validator</a>` .Permalink) | safeHTML }}
+    {{ partial "source_code" (dict "page" . "prefix" "|") }}
+
+    <div>
+        <small>
+            {{ with .File }}
+                {{ with .Path }}
+                    {{ $path := . }}
+                    {{ with site.Params.source }}
+                        {{ $md_dir := .md_dir | default "content" }}
+                        ✱ <i>Markdown <a href="{{ .url }}/-/raw/{{ $commit }}/{{ $md_dir }}/{{ $path }}"> source</a> of this page</i>
+                        |
+                    {{ end }}
+                {{ end }}
             {{ end }}
-        {{ end }}
-    {{ end }}
 
-    {{ $hugo_version_string_1 := hugo.Version }}
-    {{ with hugo.CommitHash }} <!-- Example value: "975bb629:chroma-d5ca12b" -->
-        {{ $hugo_version_string_1 = printf `<a href="https://github.com/gohugoio/hugo/commit/%s">%s</a>` . $hugo_version_string_1 }}
-    {{ end }}
-    {{ $hugo_version_string := printf `<span class="nobr">Hugo %s</span>` $hugo_version_string_1 }}
+            {{ $hugo_version_string_1 := hugo.Version }}
+            {{ with hugo.CommitHash }} <!-- Example value: "975bb629:chroma-d5ca12b" -->
+                {{ $hugo_version_string_1 = printf `<a href="https://github.com/gohugoio/hugo/commit/%s">%s</a>` . $hugo_version_string_1 }}
+            {{ end }}
+            {{ $hugo_version_string := printf `<span class="nobr">Hugo %s</span>` $hugo_version_string_1 }}
 
-    <em>Built with {{ $hugo_version_string | safeHTML }}</em>
-</div>
-
-<hr>
-<a href="../">Go Up</a> | <a href="{{ site.BaseURL }}">Back to Home</a>
-{{ partial "source_code" (dict "page" . "prefix" "|") }}
-
+            <em>Built with {{ $hugo_version_string | safeHTML }}</em>
+        </small>
+    </div>
+</footer>
 {{ end }}

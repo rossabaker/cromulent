@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{{ site.Language.Lang }}" lang="{{ site.Language.Lang }}">
     <head>
         <link href="https://gmpg.org/xfn/11" rel="profile">
         <meta charset="utf-8">
@@ -10,31 +10,50 @@
         <!-- No referrer: https://webbkoll.dataskydd.net/en/ -->
         <meta name="referrer" content="no-referrer">
 
-        <!-- Credit: http://bettermotherfuckingwebsite.com/ -->
+        <!-- Below fixes the favicon.ico 404 error
+             https://stackoverflow.com/a/43791570/1219634
+        -->
+        <link rel="shortcut icon" href="#" />
+
+        {{- if .IsHome }}
+            <title>{{ site.Title }}</title>
+            {{ with site.Params.Description }}
+                <meta name="description" content="{{ . }}">
+            {{ end }}
+        {{- else }}
+            <title>{{ .Title }} - {{ site.Title }}</title>
+            <meta name="description" content="{{ .Summary }}">
+        {{- end }}
+
+        <!-- CSS -->
+        {{ $css_asset_path := printf "css/%s" (site.Params.css | default "bmfw.css") }}
+        {{ $css := resources.Get $css_asset_path | minify | fingerprint }}
+        <link rel="stylesheet" href="{{ $css.RelPermalink }}">
+        <!-- Enable HTTP/2 Push -->
+        <link rel="preload" href="{{ $css.RelPermalink }}" as="style">
+
         <style>
-         body {
-             margin: 40px auto;
-             max-width: 650px;
-             line-height: 1.6;
-             font-size: 18px;
-             color: #444;
-             padding: 0 10px;
-         }
-         h1, h2, h3 {
-             line-height: 1.2;
+         /* Hide bullets in TOC when headings are numbered. */
+         .toc.has-section-numbers ul {
+             list-style: none;
          }
         </style>
 
-        <title>
-            {{ printf "%s | %s" .Title site.Title }}
-        </title>
-        {{ block "head" . }}{{ end }}
+        <!-- RSS -->
+        <!-- https://gohugo.io/templates/rss/#reference-your-rss-feed-in-head -->
+        {{ range .AlternativeOutputFormats -}}
+            {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink (printf "%s for %s" (.Name | title) site.Title) | safeHTML }}
+        {{ end -}}
     </head>
 
-    <body lang="{{ site.Language.Lang }}">
+    <body>
+        {{ block "header" . }}
+        {{ end }}
 
-        {{ block "main" . }}{{ end }}
+        {{ block "main" . }}
+        {{ end }}
 
-        {{ block "footer" . }}{{ end }}
+        {{ block "footer" . }}
+        {{ end }}
     </body>
 </html>
