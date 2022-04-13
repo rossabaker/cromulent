@@ -22,3 +22,13 @@ nav ul li {
     margin-right: 2em;
     color:  #4a3c31;
 }
+
+figure {
+    display: inline-block;
+}
+figure img {
+    vertical-align: top;
+}
+figure figcaption {
+    text-align: center;
+}

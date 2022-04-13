@@ -1,17 +1,17 @@
-{ emacs, stdenv }:
+{ emacsGcc, srcOnly, stdenv }:
 
 let
-  siteEmacs = emacs.pkgs.withPackages (epkgs: [
+  siteEmacs = emacsGcc.pkgs.withPackages (epkgs: [
     epkgs.esxml
   ]);
 in
-  stdenv.mkDerivation {
+  stdenv.mkDerivation rec {
     name = "rossabaker.com";
-    src = ./src;
+    srcs = ../..;
     buildInputs = [ siteEmacs ];
     buildPhase = ''
-      echo $TMPDIR
       export HOME=$TMPDIR
+      cd pkgs/website/src
       ${siteEmacs}/bin/emacs -Q --script publish.el $HOME/html
       echo 'rossabaker.com' > $HOME/html/CNAME
     '';

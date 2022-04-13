@@ -1,0 +1,10 @@
+#+TITLE: Configurations
+
+#+begin_export html
+<a href="emacs.html">
+  <figure>
+    <img src="../img/emacs.svg" alt="Emacs logo" width="128" height="128" />
+    <figcaption>Emacs</figcaption>
+  </figure>
+</a>
+#+end_export

@@ -8,12 +8,12 @@ let
 
   emacs-config = pkgs.stdenv.mkDerivation {
     name = "emacs-config";
-    src = ./config;
+    src = ./.;
     buildInputs = [
       emacs
     ];
     buildPhase = ''
-      ${emacs}/bin/emacs -Q -nw configuration.org --batch -f org-babel-tangle --kill
+      ${emacs}/bin/emacs -Q -nw default.org --batch -f org-babel-tangle --kill
     '';
     installPhase = ''
       mkdir -p $out/share/emacs/site-lisp
