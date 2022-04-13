@@ -52,11 +52,6 @@
 	 :sitemap-title "Talks"
 	 :sitemap-filename "index.org"
 	 :sitemap-sort-files anti-chronologically)
-	("emacs-config"
-	 :base-directory ,(expand-file-name "../../../modules/emacs")
-	 :base-extension "org"
-	 :publishing-directory ,(concat (rossabaker.com/out) "/config/")
-	 :publishing-function org-html-publish-to-html)
 	("config"
 	 :base-directory ,(expand-file-name "org/config")
 	 :base-extension "org"
@@ -68,6 +63,6 @@
 	 :publishing-directory ,(rossabaker.com/out)
 	 :publishing-function org-publish-attachment
 	 :recursive t)
-	("rossabaker.com" :components ("assets" "blog" "talks" "pages" "emacs-config" "config"))))
+	("rossabaker.com" :components ("assets" "blog" "talks" "pages"))))
 
 (org-publish-all t)

@@ -7,11 +7,10 @@ let
 in
   stdenv.mkDerivation rec {
     name = "rossabaker.com";
-    srcs = ../..;
+    srcs = ../../src;
     buildInputs = [ siteEmacs ];
     buildPhase = ''
       export HOME=$TMPDIR
-      cd pkgs/website/src
       ${siteEmacs}/bin/emacs -Q --script publish.el $HOME/html
       echo 'rossabaker.com' > $HOME/html/CNAME
     '';
