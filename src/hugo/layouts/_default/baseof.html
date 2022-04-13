@@ -26,18 +26,13 @@
         {{- end }}
 
         <!-- CSS -->
-        {{ $css_asset_path := printf "css/%s" (site.Params.css | default "bmfw.css") }}
-        {{ $css := resources.Get $css_asset_path | minify | fingerprint }}
-        <link rel="stylesheet" href="{{ $css.RelPermalink }}">
-        <!-- Enable HTTP/2 Push -->
-        <link rel="preload" href="{{ $css.RelPermalink }}" as="style">
-
-        <style>
-         /* Hide bullets in TOC when headings are numbered. */
-         .toc.has-section-numbers ul {
-             list-style: none;
-         }
-        </style>
+        {{ range $css_file := site.Params.css | default (slice "bmfw.css" "ox-hugo.css") }}
+            {{ $css_asset_path := printf "css/%s" $css_file }}
+            {{ $css := resources.Get $css_asset_path | minify | fingerprint }}
+            <link rel="stylesheet" href="{{ $css.RelPermalink }}">
+            <!-- Enable HTTP/2 Push -->
+            <link rel="preload" href="{{ $css.RelPermalink }}" as="style">
+        {{ end }}
 
         <!-- RSS -->
         <!-- https://gohugo.io/templates/rss/#reference-your-rss-feed-in-head -->
