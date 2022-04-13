@@ -13,35 +13,31 @@
 
 {{ define "main" }}
 <main>
-    <section>
-        <ul>
-            {{ range site.RegularPages.ByLastmod.Reverse }}
-                <li>
-                    <a href="{{ .Permalink }}">{{ .Title }}</a>
-                    {{ if (not .Date.IsZero) }}
-                        {{ if .IsHome }}
-                            <small>
-                                —
-                                <time datetime="{{ dateFormat "Jan 2, 2006" .Date }}">
-                                    {{ dateFormat "Jan 2, 2006" .Date }}
-                                </time>
-                            </small>
-                        {{ else }}
+    <ul>
+        {{ range site.RegularPages.ByLastmod.Reverse }}
+            <li>
+                <a href="{{ .Permalink }}">{{ .Title }}</a>
+                {{ if (not .Date.IsZero) }}
+                    {{ if .IsHome }}
+                        <small>
+                            —
                             <time datetime="{{ dateFormat "Jan 2, 2006" .Date }}">
                                 {{ dateFormat "Jan 2, 2006" .Date }}
                             </time>
-                        {{ end }}
+                        </small>
+                    {{ else }}
+                        <time datetime="{{ dateFormat "Jan 2, 2006" .Date }}">
+                            {{ dateFormat "Jan 2, 2006" .Date }}
+                        </time>
                     {{ end }}
-                </li>
-            {{ end }}
-        </ul>
-    </section>
-
-    <section>
-        {{ with .Content }}
-            {{ . }}
+                {{ end }}
+            </li>
         {{ end }}
-    </section>
+    </ul>
+
+    {{ with .Content }}
+        {{ . }}
+    {{ end }}
 </main>
 {{ end }}
 
