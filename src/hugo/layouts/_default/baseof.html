@@ -34,6 +34,15 @@
             <link rel="preload" href="{{ $css.RelPermalink }}" as="style">
         {{ end }}
 
+        <!-- JS -->
+        {{ range $js_file := site.Params.js }}
+            {{ $js_asset_path := printf "js/%s" $js_file }}
+            {{ $js := resources.Get $js_asset_path | minify | fingerprint }}
+            <script defer src="{{ $js.RelPermalink }}"></script>
+            <!-- Enable HTTP/2 Push -->
+            <link rel="preload" href="{{ $js.RelPermalink }}" as="script">
+        {{ end }}
+
         <!-- RSS -->
         <!-- https://gohugo.io/templates/rss/#reference-your-rss-feed-in-head -->
         {{ range .AlternativeOutputFormats -}}
