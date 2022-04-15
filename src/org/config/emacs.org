@@ -1,24 +1,59 @@
 #+TITLE: Ross A. Baker's Emacs Configuration
 #+EXPORT_FILE_NAME: emacs.html
+#+PROPERTY: header-args :tangle default.el
+
+* Startup
+
+** Packages
+
+*** Ensuring packages
+
+Most of this config is broken down into [[https://github.com/jwiegley/use-package][~use-package~]] stanzas.  All
+dependencies are managed by [[https://nixos.org/][Nix]].  Any package with a true ~:ensure~
+keyword is found by [[https://github.com/nix-community/emacs-overlay#extra-library-functionality][~emacsWithPackagesFromUsePackage~]] to generate
+the set of Emacs packages to install with Nix.
+
+In the brutish non-Nix world, ~:ensure~ triggers Emacs' own package
+manager with willy nilly downloads.  To prevent this, we tell
+~use-package~ to assume the package is there and merely look for its
+autoloads.
+
+#+begin_src emacs-lisp
+  (defun ross/use-package-ensure-already-installed
+      (name _ensure state &optional _context)
+    "Value for `use-package-ensure-function` that assumes the package
+  is already installed.  This is true in our Nix environment."
+    (let ((autoloads-file-name (format "%s-autoloads" name)))
+      (with-demoted-errors "Error loading autoloads: %s"
+	(load autoloads-file-name t t))))
+
+  (setq use-package-ensure-function #'ross/use-package-ensure-already-installed)
+#+end_src
+
+*** Hook naming
+
+~use-package~ also by default appends ~"-hook"~ to all its hooks.
+This impairs ripgreppability.  Let's be explicit:
+
+#+begin_src emacs-lisp
+  (setq use-package-hook-name-suffix nil)
+#+end_src
+
+*** Load it
+
+~use-package~ doesn't use itself.  (Well, I think it could, but this
+is the recommended approach...)
+
+#+begin_src emacs-lisp
+  (eval-when-compile
+    (require 'use-package))
+#+end_src
 
 * Unorganized territory
 
 This is my old init.el.  I'm going make it, like, literate and stuff.
 
 #+begin_src emacs-lisp :tangle default.el
-(eval-when-compile
-  (defun ross/use-package-ensure-already-installed
-      (name _ensure state &optional _context)
-    "Value for `use-package-ensure-function` that assumes the package
-is already installed.  This is true in our Nix environment."
-    (let ((autoloads-file-name (format "%s-autoloads" name)))
-      (with-demoted-errors "Error loading autoloads: %s"
-	(load autoloads-file-name t t))))
-  (setq use-package-hook-name-suffix nil
-	use-package-ensure-function #'ross/use-package-ensure-already-installed
-	)
-  (require 'use-package))
-
 ;;; Benchmark init
 
 (use-package benchmark-init
