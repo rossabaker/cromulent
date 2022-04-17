@@ -1,6 +1,9 @@
 #+TITLE: Ross A. Baker's Emacs Configuration
 #+EXPORT_FILE_NAME: emacs.html
 #+PROPERTY: header-args :tangle default.el
+#+OPTIONS: html-toc:th
+
+#+TOC: headlines 2
 
 * Startup
 
