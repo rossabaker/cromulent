@@ -3,6 +3,7 @@
 let
   siteEmacs = emacsGcc.pkgs.withPackages (epkgs: [
     epkgs.esxml
+    epkgs.htmlize
   ]);
 in
   stdenv.mkDerivation rec {

@@ -1,6 +1,7 @@
 (require 'ox-publish)
 (require 'ox-html)
 (require 'esxml)
+(require 'htmlize)
 
 (defun rossabaker.com/out ()
   (or (car command-line-args-left) (expand-file-name "../html")))
@@ -26,7 +27,8 @@
       org-export-with-toc nil
       org-html-validation-link nil
       org-html-head rossabaker.com/head
-      org-html-preamble #'rossabaker.com/preamble)
+      org-html-preamble #'rossabaker.com/preamble
+      org-html-htmlize-output-type 'css)
 
 (setq org-publish-project-alist
       `(("pages"

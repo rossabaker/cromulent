@@ -38,3 +38,53 @@ figure figcaption {
     color: #999;
     font-family: 'Fira Code', monospace;
 }
+
+/* Exported from modus-operandi theme */
+.org-builtin {
+    /* font-lock-builtin-face */
+    color: #8f0075;
+}
+.org-comment {
+    /* font-lock-comment-face */
+    color: #505050;
+}
+.org-comment-delimiter {
+    /* font-lock-comment-delimiter-face */
+    color: #505050;
+}
+.org-constant {
+    /* font-lock-constant-face */
+    color: #0000c0;
+}
+.org-doc {
+    /* font-lock-doc-face */
+    color: #2a486a;
+}
+.org-function-name {
+    /* font-lock-function-name-face */
+    color: #721045;
+}
+.org-keyword {
+    /* font-lock-keyword-face */
+    color: #5317ac;
+}
+.org-regexp-grouping-backslash {
+    /* font-lock-regexp-grouping-backslash */
+    color: #654d0f;
+}
+.org-regexp-grouping-construct {
+    /* font-lock-regexp-grouping-construct */
+    color: #8b1030;
+}
+.org-string {
+    /* font-lock-string-face */
+    color: #2544bb;
+}
+.org-type {
+    /* font-lock-type-face */
+    color: #005a5f;
+}
+.org-variable-name {
+    /* font-lock-variable-name-face */
+    color: #00538b;
+}
