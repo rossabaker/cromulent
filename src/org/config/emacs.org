@@ -19,15 +19,15 @@ manager with willy nilly downloads.  To prevent this, we tell
 autoloads.
 
 #+begin_src emacs-lisp
-  (defun ross/use-package-ensure-already-installed
-      (name _ensure state &optional _context)
-    "Value for `use-package-ensure-function` that assumes the package
+(defun ross/use-package-ensure-already-installed
+    (name _ensure state &optional _context)
+  "Value for `use-package-ensure-function` that assumes the package
   is already installed.  This is true in our Nix environment."
-    (let ((autoloads-file-name (format "%s-autoloads" name)))
-      (with-demoted-errors "Error loading autoloads: %s"
-	(load autoloads-file-name t t))))
+  (let ((autoloads-file-name (format "%s-autoloads" name)))
+    (with-demoted-errors "Error loading autoloads: %s"
+      (load autoloads-file-name t t))))
 
-  (setq use-package-ensure-function #'ross/use-package-ensure-already-installed)
+(setq use-package-ensure-function #'ross/use-package-ensure-already-installed)
 #+end_src
 
 *** Hook naming
@@ -36,7 +36,7 @@ autoloads.
 This impairs ripgreppability.  Let's be explicit:
 
 #+begin_src emacs-lisp
-  (setq use-package-hook-name-suffix nil)
+(setq use-package-hook-name-suffix nil)
 #+end_src
 
 *** Load it
@@ -45,8 +45,8 @@ This impairs ripgreppability.  Let's be explicit:
 is the recommended approach...)
 
 #+begin_src emacs-lisp
-  (eval-when-compile
-    (require 'use-package))
+(eval-when-compile
+  (require 'use-package))
 #+end_src
 
 ** Benchmarking
@@ -63,6 +63,19 @@ If I _really_ cared about this, I'd reconsider [[https://github.com/hlissner/doo
   (require 'benchmark-init-modes)	; explicitly required
   :hook
   (after-init-hook . benchmark-init/deactivate))
+#+end_src
+
+* Emacs Lisp
+
+** File variables
+
+I use local variables in this config to keep the code from indenting
+two spaces and help preserve the git history from pre-Org days.
+Without this, we get prompted the first time we read this file:
+
+#+begin_src emacs-lisp
+(dolist (pair '((org-src-preserve-indentation . t) (org-src-tab-acts-natively . t)))
+  (add-to-list 'safe-local-variable-values pair))
 #+end_src
 
 * Unorganized territory
@@ -668,3 +681,10 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
 (use-package yaml-mode
   :ensure)
 #+end_src
+
+* Local Variables :noexport:
+Local Variables:
+org-edit-src-content-indentation: 0
+org-src-tab-acts-natively: t
+org-src-preserve-indentation: t
+End:
