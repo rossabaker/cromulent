@@ -49,13 +49,13 @@ is the recommended approach...)
     (require 'use-package))
 #+end_src
 
-* Unorganized territory
+** Benchmarking
 
-This is my old init.el.  I'm going make it, like, literate and stuff.
+I don't go to extreme lengths to optimize startup time, but there are
+usually a few heavy hitters, and [[https://github.com/dholm/benchmark-init-el][benchmark-init-el]] helps find them.
+If I _really_ cared about this, I'd reconsider [[https://github.com/hlissner/doom-emacs][Doom Emacs]].
 
-#+begin_src emacs-lisp :tangle default.el
-;;; Benchmark init
-
+#+begin_src emacs-lisp
 (use-package benchmark-init
   :ensure
   :demand
@@ -63,7 +63,13 @@ This is my old init.el.  I'm going make it, like, literate and stuff.
   (require 'benchmark-init-modes)	; explicitly required
   :hook
   (after-init-hook . benchmark-init/deactivate))
+#+end_src
 
+* Unorganized territory
+
+This is my old init.el.  I'm going make it, like, literate and stuff.
+
+#+begin_src emacs-lisp :tangle default.el
 ;;; State
 
 (defconst ross/is-mac (eq system-type 'darwin))
