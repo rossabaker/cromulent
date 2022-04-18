@@ -68,6 +68,25 @@ If I _really_ cared about this, I'd reconsider [[https://github.com/hlissner/doo
   (after-init-hook . benchmark-init/deactivate))
 #+end_src
 
+** No Littering
+
+Many packages leave crumbs in ~user-emacs-directory~ or even ~$HOME~.
+Finding and configuring them individually is a hassle, so we rely on
+the community configuration of [[https://github.com/emacscollective/no-littering][~no-littering~]].  Run this early,
+because many of the crumb droppers are configured below!
+
+The default is to put everything under ~user-emacs-directory~, which
+for me is under ~~/.config~.  If I considered any of this data to be
+config, they'd be in this file!  I keep mine in ~~/.cache~.
+
+#+begin_src emacs-lisp
+(use-package no-littering
+  :ensure
+  :init
+  (setq no-littering-etc-directory "~/.cache/emacs/etc/"
+	no-littering-var-directory "~/.cache/emacs/var/"))
+#+end_src
+
 * Emacs Lisp
 
 ** File variables
@@ -98,12 +117,6 @@ This is my old init.el.  I'm going make it, like, literate and stuff.
   ;; These are duplicated with the git config in Nix...
   (user-full-name "Ross A. Baker")
   (user-mail-address "ross@rossabaker.com"))
-
-(use-package no-littering
-  :ensure
-  :init
-  (setq no-littering-etc-directory "~/.cache/emacs/etc/"
-	no-littering-var-directory "~/.cache/emacs/var/"))
 
 (use-package exec-path-from-shell
   :ensure
