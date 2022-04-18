@@ -61,6 +61,9 @@ in
       override = epkgs: epkgs // {
         fill-sentences-correctly = compile "fill-sentences-correctly" inputs.fill-sentences-correctly;
         hocon-mode = compile "hocon-mode" inputs.hocon-mode;
+        jenkinsfile-mode = withPatches epkgs.jenkinsfile-mode [
+          ./patches/jenkinsfile-mode/pr-11.diff
+        ];
         scala-mode = compile "scala-mode" inputs.scala-mode;
         unmodified-buffer = compile "unmodified-buffer" inputs.unmodified-buffer;
       };
