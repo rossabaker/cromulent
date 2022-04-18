@@ -1,7 +1,7 @@
-{ emacsGcc, srcOnly, stdenv }:
+{ emacsNativeComp, srcOnly, stdenv }:
 
 let
-  siteEmacs = emacsGcc.pkgs.withPackages (epkgs: [
+  siteEmacs = emacsNativeComp.pkgs.withPackages (epkgs: [
     epkgs.esxml
     epkgs.htmlize
   ]);

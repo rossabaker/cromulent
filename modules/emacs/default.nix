@@ -1,7 +1,7 @@
 { inputs, pkgs, config, ... }:
 
 let
-  emacs = pkgs.emacsGcc;
+  emacs = pkgs.emacsNativeComp;
 
   withPatches = pkg: patches:
     pkg.overrideAttrs (attrs: { inherit patches; });
