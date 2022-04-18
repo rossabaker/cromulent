@@ -1,4 +1,5 @@
-{{ $commit := .Param "branch" | default "" }}
+{{/* site.Param "git.branch" can be set using env var "HUGOxPARAMSxGITxBRANCH" */}}
+{{ $commit := (site.Param "git.branch" | default (.Param "branch")) | default "" }}
 {{ if (eq $commit "") }}
     {{ with .GitInfo }}
         {{ $commit = .Hash }}
