@@ -1,7 +1,7 @@
 { inputs, pkgs, config, ... }:
 
 let
-  emacs = pkgs.emacsGcc;
+  emacs = pkgs.emacsNativeComp;
 
   withPatches = pkg: patches:
     pkg.overrideAttrs (attrs: { inherit patches; });
@@ -59,12 +59,11 @@ in
       config = builtins.readFile "${emacs-config}/share/emacs/site-lisp/default.el";
       package = emacs;
       override = epkgs: epkgs // {
-        benchmark-init = withPatches epkgs.benchmark-init [
-          ./patches/benchmark-init/pr00016.diff
-          ./patches/benchmark-init/pr00017.diff
-        ];
         fill-sentences-correctly = compile "fill-sentences-correctly" inputs.fill-sentences-correctly;
         hocon-mode = compile "hocon-mode" inputs.hocon-mode;
+        jenkinsfile-mode = withPatches epkgs.jenkinsfile-mode [
+          ./patches/jenkinsfile-mode/pr-11.diff
+        ];
         scala-mode = compile "scala-mode" inputs.scala-mode;
         unmodified-buffer = compile "unmodified-buffer" inputs.unmodified-buffer;
       };
