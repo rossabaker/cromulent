@@ -23,6 +23,13 @@ nav ul li {
     color:  #4a3c31;
 }
 
+pre {
+    background-color: #edebeb;
+    border: 1px dashed #900;
+    border-radius: 0.5em;
+    font-family: 'Fira Code', monosapce;
+}
+
 figure {
     display: inline-block;
 }
