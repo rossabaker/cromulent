@@ -87,6 +87,16 @@ config, they'd be in this file!  I keep mine in ~~/.cache~.
 	no-littering-var-directory "~/.cache/emacs/var/"))
 #+end_src
 
+* Personalization
+
+These are used by a handful of packages.  Do not copy unless your name
+is also Ross A. Baker and we share an e-mail address.
+
+#+begin_src emacs-lisp
+(setq user-full-name "Ross A. Baker"
+      user-mail-address "ross@rossabaker.com"))
+#+end_src
+
 * Emacs Lisp
 
 ** File variables
@@ -110,13 +120,6 @@ This is my old init.el.  I'm going make it, like, literate and stuff.
 (defconst ross/is-mac (eq system-type 'darwin))
 
 ;;; Things to run early
-
-(use-package emacs
-  :no-require
-  :custom
-  ;; These are duplicated with the git config in Nix...
-  (user-full-name "Ross A. Baker")
-  (user-mail-address "ross@rossabaker.com"))
 
 (use-package exec-path-from-shell
   :ensure
