@@ -87,6 +87,17 @@ config, they'd be in this file!  I keep mine in ~~/.cache~.
 	no-littering-var-directory "~/.cache/emacs/var/"))
 #+end_src
 
+** Helpers
+
+*** Delight
+
+[[https://savannah.nongnu.org/projects/delight][Delight]] removes uninteresting indicators from the mode line. It
+enables the use of ~:delight~ in ~use-package~ stanzas.
+
+#+begin_src emacs-lisp
+(use-package delight :ensure)
+#+end_src
+
 * Personalization
 
 These are used by a handful of packages.  Do not copy unless your name
@@ -132,9 +143,6 @@ This is the vestige of my old init.el.  It is gradually being made literate.
 
 #+begin_src emacs-lisp :tangle default.el
 ;;; Things to run early
-
-(use-package delight
-  :ensure)
 
 ;;; Core
 
