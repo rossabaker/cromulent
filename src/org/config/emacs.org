@@ -128,7 +128,7 @@ Without this, we get prompted the first time we read this file:
 
 * Unorganized territory
 
-This is my old init.el.  I'm going make it, like, literate and stuff.
+This is the vestige of my old init.el.  It is gradually being made literate.
 
 #+begin_src emacs-lisp :tangle default.el
 ;;; Things to run early
