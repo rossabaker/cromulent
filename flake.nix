@@ -139,7 +139,9 @@
 
         packages = [
           hm
+          pkgs.google-cloud-sdk
           pkgs.nix
+          pkgs.terraform
         ];
       };
     });

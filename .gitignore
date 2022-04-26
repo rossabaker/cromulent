@@ -6,3 +6,8 @@ pkgs/website/html/
 pkgs/website/src/org/blog/index.org
 
 result
+
+.terraform/providers/
+terraform.tfstate
+terraform.tfstate.backup
+/infra/gcp/rossabaker/.terraform/
