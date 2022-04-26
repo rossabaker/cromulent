@@ -1,3 +1,8 @@
+module "nixos_image" {
+  source = "github.com/tweag/terraform-nixos/google_image_nixos"
+  nixos_version = "20.03"
+}
+
 provider "google" {
   project = "rossabaker-348417"
   region  = "us-central1"
@@ -9,15 +14,26 @@ resource "google_project_service" "compute" {
   service = "compute.googleapis.com"
 }
 
+resource "google_project_service" "oslogin" {
+  project = "rossabaker-348417"
+  service = "oslogin.googleapis.com"
+}
+
 resource "google_compute_instance" "vm_instance" {
-  name         = "terraform-instance"
+  name         = "abe"
   machine_type = "e2-micro"
 
   boot_disk {
     initialize_params {
-      image = "debian-cloud/debian-9"
+      image = module.nixos_image.self_link
     }
   }
+
+  metadata = {
+    enable-oslogin = "TRUE"
+  }
+
+  metadata_startup_script = file("configuration.nix")
 
   network_interface {
     # A default network is created for all GCP projects
@@ -28,6 +44,15 @@ resource "google_compute_instance" "vm_instance" {
 }
 
 resource "google_compute_network" "vpc_network" {
-  name                    = "terraform-network"
+  name                    = "terrraform-network"
   auto_create_subnetworks = "true"
+}
+
+resource "google_project_iam_binding" "os-login-admin-users" {
+  project = "rossabaker-348417"
+  role = "roles/compute.osAdminLogin"
+
+  members = [
+    "user:rossabaker@gmail.com"
+  ]
 }
