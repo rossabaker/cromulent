@@ -4,7 +4,8 @@
 (require 'htmlize)
 
 (defun rossabaker.com/out ()
-  (or (car command-line-args-left) (expand-file-name "../html")))
+  (or (car (reverse command-line-args-left))
+      (expand-file-name "../html")))
 
 (defvar rossabaker.com/head
   (mapconcat 'esxml-to-xml
