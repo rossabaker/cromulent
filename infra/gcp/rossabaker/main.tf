@@ -26,6 +26,7 @@ resource "google_compute_instance" "vm_instance" {
   boot_disk {
     initialize_params {
       image = module.nixos_image.self_link
+      size  = 10
     }
   }
 
