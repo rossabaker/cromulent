@@ -31,7 +31,7 @@ resource "google_compute_instance" "vm_instance" {
 
   metadata = {
     enable-oslogin = "TRUE"
-    user-data = file("configuration.nix")
+    nix-configuration = file("configuration.nix")
   }
 
   network_interface {

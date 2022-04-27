@@ -17,6 +17,6 @@ in
     '';
     installPhase = ''
       mkdir $out
-      cp -a $HOME/html/* $out
+      cp -r $HOME/html/. $out
     '';
   }

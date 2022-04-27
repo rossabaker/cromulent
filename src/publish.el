@@ -63,6 +63,8 @@
 	("assets"
 	 :base-directory ,(expand-file-name "org/")
 	 :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|svg"
+	 :include (".well-known/matrix/server"
+		   ".well-known/matrix/client")
 	 :publishing-directory ,(rossabaker.com/out)
 	 :publishing-function org-publish-attachment
 	 :recursive t)

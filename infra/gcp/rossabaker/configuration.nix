@@ -1,10 +1,5 @@
-{ pkgs, lib, config, modulesPath, ... }:
-let
-  fqdn =
-    let
-      join = hostName: domain: hostName + lib.optionalString (domain != null) ".${domain}";
-    in join config.networking.hostName config.networking.domain;
-in {
+{ pkgs, lib, modulesPath, ... }:
+{
   imports = [
     "${toString modulesPath}/virtualisation/google-compute-image.nix"
   ];
@@ -40,35 +35,35 @@ in {
       # This host section can be placed on a different host than the rest,
       # i.e. to delegate from the host being accessible as ${config.networking.domain}
       # to another host actually running the Matrix homeserver.
-      "${config.networking.domain}" = {
-        enableACME = true;
-        forceSSL = true;
+#       "rossabaker.com" = {#         enableACME = true;
+#         forceSSL = true;
 
-        locations."= /.well-known/matrix/server".extraConfig =
-          let
-            # use 443 instead of the default 8448 port to unite
-            # the client-server and server-server port for simplicity
-            server = { "m.server" = "${fqdn}:443"; };
-          in ''
-            add_header Content-Type application/json;
-            return 200 '${builtins.toJSON server}';
-          '';
-        locations."= /.well-known/matrix/client".extraConfig =
-          let
-            client = {
-              "m.homeserver" =  { "base_url" = "https://${fqdn}"; };
-              "m.identity_server" =  { "base_url" = "https://vector.im"; };
-            };
-          # ACAO required to allow element-web on any URL to request this json file
-          in ''
-            add_header Content-Type application/json;
-            add_header Access-Control-Allow-Origin *;
-            return 200 '${builtins.toJSON client}';
-          '';
-      };
+#         locations."= /.well-known/matrix/server".extraConfig =
+#           let
+#             # use 443 instead of the default 8448 port to unite
+#             # the client-server and server-server port for simplicity
+#             server = { "m.server" = "rossaabaker.com
+# :443"; };
+#           in ''
+#             add_header Content-Type application/json;
+#             return 200 '${builtins.toJSON server}';
+#           '';
+#         locations."= /.well-known/matrix/client".extraConfig =
+#           let
+#             client = {
+#               "m.homeserver" =  { "base_url" = "https://matrix.rossabaker.com"; };
+#               "m.identity_server" =  { "base_url" = "https://vector.im"; };
+#             };
+#           # ACAO required to allow element-web on any URL to request this json file
+#           in ''
+#             add_header Content-Type application/json;
+#             add_header Access-Control-Allow-Origin *;
+#             return 200 '${builtins.toJSON client}';
+#           '';
+#       };
 
       # Reverse proxy for Matrix client-server and server-server communication
-      ${fqdn} = {
+      "matrix.rossabaker.com" = {
         enableACME = true;
         forceSSL = true;
 
@@ -87,7 +82,7 @@ in {
   };
   services.matrix-synapse = {
     enable = true;
-    server_name = config.networking.domain;
+    server_name = "rossabaker.com";
     listeners = [
       {
         port = 8008;
