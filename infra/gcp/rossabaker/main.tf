@@ -31,9 +31,8 @@ resource "google_compute_instance" "vm_instance" {
 
   metadata = {
     enable-oslogin = "TRUE"
+    user-data = file("configuration.nix")
   }
-
-  metadata_startup_script = file("configuration.nix")
 
   network_interface {
     # A default network is created for all GCP projects
@@ -41,11 +40,21 @@ resource "google_compute_instance" "vm_instance" {
     access_config {
     }
   }
+
+  tags = ["http-server"]
 }
 
-resource "google_compute_network" "vpc_network" {
-  name                    = "terrraform-network"
-  auto_create_subnetworks = "true"
+resource "google_compute_firewall" "http-server" {
+  name    = "http-server"
+  network = "default"
+
+  allow {
+    protocol = "tcp"
+    ports    = ["80", "443"]
+  }
+
+  source_ranges = ["0.0.0.0/0"]
+  target_tags   = ["http-server"]
 }
 
 resource "google_project_iam_binding" "os-login-admin-users" {
