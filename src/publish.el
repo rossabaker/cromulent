@@ -7,17 +7,21 @@
   (or (car (reverse command-line-args-left))
       (expand-file-name "../html")))
 
+(defun rossabaker.com/cache-buster (path)
+  "Busts the cache by appending the Nix sources' hash as a query string."
+  (concat path "?" (string-remove-prefix "/nix/store/" (string-remove-suffix "-src" (getenv "srcs")))))
+
 (defvar rossabaker.com/head
   (mapconcat 'esxml-to-xml
-   '((link ((rel . "preconnect") (href . "https://fonts.googleapis.com")))
+   `((link ((rel . "preconnect") (href . "https://fonts.googleapis.com")))
      (link ((rel . "preconnect") (href . "https://fonts.gstatic.com") (crossorigin . "anonymous")))
      (link ((rel . "stylesheet") (href . "https://fonts.googleapis.com/css2?family=Bitter:wght@800&family=Fira+Code:wght@500&family=Fira+Sans&display=swap")))
      (link ((href . "https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css")
 	    (rel . "stylesheet")
 	    (integrity . "sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3")
 	    (crossorigin . "anonymous")))
-     (link ((rel . "stylesheet") (href . "/css/style.css"))))
-   ""))
+     (link ((rel . "stylesheet") (href . ,(rossabaker.com/cache-buster "/css/style.css")))))
+   "\n"))
 
 (defun rossabaker.com/preamble (info)
   (esxml-to-xml
