@@ -12,24 +12,50 @@
    '((link ((rel . "preconnect") (href . "https://fonts.googleapis.com")))
      (link ((rel . "preconnect") (href . "https://fonts.gstatic.com") (crossorigin . "anonymous")))
      (link ((rel . "stylesheet") (href . "https://fonts.googleapis.com/css2?family=Bitter:wght@800&family=Fira+Code:wght@500&family=Fira+Sans&display=swap")))
+     (link ((href . "https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css")
+	    (rel . "stylesheet")
+	    (integrity . "sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3")
+	    (crossorigin . "anonymous")))
      (link ((rel . "stylesheet") (href . "/css/style.css"))))
    ""))
 
 (defun rossabaker.com/preamble (info)
   (esxml-to-xml
-   '(nav ()
-	 (a ((href . "/") (id . "wordmark")) "~rossabaker/")
-	 (ul ()
-	     (li () (a ((href . "/")) "Home"))
-	     (li () (a ((href . "/talks/")) "Talks"))
-	     (li () (a ((href . "/config/")) "Config"))))))
+   '(nav ((class . "navbar navbar-expand-lg navbar-light bg-light"))
+	 (div ((class . "container-fluid"))
+	      (a ((class . "navbar-brand")
+		  (href . "/"))
+		 "~rossabaker/")
+	      (button ((class . "navbar-toggler")
+		       (type . "button")
+		       (data-bs-toggle . "collapse")
+		       (data-bs-target . "#navbarSupportedContent")
+		       (aria-controls . "navbarSupportedContent")
+		       (aria-expanded . "false")
+		       (aria-label . "Toggle navigation"))
+		      (span ((class . "navbar-toggler-icon"))))
+	      (div ((class . "collapse navbar-collapse")
+		    (id . "navbarSupportedContent"))
+		   (ul ((class . "navbar-nav"))
+		       (li ((class . "nav-item")) (a ((href . "/talks/") (class . "nav-link")) "Talks"))
+		       (li ((class . "nav-item")) (a ((href . "/config/") (class . "nav-link")) "Config"))))))))
+
+(defun rossabaker.com/postamble (info)
+  (esxml-to-xml
+   '(script ((src . "https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js")
+	     (integrity . "sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p")
+	     (crossorigin . "anonymous")))))
 
 (setq org-export-with-section-numbers nil
       org-export-with-toc nil
       org-html-validation-link nil
+      org-html-doctype "html5"
       org-html-head rossabaker.com/head
       org-html-preamble #'rossabaker.com/preamble
-      org-html-htmlize-output-type 'css)
+      org-html-postamble #'rossabaker.com/postamble
+      org-html-htmlize-output-type 'css
+      org-html-head-include-default-style nil
+      org-html-content-class "container")
 
 (setq org-publish-project-alist
       `(("pages"
