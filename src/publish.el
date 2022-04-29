@@ -11,6 +11,23 @@
   "Busts the cache by appending the Nix sources' hash as a query string."
   (concat path "?" (string-remove-prefix "/nix/store/" (string-remove-suffix "-src" (getenv "srcs")))))
 
+(defconst rossabaker.com/social
+  '(((network . "Email")
+     (href . "mailto:ross@rossabaker.com")
+     (icon . "fa-envelope"))
+    ((network . "GitHub")
+     (href . "https://github.com/rossabaker")
+     (icon . "fa-github"))
+    ((network . "Mastodon")
+     (href . "https://mastodon.social/web/@rossabaker")
+     (icon . "fa-mastodon"))
+    ((network . "Matrix")
+     (href . "https://matrix.to/#/@ross:rossabaker.com")
+     (icon . "fa-matrix-org"))
+    ((network . "Twitter")
+     (href . "https://twitter.com/rossabaker")
+     (icon . "fa-twitter"))))
+
 (defvar rossabaker.com/head
   (mapconcat 'esxml-to-xml
    `((link ((rel . "preconnect") (href . "https://fonts.googleapis.com")))
@@ -20,12 +37,16 @@
 	    (rel . "stylesheet")
 	    (integrity . "sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3")
 	    (crossorigin . "anonymous")))
+     (link ((rel . "stylesheet")
+	    (href . "https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css")
+	    (integrity . "sha256-XoaMnoYC5TH6/+ihMEnospgm0J1PM/nioxbOUdnM8HY=")
+	    (crossorigin . "anonymous")))
      (link ((rel . "stylesheet") (href . ,(rossabaker.com/cache-buster "/css/style.css")))))
    "\n"))
 
 (defun rossabaker.com/preamble (info)
   (esxml-to-xml
-   '(nav ((class . "navbar navbar-expand-lg navbar-light bg-light"))
+   `(nav ((class . "navbar navbar-expand-lg navbar-light bg-light"))
 	 (div ((class . "container-fluid"))
 	      (a ((class . "navbar-brand")
 		  (href . "/"))
@@ -41,8 +62,24 @@
 	      (div ((class . "collapse navbar-collapse")
 		    (id . "navbarSupportedContent"))
 		   (ul ((class . "navbar-nav"))
-		       (li ((class . "nav-item")) (a ((href . "/talks/") (class . "nav-link")) "Talks"))
-		       (li ((class . "nav-item")) (a ((href . "/config/") (class . "nav-link")) "Config"))))))))
+		       (li ((class . "nav-item"))
+			   (a ((href . "/talks/")
+			       (class . "nav-link"))
+			      "Talks"))
+		       (li ((class . "nav-item"))
+			   (a ((href . "/config/")
+			       (class . "nav-link"))
+			      "Config")))
+		   (ul ((class . "navbar-nav"))
+		       ,@(mapcar
+			 (lambda (link)
+			   `(a ((href . ,(alist-get 'href link))
+				(class . "nav-link")
+				(title . ,(alist-get 'network link)))
+			      (i ((class . ,(concat "fa " (alist-get 'icon link)))
+				  (aria-hidden . "true"))
+				 nil)))
+			 rossabaker.com/social)))))))
 
 (defun rossabaker.com/postamble (info)
   (esxml-to-xml
