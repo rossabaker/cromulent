@@ -108,6 +108,22 @@ is also Ross A. Baker and we share an e-mail address.
       user-mail-address "ross@rossabaker.com")
 #+end_src
 
+* Files
+
+** Autorevert
+
+Automatically revert all buffers with no unsaved changes.
+~global-auto-revert-non-file-buffers~ includes buffers like Dired.
+
+#+begin_src emacs-lisp
+(use-package autorevert
+  :delight auto-revert-mode
+  :custom
+  (global-auto-revert-non-file-buffers t)
+  :config
+  (global-auto-revert-mode))
+#+end_src
+
 * Environment
 
 ** Paths
@@ -182,9 +198,6 @@ This is the vestige of my old init.el.  It is gradually being made literate.
   :custom
   ;; .gpg suffix encrypts it.  The default uses plaintext ~/.authinfo.  Yuck!
   (auth-sources (list (expand-file-name "authinfo.gpg" no-littering-etc-directory))))
-
-(use-package autorevert
-  :delight auto-revert-mode)
 
 (use-package comint
   :custom
