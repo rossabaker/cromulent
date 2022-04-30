@@ -53,7 +53,7 @@
 (defun rossabaker.com/preamble (info)
   (esxml-to-xml
    `(nav ((class . "navbar navbar-expand-lg navbar-light bg-light"))
-	 (div ((class . "container-fluid"))
+	 (div ((class . "container"))
 	      (a ((class . "navbar-brand")
 		  (href . "/"))
 		 "~rossabaker/")
@@ -67,7 +67,7 @@
 		      (span ((class . "navbar-toggler-icon")) nil))
 	      (div ((class . "collapse navbar-collapse")
 		    (id . "navbarSupportedContent"))
-		   (ul ((class . "navbar-nav"))
+		   (ul ((class . "navbar-nav me-auto"))
 		       ,@(mapcar
 			 (lambda (link)
 			   `(a ((href . ,(alist-get 'href link))
