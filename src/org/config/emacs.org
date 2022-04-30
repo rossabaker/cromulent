@@ -124,6 +124,14 @@ Automatically revert all buffers with no unsaved changes.
   (global-auto-revert-mode))
 #+end_src
 
+* Indentation
+
+Tabs are the Devil's whitespace.
+
+#+begin_src emacs-lisp
+(customize-set-variable 'indent-tabs-mode nil)
+#+end_src
+
 * Environment
 
 ** Paths
