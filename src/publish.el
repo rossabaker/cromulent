@@ -11,6 +11,12 @@
   "Busts the cache by appending the Nix sources' hash as a query string."
   (concat path "?" (string-remove-prefix "/nix/store/" (string-remove-suffix "-src" (getenv "srcs")))))
 
+(defconst rossabaker.com/sections
+  '(((href . "/talks")
+     (name . "Talks"))
+    ((href . "/config")
+     (name . "Config"))))
+
 (defconst rossabaker.com/social
   '(((network . "Email")
      (href . "mailto:ross@rossabaker.com")
@@ -62,14 +68,12 @@
 	      (div ((class . "collapse navbar-collapse")
 		    (id . "navbarSupportedContent"))
 		   (ul ((class . "navbar-nav"))
-		       (li ((class . "nav-item"))
-			   (a ((href . "/talks/")
-			       (class . "nav-link"))
-			      "Talks"))
-		       (li ((class . "nav-item"))
-			   (a ((href . "/config/")
-			       (class . "nav-link"))
-			      "Config")))
+		       ,@(mapcar
+			 (lambda (link)
+			   `(a ((href . ,(alist-get 'href link))
+				(class . "nav-link"))
+			      ,(alist-get 'name link)))
+			 rossabaker.com/sections))
 		   (ul ((class . "navbar-nav"))
 		       ,@(mapcar
 			 (lambda (link)
