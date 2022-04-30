@@ -4,7 +4,8 @@
 A noble spirit embiggens the smallest blog.
 #+END_QUOTE
 
-#+attr_html: alt="Bender from Futurama yelling, 'Yeah, well, I'm going to go build my own blog. With Emacs! And Nix! In fact, forget the blog.'"
+#+attr_html: :alt Bender from Futurama yelling, "Yeah, well, I'm going to go build my own blog. With Emacs! And Nix! In fact, forget the blog."
+#+attr_html: :class img-fluid
 [[./img/build-my-own-blog.jpg]]
 
 # * Blog posts
