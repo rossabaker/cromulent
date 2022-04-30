@@ -124,6 +124,17 @@ Automatically revert all buffers with no unsaved changes.
   (global-auto-revert-mode))
 #+end_src
 
+** Recent files
+
+Enable tracking of recently owned files. Sadly, this doesn't integrate
+with the operating system.  Happily, we don't leave Emacs very often.
+
+#+begin_src emacs-lisp
+(use-package recentf
+  :config
+  (recentf-mode))
+#+end_src
+
 * Indentation
 
 Tabs are the Devil's whitespace.
@@ -284,10 +295,6 @@ This is the vestige of my old init.el.  It is gradually being made literate.
 (use-package mouse
   :custom
   (mouse-yank-at-point t))
-
-(use-package recentf
-  :config
-  (recentf-mode))
 
 (use-package savehist
   :config
