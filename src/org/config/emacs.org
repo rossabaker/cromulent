@@ -108,6 +108,18 @@ is also Ross A. Baker and we share an e-mail address.
       user-mail-address "ross@rossabaker.com")
 #+end_src
 
+* Editing
+
+** Killing
+
+Don't add _consecutive_ duplicates to the kill ring.
+
+#+begin_src emacs-lisp
+(use-package simple
+  :custom
+  (kill-do-not-save-duplicates t))
+#+end_src
+
 * Files
 
 ** Autorevert
