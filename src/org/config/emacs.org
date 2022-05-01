@@ -186,6 +186,17 @@ with the operating system.  Happily, we don't leave Emacs very often.
   (recentf-mode))
 #+end_src
 
+** Executable
+
+If a file starts with a [[https://en.wikipedia.org/wiki/Shebang_(Unix)][shebang]], and is not already executable, make
+it so on save.
+
+#+begin_src emacs-lisp
+(use-package executable
+  :hook
+  (after-save-hook . executable-make-buffer-file-executable-if-script-p))
+#+end_src
+
 * Indentation
 
 Tabs are the Devil's whitespace.
