@@ -274,8 +274,6 @@ Without this, we get prompted the first time we read this file:
 This is the vestige of my old init.el.  It is gradually being made literate.
 
 #+begin_src emacs-lisp :tangle default.el
-;;; Things to run early
-
 ;;; Core
 
 (use-package emacs
