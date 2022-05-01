@@ -192,6 +192,22 @@ Emacs' default scrolling behavior feels a bit janky in the 2020s.
   (scroll-preserve-screen-position t))
 #+end_src
 
+*** Pulse
+
+Flash whenever we scroll, recenter, or switch windows.
+Credit: [[https://karthinks.com/software/batteries-included-with-emacs/][Karthik Chikmagalur]].
+
+#+begin_src emacs-lisp
+(use-package pulse
+  :config
+  (defun ross/pulse-line (&rest _)
+    "Pulse the current line."
+    (pulse-momentary-highlight-one-line (point)))
+  (dolist (command '(scroll-up-command scroll-down-command
+                                       recenter-top-bottom other-window))
+    (advice-add command :after #'ross/pulse-line)))
+#+end_src
+
 * Files
 
 ** Autorevert
