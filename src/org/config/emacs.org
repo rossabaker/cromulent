@@ -5,6 +5,23 @@
 
 #+TOC: headlines 2
 
+* Preface
+
+** Structure
+
+Configuration of the built-ins more or less follows the structure of
+the Emacs manual.  Some concessions are made to bootstrapping packages
+critical to the configuration, or getting things to run early.
+
+** Inspirations
+
+*** Rational Emacs
+
+I have been following the [[https://www.youtube.com/c/systemcrafters][System Crafters]] YouTube channel.  They have
+started the [[https://github.com/SystemCrafters/rational-emacs][Rational Emacs]] base configuration.  I have experimented
+with and eschewed various starter kits over the years, and don't
+particularly want the dependency here, but I like their style.
+
 * Startup
 
 ** Packages
