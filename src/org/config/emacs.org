@@ -125,6 +125,18 @@ is also Ross A. Baker and we share an e-mail address.
       user-mail-address "ross@rossabaker.com")
 #+end_src
 
+* Minibuffer
+
+** History
+
+~savehist~ persists the history of the minibuffer across sessions.
+
+#+begin_src emacs-lisp
+(use-package savehist
+  :config
+  (savehist-mode))
+#+end_src
+
 * Editing
 
 ** Killing
@@ -370,10 +382,6 @@ This is the vestige of my old init.el.  It is gradually being made literate.
 (use-package mouse
   :custom
   (mouse-yank-at-point t))
-
-(use-package savehist
-  :config
-  (savehist-mode))
 
 (use-package simple
   :requires cl-lib
