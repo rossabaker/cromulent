@@ -176,6 +176,19 @@ Tabs are the Devil's whitespace.
 (customize-set-variable 'indent-tabs-mode nil)
 #+end_src
 
+* Lossage
+
+** Long lines
+
+Turn off some bells and whistles when lines are so long they slow down
+Emacs.
+
+#+begin_src emacs-lisp
+(use-package so-long
+  :config
+  (global-so-long-mode))
+#+end_src
+
 * Environment
 
 ** Paths
