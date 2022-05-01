@@ -208,6 +208,20 @@ Credit: [[https://karthinks.com/software/batteries-included-with-emacs/][Karthik
     (advice-add command :after #'ross/pulse-line)))
 #+end_src
 
+** Line numbers
+
+~display-line-numbers~ is a more performant replacement for the
+venerable old ~linum~.  We turn it on for program and configuration
+modes.
+
+#+begin_src emacs-lisp
+(use-package display-line-numbers
+  :custom
+  (display-line-numbers-widen t)
+  :hook
+  ((prog-mode-hook conf-mode-hook) . display-line-numbers-mode))
+#+end_src
+
 * Files
 
 ** Autorevert
@@ -478,12 +492,6 @@ This is the vestige of my old init.el.  It is gradually being made literate.
   :ensure
   :config
   (default-text-scale-mode))
-
-(use-package display-line-numbers
-  :custom
-  (display-line-numbers-widen t)
-  :hook
-  ((prog-mode-hook conf-mode-hook) . display-line-numbers-mode))
 
 (use-package faces
   :custom
