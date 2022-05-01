@@ -137,6 +137,27 @@ is also Ross A. Baker and we share an e-mail address.
   (savehist-mode))
 #+end_src
 
+* Help
+
+** Helpful
+
+The integrated help in Emacs is superb, but the presentation is less
+so. We introduce [[https://github.com/Wilfred/helpful][Helpful]] as an alternative. We introduce it primarily
+by rebinding the built-in ~describe-*~ functions.
+
+#+begin_src emacs-lisp
+(use-package helpful
+  :ensure
+  :bind
+  ([remap describe- command] . helpful-command)
+  ([remap describe-function] . helpful-callable)
+  ([remap describe-key] . helpful-key)
+  ([remap describe-symbol] . helpful-symbol)
+  ([remap describe-variable] . helpful-variable)
+  ([remap Info-goto-emacs-command-node] . helpful-function)
+  ("C-h (" . helpful-macro))
+#+end_src
+
 * Editing
 
 ** Killing
@@ -632,17 +653,6 @@ This is the vestige of my old init.el.  It is gradually being made literate.
 
 (use-package htmlize
   :ensure)
-
-(use-package helpful
-  :ensure
-  :bind
-  ([remap describe-command] . helpful-command)
-  ([remap describe-function] . helpful-callable)
-  ([remap describe-key] . helpful-key)
-  ([remap describe-symbol] . helpful-symbol)
-  ([remap describe-variable] . helpful-variable)
-  ([remap Info-goto-emacs-command-node] . helpful-function)
-  ("C-h (" . helpful-macro))
 
 (use-package flycheck
   :ensure
