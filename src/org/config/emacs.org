@@ -143,11 +143,12 @@ Don't add _consecutive_ duplicates to the kill ring.
 
 Emacs' default scrolling behavior feels a bit janky in the 2020s.
 
-- ~scroll-conservatively~ has a magic number of ~100~.  Greater than this
-scrolls just enough to get the point back on screen without recentering.
+- ~scroll-conservatively~ has a magic number of ~100~. Greater than
+  this scrolls just enough to get the point back on screen without
+  recentering.
 
-- ~scroll-margin~ specifies how many lines of context to keep above and
-below the point.
+- ~scroll-margin~ specifies how many lines of context to keep above
+  and below the point.
 
 #+begin_src emacs-lisp
 (use-package emacs
