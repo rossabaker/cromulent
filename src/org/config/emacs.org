@@ -120,6 +120,27 @@ Don't add _consecutive_ duplicates to the kill ring.
   (kill-do-not-save-duplicates t))
 #+end_src
 
+* Display
+
+** Scrolling
+
+Emacs' default scrolling behavior feels a bit janky in the 2020s.
+
+- ~scroll-conservatively~ has a magic number of ~100~.  Greater than this
+scrolls just enough to get the point back on screen without recentering.
+
+- ~scroll-margin~ specifies how many lines of context to keep above and
+below the point.
+
+#+begin_src emacs-lisp
+(use-package emacs
+  :custom
+  (frame-inhibit-implied-resize t)
+  (scroll-conservatively 101)
+  (scroll-margin 2)
+  (scroll-preserve-screen-position t))
+#+end_src
+
 * Files
 
 ** Autorevert
@@ -357,12 +378,7 @@ This is the vestige of my old init.el.  It is gradually being made literate.
   :no-require
   :custom
   (cursor-type 'bar)
-  (fast-but-imprecise-scrolling t)
-  (frame-inhibit-implied-resize t)
   (frame-resize-pixelwise t)
-  (scroll-conservatively 101)
-  (scroll-margin 2)
-  (scroll-preserve-screen-position t)
   (use-dialog-box nil)
   (visible-bell nil)
   (window-combination-resize t)
