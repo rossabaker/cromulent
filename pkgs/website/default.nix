@@ -1,4 +1,4 @@
-{ emacsNativeComp, srcOnly, stdenv }:
+{ emacsNativeComp, stdenv }:
 
 let
   siteEmacs = emacsNativeComp.pkgs.withPackages (epkgs: [
