@@ -98,13 +98,9 @@
         };
     in
     {
-      # Overlayed packages
-      overlay = (import ./overlays);
-
       overlays = [
         emacs-overlay.overlay
         devshell.overlay
-        self.overlay
       ];
 
       # System configurations
@@ -116,8 +112,6 @@
 
           modules = [
             ./configuration.nix
-            # Adds your overlay and packages to nixpkgs
-            { nixpkgs.overlays = [ self.overlay ]; }
             # Adds your custom nixos modules
             ./modules/nixos
           ];
