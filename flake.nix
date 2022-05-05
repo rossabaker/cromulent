@@ -136,7 +136,7 @@
           mkConfig = { system ? "x86_64-darwin" }: darwin.lib.darwinSystem {
             inherit system;
             modules = [
-              (tangleFor system).darwin-configuration
+              (tangleFor system)
             ];
           };
         in

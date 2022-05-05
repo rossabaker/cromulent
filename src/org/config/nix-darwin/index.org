@@ -3,18 +3,12 @@
 This is a [[https://github.com/LnL7/nix-darwin][nix-darwin configuration]].  I'm only on MacOS for work, but we
 had might as well make the best of it!
 
-#+begin_src nix :tangle default.nix
-  {
-    darwin-configuration = ./darwin-configuration.nix;
-  }
-#+end_src
-
 * Base configuration
 
 This is imported from preliterate times and could be broken up
 further.
 
-#+begin_src nix :tangle darwin-configuration.nix
+#+begin_src nix :tangle default.nix
   { config, pkgs, ... }:
 
   {
