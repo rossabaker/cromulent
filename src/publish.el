@@ -130,6 +130,7 @@
 	("config"
 	 :base-directory ,(expand-file-name "org/config")
 	 :base-extension "org"
+         :recursive t
 	 :publishing-directory ,(concat (rossabaker.com/out) "/config/")
 	 :publishing-function org-html-publish-to-html)
 	("assets"

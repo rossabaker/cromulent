@@ -57,7 +57,27 @@
     , unmodified-buffer
     , utils
     , ...
-    }@inputs: {
+    }@inputs: let
+      tangle = pkgs: pkgs.stdenv.mkDerivation {
+        name = "tangle";
+        src = ./src/org/config/nix-darwin;
+        buildInputs = [
+          pkgs.emacs
+        ];
+        buildPhase = ''
+          ${pkgs.emacs}/bin/emacs -Q -nw index.org --batch -f org-babel-tangle --kill
+        '';
+        installPhase = ''
+          mkdir $out
+          install * $out
+        '';
+      };
+
+      tangleFor = system: let
+        pkgs = import nixpkgs { inherit system; };
+      in
+        import (tangle pkgs);
+    in {
       # Overlayed packages
       overlay = (import ./overlays);
 
@@ -106,11 +126,15 @@
         };
       };
 
-      darwinConfigurations = {
-        C02Z721ZLVCG = darwin.lib.darwinSystem {
-          system = "x86_64-darwin";
-          modules = [ ./darwin-configuration.nix ];
+      darwinConfigurations = let
+        mkConfig = { system ? "x86_64-darwin" }: darwin.lib.darwinSystem {
+          inherit system;
+          modules = [
+            (tangleFor system).darwin-configuration
+          ];
         };
+      in {
+        C02Z721ZLVCG = mkConfig {};
       };
     }
     // utils.lib.eachDefaultSystem (system:

@@ -1,0 +1,73 @@
+#+TITLE: Nix-Darwin Configuration
+
+This is a [[https://github.com/LnL7/nix-darwin][nix-darwin configuration]].  I'm only on MacOS for work, but we
+had might as well make the best of it!
+
+#+begin_src nix :tangle default.nix
+  {
+    darwin-configuration = ./darwin-configuration.nix;
+  }
+#+end_src
+
+* Base configuration
+
+This is imported from preliterate times and could be broken up
+further.
+
+#+begin_src nix :tangle darwin-configuration.nix
+  { config, pkgs, ... }:
+
+  {
+    # List packages installed in system profile. To search by name, run:
+    # $ nix-env -qaP | grep wget
+    environment.systemPackages =
+      [
+        pkgs.cachix
+        pkgs.podman
+        pkgs.qemu
+        pkgs.xz
+      ];
+
+    environment.shellAliases = {
+      docker = "podman";
+    };
+
+    environment.etc."containers/containers.conf.d/99-gvproxy-path.conf".text = ''
+      [engine]
+      helper_binaries_dir = ["${pkgs.gvproxy}/bin"]
+    '';
+
+    # Use a custom configuration.nix location.
+    # $ darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin/configuration.nix
+    # environment.darwinConfig = "$HOME/.config/nixpkgs/darwin/configuration.nix";
+
+    # Auto upgrade nix package and the daemon service.
+    # services.nix-daemon.enable = true;
+    nix = {
+      binaryCaches = [
+        "https://nix-community.cachix.org/"
+        "https://rossabaker.cachix.org/"
+        "https://typelevel.cachix.org/"
+      ];
+      binaryCachePublicKeys = [
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+        "rossabaker.cachix.org-1:KK/CQTeAGEurCUBy3nDl9PdR+xX+xtWQ0C/GpNN6kuw="
+        "typelevel.cachix.org-1:UnD9fMAIpeWfeil1V/xWUZa2g758ZHk8DvGCd/keAkg="
+      ];
+      package = pkgs.nixFlakes;
+      extraOptions = ''
+        experimental-features = nix-command flakes
+      '';
+    };
+
+    # Create /etc/bashrc that loads the nix-darwin environment.
+    programs.zsh.enable = true; # default shell on catalina
+    # programs.fish.enable = true;
+
+    services.nix-daemon.enable = true;
+
+    # Used for backwards compatibility, please read the changelog before changing.
+    # $ darwin-rebuild changelog
+    system.stateVersion = 4;
+  }
+#+end_src
