@@ -29,8 +29,10 @@
       flake = false;
     };
 
-    hocon-mode.url = "github:jxq0/hocon-mode";
-    hocon-mode.flake = false;
+    hocon-mode = {
+      url = "github:jxq0/hocon-mode";
+      flake = false;
+    };
 
     scala-mode = {
       url = "github:Kazark/emacs-scala-mode?ref=scala3";
