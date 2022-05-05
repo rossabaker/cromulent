@@ -57,7 +57,8 @@
     , unmodified-buffer
     , utils
     , ...
-    }@inputs: let
+    }@inputs:
+    let
       tangle = pkgs: pkgs.stdenv.mkDerivation {
         name = "tangle";
         src = ./src/org/config/nix-darwin;
@@ -73,11 +74,13 @@
         '';
       };
 
-      tangleFor = system: let
-        pkgs = import nixpkgs { inherit system; };
-      in
+      tangleFor = system:
+        let
+          pkgs = import nixpkgs { inherit system; };
+        in
         import (tangle pkgs);
-    in {
+    in
+    {
       # Overlayed packages
       overlay = (import ./overlays);
 
@@ -126,16 +129,18 @@
         };
       };
 
-      darwinConfigurations = let
-        mkConfig = { system ? "x86_64-darwin" }: darwin.lib.darwinSystem {
-          inherit system;
-          modules = [
-            (tangleFor system).darwin-configuration
-          ];
+      darwinConfigurations =
+        let
+          mkConfig = { system ? "x86_64-darwin" }: darwin.lib.darwinSystem {
+            inherit system;
+            modules = [
+              (tangleFor system).darwin-configuration
+            ];
+          };
+        in
+        {
+          C02Z721ZLVCG = mkConfig { };
         };
-      in {
-        C02Z721ZLVCG = mkConfig {};
-      };
     }
     // utils.lib.eachDefaultSystem (system:
     let
