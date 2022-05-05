@@ -1,10 +1,6 @@
 #+TITLE: Configurations
 
-#+begin_export html
-<a href="./emacs/">
-  <figure>
-    <img src="../img/emacs.svg" alt="Emacs logo" width="128" height="128" />
-    <figcaption>Emacs</figcaption>
-  </figure>
-</a>
-#+end_export
+- [[./emacs/][Emacs]]: the crown jewel
+- [[./nix-darwin/][nix-darwin]]: my MacBook
+- [[./home-manager/][home-manager]]: my user environment
+- [[./website/][website]]: how rossabaker.com is generated
