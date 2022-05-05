@@ -5,23 +5,39 @@
 ** Matrix
 
 I run my [[https://matrix.to/#/@ross:rossabaker.com][Matrix presence]] on a personal Synapse server in Google Cloud.
+Everything described here runs in the free tier, but I am not
+responsible if you run this and get a bill.
 
 *** Terraform
 
-From preliterate times.
+~20.03~ is disappointingly old, but it's the newest one I can find
+publicly. I upgraded this on the instance after it was created. It
+would be good to get a fresher image on GCS, but it'll cost a few
+pennies.
 
 #+begin_src terraform :tangle main.tf
   module "nixos_image" {
     source = "github.com/tweag/terraform-nixos/google_image_nixos"
     nixos_version = "20.03"
   }
+#+end_src
 
+I created this project manually.  To create a project directly, we'd
+need another "admin" project to bootstrap things.  The
+~"rossabaker-348417"~ is repeated frequently and belongs in a
+variable.
+
+#+begin_src nix :tangle main.tf
   provider "google" {
     project = "rossabaker-348417"
     region  = "us-central1"
     zone    = "us-central1-c"
   }
+#+end_src
 
+These APIs need to be enabled for subsequent calls to work.
+
+#+begin_src nix :tangle main.tf
   resource "google_project_service" "compute" {
     project = "rossabaker-348417"
     service = "compute.googleapis.com"
@@ -31,7 +47,13 @@ From preliterate times.
     project = "rossabaker-348417"
     service = "oslogin.googleapis.com"
   }
+#+end_src
 
+~enable-oslogin~ lets us log into the machine as our Google identity.
+The ~nix-configuration~ is a handy way to expose the NixOS
+configuration, since we don't have a custom image to bake it into.
+
+#+begin_src nix
   resource "google_compute_instance" "vm_instance" {
     name         = "abe"
     machine_type = "e2-micro"
@@ -57,7 +79,19 @@ From preliterate times.
 
     tags = ["http-server"]
   }
+#+end_src
 
+To refresh the configuration on the instance, we can run:
+
+#+begin_src sh
+  curl "http://metadata.google.internal/computeMetadata/v1/instance/attributes/nix-configuration" -H "Metadata-Flavor: Google" | sudo tee /etc/nixos/configuration.nix && sudo nixos-rebuild --upgrade switch
+#+end_src
+
+The ~http-server~ tag links it up with the VM instance above so the
+firewall rules apply.  In hindsight, port ~443~ probably would have
+been sufficient here.
+
+#+begin_src nix :tangle main.tf
   resource "google_compute_firewall" "http-server" {
     name    = "http-server"
     network = "default"
@@ -70,7 +104,11 @@ From preliterate times.
     source_ranges = ["0.0.0.0/0"]
     target_tags   = ["http-server"]
   }
+#+end_src
 
+Make ourselves an admin:
+
+#+begin_src nix :tangle main.tf
   resource "google_project_iam_binding" "os-login-admin-users" {
     project = "rossabaker-348417"
     role = "roles/compute.osAdminLogin"
@@ -81,7 +119,7 @@ From preliterate times.
   }
 #+end_src
 
-Lock our dependencies:
+Finally, lock our dependencies:
 
 #+begin_src hcl :tangle .terraform.lock.hcl
   provider "registry.terraform.io/hashicorp/google" {
@@ -105,9 +143,10 @@ Lock our dependencies:
 
 *** Nix
 
-This is from preliterate times.
+Most of this configuration comes from the [[https://nixos.org/manual/nixos/stable/index.html#module-services-matrix-synapse][Synapse Homeserver]] section
+of the NixOS manual.
 
-#+begin_src nix :tangle default
+#+begin_src nix :tangle default.nix
   { pkgs, lib, modulesPath, ... }:
   {
     imports = [
@@ -183,3 +222,17 @@ This is from preliterate times.
     };
   }
 #+end_src
+
+The password in ~initialScript~ is gross, but NixOS' PostgreSQL
+defaults to peer authentication for domain sockets, and we don't
+expose Postgres outside the localhost.  Just to be extra safe, I
+manually ran:
+
+#+begin_src sql
+  ALTER ROLE "matrix-synapse" PASSWORD null;
+#+end_src
+
+*** Federation
+
+Federation is configured via the [[file:../../.well-known][~.well-known~]] directory, which is
+deployed to ~rossabaker.com~ as part of the [[file:../website/index.org::+TITLE: Website][website]] package.

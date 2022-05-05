@@ -4,4 +4,4 @@
 - [[./nix-darwin/][nix-darwin]]: my MacBook
 - [[./home-manager/][home-manager]]: my user environment
 - [[./website/][website]]: how rossabaker.com is generated
-- [[./infra/][Infrastructure]]: for now, my Synapse server
+- [[./infrastructure/][Infrastructure]]: for now, my Synapse server
