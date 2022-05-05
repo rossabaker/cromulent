@@ -12,24 +12,16 @@ further.
   { config, pkgs, ... }:
 
   {
+    imports = [
+      ./podman.nix
+    ];
+
     # List packages installed in system profile. To search by name, run:
     # $ nix-env -qaP | grep wget
     environment.systemPackages =
       [
         pkgs.cachix
-        pkgs.podman
-        pkgs.qemu
-        pkgs.xz
       ];
-
-    environment.shellAliases = {
-      docker = "podman";
-    };
-
-    environment.etc."containers/containers.conf.d/99-gvproxy-path.conf".text = ''
-      [engine]
-      helper_binaries_dir = ["${pkgs.gvproxy}/bin"]
-    '';
 
     # Use a custom configuration.nix location.
     # $ darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin/configuration.nix
@@ -63,5 +55,35 @@ further.
     # Used for backwards compatibility, please read the changelog before changing.
     # $ darwin-rebuild changelog
     system.stateVersion = 4;
+  }
+#+end_src
+
+* Docker
+
+There's no Docker service built into nix-darwin, but [[https://podman.io/][Podman]] has been
+an effective substitute thus far.
+
+#+begin_src nix :tangle podman.nix
+  { config, pkgs, ... }:
+
+  {
+    # List packages installed in system profile. To search by name, run:
+    # $ nix-env -qaP | grep wget
+    environment.systemPackages =
+      [
+        pkgs.podman
+        pkgs.qemu
+        pkgs.xz
+      ];
+
+    environment.shellAliases = {
+      docker = "podman";
+    };
+
+    # https://github.com/LnL7/nix-darwin/issues/432#issuecomment-1024951660
+    environment.etc."containers/containers.conf.d/99-gvproxy-path.conf".text = ''
+      [engine]
+      helper_binaries_dir = ["${pkgs.gvproxy}/bin"]
+    '';
   }
 #+end_src
