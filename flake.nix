@@ -68,6 +68,7 @@
           pkgs = pkgsFor system;
         in
         darwin.lib.darwinSystem {
+          inherit system;
           modules = [
             (pkgs.callPackage ./tangle.nix {
               inherit pkgs;
