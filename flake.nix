@@ -61,26 +61,52 @@
     , ...
     }@inputs:
     let
-      tangle = pkgs: pkgs.stdenv.mkDerivation {
-        name = "tangle";
-        src = ./src/org/config/nix-darwin;
-        buildInputs = [
-          pkgs.emacs
-        ];
-        buildPhase = ''
-          ${pkgs.emacs}/bin/emacs -Q -nw index.org --batch -f org-babel-tangle --kill
-        '';
-        installPhase = ''
-          mkdir $out
-          install * $out
-        '';
-      };
-
-      tangleFor = system:
+      tangle = { system, src }:
         let
           pkgs = import nixpkgs { inherit system; };
         in
-        import (tangle pkgs);
+        import (pkgs.stdenv.mkDerivation {
+          name = "tangle-${builtins.baseNameOf src}";
+          inherit src;
+          buildInputs = [
+            pkgs.emacs
+          ];
+          buildPhase = ''
+            ${pkgs.emacs}/bin/emacs -Q -nw index.org --batch -f org-babel-tangle --kill
+          '';
+          installPhase = ''
+            mkdir $out
+            install * $out
+          '';
+        });
+
+      mkDarwinConfig = { system ? "x86_64-darwin" }: darwin.lib.darwinSystem {
+        inherit system;
+        modules = [
+          (tangle {
+            inherit system;
+            src = ./src/org/config/nix-darwin;
+          })
+        ];
+      };
+
+      mkHomeConfig = { system, username, homeDirectory }: home-manager.lib.homeManagerConfiguration rec {
+        inherit username homeDirectory system;
+        configuration = (tangle {
+          inherit system;
+          src = ./src/org/config/home-manager;
+        });
+        extraModules = [
+          # Adds your overlay and packages to nixpkgs
+          { nixpkgs.overlays = [ self.overlay emacs-overlay.overlay gomod2nix.overlay ]; }
+          # Adds your custom home-manager modules
+          ./modules/emacs
+          ./modules/scala
+          ./modules/work
+        ];
+        # Pass our flake inputs into the config
+        extraSpecialArgs = { inherit inputs; };
+      };
     in
     {
       # Overlayed packages
@@ -111,38 +137,17 @@
         };
       };
 
-      # Home configurations
-      # Accessible via 'home-manager --flake'
       homeConfigurations = {
-        "ross.baker@C02Z721ZLVCG" = home-manager.lib.homeManagerConfiguration rec {
-          username = "ross.baker";
-          homeDirectory = "/Users/${username}";
+        "ross.baker@C02Z721ZLVCG" = mkHomeConfig {
           system = "x86_64-darwin";
-
-          configuration = ./home.nix;
-          extraModules = [
-            # Adds your overlay and packages to nixpkgs
-            { nixpkgs.overlays = [ self.overlay emacs-overlay.overlay gomod2nix.overlay ]; }
-            # Adds your custom home-manager modules
-            ./modules/work
-          ];
-          # Pass our flake inputs into the config
-          extraSpecialArgs = { inherit inputs; };
+          username = "ross.baker";
+          homeDirectory = "/Users/ross.baker";
         };
       };
 
-      darwinConfigurations =
-        let
-          mkConfig = { system ? "x86_64-darwin" }: darwin.lib.darwinSystem {
-            inherit system;
-            modules = [
-              (tangleFor system)
-            ];
-          };
-        in
-        {
-          C02Z721ZLVCG = mkConfig { };
-        };
+      darwinConfigurations = {
+        C02Z721ZLVCG = mkDarwinConfig { };
+      };
     }
     // utils.lib.eachDefaultSystem (system:
     let

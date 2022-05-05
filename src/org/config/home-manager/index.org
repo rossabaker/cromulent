@@ -1,0 +1,61 @@
+#+TITLE: home-manager
+
+[[https://github.com/nix-community/home-manager/][home-manager]] manages userspace, both packages and dotfiles.
+
+We prefer to keep a robustu user environment along with a lean
+configurations for NixOS and nix-darwin.  This keeps our environment
+maximally portable between those operating systems, as well as any
+other hosts that support the Nix package manager (e.g., Debian).
+
+* Base configuration
+
+This is imported from preliterate times and could be broken up
+further.
+
+#+begin_src nix :tangle default.nix
+  { inputs, lock, lib, config, pkgs, ... }:
+
+  {
+    # Comment out if you wish to disable unfree packages for your system
+    nixpkgs.config.allowUnfree = true;
+
+    # Add stuff for your user as you see fit:
+    # programs.neovim.enable = true;
+    home.packages = [
+      pkgs.gomod2nix
+      pkgs.jq
+      pkgs.nixpkgs-fmt
+    ];
+
+    programs.direnv = {
+      enable = true;
+      enableBashIntegration = true;
+      enableZshIntegration = true;
+    };
+
+    programs.home-manager.enable = true;
+
+    programs.git = {
+      enable = true;
+      ignores = [
+        ".DS_Store"
+        ".bloop/"
+        ".bsp/"
+        ".direnv/"
+        ".metals/"
+        "metals.sbt"
+      ];
+      userName = "Ross A. Baker";
+      userEmail = "ross@rossabaker.com";
+    };
+
+    programs.gpg = {
+      enable = true;
+    };
+
+    programs.zsh.enable = true;
+
+    # Nicely reload system units when changing configs
+    systemd.user.startServices = "sd-switch";
+  }
+#+end_src
