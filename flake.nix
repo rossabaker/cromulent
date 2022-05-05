@@ -101,7 +101,6 @@
           { nixpkgs.overlays = [ self.overlay emacs-overlay.overlay gomod2nix.overlay ]; }
           # Adds your custom home-manager modules
           (tangle { inherit system; src = ./src/org/config/emacs; })
-          ./modules/scala
           ./modules/work
         ];
         # Pass our flake inputs into the config

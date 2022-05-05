@@ -16,6 +16,10 @@ further.
   { inputs, lock, lib, config, pkgs, ... }:
 
   {
+    imports = [
+      ./scala.nix
+    ];
+
     # Comment out if you wish to disable unfree packages for your system
     nixpkgs.config.allowUnfree = true;
 
@@ -58,4 +62,62 @@ further.
     # Nicely reload system units when changing configs
     systemd.user.startServices = "sd-switch";
   }
+#+end_src
+
+* Scala
+
+Set up a global [[https://www.scala-sbt.org/][sbt]] and a few plugins.
+
+#+begin_src nix :tangle scala.nix
+  { pkgs, ... }:
+
+  {
+    home.file = {
+      ".sbt/1.0/sonatype.sbt".source = ./sonatype.sbt;
+      ".sbt/1.0/plugins/sbt-rewarn.sbt".source = ./sbt-rewarn.sbt;
+      ".sbt/1.0/plugins/sbt-updates.sbt".source = ./sbt-updates.sbt;
+    };
+
+    home.packages = [
+      pkgs.sbt
+    ];
+  }
+#+end_src
+
+** Sonatype credentials
+
+This tells sbt where to look for our [[https://central.sonatype.org/publish/publish-guide/][Sonatype]] credentials.
+
+#+begin_src scala :tangle sonatype.sbt
+credentials += Credentials(Path.userHome / ".sbt" / "sonatype-credentials.properties")
+#+end_src
+
+This will not work until a ~~/.sbt/sonatype-credentials.properties~
+file is added.  Add the password yourself:
+
+#+begin_src properties
+realm=Sonatype Nexus Repository Manager
+host=oss.sonatype.org
+user=rossabaker
+password=???
+#+end_src
+
+** Plugins
+
+*** sbt-rewarn
+
+[[https://github.com/rtimush/sbt-rewarn][sbt-rewarn]] perserves warnings across incremental compilations.
+
+#+begin_src scala :tangle sbt-rewarn.sbt
+  addSbtPlugin("com.timushev.sbt" % "sbt-rewarn" % "0.1.3")
+#+end_src
+
+*** sbt-updates
+
+[[https://github.com/rtimush/sbt-updates][sbt-updates]] shows available updates to library and plugin
+dependencies.  [[https://github.com/scala-steward-org/scala-steward][Scala Steward]] takes care of this on many modern
+projects, but it's still handy for local checking.
+
+#+begin_src scala :tangle sbt-updates.sbt
+  addSbtPlugin("com.timushev.sbt" % "sbt-updates" % "0.14.0")
 #+end_src
