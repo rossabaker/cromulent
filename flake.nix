@@ -61,51 +61,41 @@
     , ...
     }@inputs:
     let
-      tangle = { system, src }:
+      pkgsFor = system: import nixpkgs { inherit system; };
+
+      mkDarwinConfig = { system ? "x86_64-darwin" }:
         let
-          pkgs = import nixpkgs { inherit system; };
+          pkgs = pkgsFor system;
         in
-        import (pkgs.stdenv.mkDerivation {
-          name = "tangle-${builtins.baseNameOf src}";
-          inherit src;
-          buildInputs = [
-            pkgs.emacs
+        darwin.lib.darwinSystem {
+          modules = [
+            (pkgs.callPackage ./tangle.nix {
+              inherit pkgs;
+              src = ./src/org/config/nix-darwin;
+            })
           ];
-          buildPhase = ''
-            ${pkgs.emacs}/bin/emacs -Q -nw index.org --batch -f org-babel-tangle --kill
-          '';
-          installPhase = ''
-            mkdir $out
-            install * $out
-          '';
-        });
+        };
 
-      mkDarwinConfig = { system ? "x86_64-darwin" }: darwin.lib.darwinSystem {
-        inherit system;
-        modules = [
-          (tangle {
-            inherit system;
-            src = ./src/org/config/nix-darwin;
-          })
-        ];
-      };
-
-      mkHomeConfig = { system, username, homeDirectory }: home-manager.lib.homeManagerConfiguration rec {
-        inherit username homeDirectory system;
-        configuration = (tangle {
-          inherit system;
-          src = ./src/org/config/home-manager;
-        });
-        extraModules = [
-          # Adds your overlay and packages to nixpkgs
-          { nixpkgs.overlays = [ self.overlay emacs-overlay.overlay gomod2nix.overlay ]; }
-          # Adds your custom home-manager modules
-          (tangle { inherit system; src = ./src/org/config/emacs; })
-          ./modules/work
-        ];
-        # Pass our flake inputs into the config
-        extraSpecialArgs = { inherit inputs; };
-      };
+      mkHomeConfig = { system, username, homeDirectory }:
+        let
+          pkgs = pkgsFor system;
+        in
+        home-manager.lib.homeManagerConfiguration rec {
+          inherit username homeDirectory system;
+          configuration = (pkgs.callPackage ./tangle.nix {
+            inherit pkgs;
+            src = ./src/org/config/home-manager;
+          });
+          extraModules = [
+            # Adds your overlay and packages to nixpkgs
+            { nixpkgs.overlays = [ self.overlay emacs-overlay.overlay gomod2nix.overlay ]; }
+            # Adds your custom home-manager modules
+            (pkgs.callPackage ./tangle.nix { inherit pkgs; src = ./src/org/config/emacs; })
+            ./modules/work
+          ];
+          # Pass our flake inputs into the config
+          extraSpecialArgs = { inherit inputs; };
+        };
     in
     {
       # Overlayed packages
@@ -156,7 +146,14 @@
     {
       # Your custom packages, plus nixpkgs and overlayed stuff
       # Accessible via 'nix build .#example' or 'nix build .#nixpkgs.example'
-      packages = import ./pkgs { inherit pkgs; };
+      packages = {
+        website = pkgs.callPackage
+          (pkgs.callPackage ./tangle.nix {
+            inherit pkgs;
+            src = ./src/org/config/website;
+          })
+          { src = ./src; };
+      };
 
       # Devshell for bootstrapping plus editor utilities (fmt and LSP)
       # Accessible via 'nix develop'
