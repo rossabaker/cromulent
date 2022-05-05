@@ -119,5 +119,5 @@ dependencies.  [[https://github.com/scala-steward-org/scala-steward][Scala Stewa
 projects, but it's still handy for local checking.
 
 #+begin_src scala :tangle sbt-updates.sbt
-  addSbtPlugin("com.timushev.sbt" % "sbt-updates" % "0.14.0")
+  addSbtPlugin("com.timushev.sbt" % "sbt-updates" % "0.6.1")
 #+end_src
