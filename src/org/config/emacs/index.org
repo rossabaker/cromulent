@@ -1,5 +1,5 @@
 #+TITLE: Ross A. Baker's Emacs Configuration
-#+PROPERTY: header-args :tangle default.el
+#+PROPERTY: header-args :tangle init.el
 #+OPTIONS: html-toc:th
 
 #+TOC: headlines 2
@@ -22,6 +22,21 @@ with and eschewed various starter kits over the years, and don't
 particularly want the dependency here, but I like their style.
 
 * Startup
+
+** Early init
+
+From preliterate times.
+
+#+begin_src emacs-lisp :tangle early-init.el
+(setq gc-cons-threshold most-positive-fixnum)
+
+;; All our packages come from Nix
+(setq package-enable-at-startup nil
+      package-archives nil)
+
+(provide 'early-init)
+;;; early-init.el ends here
+#+end_src
 
 ** Packages
 
@@ -311,6 +326,35 @@ Without this, we get prompted the first time we read this file:
   (add-to-list 'safe-local-variable-values pair))
 #+end_src
 
+** Jenkins
+
+[[Jenkins][Jenkins]] is a CI/CD server.  The configuration is a dialect of Groovy.  The
+[[https://github.com/john2x/jenkinsfile-mode][jenkinsfile-mode]] gives us enhanced highlighting and completions.
+
+#+begin_src emacs-lisp
+(use-package jenkinsfile-mode :ensure)
+#+end_src
+
+*** Patch
+
+There was an [[https://github.com/john2x/jenkinsfile-mode/pull/11][unmatched paren]].
+
+#+begin_src diff :tangle jenkinsfile-mode-pr-11.diff
+diff --git a/jenkinsfile-mode.el b/jenkinsfile-mode.el
+index b666427..71386b9 100644
+--- a/jenkinsfile-mode.el
++++ b/jenkinsfile-mode.el
+@@ -302,7 +302,7 @@ Run this manually when editing this file to get an updated the list of keywords.
+                                                jenkinsfile-mode--option-keywords
+                                                jenkinsfile-mode--pipeline-step-keywords
+                                                jenkinsfile-mode--core-step-keywords
+-                                               ))))
++                                               )))
+   )
+ 
+ ;;;###autoload
+#+end_src
+
 ** Terraform
 
 [[https://github.com/emacsorphanage/terraform-mode][terraform-mode]] is a major mode for [[http://www.terraform.io/][Terraform]].
@@ -323,7 +367,7 @@ Without this, we get prompted the first time we read this file:
 
 This is the vestige of my old init.el.  It is gradually being made literate.
 
-#+begin_src emacs-lisp :tangle default.el
+#+begin_src emacs-lisp :tangle init.el
 ;;; Core
 
 (use-package emacs
@@ -773,9 +817,6 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
   :hook
   (groovy-mode-hook . subword-mode))
 
-(use-package jenkinsfile-mode
-  :ensure)
-
 ;;;; JSON
 
 (use-package json-mode
@@ -860,6 +901,79 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
 
 (use-package yaml-mode
   :ensure)
+#+end_src
+
+* Nix
+
+** Base module
+
+#+begin_src nix :tangle default.nix
+{ inputs, pkgs, config, ... }:
+
+let
+  emacs = pkgs.emacsNativeComp;
+
+  withPatches = pkg: patches:
+    pkg.overrideAttrs (attrs: { inherit patches; });
+
+  compile = name: src: pkgs.stdenv.mkDerivation {
+    inherit name src;
+    buildInputs = [ emacs ];
+    buildPhase = ''
+      rm -f ${name}-pkg.el # We don't load 'package
+      autoloads=${name}-autoloads.el
+      [ -f $autoloads] || ${emacs}/bin/emacs --batch -Q -L . --eval "(make-directory-autoloads \".\" \"$autoloads\")"
+      ${emacs}/bin/emacs --batch -Q -L . -f batch-byte-compile *.el
+    '';
+    installPhase = ''
+      mkdir -p $out/share/emacs/site-lisp
+      install *.el* $out/share/emacs/site-lisp
+    '';
+  };
+
+  # https://discourse.nixos.org/t/emacs-exwm-home-manager-and-loading-new-emacs-modules/10097/3
+  load-path = pkgs.writeText "load-path.el" ''
+    (let ((default-directory (file-name-as-directory
+                              "${config.programs.emacs.finalPackage.deps}/share/emacs/site-lisp/"))
+          (normal-top-level-add-subdirs-inode-list nil))
+    (normal-top-level-add-subdirs-to-load-path))
+  '';
+in
+{
+  home.packages = [
+    pkgs.fd
+    pkgs.mdl
+    pkgs.metals
+    pkgs.pythonPackages.pyhocon
+    pkgs.ripgrep
+  ];
+
+  programs.emacs = {
+    enable = true;
+    package = pkgs.emacsWithPackagesFromUsePackage {
+      config = ./init.el;
+      package = emacs;
+      override = epkgs: epkgs // {
+        fill-sentences-correctly = compile "fill-sentences-correctly" inputs.fill-sentences-correctly;
+        hocon-mode = compile "hocon-mode" inputs.hocon-mode;
+        jenkinsfile-mode = withPatches epkgs.jenkinsfile-mode [
+          ./jenkinsfile-mode-pr-11.diff
+        ];
+        scala-mode = compile "scala-mode" inputs.scala-mode;
+        unmodified-buffer = compile "unmodified-buffer" inputs.unmodified-buffer;
+      };
+    };
+    extraPackages = epkgs: [
+      epkgs.use-package
+    ];
+  };
+
+  xdg.configFile = {
+    "emacs/init.el".source = ./init.el;
+    "emacs/early-init.el".source = ./early-init.el;
+    "emacs/load-path.el".source = load-path;
+  };
+}
 #+end_src
 
 * Local Variables :noexport:

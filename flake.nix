@@ -100,7 +100,7 @@
           # Adds your overlay and packages to nixpkgs
           { nixpkgs.overlays = [ self.overlay emacs-overlay.overlay gomod2nix.overlay ]; }
           # Adds your custom home-manager modules
-          ./modules/emacs
+          (tangle { inherit system; src = ./src/org/config/emacs; })
           ./modules/scala
           ./modules/work
         ];
