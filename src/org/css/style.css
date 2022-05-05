@@ -1,10 +1,9 @@
 body {
-    font-family: 'Fira Sans', sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
-    color: #900;
-    /* font-family: 'Bitter', sans-serif; */
+    font-family: 'Roboto Serif', serif;
 }
 
 a {
@@ -15,7 +14,8 @@ pre {
     background-color: #edebeb;
     border: 1px dashed #900;
     border-radius: 0.5em;
-    font-family: 'Fira Code', monosapce;
+    font-family: 'Roboto Mono', monosapce;
+    padding: 1em;
 }
 
 figure {
