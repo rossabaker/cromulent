@@ -363,6 +363,26 @@ index b666427..71386b9 100644
 (use-package terraform-mode :ensure)
 #+end_src
 
+* Tools
+
+** REST client
+
+[[https://github.com/pashky/restclient.el/][restclient.el]] provides a convenient HTTP worksheet.
+
+#+begin_src emacs-lisp
+(use-package restclient :ensure)
+#+end_src
+
+*** jq
+
+It also integrates with [[https://stedolan.github.io/jq/][jq]].
+
+#+begin_src emacs-lisp
+(use-package restclient-jq
+  :ensure t
+  :after restclient)
+#+end_src
+
 * Unorganized territory
 
 This is the vestige of my old init.el.  It is gradually being made literate.
@@ -748,9 +768,6 @@ This is the vestige of my old init.el.  It is gradually being made literate.
   :commands lsp-ui-mode)
 
 (use-package magit
-  :ensure)
-
-(use-package restclient
   :ensure)
 
 (use-package smerge-mode
