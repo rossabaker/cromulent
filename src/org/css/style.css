@@ -28,6 +28,13 @@ figure figcaption {
     text-align: center;
 }
 
+#preamble {
+    border-top: .5rem solid #900;
+}
+.navbar-light .navbar-brand {
+    color: #900;
+}
+
 /* Exported from modus-operandi theme */
 .org-builtin {
     /* font-lock-builtin-face */
