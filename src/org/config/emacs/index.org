@@ -335,26 +335,6 @@ Without this, we get prompted the first time we read this file:
 (use-package jenkinsfile-mode :ensure)
 #+end_src
 
-*** Patch
-
-There was an [[https://github.com/john2x/jenkinsfile-mode/pull/11][unmatched paren]].
-
-#+begin_src diff :tangle jenkinsfile-mode-pr-11.diff
-diff --git a/jenkinsfile-mode.el b/jenkinsfile-mode.el
-index b666427..71386b9 100644
---- a/jenkinsfile-mode.el
-+++ b/jenkinsfile-mode.el
-@@ -302,7 +302,7 @@ Run this manually when editing this file to get an updated the list of keywords.
-                                                jenkinsfile-mode--option-keywords
-                                                jenkinsfile-mode--pipeline-step-keywords
-                                                jenkinsfile-mode--core-step-keywords
--                                               ))))
-+                                               )))
-   )
- 
- ;;;###autoload
-#+end_src
-
 ** Terraform
 
 [[https://github.com/emacsorphanage/terraform-mode][terraform-mode]] is a major mode for [[http://www.terraform.io/][Terraform]].
@@ -973,9 +953,6 @@ in
       override = epkgs: epkgs // {
         fill-sentences-correctly = compile "fill-sentences-correctly" inputs.fill-sentences-correctly;
         hocon-mode = compile "hocon-mode" inputs.hocon-mode;
-        jenkinsfile-mode = withPatches epkgs.jenkinsfile-mode [
-          ./jenkinsfile-mode-pr-11.diff
-        ];
         scala-mode = compile "scala-mode" inputs.scala-mode;
         unmodified-buffer = compile "unmodified-buffer" inputs.unmodified-buffer;
       };
