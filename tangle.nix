@@ -1,6 +1,6 @@
 { pkgs, src }:
 
-import (pkgs.stdenv.mkDerivation {
+pkgs.stdenv.mkDerivation {
   name = "tangle-${builtins.baseNameOf src}";
   inherit src;
   buildInputs = [
@@ -13,4 +13,4 @@ import (pkgs.stdenv.mkDerivation {
     mkdir $out
     cp -r ./. $out
   '';
-})
+}

@@ -161,7 +161,7 @@ This is from preliterate times.
 This is from preliterate times
 
 #+begin_src nix :tangle default.nix
-  { src, emacsNativeComp, stdenv }:
+  { src, publishEl, emacsNativeComp, stdenv }:
 
   let
     siteEmacs = emacsNativeComp.pkgs.withPackages (epkgs: [
@@ -175,7 +175,7 @@ This is from preliterate times
     buildInputs = [ siteEmacs ];
     buildPhase = ''
       export HOME=$TMPDIR
-      ${siteEmacs}/bin/emacs -Q --script publish.el $HOME/html
+      ${siteEmacs}/bin/emacs -Q --script ${publishEl} $HOME/html
       echo 'rossabaker.com' > $HOME/html/CNAME
     '';
     installPhase = ''

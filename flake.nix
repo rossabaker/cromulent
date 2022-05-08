@@ -70,10 +70,10 @@
         darwin.lib.darwinSystem {
           inherit system;
           modules = [
-            (pkgs.callPackage ./tangle.nix {
+            (import (pkgs.callPackage ./tangle.nix {
               inherit pkgs;
               src = ./src/org/config/nix-darwin;
-            })
+            }))
           ];
         };
 
@@ -83,7 +83,7 @@
         in
         home-manager.lib.homeManagerConfiguration rec {
           inherit username homeDirectory system;
-          configuration = (pkgs.callPackage ./tangle.nix {
+          configuration = import (pkgs.callPackage ./tangle.nix {
             inherit pkgs;
             src = ./src/org/config/home-manager;
           });
@@ -91,7 +91,7 @@
             # Adds your overlay and packages to nixpkgs
             { nixpkgs.overlays = [ emacs-overlay.overlay gomod2nix.overlay ]; }
             # Adds your custom home-manager modules
-            (pkgs.callPackage ./tangle.nix { inherit pkgs; src = ./src/org/config/emacs; })
+            (import (pkgs.callPackage ./tangle.nix { inherit pkgs; src = ./src/org/config/emacs; }))
             ./modules/work
           ];
           # Pass our flake inputs into the config
@@ -142,12 +142,17 @@
       # Your custom packages, plus nixpkgs and overlayed stuff
       # Accessible via 'nix build .#example' or 'nix build .#nixpkgs.example'
       packages = {
-        website = pkgs.callPackage
-          (pkgs.callPackage ./tangle.nix {
-            inherit pkgs;
-            src = ./src/org/config/website;
-          })
-          { src = ./src; };
+        website =
+          let
+            tangled = (pkgs.callPackage ./tangle.nix {
+              inherit pkgs;
+              src = ./src/org/config/website;
+            });
+          in
+          pkgs.callPackage (import tangled) {
+            src = ./src;
+            publishEl = "${tangled}/publish.el";
+          };
       };
 
       # Devshell for bootstrapping plus editor utilities (fmt and LSP)
