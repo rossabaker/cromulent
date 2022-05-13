@@ -25,7 +25,8 @@ particularly want the dependency here, but I like their style.
 
 ** Early init
 
-From preliterate times.
+From preliterate times.  Note that [[*General][~general-setq~]] is not yet
+available.
 
 #+begin_src emacs-lisp :tangle early-init.el
 (setq gc-cons-threshold most-positive-fixnum)
@@ -129,14 +130,25 @@ enables the use of ~:delight~ in ~use-package~ stanzas.
 (use-package delight :ensure)
 #+end_src
 
+*** General
+
+[[https://github.com/noctuid/general.el][General]] is known for keybindings, particularly among [[https://github.com/emacs-evil/evil][the evil]].  A
+lesser known feature is [[https://github.com/noctuid/general.el#settings][~general-setq~]], which understands the ~:set~
+hooks of custom variables.  [[https://debbugs.gnu.org/cgi/bugreport.cgi?bug=21695][#21695]] raged on for a half decade without
+a consensus, and I find this solution as tidy as any,
+
+#+begin_src emacs-lisp
+(use-package general :ensure)
+#+end_src
+
 * Personalization
 
 These are used by a handful of packages.  Do not copy unless your name
 is also Ross A. Baker and we share an e-mail address.
 
 #+begin_src emacs-lisp
-(setq user-full-name "Ross A. Baker"
-      user-mail-address "ross@rossabaker.com")
+(general-setq user-full-name "Ross A. Baker"
+              user-mail-address "ross@rossabaker.com")
 #+end_src
 
 * Minibuffer
@@ -378,7 +390,7 @@ This is the vestige of my old init.el.  It is gradually being made literate.
   (load-prefer-newer t)
   :config
   (defun ross/show-trailing-whitespace ()
-    (setq show-trailing-whitespace t))
+    (general-setq show-trailing-whitespace t))
   (defun ross/scratch ()
     "Pop to the scratch buffer, receating it if necessary."
     (interactive)
@@ -447,7 +459,7 @@ This is the vestige of my old init.el.  It is gradually being made literate.
 
 (use-package ffap
   :init
-  (setq ffap-machine-p-known 'reject)	;default slows load and sounds terrifying
+  (general-setq ffap-machine-p-known 'reject)	;default slows load and sounds terrifying
   )
 
 (use-package files
@@ -559,11 +571,11 @@ This is the vestige of my old init.el.  It is gradually being made literate.
   (defvar ross/hl-line-restore nil)
   (defun ross/hl-line-activate-mark-h ()
     (when hl-line-mode
-      (setq ross/hl-line-restore t)
-      (setq hl-line-mode nil)))
+      (general-setq ross/hl-line-restore t)
+                    hl-line-mode nil))
   (defun ross/hl-line-deactivate-mark-h ()
     (when ross/hl-line-restore
-      (setq hl-line-mode t)))
+      (general-setq hl-line-mode t)))
   :hook
   (activate-mark-hook . ross/hl-line-activate-mark-h)
   (deactivate-mark-hook . ross/hl-line-deactivate-mark-h)
@@ -731,7 +743,7 @@ This is the vestige of my old init.el.  It is gradually being made literate.
 (use-package lsp-mode
   :ensure
   :init
-  (setq lsp-keymap-prefix "C-c l")
+  (general-setq lsp-keymap-prefix "C-c l")
   :custom
   (lsp-enable-dap-auto-configure nil)
   (lsp-headerline-breadcrumb-enable nil)
