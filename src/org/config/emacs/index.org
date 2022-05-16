@@ -347,6 +347,23 @@ Without this, we get prompted the first time we read this file:
 (use-package jenkinsfile-mode :ensure)
 #+end_src
 
+** R
+
+[[https://ess.r-project.org/][Emacs Speaks Statistics]] supports multiple languages, but I'm in it for [[https://www.r-project.org/][R]].
+
+#+begin_src emacs-lisp
+(use-package ess :ensure)
+#+end_src
+
+** Stan
+
+[[https://github.com/stan-dev/stan-mode][stan-mode]] supports [[https://mc-stan.org/][Stan]], which I use for various Bayesian inference
+problems.
+
+#+begin_src emacs-lisp
+(use-package stan-mode :ensure)
+#+end_src
+
 ** Terraform
 
 [[https://github.com/emacsorphanage/terraform-mode][terraform-mode]] is a major mode for [[http://www.terraform.io/][Terraform]].
