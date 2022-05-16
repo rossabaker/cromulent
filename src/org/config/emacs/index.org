@@ -360,8 +360,10 @@ Without this, we get prompted the first time we read this file:
 [[https://github.com/stan-dev/stan-mode][stan-mode]] supports [[https://mc-stan.org/][Stan]], which I use for various Bayesian inference
 problems.
 
+Temporarily disabled due to a hash mismatch.
+
 #+begin_src emacs-lisp
-(use-package stan-mode :ensure)
+;; (use-package stan-mode :ensure)
 #+end_src
 
 ** Terraform
