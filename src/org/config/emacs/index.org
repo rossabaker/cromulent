@@ -163,6 +163,19 @@ is also Ross A. Baker and we share an e-mail address.
   (savehist-mode))
 #+end_src
 
+* Completion
+
+** Hippie Expand
+
+~hippie-expand~ is a more powerful replacement for ~dabbrev~. Mickey
+Petersen [[https://www.masteringemacs.org/article/text-expansion-hippie-expand][wrote about it]].
+
+#+begin_src emacs-lisp
+(use-package hippie-expand
+  :general
+  ([remap dabbrev-expand] 'hippie-expand))
+#+end_src
+
 * Help
 
 ** Helpful
