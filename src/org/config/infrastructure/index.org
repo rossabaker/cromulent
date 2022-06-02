@@ -8,6 +8,8 @@ I run my [[https://matrix.to/#/@ross:rossabaker.com][Matrix presence]] on a pers
 Everything described here runs in the free tier, but I am not
 responsible if you run this and get a bill.
 
+Update <2022-06-02 Thu>: I got charged $0.02 for storage last month.
+
 *** Terraform
 
 ~20.03~ is disappointingly old, but it's the newest one I can find
