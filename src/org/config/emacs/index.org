@@ -299,6 +299,24 @@ it so on save.
   (after-save-hook . executable-make-buffer-file-executable-if-script-p))
 #+end_src
 
+** Notifications
+
+On MacOS, I periodically run into "too many open files". This [[https://www.blogbyben.com/2022/05/gotcha-emacs-on-mac-os-too-many-files.html][solution]]
+from Ben Simon worked for me:
+
+#+begin_src emacs-lisp
+(defun ross/file-notify-rm-all-watches ()
+  "Remove all existing file notification watches from Emacs."
+  (interactive)
+  (maphash
+   (lambda (key _value)
+     (file-notify-rm-watch key))
+   file-notify-descriptors))
+#+end_src
+
+The function exists [[https://github.com/emacs-mirror/emacs/blob/master/lisp/filenotify.el#L483-L489][upstream]], so we should be able to remove it
+someday.
+
 * Indentation
 
 Tabs are the Devil's whitespace.
