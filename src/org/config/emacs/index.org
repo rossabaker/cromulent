@@ -1047,7 +1047,7 @@ in
     pkgs.fd
     pkgs.mdl
     pkgs.metals
-    pkgs.pythonPackages.pyhocon
+    pkgs.python3Packages.pyhocon
     pkgs.ripgrep
   ];
 
