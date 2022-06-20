@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "ammonite-term-repl": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1587016773,
+        "narHash": "sha256-5trLzx9NkyVcjKx/ud6NcxxZkQk+/NihqVmZyv5u1Dw=",
+        "owner": "zwild",
+        "repo": "ammonite-term-repl",
+        "rev": "b552fe21977e005c1c460bf6607557e67241a6b6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "zwild",
+        "repo": "ammonite-term-repl",
+        "type": "github"
+      }
+    },
     "darwin": {
       "inputs": {
         "nixpkgs": [
@@ -253,8 +269,25 @@
         "type": "github"
       }
     },
+    "ob-ammonite": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1565657991,
+        "narHash": "sha256-DUf2waPQhnhWdEDvWhKId7HoxSIdGtpj2lwLyWHeKyo=",
+        "owner": "zwild",
+        "repo": "ob-ammonite",
+        "rev": "39937dff395e70aff76a4224fa49cf2ec6c57cca",
+        "type": "github"
+      },
+      "original": {
+        "owner": "zwild",
+        "repo": "ob-ammonite",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
+        "ammonite-term-repl": "ammonite-term-repl",
         "darwin": "darwin",
         "devshell": "devshell",
         "emacs-overlay": "emacs-overlay",
@@ -265,6 +298,7 @@
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs_4",
         "nixpkgs-darwin": "nixpkgs-darwin",
+        "ob-ammonite": "ob-ammonite",
         "scala-mode": "scala-mode",
         "unmodified-buffer": "unmodified-buffer",
         "utils": "utils_2"

@@ -24,6 +24,11 @@
     gomod2nix.url = "github:tweag/gomod2nix";
 
     # Emacs packages
+    ammonite-term-repl = {
+      url = "github:zwild/ammonite-term-repl";
+      flake = false;
+    };
+
     fill-sentences-correctly = {
       url = "github:duckwork/fill-sentences-correctly.el";
       flake = false;
@@ -31,6 +36,11 @@
 
     hocon-mode = {
       url = "github:jxq0/hocon-mode";
+      flake = false;
+    };
+
+    ob-ammonite = {
+      url = "github:zwild/ob-ammonite";
       flake = false;
     };
 
@@ -55,6 +65,7 @@
     , hocon-mode
     , home-manager
     , nixpkgs
+    , ob-ammonite
     , scala-mode
     , unmodified-buffer
     , utils

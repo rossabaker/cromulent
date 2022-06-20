@@ -390,6 +390,28 @@ Without this, we get prompted the first time we read this file:
   (add-to-list 'safe-local-variable-values pair))
 #+end_src
 
+** Org mode
+
+** Scala support
+
+[[https://github.com/zwild/ob-ammonite][ob-ammonite]] is archived, but it's the only thing I've found to
+evalulate Scala blocks in org mode.
+
+Because this is a custom package, we have to be explicit about its
+pdependencies to get our Nix machinery to pick it up.  This would be
+better handled in Nix.
+
+#+begin_src emacs-lisp
+(use-package ob-ammonite
+  :ensure
+  :init
+  (use-package ammonite-term-repl :ensure)
+  (use-package xterm-color :ensure))
+#+end_src
+
+Problem: evaluating an ~amm~ source block hangs the first time and
+needs to be ~C-g~'ed. After that, it works.
+
 ** Jenkins
 
 [[Jenkins][Jenkins]] is a CI/CD server.  The configuration is a dialect of Groovy.  The
@@ -996,14 +1018,15 @@ let
   withPatches = pkg: patches:
     pkg.overrideAttrs (attrs: { inherit patches; });
 
-  compile = name: src: pkgs.stdenv.mkDerivation {
+  compile = name: inputs: src: pkgs.stdenv.mkDerivation rec {
     inherit name src;
-    buildInputs = [ emacs ];
+    buildInputs = [ emacs ] ++ inputs;
     buildPhase = ''
       rm -f ${name}-pkg.el # We don't load 'package
       autoloads=${name}-autoloads.el
       [ -f $autoloads] || ${emacs}/bin/emacs --batch -Q -L . --eval "(make-directory-autoloads \".\" \"$autoloads\")"
-      ${emacs}/bin/emacs --batch -Q -L . -f batch-byte-compile *.el
+      ARGS=$(find ${pkgs.lib.concatStrings (builtins.map (arg: arg + "/share/emacs/site-lisp ") buildInputs)} -type d -exec echo -L {} \;)
+      ${emacs}/bin/emacs --batch -Q -L . $ARGS -f batch-byte-compile *.el
     '';
     installPhase = ''
       mkdir -p $out/share/emacs/site-lisp
@@ -1033,11 +1056,13 @@ in
     package = pkgs.emacsWithPackagesFromUsePackage {
       config = ./init.el;
       package = emacs;
-      override = epkgs: epkgs // {
-        fill-sentences-correctly = compile "fill-sentences-correctly" inputs.fill-sentences-correctly;
-        hocon-mode = compile "hocon-mode" inputs.hocon-mode;
-        scala-mode = compile "scala-mode" inputs.scala-mode;
-        unmodified-buffer = compile "unmodified-buffer" inputs.unmodified-buffer;
+      override = epkgs: epkgs // rec {
+        ammonite-term-repl = compile "ammonite-term-repl" [ scala-mode epkgs.s ] inputs.ammonite-term-repl;
+        fill-sentences-correctly = compile "fill-sentences-correctly" [] inputs.fill-sentences-correctly;
+        hocon-mode = compile "hocon-mode" [] inputs.hocon-mode;
+        ob-ammonite = compile "ob-ammonite" [ ammonite-term-repl scala-mode epkgs.s epkgs.xterm-color ] inputs.ob-ammonite;
+        scala-mode = compile "scala-mode" [] inputs.scala-mode;
+        unmodified-buffer = compile "unmodified-buffer" [] inputs.unmodified-buffer;
       };
     };
     extraPackages = epkgs: [
