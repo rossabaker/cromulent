@@ -82,14 +82,14 @@
           pkgs = pkgsFor system;
         in
         home-manager.lib.homeManagerConfiguration rec {
-          inherit username homeDirectory system;
+          inherit username homeDirectory pkgs system;
           configuration = import (pkgs.callPackage ./tangle.nix {
             inherit pkgs;
             src = ./src/org/config/home-manager;
           });
           extraModules = [
             # Adds your overlay and packages to nixpkgs
-            { nixpkgs.overlays = [ emacs-overlay.overlay gomod2nix.overlay ]; }
+            { nixpkgs.overlays = [ emacs-overlay.overlay gomod2nix.overlays.default ]; }
             # Adds your custom home-manager modules
             (import (pkgs.callPackage ./tangle.nix { inherit pkgs; src = ./src/org/config/emacs; }))
             ./modules/work
