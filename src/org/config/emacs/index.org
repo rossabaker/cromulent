@@ -346,6 +346,26 @@ deserves a keybinding.
       (kill-new (buffer-string)))))
 #+end_src
 
+** Translate
+
+The [[https://github.com/atykhonov/google-translate][google-translate package]] is a frontend to [[https://translate.google.com/][Google Translate]]. It
+doesn't work very well out of the box.
+
+- We need to tell it about ~popup~, despite [[https://github.com/atykhonov/google-translate/commit/264143362a63ff820b9753c107e07327804ae6a4][this fix]].
+- We get an error related to "tkk" without [[https://github.com/atykhonov/google-translate/issues/52#issuecomment-727920888][this folderol]].
+
+#+begin_src emacs-lisp
+(use-package google-translate
+  :ensure
+  :init
+  (use-package popup :ensure t)
+  :custom
+  (google-translate-backend-method 'curl)
+  :config
+  (defun google-translate--search-tkk () "Search TKK." (list 430675 2721866130))
+  (require 'google-translate-default-ui))
+#+end_src
+
 * Lossage
 
 ** Long lines
