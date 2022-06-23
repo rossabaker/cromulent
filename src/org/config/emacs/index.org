@@ -366,6 +366,27 @@ doesn't work very well out of the box.
   (require 'google-translate-default-ui))
 #+end_src
 
+* Customization
+
+** Theme
+
+I use the [[https://protesilaos.com/emacs/modus-themes#][modus-themes]]. They're built into Emacs starting with 28.1,
+but we ~:ensure~ them to get the latest from MELPA.
+
+#+begin_src emacs-lisp
+(use-package modus-themes
+  :ensure
+  :demand t
+  :init
+  :custom
+  (modus-themes-mode-line '(borderless (padding . 3) accented))
+  :config
+  (modus-themes-load-themes)
+  (modus-themes-load-operandi)
+  :bind
+  ("C-c T t" . modus-themes-toggle))
+#+end_src
+
 * Lossage
 
 ** Long lines
@@ -706,16 +727,6 @@ This is the vestige of my old init.el.  It is gradually being made literate.
   (minibuffer-prompt-properties '(read-only t cursor-intangible t face minibuffer-prompt))
   :hook
   (minibuffer-setup-hook . cursor-intangible-mode))
-
-(use-package modus-themes
-  :ensure
-  :demand t
-  :init
-  :config
-  (modus-themes-load-themes)
-  (modus-themes-load-operandi)
-  :bind
-  ("C-c T t" . modus-themes-toggle))
 
 (use-package paren
   :custom
