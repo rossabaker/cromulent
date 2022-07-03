@@ -91,18 +91,29 @@
       mkHomeConfig = { system, username, homeDirectory }:
         let
           pkgs = pkgsFor system;
-        in
-        home-manager.lib.homeManagerConfiguration rec {
-          inherit username homeDirectory pkgs system;
-          configuration = import (pkgs.callPackage ./tangle.nix {
+
+          homeModule = import (pkgs.callPackage ./tangle.nix {
             inherit pkgs;
             src = ./src/org/config/home-manager;
           });
-          extraModules = [
-            # Adds your overlay and packages to nixpkgs
-            { nixpkgs.overlays = [ emacs-overlay.overlay gomod2nix.overlays.default ]; }
-            # Adds your custom home-manager modules
-            (import (pkgs.callPackage ./tangle.nix { inherit pkgs; src = ./src/org/config/emacs; }))
+
+          emacsModule = import (pkgs.callPackage ./tangle.nix {
+            inherit pkgs;
+            src = ./src/org/config/emacs;
+          });
+        in
+        home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = [
+            {
+              home = {
+                inherit homeDirectory username;
+                stateVersion = "21.11";
+              };
+              nixpkgs.overlays = [ emacs-overlay.overlay gomod2nix.overlays.default ];
+            }
+            homeModule
+            emacsModule
             ./modules/work
           ];
           # Pass our flake inputs into the config
