@@ -366,6 +366,23 @@ doesn't work very well out of the box.
   (require 'google-translate-default-ui))
 #+end_src
 
+* Building
+
+** Compilation
+
+[[https://codeberg.org/ideasman42/emacs-fancy-compilation][fancy-compilation]] colorizes the compilation buffer, shows progress
+lines, and improves some scrolling behavior out of the box.
+
+#+begin_src emacs-lisp
+(use-package fancy-compilation
+  :ensure
+  :custom
+  (fancy-compilation-override-colors nil)
+  (fancy-compilation-term "xterm-256color")
+  :config
+  (fancy-compilation-mode))
+#+end_src
+
 * Customization
 
 ** Theme
@@ -548,15 +565,8 @@ This is the vestige of my old init.el.  It is gradually being made literate.
   (comint-prompt-read-only t))
 
 (use-package compile
-  :config
-  (defun ross/compile-colorize-buffer ()
-    (with-silent-modifications
-      (ansi-color-apply-on-region compilation-filter-start (point))))
   :custom
-  (compilation-always-kill t)
-  (compilation-scroll-output 'first-error)
-  :hook
-  (compilation-filter-hook . ross/compile-colorize-buffer))
+  (compilation-always-kill t))
 
 (use-package cus-edit
   :custom
