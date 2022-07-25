@@ -26,6 +26,7 @@ further.
     # Add stuff for your user as you see fit:
     # programs.neovim.enable = true;
     home.packages = [
+      pkgs.coreutils
       pkgs.gomod2nix
       pkgs.jq
       pkgs.nixpkgs-fmt
