@@ -21,9 +21,9 @@ This is from preliterate times.
     (concat path "?" (string-remove-prefix "/nix/store/" (string-remove-suffix "-src" (getenv "srcs")))))
 
   (defconst rossabaker.com/sections
-    '(((href . "/talks")
+    '(((href . "/talks/")
        (name . "Talks"))
-      ((href . "/config")
+      ((href . "/config/")
        (name . "Config"))))
 
   (defconst rossabaker.com/social
