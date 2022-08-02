@@ -209,6 +209,18 @@ Don't add _consecutive_ duplicates to the kill ring.
   (kill-do-not-save-duplicates t))
 #+end_src
 
+** Undo
+
+[[https://github.com/casouri/vundo][Vundo]] displays the undo history as a tree. Unlike [[https://www.dr-qubit.org/undo-tree.html][undo-tree]], it
+doesn't replace the built-in undo commands.
+
+#+begin_src emacs-lisp
+(use-package vundo
+  :ensure
+  :custom
+  (vundo-glyph-alist vundo-unicode-symbols))
+#+end_src
+
 * Display
 
 ** Scrolling
