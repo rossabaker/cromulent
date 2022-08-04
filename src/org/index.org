@@ -1,12 +1,14 @@
 #+TITLE: Ross A. Baker
 
-#+BEGIN_QUOTE
-A noble spirit embiggens the smallest blog.
-#+END_QUOTE
+#+attr_html: :alt Profile photo of Ross A. Baker
+#+attr_html: :class profile-photo
+[[./img/profile.jpg]]
 
-#+attr_html: :alt Bender from Futurama yelling, "Yeah, well, I'm going to go build my own blog. With Emacs! And Nix! In fact, forget the blog."
-#+attr_html: :class img-fluid
-[[./img/build-my-own-blog.jpg]]
+Ross is a software engineer at [[https://www.jackhenry.com/][Jack Henry]].  His primary technical
+interests are functional programming, mentoring, and open source.  He
+is an active contributor to [[https://typelevel.org/][Typelevel]].  Besides tech, he enjoys
+jogging, barbecue, and coaching youth soccer.  He lives in
+Indianapolis, Indiana.
 
 # * Blog posts
 # #+HTML: <div class="blog-entries">

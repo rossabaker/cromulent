@@ -54,3 +54,10 @@ figure img {
 figure figcaption {
     text-align: center;
 }
+
+main img.profile-photo {
+    display: block;
+    max-width: 60%;
+    margin: 0 auto;
+    border-radius: 20%;
+}
