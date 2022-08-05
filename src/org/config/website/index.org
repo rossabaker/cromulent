@@ -168,7 +168,6 @@ This is from preliterate times
     buildPhase = ''
       export HOME=$TMPDIR
       ${siteEmacs}/bin/emacs -Q --script ${publishEl} $HOME/html
-      echo 'rossabaker.com' > $HOME/html/CNAME
     '';
     installPhase = ''
       mkdir $out
