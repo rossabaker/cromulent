@@ -59,7 +59,7 @@ convert the Markdown to HTML with [[https://gohugo.io/][Hugo]].
 A Hugo site can be configured with either TOML or YAML.  I spent my
 weirdness budget on a literate config, so let's stick to the default.
 
-#+begin_src conf-toml :tangle ../../gen/website/config.toml
+#+begin_src conf-toml :tangle ../../.hugo-out/config.toml
   baseURL = 'http://rossabaker.com/'
   languageCode = 'en-us'
   title = 'Ross A. Baker'
@@ -70,7 +70,7 @@ weirdness budget on a literate config, so let's stick to the default.
 Because all this org stuff mucks with the [[https://gohugo.io/getting-started/directory-structure/#readout][normal directory structure]],
 we have to give Hugo a few extra hints.
 
-#+begin_src conf-toml :tangle ../../gen/website/config.toml
+#+begin_src conf-toml :tangle ../../.hugo-out/config.toml
   assetDir = 'src/hugo/assets'
   layoutDir = 'src/hugo/layouts'
   staticDir = 'src/hugo/static'
@@ -86,7 +86,7 @@ While that setting sounds scary, all that does is allow have inline
 HTML in your Markdown, as CommonMark allows!
 #+end_quote
 
-#+begin_src conf-toml :tangle ../../gen/website/config.toml
+#+begin_src conf-toml :tangle ../../.hugo-out/config.toml
   [markup.goldmark.renderer]
     unsafe = true
 #+end_src
