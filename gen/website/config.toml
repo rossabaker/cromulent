@@ -4,6 +4,7 @@ title = 'Ross A. Baker'
 
 assetDir = 'src/hugo/assets'
 layoutDir = 'src/hugo/layouts'
+contentDir = '.hugo-out/content'
 
 [markup.goldmark.renderer]
   unsafe = true

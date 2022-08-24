@@ -1,10 +1,19 @@
 #+PROPERTY: header-args :mkdirp yes
+#+hugo_base_dir: ../../.hugo-out
+#+startup: logdone
 
 * Configurations
+:PROPERTIES:
+:EXPORT_HUGO_SECTION: configs
+:END:
 
-** TODO Personal Git repository
+** DONE Cromulent
+CLOSED: [2022-08-24 Wed 15:04]
+:PROPERTIES:
+:EXPORT_FILE_NAME: cromulent
+:END:
 
-My [[https://github.com/rossabaker/rossabaker][personal Git repository]] contains my all my configurations and
+My [[https://github.com/rossabaker/cromulent][personal Git repository]] contains my all my configurations and
 [[https://rossabaker.com/][personal web site]].  Everything is managed in an [[https://orgmode.org/][Org Mode]] file.  A
 monorepo is out of character for me, but this setup acts as one source
 of truth, so what I publish is what I run.
@@ -35,7 +44,11 @@ included or configurable elsewhere, goes to the ~gen~ directory.
   gen/            -diff -merge linguist-generated=true
 #+end_src
 
-** TODO Website
+** DONE Website
+CLOSED: [2022-08-24 Wed 15:04]
+:PROPERTIES:
+:EXPORT_FILE_NAME: website
+:END:
 
 [[https://rossabaker.com/][rossabaker.com]] is sourced from an Org file.  We [[https://orgmode.org/manual/Extracting-Source-Code.html][tangle]] the
 configuration, export the content to Markdown with with [[https://ox-hugo.scripter.co][ox-hugo]], and
@@ -60,6 +73,7 @@ we have to give Hugo a few extra hints.
 #+begin_src conf-toml :tangle ../../gen/website/config.toml
   assetDir = 'src/hugo/assets'
   layoutDir = 'src/hugo/layouts'
+  contentDir = '.hugo-out/content'
 #+end_src
 
 **** ox-hugo
