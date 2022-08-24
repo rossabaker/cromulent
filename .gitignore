@@ -11,3 +11,4 @@ result
 terraform.tfstate
 terraform.tfstate.backup
 /infra/gcp/rossabaker/.terraform/
+/.hugo_build.lock

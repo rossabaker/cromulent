@@ -34,3 +34,51 @@ included or configurable elsewhere, goes to the ~gen~ directory.
 #+begin_src gitattributes :tangle ../../.gitattributes
   gen/            -diff -merge linguist-generated=true
 #+end_src
+
+** TODO Website
+
+[[https://rossabaker.com/][rossabaker.com]] is sourced from an Org file.  We [[https://orgmode.org/manual/Extracting-Source-Code.html][tangle]] the
+configuration, export the content to Markdown with with [[https://ox-hugo.scripter.co][ox-hugo]], and
+convert the Markdown to HTML with [[https://gohugo.io/][Hugo]].
+
+*** Site configuration
+
+A Hugo site can be configured with either TOML or YAML.  I spent my
+weirdness budget on a literate config, so let's stick to the default.
+
+#+begin_src conf-toml :tangle ../../gen/website/config.toml
+  baseURL = 'http://rossabaker.com/'
+  languageCode = 'en-us'
+  title = 'Ross A. Baker'
+#+end_src
+
+**** Directories
+
+Because all this org stuff mucks with the [[https://gohugo.io/getting-started/directory-structure/#readout][normal directory structure]],
+we have to give Hugo a few extra hints.
+
+#+begin_src conf-toml :tangle ../../gen/website/config.toml
+  assetDir = 'src/hugo/assets'
+  layoutDir = 'src/hugo/layouts'
+#+end_src
+
+**** ox-hugo
+
+ox-hugo [[https://ox-hugo.scripter.co/doc/goldmark/#enable-unsafe-html][recommends Goldmark]].  The ~unsafe~ is not as bad as it sounds:
+
+#+begin_quote
+While that setting sounds scary, all that does is allow have inline
+HTML in your Markdown, as CommonMark allows!
+#+end_quote
+
+#+begin_src conf-toml :tangle ../../gen/website/config.toml
+  [markup.goldmark.renderer]
+    unsafe = true
+#+end_src
+
+*** Layouts
+
+This site is bootstrapped from [[https://gitlab.com/hugo-mwe/hugo-mwe][Hugo MWE]].  It's not published as a
+theme, so I bootstrapped it with [[https://github.com/newren/git-filter-repo][git-filter-repo]] to rewrite the
+commits into ~src/hugo~.  As we customize them, we'll document the
+atrocities here.

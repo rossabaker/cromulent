@@ -1,0 +1,9 @@
+baseURL = 'http://rossabaker.com/'
+languageCode = 'en-us'
+title = 'Ross A. Baker'
+
+assetDir = 'src/hugo/assets'
+layoutDir = 'src/hugo/layouts'
+
+[markup.goldmark.renderer]
+  unsafe = true

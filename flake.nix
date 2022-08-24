@@ -191,6 +191,7 @@
         packages = [
           hm
           pkgs.google-cloud-sdk
+          pkgs.hugo
           pkgs.nix
           pkgs.terraform
         ];
