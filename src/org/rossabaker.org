@@ -73,6 +73,7 @@ we have to give Hugo a few extra hints.
 #+begin_src conf-toml :tangle ../../gen/website/config.toml
   assetDir = 'src/hugo/assets'
   layoutDir = 'src/hugo/layouts'
+  staticDir = 'src/hugo/static'
   contentDir = '.hugo-out/content'
 #+end_src
 
@@ -96,3 +97,14 @@ This site is bootstrapped from [[https://gitlab.com/hugo-mwe/hugo-mwe][Hugo MWE]
 theme, so I bootstrapped it with [[https://github.com/newren/git-filter-repo][git-filter-repo]] to rewrite the
 commits into ~src/hugo~.  As we customize them, we'll document the
 atrocities here.
+
+*** Home page
+:PROPERTIES:
+:EXPORT_HUGO_SECTION: /
+:EXPORT_FILE_NAME: _index
+:END:
+
+# How about a nice 90s homage while we move in
+
+#+attr_html: :alt Under Construction
+[[./img/under-construction.gif]]
