@@ -1,0 +1,3 @@
+.gitattributes  -diff -merge linguist-generated=true
+
+gen/            -diff -merge linguist-generated=true

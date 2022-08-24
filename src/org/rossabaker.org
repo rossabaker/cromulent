@@ -1,0 +1,36 @@
+#+PROPERTY: header-args :mkdirp yes
+
+* Configurations
+
+** TODO Personal Git repository
+
+My [[https://github.com/rossabaker/rossabaker][personal Git repository]] contains my all my configurations and
+[[https://rossabaker.com/][personal web site]].  Everything is managed in an [[https://orgmode.org/][Org Mode]] file.  A
+monorepo is out of character for me, but this setup acts as one source
+of truth, so what I publish is what I run.
+
+*** Original sources
+
+As much as possible, original sources are stored in the ~src~
+directory.
+
+*** Generated sources
+
+Some files that we'd like to document here must be materialized to
+specific locations in the repository.  There are files I'd like to
+document here, but must to be materialized to a specific place in my
+[[https://github.com/rossabaker/rossabaker][personal Git repository]].  Checking in generated source is generally
+poor practice, but a ~.gitattributes~ file [[https://medium.com/@clarkbw/managing-generated-files-in-github-1f1989c09dfd][mitigates the damage]].
+
+First up is the ~.gitattributes~ file itself!
+
+#+begin_src gitattributes :tangle ../../.gitattributes
+  .gitattributes  -diff -merge linguist-generated=true
+#+end_src
+
+Any file whose location we're free to choose, typically because it's
+included or configurable elsewhere, goes to the ~gen~ directory.
+
+#+begin_src gitattributes :tangle ../../.gitattributes
+  gen/            -diff -merge linguist-generated=true
+#+end_src
