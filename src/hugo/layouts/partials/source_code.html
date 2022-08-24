@@ -1,0 +1,14 @@
+{{ $page := .page }}
+{{ $prefix := .prefix | default "" }}
+
+{{ $commit := (partial "get_commit" $page) }}
+
+{{ $url := "" }}
+{{ with site.Params.source }}
+    {{ $url = .url }}
+    {{ $default_branch := .default_branch | default "main" }}
+    {{ if (and $commit (not (eq $commit $default_branch))) }}
+        {{ $url = (printf `%s/-/tree/%s` $url $commit) | safeHTML }}
+    {{ end }}
+    {{ $prefix }} <a href="{{ $url }}">Source code repo</a>
+{{ end }}
