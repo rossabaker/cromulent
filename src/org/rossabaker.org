@@ -48,6 +48,7 @@ included or configurable elsewhere, goes to the ~gen~ directory.
 CLOSED: [2022-08-24 Wed 15:04]
 :PROPERTIES:
 :EXPORT_FILE_NAME: website
+:EXPORT_HUGO_PUBLISHDATE: <2022-08-24 Wed 18:57>
 :END:
 
 [[https://rossabaker.com/][rossabaker.com]] is sourced from an Org file.  We [[https://orgmode.org/manual/Extracting-Source-Code.html][tangle]] the
@@ -108,3 +109,58 @@ atrocities here.
 
 #+attr_html: :alt Under Construction
 [[./img/under-construction.gif]]
+
+*** Build
+
+The website is just another package in our flake.
+
+#+begin_src nix :tangle ../../gen/website/default.nix
+  { src, emacsNativeComp, hugo, stdenv }:
+
+  let
+    siteEmacs = emacsNativeComp.pkgs.withPackages (epkgs: [
+      epkgs.ox-hugo
+    ]);
+  in
+  stdenv.mkDerivation rec {
+    name = "rossabaker.com";
+    inherit src;
+    buildInputs = [ siteEmacs hugo ];
+    buildPhase = ''
+      cd ..
+      ${siteEmacs}/bin/emacs -Q --batch --script ${./export.el}
+      ${hugo}/bin/hugo --config .hugo-out/config.toml
+    '';
+    installPhase = ''
+      mkdir $out
+      cp -r public/. $out
+    '';
+  }
+#+end_src
+
+~export.el~ is a small Emacs script that finds the Org file and
+exports its contents with ox-hugo.
+
+#+begin_src emacs-lisp :tangle ../../gen/website/export.el
+  (require 'ox-hugo)
+  (find-file "src/org/rossabaker.org")
+  (org-babel-tangle)
+  (mkdir "../../.hugo-out/static")
+  (org-hugo-export-wim-to-md t)
+#+end_src
+
+**** Local Nix build
+
+To build the site locally into ~./result~, run:
+
+#+begin_src sh :tangle no
+  nix build .#website
+#+end_src
+
+**** Development
+
+For a more iterative experience with live reload in the browser, try:
+
+#+begin_src sh :tangle no
+  hugo serve --disableFastRender --config .hugo-out/config.toml
+#+end_src

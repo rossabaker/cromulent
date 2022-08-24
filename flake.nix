@@ -164,17 +164,7 @@
       # Your custom packages, plus nixpkgs and overlayed stuff
       # Accessible via 'nix build .#example' or 'nix build .#nixpkgs.example'
       packages = {
-        website =
-          let
-            tangled = (pkgs.callPackage ./tangle.nix {
-              inherit pkgs;
-              src = ./src/org/config/website;
-            });
-          in
-          pkgs.callPackage (import tangled) {
-            src = ./src;
-            publishEl = "${tangled}/publish.el";
-          };
+        website = pkgs.callPackage ./gen/website { src = ./src; };
       };
 
       # Devshell for bootstrapping plus editor utilities (fmt and LSP)

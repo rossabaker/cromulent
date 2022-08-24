@@ -1,0 +1,5 @@
+(require 'ox-hugo)
+(find-file "src/org/rossabaker.org")
+(org-babel-tangle)
+(mkdir "../../.hugo-out/static")
+(org-hugo-export-wim-to-md t)
