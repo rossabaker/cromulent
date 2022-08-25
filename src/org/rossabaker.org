@@ -2,6 +2,17 @@
 #+hugo_base_dir: ../../.hugo-out
 #+startup: logdone
 
+* Home page
+:PROPERTIES:
+:EXPORT_HUGO_SECTION: /
+:EXPORT_FILE_NAME: _index
+:END:
+
+# How about a nice 90s homage while we move in
+
+#+attr_html: :alt Under Construction
+[[./img/under-construction.gif]]
+
 * Configurations
 :PROPERTIES:
 :EXPORT_HUGO_SECTION: configs
@@ -103,17 +114,6 @@ HTML in your Markdown, as CommonMark allows!
   [markup.goldmark.renderer]
     unsafe = true
 #+end_src
-
-*** Home page
-:PROPERTIES:
-:EXPORT_HUGO_SECTION: /
-:EXPORT_FILE_NAME: _index
-:END:
-
-# How about a nice 90s homage while we move in
-
-#+attr_html: :alt Under Construction
-[[./img/under-construction.gif]]
 
 *** Build
 
