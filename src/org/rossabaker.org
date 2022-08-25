@@ -287,7 +287,6 @@ layouts for our ~chroma.css~ asset to work.
 
           <a href="../">Go Up</a>
           | <a href="{{ site.BaseURL }}">Home</a>
-          | {{ (printf `<a href="https://html5.validator.nu/?doc=%s&showsource=yes">HTML5 Validator</a>` .Permalink) | safeHTML }}
           {{ partial "source_code" (dict "page" . "prefix" "|") }}
 
           <div>
@@ -379,7 +378,6 @@ terms.
                   {{ printf `<a href="%s">%s</a>` .Permalink $name_upper | safeHTML }}
               {{ end }}
           {{ end }}
-          | {{ (printf `<a href="https://html5.validator.nu/?doc=%s&showsource=yes">HTML5 Validator</a>` .Permalink) | safeHTML }}
           | {{ partial "source_code" (dict "page" .) }}
       </footer>
   {{ end }}
