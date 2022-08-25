@@ -59,7 +59,7 @@ included or configurable elsewhere, goes to the ~gen~ directory.
 CLOSED: [2022-08-24 Wed 15:04]
 :PROPERTIES:
 :EXPORT_FILE_NAME: website
-:EXPORT_HUGO_PUBLISHDATE: <2022-08-24 Wed 23:02>
+:EXPORT_HUGO_PUBLISHDATE: <2022-08-25 Thu 08:57>
 :END:
 
 [[https://rossabaker.com/][rossabaker.com]] is sourced from an Org file.  We [[https://orgmode.org/manual/Extracting-Source-Code.html][tangle]] the
@@ -84,7 +84,7 @@ we have to give Hugo a few extra hints.
 
 #+begin_src conf-toml :tangle ../../.hugo-out/config.toml
   assetDir = 'src/hugo/assets'
-  layoutDir = 'src/hugo/layouts'
+  layoutDir = '.hugo-out/layouts'
   staticDir = 'src/hugo/static'
   themesDir = 'src/hugo/themes'
   contentDir = '.hugo-out/content'
@@ -113,6 +113,172 @@ HTML in your Markdown, as CommonMark allows!
 #+begin_src conf-toml :tangle ../../.hugo-out/config.toml
   [markup.goldmark.renderer]
     unsafe = true
+#+end_src
+
+*** Layouts
+
+**** Templates
+
+***** Single pages
+
+#+begin_src html :tangle ../../.hugo-out/layouts/_default/single.html
+  {{ define "header" }}
+      <header>
+          <a href="{{ site.BaseURL }}">{{ site.Title }}</a>
+      </header>
+  {{ end }}
+
+  {{ define "main" }}
+      <main>
+          <article>
+              <header>
+                  <h1>{{ .Title }}</h1>
+                  {{ with .Description }}
+                      <blockquote>
+                          {{ . | markdownify | emojify }}
+                      </blockquote>
+                  {{ end }}
+                  {{ if (not .Date.IsZero) }}
+                      Published on
+                      <time datetime="{{ dateFormat "Jan 2, 2006" .Date }}">
+                          {{ dateFormat "Jan 2, 2006" .Date }}
+                      </time>
+                  {{ end }}
+              </header>
+              <a id="top"></a>
+              {{ .Content }}
+          </article>
+      </main>
+  {{ end }}
+
+  {{ define "footer" }}
+      <footer>
+          {{ partial "footer.html" . }}
+          {{ $commit := (partial "get_commit" .Page) }}
+
+          <div style="color: green;">
+              {{ with site.Params.source }}
+                  {{ $url := .url }}
+                  {{ $url_splits := path.Split $url }}
+                  <h3>To reproduce this page/issue</h3>
+                  <pre>
+        git clone {{ $url }}
+        cd {{ $url_splits.File }}
+        git checkout {{ $commit }}
+        ./srv.sh
+                  </pre>
+              {{ end }}
+          </div>
+
+          <a href="../">Go Up</a>
+          | <a href="{{ site.BaseURL }}">Home</a>
+          | {{ (printf `<a href="https://html5.validator.nu/?doc=%s&showsource=yes">HTML5 Validator</a>` .Permalink) | safeHTML }}
+          {{ partial "source_code" (dict "page" . "prefix" "|") }}
+
+          <div>
+              <small>
+                  {{ with .File }}
+                      {{ with .Path }}
+                          {{ $path := . }}
+                          {{ with site.Params.source }}
+                              {{ $md_dir := .md_dir | default "content" }}
+                              ✱ <i>Markdown <a href="{{ .url }}/-/raw/{{ $commit }}/{{ $md_dir }}/{{ $path }}"> source</a> of this page</i>
+                              |
+                          {{ end }}
+                      {{ end }}
+                  {{ end }}
+
+                  {{ $hugo_version_string_1 := hugo.Version }}
+                  {{ with hugo.CommitHash }} <!-- Example value: "975bb629:chroma-d5ca12b" -->
+                      {{ $hugo_version_string_1 = printf `<a href="https://github.com/gohugoio/hugo/commit/%s">%s</a>` . $hugo_version_string_1 }}
+                  {{ end }}
+                  {{ $hugo_version_string := printf `<span class="nobr">Hugo %s</span>` $hugo_version_string_1 }}
+
+                  <em>Built with {{ $hugo_version_string | safeHTML }}</em>
+              </small>
+          </div>
+      </footer>
+  {{ end }}
+#+end_src
+
+***** List pages
+
+This renders for the home page, section listings, taxonomies, and
+terms.
+
+#+begin_src html :tangle ../../.hugo-out/layouts/_default/list.html
+  {{ define "header" }}
+      <header>
+          {{ if .IsHome }}
+              <h1>{{ site.Title }}</h1>
+              {{ with site.Params.Description }}
+                  <p>{{ . }} </p>
+              {{ end }}
+          {{ else }}
+              <h1>Posts in ‘{{ .Section }}’</h1>
+          {{ end }}
+      </header>
+  {{ end }}
+
+  {{ define "main" }}
+      <main>
+          <ul>
+              {{ range site.RegularPages.ByLastmod.Reverse }}
+                  <li>
+                      <a href="{{ .Permalink }}">{{ .Title }}</a>
+                      {{ if (not .Date.IsZero) }}
+                          {{ if .IsHome }}
+                              <small>
+                                  —
+                                  <time datetime="{{ dateFormat "Jan 2, 2006" .Date }}">
+                                      {{ dateFormat "Jan 2, 2006" .Date }}
+                                  </time>
+                              </small>
+                          {{ else }}
+                              <time datetime="{{ dateFormat "Jan 2, 2006" .Date }}">
+                                  {{ dateFormat "Jan 2, 2006" .Date }}
+                              </time>
+                          {{ end }}
+                      {{ end }}
+                  </li>
+              {{ end }}
+          </ul>
+
+          {{ with .Content }}
+              {{ . }}
+          {{ end }}
+      </main>
+  {{ end }}
+
+  {{ define "footer" }}
+      <footer>
+          {{ partial "footer.html" . }}
+          {{ if (not .IsHome) }}
+              <a href="../">Go Up</a>
+              | <a href="{{ site.BaseURL }}">Home</a>
+              |
+          {{ end }}
+          {{ range .AlternativeOutputFormats }}
+              {{ $name_upper := .Name | upper }}
+              {{ if (or (eq $name_upper "RSS") (eq $name_upper "ATOM")) }}
+                  {{ printf `<a href="%s">%s</a>` .Permalink $name_upper | safeHTML }}
+              {{ end }}
+          {{ end }}
+          | {{ (printf `<a href="https://html5.validator.nu/?doc=%s&showsource=yes">HTML5 Validator</a>` .Permalink) | safeHTML }}
+          | {{ partial "source_code" (dict "page" .) }}
+      </footer>
+  {{ end }}
+#+end_src
+
+**** Partial templates
+
+***** Footer
+
+#+begin_src html :tangle ../../.hugo-out/layouts/partials/footer.html
+  <address>
+      Ross A. Baker
+      <a href="https://pronoun.is/he">(he/him)</a>
+  </address>
 #+end_src
 
 *** Build
