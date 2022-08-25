@@ -18,29 +18,30 @@
 :EXPORT_HUGO_SECTION: configs
 :END:
 
-** DONE Cromulent
+** DONE A perfectly cromulent repository
 CLOSED: [2022-08-24 Wed 15:04]
 :PROPERTIES:
 :EXPORT_FILE_NAME: cromulent
+:EXPORT_HUGO_LASTMOD: <2022-08-25 Thu 15:06>
 :END:
 
 My [[https://github.com/rossabaker/cromulent][personal Git repository]] contains my all my configurations and
 [[https://rossabaker.com/][personal web site]].  Everything is managed in an [[https://orgmode.org/][Org Mode]] file.  A
 monorepo is out of character for me, but this setup acts as one source
-of truth, so what I publish is what I run.
+of truth for what I share and what I run.
 
 *** Original sources
 
 As much as possible, original sources are stored in the ~src~
 directory.
 
-*** Generated sources
+*** Materialized sources
 
 Some files that we'd like to document here must be materialized to
-specific locations in the repository.  There are files I'd like to
-document here, but must to be materialized to a specific place in my
-[[https://github.com/rossabaker/rossabaker][personal Git repository]].  Checking in generated source is generally
-poor practice, but a ~.gitattributes~ file [[https://medium.com/@clarkbw/managing-generated-files-in-github-1f1989c09dfd][mitigates the damage]].
+specific locations in the repository.  If we can generate the files
+transiently in our builds, we do.  If some other tool expects a file
+in a specific location, we [[https://medium.com/@clarkbw/managing-generated-files-in-github-1f1989c09dfd][mark the generated version with
+.gitattributes]].
 
 First up is the ~.gitattributes~ file itself!
 
@@ -48,8 +49,8 @@ First up is the ~.gitattributes~ file itself!
   .gitattributes  -diff -merge linguist-generated=true
 #+end_src
 
-Any file whose location we're free to choose, typically because it's
-included or configurable elsewhere, goes to the ~gen~ directory.
+Any file that needs to be checked in, but whose location we're free to
+choose, goes to the ~gen~ directory.
 
 #+begin_src gitattributes :tangle ../../.gitattributes
   gen/            -diff -merge linguist-generated=true
