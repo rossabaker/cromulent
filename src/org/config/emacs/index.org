@@ -478,7 +478,16 @@ Without this, we get prompted the first time we read this file:
   (add-to-list 'safe-local-variable-values pair))
 #+end_src
 
-** Org mode
+** HTML
+
+*** web-mode
+
+[[https://web-mode.org/][web-mode.el]] understands the Go templates we use in our ox-hugo site.
+
+#+begin_src emacs-lisp
+(use-package web-mode
+  :ensure)
+#+end_src
 
 ** Scala support
 
@@ -890,6 +899,9 @@ This is the vestige of my old init.el.  It is gradually being made literate.
   (which-key-mode))
 
 ;;; Tools
+
+(use-package ox-hugo
+  :ensure)
 
 (use-package ox-reveal
   :ensure)
