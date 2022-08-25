@@ -59,7 +59,7 @@ included or configurable elsewhere, goes to the ~gen~ directory.
 CLOSED: [2022-08-24 Wed 15:04]
 :PROPERTIES:
 :EXPORT_FILE_NAME: website
-:EXPORT_HUGO_PUBLISHDATE: <2022-08-25 Thu 08:57>
+:EXPORT_HUGO_PUBLISHDATE: <2022-08-25 Thu 14:35>
 :END:
 
 [[https://rossabaker.com/][rossabaker.com]] is sourced from an Org file.  We [[https://orgmode.org/manual/Extracting-Source-Code.html][tangle]] the
@@ -77,19 +77,6 @@ weirdness budget on a literate config, so let's stick to the default.
   title = 'Ross A. Baker'
 #+end_src
 
-**** Directories
-
-Because all this org stuff mucks with the [[https://gohugo.io/getting-started/directory-structure/#readout][normal directory structure]],
-we have to give Hugo a few extra hints.
-
-#+begin_src conf-toml :tangle ../../.hugo-out/config.toml
-  assetDir = 'src/hugo/assets'
-  layoutDir = '.hugo-out/layouts'
-  staticDir = 'src/hugo/static'
-  themesDir = 'src/hugo/themes'
-  contentDir = '.hugo-out/content'
-#+end_src
-
 **** hugo-mwe
 
 This site is bootstrapped from [[https://gitlab.com/hugo-mwe/hugo-mwe][Hugo MWE]].  A [[https://scripter.co/hugo-modules-importing-a-theme/][hugo module]] would be
@@ -97,8 +84,42 @@ easier, but I have not figured out a way to integrate Hugo modules
 with [[https://github.com/tweag/gomod2nix][gomod2nix]].  Instead, we'll do it the old-fashioned way and clone
 it into ~src/hugo/themes~.
 
+~themesDir~ cannot be a module mount.
+
 #+begin_src conf-toml :tangle ../../.hugo-out/config.toml
   theme = 'hugo-mwe'
+  themesDir = 'src/hugo/themes'
+#+end_src
+
+**** Mounts
+
+Because all this org stuff mucks with the [[https://gohugo.io/getting-started/directory-structure/#readout][normal directory structure]],
+we have to give Hugo a few extra hints.  [[https://github.com/gohugoio/hugo/issues/6457#issuecomment-546580193][~assetDir~ is "legacy"]], so
+we'll use [[https://gohugo.io/hugo-modules/configuration/#module-config-mounts][module mounts]].
+
+#+begin_src conf-toml :tangle ../../.hugo-out/config.toml
+  [[module.mounts]]
+    source = '.hugo-out/layouts'
+    target = 'layouts'
+  [[module.mounts]]
+    source = '.hugo-out/content'
+    target = 'content'
+  [[module.mounts]]
+    source = '.hugo-out/assets'
+    target = 'assets'
+  [[module.mounts]]
+    source = 'src/hugo/static'
+    target = 'static'
+#+end_src
+
+**** General site parameters
+
+The ~css~ parameter lets us add custom stylesheets to the asset
+pipeline.  ~chroma.css~ is [[*Syntax highlighting][generated below]].
+
+#+begin_src conf-toml :tangle ../../.hugo-out/config.toml
+  [Params]
+    css = [ 'chroma.css', 'bmfw.css', 'ox-hugo.css' ]
 #+end_src
 
 **** ox-hugo
@@ -115,9 +136,103 @@ HTML in your Markdown, as CommonMark allows!
     unsafe = true
 #+end_src
 
+**** Syntax highlighting
+
+The classless style is classless.
+
+#+begin_src conf-toml :tangle ../../.hugo-out/config.toml
+  [markup.highlight]
+    noClasses = false
+#+end_src
+
+Generate the CSS!
+
+#+name: generate-chroma-css
+#+begin_src sh :results none
+  mkdir -p ../../.hugo-out/assets/css
+  hugo gen chromastyles --style=github > ../../.hugo-out/assets/css/chroma.css
+#+end_src
+
+#+call: generate-chroma-css()
+
 *** Layouts
 
 **** Templates
+
+***** Base layout
+
+This defines the outermost HTML.  Every other template fills in the
+header, main, and footer.
+
+This isn't customized from hugo-mwe yet, but we need to move it into
+layouts for our ~chroma.css~ asset to work.
+
+#+begin_src html :tangle ../../.hugo-out/layouts/_default/baseof.html
+  <!DOCTYPE html>
+  <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{{ site.Language.Lang }}" lang="{{ site.Language.Lang }}">
+      <head>
+          <link href="https://gmpg.org/xfn/11" rel="profile">
+          <meta charset="utf-8">
+
+          <!-- Enable responsiveness on mobile devices-->
+          <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+
+          <!-- No referrer: https://webbkoll.dataskydd.net/en/ -->
+          <meta name="referrer" content="no-referrer">
+
+          <!-- Below fixes the favicon.ico 404 error
+               https://stackoverflow.com/a/43791570/1219634
+          -->
+          <link rel="shortcut icon" href="#" />
+
+          {{- if .IsHome }}
+              <title>{{ site.Title }}</title>
+              {{ with site.Params.Description }}
+                  <meta name="description" content="{{ . }}">
+              {{ end }}
+          {{- else }}
+              <title>{{ .Title }} - {{ site.Title }}</title>
+              <meta name="description" content="{{ .Summary }}">
+          {{- end }}
+
+          <!-- CSS -->
+          {{ range $css_file := site.Params.css | default (slice "bmfw.css" "ox-hugo.css") }}
+              {{ $css_asset_path := printf "css/%s" $css_file }}
+              {{ $css := resources.Get $css_asset_path | minify | fingerprint }}
+              <link rel="stylesheet" href="{{ $css.RelPermalink }}">
+              <!-- Enable HTTP/2 Push -->
+              <link rel="preload" href="{{ $css.RelPermalink }}" as="style">
+          {{ end }}
+
+          <!-- JS -->
+          {{ range $js_file := site.Params.js }}
+              {{ $js_asset_path := printf "js/%s" $js_file }}
+              {{ $js := resources.Get $js_asset_path | minify | fingerprint }}
+              <script defer src="{{ $js.RelPermalink }}"></script>
+              <!-- Enable HTTP/2 Push -->
+              <link rel="preload" href="{{ $js.RelPermalink }}" as="script">
+          {{ end }}
+
+          <!-- RSS -->
+          <!-- https://gohugo.io/templates/rss/#reference-your-rss-feed-in-head -->
+          {{ range .AlternativeOutputFormats -}}
+              {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink (printf "%s for %s" (.Name | title) site.Title) | safeHTML }}
+          {{ end -}}
+      </head>
+
+      <body>
+          {{ block "header" . }}
+          {{ end }}
+
+          {{ block "main" . }}
+          {{ end }}
+
+          {{ block "footer" . }}
+          {{ end }}
+      </body>
+  </html>
+
+#+end_src
 
 ***** Single pages
 
@@ -314,7 +429,10 @@ exports its contents with ox-hugo.
 
 #+begin_src emacs-lisp :tangle ../../gen/website/export.el
   (require 'ox-hugo)
+  (require 'ob-shell)
+
   (find-file "src/org/rossabaker.org")
+  (setq org-confirm-babel-evaluate nil)
   (org-babel-tangle)
   (mkdir "../../.hugo-out/static")
   (org-hugo-export-wim-to-md t)
