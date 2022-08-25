@@ -59,7 +59,7 @@ included or configurable elsewhere, goes to the ~gen~ directory.
 CLOSED: [2022-08-24 Wed 15:04]
 :PROPERTIES:
 :EXPORT_FILE_NAME: website
-:EXPORT_HUGO_LASTMOD: <2022-08-25 Thu 14:45>
+:EXPORT_HUGO_LASTMOD: <2022-08-25 Thu 14:48>
 :END:
 
 [[https://rossabaker.com/][rossabaker.com]] is sourced from an Org file.  We [[https://orgmode.org/manual/Extracting-Source-Code.html][tangle]] the
@@ -120,6 +120,7 @@ pipeline.  ~chroma.css~ is [[*Syntax highlighting][generated below]].
 #+begin_src conf-toml :tangle ../../.hugo-out/config.toml
   [Params]
     css = [ 'chroma.css', 'bmfw.css', 'ox-hugo.css' ]
+    description = "A perfectly cromulent developer."
 #+end_src
 
 **** ox-hugo
