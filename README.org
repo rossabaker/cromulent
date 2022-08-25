@@ -1,5 +1,5 @@
 * Cromulent
 
 This repository hosts my configuration and [[https://rossabaker.com/][personal website]].  The most
-interesting file is [[file:src/org/rossabaker.org][rossabaker.org]].  General documentation for this
-repository is published at [[https://rossabaker.com/configs/cromulent][rossabaker.com/configs/cromulent]].
+interesting source file is [[file:src/org/rossabaker.org][rossabaker.org,]] and the most interesting
+view of it all is the published site.
