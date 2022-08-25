@@ -48,7 +48,7 @@ included or configurable elsewhere, goes to the ~gen~ directory.
 CLOSED: [2022-08-24 Wed 15:04]
 :PROPERTIES:
 :EXPORT_FILE_NAME: website
-:EXPORT_HUGO_PUBLISHDATE: <2022-08-24 Wed 18:57>
+:EXPORT_HUGO_PUBLISHDATE: <2022-08-24 Wed 23:02>
 :END:
 
 [[https://rossabaker.com/][rossabaker.com]] is sourced from an Org file.  We [[https://orgmode.org/manual/Extracting-Source-Code.html][tangle]] the
@@ -75,7 +75,19 @@ we have to give Hugo a few extra hints.
   assetDir = 'src/hugo/assets'
   layoutDir = 'src/hugo/layouts'
   staticDir = 'src/hugo/static'
+  themesDir = 'src/hugo/themes'
   contentDir = '.hugo-out/content'
+#+end_src
+
+**** hugo-mwe
+
+This site is bootstrapped from [[https://gitlab.com/hugo-mwe/hugo-mwe][Hugo MWE]].  A [[https://scripter.co/hugo-modules-importing-a-theme/][hugo module]] would be
+easier, but I have not figured out a way to integrate Hugo modules
+with [[https://github.com/tweag/gomod2nix][gomod2nix]].  Instead, we'll do it the old-fashioned way and clone
+it into ~src/hugo/themes~.
+
+#+begin_src conf-toml :tangle ../../.hugo-out/config.toml
+  theme = 'hugo-mwe'
 #+end_src
 
 **** ox-hugo
@@ -91,13 +103,6 @@ HTML in your Markdown, as CommonMark allows!
   [markup.goldmark.renderer]
     unsafe = true
 #+end_src
-
-*** Layouts
-
-This site is bootstrapped from [[https://gitlab.com/hugo-mwe/hugo-mwe][Hugo MWE]].  It's not published as a
-theme, so I bootstrapped it with [[https://github.com/newren/git-filter-repo][git-filter-repo]] to rewrite the
-commits into ~src/hugo~.  As we customize them, we'll document the
-atrocities here.
 
 *** Home page
 :PROPERTIES:
