@@ -59,7 +59,7 @@ included or configurable elsewhere, goes to the ~gen~ directory.
 CLOSED: [2022-08-24 Wed 15:04]
 :PROPERTIES:
 :EXPORT_FILE_NAME: website
-:EXPORT_HUGO_PUBLISHDATE: <2022-08-25 Thu 14:35>
+:EXPORT_HUGO_LASTMOD: <2022-08-25 Thu 14:45>
 :END:
 
 [[https://rossabaker.com/][rossabaker.com]] is sourced from an Org file.  We [[https://orgmode.org/manual/Extracting-Source-Code.html][tangle]] the
@@ -257,7 +257,13 @@ layouts for our ~chroma.css~ asset to work.
                       Published on
                       <time datetime="{{ dateFormat "Jan 2, 2006" .Date }}">
                           {{ dateFormat "Jan 2, 2006" .Date }}
-                      </time>
+                      </time><br />
+                  {{ end }}
+                  {{ if (not .Lastmod.IsZero) }}
+                      Updated on
+                      <time datetime="{{ dateFormat "Jan 2, 2006" .Lastmod }}">
+                          {{ dateFormat "Jan 2, 2006" .Lastmod }}
+                      </time><br />
                   {{ end }}
               </header>
               <a id="top"></a>
