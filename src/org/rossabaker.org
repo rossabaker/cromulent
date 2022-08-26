@@ -22,7 +22,7 @@
 CLOSED: [2022-08-24 Wed 15:04]
 :PROPERTIES:
 :EXPORT_FILE_NAME: cromulent
-:EXPORT_HUGO_LASTMOD: <2022-08-25 Thu 15:06>
+:EXPORT_HUGO_LASTMOD: <2022-08-26 Fri 00:26>
 :END:
 
 My [[https://github.com/rossabaker/cromulent][personal Git repository]] contains my all my configurations and
@@ -477,8 +477,16 @@ Our gimmick is to render the header as Emacs Lisp.
 
 #+begin_src html :tangle ../../.hugo-out/layouts/partials/header.html
   <pre>(defvar <strong><a href="{{ site.BaseURL }}">{{ .Site.Params.username }}</a></strong>
-    &#34;{{ .Site.Params.description }}&#34;
+    &#34;<i>{{ .Site.Params.description }}</i>&#34;
     '(<a href="/categories">categories</a> <a href="/tags">tags</a>))</pre>
+#+end_src
+
+Mute the frou-frou a bit.
+
+#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
+  header pre {
+      color: #999;
+  }
 #+end_src
 
 ***** Footer
