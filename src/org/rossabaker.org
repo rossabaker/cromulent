@@ -10,8 +10,18 @@
 
 # How about a nice 90s homage while we move in
 
-#+attr_html: :alt Under Construction
-[[./img/under-construction.gif]]
+#+attr_html: :alt Under Construction :class under-construction
+[[file:../hugo/static/img/under-construction.gif]]
+
+#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css :exports none
+  figure.under-construction {
+      margin: 0 auto;
+      max-width: 30%;
+  }
+  .under-construction img {
+      max-width: 100%;
+  }
+#+end_src
 
 * Configurations                                        :@tech:configuration:
 :PROPERTIES:
