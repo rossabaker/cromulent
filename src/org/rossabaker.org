@@ -32,7 +32,7 @@
 CLOSED: [2022-08-24 Wed 15:04]
 :PROPERTIES:
 :EXPORT_FILE_NAME: cromulent
-:EXPORT_HUGO_LASTMOD: <2022-08-26 Fri 00:26>
+:EXPORT_HUGO_LASTMOD: <2022-08-25 Thu 15:06>
 :END:
 
 My [[https://github.com/rossabaker/cromulent][personal Git repository]] contains my all my configurations and
@@ -70,7 +70,7 @@ choose, goes to the ~gen~ directory.
 CLOSED: [2022-08-24 Wed 15:04]
 :PROPERTIES:
 :EXPORT_FILE_NAME: website
-:EXPORT_HUGO_LASTMOD: <2022-08-26 Fri 00:11>
+:EXPORT_HUGO_LASTMOD: <2022-08-26 Fri 00:26>
 :END:
 
 [[https://rossabaker.com/][rossabaker.com]] is sourced from an Org file.  We [[https://orgmode.org/manual/Extracting-Source-Code.html][tangle]] the
