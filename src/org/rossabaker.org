@@ -60,7 +60,7 @@ choose, goes to the ~gen~ directory.
 CLOSED: [2022-08-24 Wed 15:04]
 :PROPERTIES:
 :EXPORT_FILE_NAME: website
-:EXPORT_HUGO_LASTMOD: <2022-08-25 Thu 22:45>
+:EXPORT_HUGO_LASTMOD: <2022-08-25 Thu 23:45>
 :END:
 
 [[https://rossabaker.com/][rossabaker.com]] is sourced from an Org file.  We [[https://orgmode.org/manual/Extracting-Source-Code.html][tangle]] the
@@ -236,7 +236,6 @@ layouts for our ~chroma.css~ asset to work.
           {{ end }}
       </body>
   </html>
-
 #+end_src
 
 ***** Single pages
@@ -303,7 +302,7 @@ terms.
                   <p>{{ . }} </p>
               {{ end }}
           {{ else }}
-              <h1>Posts in ‘{{ .Section }}’</h1>
+              <h1>{{ .Section }}</h1>
           {{ end }}
       </header>
   {{ end }}
@@ -346,6 +345,109 @@ terms.
               | <a href="{{ site.BaseURL }}">Home</a>
               |
           {{ end }}
+          {{ range .AlternativeOutputFormats }}
+              {{ $name_upper := .Name | upper }}
+              {{ if (or (eq $name_upper "RSS") (eq $name_upper "ATOM")) }}
+                  {{ printf `<a href="%s">%s</a>` .Permalink $name_upper | safeHTML }}
+              {{ end }}
+          {{ end }}
+          | {{ partial "source_code" (dict "page" .) }}
+      </footer>
+  {{ end }}
+#+end_src
+
+***** Taxonomy terms list
+
+This is the taxonomy list page (e.g., ~/categories~).
+
+#+begin_src html :tangle ../../.hugo-out/layouts/_default/terms.html
+  {{ define "header" }}
+      <header>
+        <h1>{{ .Name }}</h1>
+      </header>
+  {{ end }}
+
+  {{ define "main" }}
+      <main>
+          <ul>
+              {{ $plural := .Data.Plural }}
+              {{ range .Data.Terms.Alphabetical }}
+                  <li>
+                      <a href="/{{ $plural }}/{{ .Name }}">{{ .Name }}</a>
+                  </li>
+              {{ end }}
+          </ul>
+
+          {{ with .Content }}
+              {{ . }}
+          {{ end }}
+      </main>
+  {{ end }}
+
+  {{ define "footer" }}
+      <footer>
+          {{ partial "footer.html" . }}
+          <a href="../">Go Up</a>
+          | <a href="{{ site.BaseURL }}">Home</a>
+          |
+          {{ range .AlternativeOutputFormats }}
+              {{ $name_upper := .Name | upper }}
+              {{ if (or (eq $name_upper "RSS") (eq $name_upper "ATOM")) }}
+                  {{ printf `<a href="%s">%s</a>` .Permalink $name_upper | safeHTML }}
+              {{ end }}
+          {{ end }}
+          | {{ partial "source_code" (dict "page" .) }}
+      </footer>
+  {{ end }}
+#+end_src
+
+***** Taxonomy term
+
+This is the taxonomy term page (e.g., ~/categories/tech~).
+
+#+begin_src html :tangle ../../.hugo-out/layouts/_default/term.html
+  {{ define "header" }}
+      <header>
+        <h1>{{ .Name }}</h1>
+      </header>
+  {{ end }}
+
+  {{ define "main" }}
+      <main>
+          <ul>
+              {{ range .Pages.ByLastmod.Reverse }}
+                  <li>
+                      <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+                      {{ if (not .Date.IsZero) }}
+                          {{ if .IsHome }}
+                              <small>
+                                  —
+                                  <time datetime="{{ dateFormat "Jan 2, 2006" .Date }}">
+                                      {{ dateFormat "Jan 2, 2006" .Date }}
+                                  </time>
+                              </small>
+                          {{ else }}
+                              <time datetime="{{ dateFormat "Jan 2, 2006" .Date }}">
+                                  {{ dateFormat "Jan 2, 2006" .Date }}
+                              </time>
+                          {{ end }}
+                      {{ end }}
+                  </li>
+              {{ end }}
+          </ul>
+
+          {{ with .Content }}
+              {{ . }}
+          {{ end }}
+      </main>
+  {{ end }}
+
+  {{ define "footer" }}
+      <footer>
+          {{ partial "footer.html" . }}
+          <a href="../">Go Up</a>
+          | <a href="{{ site.BaseURL }}">Home</a>
+          |
           {{ range .AlternativeOutputFormats }}
               {{ $name_upper := .Name | upper }}
               {{ if (or (eq $name_upper "RSS") (eq $name_upper "ATOM")) }}
