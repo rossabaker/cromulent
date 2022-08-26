@@ -60,7 +60,7 @@ choose, goes to the ~gen~ directory.
 CLOSED: [2022-08-24 Wed 15:04]
 :PROPERTIES:
 :EXPORT_FILE_NAME: website
-:EXPORT_HUGO_LASTMOD: <2022-08-25 Thu 23:45>
+:EXPORT_HUGO_LASTMOD: <2022-08-26 Fri 00:11>
 :END:
 
 [[https://rossabaker.com/][rossabaker.com]] is sourced from an Org file.  We [[https://orgmode.org/manual/Extracting-Source-Code.html][tangle]] the
@@ -120,8 +120,9 @@ pipeline.  ~chroma.css~ is [[*Syntax highlighting][generated below]].
 
 #+begin_src conf-toml :tangle ../../.hugo-out/config.toml
   [Params]
-    css = [ 'chroma.css', 'bmfw.css', 'ox-hugo.css' ]
+    css = [ 'cromulent.css', 'chroma.css', 'bmfw.css', 'ox-hugo.css' ]
     description = "A perfectly cromulent developer."
+    username = 'rossabaker'
 
     [Params.source]
       url = "https://github.com/rossabaker/cromulent"
@@ -238,12 +239,22 @@ layouts for our ~chroma.css~ asset to work.
   </html>
 #+end_src
 
+Visually separate the three sections a bit.
+
+#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
+  body > main {
+      border-width: 1px 0;
+      border-style: solid;
+      margin: 1.5rem 0;
+  }
+#+end_src
+
 ***** Single pages
 
 #+begin_src html :tangle ../../.hugo-out/layouts/_default/single.html
   {{ define "header" }}
       <header>
-          <a href="{{ site.BaseURL }}">{{ site.Title }}</a>
+          {{ partial "header.html" . }}
       </header>
   {{ end }}
 
@@ -296,19 +307,16 @@ terms.
 #+begin_src html :tangle ../../.hugo-out/layouts/_default/list.html
   {{ define "header" }}
       <header>
-          {{ if .IsHome }}
-              <h1>{{ site.Title }}</h1>
-              {{ with site.Params.Description }}
-                  <p>{{ . }} </p>
-              {{ end }}
-          {{ else }}
-              <h1>{{ .Section }}</h1>
-          {{ end }}
+          {{ partial "header.html" . }}
       </header>
   {{ end }}
 
   {{ define "main" }}
       <main>
+          {{ if not .IsHome }}
+          <h1>{{ .Title }}</h1>
+          {{ end }}
+
           <ul>
               {{ range site.RegularPages.ByLastmod.Reverse }}
                   <li>
@@ -363,12 +371,13 @@ This is the taxonomy list page (e.g., ~/categories~).
 #+begin_src html :tangle ../../.hugo-out/layouts/_default/terms.html
   {{ define "header" }}
       <header>
-        <h1>{{ .Name }}</h1>
+          {{ partial "header.html" . }}
       </header>
   {{ end }}
 
   {{ define "main" }}
       <main>
+          <h1>{{ .Name }}</h1>
           <ul>
               {{ $plural := .Data.Plural }}
               {{ range .Data.Terms.Alphabetical }}
@@ -408,12 +417,13 @@ This is the taxonomy term page (e.g., ~/categories/tech~).
 #+begin_src html :tangle ../../.hugo-out/layouts/_default/term.html
   {{ define "header" }}
       <header>
-        <h1>{{ .Name }}</h1>
+          {{ partial "header.html" . }}
       </header>
   {{ end }}
 
   {{ define "main" }}
       <main>
+          <h1>{{ .Name }}</h1>
           <ul>
               {{ range .Pages.ByLastmod.Reverse }}
                   <li>
@@ -460,6 +470,16 @@ This is the taxonomy term page (e.g., ~/categories/tech~).
 #+end_src
 
 **** Partial templates
+
+***** Header
+
+Our gimmick is to render the header as Emacs Lisp.
+
+#+begin_src html :tangle ../../.hugo-out/layouts/partials/header.html
+  <pre>(defvar <strong><a href="{{ site.BaseURL }}">{{ .Site.Params.username }}</a></strong>
+    &#34;{{ .Site.Params.description }}&#34;
+    '(<a href="/categories">categories</a> <a href="/tags">tags</a>))</pre>
+#+end_src
 
 ***** Footer
 
