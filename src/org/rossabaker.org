@@ -13,12 +13,12 @@
 #+attr_html: :alt Under Construction
 [[./img/under-construction.gif]]
 
-* Configurations
+* Configurations                                        :@tech:configuration:
 :PROPERTIES:
 :EXPORT_HUGO_SECTION: configs
 :END:
 
-** DONE A perfectly cromulent repository
+** DONE A perfectly cromulent repository                  :git:gitattributes:
 CLOSED: [2022-08-24 Wed 15:04]
 :PROPERTIES:
 :EXPORT_FILE_NAME: cromulent
@@ -56,7 +56,7 @@ choose, goes to the ~gen~ directory.
   gen/            -diff -merge linguist-generated=true
 #+end_src
 
-** DONE Website
+** DONE Website                               :hugo:org_mode:ox_hugo:nix:
 CLOSED: [2022-08-24 Wed 15:04]
 :PROPERTIES:
 :EXPORT_FILE_NAME: website
