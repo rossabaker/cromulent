@@ -2,9 +2,13 @@
 #+hugo_base_dir: ../../.hugo-out
 #+startup: logdone
 
-* Home page
+* Root section
 :PROPERTIES:
 :EXPORT_HUGO_SECTION: /
+:END:
+
+** Home page
+:PROPERTIES:
 :EXPORT_FILE_NAME: _index
 :END:
 
@@ -20,6 +24,38 @@
   }
   .under-construction img {
       max-width: 100%;
+  }
+#+end_src
+
+** DONE Contact      :@personal:contact:email:github:mastodon:matrix:twitter:
+CLOSED: [2022-08-27 Sat 14:04]
+:PROPERTIES:
+:EXPORT_FILE_NAME: contact
+:END:
+
+I'm other places too, but try one of these first.
+
+#+begin_contacts
+- Email :: [[mailto:ross@rossabaker.com][ross@rossabaker.com]]
+- GitHub :: [[https://github.com/rossabaker][@rossabaker]]
+- Matrix :: [[https://matrix.to/#/@ross:rossabaker.com][@ross:rossabaker.com]]
+- Mastodon :: [[https://mastodon.social/@rossabaker][@rossabaker@mastodon.social]]
+- Twitter :: [[https://twitter.com/rossabaker][@rossabaker]]
+#+end_contacts
+
+#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css :exports none
+  .contacts dl {
+      display: grid;
+      grid-template-columns: max-content auto;
+  }
+
+  dt {
+      font-weight: bolder;
+      grid-column: 1;
+  }
+
+  dd {
+      grid-column: 2;
   }
 #+end_src
 
