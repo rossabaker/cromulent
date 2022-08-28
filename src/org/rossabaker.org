@@ -121,7 +121,7 @@ choose, goes to the ~gen~ directory.
 CLOSED: [2022-08-24 Wed 15:04]
 :PROPERTIES:
 :EXPORT_FILE_NAME: website
-:EXPORT_HUGO_LASTMOD: <2022-08-28 Sun 14:48>
+:EXPORT_HUGO_LASTMOD: <2022-08-28 Sun 17:24>
 :EXPORT_DESCRIPTION: A colophon for rossabaker.com.  Describes the way we convert an Org-Mode file into a website with ox-hugo and Nix.
 :END:
 
@@ -380,22 +380,35 @@ terms.
                       <article>
                           <header>
                               <h1><a href="{{ .Permalink }}">{{ .Title }}</a></h1>
+                              <ul>
+                                  {{ if (not .Date.IsZero) }}
+                                      <li class="publish-date">
+                                          <time title="Original date" datetime="{{ dateFormat "Jan 2, 2006" .Date }}">
+                                              {{ dateFormat "Jan 2, 2006" .Date }}
+                                          </time>
+                                      </li>
+                                  {{ end }}
+                                  {{ if ne (dateFormat "Jan 2, 2006" .Date) (dateFormat "Jan 2, 2006" .Lastmod) }}
+                                      <li class="last-modified-date">
+                                          <time title="Last modified date" datetime="{{ dateFormat "Jan 2, 2006" .Lastmod }}">
+                                              {{ dateFormat "Jan 2, 2006" .Lastmod }}
+                                          </time>
+                                      </li>
+                                  {{ end }}
+                              </ul>
                           </header>
                           <main>
                               {{ (.Description | markdownify) | default .Summary }}
                           </main>
                           <footer>
-                              {{ if (not .Lastmod.IsZero) }}
-                                  <time datetime="{{ dateFormat "Jan 2, 2006" .Date }}">
-                                      {{ dateFormat "Jan 2, 2006" .Date }}
-                                  </time>
-                              {{ end }}
-                              {{ if (not .Lastmod.IsZero) }}
-                                  ⋅ Updated
-                                  <time datetime="{{ dateFormat "Jan 2, 2006" .Lastmod }}">
-                                      {{ dateFormat "Jan 2, 2006" .Lastmod }}
-                                  </time>
-                              {{ end }}
+                              <ul>
+                                  {{ range .Params.categories }}
+                                      <li class="category"><a href="{{ (print "/categories/" .) | absURL }}">{{ . | humanize }}</a></li>
+                                  {{ end }}
+                                  {{ range .Params.tags }}
+                                      <li class="tag"><a href="{{ (print "/tags/" .) | absURL }}">{{ . }}</a></li>
+                                  {{ end }}
+                              </ul>
                           </footer>
                       </article>
                   </li>
@@ -441,14 +454,43 @@ terms.
 
   ul.pages article header h1 {
       font-size: 1.25em;
+      margin-bottom: 0.25em;
   }
 
-  ul pages article main {
+  ul.pages article main {
       margin: 1em 0;
   }
 
-  ul.pages article footer {
+  ul.pages article header ul, ul.pages article footer ul {
       font-size: 0.8em;
+  }
+
+  ul.pages article header ul, ul.pages article footer ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      margin: 0;
+  }
+
+  ul.pages article header li, ul.pages article footer li {
+      display: inline;
+      margin-right: 0.5ch;
+  }
+
+  ul.pages li.category::before {
+      content: "📁 ";
+  }
+
+  ul.pages li.tag::before {
+      content: "🏷️ ";
+  }
+
+  ul.pages li.publish-date::before {
+      content: "📅";
+  }
+
+  ul.pages li.last-modified-date::before {
+      content: "🔄";
   }
 #+end_src
 
