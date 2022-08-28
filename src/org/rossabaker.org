@@ -121,7 +121,7 @@ choose, goes to the ~gen~ directory.
 CLOSED: [2022-08-24 Wed 15:04]
 :PROPERTIES:
 :EXPORT_FILE_NAME: website
-:EXPORT_HUGO_LASTMOD: <2022-08-28 Sun 17:34>
+:EXPORT_HUGO_LASTMOD: <2022-08-28 Sun 17:41>
 :EXPORT_DESCRIPTION: A colophon for rossabaker.com.  Describes the way we convert an Org-Mode file into a website with ox-hugo and Nix.
 :END:
 
@@ -374,43 +374,10 @@ terms.
           <h1>{{ .Title }}</h1>
           {{ end }}
 
-          <ul class="pages">
+          <ul class="article-summaries">
               {{ range site.RegularPages.ByLastmod.Reverse }}
                   <li>
-                      <article>
-                          <header>
-                              <h1><a href="{{ .Permalink }}">{{ .Title }}</a></h1>
-                              <ul>
-                                  {{ if (not .Date.IsZero) }}
-                                      <li class="publish-date">
-                                          <time title="Original date" datetime="{{ dateFormat "Jan 2, 2006" .Date }}">
-                                              {{ dateFormat "Jan 2, 2006" .Date }}
-                                          </time>
-                                      </li>
-                                  {{ end }}
-                                  {{ if ne (dateFormat "Jan 2, 2006" .Date) (dateFormat "Jan 2, 2006" .Lastmod) }}
-                                      <li class="last-modified-date">
-                                          <time title="Last modified date" datetime="{{ dateFormat "Jan 2, 2006" .Lastmod }}">
-                                              {{ dateFormat "Jan 2, 2006" .Lastmod }}
-                                          </time>
-                                      </li>
-                                  {{ end }}
-                              </ul>
-                          </header>
-                          <main>
-                              {{ (.Description | markdownify) | default .Summary }}
-                          </main>
-                          <footer>
-                              <ul>
-                                  {{ range .Params.categories }}
-                                      <li class="category"><a href="{{ (print "/categories/" .) | absURL }}">{{ . | humanize }}</a></li>
-                                  {{ end }}
-                                  {{ range .Params.tags }}
-                                      <li class="tag"><a href="{{ (print "/tags/" .) | absURL }}">{{ . }}</a></li>
-                                  {{ end }}
-                              </ul>
-                          </footer>
-                      </article>
+                      {{ partial "article-summary" . }}
                   </li>
               {{ end }}
           </ul>
@@ -438,60 +405,6 @@ terms.
           | {{ partial "source_code" (dict "page" .) }}
       </footer>
   {{ end }}
-#+end_src
-
-#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
-  ul.pages {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-  }
-
-  ul.pages article {
-      border-top: 1px dotted #ccc;
-      padding: 1em;
-  }
-
-  ul.pages article header h1 {
-      font-size: 1.25em;
-      margin-bottom: 0.25em;
-  }
-
-  ul.pages article main {
-      margin: 1em 0;
-  }
-
-  ul.pages article header ul, ul.pages article footer ul {
-      font-size: 0.8em;
-  }
-
-  ul.pages article header ul, ul.pages article footer ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      margin: 0;
-  }
-
-  ul.pages article header li, ul.pages article footer li {
-      display: inline;
-      margin-right: 0.5ch;
-  }
-
-  ul.pages li.category::before {
-      content: "📁 ";
-  }
-
-  ul.pages li.tag::before {
-      content: "🏷️ ";
-  }
-
-  ul.pages li.publish-date::before {
-      content: "📅";
-  }
-
-  ul.pages li.last-modified-date::before {
-      content: "🔄";
-  }
 #+end_src
 
 ***** Taxonomy terms list
@@ -554,24 +467,10 @@ This is the taxonomy term page (e.g., ~/categories/tech~).
   {{ define "main" }}
       <main>
           <h1>{{ .Name }}</h1>
-          <ul>
+          <ul class="article-summaries">
               {{ range .Pages.ByLastmod.Reverse }}
                   <li>
-                      <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-                      {{ if (not .Date.IsZero) }}
-                          {{ if .IsHome }}
-                              <small>
-                                  —
-                                  <time datetime="{{ dateFormat "Jan 2, 2006" .Date }}">
-                                      {{ dateFormat "Jan 2, 2006" .Date }}
-                                  </time>
-                              </small>
-                          {{ else }}
-                              <time datetime="{{ dateFormat "Jan 2, 2006" .Date }}">
-                                  {{ dateFormat "Jan 2, 2006" .Date }}
-                              </time>
-                          {{ end }}
-                      {{ end }}
+                      {{ partial "article-summary" . }}
                   </li>
               {{ end }}
           </ul>
@@ -600,6 +499,103 @@ This is the taxonomy term page (e.g., ~/categories/tech~).
 #+end_src
 
 **** Partial templates
+
+***** Article summary
+
+Provide a standard article summary for list views.  It includes the
+title, dates, category, tags, and either the page description or
+summary.
+
+#+begin_src html :tangle ../../.hugo-out/layouts/partials/article-summary.html
+  <article>
+      <header>
+          <h1><a href="{{ .Permalink }}">{{ .Title }}</a></h1>
+          <ul>
+              {{ if (not .Date.IsZero) }}
+                  <li class="publish-date">
+                      <time title="Original date" datetime="{{ dateFormat "Jan 2, 2006" .Date }}">
+                          {{ dateFormat "Jan 2, 2006" .Date }}
+                      </time>
+                  </li>
+              {{ end }}
+              {{ if ne (dateFormat "Jan 2, 2006" .Date) (dateFormat "Jan 2, 2006" .Lastmod) }}
+                  <li class="last-modified-date">
+                      <time title="Last modified date" datetime="{{ dateFormat "Jan 2, 2006" .Lastmod }}">
+                          {{ dateFormat "Jan 2, 2006" .Lastmod }}
+                      </time>
+                  </li>
+              {{ end }}
+          </ul>
+      </header>
+      <main>
+          {{ (.Description | markdownify) | default .Summary }}
+      </main>
+      <footer>
+          <ul>
+              {{ range .Params.categories }}
+                  <li class="category"><a href="{{ (print "/categories/" .) | absURL }}">{{ . | humanize }}</a></li>
+              {{ end }}
+              {{ range .Params.tags }}
+                  <li class="tag"><a href="{{ (print "/tags/" .) | absURL }}">{{ . }}</a></li>
+              {{ end }}
+          </ul>
+      </footer>
+  </article>
+#+end_src
+
+#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
+  ul.article-summaries {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+  }
+
+  ul.article-summaries article {
+      border-top: 1px dotted #ccc;
+      padding: 1em;
+  }
+
+  ul.article-summaries article header h1 {
+      font-size: 1.25em;
+      margin-bottom: 0.25em;
+  }
+
+  ul.article-summaries article main {
+      margin: 1em 0;
+  }
+
+  ul.article-summaries article header ul, ul.article-summaries article footer ul {
+      font-size: 0.8em;
+  }
+
+  ul.article-summaries article header ul, ul.article-summaries article footer ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      margin: 0;
+  }
+
+  ul.article-summaries article header li, ul.article-summaries article footer li {
+      display: inline;
+      margin-right: 0.5ch;
+  }
+
+  ul.article-summaries li.category::before {
+      content: "📁 ";
+  }
+
+  ul.article-summaries li.tag::before {
+      content: "🏷️ ";
+  }
+
+  ul.article-summaries li.publish-date::before {
+      content: "📅";
+  }
+
+  ul.article-summaries li.last-modified-date::before {
+      content: "🔄";
+  }
+#+end_src
 
 ***** Header
 
