@@ -27,7 +27,7 @@
   }
 #+end_src
 
-** DONE Contact      :@personal:contact:email:github:mastodon:matrix:twitter:
+** DONE Contact      :@personal:email:github:mastodon:matrix:twitter:pgp:
 CLOSED: [2022-08-27 Sat 14:04]
 :PROPERTIES:
 :EXPORT_FILE_NAME: contact
