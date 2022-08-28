@@ -620,5 +620,5 @@ For a more iterative experience with live reload in the browser, try:
 * Local Variables :noexport:
 
 Local Variables:
-org-hugo-external-file-extensions-allowed-for-copying: '("asc" "jpg" "jpeg" "tiff" "png" "svg" "gif" "mp4" "pdf" "odt" "doc" "ppt" "xls" "docx" "pptx" "xlsx")
+org-hugo-external-file-extensions-allowed-for-copying: ("asc" "jpg" "jpeg" "tiff" "png" "svg" "gif" "mp4" "pdf" "odt" "doc" "ppt" "xls" "docx" "pptx" "xlsx")
 End:
