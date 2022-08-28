@@ -119,7 +119,7 @@ choose, goes to the ~gen~ directory.
 CLOSED: [2022-08-24 Wed 15:04]
 :PROPERTIES:
 :EXPORT_FILE_NAME: website
-:EXPORT_HUGO_LASTMOD: <2022-08-26 Fri 00:26>
+:EXPORT_HUGO_LASTMOD: <2022-08-28 Sun 14:48>
 :END:
 
 [[https://rossabaker.com/][rossabaker.com]] is sourced from an Org file.  We [[https://orgmode.org/manual/Extracting-Source-Code.html][tangle]] the
@@ -132,7 +132,7 @@ A Hugo site can be configured with either TOML or YAML.  I spent my
 weirdness budget on a literate config, so let's stick to the default.
 
 #+begin_src conf-toml :tangle ../../.hugo-out/config.toml
-  baseURL = 'http://rossabaker.com/'
+  baseURL = 'http://rossabaker.com'
   languageCode = 'en-us'
   title = 'Ross A. Baker'
 #+end_src
@@ -532,19 +532,74 @@ This is the taxonomy term page (e.g., ~/categories/tech~).
 
 ***** Header
 
-Our gimmick is to render the header as Emacs Lisp.
+Our gimmick is to render this semantic HTML header as Emacs Lisp.
 
 #+begin_src html :tangle ../../.hugo-out/layouts/partials/header.html
-  <pre>(defvar <strong><a href="{{ site.BaseURL }}">{{ .Site.Params.username }}</a></strong>
-    &#34;<i>{{ .Site.Params.description }}</i>&#34;
-    '(<a href="/categories">categories</a> <a href="/tags">tags</a>))</pre>
+  <h1><a href="{{ "/" | absURL }}">{{ .Site.Params.username }}</a></h1>
+  <p>{{ .Site.Params.description }}</p>
+  <nav>
+      <ul>
+          {{ $baseURL := .Site.BaseURL }}
+          {{ range $name, $_ := .Site.Taxonomies.categories }}
+              <li><a href="{{ "/categories" | absURL }}/{{ $name }}">{{ $name }}</a></li>
+          {{ end }}
+          <li><a href="{{ "/tags" | absURL }}">tags</a></li>
+      </ul>
+  </nav>
 #+end_src
 
-Mute the frou-frou a bit.
-
 #+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
-  header pre {
-      color: #999;
+  body > header {
+      display: inline;
+      font-family: monospace;
+  }
+  body > header::before {
+      content: "(defvar ";
+      color: #aaa;
+  }
+  body > header h1 {
+      font-size: 1em;
+      display: inline;
+      margin: 0;
+      line-height: inherit;
+  }
+  body > header p {
+      margin: 0;
+      padding-left: 2ch;
+      font-style: italic;
+      color: #aaa;
+  }
+  body > header p::before {
+      content: "\"";
+  }
+  body > header p::after {
+      content: "\"";
+  }
+  body > header nav {
+      display: inline-flex;
+  }
+  body > header ul {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0 0 0 2ch;
+  }
+  body > header ul::before {
+      content: "'(";
+      color: #aaa;
+  }
+  body > header ul::after {
+      content: "))";
+      color: #aaa;
+  }
+  body > header li {
+      display: inline;
+  }
+  body > header li {
+      padding-right: 1ch;
+  }
+  body > header li:last-child {
+      padding-right: 0;
   }
 #+end_src
 
@@ -594,7 +649,6 @@ exports its contents with ox-hugo.
 
   (put 'org-hugo-external-file-extensions-allowed-for-copying 'safe-local-variable 'listp)
   (find-file "src/org/rossabaker.org")
-  (message "WTF: %s" org-hugo-external-file-extensions-allowed-for-copying)
   (setq org-confirm-babel-evaluate nil)
   (org-babel-tangle)
   (mkdir "../../.hugo-out/static")
