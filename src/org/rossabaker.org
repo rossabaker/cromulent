@@ -10,20 +10,25 @@
 ** Home page
 :PROPERTIES:
 :EXPORT_FILE_NAME: _index
+:EXPORT_TITLE: Ross A. Baker
 :END:
 
-# How about a nice 90s homage while we move in
+This is Ross A. Baker's personal web site.  He's unsure where he's
+going with it quite yet, but it will certainly feature tired Simpsons
+references.  Ross is a backend developer by trade, so please excuse
+any season-one aesthetics.
 
-#+attr_html: :alt Under Construction :class under-construction
-[[file:../hugo/static/img/under-construction.gif]]
+#+attr_html: :alt He's a perfectly cromulent developer :class perfectly-cromulent-developer
+[[file:../hugo/static/img/perfectly-cromulent-developer.gif]]
 
 #+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css :exports none
-  figure.under-construction {
+  figure.perfectly-cromulent-developer {
       margin: 0 auto;
-      max-width: 30%;
+      max-width: 60%;
   }
-  .under-construction img {
+  .perfectly-cromulent-developer img {
       max-width: 100%;
+      border-radius: 0.5em;
   }
 #+end_src
 
@@ -370,8 +375,10 @@ terms.
 
   {{ define "main" }}
       <main>
-          {{ if not .IsHome }}
           <h1>{{ .Title }}</h1>
+
+          {{ with .Content }}
+              {{ . }}
           {{ end }}
 
           <ul class="article-summaries">
@@ -381,10 +388,6 @@ terms.
                   </li>
               {{ end }}
           </ul>
-
-          {{ with .Content }}
-              {{ . }}
-          {{ end }}
       </main>
   {{ end }}
 
