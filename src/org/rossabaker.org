@@ -121,7 +121,7 @@ choose, goes to the ~gen~ directory.
 CLOSED: [2022-08-24 Wed 15:04]
 :PROPERTIES:
 :EXPORT_FILE_NAME: website
-:EXPORT_HUGO_LASTMOD: <2022-08-28 Sun 17:24>
+:EXPORT_HUGO_LASTMOD: <2022-08-28 Sun 17:34>
 :EXPORT_DESCRIPTION: A colophon for rossabaker.com.  Describes the way we convert an Org-Mode file into a website with ox-hugo and Nix.
 :END:
 
@@ -681,6 +681,27 @@ Our gimmick is to render this semantic HTML header as Emacs Lisp.
       Ross A. Baker
       <a href="https://pronoun.is/he">(he/him)</a>
   </address>
+#+end_src
+
+*** General styling
+
+Give the code samples a little more room to breathe.
+
+#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
+  pre.chroma {
+      background: #f8f8f8;
+      border: 1px dotted #ccc;
+      border-radius: 1em;
+      padding: 1em;
+  }
+#+end_src
+
+Put a scroll bar on code samples, but only where necessary.
+
+#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
+  pre {
+      overflow-x: auto;
+  }
 #+end_src
 
 *** Build
