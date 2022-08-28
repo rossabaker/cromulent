@@ -1,3 +1,0 @@
-#+TITLE: Blog Posts
-
-- [[file:the-aol-of-the-2020s.org][The AOL of the 2020s]]

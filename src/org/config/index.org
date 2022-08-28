@@ -1,7 +1,0 @@
-#+TITLE: Configurations
-
-- [[./emacs/][Emacs]]: the crown jewel
-- [[./nix-darwin/][nix-darwin]]: my MacBook
-- [[./home-manager/][home-manager]]: my user environment
-- [[./website/][website]]: how rossabaker.com is generated
-- [[./infrastructure/][Infrastructure]]: for now, my Synapse server
