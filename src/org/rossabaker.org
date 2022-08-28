@@ -381,6 +381,8 @@ terms.
               {{ . }}
           {{ end }}
 
+          <h2>Recently updated</h2>
+
           <ul class="article-summaries">
               {{ range site.RegularPages.ByLastmod.Reverse }}
                   <li>
