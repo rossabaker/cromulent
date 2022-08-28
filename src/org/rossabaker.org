@@ -32,6 +32,7 @@ CLOSED: [2022-08-27 Sat 14:04]
 :PROPERTIES:
 :EXPORT_FILE_NAME: contact
 :EXPORT_HUGO_LASTMOD: <2022-08-28 Sun 00:12>
+:EXPORT_DESCRIPTION: An partial enumeration of addresses, social networks, and PGP public key.
 :END:
 
 I'm other places too, but try one of these first.
@@ -82,6 +83,7 @@ CLOSED: [2022-08-24 Wed 15:04]
 :PROPERTIES:
 :EXPORT_FILE_NAME: cromulent
 :EXPORT_HUGO_LASTMOD: <2022-08-25 Thu 15:06>
+:EXPORT_DESCRIPTION: Documents the Git repository that hosts my configurations and the source code for rossabaker.com.
 :END:
 
 My [[https://github.com/rossabaker/cromulent][personal Git repository]] contains my all my configurations and
@@ -120,6 +122,7 @@ CLOSED: [2022-08-24 Wed 15:04]
 :PROPERTIES:
 :EXPORT_FILE_NAME: website
 :EXPORT_HUGO_LASTMOD: <2022-08-28 Sun 14:48>
+:EXPORT_DESCRIPTION: A colophon for rossabaker.com.  Describes the way we convert an Org-Mode file into a website with ox-hugo and Nix.
 :END:
 
 [[https://rossabaker.com/][rossabaker.com]] is sourced from an Org file.  We [[https://orgmode.org/manual/Extracting-Source-Code.html][tangle]] the
@@ -322,11 +325,6 @@ Visually separate the three sections a bit.
           <article>
               <header>
                   <h1>{{ .Title }}</h1>
-                  {{ with .Description }}
-                      <blockquote>
-                          {{ . | markdownify | emojify }}
-                      </blockquote>
-                  {{ end }}
                   {{ if (not .Date.IsZero) }}
                       Published on
                       <time datetime="{{ dateFormat "Jan 2, 2006" .Date }}">
@@ -376,24 +374,30 @@ terms.
           <h1>{{ .Title }}</h1>
           {{ end }}
 
-          <ul>
+          <ul class="pages">
               {{ range site.RegularPages.ByLastmod.Reverse }}
                   <li>
-                      <a href="{{ .Permalink }}">{{ .Title }}</a>
-                      {{ if (not .Date.IsZero) }}
-                          {{ if .IsHome }}
-                              <small>
-                                  —
+                      <article>
+                          <header>
+                              <h1><a href="{{ .Permalink }}">{{ .Title }}</a></h1>
+                          </header>
+                          <main>
+                              {{ (.Description | markdownify) | default .Summary }}
+                          </main>
+                          <footer>
+                              {{ if (not .Lastmod.IsZero) }}
                                   <time datetime="{{ dateFormat "Jan 2, 2006" .Date }}">
                                       {{ dateFormat "Jan 2, 2006" .Date }}
                                   </time>
-                              </small>
-                          {{ else }}
-                              <time datetime="{{ dateFormat "Jan 2, 2006" .Date }}">
-                                  {{ dateFormat "Jan 2, 2006" .Date }}
-                              </time>
-                          {{ end }}
-                      {{ end }}
+                              {{ end }}
+                              {{ if (not .Lastmod.IsZero) }}
+                                  ⋅ Updated
+                                  <time datetime="{{ dateFormat "Jan 2, 2006" .Lastmod }}">
+                                      {{ dateFormat "Jan 2, 2006" .Lastmod }}
+                                  </time>
+                              {{ end }}
+                          </footer>
+                      </article>
                   </li>
               {{ end }}
           </ul>
@@ -421,6 +425,31 @@ terms.
           | {{ partial "source_code" (dict "page" .) }}
       </footer>
   {{ end }}
+#+end_src
+
+#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
+  ul.pages {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+  }
+
+  ul.pages article {
+      border-top: 1px dotted #ccc;
+      padding: 1em;
+  }
+
+  ul.pages article header h1 {
+      font-size: 1.25em;
+  }
+
+  ul pages article main {
+      margin: 1em 0;
+  }
+
+  ul.pages article footer {
+      font-size: 0.8em;
+  }
 #+end_src
 
 ***** Taxonomy terms list
