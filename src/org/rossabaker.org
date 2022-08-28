@@ -31,6 +31,7 @@
 CLOSED: [2022-08-27 Sat 14:04]
 :PROPERTIES:
 :EXPORT_FILE_NAME: contact
+:EXPORT_HUGO_LASTMOD: <2022-08-28 Sun 00:12>
 :END:
 
 I'm other places too, but try one of these first.
@@ -58,6 +59,18 @@ I'm other places too, but try one of these first.
       grid-column: 2;
   }
 #+end_src
+
+*** PGP
+
+Download my [[file:../hugo/static/keys/0x975BE5BC29D92CA5.pub.asc][public PGP key]].  Its fingerprint is as follows:
+
+#+begin_example
+pub   rsa4096/0x975BE5BC29D92CA5 2018-01-31 [SC]
+      Key fingerprint = 904C 1537 33DB B010 6915  C0BD 975B E5BC 29D9 2CA5
+uid                   [ultimate] Ross A. Baker <ross@rossabaker.com>
+sub   rsa4096/0x89FB7DEA8BDEB545 2018-01-31 [E]
+      Key fingerprint = 7578 8CFE 8A1B E74E D17D  30AB 89FB 7DEA 8BDE B545
+#+end_example
 
 * Configurations                                        :@tech:configuration:
 :PROPERTIES:
@@ -579,7 +592,9 @@ exports its contents with ox-hugo.
   (require 'ox-hugo)
   (require 'ob-shell)
 
+  (put 'org-hugo-external-file-extensions-allowed-for-copying 'safe-local-variable 'listp)
   (find-file "src/org/rossabaker.org")
+  (message "WTF: %s" org-hugo-external-file-extensions-allowed-for-copying)
   (setq org-confirm-babel-evaluate nil)
   (org-babel-tangle)
   (mkdir "../../.hugo-out/static")
@@ -601,3 +616,9 @@ For a more iterative experience with live reload in the browser, try:
 #+begin_src sh :tangle no
   hugo serve --disableFastRender --config .hugo-out/config.toml
 #+end_src
+
+* Local Variables :noexport:
+
+Local Variables:
+org-hugo-external-file-extensions-allowed-for-copying: '("asc" "jpg" "jpeg" "tiff" "png" "svg" "gif" "mp4" "pdf" "odt" "doc" "ppt" "xls" "docx" "pptx" "xlsx")
+End:
