@@ -126,7 +126,7 @@ choose, goes to the ~gen~ directory.
 CLOSED: [2022-08-24 Wed 15:04]
 :PROPERTIES:
 :EXPORT_FILE_NAME: website
-:EXPORT_HUGO_LASTMOD: <2022-08-29 Mon 00:16>
+:EXPORT_HUGO_LASTMOD: <2022-08-29 Mon 18:25>
 :EXPORT_DESCRIPTION: A colophon for rossabaker.com.  Describes the way we convert an Org-Mode file into a website with ox-hugo and Nix.
 :END:
 
@@ -268,6 +268,7 @@ layouts for our ~chroma.css~ asset to work.
               <meta name="description" content="{{ .Summary }}">
           {{- end }}
 
+
           <!-- CSS -->
           {{ range $css_file := site.Params.css | default (slice "bmfw.css" "ox-hugo.css") }}
               {{ $css_asset_path := printf "css/%s" $css_file }}
@@ -294,14 +295,22 @@ layouts for our ~chroma.css~ asset to work.
       </head>
 
       <body>
-          {{ block "header" . }}
-          {{ end }}
+          <header>
+              {{ block "header" . }}
+                  {{ partial "header.html" . }}
+              {{ end }}
+          </header>
 
-          {{ block "main" . }}
-          {{ end }}
+          <main>
+              {{ block "main" . }}
+              {{ end }}
+          </main>
 
-          {{ block "footer" . }}
-          {{ end }}
+          <footer>
+              {{ block "footer" . }}
+                  {{ partial "footer.html" . }}
+              {{ end }}
+          </footer>
       </body>
   </html>
 #+end_src
@@ -315,37 +324,22 @@ Visually separate the three sections a bit.
       margin: 1.5rem 0;
   }
 #+end_src
-
 ***** Single pages
 
 #+begin_src html :tangle ../../.hugo-out/layouts/_default/single.html
-  {{ define "header" }}
-      <header>
-          {{ partial "header.html" . }}
-      </header>
-  {{ end }}
-
   {{ define "main" }}
-      <main>
-          <article>
-              <header>
-                  <h1>{{ .Title }}</h1>
-              </header>
-              <main>
-                {{ .Content }}
-              </main>
-              <footer>
-                  {{ partial "post-info" . }}
-              </footer>
-          </article>
-      </main>
-  {{ end }}
-
-  {{ define "footer" }}
-      <footer>
-          {{ partial "footer.html" . }}
-      </footer>
-  {{ end }}
+      <article>
+          <header>
+              <h1>{{ .Title }}</h1>
+          </header>
+          <main>
+              {{ .Content }}
+          </main>
+          <footer>
+              {{ partial "post-info" . }}
+          </footer>
+      </article>
+    {{ end }}
 #+end_src
 
 ****** Talks
@@ -353,48 +347,34 @@ Visually separate the three sections a bit.
 The talks section has its own front matter.  We give it a different template.
 
 #+begin_src html :tangle ../../.hugo-out/layouts/talks/single.html
-  {{ define "header" }}
-      <header>
-          {{ partial "header.html" . }}
-      </header>
-  {{ end }}
-
   {{ define "main" }}
-      <main>
-          <article>
-              <header>
-                  <h1>{{ .Title }}</h1>
-                  <dl>
-                      {{ if .Params.venue }}
-                          <dt>Venue</dt>
-                          <dd>{{ .Params.Venue | markdownify }}</dd>
+            <article>
+          <header>
+              <h1>{{ .Title }}</h1>
+              <dl>
+                  {{ if .Params.venue }}
+                      <dt>Venue</dt>
+                      <dd>{{ .Params.Venue | markdownify }}</dd>
 
-                          <dt>Source code</dt>
-                          <dd><a href="{{ .Params.Source }}">{{ .Params.Source }}</a></dd>
-                      {{ end }}
-                  </dl>
-              </header>
-              <main>
-                  {{ .Content }}
-                  {{ if .Params.Slides }}
-                      <div class="slides">
-                          <object data="{{ .Params.Slides | absURL }}" type="application/pdf">
-                              <p>Download the <a href="{{ .Params.Slides | absURL }}">slides</a>.
-                          </object>
-                      </div>
+                      <dt>Source code</dt>
+                      <dd><a href="{{ .Params.Source }}">{{ .Params.Source }}</a></dd>
                   {{ end }}
-              </main>
-              <footer>
-                  {{ partial "post-info" . }}
-              </footer>
-          </article>
-      </main>
-  {{ end }}
-
-  {{ define "footer" }}
-      <footer>
-          {{ partial "footer.html" . }}
-      </footer>
+              </dl>
+          </header>
+          <main>
+              {{ .Content }}
+              {{ if .Params.Slides }}
+                  <div class="slides">
+                      <object data="{{ .Params.Slides | absURL }}" type="application/pdf">
+                          <p>Download the <a href="{{ .Params.Slides | absURL }}">slides</a>.
+                      </object>
+                  </div>
+              {{ end }}
+          </main>
+          <footer>
+              {{ partial "post-info" . }}
+          </footer>
+      </article>
   {{ end }}
 #+end_src
 
@@ -427,36 +407,22 @@ This renders for the home page, section listings, taxonomies, and
 terms.
 
 #+begin_src html :tangle ../../.hugo-out/layouts/_default/list.html
-  {{ define "header" }}
-      <header>
-          {{ partial "header.html" . }}
-      </header>
-  {{ end }}
-
   {{ define "main" }}
-      <main>
-          <h1>{{ .Title }}</h1>
+      <h1>{{ .Title }}</h1>
 
-          {{ with .Content }}
-              {{ . }}
+      {{ with .Content }}
+          {{ . }}
+      {{ end }}
+
+      <h2>Recently updated</h2>
+
+      <ul class="article-summaries">
+          {{ range site.RegularPages.ByLastmod.Reverse }}
+              <li>
+                  {{ partial "article-summary" . }}
+              </li>
           {{ end }}
-
-          <h2>Recently updated</h2>
-
-          <ul class="article-summaries">
-              {{ range site.RegularPages.ByLastmod.Reverse }}
-                  <li>
-                      {{ partial "article-summary" . }}
-                  </li>
-              {{ end }}
-          </ul>
-      </main>
-  {{ end }}
-
-  {{ define "footer" }}
-      <footer>
-          {{ partial "footer.html" . }}
-      </footer>
+      </ul>
   {{ end }}
 #+end_src
 
@@ -465,34 +431,20 @@ terms.
 This is the taxonomy list page (e.g., ~/categories~).
 
 #+begin_src html :tangle ../../.hugo-out/layouts/_default/terms.html
-  {{ define "header" }}
-      <header>
-          {{ partial "header.html" . }}
-      </header>
-  {{ end }}
-
   {{ define "main" }}
-      <main>
-          <h1>{{ .Name }}</h1>
-          <ul>
-              {{ $plural := .Data.Plural }}
-              {{ range .Data.Terms.Alphabetical }}
-                  <li>
-                      <a href="/{{ $plural }}/{{ .Name }}">{{ .Name }}</a>
-                  </li>
-              {{ end }}
-          </ul>
-
-          {{ with .Content }}
-              {{ . }}
+      <h1>{{ .Name }}</h1>
+      <ul>
+          {{ $plural := .Data.Plural }}
+          {{ range .Data.Terms.Alphabetical }}
+              <li>
+                  <a href="/{{ $plural }}/{{ .Name }}">{{ .Name }}</a>
+              </li>
           {{ end }}
-      </main>
-  {{ end }}
+      </ul>
 
-  {{ define "footer" }}
-      <footer>
-          {{ partial "footer.html" . }}
-      </footer>
+      {{ with .Content }}
+          {{ . }}
+      {{ end }}
   {{ end }}
 #+end_src
 
@@ -501,33 +453,19 @@ This is the taxonomy list page (e.g., ~/categories~).
 This is the taxonomy term page (e.g., ~/categories/tech~).
 
 #+begin_src html :tangle ../../.hugo-out/layouts/_default/term.html
-  {{ define "header" }}
-      <header>
-          {{ partial "header.html" . }}
-      </header>
-  {{ end }}
-
   {{ define "main" }}
-      <main>
-          <h1>{{ .Name }}</h1>
-          <ul class="article-summaries">
-              {{ range .Pages.ByLastmod.Reverse }}
-                  <li>
-                      {{ partial "article-summary" . }}
-                  </li>
-              {{ end }}
-          </ul>
-
-          {{ with .Content }}
-              {{ . }}
+      <h1>{{ .Name }}</h1>
+      <ul class="article-summaries">
+          {{ range .Pages.ByLastmod.Reverse }}
+              <li>
+                  {{ partial "article-summary" . }}
+              </li>
           {{ end }}
-      </main>
-  {{ end }}
+      </ul>
 
-  {{ define "footer" }}
-      <footer>
-          {{ partial "footer.html" . }}
-      </footer>
+      {{ with .Content }}
+          {{ . }}
+      {{ end }}
   {{ end }}
 #+end_src
 
