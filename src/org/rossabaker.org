@@ -819,6 +819,45 @@ reasonably accurate.
   }
 #+end_src
 
+* Podcasts...
+:PROPERTIES:
+:EXPORT_HUGO_SECTION: podcasts
+:END:
+** CoRecursive Episode #017 :@tech:podcast:corecursive:scala:http4s:functional_programming:remote_work:
+:PROPERTIES:
+:EXPORT_FILE_NAME: corecursive-17
+:EXPORT_DATE: <2018-07-27 Fri>
+:EXPORT_HUGO_LASTMOD: <2022-08-29 Mon 00:10>
+:END:
+
+I was interviewed by Adam Gordon Bell on the [[https://corecursive.com/017-http4s-with-ross-baker/][CoRecursive podcast]].
+#+hugo:more
+
+#+begin_quote
+The promise of functional programming is code that is easier to reason
+about, test and maintain. Referential transparency means there is no
+extra context to worry about, we can just focus on inputs and
+outputs. Examples of functional programming in the small are
+plentiful. Fibonacci is easy to write as a function but what about fp
+in the large?
+
+Http4s is a web framework written in scala that takes a pure
+functional approach to building http services. Ross Baker is a
+contributor to http4s and he explains the benefits of this
+approach. We also touch on the benefits of working remotely, since he
+and I have both been doing it for some time.
+#+end_quote
+
+** The Scala Logs :@tech:podcast:http4s:haskell:hockey:scala_logs:
+:PROPERTIES:
+:EXPORT_FILE_NAME: scala-logs
+:EXPORT_DATE: <2020-02-08 Sat>
+:EXPORT_HUGO_LASTMOD: <2022-08-29 Mon 00:09>
+:END:
+
+It was my honor to join Zach McCoy on the [[https://open.spotify.com/episode/57RHzk5M7gJjLnV5nfehJo][first full episode of The
+Scala Logs]], where we talked http4s, Haskell, and hockey.
+
 * Local Variables :noexport:
 
 Local Variables:
