@@ -268,6 +268,9 @@ layouts for our ~chroma.css~ asset to work.
               <meta name="description" content="{{ .Summary }}">
           {{- end }}
 
+          <link rel="preconnect" href="https://fonts.googleapis.com">
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+          <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Fira+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 
           <!-- CSS -->
           {{ range $css_file := site.Params.css | default (slice "bmfw.css" "ox-hugo.css") }}
@@ -723,6 +726,16 @@ Our gimmick is to render this semantic HTML header as Emacs Lisp.
 #+end_src
 
 *** General styling
+
+#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
+  body {
+      font-family: "Fira Sans", serif;
+  }
+
+  code, kbd, pre, samp, var {
+      font-family: "Fira Code", monospace;
+  }
+#+end_src
 
 Give the code samples a little more room to breathe.
 
