@@ -126,7 +126,7 @@ choose, goes to the ~gen~ directory.
 CLOSED: [2022-08-24 Wed 15:04]
 :PROPERTIES:
 :EXPORT_FILE_NAME: website
-:EXPORT_HUGO_LASTMOD: <2022-08-28 Sun 23:36>
+:EXPORT_HUGO_LASTMOD: <2022-08-28 Sun 23:43>
 :EXPORT_DESCRIPTION: A colophon for rossabaker.com.  Describes the way we convert an Org-Mode file into a website with ox-hugo and Nix.
 :END:
 
@@ -344,11 +344,6 @@ Visually separate the three sections a bit.
   {{ define "footer" }}
       <footer>
           {{ partial "footer.html" . }}
-          {{ $commit := (partial "get_commit" .Page) }}
-
-          <a href="../">Go Up</a>
-          | <a href="{{ site.BaseURL }}">Home</a>
-          {{ partial "source_code" (dict "page" . "prefix" "|") }}
       </footer>
   {{ end }}
 #+end_src
@@ -388,18 +383,6 @@ terms.
   {{ define "footer" }}
       <footer>
           {{ partial "footer.html" . }}
-          {{ if (not .IsHome) }}
-              <a href="../">Go Up</a>
-              | <a href="{{ site.BaseURL }}">Home</a>
-              |
-          {{ end }}
-          {{ range .AlternativeOutputFormats }}
-              {{ $name_upper := .Name | upper }}
-              {{ if (or (eq $name_upper "RSS") (eq $name_upper "ATOM")) }}
-                  {{ printf `<a href="%s">%s</a>` .Permalink $name_upper | safeHTML }}
-              {{ end }}
-          {{ end }}
-          | {{ partial "source_code" (dict "page" .) }}
       </footer>
   {{ end }}
 #+end_src
@@ -436,16 +419,6 @@ This is the taxonomy list page (e.g., ~/categories~).
   {{ define "footer" }}
       <footer>
           {{ partial "footer.html" . }}
-          <a href="../">Go Up</a>
-          | <a href="{{ site.BaseURL }}">Home</a>
-          |
-          {{ range .AlternativeOutputFormats }}
-              {{ $name_upper := .Name | upper }}
-              {{ if (or (eq $name_upper "RSS") (eq $name_upper "ATOM")) }}
-                  {{ printf `<a href="%s">%s</a>` .Permalink $name_upper | safeHTML }}
-              {{ end }}
-          {{ end }}
-          | {{ partial "source_code" (dict "page" .) }}
       </footer>
   {{ end }}
 #+end_src
@@ -481,16 +454,6 @@ This is the taxonomy term page (e.g., ~/categories/tech~).
   {{ define "footer" }}
       <footer>
           {{ partial "footer.html" . }}
-          <a href="../">Go Up</a>
-          | <a href="{{ site.BaseURL }}">Home</a>
-          |
-          {{ range .AlternativeOutputFormats }}
-              {{ $name_upper := .Name | upper }}
-              {{ if (or (eq $name_upper "RSS") (eq $name_upper "ATOM")) }}
-                  {{ printf `<a href="%s">%s</a>` .Permalink $name_upper | safeHTML }}
-              {{ end }}
-          {{ end }}
-          | {{ partial "source_code" (dict "page" .) }}
       </footer>
   {{ end }}
 #+end_src
