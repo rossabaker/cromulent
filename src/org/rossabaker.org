@@ -187,7 +187,7 @@ pipeline.  ~chroma.css~ is [[*Syntax highlighting][generated below]].
 
 #+begin_src conf-toml :tangle ../../.hugo-out/config.toml
   [Params]
-    css = [ 'cromulent.css', 'chroma.css', 'bmfw.css', 'ox-hugo.css' ]
+    css = [ 'cromulent.css', 'chroma.css', 'ox-hugo.css' ]
     description = "A perfectly cromulent developer."
     username = 'rossabaker'
 
@@ -324,7 +324,6 @@ Visually separate the three sections a bit.
   body > main {
       border-width: 1px 0;
       border-style: solid;
-      margin: 1.5rem 0;
   }
 #+end_src
 ***** Single pages
@@ -663,8 +662,9 @@ Our gimmick is to render this semantic HTML header as Emacs Lisp.
 
 #+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
   body > header {
-      display: inline;
-      font-family: monospace;
+      display: block;
+      font-family: "Fira Mono", monospace;
+      font-size: 1.225em;
   }
   body > header::before {
       content: "(defvar ";
@@ -727,6 +727,47 @@ Our gimmick is to render this semantic HTML header as Emacs Lisp.
 
 *** General styling
 
+Establish some responsive boundaries.
+
+#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
+  body {
+      width: 100%;
+      margin: 0;
+      padding: 0;
+  }
+
+  body > * {
+      width: 100%;
+      margin: 1.5em auto;
+  }
+
+  @media (min-width: 576px) {
+      body > * {
+          max-width: 510px;
+      }
+  }
+
+  @media (min-width: 768px) {
+      body > * {
+          max-width: 700px;
+      }
+  }
+
+  @media (min-width: 992px) {
+      body > * {
+          max-width: 920px;
+      }
+  }
+
+  @media (min-width: 1200px) {
+      body > * {
+          max-width: 1130px;
+      }
+  }
+#+end_src
+
+I look at the Fira font all day anyway.  Why not here?
+
 #+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
   body {
       font-family: "Fira Sans", serif;
@@ -752,6 +793,7 @@ Put a scroll bar on code samples, but only where necessary.
 
 #+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
   pre {
+      max-width: 100%;
       overflow-x: auto;
   }
 #+end_src
