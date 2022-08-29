@@ -863,6 +863,8 @@ Scala Logs]], where we talked http4s, Haskell, and hockey.
 
 * Local Variables :noexport:
 
+We need to prepend ~"asc"~ to the defaults to share our PGP public key.
+
 Local Variables:
 org-hugo-external-file-extensions-allowed-for-copying: ("asc" "jpg" "jpeg" "tiff" "png" "svg" "gif" "mp4" "pdf" "odt" "doc" "ppt" "xls" "docx" "pptx" "xlsx")
 End:
