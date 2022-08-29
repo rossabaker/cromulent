@@ -126,7 +126,7 @@ choose, goes to the ~gen~ directory.
 CLOSED: [2022-08-24 Wed 15:04]
 :PROPERTIES:
 :EXPORT_FILE_NAME: website
-:EXPORT_HUGO_LASTMOD: <2022-08-28 Sun 23:07>
+:EXPORT_HUGO_LASTMOD: <2022-08-28 Sun 23:36>
 :EXPORT_DESCRIPTION: A colophon for rossabaker.com.  Describes the way we convert an Org-Mode file into a website with ox-hugo and Nix.
 :END:
 
@@ -330,21 +330,13 @@ Visually separate the three sections a bit.
           <article>
               <header>
                   <h1>{{ .Title }}</h1>
-                  {{ if (not .Date.IsZero) }}
-                      Published on
-                      <time datetime="{{ dateFormat "Jan 2, 2006" .Date }}">
-                          {{ dateFormat "Jan 2, 2006" .Date }}
-                      </time><br />
-                  {{ end }}
-                  {{ if (not .Lastmod.IsZero) }}
-                      Updated on
-                      <time datetime="{{ dateFormat "Jan 2, 2006" .Lastmod }}">
-                          {{ dateFormat "Jan 2, 2006" .Lastmod }}
-                      </time><br />
-                  {{ end }}
               </header>
-              <a id="top"></a>
-              {{ .Content }}
+              <main>
+                {{ .Content }}
+              </main>
+              <footer>
+                  {{ partial "post-info" . }}
+              </footer>
           </article>
       </main>
   {{ end }}
@@ -523,46 +515,7 @@ summary.
           {{ (.Description | markdownify) | default .Summary }}
       </main>
       <footer>
-          <div class="post-info">
-              <dl>
-                  <div class="type">
-                      <dt>Type</dt>
-                      <dd><a href="{{ .Type | relURL }}">{{ .Type | singularize | humanize }}</a></dd>
-                  </div>
-                  <div class="published">
-                      <dt>Published</dt>
-                      <dd>{{ dateFormat "2006-01-02" .Date }}</dd>
-                  </div>
-                  <div class="last-modified">
-                      <dt>Last updated</dt>
-                      <dd>{{ dateFormat "2006-01-02" .Lastmod }}</dd>
-                  </div>
-                  <div class="taxonomies">
-                      <dt>Taxonomies</dt>
-                      <dd>
-                          <dl>
-                              <dt>Categories</dt>
-                              <dd>
-                                  <ul>
-                                      {{ range .Params.categories }}
-                                          <li class="category"><a href="{{ (print "/categories/" .) | absURL }}">{{ . | humanize }}</a></li>
-                                      {{ end }}
-                                  </ul>
-                              </dd>
-
-                              <dt>Tags</dt>
-                              <dd>
-                                  <ul>
-                                      {{ range .Params.tags }}
-                                          <li class="tag"><a href="{{ (print "/tags/" .) | absURL }}">{{ . }}</a></li>
-                                      {{ end }}
-                                  </ul>
-                              </dd>
-                          </dl>
-                      </dl>
-                  </dd>
-              </dl>
-          </div>
+        {{ partial "post-info" . }}
       </footer>
   </article>
 #+end_src
@@ -577,7 +530,57 @@ summary.
   ul.article-summaries > li {
       border-bottom: thin solid #999;
   }
+#+end_src
 
+***** Post info
+
+~<dl>~ has long been my favorite idiosyncratic HTML tag.  Maybe I'm
+abusing it here, but I like the result.
+
+#+begin_src html :tangle ../../.hugo-out/layouts/partials/post-info.html
+  <div class="post-info">
+      <dl>
+          <div class="type">
+              <dt>Type</dt>
+              <dd><a href="{{ .Type | relURL }}">{{ .Type | singularize | humanize }}</a></dd>
+          </div>
+          <div class="published">
+              <dt>Published</dt>
+              <dd>{{ dateFormat "2006-01-02" .Date }}</dd>
+          </div>
+          <div class="last-modified">
+              <dt>Last updated</dt>
+              <dd>{{ dateFormat "2006-01-02" .Lastmod }}</dd>
+          </div>
+          <div class="taxonomies">
+              <dt>Taxonomies</dt>
+              <dd>
+                  <dl>
+                      <dt>Categories</dt>
+                      <dd>
+                          <ul>
+                              {{ range .Params.categories }}
+                                  <li class="category"><a href="{{ (print "/categories/" .) | absURL }}">{{ . | humanize }}</a></li>
+                              {{ end }}
+                          </ul>
+                      </dd>
+
+                      <dt>Tags</dt>
+                      <dd>
+                          <ul>
+                              {{ range .Params.tags }}
+                                  <li class="tag"><a href="{{ (print "/tags/" .) | absURL }}">{{ . }}</a></li>
+                              {{ end }}
+                          </ul>
+                      </dd>
+                  </dl>
+              </dd>
+          </div>
+      </dl>
+  </div>
+#+end_src
+
+#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
   .post-info {
       margin: 1em 0;
       font-size: 0.816em;
@@ -659,7 +662,6 @@ summary.
   .post-info a {
       text-decoration: none;
   }
-
 #+end_src
 
 ***** Header
