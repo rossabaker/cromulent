@@ -126,7 +126,7 @@ choose, goes to the ~gen~ directory.
 CLOSED: [2022-08-24 Wed 15:04]
 :PROPERTIES:
 :EXPORT_FILE_NAME: website
-:EXPORT_HUGO_LASTMOD: <2022-08-28 Sun 17:41>
+:EXPORT_HUGO_LASTMOD: <2022-08-28 Sun 23:07>
 :EXPORT_DESCRIPTION: A colophon for rossabaker.com.  Describes the way we convert an Org-Mode file into a website with ox-hugo and Nix.
 :END:
 
@@ -516,34 +516,53 @@ summary.
       <header>
           <h1><a href="{{ .Permalink }}">{{ .Title }}</a></h1>
           <ul>
-              {{ if (not .Date.IsZero) }}
-                  <li class="publish-date">
-                      <time title="Original date" datetime="{{ dateFormat "Jan 2, 2006" .Date }}">
-                          {{ dateFormat "Jan 2, 2006" .Date }}
-                      </time>
-                  </li>
-              {{ end }}
-              {{ if ne (dateFormat "Jan 2, 2006" .Date) (dateFormat "Jan 2, 2006" .Lastmod) }}
-                  <li class="last-modified-date">
-                      <time title="Last modified date" datetime="{{ dateFormat "Jan 2, 2006" .Lastmod }}">
-                          {{ dateFormat "Jan 2, 2006" .Lastmod }}
-                      </time>
-                  </li>
-              {{ end }}
+
           </ul>
       </header>
       <main>
           {{ (.Description | markdownify) | default .Summary }}
       </main>
       <footer>
-          <ul>
-              {{ range .Params.categories }}
-                  <li class="category"><a href="{{ (print "/categories/" .) | absURL }}">{{ . | humanize }}</a></li>
-              {{ end }}
-              {{ range .Params.tags }}
-                  <li class="tag"><a href="{{ (print "/tags/" .) | absURL }}">{{ . }}</a></li>
-              {{ end }}
-          </ul>
+          <div class="post-info">
+              <dl>
+                  <div class="type">
+                      <dt>Type</dt>
+                      <dd><a href="{{ .Type | relURL }}">{{ .Type | singularize | humanize }}</a></dd>
+                  </div>
+                  <div class="published">
+                      <dt>Published</dt>
+                      <dd>{{ dateFormat "2006-01-02" .Date }}</dd>
+                  </div>
+                  <div class="last-modified">
+                      <dt>Last updated</dt>
+                      <dd>{{ dateFormat "2006-01-02" .Lastmod }}</dd>
+                  </div>
+                  <div class="taxonomies">
+                      <dt>Taxonomies</dt>
+                      <dd>
+                          <dl>
+                              <dt>Categories</dt>
+                              <dd>
+                                  <ul>
+                                      {{ range .Params.categories }}
+                                          <li class="category"><a href="{{ (print "/categories/" .) | absURL }}">{{ . | humanize }}</a></li>
+                                      {{ end }}
+                                  </ul>
+                              </dd>
+
+                              <dt>Tags</dt>
+                              <dd>
+                                  <ul>
+                                      {{ range .Params.tags }}
+                                          <li class="tag"><a href="{{ (print "/tags/" .) | absURL }}">{{ . }}</a></li>
+                                      {{ end }}
+                                  </ul>
+                              </dd>
+                          </dl>
+                      </dl>
+                  </dd>
+              </dl>
+          </div>
       </footer>
   </article>
 #+end_src
@@ -555,51 +574,92 @@ summary.
       padding: 0;
   }
 
-  ul.article-summaries article {
-      border-top: 1px dotted #ccc;
-      padding: 1em;
+  ul.article-summaries > li {
+      border-bottom: thin solid #999;
   }
 
-  ul.article-summaries article header h1 {
-      font-size: 1.25em;
-      margin-bottom: 0.25em;
-  }
-
-  ul.article-summaries article main {
+  .post-info {
       margin: 1em 0;
+      font-size: 0.816em;
   }
 
-  ul.article-summaries article header ul, ul.article-summaries article footer ul {
-      font-size: 0.8em;
+  .post-info .type dt {
+      display: none;
   }
 
-  ul.article-summaries article header ul, ul.article-summaries article footer ul {
+  .post-info .type dd {
+      display: inline;
+      margin-left: 0;
+  }
+
+  .post-info .type, .post-info .published, .post-info .last-modified {
+      display: inline-flex;
+  }
+
+  .published dt, .post-info .last-modified dt {
+      display: inline;
+      font-weight: normal;
+      text-transform: lowercase;
+      color: #999;
+      margin-right: 1ch;
+  }
+
+  .post-info .published dt, .post-info .last-modified dt {
+      display: inline;
+      font-weight: normal;
+      text-transform: lowercase;
+      color: #999;
+      margin-right: 1ch;
+  }
+
+  .post-info .published dd, .post-info .last-modified dd {
+      display: inline;
+      margin-left: 0;
+      margin-right: 1ch;
+  }
+
+  .post-info .taxonomies > dt {
+      display: none;
+  }
+
+  .post-info .taxonomies dd dl dt {
+      display: none;
+  }
+
+  .post-info .taxonomies dd {
+      margin-left: 0;
+  }
+
+  .post-info .taxonomies dd dl dd {
+      display: inline;
+  }
+
+  .post-info .taxonomies dd dl dd ul {
       list-style: none;
       margin: 0;
       padding: 0;
-      margin: 0;
-  }
-
-  ul.article-summaries article header li, ul.article-summaries article footer li {
       display: inline;
-      margin-right: 0.5ch;
   }
 
-  ul.article-summaries li.category::before {
-      content: "📁 ";
+  .post-info .taxonomies dd dl dd li {
+      display: inline;
   }
 
-  ul.article-summaries li.tag::before {
-      content: "🏷️ ";
+  .post-info .taxonomies dd dl dd li.category::before {
+      content: '@';
+      color: #666;
   }
 
-  ul.article-summaries li.publish-date::before {
-      content: "📅";
+  .post-info .taxonomies dd dl dd li.tag::before {
+      content: '#';
+      margin-left: 1ch;
+      color: #666;
   }
 
-  ul.article-summaries li.last-modified-date::before {
-      content: "🔄";
+  .post-info a {
+      text-decoration: none;
   }
+
 #+end_src
 
 ***** Header
@@ -611,7 +671,6 @@ Our gimmick is to render this semantic HTML header as Emacs Lisp.
   <p>{{ .Site.Params.description }}</p>
   <nav>
       <ul>
-          {{ $baseURL := .Site.BaseURL }}
           {{ range $name, $_ := .Site.Taxonomies.categories }}
               <li><a href="{{ "/categories" | absURL }}/{{ $name }}">{{ $name }}</a></li>
           {{ end }}
