@@ -348,6 +348,79 @@ Visually separate the three sections a bit.
   {{ end }}
 #+end_src
 
+****** Talks
+
+The talks section has its own front matter.  We give it a different template.
+
+#+begin_src html :tangle ../../.hugo-out/layouts/talks/single.html
+  {{ define "header" }}
+      <header>
+          {{ partial "header.html" . }}
+      </header>
+  {{ end }}
+
+  {{ define "main" }}
+      <main>
+          <article>
+              <header>
+                  <h1>{{ .Title }}</h1>
+                  <dl>
+                      {{ if .Params.venue }}
+                          <dt>Venue</dt>
+                          <dd>{{ .Params.Venue | markdownify }}</dd>
+
+                          <dt>Source code</dt>
+                          <dd><a href="{{ .Params.Source }}">{{ .Params.Source }}</a></dd>
+                      {{ end }}
+                  </dl>
+              </header>
+              <main>
+                  {{ .Content }}
+                  {{ if .Params.Slides }}
+                      <div class="slides">
+                          <object data="{{ .Params.Slides | absURL }}" type="application/pdf">
+                              <p>Download the <a href="{{ .Params.Slides | absURL }}">slides</a>.
+                          </object>
+                      </div>
+                  {{ end }}
+              </main>
+              <footer>
+                  {{ partial "post-info" . }}
+              </footer>
+          </article>
+      </main>
+  {{ end }}
+
+  {{ define "footer" }}
+      <footer>
+          {{ partial "footer.html" . }}
+      </footer>
+  {{ end }}
+#+end_src
+
+This is approximately what Bootstrap does, and is optimized for a 4x3
+slide deck. We're going to need something more sophisticated
+eventually.
+
+#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
+  .slides {
+      position: relative;
+  }
+  .slides::before {
+      content: "";
+      display: block;
+      padding-top: 78%;
+  }
+  .slides object {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+  }
+#+end_src
+
 ***** List pages
 
 This renders for the home page, section listings, taxonomies, and
@@ -821,6 +894,22 @@ reasonably accurate.
       margin: 1.5em auto;
   }
 #+end_src
+
+* Talks
+:PROPERTIES:
+:EXPORT_HUGO_SECTION: talks
+:END:
+
+** IndyScala                                          :@tech:scala:indyscala:
+*** Akka IO and Netty                                            :akka:netty:
+:PROPERTIES:
+:EXPORT_FILE_NAME: akka-io-and-netty
+:EXPORT_DATE: <2013-11-04 Mon>
+:EXPORT_PUBLISH_DATE: <2022-08-29 Mon 13:20>
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER+: :venue "[IndyScala](http://indyscala.org/) at [E-gineering](https://e-gineering.com), November 2013"
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER+: :source https://github.com/indyscala/akka-io-demo
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER+: :slides /pdf/akka-io-and-netty.pdf
+:END:
 
 * Podcasts...
 :PROPERTIES:
