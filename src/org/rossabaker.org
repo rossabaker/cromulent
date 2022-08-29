@@ -919,7 +919,7 @@ reasonably accurate.
 :PROPERTIES:
 :EXPORT_FILE_NAME: corecursive-17
 :EXPORT_DATE: <2018-07-27 Fri>
-:EXPORT_HUGO_LASTMOD: <2022-08-29 Mon 00:10>
+:EXPORT_HUGO_PUBLISHDATE: <2022-08-29 Mon 00:10>
 :END:
 
 I was interviewed by Adam Gordon Bell on the [[https://corecursive.com/017-http4s-with-ross-baker/][CoRecursive podcast]].
@@ -944,7 +944,7 @@ and I have both been doing it for some time.
 :PROPERTIES:
 :EXPORT_FILE_NAME: scala-logs
 :EXPORT_DATE: <2020-02-08 Sat>
-:EXPORT_HUGO_LASTMOD: <2022-08-29 Mon 00:09>
+:EXPORT_HUGO_PUBLISHDATE: <2022-08-29 Mon 00:09>
 :END:
 
 It was my honor to join Zach McCoy on the [[https://open.spotify.com/episode/57RHzk5M7gJjLnV5nfehJo][first full episode of The
