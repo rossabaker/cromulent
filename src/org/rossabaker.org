@@ -764,6 +764,37 @@ For a more iterative experience with live reload in the browser, try:
   hugo serve --disableFastRender --config .hugo-out/config.toml
 #+end_src
 
+* Projects
+:PROPERTIES:
+:EXPORT_HUGO_SECTION: projects
+:END:
+
+** DONE Personal Weather Station             :@personal:weather:indianapolis:
+CLOSED: [2022-08-28 Sun 21:03]
+:PROPERTIES:
+:EXPORT_FILE_NAME: personal-weather-station
+:EXPORT_DESCRIPTION: Data from my personal weather station in Indianapolis, Indiana.
+:END:
+
+I run an [[https://ambientweather.net/][Ambient Weather]] WS-1400-IP weather station in the Castleton
+neighborhood of Indianapolis and share its [[https://ambientweather.net/devices/public/b78b5bb0e59646a78a623a940937335c][public dashboard]].  The
+anemometer is not raised high enough for accuracy, but the rest is
+reasonably accurate.
+
+#+begin_export html
+  <iframe class="weather-station" frameborder="0" src="https://ambientweather.net/devices/public/b78b5bb0e59646a78a623a940937335c?embed=true"></iframe>
+#+end_export
+
+#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css :exports none
+  .weather-station {
+      width: 500px;
+      height: 400px;
+      max-width: 100%;
+      display: block;
+      margin: 1.5em auto;
+  }
+#+end_src
+
 * Local Variables :noexport:
 
 Local Variables:
