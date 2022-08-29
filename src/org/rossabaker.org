@@ -140,7 +140,7 @@ A Hugo site can be configured with either TOML or YAML.  I spent my
 weirdness budget on a literate config, so let's stick to the default.
 
 #+begin_src conf-toml :tangle ../../.hugo-out/config.toml
-  baseURL = 'http://rossabaker.com'
+  baseURL = 'https://rossabaker.com'
   languageCode = 'en-us'
   title = 'Ross A. Baker'
 #+end_src
