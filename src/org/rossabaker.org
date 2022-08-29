@@ -126,7 +126,7 @@ choose, goes to the ~gen~ directory.
 CLOSED: [2022-08-24 Wed 15:04]
 :PROPERTIES:
 :EXPORT_FILE_NAME: website
-:EXPORT_HUGO_LASTMOD: <2022-08-28 Sun 23:43>
+:EXPORT_HUGO_LASTMOD: <2022-08-29 Mon 00:16>
 :EXPORT_DESCRIPTION: A colophon for rossabaker.com.  Describes the way we convert an Org-Mode file into a website with ox-hugo and Nix.
 :END:
 
@@ -470,12 +470,15 @@ summary.
   <article>
       <header>
           <h1><a href="{{ .Permalink }}">{{ .Title }}</a></h1>
-          <ul>
-
-          </ul>
       </header>
       <main>
-          {{ (.Description | markdownify) | default .Summary }}
+          {{ if .Description }}
+              {{ .Description | markdownify }}
+          {{ else if .Truncated }}
+              {{ .Summary }}
+          {{ else }}
+              {{ .Content }}
+          {{ end }}
       </main>
       <footer>
         {{ partial "post-info" . }}
