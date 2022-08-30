@@ -159,6 +159,8 @@ it into ~src/hugo/themes~.
   themesDir = 'src/hugo/themes'
 #+end_src
 
+Further design comes from the [[*CSS foundation][CSS foundation]].
+
 **** Mounts
 
 Because all this org stuff mucks with the [[https://gohugo.io/getting-started/directory-structure/#readout][normal directory structure]],
@@ -736,105 +738,6 @@ Our gimmick is to render this semantic HTML header as Emacs Lisp.
   </address>
 #+end_src
 
-*** General styling
-
-**** Fonts
-
-The [[https://en.wikipedia.org/wiki/Noto_fonts][Noto fonts]] may be a bit cliched, but they look nice.  Google Fonts spat out this code:
-
-#+begin_src html :tangle ../../.hugo-out/layouts/partials/head.html
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@400;700&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-#+end_src
-
-Use them everywhere.
-
-#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
-  html {
-      font-family: "Noto Sans", sans-serif;
-  }
-
-  h1, h2, h3, h4, h5, h6 {
-      font-family: "Noto Serif", serif;
-  }
-
-  code, kbd, pre, samp, var, header {
-      font-family: "Noto Sans Mono", monospace;
-  }
-#+end_src
-
-**** Responsive width
-
-Reset the body to take up the entire window.
-
-#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
-  body {
-      width: 100%;
-      margin: 0;
-      padding: 0;
-  }
-#+end_src
-
-~border-box~ means that the padding is included in the 100%.  Without
-it, the content is 100% of the window, but shifted by the left
-padding.
-
-#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
-  body > * {
-      box-sizing: border-box;
-      padding: 0 1.5em;
-      width: 100%;
-      margin: 1.5em auto;
-  }
-
-  @media (min-width: 576px) {
-      body > * {
-          max-width: 510px;
-      }
-  }
-
-  @media (min-width: 768px) {
-      body > * {
-          max-width: 700px;
-      }
-  }
-
-  @media (min-width: 992px) {
-      body > * {
-          max-width: 920px;
-      }
-  }
-
-  @media (min-width: 1200px) {
-      body > * {
-          max-width: 1130px;
-      }
-  }
-#+end_src
-
-**** Code rendering
-
-Give the code samples a little more room to breathe.
-
-#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
-  pre.chroma {
-      background: #f8f8f8;
-      border: 1px dotted #ccc;
-      border-radius: 1em;
-      padding: 1em;
-  }
-#+end_src
-
-Put a scroll bar on code samples, but only where necessary.
-
-#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
-  pre {
-      max-width: 100%;
-      overflow-x: auto;
-  }
-#+end_src
-
 *** Build
 
 The website is just another package in our flake.
@@ -892,6 +795,114 @@ For a more iterative experience with live reload in the browser, try:
 
 #+begin_src sh :tangle no
   hugo serve --disableFastRender --config .hugo-out/config.toml
+#+end_src
+
+** DONE CSS foundation                        :website:css:google_fonts:noto:
+CLOSED: [2022-08-30 Tue 14:26]
+:PROPERTIES:
+:EXPORT_FILE_NAME: css-foundation
+:END:
+
+We strive for [[https://en.wikipedia.org/wiki/Semantic_HTML][semantic HTML]].  The styles presented here provide a
+solid foundation, independent of the [[https://gohugo.io/hugo-modules/theme-components/][Hugo theme]], or even the choice to
+use Hugo at all.  These rules are presently deployed to rossabaker.com,
+but could conceivably be used in future projects.
+*** Fonts
+
+The [[https://en.wikipedia.org/wiki/Noto_fonts][Noto fonts]] look nice and have a full glyph set.  We serve them up
+with [[https://fonts.google.com/][Google Fonts]] with these links in our ~<head>~:
+
+#+begin_src html :tangle ../../.hugo-out/layouts/partials/head.html
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@400;700&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+#+end_src
+
+Use them everywhere.
+
+#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
+  html {
+      font-family: "Noto Sans", sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+      font-family: "Noto Serif", serif;
+  }
+
+  code, kbd, pre, samp, var, header {
+      font-family: "Noto Sans Mono", monospace;
+  }
+#+end_src
+
+*** Responsive width
+
+Reset the body to take up the entire window.
+
+#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
+  body {
+      width: 100%;
+      margin: 0;
+      padding: 0;
+  }
+#+end_src
+
+~border-box~ means that the padding is included in the 100%.  Without
+it, the content is 100% of the window, but shifted by the left
+padding.
+
+#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
+  body > * {
+      box-sizing: border-box;
+      padding: 0 1.5em;
+      width: 100%;
+      margin: 1.5em auto;
+  }
+
+  @media (min-width: 576px) {
+      body > * {
+          max-width: 510px;
+      }
+  }
+
+  @media (min-width: 768px) {
+      body > * {
+          max-width: 700px;
+      }
+  }
+
+  @media (min-width: 992px) {
+      body > * {
+          max-width: 920px;
+      }
+  }
+
+  @media (min-width: 1200px) {
+      body > * {
+          max-width: 1130px;
+      }
+  }
+#+end_src
+
+*** Code rendering
+
+Put a scroll bar on code samples, but only where necessary.
+
+#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
+  pre {
+      max-width: 100%;
+      overflow-x: auto;
+  }
+#+end_src
+
+Give the code samples a little more room to breathe.
+
+#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
+  pre {
+      background: #f8f8f8;
+      border: 1px dotted #ccc;
+      border-radius: 1em;
+      padding: 1em;
+  }
 #+end_src
 
 * Projects
