@@ -122,7 +122,7 @@ choose, goes to the ~gen~ directory.
   gen/            -diff -merge linguist-generated=true
 #+end_src
 
-** DONE Website                               :hugo:org_mode:ox_hugo:nix:
+** DONE Website                           :hugo:org_mode:ox_hugo:nix:website:
 CLOSED: [2022-08-24 Wed 15:04]
 :PROPERTIES:
 :EXPORT_FILE_NAME: website
