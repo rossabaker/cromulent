@@ -126,7 +126,7 @@ choose, goes to the ~gen~ directory.
 CLOSED: [2022-08-24 Wed 15:04]
 :PROPERTIES:
 :EXPORT_FILE_NAME: website
-:EXPORT_HUGO_LASTMOD: <2022-08-29 Mon 18:25>
+:EXPORT_HUGO_LASTMOD: <2022-08-29 Mon 21:08>
 :EXPORT_DESCRIPTION: A colophon for rossabaker.com.  Describes the way we convert an Org-Mode file into a website with ox-hugo and Nix.
 :END:
 
@@ -244,57 +244,7 @@ layouts for our ~chroma.css~ asset to work.
   <!DOCTYPE html>
   <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{{ site.Language.Lang }}" lang="{{ site.Language.Lang }}">
       <head>
-          <link href="https://gmpg.org/xfn/11" rel="profile">
-          <meta charset="utf-8">
-
-          <!-- Enable responsiveness on mobile devices-->
-          <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
-
-          <!-- No referrer: https://webbkoll.dataskydd.net/en/ -->
-          <meta name="referrer" content="no-referrer">
-
-          <!-- Below fixes the favicon.ico 404 error
-               https://stackoverflow.com/a/43791570/1219634
-          -->
-          <link rel="shortcut icon" href="#" />
-
-          {{- if .IsHome }}
-              <title>{{ site.Title }}</title>
-              {{ with site.Params.Description }}
-                  <meta name="description" content="{{ . }}">
-              {{ end }}
-          {{- else }}
-              <title>{{ .Title }} - {{ site.Title }}</title>
-              <meta name="description" content="{{ .Summary }}">
-          {{- end }}
-
-          <link rel="preconnect" href="https://fonts.googleapis.com">
-          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-          <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Fira+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-
-          <!-- CSS -->
-          {{ range $css_file := site.Params.css | default (slice "bmfw.css" "ox-hugo.css") }}
-              {{ $css_asset_path := printf "css/%s" $css_file }}
-              {{ $css := resources.Get $css_asset_path | minify | fingerprint }}
-              <link rel="stylesheet" href="{{ $css.RelPermalink }}">
-              <!-- Enable HTTP/2 Push -->
-              <link rel="preload" href="{{ $css.RelPermalink }}" as="style">
-          {{ end }}
-
-          <!-- JS -->
-          {{ range $js_file := site.Params.js }}
-              {{ $js_asset_path := printf "js/%s" $js_file }}
-              {{ $js := resources.Get $js_asset_path | minify | fingerprint }}
-              <script defer src="{{ $js.RelPermalink }}"></script>
-              <!-- Enable HTTP/2 Push -->
-              <link rel="preload" href="{{ $js.RelPermalink }}" as="script">
-          {{ end }}
-
-          <!-- RSS -->
-          <!-- https://gohugo.io/templates/rss/#reference-your-rss-feed-in-head -->
-          {{ range .AlternativeOutputFormats -}}
-              {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink (printf "%s for %s" (.Name | title) site.Title) | safeHTML }}
-          {{ end -}}
+          {{ partial "head" . }}
       </head>
 
       <body>
@@ -472,6 +422,68 @@ This is the taxonomy term page (e.g., ~/categories/tech~).
 #+end_src
 
 **** Partial templates
+
+***** Head
+
+UTF-8 has won.
+
+#+begin_src html :tangle ../../.hugo-out/layouts/partials/head.html
+  <meta charset="utf-8">
+#+end_src
+
+[[https://developer.mozilla.org/en-US/docs/Web/HTML/Viewport_meta_tag][Improve responsiveness]].
+
+#+begin_src html :tangle ../../.hugo-out/layouts/partials/head.html
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+#+end_src
+
+Set the title tag.  Always include the site title.
+
+#+begin_src html :tangle ../../.hugo-out/layouts/partials/head.html
+  {{- if .IsHome }}
+      <title>{{ site.Title }}</title>
+  {{- else }}
+      <title>{{ site.Title }}: {{ .Title }}</title>
+  {{- end }}
+#+end_src
+
+Set the description, either at the site or page level.
+
+#+begin_src html :tangle ../../.hugo-out/layouts/partials/head.html
+  {{- with site.Params.Description }}
+
+  {{- else }}
+      <title>{{ .Title }} - {{ site.Title }}</title>
+  {{- end }}
+#+end_src
+
+Load our own CSS and JavaScript through the Hugo asset pipeline.
+
+#+begin_src html :tangle ../../.hugo-out/layouts/partials/head.html
+  {{ range $css_file := site.Params.css | default (slice "bmfw.css" "ox-hugo.css") }}
+      {{ $css_asset_path := printf "css/%s" $css_file }}
+      {{ $css := resources.Get $css_asset_path | minify | fingerprint }}
+      <link rel="stylesheet" href="{{ $css.RelPermalink }}">
+      <!-- Enable HTTP/2 Push -->
+      <link rel="preload" href="{{ $css.RelPermalink }}" as="style">
+  {{ end }}
+
+  {{ range $js_file := site.Params.js }}
+      {{ $js_asset_path := printf "js/%s" $js_file }}
+      {{ $js := resources.Get $js_asset_path | minify | fingerprint }}
+      <script defer src="{{ $js.RelPermalink }}"></script>
+      <!-- Enable HTTP/2 Push -->
+      <link rel="preload" href="{{ $js.RelPermalink }}" as="script">
+  {{ end }}
+#+end_src
+
+Render our RSS feed.
+
+#+begin_src html :tangle ../../.hugo-out/layouts/partials/head.html
+  {{ range .AlternativeOutputFormats -}}
+      {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink (printf "%s for %s" (.Name | title) site.Title) | safeHTML }}
+  {{ end -}}
+#+end_src
 
 ***** Article summary
 
@@ -727,7 +739,29 @@ Our gimmick is to render this semantic HTML header as Emacs Lisp.
 
 *** General styling
 
-Establish some responsive boundaries.
+**** Fonts
+
+Load up Fira and Fira Code from Google Fonts.
+
+#+begin_src html :tangle ../../.hugo-out/layouts/partials/head.html
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Fira+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+#+end_src
+
+And use them.
+
+#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
+  body {
+      font-family: "Fira Sans", serif;
+  }
+
+  code, kbd, pre, samp, var {
+      font-family: "Fira Code", monospace;
+  }
+#+end_src
+
+**** Responsive width
 
 #+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
   body {
@@ -766,17 +800,7 @@ Establish some responsive boundaries.
   }
 #+end_src
 
-I look at the Fira font all day anyway.  Why not here?
-
-#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
-  body {
-      font-family: "Fira Sans", serif;
-  }
-
-  code, kbd, pre, samp, var {
-      font-family: "Fira Code", monospace;
-  }
-#+end_src
+**** Code rendering
 
 Give the code samples a little more room to breathe.
 
