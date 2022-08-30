@@ -766,14 +766,24 @@ Use them everywhere.
 
 **** Responsive width
 
+Reset the body to take up the entire window.
+
 #+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
   body {
       width: 100%;
       margin: 0;
       padding: 0;
   }
+#+end_src
 
+~border-box~ means that the padding is included in the 100%.  Without
+it, the content is 100% of the window, but shifted by the left
+padding.
+
+#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
   body > * {
+      box-sizing: border-box;
+      padding: 0 1.5em;
       width: 100%;
       margin: 1.5em auto;
   }
