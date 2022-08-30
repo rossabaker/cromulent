@@ -126,7 +126,7 @@ choose, goes to the ~gen~ directory.
 CLOSED: [2022-08-24 Wed 15:04]
 :PROPERTIES:
 :EXPORT_FILE_NAME: website
-:EXPORT_HUGO_LASTMOD: <2022-08-29 Mon 21:08>
+:EXPORT_HUGO_LASTMOD: <2022-08-30 Tue 14:37>
 :EXPORT_DESCRIPTION: A colophon for rossabaker.com.  Describes the way we convert an Org-Mode file into a website with ox-hugo and Nix.
 :END:
 
@@ -552,7 +552,7 @@ abusing it here, but I like the result.
                       <dt>Categories</dt>
                       <dd>
                           <ul>
-                              {{ range .Params.categories }}
+                              {{ range (sort .Params.categories) }}
                                   <li class="category"><a href="{{ (print "/categories/" .) | absURL }}">{{ . | humanize }}</a></li>
                               {{ end }}
                           </ul>
@@ -561,7 +561,7 @@ abusing it here, but I like the result.
                       <dt>Tags</dt>
                       <dd>
                           <ul>
-                              {{ range .Params.tags }}
+                              {{ range (sort .Params.tags) }}
                                   <li class="tag"><a href="{{ (print "/tags/" .) | absURL }}">{{ . }}</a></li>
                               {{ end }}
                           </ul>
