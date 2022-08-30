@@ -675,7 +675,6 @@ Our gimmick is to render this semantic HTML header as Emacs Lisp.
 #+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
   body > header {
       display: block;
-      font-family: "Fira Mono", monospace;
       font-size: 1.225em;
   }
   body > header::before {
@@ -741,23 +740,27 @@ Our gimmick is to render this semantic HTML header as Emacs Lisp.
 
 **** Fonts
 
-Load up Fira and Fira Code from Google Fonts.
+The [[https://en.wikipedia.org/wiki/Noto_fonts][Noto fonts]] may be a bit cliched, but they look nice.  Google Fonts spat out this code:
 
 #+begin_src html :tangle ../../.hugo-out/layouts/partials/head.html
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Fira+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@400;700&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 #+end_src
 
-And use them.
+Use them everywhere.
 
 #+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
-  body {
-      font-family: "Fira Sans", serif;
+  html {
+      font-family: "Noto Sans", sans-serif;
   }
 
-  code, kbd, pre, samp, var {
-      font-family: "Fira Code", monospace;
+  h1, h2, h3, h4, h5, h6 {
+      font-family: "Noto Serif", serif;
+  }
+
+  code, kbd, pre, samp, var, header {
+      font-family: "Noto Sans Mono", monospace;
   }
 #+end_src
 
