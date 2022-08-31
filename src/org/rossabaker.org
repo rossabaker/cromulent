@@ -615,7 +615,11 @@ abusing it here, but I like the result.
       <dl>
           <div class="type">
               <dt>Type</dt>
-              <dd><a href="{{ .Type | relURL }}">{{ .Type | singularize | humanize }}</a></dd>
+              {{ if ne .Type "page" }}
+                  <dd><a href="{{ .Type | relURL }}">{{ .Type | singularize | humanize }}</a></dd>
+              {{ else }}
+                  <dd>Page</dd>
+              {{ end }}
           </div>
           <div class="published">
               <dt>Published</dt>
@@ -789,7 +793,7 @@ Our gimmick is to render this semantic HTML header as Emacs Lisp.
       display: inline-flex;
   }
   body > header ul {
-      display: flex;
+      display: inline-flex;
       list-style: none;
       margin: 0;
       padding: 0 0 0 2ch;
