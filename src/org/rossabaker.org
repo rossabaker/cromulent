@@ -554,23 +554,27 @@ abusing it here, but I like the result.
               <dt>Taxonomies</dt>
               <dd>
                   <dl>
-                      <dt>Categories</dt>
-                      <dd>
-                          <ul>
-                              {{ range (sort .Params.categories) }}
-                                  <li class="category"><a href="{{ (print "/categories/" .) | absURL }}">{{ . | humanize }}</a></li>
-                              {{ end }}
-                          </ul>
-                      </dd>
+                      {{ if .Params.categories }}
+                          <dt>Categories</dt>
+                          <dd>
+                              <ul>
+                                  {{ range (sort .Params.categories) }}
+                                      <li class="category"><a href="{{ (print "/categories/" .) | absURL }}">{{ . | humanize }}</a></li>
+                                  {{ end }}
+                              </ul>
+                          </dd>
+                      {{ end }}
 
-                      <dt>Tags</dt>
-                      <dd>
-                          <ul>
-                              {{ range (sort .Params.tags) }}
-                                  <li class="tag"><a href="{{ (print "/tags/" .) | absURL }}">{{ . }}</a></li>
-                              {{ end }}
-                          </ul>
-                      </dd>
+                      {{ if .Params.tags }}
+                          <dt>Tags</dt>
+                          <dd>
+                              <ul>
+                                  {{ range (sort .Params.tags) }}
+                                      <li class="tag"><a href="{{ (print "/tags/" .) | absURL }}">{{ . }}</a></li>
+                                  {{ end }}
+                              </ul>
+                          </dd>
+                      {{ end }}
                   </dl>
               </dd>
           </div>
