@@ -201,7 +201,7 @@ choose, goes to the ~gen~ directory.
 CLOSED: [2022-08-24 Wed 15:04]
 :PROPERTIES:
 :EXPORT_FILE_NAME: website
-:EXPORT_HUGO_LASTMOD: <2022-08-30 Tue 14:37>
+:EXPORT_HUGO_LASTMOD: <2022-08-31 Wed 11:14>
 :EXPORT_DESCRIPTION: A colophon for rossabaker.com.  Describes the way we convert an Org-Mode file into a website with ox-hugo and Nix.
 :END:
 
@@ -467,11 +467,14 @@ This is the taxonomy list page (e.g., ~/categories~).
 #+begin_src html :tangle ../../.hugo-out/layouts/_default/terms.html
   {{ define "main" }}
       <h1>{{ .Name }}</h1>
-      <ul>
+      <ul class="terms {{.Name | urlize}}">
           {{ $plural := .Data.Plural }}
+          {{ $max := len (index .Data.Terms.ByCount 0).Pages }}
           {{ range .Data.Terms.Alphabetical }}
+              {{ $size := math.Floor (div (mul (len .Pages) 6) $max) }}
               <li>
-                  <a href="/{{ $plural }}/{{ .Name }}">{{ .Name }}</a>
+                  <a href="/{{ $plural }}/{{ .Name }}" class="{{ printf "terms-size-%.0f" $size }}">{{ .Name }}</a>
+                  <sub>{{ len .Pages }}</sub>
               </li>
           {{ end }}
       </ul>
@@ -480,6 +483,53 @@ This is the taxonomy list page (e.g., ~/categories~).
           {{ . }}
       {{ end }}
   {{ end }}
+#+end_src
+
+Generate an exponentially-sized tag cloud in Emacs Lisp.
+
+#+name: terms-sizes-css
+#+begin_src emacs-lisp
+  (mapconcat (lambda (x)
+               (let ((size (expt 2.0 (/ (- x 2) 4.0))))
+                 (format ".terms-size-%i { font-size: %1.3fem; }" x size)))
+             (number-sequence 0 6)
+             "\n")
+#+end_src
+
+Isn't this neat?!
+
+#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css :noweb yes
+  <<terms-sizes-css()>>
+
+  .terms {
+      list-style: none;
+      padding-left: 0;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      line-height: 2.25em;
+  }
+
+  .terms li {
+      display: inline;
+      margin: 0 0.5rem;
+  }
+
+  .terms li a::before {
+      color: #aaa;
+  }
+
+  .terms.tags li a::before {
+      content: "#";
+  }
+  .terms.categories li a::before {
+      content: "@";
+  }
+
+  .terms li {
+      color: #aaa;
+  }
 #+end_src
 
 ***** Taxonomy term
