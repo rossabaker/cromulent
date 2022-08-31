@@ -469,9 +469,9 @@ This is the taxonomy list page (e.g., ~/categories~).
       <h1>{{ .Name }}</h1>
       <ul class="terms {{.Name | urlize}}">
           {{ $plural := .Data.Plural }}
-          {{ $max := len (index .Data.Terms.ByCount 0).Pages }}
+          {{ $max := math.Log (len (index .Data.Terms.ByCount 0).Pages) }}
           {{ range .Data.Terms.Alphabetical }}
-              {{ $size := math.Floor (div (mul (len .Pages) 6) $max) }}
+              {{ $size := math.Floor (mul (div (math.Log (len .Pages)) $max) 6) }}
               <li>
                   <a href="/{{ $plural }}/{{ .Name }}" class="{{ printf "terms-size-%.0f" $size }}">{{ .Name }}</a>
                   <sub>{{ len .Pages }}</sub>
