@@ -947,6 +947,15 @@ reasonably accurate.
 :END:
 
 ** IndyScala                                          :@tech:scala:indyscala:
+*** Akka IO and Netty                                            :akka:netty:
+:PROPERTIES:
+:EXPORT_FILE_NAME: akka-io-and-netty
+:EXPORT_DATE: <2013-11-04 Mon>
+:EXPORT_PUBLISH_DATE: <2022-08-29 Mon 13:20>
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER+: :venue "[IndyScala](http://indyscala.org/) at [E-gineering](https://e-gineering.com), November 2013"
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER+: :source https://github.com/indyscala/akka-io-demo
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER+: :slides /pdf/akka-io-and-netty.pdf
+:END:
 *** Algebras in Scala                                               :algebra:
 :PROPERTIES:
 :EXPORT_FILE_NAME: algebras-in-scala
@@ -961,16 +970,6 @@ Scala developers like to talk about "algebras".  Or when they're
 feeling particularly precious, "algebrae."  Ross gives an overview,
 and promises any references to "F-algebra" are not a taunt about your
 ninth grade report card.
-
-*** Akka IO and Netty                                            :akka:netty:
-:PROPERTIES:
-:EXPORT_FILE_NAME: akka-io-and-netty
-:EXPORT_DATE: <2013-11-04 Mon>
-:EXPORT_PUBLISH_DATE: <2022-08-29 Mon 13:20>
-:EXPORT_HUGO_CUSTOM_FRONT_MATTER+: :venue "[IndyScala](http://indyscala.org/) at [E-gineering](https://e-gineering.com), November 2013"
-:EXPORT_HUGO_CUSTOM_FRONT_MATTER+: :source https://github.com/indyscala/akka-io-demo
-:EXPORT_HUGO_CUSTOM_FRONT_MATTER+: :slides /pdf/akka-io-and-netty.pdf
-:END:
 
 * Podcasts...
 :PROPERTIES:
