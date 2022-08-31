@@ -78,6 +78,81 @@ sub   rsa4096/0x89FB7DEA8BDEB545 2018-01-31 [E]
       Key fingerprint = 7578 8CFE 8A1B E74E D17D  30AB 89FB 7DEA 8BDE B545
 #+end_example
 
+* DONE About                                              :@personal:infobox:
+CLOSED: [2022-08-31 Wed 00:23]
+:PROPERTIES:
+:EXPORT_HUGO_SECTION: /
+:EXPORT_FILE_NAME: about
+:END:
+
+I don't expect to ever be notable enough for a Wikipedia article, but
+we all deserve an infobox.  Here's mine.
+
+#+hugo:more
+#+begin_infobox
+[[../hugo/static/img/profile.jpg]]
+
+- Name :: Ross A. Baker
+- Pronunciation :: /​ɹɔs eɪ beɪ.kɚ/
+- Pronouns :: [[https://pronoun.is/he][he/him]]
+- Generation :: [[https://en.wikipedia.org/wiki/Xennials][Xennial]]
+- Hometown :: [[https://en.wikipedia.org/wiki/Crystal_Lake,_Illinois][Crystal Lake]], [[https://en.wikipedia.org/wiki/Illinois][Illinois]], U.S.
+- Residence :: [[https://en.wikipedia.org/wiki/Indianapolis][Indianapolis]], [[https://en.wikipedia.org/wiki/Indiana][Indiana]], U.S.
+- Alma mater :: [[https://www.indiana.edu/][Indiana University]]
+- Occupation :: software engineer
+- Employer :: [[https://www.jackhenry.com/][Jack Henry]]
+- Organizations :: [[https://typelevel.org/][Typelevel]], [[https://www.northsidesoccer.com/][Northside Soccer]]
+- Style :: functional
+- Spouse :: bless her
+- Children :: 2
+- Dogs :: 2
+- Cats :: 1
+- Fish :: several
+- Amphibians :: a few
+- Personality :: BBQ
+- ~$EDITOR~ :: Emacs
+- HTML tag :: ~<dl>~
+- Number :: /e/
+- Sandwich :: Italian beef, dipped
+- MLB team :: Cubs
+- NFL team :: Bears
+- NHL team :: Blackhawks
+- NBA team :: Pacers
+- Interjections :: ope
+- Disposition :: curmudgeonly
+#+end_infobox
+
+#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css :exports none
+  .infobox {
+      width: fit-content;
+      margin: 0 auto;
+      border: 1px solid #666;
+      padding: 0.5em;
+
+  }
+
+  .infobox img {
+      display: block;
+      max-width: 45%;
+      margin: 0 auto;
+  }
+
+  .infobox dl {
+      display: inline-grid;
+      grid-template-columns: max-content, max-content;
+  }
+
+  .infobox dt {
+      font-weight: bolder;
+      grid-column: 1;
+  }
+
+  .infobox dd {
+      grid-column: 2;
+      margin-bottom: 0.5em;
+  }
+#+end_src
+
 * Configurations                                        :@tech:configuration:
 :PROPERTIES:
 :EXPORT_HUGO_SECTION: configs
@@ -742,7 +817,7 @@ Our gimmick is to render this semantic HTML header as Emacs Lisp.
 
 #+begin_src html :tangle ../../.hugo-out/layouts/partials/footer.html
   <address>
-      Ross A. Baker
+      <a href="{{ "/about" | absURL }}">Ross A. Baker</a>
       <a href="https://pronoun.is/he">(he/him)</a>
   </address>
 #+end_src
