@@ -1046,8 +1046,8 @@ reasonably accurate.
 :EXPORT_DATE: <2019-12-02 Mon>
 :EXPORT_PUBLISH_DATE: <2022-08-30 Tue 14:51>
 :EXPORT_HUGO_CUSTOM_FRONT_MATTER+: :venue "[IndyScala](http://indyscala.org/) at [E-gineering](https://e-gineering.com), December 2019"
-:EXPORT_HUGO_CUSTOM_FRONT_MATTER+: :source https://github.com/indyscala/
-:EXPORT_HUGO_CUSTOM_FRONT_MATTER+: :slides html/algebrae-in-scala.html
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER+: :source https://github.com/indyscala/algebras
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER+: :slides https://indyscala.org/algebras
 :END:
 
 Scala developers like to talk about "algebras".  Or when they're
