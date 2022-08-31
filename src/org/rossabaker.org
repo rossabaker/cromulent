@@ -891,6 +891,7 @@ We strive for [[https://en.wikipedia.org/wiki/Semantic_HTML][semantic HTML]].  T
 solid foundation, independent of the [[https://gohugo.io/hugo-modules/theme-components/][Hugo theme]], or even the choice to
 use Hugo at all.  These rules are presently deployed to rossabaker.com,
 but could conceivably be used in future projects.
+#+hugo:more
 *** Fonts
 
 The [[https://en.wikipedia.org/wiki/Noto_fonts][Noto fonts]] look nice and have a full glyph set.  We serve them up
