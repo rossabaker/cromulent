@@ -970,6 +970,15 @@ Scala developers like to talk about "algebras".  Or when they're
 feeling particularly precious, "algebrae."  Ross gives an overview,
 and promises any references to "F-algebra" are not a taunt about your
 ninth grade report card.
+*** Anorm                                                         :anorm:sql:
+:PROPERTIES:
+:EXPORT_FILE_NAME: anorm
+:EXPORT_DATE: <2012-08-13 Mon>
+:EXPORT_PUBLISH_DATE: <2022-08-30 Tue 21:56>
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER+: :venue "[IndyScala](http://indyscala.org/), August 2012"
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER+: :source https://github.com/indyscala-anorm/
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER+: :slides pdf/anorm.pdf
+:END:
 
 * Podcasts...
 :PROPERTIES:
