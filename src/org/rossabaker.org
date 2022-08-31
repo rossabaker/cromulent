@@ -1023,6 +1023,57 @@ and I have both been doing it for some time.
 It was my honor to join Zach McCoy on the [[https://open.spotify.com/episode/57RHzk5M7gJjLnV5nfehJo][first full episode of The
 Scala Logs]], where we talked http4s, Haskell, and hockey.
 
+* Books
+:PROPERTIES:
+:EXPORT_HUGO_SECTION: books
+:END:
+
+** Scalatra in Action                 :@tech:scala:scalatra:http:sbt:scalate:
+:PROPERTIES:
+:EXPORT_FILE_NAME: scalatra-in-action
+:EXPORT_DATE: <2016-05-23 Mon>
+:END:
+
+[[https://www.manning.com/books/scalatra-in-action][Scalatra in Action]] was written by [[https://constructiveproof.com/][Dave Hrycyszyn,]] Stefan Ollinger, and
+me and covers the [[https://scalatra.org/][Scalatra micro-framework]] in depth.  Scalatra is a
+port of Ruby's Sinatra to Scala.
+
+#+hugo:more
+
+#+attr_html: :alt Scalatra in Action book cover :class scalatra-in-action
+[[https://www.manning.com/books/scalatra-in-action][file:../hugo/static/img/scalatra-in-action.jpg]]
+
+From the publisher:
+
+#+begin_quote
+_Scalatra in Action_ covers the Scalatra framework in its entirety,
+starting with concepts such as request routing, input handling,
+actions, and HTTP responses. For readers who don't already know Scala,
+the book introduces the Scala language and sbt, the Simple Build
+Tool. You'll learn how to use Scalatra's powerful templating engine,
+Scalate. It also covers advanced topics such as data access, handling
+heavy load, asynchronicity, securing your application, designing
+RESTful APIs, and real-time web programming.
+#+end_quote
+
+#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css :exports none
+  figure.scalatra-in-action {
+      margin: 0 auto;
+      max-width: 360px;
+      max-height: 452px
+  }
+
+  .scalatra-in-action {
+      display: block;
+      width: auto;
+      height: auto;
+      margin: 0 auto;
+  }
+#+end_src
+
+
+
+
 * Local Variables :noexport:
 
 We need to prepend ~"asc"~ to the defaults to share our PGP public key.
