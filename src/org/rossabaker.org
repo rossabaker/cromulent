@@ -1032,6 +1032,7 @@ Scala Logs]], where we talked http4s, Haskell, and hockey.
 :PROPERTIES:
 :EXPORT_FILE_NAME: scalatra-in-action
 :EXPORT_DATE: <2016-05-23 Mon>
+:EXPORT_HUGO_PUBLISHDATE: <2022-08-30 Tue 22:44>
 :END:
 
 [[https://www.manning.com/books/scalatra-in-action][Scalatra in Action]] was written by [[https://constructiveproof.com/][Dave Hrycyszyn,]] Stefan Ollinger, and
