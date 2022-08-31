@@ -425,7 +425,7 @@ eventually.
       display: block;
       padding-top: 78%;
   }
-  .slides object,iframe {
+  .slides object, .slides iframe {
       position: absolute;
       top: 0;
       bottom: 0;
