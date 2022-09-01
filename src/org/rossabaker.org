@@ -197,19 +197,28 @@ choose, goes to the ~gen~ directory.
   gen/            -diff -merge linguist-generated=true
 #+end_src
 
-** DONE Website                           :hugo:org_mode:ox_hugo:nix:website:
+** DONE Website                           :website:
 CLOSED: [2022-08-24 Wed 15:04]
 :PROPERTIES:
-:EXPORT_FILE_NAME: website
-:EXPORT_HUGO_LASTMOD: <2022-08-31 Wed 11:14>
+:EXPORT_HUGO_SECTION_FRAG: website
 :EXPORT_DESCRIPTION: A colophon for rossabaker.com.  Describes the way we convert an Org-Mode file into a website with ox-hugo and Nix.
+:END:
+
+*** Website index
+:PROPERTIES:
+:EXPORT_FILE_NAME: _index
+:EXPORT_TITLE: How rossabaker.com works
 :END:
 
 [[https://rossabaker.com/][rossabaker.com]] is sourced from an Org file.  We [[https://orgmode.org/manual/Extracting-Source-Code.html][tangle]] the
 configuration, export the content to Markdown with with [[https://ox-hugo.scripter.co][ox-hugo]], and
 convert the Markdown to HTML with [[https://gohugo.io/][Hugo]].
 
-*** Site configuration
+*** DONE Site configuration                       :hugo:org_mode:ox_hugo:nix:
+CLOSED: [2022-09-01 Thu 16:48]
+:PROPERTIES:
+:EXPORT_TITLE: hugo
+:END:
 
 A Hugo site can be configured with either TOML or YAML.  I spent my
 weirdness budget on a literate config, so let's stick to the default.
@@ -308,9 +317,17 @@ Generate the CSS!
 
 #+call: generate-chroma-css()
 
-*** Layouts
+*** DONE Templates                                            :hugo:html:css:
+CLOSED: [2022-09-01 Thu 16:53]
+:PROPERTIES:
+:EXPORT_FILE_NAME: templates
+:END:
 
-**** Templates
+I've eschewed the [[https://themes.gohugo.io/][many community themes]] to lay everything out from
+scratch.  I took over a decade off front ends and wanted to see what
+I've missed.  If you have no such need, don't follow my footsteps.
+
+**** Full templates
 
 ***** Base layout
 
@@ -454,7 +471,7 @@ terms.
       <h2>Recently updated</h2>
 
       <ul class="article-summaries">
-          {{ range site.RegularPages.ByLastmod.Reverse }}
+          {{ range cond .IsHome site.RegularPages.ByLastmod.Reverse .Pages.ByLastmod.Reverse }}
               <li>
                   {{ partial "article-summary" . }}
               </li>
@@ -879,7 +896,10 @@ Our gimmick is to render this semantic HTML header as Emacs Lisp.
   </address>
 #+end_src
 
-*** Build
+*** Build                                            :hugo:ox_hugo:nix:babel:
+:PROPERTIES:
+:EXPORT_FILE_NAME: build
+:END:
 
 The website is just another package in our flake.
 
@@ -938,10 +958,10 @@ For a more iterative experience with live reload in the browser, try:
   hugo serve --disableFastRender --config .hugo-out/config.toml
 #+end_src
 
-** DONE CSS foundation                        :website:css:google_fonts:noto:
+*** DONE CSS foundation                               :css:google_fonts:noto:
 CLOSED: [2022-08-30 Tue 14:26]
 :PROPERTIES:
-:EXPORT_FILE_NAME: css-foundation
+:EXPORT_FILE_NAME: style
 :EXPORT_HUGO_LASTMOD: <2022-09-01 Thu 10:54>
 :END:
 
@@ -950,7 +970,7 @@ solid foundation, independent of the [[https://gohugo.io/hugo-modules/theme-comp
 use Hugo at all.  These rules are presently deployed to rossabaker.com,
 but could conceivably be used in future projects.
 #+hugo:more
-*** Fonts
+**** Fonts
 
 The [[https://en.wikipedia.org/wiki/Noto_fonts][Noto fonts]] look nice and have a full glyph set.
 
@@ -972,7 +992,7 @@ Noto variants from Google Fonts, and ran them through [[https://transfonter.org/
   }
 #+end_src
 
-*** Responsive width
+**** Responsive width
 
 Reset the body to take up the entire window.
 
