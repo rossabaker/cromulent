@@ -942,6 +942,7 @@ For a more iterative experience with live reload in the browser, try:
 CLOSED: [2022-08-30 Tue 14:26]
 :PROPERTIES:
 :EXPORT_FILE_NAME: css-foundation
+:EXPORT_HUGO_LASTMOD: <2022-09-01 Thu 10:54>
 :END:
 
 We strive for [[https://en.wikipedia.org/wiki/Semantic_HTML][semantic HTML]].  The styles presented here provide a
