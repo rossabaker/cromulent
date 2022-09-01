@@ -78,7 +78,7 @@ sub   rsa4096/0x89FB7DEA8BDEB545 2018-01-31 [E]
       Key fingerprint = 7578 8CFE 8A1B E74E D17D  30AB 89FB 7DEA 8BDE B545
 #+end_example
 
-* DONE About                                              :@personal:infobox:
+** DONE About                                             :@personal:infobox:
 CLOSED: [2022-08-31 Wed 00:23]
 :PROPERTIES:
 :EXPORT_HUGO_SECTION: /
