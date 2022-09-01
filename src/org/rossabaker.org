@@ -253,6 +253,9 @@ we'll use [[https://gohugo.io/hugo-modules/configuration/#module-config-mounts][
     source = '.hugo-out/assets'
     target = 'assets'
   [[module.mounts]]
+    source = 'src/hugo/assets'
+    target = 'assets'
+  [[module.mounts]]
     source = 'src/hugo/static'
     target = 'static'
 #+end_src
@@ -264,7 +267,7 @@ pipeline.  ~chroma.css~ is [[*Syntax highlighting][generated below]].
 
 #+begin_src conf-toml :tangle ../../.hugo-out/config.toml
   [Params]
-    css = [ 'cromulent.css', 'chroma.css', 'ox-hugo.css' ]
+    css = [ 'cromulent.css', 'chroma.css', 'noto-fonts.css', 'ox-hugo.css' ]
     description = "A perfectly cromulent developer."
     username = 'rossabaker'
 
@@ -948,12 +951,11 @@ but could conceivably be used in future projects.
 #+hugo:more
 *** Fonts
 
-The [[https://en.wikipedia.org/wiki/Noto_fonts][Noto fonts]] look nice and have a full glyph set.  +We serve them up
-with [[https://fonts.google.com/][Google Fonts]] with these links in our ~<head>~+.  Google Fonts
-[[https://cookie-script.com/blog/google-fonts-and-gdpr][violates the GDPR]].  I'm American, and doing this for fun, and I don't
-want to learn about any of that.  We'll have to self host.
+The [[https://en.wikipedia.org/wiki/Noto_fonts][Noto fonts]] look nice and have a full glyph set.
 
-Use them everywhere.
++We serve them up with [[https://fonts.google.com/][Google Fonts]] with these links in our ~<head>~+.
+Google Fonts [[https://cookie-script.com/blog/google-fonts-and-gdpr][violates the GDPR]], so we self host.  I downloaded all the
+Noto variants from Google Fonts, and ran them through [[https://transfonter.org/][Transfonter]].
 
 #+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
   html {
