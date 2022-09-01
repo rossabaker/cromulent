@@ -948,14 +948,10 @@ but could conceivably be used in future projects.
 #+hugo:more
 *** Fonts
 
-The [[https://en.wikipedia.org/wiki/Noto_fonts][Noto fonts]] look nice and have a full glyph set.  We serve them up
-with [[https://fonts.google.com/][Google Fonts]] with these links in our ~<head>~:
-
-#+begin_src html :tangle ../../.hugo-out/layouts/partials/head.html
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@400;700&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-#+end_src
+The [[https://en.wikipedia.org/wiki/Noto_fonts][Noto fonts]] look nice and have a full glyph set.  +We serve them up
+with [[https://fonts.google.com/][Google Fonts]] with these links in our ~<head>~+.  Google Fonts
+[[https://cookie-script.com/blog/google-fonts-and-gdpr][violates the GDPR]].  I'm American, and doing this for fun, and I don't
+want to learn about any of that.  We'll have to self host.
 
 Use them everywhere.
 
