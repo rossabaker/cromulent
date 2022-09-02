@@ -326,7 +326,7 @@ CLOSED: [2022-09-01 Thu 16:53]
 I've eschewed the [[https://themes.gohugo.io/][many community themes]] to lay everything out from
 scratch.  I took over a decade off front ends and wanted to see what
 I've missed.  If you have no such need, don't follow my footsteps.
-
+#+hugo:more
 **** Full templates
 
 ***** Base layout
@@ -903,7 +903,7 @@ CLOSED: [2022-09-01 Thu 16:54]
 :END:
 
 The website is just another package in our flake.
-
+#+hugo:more
 #+begin_src nix :tangle ../../gen/website/default.nix
   { src, emacsNativeComp, hugo, stdenv }:
 
