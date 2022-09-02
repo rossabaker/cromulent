@@ -217,12 +217,12 @@ convert the Markdown to HTML with [[https://gohugo.io/][Hugo]].
 *** DONE Site configuration                       :hugo:org_mode:ox_hugo:nix:
 CLOSED: [2022-09-01 Thu 16:48]
 :PROPERTIES:
-:EXPORT_TITLE: hugo
+:EXPORT_FILE_NAME: hugo
 :END:
 
 A Hugo site can be configured with either TOML or YAML.  I spent my
 weirdness budget on a literate config, so let's stick to the default.
-
+#+hugo:more
 #+begin_src conf-toml :tangle ../../.hugo-out/config.toml
   baseURL = 'https://rossabaker.com'
   languageCode = 'en-us'
@@ -307,42 +307,60 @@ The classless style is classless.
     noClasses = false
 #+end_src
 
-Generate the CSS!
+Generate the ~chroma.css~ file.
 
 #+name: chroma-css
 #+begin_src sh :results verbatim
   hugo gen chromastyles --style=github
 #+end_src
 
-#+begin_src css :tangle ../../.hugo-out/assets/css/chroma.css :noweb yes
+#+begin_src css :tangle ../../.hugo-out/assets/css/chroma.css :noweb yes :exports none
   <<chroma-css()>>
 #+end_src
 
-*** DONE Templates                                            :hugo:html:css:
+*** DONE Templates                                            :hugo:html:
 CLOSED: [2022-09-01 Thu 16:53]
 :PROPERTIES:
-:EXPORT_FILE_NAME: templates
+:EXPORT_HUGO_SECTION_FRAG: templates
+:END:
+
+**** DONE Index
+CLOSED: [2022-09-02 Fri 11:28]
+:PROPERTIES:
+:EXPORT_FILE_NAME: _index
+:EXPORT_TITLE: Templates
 :END:
 
 I've eschewed the [[https://themes.gohugo.io/][many community themes]] to lay everything out from
 scratch.  I took over a decade off front ends and wanted to see what
 I've missed.  If you have no such need, don't follow my footsteps.
+There is a lot to unpack here.
+
+**** DONE Base template
+CLOSED: [2022-09-02 Fri 09:17]
+:PROPERTIES:
+:EXPORT_FILE_NAME: base-template
+:END:
+
+This [[https://gohugo.io/templates/base/][base template]] defines the outermost HTML for single pages and
+lists alike.  Nothing here is extraordinary.  It is a simple
+foundation for semantic HTML.  It specifies four blocks:
+- [[*Head template][~head~]]
+- [[*Header template][~header~]]
+- ~main~
+- [[*Footer template][~footer~]]
 #+hugo:more
-**** Full templates
-
-***** Base layout
-
-This defines the outermost HTML.  Every other template fills in the
-header, main, and footer.
-
-This isn't customized from hugo-mwe yet, but we need to move it into
-layouts for our ~chroma.css~ asset to work.
+All but ~main~ provide a default value.  There is no notion of
+"abstract" in a hugo template, so we can't enforce that every other
+template provide a ~main~, but this is the expectation.
 
 #+begin_src html :tangle ../../.hugo-out/layouts/_default/baseof.html
   <!DOCTYPE html>
   <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{{ site.Language.Lang }}" lang="{{ site.Language.Lang }}">
       <head>
-          {{ partial "head" . }}
+          {{ block "head" . }}
+              {{ partial "head" . }}
+          {{ end }}
       </head>
 
       <body>
@@ -374,7 +392,18 @@ Visually separate the three sections a bit.
       border-style: solid;
   }
 #+end_src
-***** Single pages
+
+**** DONE Single-page template
+CLOSED: [2022-09-02 Fri 12:53]
+:PROPERTIES:
+:EXPORT_FILE_NAME: single
+:END:
+
+Most pages on the site are "single pages".  These are generally the
+subtrees in the [[https://github.com/rossabaker/cromulent/blob/main/src/org/rossabaker.org][source]] with ~EXPORT_FILE_NAME~ not equal to ~_index~.
+Think of them as the articles.  Indeed, we mark them up in an
+~<article>~ tag.
+#+hugo:more
 
 #+begin_src html :tangle ../../.hugo-out/layouts/_default/single.html
   {{ define "main" }}
@@ -386,56 +415,78 @@ Visually separate the three sections a bit.
               {{ .Content }}
           </main>
           <footer>
-              {{ partial "post-info" . }}
-          </footer>
-      </article>
-    {{ end }}
-#+end_src
-
-****** Talks
-
-The talks section has its own front matter.  We give it a different template.
-
-#+begin_src html :tangle ../../.hugo-out/layouts/talks/single.html
-  {{ define "main" }}
-            <article>
-          <header>
-              <h1>{{ .Title }}</h1>
-              <dl>
-                  {{ if .Params.venue }}
-                      <dt>Venue</dt>
-                      <dd>{{ .Params.Venue | markdownify }}</dd>
-
-                      <dt>Source code</dt>
-                      <dd><a href="{{ .Params.Source }}">{{ .Params.Source }}</a></dd>
-                  {{ end }}
-              </dl>
-          </header>
-          <main>
-              {{ .Content }}
-              {{ if .Params.Slides }}
-                  <div class="slides">
-                      {{ if strings.HasSuffix .Params.Slides ".pdf" }}
-                          <object data="{{ .Params.Slides | absURL }}" type="application/pdf">
-                          </object>
-                      {{ else }}
-                          <iframe src="{{ .Params.Slides | absURL }}">
-                          </iframe>
-                      {{ end }}
-                  </div>
-                  <p>Download the <a href="{{ .Params.Slides | absURL }}">slides</a>.
-              {{ end }}
-          </main>
-          <footer>
-              {{ partial "post-info" . }}
+              {{ partial "article-info" . }}
           </footer>
       </article>
   {{ end }}
 #+end_src
 
-This is approximately what Bootstrap does, and is optimized for a 4x3
-slide deck. We're going to need something more sophisticated
-eventually.
+Futher customization is possible by [[https://gohugo.io/content-management/types/][type]].  Certain types get their own
+custom [[https://gohugo.io/content-management/front-matter/][front matter]], which we can render with a consistent look and feel.
+
+I would like to define ~article-header~ and ~article-main~ blocks in
+this template so less gets repeated in the section overrides.  I'm
+still missing something.
+
+**** DONE Talks template                                                :css:
+CLOSED: [2022-09-02 Fri 12:48]
+:PROPERTIES:
+:EXPORT_FILE_NAME: talks
+:END:
+
+Talks get their own single-page template based on custom front matter.
+#+hugo:more
+
+- ~.Venue~ :: Where the talk was delivered.  Supports markdown.  Protip:
+  put it in quotes if it begins with a link.
+- ~.Source~ :: The source repository associated with the talk.
+- ~.Slides~ :: If it's a =*.pdf=, it's rendered as an ~<object>~.
+  Otherwise, put it in an ~<iframe>~.  Make sure it links to content
+  served over https, or it won't load.
+
+Metadata appears in the article header.
+
+#+begin_src html :tangle ../../.hugo-out/layouts/talks/single.html
+  Ayo wtf
+
+  {{ define "article-header" }}
+      <h1>{{ .Title }}</h1>
+      <dl>
+          {{ if .Params.venue }}
+              <dt>Venue</dt>
+              <dd>{{ .Params.Venue | markdownify }}</dd>
+
+              <dt>Source code</dt>
+              <dd><a href="{{ .Params.Source }}">{{ .Params.Source }}</a></dd>
+          {{ end }}
+      </dl>
+  {{ end }}
+#+end_src
+
+The content should be the abstract of the talk.  Slides are rendered
+inline below.
+
+#+begin_src html :tangle ../../.hugo-out/layouts/talks/single.html
+  {{ define "article-main" }}
+      {{ .Content }}
+      {{ if .Params.Slides }}
+          <div class="slides">
+              {{ if strings.HasSuffix .Params.Slides ".pdf" }}
+                  <object data="{{ .Params.Slides | absURL }}" type="application/pdf">
+                  </object>
+              {{ else }}
+                  <iframe src="{{ .Params.Slides | absURL }}">
+                  </iframe>
+              {{ end }}
+          </div>
+          <p>Download the <a href="{{ .Params.Slides | absURL }}">slides</a>.
+      {{ end }}
+  {{ end }}
+#+end_src
+
+This is approximately how Bootstrap styles an embed, and is optimized
+for a 4x3 slide deck.  We're going to need something more
+sophisticated eventually.
 
 #+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
   .slides {
@@ -456,11 +507,16 @@ eventually.
   }
 #+end_src
 
-***** List pages
+**** DONE List template
+CLOSED: [2022-09-02 Fri 12:55]
+:PROPERTIES:
+:EXPORT_FILE_NAME: list
+:END:
 
-This renders for the home page, section listings, taxonomies, and
-terms.
-
+The list template renders for the home page, section listings,
+taxonomies, and terms.  By default, we render our article summaries
+in reverse order of modification.
+#+hugo:more
 #+begin_src html :tangle ../../.hugo-out/layouts/_default/list.html
   {{ define "main" }}
       <h1>{{ .Title }}</h1>
@@ -481,9 +537,21 @@ terms.
   {{ end }}
 #+end_src
 
-***** Taxonomy terms list
+**** DONE Taxonomy tag cloud              :taxonomy:tag_cloud:css:emacs_lisp:
+CLOSED: [2022-09-02 Fri 13:07]
+:PROPERTIES:
+:EXPORT_FILE_NAME: terms
+:END:
 
-This is the taxonomy list page (e.g., ~/categories~).
+This is the taxonomy list page, which is rendered as a tag cloud.  We
+use it for categories and tags.  Terms are rendered in a font
+proportional to the logarithm of its page count.
+#+hugo:more
+
+The least-used term is assigned an importance between =0=.  The most
+used term is assigned an importance of =6=.  Everything else falls in
+between.  We choose a logarithm because we expect the distribution to
+roughly follow a power law.
 
 #+begin_src html :tangle ../../.hugo-out/layouts/_default/terms.html
   {{ define "main" }}
@@ -506,7 +574,7 @@ This is the taxonomy list page (e.g., ~/categories~).
   {{ end }}
 #+end_src
 
-Generate an exponentially-sized tag cloud in Emacs Lisp.
+Creating font sizes for the CSS is boring.  Let's spit them out in Emacs Lisp!
 
 #+name: terms-sizes-css
 #+begin_src emacs-lisp
@@ -517,11 +585,16 @@ Generate an exponentially-sized tag cloud in Emacs Lisp.
              "\n")
 #+end_src
 
-Isn't this neat?!
+Look at all the CSS we didn't have to write:
 
 #+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css :noweb yes
   <<terms-sizes-css()>>
+#+end_src
 
+We still need to handwrite a bit.  This centers the ~.terms~ and
+reserves enough line height for the largest:
+
+#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
   .terms {
       list-style: none;
       padding-left: 0;
@@ -531,32 +604,46 @@ Isn't this neat?!
       justify-content: center;
       line-height: 2.25em;
   }
+#+end_src
 
+The elements are a regular inline list:
+
+#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
   .terms li {
       display: inline;
       margin: 0 0.5rem;
   }
+#+end_src
 
-  .terms li a::before {
-      color: #aaa;
-  }
+Our site convention is that tags receive a ~#~ prefix and categories
+get a ~@~.  Give them a tasteful, muted style:
 
-  .terms.tags li a::before {
+#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
+  .terms.tags li::before {
       content: "#";
   }
-  .terms.categories li a::before {
+  .terms.categories li::before {
       content: "@";
   }
+#+end_src
 
+Mute the color and count, because it's all about the terms:
+
+#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
   .terms li {
       color: #aaa;
   }
 #+end_src
 
-***** Taxonomy term
+**** DONE Taxonomy term template
+CLOSED: [2022-09-02 Fri 13:10]
+:PROPERTIES:
+:EXPORT_FILE_NAME: term
+:END:
 
-This is the taxonomy term page (e.g., ~/categories/tech~).
-
+Taxonomy terms (e.g., ~/categories/tech~) are rendered in a simple
+template that lists the article summaries in reverse order of modification.
+#+hugo:more
 #+begin_src html :tangle ../../.hugo-out/layouts/_default/term.html
   {{ define "main" }}
       <h1>{{ .Name }}</h1>
@@ -574,11 +661,16 @@ This is the taxonomy term page (e.g., ~/categories/tech~).
   {{ end }}
 #+end_src
 
-**** Partial templates
+**** DONE Head template
+CLOSED: [2022-09-02 Fri 10:29]
+:PROPERTIES:
+:EXPORT_FILE_NAME: head
+:END:
 
-***** Head
-
-UTF-8 has won.
+This template defines our default ~<head>~ element, and is not often
+customized.  Most of it originated in [[https://gitlab.com/hugo-mwe/hugo-mwe][hugo-mwe]].
+#+hugo:more
+UTF-8 ought to be enough characters for anyone.
 
 #+begin_src html :tangle ../../.hugo-out/layouts/partials/head.html
   <meta charset="utf-8">
@@ -603,14 +695,13 @@ Set the title tag.  Always include the site title.
 Set the description, either at the site or page level.
 
 #+begin_src html :tangle ../../.hugo-out/layouts/partials/head.html
-  {{- with site.Params.Description }}
-
-  {{- else }}
-      <title>{{ .Title }} - {{ site.Title }}</title>
-  {{- end }}
+  {{ $description := cond .IsHome .Site.Params.Description .Params.Description }}
+  {{ if $description }}
+      <meta name="description" content="{{ $description }}">
+  {{ end }}
 #+end_src
 
-Load our own CSS and JavaScript through the Hugo asset pipeline.
+Load our own CSS and JavaScript through the [[https://gohugo.io/hugo-pipes/introduction/][Hugo asset pipeline]].
 
 #+begin_src html :tangle ../../.hugo-out/layouts/partials/head.html
   {{ range $css_file := site.Params.css | default (slice "bmfw.css" "ox-hugo.css") }}
@@ -630,7 +721,8 @@ Load our own CSS and JavaScript through the Hugo asset pipeline.
   {{ end }}
 #+end_src
 
-Render our RSS feed.
+Render our RSS feed.  Putting it in a ~<link>~ integrates with various
+[[https://addons.mozilla.org/en-US/firefox/search/?q=rss][RSS readers]].
 
 #+begin_src html :tangle ../../.hugo-out/layouts/partials/head.html
   {{ range .AlternativeOutputFormats -}}
@@ -638,11 +730,16 @@ Render our RSS feed.
   {{ end -}}
 #+end_src
 
-***** Article summary
+**** DONE Article summary                                               :css:
+CLOSED: [2022-09-02 Fri 13:12]
+:PROPERTIES:
+:EXPORT_FILE_NAME: article-summary
+:END:
 
-Provide a standard article summary for list views.  It includes the
-title, dates, category, tags, and either the page description or
-summary.
+Provide a standard article summary for our various list templates.  It
+includes the title, dates, category, tags, and either the page
+description or summary.
+#+hugo:more
 
 #+begin_src html :tangle ../../.hugo-out/layouts/partials/article-summary.html
   <article>
@@ -659,10 +756,12 @@ summary.
           {{ end }}
       </main>
       <footer>
-        {{ partial "post-info" . }}
+        {{ partial "article-info" . }}
       </footer>
   </article>
 #+end_src
+
+A list of summaries should be unbulleted and separated by a thin line:
 
 #+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
   ul.article-summaries {
@@ -676,13 +775,26 @@ summary.
   }
 #+end_src
 
-***** Post info
+**** DONE Article info                                                  :css:
+CLOSED: [2022-09-02 Fri 13:16]
+:PROPERTIES:
+:EXPORT_FILE_NAME: article-info
+:END:
 
+Article info appears at the bottom of every article and article
+summary on the site.  It describes:
+
+- The content type
+- The date
+- The modification date
+- The category, usually one, prefixed with ~@~
+- The tags, usually many, prefixed with ~#~
+#+hugo:more
 ~<dl>~ has long been my favorite idiosyncratic HTML tag.  Maybe I'm
 abusing it here, but I like the result.
 
-#+begin_src html :tangle ../../.hugo-out/layouts/partials/post-info.html
-  <div class="post-info">
+#+begin_src html :tangle ../../.hugo-out/layouts/partials/article-info.html
+  <div class="article-info">
       <dl>
           <div class="type">
               <dt>Type</dt>
@@ -732,26 +844,28 @@ abusing it here, but I like the result.
   </div>
 #+end_src
 
+CSS.  Lunch hour is almost over, so I'll describe it another day.
+
 #+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
-  .post-info {
+  .article-info {
       margin: 1em 0;
       font-size: 0.816em;
   }
 
-  .post-info .type dt {
+  .article-info .type dt {
       display: none;
   }
 
-  .post-info .type dd {
+  .article-info .type dd {
       display: inline;
       margin-left: 0;
   }
 
-  .post-info .type, .post-info .published, .post-info .last-modified {
+  .article-info .type, .article-info .published, .article-info .last-modified {
       display: inline-flex;
   }
 
-  .published dt, .post-info .last-modified dt {
+  .published dt, .article-info .last-modified dt {
       display: inline;
       font-weight: normal;
       text-transform: lowercase;
@@ -759,7 +873,7 @@ abusing it here, but I like the result.
       margin-right: 1ch;
   }
 
-  .post-info .published dt, .post-info .last-modified dt {
+  .article-info .published dt, .article-info .last-modified dt {
       display: inline;
       font-weight: normal;
       text-transform: lowercase;
@@ -767,58 +881,71 @@ abusing it here, but I like the result.
       margin-right: 1ch;
   }
 
-  .post-info .published dd, .post-info .last-modified dd {
+  .article-info .published dd, .article-info .last-modified dd {
       display: inline;
       margin-left: 0;
       margin-right: 1ch;
   }
 
-  .post-info .taxonomies > dt {
+  .article-info .taxonomies > dt {
       display: none;
   }
 
-  .post-info .taxonomies dd dl dt {
+  .article-info .taxonomies dd dl dt {
       display: none;
   }
 
-  .post-info .taxonomies dd {
+  .article-info .taxonomies dd {
       margin-left: 0;
   }
 
-  .post-info .taxonomies dd dl dd {
+  .article-info .taxonomies dd dl dd {
       display: inline;
   }
 
-  .post-info .taxonomies dd dl dd ul {
+  .article-info .taxonomies dd dl dd ul {
       list-style: none;
       margin: 0;
       padding: 0;
       display: inline;
   }
 
-  .post-info .taxonomies dd dl dd li {
+  .article-info .taxonomies dd dl dd li {
       display: inline;
   }
 
-  .post-info .taxonomies dd dl dd li.category::before {
+  .article-info .taxonomies dd dl dd li.category::before {
       content: '@';
       color: #666;
   }
 
-  .post-info .taxonomies dd dl dd li.tag::before {
+  .article-info .taxonomies dd dl dd li.tag::before {
       content: '#';
       margin-left: 1ch;
       color: #666;
   }
 
-  .post-info a {
+  .article-info a {
       text-decoration: none;
   }
 #+end_src
 
-***** Header
+**** DONE Header template                                    :css:emacs_lisp:
+CLOSED: [2022-09-02 Fri 11:41]
+:PROPERTIES:
+:EXPORT_FILE_NAME: header
+:END:
 
-Our gimmick is to render this semantic HTML header as Emacs Lisp.
+Our header is straightforward semantic HTML, with a ~<h1>~, ~<p>~,
+~<nav>~, etc.  It establishes the brand, and my brand is to be a
+complete dweeb.  Therefore, we're going to abuse CSS to render it as
+an Emacs Lisp definition.
+#+hugo:more
+
+***** HTML
+
+We reference a ~username~ site parameter, because my full name doesn't
+make any sense as a Lisp variable.
 
 #+begin_src html :tangle ../../.hugo-out/layouts/partials/header.html
   <h1><a href="{{ "/" | absURL }}">{{ .Site.Params.username }}</a></h1>
@@ -833,26 +960,33 @@ Our gimmick is to render this semantic HTML header as Emacs Lisp.
   </nav>
 #+end_src
 
+***** CSS
+
+Make it a little bigger.
+
 #+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
   body > header {
-      display: block;
       font-size: 1.225em;
   }
-  body > header::before {
+#+end_src
+
+It's monospace, because it's "code".
+
+#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
+  body > header {
+      font-family: "Noto Sans Mono", monospace;
+  }
+#+end_src
+
+Render each element as a flex:
+
+Introduce the Lisp syntax as CSS content.  It's sloppy that the
+~ul::after~ closes both lists, but I couldn't get it to eliminate
+the whitespace between the ~</ul>~ and the ~</header>~.
+
+#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
+  body > header h1::before {
       content: "(defvar ";
-      color: #aaa;
-  }
-  body > header h1 {
-      font-size: 1em;
-      display: inline;
-      margin: 0;
-      line-height: inherit;
-  }
-  body > header p {
-      margin: 0;
-      padding-left: 2ch;
-      font-style: italic;
-      color: #aaa;
   }
   body > header p::before {
       content: "\"";
@@ -860,23 +994,73 @@ Our gimmick is to render this semantic HTML header as Emacs Lisp.
   body > header p::after {
       content: "\"";
   }
-  body > header nav {
-      display: inline-flex;
+  body > header ul::before {
+      content: "'(";
   }
+  body > header ul::after {
+      content: "))";
+  }
+#+end_src
+
+Mute all the frou-frou.
+
+#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
+  body > header::before, body > header::after,
+  body > header ::before, body > header ::after {
+      color: #aaa;
+      font-weight: lighter;
+      white-space: pre-wrap;
+  }
+#+end_src
+
+~M-x indent-region~:
+
+#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
+  body > header :first-child {
+      padding-left: 0;
+  }
+
+  body > header > * {
+      padding-left: 2ch;
+  }
+#+end_src
+
+It's fine and good that the header is bold, but otherwise we want it
+to look like the rest.
+
+#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
+  body > header h1 {
+      font-size: 1em;
+      line-height: inherit;
+      margin: 0;
+      font-family: "Noto Sans Mono", monospace;
+  }
+#+end_src
+
+The site subtitle becomes our "docstring".
+
+#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
+  body > header p {
+      margin: 0;
+      font-style: italic;
+      color: #aaa;
+  }
+#+end_src
+
+Setting ~display: inline-flex~ on the link eats the whitespace around
+the generated parens.
+
+#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
   body > header ul {
       display: inline-flex;
       list-style: none;
       margin: 0;
-      padding: 0 0 0 2ch;
   }
-  body > header ul::before {
-      content: "'(";
-      color: #aaa;
-  }
-  body > header ul::after {
-      content: "))";
-      color: #aaa;
-  }
+#+end_src
+
+Render the HTML list as a Lispy, inline list.
+
+#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
   body > header li {
       display: inline;
   }
@@ -888,16 +1072,23 @@ Our gimmick is to render this semantic HTML header as Emacs Lisp.
   }
 #+end_src
 
-***** Footer
+**** DONE Footer template
+CLOSED: [2022-09-02 Fri 10:35]
+:PROPERTIES:
+:EXPORT_FILE_NAME: footer
+:END:
 
+We currently have a minimalist ~<footer>~ that links to our contact
+info.  Social links eventually belong here.
+#+hugo:more
 #+begin_src html :tangle ../../.hugo-out/layouts/partials/footer.html
   <address>
-      <a href="{{ "/about" | absURL }}">Ross A. Baker</a>
+      <a href="{{ "/contact" | absURL }}">Ross A. Baker</a>
       <a href="https://pronoun.is/he">(he/him)</a>
   </address>
 #+end_src
 
-*** DONE Build                                       :hugo:ox_hugo:nix:babel:
+*** DONE Build website with Nix :hugo:ox_hugo:nix:babel:
 CLOSED: [2022-09-01 Thu 16:54]
 :PROPERTIES:
 :EXPORT_FILE_NAME: build
@@ -989,7 +1180,7 @@ Noto variants from Google Fonts, and ran them through [[https://transfonter.org/
       font-family: "Noto Serif", serif;
   }
 
-  code, kbd, pre, samp, var, header {
+  code, kbd, pre, samp, var {
       font-family: "Noto Sans Mono", monospace;
   }
 #+end_src
