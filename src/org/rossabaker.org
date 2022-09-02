@@ -309,13 +309,14 @@ The classless style is classless.
 
 Generate the CSS!
 
-#+name: generate-chroma-css
-#+begin_src sh :results none
-  mkdir -p ../../.hugo-out/assets/css
-  hugo gen chromastyles --style=github > ../../.hugo-out/assets/css/chroma.css
+#+name: chroma-css
+#+begin_src sh :results verbatim
+  hugo gen chromastyles --style=github
 #+end_src
 
-#+call: generate-chroma-css()
+#+begin_src css :tangle ../../.hugo-out/assets/css/chroma.css :noweb yes
+  <<chroma-css()>>
+#+end_src
 
 *** DONE Templates                                            :hugo:html:css:
 CLOSED: [2022-09-01 Thu 16:53]
