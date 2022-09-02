@@ -896,7 +896,8 @@ Our gimmick is to render this semantic HTML header as Emacs Lisp.
   </address>
 #+end_src
 
-*** Build                                            :hugo:ox_hugo:nix:babel:
+*** DONE Build                                       :hugo:ox_hugo:nix:babel:
+CLOSED: [2022-09-01 Thu 16:54]
 :PROPERTIES:
 :EXPORT_FILE_NAME: build
 :END:
