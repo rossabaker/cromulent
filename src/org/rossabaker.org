@@ -1008,7 +1008,7 @@ Mute all the frou-frou.
   body > header::before, body > header::after,
   body > header ::before, body > header ::after {
       color: #aaa;
-      font-weight: lighter;
+      font-weight: normal;
       white-space: pre-wrap;
   }
 #+end_src
