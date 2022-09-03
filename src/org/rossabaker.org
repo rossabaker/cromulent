@@ -528,11 +528,13 @@ in reverse order of modification.
       <h2>Recently updated</h2>
 
       <ul class="article-summaries">
-          {{ range cond .IsHome site.RegularPages.ByLastmod.Reverse .Pages.ByLastmod.Reverse }}
-              <li>
-                  {{ partial "article-summary" . }}
-              </li>
-          {{ end }}
+          {{ range cond .IsHome site.Pages.ByLastmod.Reverse .Pages.ByLastmod.Reverse }}
+              {{ if and (ne .Kind "term") (ne .Kind "taxonomy") (ne .Kind "home") }}
+                  <li>
+                      {{ partial "article-summary" . }}
+                  </li>
+              {{ end }}
+          {{ end}}
       </ul>
   {{ end }}
 #+end_src
