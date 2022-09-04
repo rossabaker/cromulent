@@ -1090,6 +1090,50 @@ info.  Social links eventually belong here.
   </address>
 #+end_src
 
+**** DONE Heading rendering
+CLOSED: [2022-09-04 Sun 17:50]
+:PROPERTIES:
+:EXPORT_FILE_NAME: heading-renderer
+:END:
+
+We [[https://gohugo.io/templates/render-hooks][hook]] into the heading renderer to generate anchor targets for subheadings.
+#+hugo:more
+Note that these only work for markdown headings.  Headings created in
+our other layouts do not get these for free.
+
+***** HTML
+
+Put this file in =layouts/_default/_markup/render-heading.html=:
+
+#+begin_src html :tangle ../../.hugo-out/layouts/_default/_markup/render-heading.html
+  <h{{ .Level }} id="{{ .Anchor | safeURL }}">
+      {{ .Text | safeHTML }}
+      <a class="heading-anchor" href="#{{ .Anchor | safeURL }}">¶</a>
+  </h{{ .Level }}>
+#+end_src
+
+***** CSS
+
+Mute the header anchors until hover:
+
+#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
+  .heading-anchor {
+      color: #ccc;
+      font-size: .667em;
+  }
+  a.heading-anchor:hover {
+      color: #00f;
+  }
+#+end_src
+
+Align the symbol as a superscript:
+
+#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
+  .heading-anchor {
+      vertical-align: super;
+  }
+#+end_src
+
 *** DONE Build website with Nix :hugo:ox_hugo:nix:babel:
 CLOSED: [2022-09-01 Thu 16:54]
 :PROPERTIES:
