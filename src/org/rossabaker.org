@@ -24,8 +24,10 @@ disillusioned by walled gardens, follower counts, reaction emoji, and
 gamification that followed.  This project is his attempt to rekindle
 the joy of networking.
 
-Enclosed you will find archives of Ross' [[*Talks][talks]], [[*Projects][projects]], [[*Podcasts][podcasts]],
-and [[*Publications][publications]], plus a sprawling experiment in [[*Configurations][literate
+# These shouldn't have needed to be absolute links...
+
+Enclosed you will find archives of Ross' [[/talks][talks]], [[/projects][projects]], [[/podcasts][podcasts]],
+and [[/publications][publications]], plus a sprawling experiment in [[*Configurations][literate
 configuration]].  A blog is planned.  Find common interests in coarse
 [[/categories][categories]] or finer [[/tags][tags]].
 
