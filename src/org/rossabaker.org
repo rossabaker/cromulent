@@ -13,24 +13,16 @@
 :EXPORT_TITLE: Ross A. Baker
 :END:
 
+#+attr_html: :class perfectly-cromulent-developer
+#+begin_aside
+#+attr_html: :alt Mrs. Hoover and Mrs. Krabappel from the Simpsons smoking.  Mrs. Hoover says, &quot;He's a perfectly cromulent developer.&quot;
+[[file:../hugo/static/img/perfectly-cromulent-developer.gif]]
+#+end_aside
+
 This is Ross A. Baker's personal web site.  He's unsure where he's
 going with it quite yet, but it will certainly feature tired Simpsons
 references.  Ross is a backend developer by trade, so please excuse
 any season-one aesthetics.
-
-#+attr_html: :alt He's a perfectly cromulent developer :class perfectly-cromulent-developer
-[[file:../hugo/static/img/perfectly-cromulent-developer.gif]]
-
-#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css :exports none
-  figure.perfectly-cromulent-developer {
-      margin: 0 auto;
-      max-width: 60%;
-  }
-  .perfectly-cromulent-developer img {
-      max-width: 100%;
-      border-radius: 0.5em;
-  }
-#+end_src
 
 ** DONE Contact      :@personal:email:github:mastodon:matrix:twitter:pgp:
 CLOSED: [2022-08-27 Sat 14:04]
@@ -517,24 +509,36 @@ in reverse order of modification.
 #+hugo:more
 #+begin_src html :tangle ../../.hugo-out/layouts/_default/list.html
   {{ define "main" }}
-      <h1>{{ .Title }}</h1>
+      <article>
+          <h1>{{ .Title }}</h1>
 
-      {{ with .Content }}
-          {{ . }}
-      {{ end }}
+          {{ with .Content }}
+              {{ . }}
+          {{ end }}
 
-      <h2>Recently updated</h2>
+          <footer>
+              <h2>Recently updated</h2>
 
-      <ul class="article-summaries">
-          {{ range cond .IsHome site.Pages.ByLastmod.Reverse .Pages.ByLastmod.Reverse }}
-              {{ if and (ne .Kind "term") (ne .Kind "taxonomy") (ne .Kind "home") }}
-                  <li>
-                      {{ partial "article-summary" . }}
-                  </li>
-              {{ end }}
-          {{ end}}
-      </ul>
+              <ul class="article-summaries">
+                  {{ range cond .IsHome site.Pages.ByLastmod.Reverse .Pages.ByLastmod.Reverse }}
+                      {{ if and (ne .Kind "term") (ne .Kind "taxonomy") (ne .Kind "home") }}
+                          <li>
+                              {{ partial "article-summary" . }}
+                          </li>
+                      {{ end }}
+                  {{ end}}
+              </ul>
+          </footer>
+      </article>
   {{ end }}
+#+end_src
+
+In case anything is floated in the content, clear it here.
+
+#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
+  article footer {
+      clear: both;
+  }
 #+end_src
 
 **** DONE Taxonomy tag cloud              :taxonomy:tag_cloud:css:emacs_lisp:
@@ -1198,7 +1202,7 @@ For a more iterative experience with live reload in the browser, try:
 CLOSED: [2022-08-30 Tue 14:26]
 :PROPERTIES:
 :EXPORT_FILE_NAME: style
-:EXPORT_HUGO_LASTMOD: <2022-09-01 Thu 10:54>
+:EXPORT_HUGO_LASTMOD: <2022-09-04 Sun 22:11>
 :END:
 
 We strive for [[https://en.wikipedia.org/wiki/Semantic_HTML][semantic HTML]].  The styles presented here provide a
@@ -1274,6 +1278,30 @@ padding.
       body > * {
           max-width: 1130px;
       }
+  }
+#+end_src
+
+Scale ~<aside>~ elements reasonably.
+
+#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
+  main article aside {
+      float: right;
+      min-width: 240px;
+      max-width: 400px;
+      width: 40%;
+  }
+
+  @media (max-width: 576px) {
+      float: none;
+      width: 100%;
+  }
+
+  main article figure {
+      margin: 0;
+  }
+
+  main article figure img {
+      max-width: 100%;
   }
 #+end_src
 
