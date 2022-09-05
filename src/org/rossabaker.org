@@ -527,7 +527,7 @@ in reverse order of modification.
               {{ . }}
           {{ end }}
 
-          <footer>
+          <section>
               <h2>Recently updated</h2>
 
               <ul class="article-summaries">
@@ -539,7 +539,7 @@ in reverse order of modification.
                       {{ end }}
                   {{ end}}
               </ul>
-          </footer>
+          </section>
       </article>
   {{ end }}
 #+end_src
