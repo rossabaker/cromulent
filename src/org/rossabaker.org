@@ -16,7 +16,7 @@ CLOSED: [2022-09-05 Mon 00:30]
 #+attr_html: :class profile
 #+begin_aside
 #+attr_html: :alt Profile picture of Ross A. Baker
-[[file:~/src/cromulent/src/hugo/static/img/profile.jpg]]
+[[file:../hugo/static/img/profile.jpg]]
 #+end_aside
 
 [[*About][Ross A. Baker]] fell in love with the open web in the 1990s, but became
