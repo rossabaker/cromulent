@@ -13,25 +13,51 @@ CLOSED: [2022-09-05 Mon 00:30]
 :EXPORT_FILE_NAME: _index
 :END:
 
-#+attr_html: :class perfectly-cromulent-developer
+#+attr_html: :class profile
 #+begin_aside
-#+attr_html: :alt Mrs. Hoover and Mrs. Krabappel from the Simpsons smoking.  Mrs. Hoover says, &quot;He's a perfectly cromulent developer.&quot;
-[[file:../hugo/static/img/perfectly-cromulent-developer.gif]]
+#+attr_html: :alt Profile picture of Ross A. Baker
+[[file:~/src/cromulent/src/hugo/static/img/profile.jpg]]
 #+end_aside
 
 [[*About][Ross A. Baker]] fell in love with the open web in the 1990s, but became
 disillusioned by walled gardens, follower counts, reaction emoji, and
-gamification that followed.  This project is his attempt to rekindle
-the joy of networking.
+gamification that pervades today's content.  This project is his
+attempt to rekindle the original joy of networking.
 
 # These shouldn't have needed to be absolute links...
 
 Enclosed you will find archives of Ross' [[/talks][talks]], [[/projects][projects]], [[/podcasts][podcasts]],
 and [[/publications][publications]], plus a sprawling experiment in [[*Configurations][literate
-configuration]].  A blog is planned.  Find common interests in coarse
-[[/categories][categories]] or finer [[/tags][tags]].
+configuration]].  A blog is planned.
 
-As in real life, he fills awkward gaps with Simpsons references.
+Common interests may be discovered in the coarse [[/categories][categories]] or finer
+[[/tags][tags]].
+
+#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css :exports none
+  aside.profile {
+      float: left;
+      width: 40%;
+      max-width: 400px;
+      margin: 0 1.5em 1.5em 0;
+  }
+
+  @media (max-width: 576px) {
+      aside.profile {
+          float: none;
+          width: 100%;
+          margin: 1.5em auto;
+      };
+  }
+
+  aside.profile figure {
+      margin: 0;
+  }
+
+  aside.profile img {
+      max-width: 100%;
+      border-radius: 1.5em;
+  }
+#+end_src
 
 ** DONE Contact      :@personal:email:github:mastodon:matrix:twitter:pgp:
 CLOSED: [2022-08-27 Sat 14:04]
@@ -527,7 +553,7 @@ in reverse order of modification.
               {{ . }}
           {{ end }}
 
-          <section>
+          <section class="recently-updated">
               <h2>Recently updated</h2>
 
               <ul class="article-summaries">
@@ -547,7 +573,7 @@ in reverse order of modification.
 In case anything is floated in the content, clear it here.
 
 #+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
-  article footer {
+  article .recently-updated {
       clear: both;
   }
 #+end_src
@@ -1289,34 +1315,6 @@ padding.
       body > * {
           max-width: 1130px;
       }
-  }
-#+end_src
-
-Scale ~<aside>~ elements reasonably.
-
-#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
-  main article aside {
-      float: right;
-      min-width: 240px;
-      max-width: 400px;
-      width: 40%;
-  }
-
-  @media (max-width: 576px) {
-      float: none;
-      width: 100%;
-  }
-
-  main article aside {
-      margin: 1.5em;
-  }
-
-  main article figure {
-      margin: 0;
-  }
-
-  main article figure img {
-      max-width: 100%;
   }
 #+end_src
 
