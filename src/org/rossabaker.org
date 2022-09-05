@@ -7,10 +7,10 @@
 :EXPORT_HUGO_SECTION: /
 :END:
 
-** Home page
+** DONE Home page
+CLOSED: [2022-09-05 Mon 00:30]
 :PROPERTIES:
 :EXPORT_FILE_NAME: _index
-:EXPORT_TITLE: Ross A. Baker
 :END:
 
 #+attr_html: :class perfectly-cromulent-developer
@@ -19,10 +19,17 @@
 [[file:../hugo/static/img/perfectly-cromulent-developer.gif]]
 #+end_aside
 
-This is Ross A. Baker's personal web site.  He's unsure where he's
-going with it quite yet, but it will certainly feature tired Simpsons
-references.  Ross is a backend developer by trade, so please excuse
-any season-one aesthetics.
+[[*About][Ross A. Baker]] fell in love with the open web in the 1990s, but became
+disillusioned by walled gardens, follower counts, reaction emoji, and
+gamification that followed.  This project is his attempt to rekindle
+the joy of networking.
+
+Enclosed you will find archives of Ross' [[*Talks][talks]], [[*Projects][projects]], [[*Podcasts][podcasts]],
+and [[*Publications][publications]], plus a sprawling experiment in [[*Configurations][literate
+configuration]].  A blog is planned.  Find common interests in coarse
+[[/categories][categories]] or finer [[/tags][tags]].
+
+As in real life, he fills awkward gaps with Simpsons references.
 
 ** DONE Contact      :@personal:email:github:mastodon:matrix:twitter:pgp:
 CLOSED: [2022-08-27 Sat 14:04]
@@ -510,7 +517,9 @@ in reverse order of modification.
 #+begin_src html :tangle ../../.hugo-out/layouts/_default/list.html
   {{ define "main" }}
       <article>
+          {{ if not .IsHome }}
           <h1>{{ .Title }}</h1>
+          {{ end }}
 
           {{ with .Content }}
               {{ . }}
@@ -1296,6 +1305,10 @@ Scale ~<aside>~ elements reasonably.
       width: 100%;
   }
 
+  main article aside {
+      margin: 1.5em;
+  }
+
   main article figure {
       margin: 0;
   }
@@ -1391,17 +1404,17 @@ ninth grade report card.
 :PROPERTIES:
 :EXPORT_FILE_NAME: anorm
 :EXPORT_DATE: <2012-08-13 Mon>
-:EXPORT_PUBLISH_DATE: <2022-08-30 Tue 21:56>
+:EXPORT_PUBLISH_DATE: <202d2-08-30 Tue 21:56>
 :EXPORT_HUGO_CUSTOM_FRONT_MATTER+: :venue "[IndyScala](http://indyscala.org/), August 2012"
 :EXPORT_HUGO_CUSTOM_FRONT_MATTER+: :source https://github.com/indyscala-anorm/
 :EXPORT_HUGO_CUSTOM_FRONT_MATTER+: :slides pdf/anorm.pdf
 :END:
 
-* Podcasts...
+* Podcasts                                                          :podcast:
 :PROPERTIES:
 :EXPORT_HUGO_SECTION: podcasts
 :END:
-** CoRecursive Episode #017 :@tech:podcast:corecursive:scala:http4s:functional_programming:remote_work:
+** CoRecursive Episode #017 :@tech:corecursive:scala:http4s:functional_programming:remote_work:
 :PROPERTIES:
 :EXPORT_FILE_NAME: corecursive-17
 :EXPORT_DATE: <2018-07-27 Fri>
@@ -1426,7 +1439,7 @@ approach. We also touch on the benefits of working remotely, since he
 and I have both been doing it for some time.
 #+end_quote
 
-** The Scala Logs :@tech:podcast:http4s:haskell:hockey:scala_logs:
+** The Scala Logs :@tech:http4s:haskell:hockey:scala_logs:
 :PROPERTIES:
 :EXPORT_FILE_NAME: scala-logs
 :EXPORT_DATE: <2020-02-08 Sat>
@@ -1436,9 +1449,9 @@ and I have both been doing it for some time.
 It was my honor to join Zach McCoy on the [[https://open.spotify.com/episode/57RHzk5M7gJjLnV5nfehJo][first full episode of The
 Scala Logs]], where we talked http4s, Haskell, and hockey.
 
-* Books
+* Publications
 :PROPERTIES:
-:EXPORT_HUGO_SECTION: books
+:EXPORT_HUGO_SECTION: publications
 :END:
 
 ** Scalatra in Action                 :@tech:scala:scalatra:http:sbt:scalate:
