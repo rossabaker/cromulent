@@ -90,6 +90,8 @@ we all deserve an infobox.  Here's mine.
 
 #+hugo:more
 #+begin_infobox
+
+#+attr_html: :alt Profile image of Ross A. Baker
 [[../hugo/static/img/profile.jpg]]
 
 - Name :: Ross A. Baker
@@ -411,9 +413,7 @@ Think of them as the articles.  Indeed, we mark them up in an
           <header>
               <h1>{{ .Title }}</h1>
           </header>
-          <main>
-              {{ .Content }}
-          </main>
+          {{ .Content }}
           <footer>
               {{ partial "article-info" . }}
           </footer>
@@ -447,8 +447,6 @@ Talks get their own single-page template based on custom front matter.
 Metadata appears in the article header.
 
 #+begin_src html :tangle ../../.hugo-out/layouts/talks/single.html
-  Ayo wtf
-
   {{ define "article-header" }}
       <h1>{{ .Title }}</h1>
       <dl>
@@ -736,6 +734,7 @@ Render our RSS feed.  Putting it in a ~<link>~ integrates with various
 CLOSED: [2022-09-02 Fri 13:12]
 :PROPERTIES:
 :EXPORT_FILE_NAME: article-summary
+:EXPORT_HUGO_LASTMOD: <2022-09-04 Sun 21:12>
 :END:
 
 Provide a standard article summary for our various list templates.  It
@@ -748,15 +747,13 @@ description or summary.
       <header>
           <h1><a href="{{ .Permalink }}">{{ .Title }}</a></h1>
       </header>
-      <main>
-          {{ if .Description }}
-              {{ .Description | markdownify }}
-          {{ else if .Truncated }}
-              {{ .Summary }}
-          {{ else }}
-              {{ .Content }}
-          {{ end }}
-      </main>
+      {{ if .Description }}
+          {{ .Description | markdownify }}
+      {{ else if .Truncated }}
+          {{ .Summary }}
+      {{ else }}
+          {{ .Content }}
+      {{ end }}
       <footer>
         {{ partial "article-info" . }}
       </footer>
@@ -1320,7 +1317,7 @@ anemometer is not raised high enough for accuracy, but the rest is
 reasonably accurate.
 
 #+begin_export html
-  <iframe class="weather-station" frameborder="0" src="https://ambientweather.net/devices/public/b78b5bb0e59646a78a623a940937335c?embed=true"></iframe>
+  <iframe class="weather-station" src="https://ambientweather.net/devices/public/b78b5bb0e59646a78a623a940937335c?embed=true"></iframe>
 #+end_export
 
 #+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css :exports none
