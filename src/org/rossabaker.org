@@ -23,10 +23,8 @@ CLOSED: [2022-09-05 Mon 00:30]
 siloed apps, follower counts, reaction emoji, and gamification.  This
 project is his attempt to rekindle that initial wonder.
 
-# These shouldn't have needed to be absolute links...
-
-Enclosed is a sprawling experiment in [[/configs][literate configuration]], plus
-archives of Ross' [[/talks][talks]], [[/projects][projects]], [[/podcasts][podcasts]], and [[/publications][publications]].  A blog
+Enclosed is a sprawling experiment in [[*Configurations index][literate configuration]], plus
+archives of Ross' [[*Talks index][talks]], [[*Projects index][projects]], [[*Podcasts index][podcasts]], and [[*Publications index][publications]].  A blog
 is planned.
 
 Shared interests may be revealed via [[/categories][categories]] (coarse) or [[/tags][tags]]
@@ -181,13 +179,11 @@ we all deserve an infobox.  Here's mine.
   }
 #+end_src
 
-* Configurations                                        :@tech:configuration:
-:PROPERTIES:
-:EXPORT_HUGO_SECTION: configs
-:END:
+* Configurations                                                      :@tech:
 
 ** Configurations index
 :PROPERTIES:
+:EXPORT_HUGO_BUNDLE: configs
 :EXPORT_FILE_NAME: _index
 :EXPORT_TITLE: Configurations
 :END:
@@ -199,7 +195,12 @@ website.
 These are intended to be living documents, revised whenever the
 corresponding configuration is reconfigured.
 
-** DONE A perfectly cromulent repository                  :git:gitattributes:
+** Configurations pages
+:PROPERTIES:
+:EXPORT_HUGO_SECTION: configs
+:END:
+
+*** DONE A perfectly cromulent repository                 :git:gitattributes:
 CLOSED: [2022-08-24 Wed 15:04]
 :PROPERTIES:
 :EXPORT_FILE_NAME: cromulent
@@ -212,12 +213,12 @@ My [[https://github.com/rossabaker/cromulent][personal Git repository]] contains
 monorepo is out of character for me, but this setup acts as one source
 of truth for what I share and what I run.
 
-*** Original sources
+**** Original sources
 
 As much as possible, original sources are stored in the ~src~
 directory.
 
-*** Materialized sources
+**** Materialized sources
 
 Some files that we'd like to document here must be materialized to
 specific locations in the repository.  If we can generate the files
@@ -238,14 +239,14 @@ choose, goes to the ~gen~ directory.
   gen/            -diff -merge linguist-generated=true
 #+end_src
 
-** DONE Website                           :website:
+*** DONE Website                                                    :website:
 CLOSED: [2022-08-24 Wed 15:04]
 :PROPERTIES:
 :EXPORT_HUGO_SECTION_FRAG: website
 :EXPORT_DESCRIPTION: A colophon for rossabaker.com.  Describes the way we convert an Org-Mode file into a website with ox-hugo and Nix.
 :END:
 
-*** Website index
+**** Website index
 :PROPERTIES:
 :EXPORT_FILE_NAME: _index
 :EXPORT_TITLE: How rossabaker.com works
@@ -255,7 +256,7 @@ CLOSED: [2022-08-24 Wed 15:04]
 configuration, export the content to Markdown with with [[https://ox-hugo.scripter.co][ox-hugo]], and
 convert the Markdown to HTML with [[https://gohugo.io/][Hugo]].
 
-*** DONE Site configuration                       :hugo:org_mode:ox_hugo:nix:
+**** DONE Site configuration                      :hugo:org_mode:ox_hugo:nix:
 CLOSED: [2022-09-01 Thu 16:48]
 :PROPERTIES:
 :EXPORT_FILE_NAME: hugo
@@ -270,7 +271,7 @@ weirdness budget on a literate config, so let's stick to the default.
   title = 'Ross A. Baker'
 #+end_src
 
-**** hugo-mwe
+***** hugo-mwe
 
 This site is bootstrapped from [[https://gitlab.com/hugo-mwe/hugo-mwe][Hugo MWE]].  A [[https://scripter.co/hugo-modules-importing-a-theme/][hugo module]] would be
 easier, but I have not figured out a way to integrate Hugo modules
@@ -286,7 +287,7 @@ it into ~src/hugo/themes~.
 
 Further design comes from the [[*CSS foundation][CSS foundation]].
 
-**** Mounts
+***** Mounts
 
 Because all this org stuff mucks with the [[https://gohugo.io/getting-started/directory-structure/#readout][normal directory structure]],
 we have to give Hugo a few extra hints.  [[https://github.com/gohugoio/hugo/issues/6457#issuecomment-546580193][~assetDir~ is "legacy"]], so
@@ -310,7 +311,7 @@ we'll use [[https://gohugo.io/hugo-modules/configuration/#module-config-mounts][
     target = 'static'
 #+end_src
 
-**** General site parameters
+***** General site parameters
 
 The ~css~ parameter lets us add custom stylesheets to the asset
 pipeline.  ~chroma.css~ is [[*Syntax highlighting][generated below]].
@@ -325,7 +326,7 @@ pipeline.  ~chroma.css~ is [[*Syntax highlighting][generated below]].
       url = "https://github.com/rossabaker/cromulent"
 #+end_src
 
-**** ox-hugo
+***** ox-hugo
 
 ox-hugo [[https://ox-hugo.scripter.co/doc/goldmark/#enable-unsafe-html][recommends Goldmark]].  The ~unsafe~ is not as bad as it sounds:
 
@@ -339,7 +340,7 @@ HTML in your Markdown, as CommonMark allows!
     unsafe = true
 #+end_src
 
-**** Syntax highlighting
+***** Syntax highlighting
 
 The classless style is classless.
 
@@ -359,13 +360,13 @@ Generate the ~chroma.css~ file.
   <<chroma-css()>>
 #+end_src
 
-*** DONE Templates                                            :hugo:html:
+**** DONE Templates                                               :hugo:html:
 CLOSED: [2022-09-01 Thu 16:53]
 :PROPERTIES:
 :EXPORT_HUGO_SECTION_FRAG: templates
 :END:
 
-**** DONE Index
+***** DONE Index
 CLOSED: [2022-09-02 Fri 11:28]
 :PROPERTIES:
 :EXPORT_FILE_NAME: _index
@@ -377,7 +378,7 @@ scratch.  I took over a decade off front ends and wanted to see what
 I've missed.  If you have no such need, don't follow my footsteps.
 There is a lot to unpack here.
 
-**** DONE Base template
+***** DONE Base template
 CLOSED: [2022-09-02 Fri 09:17]
 :PROPERTIES:
 :EXPORT_FILE_NAME: base-template
@@ -434,7 +435,7 @@ Visually separate the three sections a bit.
   }
 #+end_src
 
-**** DONE Single-page template
+***** DONE Single-page template
 CLOSED: [2022-09-02 Fri 12:53]
 :PROPERTIES:
 :EXPORT_FILE_NAME: single
@@ -467,7 +468,7 @@ I would like to define ~article-header~ and ~article-main~ blocks in
 this template so less gets repeated in the section overrides.  I'm
 still missing something.
 
-**** DONE Talks template                                                :css:
+***** DONE Talks template                                               :css:
 CLOSED: [2022-09-02 Fri 12:48]
 :PROPERTIES:
 :EXPORT_FILE_NAME: talks
@@ -544,7 +545,7 @@ sophisticated eventually.
   }
 #+end_src
 
-**** DONE List template
+***** DONE List template
 CLOSED: [2022-09-02 Fri 12:55]
 :PROPERTIES:
 :EXPORT_FILE_NAME: list
@@ -590,7 +591,7 @@ In case anything is floated in the content, clear it here.
   }
 #+end_src
 
-**** DONE Taxonomy tag cloud              :taxonomy:tag_cloud:css:emacs_lisp:
+***** DONE Taxonomy tag cloud             :taxonomy:tag_cloud:css:emacs_lisp:
 CLOSED: [2022-09-02 Fri 13:07]
 :PROPERTIES:
 :EXPORT_FILE_NAME: terms
@@ -688,7 +689,7 @@ Mute the color and count, because it's all about the terms:
   }
 #+end_src
 
-**** DONE Taxonomy term template
+***** DONE Taxonomy term template
 CLOSED: [2022-09-02 Fri 13:10]
 :PROPERTIES:
 :EXPORT_FILE_NAME: term
@@ -714,7 +715,7 @@ template that lists the article summaries in reverse order of modification.
   {{ end }}
 #+end_src
 
-**** DONE Head template
+***** DONE Head template
 CLOSED: [2022-09-02 Fri 10:29]
 :PROPERTIES:
 :EXPORT_FILE_NAME: head
@@ -783,7 +784,7 @@ Render our RSS feed.  Putting it in a ~<link>~ integrates with various
   {{ end -}}
 #+end_src
 
-**** DONE Article summary                                               :css:
+***** DONE Article summary                                              :css:
 CLOSED: [2022-09-02 Fri 13:12]
 :PROPERTIES:
 :EXPORT_FILE_NAME: article-summary
@@ -827,7 +828,7 @@ A list of summaries should be unbulleted and separated by a thin line:
   }
 #+end_src
 
-**** DONE Article info                                                  :css:
+***** DONE Article info                                                 :css:
 CLOSED: [2022-09-02 Fri 13:16]
 :PROPERTIES:
 :EXPORT_FILE_NAME: article-info
@@ -982,7 +983,7 @@ CSS.  Lunch hour is almost over, so I'll describe it another day.
   }
 #+end_src
 
-**** DONE Header template                                    :css:emacs_lisp:
+***** DONE Header template                                   :css:emacs_lisp:
 CLOSED: [2022-09-02 Fri 11:41]
 :PROPERTIES:
 :EXPORT_FILE_NAME: header
@@ -994,7 +995,7 @@ complete dweeb.  Therefore, we're going to abuse CSS to render it as
 an Emacs Lisp definition.
 #+hugo:more
 
-***** HTML
+****** HTML
 
 We reference a ~username~ site parameter, because my full name doesn't
 make any sense as a Lisp variable.
@@ -1012,7 +1013,7 @@ make any sense as a Lisp variable.
   </nav>
 #+end_src
 
-***** CSS
+****** CSS
 
 Make it a little bigger.
 
@@ -1124,7 +1125,7 @@ Render the HTML list as a Lispy, inline list.
   }
 #+end_src
 
-**** DONE Footer template
+***** DONE Footer template
 CLOSED: [2022-09-02 Fri 10:35]
 :PROPERTIES:
 :EXPORT_FILE_NAME: footer
@@ -1140,7 +1141,7 @@ info.  Social links eventually belong here.
   </address>
 #+end_src
 
-**** DONE Heading rendering
+***** DONE Heading rendering
 CLOSED: [2022-09-04 Sun 17:50]
 :PROPERTIES:
 :EXPORT_FILE_NAME: heading-renderer
@@ -1151,7 +1152,7 @@ We [[https://gohugo.io/templates/render-hooks][hook]] into the heading renderer 
 Note that these only work for markdown headings.  Headings created in
 our other layouts do not get these for free.
 
-***** HTML
+****** HTML
 
 Put this file in =layouts/_default/_markup/render-heading.html=:
 
@@ -1162,7 +1163,7 @@ Put this file in =layouts/_default/_markup/render-heading.html=:
   </h{{ .Level }}>
 #+end_src
 
-***** CSS
+****** CSS
 
 Mute the header anchors until hover:
 
@@ -1184,7 +1185,7 @@ Align the symbol as a superscript:
   }
 #+end_src
 
-*** DONE Build website with Nix :hugo:ox_hugo:nix:babel:
+**** DONE Build website with Nix                     :hugo:ox_hugo:nix:babel:
 CLOSED: [2022-09-01 Thu 16:54]
 :PROPERTIES:
 :EXPORT_FILE_NAME: build
@@ -1231,7 +1232,7 @@ exports its contents with ox-hugo.
   (org-hugo-export-wim-to-md t)
 #+end_src
 
-**** Local Nix build
+***** Local Nix build
 
 To build the site locally into ~./result~, run:
 
@@ -1239,7 +1240,7 @@ To build the site locally into ~./result~, run:
   nix build .#website
 #+end_src
 
-**** Development
+***** Development
 
 For a more iterative experience with live reload in the browser, try:
 
@@ -1247,7 +1248,7 @@ For a more iterative experience with live reload in the browser, try:
   hugo serve --disableFastRender --config .hugo-out/config.toml
 #+end_src
 
-*** DONE CSS foundation                               :css:google_fonts:noto:
+**** DONE CSS foundation                              :css:google_fonts:noto:
 CLOSED: [2022-08-30 Tue 14:26]
 :PROPERTIES:
 :EXPORT_FILE_NAME: style
@@ -1259,7 +1260,7 @@ solid foundation, independent of the [[https://gohugo.io/hugo-modules/theme-comp
 use Hugo at all.  These rules are presently deployed to rossabaker.com,
 but could conceivably be used in future projects.
 #+hugo:more
-**** Fonts
+***** Fonts
 
 The [[https://en.wikipedia.org/wiki/Noto_fonts][Noto fonts]] look nice and have a full glyph set.
 
@@ -1281,7 +1282,7 @@ Noto variants from Google Fonts, and ran them through [[https://transfonter.org/
   }
 #+end_src
 
-**** Responsive width
+***** Responsive width
 
 Reset the body to take up the entire window.
 
@@ -1330,7 +1331,7 @@ padding.
   }
 #+end_src
 
-*** Code rendering
+**** Code rendering
 
 Put a scroll bar on code samples, but only where necessary.
 
@@ -1353,11 +1354,16 @@ Give the code samples a little more room to breathe.
 #+end_src
 
 * Projects
+** Projects index
+:PROPERTIES:
+:EXPORT_HUGO_BUNDLE: projects
+:EXPORT_FILE_NAME: _index
+:END:
+** Projects pages
 :PROPERTIES:
 :EXPORT_HUGO_SECTION: projects
 :END:
-
-** DONE Personal Weather Station             :@personal:weather:indianapolis:
+*** DONE Personal Weather Station            :@personal:weather:indianapolis:
 CLOSED: [2022-08-28 Sun 21:03]
 :PROPERTIES:
 :EXPORT_FILE_NAME: personal-weather-station
@@ -1384,10 +1390,15 @@ reasonably accurate.
 #+end_src
 
 * Talks
+** Talks index
+:PROPERTIES:
+:EXPORT_HUGO_BUNDLE: talks
+:EXPORT_FILE_NAME: _index
+:END:
+** Talks pages
 :PROPERTIES:
 :EXPORT_HUGO_SECTION: talks
 :END:
-
 ** IndyScala                                          :@tech:scala:indyscala:
 *** Akka IO and Netty                                            :akka:netty:
 :PROPERTIES:
@@ -1423,10 +1434,16 @@ ninth grade report card.
 :END:
 
 * Podcasts                                                          :podcast:
+** Podcasts index
+:PROPERTIES:
+:EXPORT_HUGO_BUNDLE: podcasts
+:EXPORT_FILE_NAME: _index
+:END:
+** Podcasts pages
 :PROPERTIES:
 :EXPORT_HUGO_SECTION: podcasts
 :END:
-** CoRecursive Episode #017 :@tech:corecursive:scala:http4s:functional_programming:remote_work:
+*** CoRecursive Episode #017 :@tech:corecursive:scala:http4s:functional_programming:remote_work:
 :PROPERTIES:
 :EXPORT_FILE_NAME: corecursive-17
 :EXPORT_DATE: <2018-07-27 Fri>
@@ -1451,7 +1468,7 @@ approach. We also touch on the benefits of working remotely, since he
 and I have both been doing it for some time.
 #+end_quote
 
-** The Scala Logs :@tech:http4s:haskell:hockey:scala_logs:
+**** The Scala Logs                  :@tech:http4s:haskell:hockey:scala_logs:
 :PROPERTIES:
 :EXPORT_FILE_NAME: scala-logs
 :EXPORT_DATE: <2020-02-08 Sat>
@@ -1462,11 +1479,16 @@ It was my honor to join Zach McCoy on the [[https://open.spotify.com/episode/57R
 Scala Logs]], where we talked http4s, Haskell, and hockey.
 
 * Publications
+** Publications index
+:PROPERTIES:
+:EXPORT_HUGO_BUNDLE: publications
+:EXPORT_FILE_NAME: _index
+:END:
+** Publications pages
 :PROPERTIES:
 :EXPORT_HUGO_SECTION: publications
 :END:
-
-** Scalatra in Action                 :@tech:scala:scalatra:http:sbt:scalate:
+*** Scalatra in Action                :@tech:scala:scalatra:http:sbt:scalate:
 :PROPERTIES:
 :EXPORT_FILE_NAME: scalatra-in-action
 :EXPORT_DATE: <2016-05-23 Mon>
@@ -1509,7 +1531,6 @@ RESTful APIs, and real-time web programming.
       margin: 0 auto;
   }
 #+end_src
-
 
 
 
