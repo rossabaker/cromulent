@@ -19,19 +19,18 @@ CLOSED: [2022-09-05 Mon 00:30]
 [[file:../hugo/static/img/profile.jpg]]
 #+end_aside
 
-[[*About][Ross A. Baker]] fell in love with the open web in the 1990s, but became
-disillusioned by walled gardens, follower counts, reaction emoji, and
-gamification that pervades today's content.  This project is his
-attempt to rekindle the original joy of networking.
+[[*About][Ross A. Baker]] fell in love with the open web in the 1990s, before
+siloed apps, follower counts, reaction emoji, and gamification.  This
+project is his attempt to rekindle that initial wonder.
 
 # These shouldn't have needed to be absolute links...
 
-Enclosed you will find archives of Ross' [[/talks][talks]], [[/projects][projects]], [[/podcasts][podcasts]],
-and [[/publications][publications]], plus a sprawling experiment in [[*Configurations][literate
-configuration]].  A blog is planned.
+Enclosed is a sprawling experiment in [[/configs][literate configuration]], plus
+archives of Ross' [[/talks][talks]], [[/projects][projects]], [[/podcasts][podcasts]], and [[/publications][publications]].  A blog
+is planned.
 
-Common interests may be discovered in the coarse [[/categories][categories]] or finer
-[[/tags][tags]].
+Shared interests may be revealed via [[/categories][categories]] (coarse) or [[/tags][tags]]
+(fine).  Enjoy.
 
 #+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css :exports none
   aside.profile {
