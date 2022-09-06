@@ -186,6 +186,19 @@ we all deserve an infobox.  Here's mine.
 :EXPORT_HUGO_SECTION: configs
 :END:
 
+** Configurations index
+:PROPERTIES:
+:EXPORT_FILE_NAME: _index
+:EXPORT_TITLE: Configurations
+:END:
+
+This is my attempt at [[https://en.wikipedia.org/wiki/Literate_programming][literate programming]].  The configurations
+presented here run my apps, provision my systems, and build this
+website.
+
+These are intended to be living documents, revised whenever the
+corresponding configuration is reconfigured.
+
 ** DONE A perfectly cromulent repository                  :git:gitattributes:
 CLOSED: [2022-08-24 Wed 15:04]
 :PROPERTIES:
