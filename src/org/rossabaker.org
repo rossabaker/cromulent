@@ -1359,12 +1359,20 @@ CLOSED: [2022-08-28 Sun 21:03]
 :PROPERTIES:
 :EXPORT_FILE_NAME: personal-weather-station
 :EXPORT_DESCRIPTION: Data from my personal weather station in Indianapolis, Indiana.
+:EXPORT_HUGO_LASTMOD: <2022-09-07 Wed 00:00>
 :END:
 
 I run an [[https://ambientweather.net/][Ambient Weather]] WS-1400-IP weather station in the Castleton
 neighborhood of Indianapolis and share its [[https://ambientweather.net/devices/public/b78b5bb0e59646a78a623a940937335c][public dashboard]].  The
 anemometer is not raised high enough for accuracy, but the rest is
 reasonably accurate.
+
+#+begin_aside
+I learned on 2022-09-06 that the [[https://www.ind.com/business/general-aviation-airports/metropolitan-airport][Indianapolis Metropolitan Airport]] is
+now [[https://aviationweather.gov/metar/data?ids=kump&format=decoded&hours=24&taf=off&layout=on][publishing METAR data]].  That airport is just a mile away, and
+certainly has a more credible weather station, but it's fun to compare
+to mine.
+#+end_aside
 
 #+begin_export html
   <iframe class="weather-station" src="https://ambientweather.net/devices/public/b78b5bb0e59646a78a623a940937335c?embed=true"></iframe>
@@ -1379,6 +1387,8 @@ reasonably accurate.
       margin: 1.5em auto;
   }
 #+end_src
+
+
 
 * Talks section
 :PROPERTIES:
