@@ -1399,8 +1399,8 @@ reasonably accurate.
 :PROPERTIES:
 :EXPORT_HUGO_SECTION: talks
 :END:
-** IndyScala                                          :@tech:scala:indyscala:
-*** Akka IO and Netty                                            :akka:netty:
+*** IndyScala                                         :@tech:scala:indyscala:
+**** Akka IO and Netty                                           :akka:netty:
 :PROPERTIES:
 :EXPORT_FILE_NAME: akka-io-and-netty
 :EXPORT_DATE: <2013-11-04 Mon>
@@ -1409,7 +1409,7 @@ reasonably accurate.
 :EXPORT_HUGO_CUSTOM_FRONT_MATTER+: :source https://github.com/indyscala/akka-io-demo
 :EXPORT_HUGO_CUSTOM_FRONT_MATTER+: :slides /pdf/akka-io-and-netty.pdf
 :END:
-*** Algebras in Scala                                               :algebra:
+**** Algebras in Scala                                              :algebra:
 :PROPERTIES:
 :EXPORT_FILE_NAME: algebras-in-scala
 :EXPORT_DATE: <2019-12-02 Mon>
@@ -1423,7 +1423,7 @@ Scala developers like to talk about "algebras".  Or when they're
 feeling particularly precious, "algebrae."  Ross gives an overview,
 and promises any references to "F-algebra" are not a taunt about your
 ninth grade report card.
-*** Anorm                                                         :anorm:sql:
+**** Anorm                                                        :anorm:sql:
 :PROPERTIES:
 :EXPORT_FILE_NAME: anorm
 :EXPORT_DATE: <2012-08-13 Mon>
