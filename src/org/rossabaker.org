@@ -1433,6 +1433,69 @@ ninth grade report card.
 :EXPORT_HUGO_CUSTOM_FRONT_MATTER+: :slides pdf/anorm.pdf
 :END:
 
+* Articles section
+:PROPERTIES:
+:EXPORT_HUGO_BUNDLE: articles
+:END:
+** Articles
+:PROPERTIES:
+:EXPORT_FILE_NAME: _index
+:END:
+** TODO Running up the score in Scrabble           :@personal:grandma:eulogy:
+SCHEDULED: [2022-09-10 Sat 10:30]
+:PROPERTIES:
+:EXPORT_FILE_NAME: running-up-the-score-in-scrabble
+:END:
+
+Grandma and I had a tradition of playing Scrabble.  Her tradition
+predated mine.  The box still held score pads with relatives I never
+met.  That set was unfathomably old to my teenaged self, but at least
+it was the Modern English Alphabet Edition.  True to Grandma's
+stewardship, it still had all its pieces.
+
+She won the first several matches.  One time, after sealing another
+victory, she remained hunched over the rack, running up the score on
+her own grandson.  "Really, Grandma?"  She explained that it's not
+worth doing if it's not worth your best.  She also pointed out I lost
+by hanging a vowel right next to the triple word score.
+
+Her blood runs through my veins, which is to say that I am also
+stubborn.  I read a strategy guide.  When we met again, no more long
+words.  Trench warfare!  Both scores were low, but she was prepared.
+She was always prepared.  She put me away with a "jo."
+
+"It's a Scottish sweetheart," she said.
+
+"Isn't that a foreign word?" I protested.
+
+"She's been playing that one for years," my aunt sighed.
+
+We didn't have the official Scrabble Dictionary, but still bitter, I
+checked [[https://scrabble.hasbro.com/en-us/tools#dictionary][hasbro.com's dictionary]] this week.  Grandma was right, you
+know.
+
+She came to one of my softball games.  I didn't play well, but she
+asked if I played my best.  She realized that I would not succeed Ryne
+Sandberg as the Cubs' second baseman a couple years before I did.  It
+was my best.
+
+Another time she asked about a poor grade.  "Well, to whom much is
+given, much is expected."  I didn't recognize the scriptural reference[fn:1]
+at the time, but that one hit me like a truck.  It wasn't my best.  My
+effort had disappointed Grandma.
+
+She gave me more tips than I ever got from that Scrabble book.
+Eventually I did win.  I never got the consistent upper hand in
+Scrabble, but she made me better, in so many ways.  Her gifts were
+teaching and inspiration, so she was expected to bring out the best in
+each of us.
+
+All games come to an end.  After 97 years, Grandma played her last
+tile, and I can imagine her at the Pearly Gates to tally the final
+score.  "I say, hand me the top of the box, would you?" she surely
+told St. Peter.  "I want to look at the rules!"  But there's nothing
+to be worried about.  Grandma, you always did your best.
+
 * Podcasts section                                                  :podcast:
 :PROPERTIES:
 :EXPORT_HUGO_BUNDLE: podcasts
@@ -1537,3 +1600,14 @@ We need to prepend ~"asc"~ to the defaults to share our PGP public key.
 Local Variables:
 org-hugo-external-file-extensions-allowed-for-copying: ("asc" "jpg" "jpeg" "tiff" "png" "svg" "gif" "mp4" "pdf" "odt" "doc" "ppt" "xls" "docx" "pptx" "xlsx")
 End:
+
+* Footnotes
+
+[fn:1]
+#+begin_quote
+From everyone to whom much has been given, much will be required, and from the one to whom much has been entrusted, even more will be demanded.
+
+#+begin_cite
+Luke 12:48, NRSV-UE
+#+end_cite
+#+end_quote
