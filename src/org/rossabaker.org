@@ -16,16 +16,24 @@ CLOSED: [2022-09-05 Mon 00:30]
 [[file:../hugo/static/img/profile.jpg]]
 #+end_aside
 
-[[*About][Ross A. Baker]] fell in love with the open web in the 1990s, before
-siloed apps, follower counts, reaction emoji, and gamification.  This
-project is his attempt to rekindle that initial wonder.
+I came online a little after [[https://en.wikipedia.org/wiki/Eternal_September][The September That Never Ended]], but long
+before [[https://en.wikipedia.org/wiki/Web_2.0][Web 2.0]].  I don't feel that old, but my internet age is in the
+99th percentile[fn:2].  Analysts rate my curmudgeonhood even
+higher.
 
-Enclosed is a sprawling experiment in [[*Configurations][literate configuration]], plus
-archives of Ross' [[*Talks][talks]], [[*Projects][projects]], [[*Podcasts][podcasts]], and [[*Publications][publications]].  A blog
-is planned.
+I still love the ideals of the Open Web, but we are goaded by siloed
+apps, follower counts, reaction emoji, and chum boxes.  Today, there
+are so many more cool things to discuss, billions more to discuss them
+with, and such dreadful mediums we've built to discuss them in.
 
-Shared interests may be revealed via [[/categories][categories]] (coarse) or [[/tags][tags]]
-(fine).  Enjoy.
+This project hopes to bring the old wonder to the modern Web.  It
+hosts an experiment in [[*Configurations][literate configuration]] and an [[*Articles][inchoate blog]].
+Archives of my [[*Talks][talks]], [[*Projects][projects]], [[*Podcasts][podcasts]], and [[*Publications][publications]] are under
+construction.  I suggest the [[/categories][categories]] (coarse) or [[/tags][tags]] (fine) to
+zoom in on shared interests.
+
+I hope you find something here to enjoy, and I hope it inspires you to
+contribute to the open web, too.
 
 #+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css :exports none
   aside.profile {
@@ -1611,3 +1619,5 @@ From everyone to whom much has been given, much will be required, and from the o
 Luke 12:48, NRSV-UE
 #+end_cite
 #+end_quote
+
+[fn:2] 36 million users online in December 1996, vs. 5,473 million in July 2022, per [[https://www.internetworldstats.com/emarketing.htm][Internet World Stats]].
