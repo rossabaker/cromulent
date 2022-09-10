@@ -1253,7 +1253,7 @@ For a more iterative experience with live reload in the browser, try:
 CLOSED: [2022-08-30 Tue 14:26]
 :PROPERTIES:
 :EXPORT_FILE_NAME: style
-:EXPORT_HUGO_LASTMOD: <2022-09-04 Sun 22:11>
+:EXPORT_HUGO_LASTMOD: <2022-09-10 Sat 10:51>
 :END:
 
 We strive for [[https://en.wikipedia.org/wiki/Semantic_HTML][semantic HTML]].  The styles presented here provide a
@@ -1261,6 +1261,32 @@ solid foundation, independent of the [[https://gohugo.io/hugo-modules/theme-comp
 use Hugo at all.  These rules are presently deployed to rossabaker.com,
 but could conceivably be used in future projects.
 #+hugo:more
+
+**** Box sizing
+
+[[https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing][~border-box~]] includes the widths of the border and padding in the
+width of an element.  This cuts out a lot of ~<div class="container">~
+nonsense.
+
+#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
+  *, *::before, *::after {
+      box-sizing: border-box;
+  }
+#+end_src
+
+**** Let the body breathe
+
+The [[https://www.w3.org/TR/WCAG22/#visual-presentation][Web Content Accessibility Guidelines]] call for a line height of at
+least 1.5.
+
+There are more criteria there that are probably worth revisting.
+
+#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
+  body {
+      line-height: 1.6;
+  }
+#+end_src
+
 **** Fonts
 
 The [[https://en.wikipedia.org/wiki/Noto_fonts][Noto fonts]] look nice and have a full glyph set.
@@ -1450,7 +1476,7 @@ ninth grade report card.
 :EXPORT_FILE_NAME: _index
 :END:
 ** DONE The AOL of the 2020s :@tech:community:gitter:discord:slack:open_web:aol:
-CLOSED: [2022-09-10 Sat 00:47]
+CLOSED: <2022-09-10 Sat 01:29>
 :PROPERTIES:
 :EXPORT_FILE_NAME: the-aol-of-the-2020s
 :END:
@@ -1465,7 +1491,7 @@ My online life began in 1995, in AOL's walled garden of chat.  It was
 mostly a wasteland of "[[https://en.wikipedia.org/wiki/Age/sex/location][a/s/l]]", but there was ample opportunity for
 serious discussion.  I could practice German, with native speakers,
 from Middle America!
-
+#+hugo:more
 I was not yet a serious person.  With a naughty phrasebook and
 sophomoric wit, my friend and I carefully transcribed, "/Hat dir Jemand ins
 Gehirn geschissen und vergessen umzurühren?/"[fn:3].  We were abruptly
