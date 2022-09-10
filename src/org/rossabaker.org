@@ -1449,6 +1449,85 @@ ninth grade report card.
 :PROPERTIES:
 :EXPORT_FILE_NAME: _index
 :END:
+** DONE The AOL of the 2020s :@tech:community:gitter:discord:slack:open_web:aol:
+CLOSED: [2022-09-10 Sat 00:47]
+:PROPERTIES:
+:EXPORT_FILE_NAME: the-aol-of-the-2020s
+:END:
+
+#+begin_aside
+This is an edited version of a draft that circulated in February, 2022.
+#+end_aside
+
+*** Maybe it's good that I started behind a wall
+
+My online life began in 1995, in AOL's walled garden of chat.  It was
+mostly a wasteland of "[[https://en.wikipedia.org/wiki/Age/sex/location][a/s/l]]", but there was ample opportunity for
+serious discussion.  I could practice German, with native speakers,
+from Middle America!
+
+I was not yet a serious person.  With a naughty phrasebook and
+sophomoric wit, my friend and I carefully transcribed, "/Hat dir Jemand ins
+Gehirn geschissen und vergessen umzurühren?/"[fn:3].  We were abruptly
+disconnected and banned.
+
+*** First frolics on the open web
+
+I dusted myself off and ventured onto the public internet.  It was
+marvelous.  I learned about the web setting up [[http://www.scriptarchive.com/wwwboard.html][Matt's Script Archive]]
+and talking to others on their boards.  We made [[https://en.wikipedia.org/wiki/Webring][web rings]] and
+organized ourselves through web directories like [[https://en.wikipedia.org/wiki/DMOZ][dmoz]].  A succession
+of search engines began indexing the Web for us, while other services
+like [[http://www.searchengineshowdown.com/usenet/deja/][DejaNews]] crawled [[https://en.wikipedia.org/wiki/Usenet][Usenet]].  The golden eras of mailing lists and
+blogs came and went, each contributing to the digital commons.
+
+*** The rise and fall of Gitter
+
+In the mid-2010s, [[https://gitter.im/][Gitter]] chat became an important hub for developers.
+To this day, its archives serve as a primary source.  Most original
+[[https://github.com/typelevel/cats][Cats]] authors have moved on, but we can [[https://gitter.im/typelevel/cats/archives/2015/01/29][observe its Big Bang]].  There
+are years of insights there, referenced from the issue trackers and
+indexed by Google.  These archives are admittedly precarious — none of
+us pay for their upkeep — but it was an open product for an Open Web.
+
+The Gitter UX grew derelict, and many OSS projects withdrew to gated
+communities like Discord and Slack.  These apps are fine for
+fellowship, but come at an unbearable cost to the project's history
+and discoverability.  Questions recur, but the search engines no
+longer reference the answers.  Prospective members who have the right
+keywords fail to connect with their kindred spirits.  These closed
+platforms are the AOL of the 2020s, and are anathema to Open Source.
+
+*** Recommitment to the open web
+
+I have many niche interests, and I'm not attempting to maximize my
+following.  I want my efforts to reverberate.
+
+- My current role involves a lot of teaching.  We use Slack,
+  which is fair game in private enterprise, but I will expound
+  what I can on this [[*Articles][nascent blog]].
+
+- I am slowly republishing my old [[*Talks][talks]] here, with a couple new ones
+  to share.
+
+- I will continue to explore [[https://mastodon.social/@rossabaker][Mastodon]] for conversing on technical
+  subjects.  You need a login to participate, but not to view.
+
+- [[https://matrix.to/#/@ross:rossabaker.com][Matrix]] is the natural, open successor to Gitter.  I've drastically
+  curtailed my chatting, but you might nerdsnipe me into a public room
+  there.
+
+- I challenge you to contribute back to the open web.  [[*Website index][My setup]] is
+  arcane, but it's documented and I've recaptured some Joy of
+  Computing in building it.  Find yours.
+
+- /Ich werde nicht vergessen umzurühren.[fn:5]/
+
+*** See also
+
+- Alexandru Nedelcu touches on similar subjects in [[https://alexn.org/blog/2022/04/09/scala-gitter-discord-mistake/][Scala's Gitter to
+  Discord migration mistake]].
+
 ** TODO Running up the score in Scrabble           :@personal:grandma:eulogy:
 SCHEDULED: [2022-09-10 Sat 10:30]
 :PROPERTIES:
@@ -1621,3 +1700,7 @@ Luke 12:48, NRSV-UE
 #+end_quote
 
 [fn:2] 36 million users online in December 1996, vs. 5,473 million in July 2022, per [[https://www.internetworldstats.com/emarketing.htm][Internet World Stats]].
+
+[fn:3] Did someone shit in your brain and forget to stir?
+
+[fn:5] I won't forget to stir.
