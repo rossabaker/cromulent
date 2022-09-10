@@ -240,17 +240,17 @@ choose, goes to the ~gen~ directory.
   gen/            -diff -merge linguist-generated=true
 #+end_src
 
-** DONE Website                                                     :website:
+** DONE Website bundle                                              :website:
 CLOSED: [2022-08-24 Wed 15:04]
 :PROPERTIES:
-:EXPORT_HUGO_SECTION_FRAG: website
+:EXPORT_HUGO_BUNDLE: website
 :EXPORT_DESCRIPTION: A colophon for rossabaker.com.  Describes the way we convert an Org-Mode file into a website with ox-hugo and Nix.
 :END:
 
-*** Website index
+*** Website
 :PROPERTIES:
 :EXPORT_FILE_NAME: _index
-:EXPORT_TITLE: How rossabaker.com works
+:EXPORT_TITLE: Website
 :END:
 
 [[https://rossabaker.com/][rossabaker.com]] is sourced from an Org file.  We [[https://orgmode.org/manual/Extracting-Source-Code.html][tangle]] the
@@ -364,7 +364,7 @@ Generate the ~chroma.css~ file.
 *** DONE Templates                                                :hugo:html:
 CLOSED: [2022-09-01 Thu 16:53]
 :PROPERTIES:
-:EXPORT_HUGO_SECTION_FRAG: templates
+:EXPORT_HUGO_BUNDLE: templates
 :END:
 
 **** DONE Index
@@ -1476,7 +1476,7 @@ ninth grade report card.
 :EXPORT_FILE_NAME: _index
 :END:
 ** DONE The AOL of the 2020s :@tech:community:gitter:discord:slack:open_web:aol:
-CLOSED: <2022-09-10 Sat 01:29>
+CLOSED: [2022-09-10 Sat 01:29]
 :PROPERTIES:
 :EXPORT_FILE_NAME: the-aol-of-the-2020s
 :END:
@@ -1543,7 +1543,9 @@ following.  I want my efforts to reverberate.
   curtailed my chatting, but you might nerdsnipe me into a public room
   there.
 
-- I challenge you to contribute back to the open web.  [[*Website index][My setup]] is
+# TODO absoulte link, because bundle names can't be tag names
+
+- I challenge you to contribute back to the open web.  [[/configs/website][My setup]] is
   arcane, but it's documented and I've recaptured some Joy of
   Computing in building it.  Find yours.
 
