@@ -27,8 +27,8 @@ are so many more cool things to discuss, billions more to discuss them
 with, and such dreadful mediums we've built to discuss them in.
 
 This project hopes to bring the old wonder to the modern Web.  It
-hosts an experiment in [[*Configurations][literate configuration]] and an [[*Articles][inchoate blog]].
-Archives of my [[*Talks][talks]], [[*Projects][projects]], [[*Podcasts][podcasts]], and [[*Publications][publications]] are under
+hosts an experiment in [[*Configurations][literate configuration]] and an [[*Blog][inchoate blog]].
+Archives of my [[*Talks][talks]], [[*Projects][projects]], [[*Podcasts][podcasts]], and [[*Books][books]] are under
 construction.  I suggest the [[/categories][categories]] (coarse) or [[/tags][tags]] (fine) to
 zoom in on shared interests.
 
@@ -988,6 +988,7 @@ CSS.  Lunch hour is almost over, so I'll describe it another day.
 CLOSED: [2022-09-02 Fri 11:41]
 :PROPERTIES:
 :EXPORT_FILE_NAME: header
+:EXPORT_HUGO_LASTMOD: <2022-09-11 Sun 15:58>
 :END:
 
 Our header is straightforward semantic HTML, with a ~<h1>~, ~<p>~,
@@ -1001,15 +1002,53 @@ an Emacs Lisp definition.
 We reference a ~username~ site parameter, because my full name doesn't
 make any sense as a Lisp variable.
 
+Define the menu in the config:
+
+#+begin_src conf-toml :tangle ../../.hugo-out/config.toml
+  [[menu.main]]
+  name = 'About'
+  url = '/about'
+  weight = 1
+
+  [[menu.main]]
+  name = 'Blog'
+  url = '/blog'
+  weight = 100
+
+  [[menu.main]]
+  name = 'Talks'
+  url = '/talks'
+  weight = 120
+
+  [[menu.main]]
+  name = 'Projects'
+  url = '/projects'
+  weight = 130
+
+  [[menu.main]]
+  name = 'Configs'
+  url = '/talks'
+  weight = 140
+
+  [[menu.main]]
+  name = 'Categories'
+  url = '/categories'
+  weight = 500
+
+  [[menu.main]]
+  name = 'Tags'
+  url = '/tags'
+  weight = 510
+#+end_src
+
 #+begin_src html :tangle ../../.hugo-out/layouts/partials/header.html
-  <h1><a href="{{ "/" | absURL }}">{{ .Site.Params.username }}</a></h1>
+  <h1><a href="{{ "/" | relURL }}">{{ .Site.Params.username }}</a></h1>
   <p>{{ .Site.Params.description }}</p>
   <nav>
       <ul>
-          {{ range $name, $_ := .Site.Taxonomies.categories }}
-              <li><a href="{{ "/categories" | absURL }}/{{ $name }}">{{ $name }}</a></li>
+          {{ range .Site.Menus.main }}
+              <li><a href="{{ .URL }}">{{ .Name | urlize }}</a></li>
           {{ end }}
-          <li><a href="{{ "/tags" | absURL }}">tags</a></li>
       </ul>
   </nav>
 #+end_src
@@ -1422,6 +1461,53 @@ to mine.
   }
 #+end_src
 
+** Books                                                               :book:
+
+*** Scalatra in Action                :@tech:scala:scalatra:http:sbt:scalate:
+:PROPERTIES:
+:EXPORT_FILE_NAME: scalatra-in-action
+:EXPORT_DATE: <2016-05-23 Mon>
+:EXPORT_HUGO_PUBLISHDATE: <2022-08-30 Tue 22:44>
+:END:
+
+[[https://www.manning.com/books/scalatra-in-action][Scalatra in Action]] was written by [[https://constructiveproof.com/][Dave Hrycyszyn,]] Stefan Ollinger, and
+me and covers the [[https://scalatra.org/][Scalatra micro-framework]] in depth.  Scalatra is a
+port of Ruby's Sinatra to Scala.
+
+#+hugo:more
+
+#+attr_html: :alt Scalatra in Action book cover :class scalatra-in-action
+[[https://www.manning.com/books/scalatra-in-action][file:../hugo/static/img/scalatra-in-action.jpg]]
+
+From the publisher:
+
+#+begin_quote
+_Scalatra in Action_ covers the Scalatra framework in its entirety,
+starting with concepts such as request routing, input handling,
+actions, and HTTP responses. For readers who don't already know Scala,
+the book introduces the Scala language and sbt, the Simple Build
+Tool. You'll learn how to use Scalatra's powerful templating engine,
+Scalate. It also covers advanced topics such as data access, handling
+heavy load, asynchronicity, securing your application, designing
+RESTful APIs, and real-time web programming.
+#+end_quote
+
+#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css :exports none
+  figure.scalatra-in-action {
+      margin: 0 auto;
+      max-width: 360px;
+      max-height: 452px
+  }
+
+  .scalatra-in-action {
+      display: block;
+      width: auto;
+      height: auto;
+      margin: 0 auto;
+  }
+#+end_src
+
+
 
 
 * Talks section
@@ -1467,16 +1553,59 @@ ninth grade report card.
 :EXPORT_HUGO_CUSTOM_FRONT_MATTER+: :slides pdf/anorm.pdf
 :END:
 
-* Articles section
+** Podcasts section                                                 :podcast:
 :PROPERTIES:
-:EXPORT_HUGO_BUNDLE: articles
+:EXPORT_HUGO_BUNDLE: podcasts
 :END:
-** Articles
+*** Podcasts
 :PROPERTIES:
 :EXPORT_FILE_NAME: _index
 :END:
-** DONE The AOL of the 2020s :@tech:community:gitter:discord:slack:open_web:aol:
-CLOSED: [2022-09-10 Sat 01:29]
+*** CoRecursive Episode #017 :@tech:corecursive:scala:http4s:functional_programming:remote_work:
+:PROPERTIES:
+:EXPORT_FILE_NAME: corecursive-17
+:EXPORT_DATE: <2018-07-27 Fri>
+:EXPORT_HUGO_PUBLISHDATE: <2022-08-29 Mon 00:10>
+:END:
+
+I was interviewed by Adam Gordon Bell on the [[https://corecursive.com/017-http4s-with-ross-baker/][CoRecursive podcast]].
+#+hugo:more
+
+#+begin_quote
+The promise of functional programming is code that is easier to reason
+about, test and maintain. Referential transparency means there is no
+extra context to worry about, we can just focus on inputs and
+outputs. Examples of functional programming in the small are
+plentiful. Fibonacci is easy to write as a function but what about fp
+in the large?
+
+Http4s is a web framework written in scala that takes a pure
+functional approach to building http services. Ross Baker is a
+contributor to http4s and he explains the benefits of this
+approach. We also touch on the benefits of working remotely, since he
+and I have both been doing it for some time.
+#+end_quote
+
+*** The Scala Logs                   :@tech:http4s:haskell:hockey:scala_logs:
+:PROPERTIES:
+:EXPORT_FILE_NAME: scala-logs
+:EXPORT_DATE: <2020-02-08 Sat>
+:EXPORT_HUGO_PUBLISHDATE: <2022-08-29 Mon 00:09>
+:END:
+
+It was my honor to join Zach McCoy on the [[https://open.spotify.com/episode/57RHzk5M7gJjLnV5nfehJo][first full episode of The
+Scala Logs]], where we talked http4s, Haskell, and hockey.
+
+
+* Blog section
+:PROPERTIES:
+:EXPORT_HUGO_BUNDLE: blog
+:END:
+** Blog
+:PROPERTIES:
+:EXPORT_FILE_NAME: _index
+:END:
+** TODO The AOL of the 2020s :@tech:community:gitter:discord:slack:open_web:aol:
 :PROPERTIES:
 :EXPORT_FILE_NAME: the-aol-of-the-2020s
 :END:
@@ -1531,7 +1660,7 @@ following.  I want my efforts to reverberate.
 
 - My current role involves a lot of teaching.  We use Slack,
   which is fair game in private enterprise, but I will expound
-  what I can on this [[*Articles][nascent blog]].
+  what I can on this [[*Blog][nascent blog]].
 
 - I am slowly republishing my old [[*Talks][talks]] here, with a couple new ones
   to share.
@@ -1610,103 +1739,6 @@ tile, and I can imagine her at the Pearly Gates to tally the final
 score.  "I say, hand me the top of the box, would you?" she surely
 told St. Peter.  "I want to look at the rules!"  But there's nothing
 to be worried about.  Grandma, you always did your best.
-
-* Podcasts section                                                  :podcast:
-:PROPERTIES:
-:EXPORT_HUGO_BUNDLE: podcasts
-:END:
-** Podcasts
-:PROPERTIES:
-:EXPORT_FILE_NAME: _index
-:END:
-** CoRecursive Episode #017 :@tech:corecursive:scala:http4s:functional_programming:remote_work:
-:PROPERTIES:
-:EXPORT_FILE_NAME: corecursive-17
-:EXPORT_DATE: <2018-07-27 Fri>
-:EXPORT_HUGO_PUBLISHDATE: <2022-08-29 Mon 00:10>
-:END:
-
-I was interviewed by Adam Gordon Bell on the [[https://corecursive.com/017-http4s-with-ross-baker/][CoRecursive podcast]].
-#+hugo:more
-
-#+begin_quote
-The promise of functional programming is code that is easier to reason
-about, test and maintain. Referential transparency means there is no
-extra context to worry about, we can just focus on inputs and
-outputs. Examples of functional programming in the small are
-plentiful. Fibonacci is easy to write as a function but what about fp
-in the large?
-
-Http4s is a web framework written in scala that takes a pure
-functional approach to building http services. Ross Baker is a
-contributor to http4s and he explains the benefits of this
-approach. We also touch on the benefits of working remotely, since he
-and I have both been doing it for some time.
-#+end_quote
-
-*** The Scala Logs                   :@tech:http4s:haskell:hockey:scala_logs:
-:PROPERTIES:
-:EXPORT_FILE_NAME: scala-logs
-:EXPORT_DATE: <2020-02-08 Sat>
-:EXPORT_HUGO_PUBLISHDATE: <2022-08-29 Mon 00:09>
-:END:
-
-It was my honor to join Zach McCoy on the [[https://open.spotify.com/episode/57RHzk5M7gJjLnV5nfehJo][first full episode of The
-Scala Logs]], where we talked http4s, Haskell, and hockey.
-
-* Publications section
-:PROPERTIES:
-:EXPORT_HUGO_BUNDLE: publications
-:END:
-** Publications
-:PROPERTIES:
-:EXPORT_FILE_NAME: _index
-:END:
-** Scalatra in Action                 :@tech:scala:scalatra:http:sbt:scalate:
-:PROPERTIES:
-:EXPORT_FILE_NAME: scalatra-in-action
-:EXPORT_DATE: <2016-05-23 Mon>
-:EXPORT_HUGO_PUBLISHDATE: <2022-08-30 Tue 22:44>
-:END:
-
-[[https://www.manning.com/books/scalatra-in-action][Scalatra in Action]] was written by [[https://constructiveproof.com/][Dave Hrycyszyn,]] Stefan Ollinger, and
-me and covers the [[https://scalatra.org/][Scalatra micro-framework]] in depth.  Scalatra is a
-port of Ruby's Sinatra to Scala.
-
-#+hugo:more
-
-#+attr_html: :alt Scalatra in Action book cover :class scalatra-in-action
-[[https://www.manning.com/books/scalatra-in-action][file:../hugo/static/img/scalatra-in-action.jpg]]
-
-From the publisher:
-
-#+begin_quote
-_Scalatra in Action_ covers the Scalatra framework in its entirety,
-starting with concepts such as request routing, input handling,
-actions, and HTTP responses. For readers who don't already know Scala,
-the book introduces the Scala language and sbt, the Simple Build
-Tool. You'll learn how to use Scalatra's powerful templating engine,
-Scalate. It also covers advanced topics such as data access, handling
-heavy load, asynchronicity, securing your application, designing
-RESTful APIs, and real-time web programming.
-#+end_quote
-
-#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css :exports none
-  figure.scalatra-in-action {
-      margin: 0 auto;
-      max-width: 360px;
-      max-height: 452px
-  }
-
-  .scalatra-in-action {
-      display: block;
-      width: auto;
-      height: auto;
-      margin: 0 auto;
-  }
-#+end_src
-
-
 
 * Local Variables :noexport:
 
