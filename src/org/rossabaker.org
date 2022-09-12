@@ -1498,9 +1498,6 @@ RESTful APIs, and real-time web programming.
   }
 #+end_src
 
-
-
-
 * Talks section
 :PROPERTIES:
 :EXPORT_HUGO_BUNDLE: talks
@@ -1586,7 +1583,6 @@ and I have both been doing it for some time.
 
 It was my honor to join Zach McCoy on the [[https://open.spotify.com/episode/57RHzk5M7gJjLnV5nfehJo][first full episode of The
 Scala Logs]], where we talked http4s, Haskell, and hockey.
-
 
 * Blog section
 :PROPERTIES:
@@ -1765,8 +1761,6 @@ zoom in on shared interests.
 
 I hope you find something here to enjoy, and I hope it inspires you to
 contribute to the open web, too.
-
-
 
 * Footnotes
 
