@@ -1676,26 +1676,32 @@ following.  I want my efforts to reverberate.
 - Alexandru Nedelcu touches on similar subjects in [[https://alexn.org/blog/2022/04/09/scala-gitter-discord-mistake/][Scala's Gitter to
   Discord migration mistake]].
 
-** TODO Running up the score in Scrabble           :@personal:grandma:eulogy:
-SCHEDULED: [2022-09-10 Sat 10:30]
+** DONE Running up the score in Scrabble           :@personal:grandma:eulogy:
+CLOSED: [2022-09-12 Mon 00:32]
 :PROPERTIES:
 :EXPORT_FILE_NAME: running-up-the-score-in-scrabble
 :END:
 
-Grandma and I had a tradition of playing Scrabble.  Her tradition
-predated mine.  The box still held score pads with relatives I never
-met.  That set was unfathomably old to my teenaged self, but at least
-it was the Modern English Alphabet Edition.  True to Grandma's
-stewardship, it still had all its pieces.
+#+begin_aside
+  My grandmother recently passed away.  A lightly edited version of
+  this was read at her memorial service.
+#+end_aside
 
-She won the first several matches.  One time, after sealing another
+Grandma and I had a tradition of playing Scrabble.  We used her
+vintage set.  It still had score pads with games featuring players
+further up the family tree.  It was intimidating.  I feared I might
+draw a "þ" or "æ", just like Chaucer used to play.  But it was indeed
+the Modern English Alphabet Edition.  True to her meticulous nature,
+it retained all its original pieces.
+#+hugo:more
+She won the first several matches.  One time, having sealed another
 victory, she remained hunched over the rack, running up the score on
-her own grandson.  "Really, Grandma?"  She explained that it's not
-worth doing if it's not worth your best.  She also pointed out I lost
-by hanging a vowel right next to the triple word score.
+her own grandson.  "Really, Grandma?"  She explained that
+it's not worth doing if it's not worth your best.  She also pointed
+out I lost when I hung a vowel too close to the triple word score.
 
-Her blood runs through my veins, which is to say that I am also
-stubborn.  I read a strategy guide.  When we met again, no more long
+Her blood runs in my veins, which means I am also stubborn.  I vowed
+to beat her.  I read a strategy book.  When we met again, no more long
 words.  Trench warfare!  Both scores were low, but she was prepared.
 She was always prepared.  She put me away with a "jo."
 
@@ -1703,33 +1709,32 @@ She was always prepared.  She put me away with a "jo."
 
 "Isn't that a foreign word?" I protested.
 
-"She's been playing that one for years," my aunt sighed.
-
-We didn't have the official Scrabble Dictionary, but still bitter, I
-checked [[https://scrabble.hasbro.com/en-us/tools#dictionary][hasbro.com's dictionary]] this week.  Grandma was right, you
-know.
+"She's been playing that one for years," my aunt sighed.  We didn't
+have the official Scrabble Dictionary, but still bitter, I checked
+[[https://scrabble.hasbro.com/en-us/tools#dictionary][hasbro.com's dictionary]] this week.  Grandma was right, you know.
 
 She came to one of my softball games.  I didn't play well, but she
 asked if I played my best.  She realized that I would not succeed Ryne
 Sandberg as the Cubs' second baseman a couple years before I did.  It
 was my best.
 
-Another time she asked about a poor grade.  "Well, to whom much is
-given, much is expected."  I didn't recognize the scriptural reference[fn:1]
-at the time, but that one hit me like a truck.  It wasn't my best.  My
-effort had disappointed Grandma.
+Another time, she asked me about a poor grade.  "To whom much is
+given, much is expected," she said.  I didn't recognize the scriptural
+reference[fn:1] at the time, but those words from her faith still hit
+me like a truck.  It wasn't my best.  I had disappointed her.
 
 She gave me more tips than I ever got from that Scrabble book.
-Eventually I did win.  I never got the consistent upper hand in
-Scrabble, but she made me better, in so many ways.  Her gifts were
-teaching and inspiration, so she was expected to bring out the best in
-each of us.
+Eventually, I beat her.  I never got the consistent upper hand in our
+series, but she made me better, in so many ways.  She was a gifted
+teacher and motivator, and her calling was to bring out the best in
+all of us.
 
 All games come to an end.  After 97 years, Grandma played her last
 tile, and I can imagine her at the Pearly Gates to tally the final
 score.  "I say, hand me the top of the box, would you?" she surely
-told St. Peter.  "I want to look at the rules!"  But there's nothing
-to be worried about.  Grandma, you always did your best.
+told St. Peter.  "I want to look at the rules!"  She was such a
+stickler for the rules.  But not to worry, Grandma: you /always/ did
+your best.
 
 * Local Variables :noexport:
 
