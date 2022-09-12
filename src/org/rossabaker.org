@@ -8,35 +8,26 @@
 CLOSED: [2022-09-05 Mon 00:30]
 :PROPERTIES:
 :EXPORT_FILE_NAME: _index
+:EXPORT_HUGO_LASTMOD: <2022-09-11 Sun 23:56>
 :END:
 
-#+attr_html: :class profile
+#+attr_html: :class construction
 #+begin_aside
-#+attr_html: :alt Profile picture of Ross A. Baker
-[[file:../hugo/static/img/profile.jpg]]
+#+attr_html: :alt Under construction
+file:../hugo/static/img/under-construction.gif
 #+end_aside
 
-I came online a little after [[https://en.wikipedia.org/wiki/Eternal_September][The September That Never Ended]], but long
-before [[https://en.wikipedia.org/wiki/Web_2.0][Web 2.0]].  I don't feel that old, but my internet age is in the
-99th percentile[fn:2].  Analysts rate my curmudgeonhood even
-higher.
+** "Under construction"
 
-I still love the ideals of the Open Web, but we are goaded by siloed
-apps, follower counts, reaction emoji, and chum boxes.  Today, there
-are so many more cool things to discuss, billions more to discuss them
-with, and such dreadful mediums we've built to discuss them in.
+This site is /under construction/, as we said the last time I built
+a web site.  I'm a backend developer and got himself in a bit over
+my head [[/configs/website][building this one from scratch]].
 
-This project hopes to bring the old wonder to the modern Web.  It
-hosts an experiment in [[*Configurations][literate configuration]] and an [[*Blog][inchoate blog]].
-Archives of my [[*Talks][talks]], [[*Projects][projects]], [[*Podcasts][podcasts]], and [[*Books][books]] are under
-construction.  I suggest the [[/categories][categories]] (coarse) or [[/tags][tags]] (fine) to
-zoom in on shared interests.
-
-I hope you find something here to enjoy, and I hope it inspires you to
-contribute to the open web, too.
+I struggle with the perfect being the enemy of the good.  I'm
+publishing before I'm proud of it, or else it will never happen.
 
 #+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css :exports none
-  aside.profile {
+  aside.construction {
       float: left;
       width: 40%;
       max-width: 400px;
@@ -44,18 +35,18 @@ contribute to the open web, too.
   }
 
   @media (max-width: 576px) {
-      aside.profile {
+      aside.construction {
           float: none;
           width: 100%;
           margin: 1.5em auto;
       };
   }
 
-  aside.profile figure {
+  aside.construction figure {
       margin: 0;
   }
 
-  aside.profile img {
+  aside.construction img {
       max-width: 100%;
       border-radius: 1.5em;
   }
@@ -1747,6 +1738,30 @@ We need to prepend ~"asc"~ to the defaults to share our PGP public key.
 Local Variables:
 org-hugo-external-file-extensions-allowed-for-copying: ("asc" "jpg" "jpeg" "tiff" "png" "svg" "gif" "mp4" "pdf" "odt" "doc" "ppt" "xls" "docx" "pptx" "xlsx")
 End:
+
+* Stashed
+
+** Old home page copy
+I came online a little after [[https://en.wikipedia.org/wiki/Eternal_September][The September That Never Ended]], but long
+before [[https://en.wikipedia.org/wiki/Web_2.0][Web 2.0]].  I don't feel that old, but my internet age is in the
+99th percentile[fn:2].  Analysts rate my curmudgeonhood even
+higher.
+
+I still love the ideals of the Open Web, but we are goaded by siloed
+apps, follower counts, reaction emoji, and chum boxes.  Today, there
+are so many more cool things to discuss, billions more to discuss them
+with, and such dreadful mediums we've built to discuss them in.
+
+This project hopes to bring the old wonder to the modern Web.  It
+hosts an experiment in [[*Configurations][literate configuration]] and an [[*Blog][inchoate blog]].
+Archives of my [[*Talks][talks]], [[*Projects][projects]], [[*Podcasts][podcasts]], and [[*Books][books]] are under
+construction.  I suggest the [[/categories][categories]] (coarse) or [[/tags][tags]] (fine) to
+zoom in on shared interests.
+
+I hope you find something here to enjoy, and I hope it inspires you to
+contribute to the open web, too.
+
+
 
 * Footnotes
 
