@@ -63,11 +63,9 @@ CLOSED: [2022-08-27 Sat 14:04]
 I'm other places too, but try one of these first.
 
 #+begin_contacts
-- Email :: [[mailto:ross@rossabaker.com][ross@rossabaker.com]]
-- GitHub :: [[https://github.com/rossabaker][@rossabaker]]
-- Matrix :: [[https://matrix.to/#/@ross:rossabaker.com][@ross:rossabaker.com]]
-- Mastodon :: [[https://mastodon.social/@rossabaker][@rossabaker@mastodon.social]]
-- Twitter :: [[https://twitter.com/rossabaker][@rossabaker]]
+# Uses the [[*~contact-info-dl~ shortcode][~contact-info-dl~ shortcode]].  That's not great, if we ever export
+# to non-Hugo targets.
+@@hugo:{{< contact-info-dl >}}@@
 #+end_contacts
 
 #+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css :exports none
@@ -310,7 +308,7 @@ pipeline.  ~chroma.css~ is [[*Syntax highlighting][generated below]].
 
 #+begin_src conf-toml :tangle ../../.hugo-out/config.toml
   [Params]
-    css = [ 'cromulent.css', 'chroma.css', 'noto-fonts.css', 'ox-hugo.css' ]
+    css = [ 'cromulent.css', 'chroma.css', 'noto-fonts.css', 'fork-awesome.css', 'ox-hugo.css' ]
     description = "A perfectly cromulent developer."
     username = 'rossabaker'
 
@@ -1160,16 +1158,40 @@ Render the HTML list as a Lispy, inline list.
 CLOSED: [2022-09-02 Fri 10:35]
 :PROPERTIES:
 :EXPORT_FILE_NAME: footer
+:EXPORT_HUGO_LASTMOD: <2022-09-12 Mon 23:02>
 :END:
 
-We currently have a minimalist ~<footer>~ that links to our contact
-info.  Social links eventually belong here.
+The footer is a simple ~<address>~ with our name, pronouns, and
+socials.  Our social links will use the [[https://microformats.org/wiki/rel-me][rel-me microformat]] for
+verification.
 #+hugo:more
+
 #+begin_src html :tangle ../../.hugo-out/layouts/partials/footer.html
   <address>
-      <a href="{{ "/contact" | absURL }}">Ross A. Baker</a>
+      Ross A. Baker
       <a href="https://pronoun.is/he">(he/him)</a>
+      <nav>
+        {{ partial "contact-info-icons" . }}
+      </nav>
   </address>
+#+end_src
+
+#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
+  address nav {
+      display: inline-block;
+  }
+
+  address nav ul {
+      display: inline-block;
+      list-style-type: none;
+      margin: 0;
+      padding-left: 0;
+  }
+
+  address nav li {
+      display: inline;
+      margin-left: 1ch;
+  }
 #+end_src
 
 **** DONE Heading rendering
@@ -1214,6 +1236,73 @@ Align the symbol as a superscript:
   .heading-anchor {
       vertical-align: super;
   }
+#+end_src
+
+**** DONE Contact info templates
+CLOSED: [2022-09-12 Mon 22:11]
+:PROPERTIES:
+:EXPORT_FILE_NAME: contact-info
+:END:
+
+Contact info is rendered in two places: in the [[*Footer template][footer template]] and on the
+[[*Contact][contact page]].  They share a common definition.
+#+hugo:more
+***** Site parameters
+
+We'll store the contacts in the site parameters of ~config.toml~.  The
+icon is derived from ~network~, unless explicitly specified as ~icon~.
+It should match a [[https://forkaweso.me/Fork-Awesome/icons/][Fork Awesome icon name]].
+
+#+begin_src conf-toml :tangle ../../.hugo-out/config.toml
+  [[Params.contacts]]
+  network = 'Email'
+  icon = 'envelope-o'
+  handle = 'ross@rossabaker.com'
+  url = 'mailto:ross@rossabaker.com'
+
+  [[Params.contacts]]
+  network = 'GitHub'
+  handle = '@rossabaker'
+  url = 'https://github.com/rossabaker'
+
+  [[Params.contacts]]
+  network = 'Matrix'
+  icon = 'matrix-org'
+  handle = '@ross:rossabaker.com'
+  url = 'https://matrix.to/#/@ross:rossabaker.com'
+
+  [[Params.contacts]]
+  network = 'Mastodon'
+  handle = 'https://mastodon.social/@rossabaker'
+  url = 'https://matrix.to/#/@ross:rossabaker.com'
+
+  [[Params.contacts]]
+  network = 'Twitter'
+  handle = '@rossabaker'
+  url = 'https://twitter.com/rossabaker'
+#+end_src
+
+***** ~contact-info-icons~ partial template
+
+#+begin_src html :tangle ../../.hugo-out/layouts/partials/contact-info-icons.html
+  <ul>
+      {{ range .Site.Params.contacts }}
+          <li><a href="{{ .url }}" rel="me"><span class="fa fa-{{ .icon | default (.network | urlize) }}"></span></a></li>
+      {{ end }}
+  </ul>
+#+end_src
+
+***** ~contact-info-dl~ shortcode
+
+~contact-info-dl~ renders all the contacts in a simple definition list.
+
+#+begin_src html :tangle ../../.hugo-out/layouts/shortcodes/contact-info-dl.html
+  <dl>
+      {{ range .Site.Params.contacts }}
+          <dt>{{ .network }}</dt>
+          <dd><a href="{{ .url }}">{{ .handle }}</a></dd>
+      {{ end }}
+  </dl>
 #+end_src
 
 *** DONE Build website with Nix                      :hugo:ox_hugo:nix:babel:
