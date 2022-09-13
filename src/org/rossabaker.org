@@ -1274,7 +1274,7 @@ It should match a [[https://forkaweso.me/Fork-Awesome/icons/][Fork Awesome icon 
   [[Params.contacts]]
   network = 'Mastodon'
   handle = 'https://mastodon.social/@rossabaker'
-  url = 'https://matrix.to/#/@ross:rossabaker.com'
+  url = 'https://mastodon.social/web/@rossabaker'
 
   [[Params.contacts]]
   network = 'Twitter'
