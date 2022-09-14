@@ -52,15 +52,77 @@ publishing before I'm proud of it, or else it will never happen.
   }
 #+end_src
 
-* DONE Contact           :@personal:email:github:mastodon:matrix:twitter:pgp:
-CLOSED: [2022-08-27 Sat 14:04]
+* DONE Ross A. Baker                                    :@personal:biography:contact:
+CLOSED: [2022-08-31 Wed 00:23]
 :PROPERTIES:
-:EXPORT_FILE_NAME: contact
-:EXPORT_HUGO_LASTMOD: <2022-08-28 Sun 00:12>
-:EXPORT_DESCRIPTION: A partial enumeration of addresses, social networks, and PGP public key.
+:EXPORT_HUGO_SECTION: /
+:EXPORT_FILE_NAME: about
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :grid true
+:EXPORT_HUGO_LASTMOD: <2022-09-14 Wed 13:28>
 :END:
 
-I'm other places too, but try one of these first.
+@@hugo:<div class="content">@@
+
+*Ross A. Baker* (/​ɹɔs eɪ beɪ.kɚ/) is an American software engineer who
+is not notable enough for a Wikipedia article.  He's arguably not even
+notable enough for this article on an eponymous domain.
+#+hugo:more
+
+#+toc: headlines 2
+
+** Early life
+
+Baker grew up in [[https://en.wikipedia.org/wiki/Crystal_Lake,_Illinois][Crystal Lake]], [[https://en.wikipedia.org/wiki/Illinois][Illinois]].  He was gifted a copy of
+[[https://archive.org/details/LearningBasicForTandyComputers][Learning BASIC for Tandy Computers]] by his aunt, and would enter and
+then modify programs out of the back of [[https://en.wikipedia.org/wiki/3-2-1_Contact#Magazine][3-2-1 Contact Magazine]].  He
+wanted to be a computer programmer or a Major League Baseball player,
+but showed some aptitude for the former and absolutely none for the
+latter.
+
+In high school, he reverse engineered the roster format of [[https://en.wikipedia.org/wiki/Wayne_Gretzky_Hockey_2][Wayne
+Gretzky Hockey 2]] and made a league simulator with rosters, drafts,
+trades, and playoffs, in BASIC, and shared it with friends.  He hasn't
+written anything that cool since.
+
+** Education
+
+Baker studied Computer Science and Cognitive Science at [[https://www.indiana.edu/][Indiana
+University]], where he was recognized on campus as the guy who wore
+shorts even in the dead of winter.  He captained the [[http://www.collegebowl.com/schoolhistoryrpt.asp?CustomerID=165][IU College Bowl
+Team]] team to an abysmal [[http://www.collegebowl.com/schoolhistoryrpt.asp?CustomerID=165][2-13 record]] at the 1998 National Championship.
+
+** Career
+
+Baker has worked as a software engineer on school library circulation
+systems, commercial insurance, mail-order music clubs, automobile
+auctions, 340B compliance, cybersecurity, IP television, rewards
+clubs, cloud infrastructure, and fintech.  He currently works as a
+staff engineer with a heavy emphasis on mentoring.
+
+He taught himself Scala and got deeply involved in Open Source and the
+[[https://typelevel.org/][Typelevel]] ecosystem, where he serves on the Steering Committee.
+
+Baker enjoys statistics, pairwise comparison, and various types of
+sportsball.  He combined these interests to assist with the [[http://prwolfe.bol.ucla.edu/cfootball/][Wolfe
+Ratings]] used by the Bowl Championship Series from 2001-2013.
+
+** Controversies
+
+*** 2005 World Series conspiracy theory
+
+Baker believes, without evidence, that the 2005 World Series was
+canceled due to lack of interest.  Some thought he'd let it go after
+the Cubs won in 2016, but no.
+
+** Personal life
+
+Baker lives in [[https://en.wikipedia.org/wiki/Indianapolis][Indianapolis]], [[https://en.wikipedia.org/wiki/Indiana][Indiana]], with his wife, two children, two
+dogs, cat, myriad freshwater fish, frogs, and invertebrates.  He
+is a volunteer soccer coach at [[https://northsidesoccer.com/][Northside Soccer]] and active member of
+[[https://northchurchindy.com/][North United Methodist Church]].  He cross-country skis when it's snowy
+and jogs when it's not.
+
+** External links
 
 #+begin_contacts
 # Uses the [[*~contact-info-dl~ shortcode][~contact-info-dl~ shortcode]].  That's not great, if we ever export
@@ -82,34 +144,40 @@ I'm other places too, but try one of these first.
   dd {
       grid-column: 2;
   }
+
+  .ox-hugo-toc {
+      background: #f8f8f8;
+      border: 1px solid #666;
+      font-size: 0.85em;
+      padding: 1em;
+      display: inline-block;
+  }
+
+  .ox-hugo-toc .heading {
+      font-weight: bolder;
+      text-align: center;
+  }
+
+  .ox-hugo-toc ul {
+      counter-reset: toc-item;
+      list-style: none;
+      padding-left: 0;
+  }
+  .ox-hugo-toc li {
+      display: block;
+  }
+  .ox-hugo-toc ul ul {
+      padding-left: 4ch;
+  }
+
+  .ox-hugo-toc li::before {
+      content: counters(toc-item, ".") " ";
+      counter-increment: toc-item;
+  }
 #+end_src
 
-** PGP
+@@hugo:</div>@@
 
-Download my [[file:../hugo/static/keys/0x975BE5BC29D92CA5.pub.asc][public PGP key]].  Its fingerprint is as follows:
-
-#+begin_example
-pub   rsa4096/0x975BE5BC29D92CA5 2018-01-31 [SC]
-      Key fingerprint = 904C 1537 33DB B010 6915  C0BD 975B E5BC 29D9 2CA5
-uid                   [ultimate] Ross A. Baker <ross@rossabaker.com>
-sub   rsa4096/0x89FB7DEA8BDEB545 2018-01-31 [E]
-      Key fingerprint = 7578 8CFE 8A1B E74E D17D  30AB 89FB 7DEA 8BDE B545
-#+end_example
-
-* DONE About                                              :@personal:infobox:
-CLOSED: [2022-08-31 Wed 00:23]
-:PROPERTIES:
-:EXPORT_HUGO_SECTION: /
-:EXPORT_FILE_NAME: about
-:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :grid true
-:END:
-
-#+begin_content
-I don't expect to ever be notable enough for a Wikipedia article, but
-we all deserve an infobox.  Here's mine.
-#+end_content
-
-#+hugo:more
 #+begin_infobox
 @@hugo:<h2>@@Ross A. Baker@@hugo:</h2>@@
 
@@ -117,22 +185,10 @@ we all deserve an infobox.  Here's mine.
 [[../hugo/static/img/profile.jpg]]
 
 - Name :: Ross A. Baker
-- Pronunciation :: /​ɹɔs eɪ beɪ.kɚ/
-- Pronouns :: [[https://pronoun.is/he][he/him]]
-- Generation :: [[https://en.wikipedia.org/wiki/Xennials][Xennial]]
-- Hometown :: [[https://en.wikipedia.org/wiki/Crystal_Lake,_Illinois][Crystal Lake]], [[https://en.wikipedia.org/wiki/Illinois][Illinois]], U.S.
-- Residence :: [[https://en.wikipedia.org/wiki/Indianapolis][Indianapolis]], [[https://en.wikipedia.org/wiki/Indiana][Indiana]], U.S.
-- Alma mater :: [[https://www.indiana.edu/][Indiana University]]
 - Occupation :: software engineer
-- Employer :: [[https://www.jackhenry.com/][Jack Henry]]
-- Organizations :: [[https://typelevel.org/][Typelevel]], [[https://www.northsidesoccer.com/][Northside Soccer]]
 - Style :: functional
-- Spouse :: bless her
-- Children :: 2
-- Dogs :: 2
-- Cats :: 1
-- Fish :: several
-- Amphibians :: a few
+- Pronouns :: [[https://pronoun.is/he][he/him]]
+- Interjections :: ope
 - Personality :: BBQ
 - ~$EDITOR~ :: Emacs
 - HTML tag :: ~<dl>~
@@ -142,7 +198,6 @@ we all deserve an infobox.  Here's mine.
 - NFL team :: Bears
 - NHL team :: Blackhawks
 - NBA team :: Pacers
-- Interjections :: ope
 - Disposition :: curmudgeonly
 #+end_infobox
 
@@ -210,6 +265,25 @@ we all deserve an infobox.  Here's mine.
       margin-left: 0;
   }
 #+end_src
+
+* DONE Public keys              :@tech:keys:pgp:
+CLOSED: [2022-09-14 Wed 13:30]
+:PROPERTIES:
+:EXPORT_FILE_NAME: public-keys
+:EXPORT_DESCRIPTION: A partial enumeration of addresses, social networks, and PGP public key.
+:END:
+
+** PGP
+
+Download my [[file:../hugo/static/keys/0x975BE5BC29D92CA5.pub.asc][public PGP key]].  Its fingerprint is as follows:
+
+#+begin_example
+pub   rsa4096/0x975BE5BC29D92CA5 2018-01-31 [SC]
+      Key fingerprint = 904C 1537 33DB B010 6915  C0BD 975B E5BC 29D9 2CA5
+uid                   [ultimate] Ross A. Baker <ross@rossabaker.com>
+sub   rsa4096/0x89FB7DEA8BDEB545 2018-01-31 [E]
+      Key fingerprint = 7578 8CFE 8A1B E74E D17D  30AB 89FB 7DEA 8BDE B545
+#+end_example
 
 * Configurations section                                              :@tech:
 :PROPERTIES:
@@ -1294,7 +1368,7 @@ CLOSED: [2022-09-12 Mon 22:11]
 :END:
 
 Contact info is rendered in two places: in the [[*Footer template][footer template]] and on the
-[[*Contact][contact page]].  They share a common definition.
+[[*Ross A. Baker][about page]].  They share a common definition.
 #+hugo:more
 ***** Site parameters
 
