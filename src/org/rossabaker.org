@@ -101,13 +101,17 @@ CLOSED: [2022-08-31 Wed 00:23]
 :PROPERTIES:
 :EXPORT_HUGO_SECTION: /
 :EXPORT_FILE_NAME: about
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :grid true
 :END:
 
+#+begin_content
 I don't expect to ever be notable enough for a Wikipedia article, but
 we all deserve an infobox.  Here's mine.
+#+end_content
 
 #+hugo:more
 #+begin_infobox
+@@hugo:<h2>@@Ross A. Baker@@hugo:</h2>@@
 
 #+attr_html: :alt Profile image of Ross A. Baker
 [[../hugo/static/img/profile.jpg]]
@@ -143,23 +147,57 @@ we all deserve an infobox.  Here's mine.
 #+end_infobox
 
 #+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css :exports none
+  article.grid {
+      display: grid;
+      grid-template-columns: 1fr 18em;
+      grid-template-areas:
+          "header header"
+          "content infobox"
+          "footer footer";
+      column-gap: 2em;
+      row-gap: 0;
+  }
+
+  article.grid header {
+      grid-area: header;
+  }
+
+  article.grid footer {
+      grid-area: footer;
+  }
+
+  .content {
+      grid-area: content;
+  }
+
   .infobox {
-      width: fit-content;
+      grid-area: infobox;
+      width: 18em;
       margin: 0 auto;
       border: 1px solid #666;
       padding: 0.5em;
+      background: #f8f8f8;
+      font-size: 0.85em;
+  }
 
+  .infobox h2 {
+      text-align: center;
+      font-family: "Noto Sans", sans-serif;
+      font-size: 1.25rem;
+      margin: 0;
   }
 
   .infobox img {
       display: block;
-      max-width: 45%;
+      max-width: 100%;
       margin: 0 auto;
   }
 
   .infobox dl {
       display: inline-grid;
-      grid-template-columns: max-content, max-content;
+      grid-template-columns: max-content 1fr;
+      column-gap: 1em;
+      row-gap: 0.5em;
   }
 
   .infobox dt {
@@ -169,7 +207,7 @@ we all deserve an infobox.  Here's mine.
 
   .infobox dd {
       grid-column: 2;
-      margin-bottom: 0.5em;
+      margin-left: 0;
   }
 #+end_src
 
@@ -439,7 +477,7 @@ Think of them as the articles.  Indeed, we mark them up in an
 
 #+begin_src html :tangle ../../.hugo-out/layouts/_default/single.html
   {{ define "main" }}
-      <article>
+      <article {{ with .Params.grid }}class="grid"{{ end }}>
           <header>
               <h1>{{ .Title }}</h1>
           </header>
