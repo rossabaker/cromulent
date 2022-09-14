@@ -1063,8 +1063,7 @@ It's monospace, because it's "code".
 Render each element as a flex:
 
 Introduce the Lisp syntax as CSS content.  The double paren on the
-last child of the last child is sloppy, but I haven't figured out
-another way to hug it.
+last child is sloppy, but I haven't figured out another way to hug it.
 
 #+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
   body > header h1::before {
@@ -1079,8 +1078,9 @@ another way to hug it.
   body > header nav::before {
       content: "'(";
   }
-  body > header > *:last-child > *:last-child::after {
+  body > header > nav > ul > li:last-child::after {
       content: "))";
+      white-space: nowrap;
   }
 #+end_src
 
