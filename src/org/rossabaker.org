@@ -977,7 +977,7 @@ CSS.  Lunch hour is almost over, so I'll describe it another day.
 CLOSED: [2022-09-02 Fri 11:41]
 :PROPERTIES:
 :EXPORT_FILE_NAME: header
-:EXPORT_HUGO_LASTMOD: <2022-09-11 Sun 15:58>
+:EXPORT_HUGO_LASTMOD: <2022-09-13 Tue 22:13>
 :END:
 
 Our header is straightforward semantic HTML, with a ~<h1>~, ~<p>~,
@@ -1062,9 +1062,9 @@ It's monospace, because it's "code".
 
 Render each element as a flex:
 
-Introduce the Lisp syntax as CSS content.  It's sloppy that the
-~ul::after~ closes both lists, but I couldn't get it to eliminate
-the whitespace between the ~</ul>~ and the ~</header>~.
+Introduce the Lisp syntax as CSS content.  The double paren on the
+last child of the last child is sloppy, but I haven't figured out
+another way to hug it.
 
 #+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
   body > header h1::before {
@@ -1076,10 +1076,10 @@ the whitespace between the ~</ul>~ and the ~</header>~.
   body > header p::after {
       content: "\"";
   }
-  body > header ul::before {
+  body > header nav::before {
       content: "'(";
   }
-  body > header ul::after {
+  body > header > *:last-child > *:last-child::after {
       content: "))";
   }
 #+end_src
@@ -1129,12 +1129,23 @@ The site subtitle becomes our "docstring".
   }
 #+end_src
 
-Setting ~display: inline-flex~ on the link eats the whitespace around
-the generated parens.
+Setting ~display: inline-flex~ on the nav indents things properly in
+the quoted list, even across multiple lines.
+
+#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
+  body > header > nav {
+      display: inline-flex;
+  }
+#+end_src
+
+The ~ul~ is also ~inline-flex~, to eat the whitespace in the HTML and
+let ~li~ set their own padding.  ~flex-wrap~ breaks it across lines
+on narrow viewports.
 
 #+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
   body > header ul {
       display: inline-flex;
+      flex-wrap: wrap;
       list-style: none;
       margin: 0;
   }
