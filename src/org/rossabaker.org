@@ -1016,7 +1016,7 @@ Define the menu in the config:
 
   [[menu.main]]
   name = 'Configs'
-  url = '/talks'
+  url = '/configs'
   weight = 140
 
   [[menu.main]]
