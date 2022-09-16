@@ -1,15 +1,4 @@
-result
-*.qcow2
-flycheck_init.el
+/result
 
-pkgs/website/html/
-pkgs/website/src/org/blog/index.org
-
-result
-
-.terraform/providers/
-terraform.tfstate
-terraform.tfstate.backup
-/infra/gcp/rossabaker/.terraform/
-/.hugo_build.lock
 /.hugo-out/
+/.hugo_build.lock

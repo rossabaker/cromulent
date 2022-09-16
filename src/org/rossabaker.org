@@ -287,7 +287,7 @@ corresponding configuration is reconfigured.
 CLOSED: [2022-08-24 Wed 15:04]
 :PROPERTIES:
 :EXPORT_FILE_NAME: cromulent
-:EXPORT_HUGO_LASTMOD: <2022-08-25 Thu 15:06>
+:EXPORT_HUGO_LASTMOD: <2022-09-16 Fri 08:49>
 :EXPORT_DESCRIPTION: Documents the Git repository that hosts my configurations and the source code for rossabaker.com.
 :END:
 
@@ -309,17 +309,26 @@ transiently in our builds, we do.  If some other tool expects a file
 in a specific location, we [[https://medium.com/@clarkbw/managing-generated-files-in-github-1f1989c09dfd][mark the generated version with
 .gitattributes]].
 
-First up is the ~.gitattributes~ file itself!
-
+Any file that needs to be checked in, but whose location we're free
+to choose, goes to the ~gen~ directory.
 #+begin_src gitattributes :tangle ../../.gitattributes
+  gen/            -diff -merge linguist-generated=true
+#+end_src
+
+Other generated files have hardcoded locations.  Enumerate them here.
+#+begin_src gitattributes :tangle ../../.gitattributes
+  .gitignore      -diff -merge linguist-generated=true
   .gitattributes  -diff -merge linguist-generated=true
 #+end_src
 
-Any file that needs to be checked in, but whose location we're free to
-choose, goes to the ~gen~ directory.
+*** Ignored files
 
-#+begin_src gitattributes :tangle ../../.gitattributes
-  gen/            -diff -merge linguist-generated=true
+These files don't need to be checked in, but are artifacts of things
+we do herein.
+
+~nix build~ creates a ~result/~ symlink in the project root.
+#+begin_src gitignore :tangle ../../.gitignore
+  /result
 #+end_src
 
 ** DONE Website bundle                                              :website:
@@ -1413,6 +1422,7 @@ It should match a [[https://forkaweso.me/Fork-Awesome/icons/][Fork Awesome icon 
 CLOSED: [2022-09-01 Thu 16:54]
 :PROPERTIES:
 :EXPORT_FILE_NAME: build
+:EXPORT_HUGO_LASTMOD: <2022-09-16 Fri 08:58>
 :END:
 
 The website is just another package in our flake.
@@ -1470,6 +1480,15 @@ For a more iterative experience with live reload in the browser, try:
 
 #+begin_src sh :tangle no
   hugo serve --disableFastRender --config .hugo-out/config.toml
+#+end_src
+
+**** Git ignores
+
+Our build creates some detritus that we don't want checked into Git.
+
+#+begin_src gitignore :tangle ../../.gitignore
+  /.hugo-out/
+  /.hugo_build.lock
 #+end_src
 
 *** DONE CSS foundation                               :css:google_fonts:noto:
