@@ -57,16 +57,85 @@ CLOSED: [2022-08-31 Wed 00:23]
 :PROPERTIES:
 :EXPORT_HUGO_SECTION: /
 :EXPORT_FILE_NAME: about
-:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :grid true
 :EXPORT_HUGO_LASTMOD: <2022-09-14 Wed 13:28>
 :END:
+
+#+begin_description
+Ross A. Baker is an American software engineer who is not notable
+enough for a Wikipedia article.  He's arguably not even notable enough
+for this article on an eponymous domain.
+#+end_description
+
+#+begin_infobox
+@@hugo:<h2>@@Ross A. Baker@@hugo:</h2>@@
+
+#+attr_html: :alt Profile image of Ross A. Baker
+[[../hugo/static/img/profile.jpg]]
+
+- Name :: Ross A. Baker
+- Occupation :: software engineer
+- Style :: functional
+- Pronouns :: [[https://pronoun.is/he][he/him]]
+- Interjections :: ope
+- Personality :: BBQ
+- ~$EDITOR~ :: Emacs
+- HTML tag :: ~<dl>~
+- Number :: /e/
+- Sandwich :: Italian beef, dipped
+- MLB team :: Cubs
+- NFL team :: Bears
+- NHL team :: Blackhawks
+- NBA team :: Pacers
+- Disposition :: curmudgeonly
+#+end_infobox
+
+#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css :exports none
+  .infobox {
+      float: right;
+      width: 18em;
+      margin: 0 0 1.5em 1.5em;
+      border: 1px solid #666;
+      padding: 0.5em;
+      background: #f8f8f8;
+      font-size: 0.85em;
+  }
+
+  .infobox h2 {
+      text-align: center;
+      font-family: "Noto Sans", sans-serif;
+      font-size: 1.25rem;
+      margin: 0;
+  }
+
+  .infobox img {
+      display: block;
+      max-width: 100%;
+      margin: 0 auto;
+  }
+
+  .infobox dl {
+      display: inline-grid;
+      grid-template-columns: max-content 1fr;
+      column-gap: 1em;
+      row-gap: 0.5em;
+  }
+
+  .infobox dt {
+      font-weight: bolder;
+      grid-column: 1;
+  }
+
+  .infobox dd {
+      grid-column: 2;
+      margin-left: 0;
+  }
+#+end_src
 
 @@hugo:<div class="content">@@
 
 *Ross A. Baker* (/​ɹɔs eɪ beɪ.kɚ/) is an American software engineer who
 is not notable enough for a Wikipedia article.  He's arguably not even
 notable enough for this article on an eponymous domain.
-#+hugo:more
 
 #+toc: headlines 2
 
@@ -177,94 +246,6 @@ and jogs when it's not.
 #+end_src
 
 @@hugo:</div>@@
-
-#+begin_infobox
-@@hugo:<h2>@@Ross A. Baker@@hugo:</h2>@@
-
-#+attr_html: :alt Profile image of Ross A. Baker
-[[../hugo/static/img/profile.jpg]]
-
-- Name :: Ross A. Baker
-- Occupation :: software engineer
-- Style :: functional
-- Pronouns :: [[https://pronoun.is/he][he/him]]
-- Interjections :: ope
-- Personality :: BBQ
-- ~$EDITOR~ :: Emacs
-- HTML tag :: ~<dl>~
-- Number :: /e/
-- Sandwich :: Italian beef, dipped
-- MLB team :: Cubs
-- NFL team :: Bears
-- NHL team :: Blackhawks
-- NBA team :: Pacers
-- Disposition :: curmudgeonly
-#+end_infobox
-
-#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css :exports none
-  article.grid {
-      display: grid;
-      grid-template-columns: 1fr 18em;
-      grid-template-areas:
-          "header header"
-          "content infobox"
-          "footer footer";
-      column-gap: 2em;
-      row-gap: 0;
-  }
-
-  article.grid header {
-      grid-area: header;
-  }
-
-  article.grid footer {
-      grid-area: footer;
-  }
-
-  .content {
-      grid-area: content;
-  }
-
-  .infobox {
-      grid-area: infobox;
-      width: 18em;
-      margin: 0 auto;
-      border: 1px solid #666;
-      padding: 0.5em;
-      background: #f8f8f8;
-      font-size: 0.85em;
-  }
-
-  .infobox h2 {
-      text-align: center;
-      font-family: "Noto Sans", sans-serif;
-      font-size: 1.25rem;
-      margin: 0;
-  }
-
-  .infobox img {
-      display: block;
-      max-width: 100%;
-      margin: 0 auto;
-  }
-
-  .infobox dl {
-      display: inline-grid;
-      grid-template-columns: max-content 1fr;
-      column-gap: 1em;
-      row-gap: 0.5em;
-  }
-
-  .infobox dt {
-      font-weight: bolder;
-      grid-column: 1;
-  }
-
-  .infobox dd {
-      grid-column: 2;
-      margin-left: 0;
-  }
-#+end_src
 
 * DONE Public keys              :@tech:keys:pgp:
 CLOSED: [2022-09-14 Wed 13:30]
@@ -551,7 +532,7 @@ Think of them as the articles.  Indeed, we mark them up in an
 
 #+begin_src html :tangle ../../.hugo-out/layouts/_default/single.html
   {{ define "main" }}
-      <article {{ with .Params.grid }}class="grid"{{ end }}>
+      <article>
           <header>
               <h1>{{ .Title }}</h1>
           </header>
