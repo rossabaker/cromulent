@@ -1146,14 +1146,6 @@ Define the menu in the config:
 
 ***** CSS
 
-Make it a little bigger.
-
-#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
-  body > header {
-      font-size: 1.225em;
-  }
-#+end_src
-
 It's monospace, because it's "code".
 
 #+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
