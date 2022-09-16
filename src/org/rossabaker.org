@@ -1283,25 +1283,23 @@ verification.
   <address>
       Ross A. Baker
       <a href="https://pronoun.is/he">(he/him)</a>
-      <nav>
-        {{ partial "contact-info-icons" . }}
-      </nav>
+      {{ partial "contact-info-icons" . }}
   </address>
 #+end_src
 
 #+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
-  address nav {
+  address {
       display: inline-block;
   }
 
-  address nav ul {
+  address ul {
       display: inline-block;
       list-style-type: none;
       margin: 0;
       padding-left: 0;
   }
 
-  address nav li {
+  address li {
       display: inline;
       margin-left: 1ch;
   }
