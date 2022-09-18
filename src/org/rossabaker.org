@@ -1,5 +1,5 @@
 #+PROPERTY: header-args :mkdirp yes
-#+hugo_base_dir: ../../.hugo-out
+#+hugo_base_dir: ../../tmp/hugo
 #+hugo_section: /
 #+startup: logdone
 #+export
@@ -26,7 +26,7 @@ my head [[/configs/website][building this one from scratch]].
 I struggle with the perfect being the enemy of the good.  I'm
 publishing before I'm proud of it, or else it will never happen.
 
-#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css :exports none
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css :exports none
   aside.construction {
       float: left;
       width: 40%;
@@ -89,7 +89,7 @@ for this article on an eponymous domain.
 - Disposition :: curmudgeonly
 #+end_infobox
 
-#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css :exports none
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css :exports none
   .infobox {
       float: right;
       width: 18em;
@@ -199,7 +199,7 @@ and jogs when it's not.
 @@hugo:{{< contact-info-dl >}}@@
 #+end_contacts
 
-#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css :exports none
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css :exports none
   .contacts dl {
       display: grid;
       grid-template-columns: max-content auto;
@@ -283,52 +283,94 @@ website.
 These are intended to be living documents, revised whenever the
 corresponding configuration is reconfigured.
 
-** DONE A perfectly cromulent repository                  :git:gitattributes:
+** DONE Managing generated sources in Git :git:gitattributes:gitignore:babel:
 CLOSED: [2022-08-24 Wed 15:04]
 :PROPERTIES:
-:EXPORT_FILE_NAME: cromulent
-:EXPORT_HUGO_LASTMOD: <2022-09-16 Fri 08:49>
-:EXPORT_DESCRIPTION: Documents the Git repository that hosts my configurations and the source code for rossabaker.com.
+:EXPORT_FILE_NAME: managing-generated-sources-in-git
+:EXPORT_HUGO_LASTMOD: <2022-09-18 Sun 00:18>
+:EXPORT_OPTIONS: H:6
 :END:
 
-My [[https://github.com/rossabaker/cromulent][personal Git repository]] contains my all my configurations and
-[[https://rossabaker.com/][personal web site]].  Everything is managed in an [[https://orgmode.org/][Org Mode]] file.  A
-monorepo is out of character for me, but this setup acts as one source
-of truth for what I share and what I run.
+My [[https://github.com/rossabaker/cromulent][personal Git repository]] hosts my configurations and this web site.
+Most of it is sourced from a single [[https://github.com/rossabaker/cromulent/blob/main/src/org/rossabaker.org][Org Mode file]], but most tools
+don't read Org directly.  We need to commit some [[https://orgmode.org/manual/Extracting-Source-Code.html][tangled]] sources to
+interoperate with various tools.  We must deal with three sorts of
+files.
+#+hugo:more
 
 *** Original sources
 
-As much as possible, original sources are stored in the ~src~
-directory.
+This is the minimal set of files from which all other files can be
+derived.  As much as possible, we keep them in ~src~.
 
-*** Materialized sources
+*** Ephemeral files
 
-Some files that we'd like to document here must be materialized to
-specific locations in the repository.  If we can generate the files
-transiently in our builds, we do.  If some other tool expects a file
-in a specific location, we [[https://medium.com/@clarkbw/managing-generated-files-in-github-1f1989c09dfd][mark the generated version with
-.gitattributes]].
+Ephemeral files can be tangled on demand and disposed of at will.
+Development processes may need them, but they can be comfortably
+recreated from the original sources.  An example of these are the Hugo
+outputs when [[*Local Nix build][locally building the site]].
 
-Any file that needs to be checked in, but whose location we're free
-to choose, goes to the ~gen~ directory.
-#+begin_src gitattributes :tangle ../../.gitattributes
-  gen/            -diff -merge linguist-generated=true
+We put as many of them as we can in ~tmp~ for organization.  The best
+way to handle them is with a [[https://git-scm.com/docs/gitignore][gitignore]].
+
+#+begin_src gitignore :tangle ../../.gitignore
+  /tmp/
 #+end_src
 
-Other generated files have hardcoded locations.  Enumerate them here.
-#+begin_src gitattributes :tangle ../../.gitattributes
-  .gitignore      -diff -merge linguist-generated=true
-  .gitattributes  -diff -merge linguist-generated=true
-#+end_src
+Nix builds create a ~result~ symlink by default that should laso be
+ignored.
 
-*** Ignored files
-
-These files don't need to be checked in, but are artifacts of things
-we do herein.
-
-~nix build~ creates a ~result/~ symlink in the project root.
 #+begin_src gitignore :tangle ../../.gitignore
   /result
+#+end_src
+
+*** Commited, generated sources
+
+There are files that are neither original, nor can they be generated
+on demand from originals.  This class of files is generally to be
+avoided, but with the right mitigations, we can live with it and still
+live in our Org Mode bubble within a world that isn't ready for it.
+
+**** Location
+
+Some files must be tangled to specific locations in the repository to
+be loaded by other tools.  For example, Git looks for ~.gitignore~ and
+in the project root.
+
+Other files need to be tangled for non-Org tooling, but are imported
+by something else.  The [[*Build website with Nix][Nix package for our website]], included in
+~flake.nix~.  We stow all such files we can in the ~gen~ directory.
+
+**** Problems and mitigations
+
+***** Desycnhronization
+
+The tangled source may be desynchronized with the Org Mode source.  We
+could check for this with a GitHub workflow, but don't yet.
+
+***** Bloated diffs
+
+When we commit tangled sources, each hunk of the diff may be
+duplicated between the original source and the tangled source.  This
+is distracting in review.  We can set a gitattribute of [[https://git-scm.com/docs/gitattributes#_diff][~-diff~]], which
+treats the specified file as binary.  It's a little white lie, but
+it prevents repeating each hunk.
+
+A second problem is that a larger diff has a larger surface area for
+merge conflicts.  [[https://git-scm.com/docs/gitattributes#_merge][~-merge~]] avoids 3-way merges, but still flags the
+file as a conflict.  Typically the file needs to be regenerated
+in these cases.
+
+Finally, seeting [[https://github.com/github/linguist/blob/97bc889ce840208652bf09b45f3b7859de43fe8e/docs/overrides.md#generated-code][~linguist-generated~]] suppresses these files from
+rendered diffs.  It also excludes them from GitHub language stats.
+
+We set all these gitattributes for all tangled sources.  The
+~.gitattributes~ file itself gets gitattributes set on it!
+
+#+begin_src gitattributes :tangle ../../.gitattributes
+  gen/            -diff -merge linguist-generated=true
+  .gitignore      -diff -merge linguist-generated=true
+  .gitattributes  -diff -merge linguist-generated=true
 #+end_src
 
 ** DONE Website bundle                                              :website:
@@ -357,7 +399,7 @@ CLOSED: [2022-09-01 Thu 16:48]
 A Hugo site can be configured with either TOML or YAML.  I spent my
 weirdness budget on a literate config, so let's stick to the default.
 #+hugo:more
-#+begin_src conf-toml :tangle ../../.hugo-out/config.toml
+#+begin_src conf-toml :tangle ../../tmp/hugo/config.toml
   baseURL = 'https://rossabaker.com'
   languageCode = 'en-us'
   title = 'Ross A. Baker'
@@ -372,7 +414,7 @@ it into ~src/hugo/themes~.
 
 ~themesDir~ cannot be a module mount.
 
-#+begin_src conf-toml :tangle ../../.hugo-out/config.toml
+#+begin_src conf-toml :tangle ../../tmp/hugo/config.toml
   theme = 'hugo-mwe'
   themesDir = 'src/hugo/themes'
 #+end_src
@@ -385,15 +427,15 @@ Because all this org stuff mucks with the [[https://gohugo.io/getting-started/di
 we have to give Hugo a few extra hints.  [[https://github.com/gohugoio/hugo/issues/6457#issuecomment-546580193][~assetDir~ is "legacy"]], so
 we'll use [[https://gohugo.io/hugo-modules/configuration/#module-config-mounts][module mounts]].
 
-#+begin_src conf-toml :tangle ../../.hugo-out/config.toml
+#+begin_src conf-toml :tangle ../../tmp/hugo/config.toml
   [[module.mounts]]
-    source = '.hugo-out/layouts'
+    source = 'tmp/hugo/layouts'
     target = 'layouts'
   [[module.mounts]]
-    source = '.hugo-out/content'
+    source = 'tmp/hugo/content'
     target = 'content'
   [[module.mounts]]
-    source = '.hugo-out/assets'
+    source = 'tmp/hugo/assets'
     target = 'assets'
   [[module.mounts]]
     source = 'src/hugo/assets'
@@ -408,7 +450,7 @@ we'll use [[https://gohugo.io/hugo-modules/configuration/#module-config-mounts][
 The ~css~ parameter lets us add custom stylesheets to the asset
 pipeline.  ~chroma.css~ is [[*Syntax highlighting][generated below]].
 
-#+begin_src conf-toml :tangle ../../.hugo-out/config.toml
+#+begin_src conf-toml :tangle ../../tmp/hugo/config.toml
   [Params]
     css = [ 'cromulent.css', 'chroma.css', 'noto-fonts.css', 'fork-awesome.css', 'ox-hugo.css' ]
     description = "A perfectly cromulent developer."
@@ -427,7 +469,7 @@ While that setting sounds scary, all that does is allow have inline
 HTML in your Markdown, as CommonMark allows!
 #+end_quote
 
-#+begin_src conf-toml :tangle ../../.hugo-out/config.toml
+#+begin_src conf-toml :tangle ../../tmp/hugo/config.toml
   [markup.goldmark.renderer]
     unsafe = true
 #+end_src
@@ -436,7 +478,7 @@ HTML in your Markdown, as CommonMark allows!
 
 The classless style is classless.
 
-#+begin_src conf-toml :tangle ../../.hugo-out/config.toml
+#+begin_src conf-toml :tangle ../../tmp/hugo/config.toml
   [markup.highlight]
     noClasses = false
 #+end_src
@@ -448,7 +490,7 @@ Generate the ~chroma.css~ file.
   hugo gen chromastyles --style=github
 #+end_src
 
-#+begin_src css :tangle ../../.hugo-out/assets/css/chroma.css :noweb yes :exports none
+#+begin_src css :tangle ../../tmp/hugo/assets/css/chroma.css :noweb yes :exports none
   <<chroma-css()>>
 #+end_src
 
@@ -488,7 +530,7 @@ All but ~main~ provide a default value.  There is no notion of
 "abstract" in a hugo template, so we can't enforce that every other
 template provide a ~main~, but this is the expectation.
 
-#+begin_src html :tangle ../../.hugo-out/layouts/_default/baseof.html
+#+begin_src html :tangle ../../tmp/hugo/layouts/_default/baseof.html
   <!DOCTYPE html>
   <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{{ site.Language.Lang }}" lang="{{ site.Language.Lang }}">
       <head>
@@ -520,7 +562,7 @@ template provide a ~main~, but this is the expectation.
 
 Visually separate the three sections a bit.
 
-#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
   body > main {
       border-width: 1px 0;
       border-style: solid;
@@ -539,7 +581,7 @@ Think of them as the articles.  Indeed, we mark them up in an
 ~<article>~ tag.
 #+hugo:more
 
-#+begin_src html :tangle ../../.hugo-out/layouts/_default/single.html
+#+begin_src html :tangle ../../tmp/hugo/layouts/_default/single.html
   {{ define "main" }}
       <article>
           <header>
@@ -578,7 +620,7 @@ Talks get their own single-page template based on custom front matter.
 
 Metadata appears in the article header.
 
-#+begin_src html :tangle ../../.hugo-out/layouts/talks/single.html
+#+begin_src html :tangle ../../tmp/hugo/layouts/talks/single.html
   {{ define "article-header" }}
       <h1>{{ .Title }}</h1>
       <dl>
@@ -596,7 +638,7 @@ Metadata appears in the article header.
 The content should be the abstract of the talk.  Slides are rendered
 inline below.
 
-#+begin_src html :tangle ../../.hugo-out/layouts/talks/single.html
+#+begin_src html :tangle ../../tmp/hugo/layouts/talks/single.html
   {{ define "article-main" }}
       {{ .Content }}
       {{ if .Params.Slides }}
@@ -618,7 +660,7 @@ This is approximately how Bootstrap styles an embed, and is optimized
 for a 4x3 slide deck.  We're going to need something more
 sophisticated eventually.
 
-#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
   .slides {
       position: relative;
   }
@@ -647,7 +689,7 @@ The list template renders for the home page, section listings,
 taxonomies, and terms.  By default, we render our article summaries
 in reverse order of modification.
 #+hugo:more
-#+begin_src html :tangle ../../.hugo-out/layouts/_default/list.html
+#+begin_src html :tangle ../../tmp/hugo/layouts/_default/list.html
   {{ define "main" }}
       <article>
           {{ if not .IsHome }}
@@ -677,7 +719,7 @@ in reverse order of modification.
 
 In case anything is floated in the content, clear it here.
 
-#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
   article .recently-updated {
       clear: both;
   }
@@ -699,7 +741,7 @@ used term is assigned an importance of =6=.  Everything else falls in
 between.  We choose a logarithm because we expect the distribution to
 roughly follow a power law.
 
-#+begin_src html :tangle ../../.hugo-out/layouts/_default/terms.html
+#+begin_src html :tangle ../../tmp/hugo/layouts/_default/terms.html
   {{ define "main" }}
       <h1>{{ .Name }}</h1>
       <ul class="terms {{.Name | urlize}}">
@@ -733,14 +775,14 @@ Creating font sizes for the CSS is boring.  Let's spit them out in Emacs Lisp!
 
 Look at all the CSS we didn't have to write:
 
-#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css :noweb yes
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css :noweb yes
   <<terms-sizes-css()>>
 #+end_src
 
 We still need to handwrite a bit.  This centers the ~.terms~ and
 reserves enough line height for the largest:
 
-#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
   .terms {
       list-style: none;
       padding-left: 0;
@@ -754,7 +796,7 @@ reserves enough line height for the largest:
 
 The elements are a regular inline list:
 
-#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
   .terms li {
       display: inline;
       margin: 0 0.5rem;
@@ -764,7 +806,7 @@ The elements are a regular inline list:
 Our site convention is that tags receive a ~#~ prefix and categories
 get a ~@~.  Give them a tasteful, muted style:
 
-#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
   .terms.tags li::before {
       content: "#";
   }
@@ -775,7 +817,7 @@ get a ~@~.  Give them a tasteful, muted style:
 
 Mute the color and count, because it's all about the terms:
 
-#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
   .terms li {
       color: #aaa;
   }
@@ -790,7 +832,7 @@ CLOSED: [2022-09-02 Fri 13:10]
 Taxonomy terms (e.g., ~/categories/tech~) are rendered in a simple
 template that lists the article summaries in reverse order of modification.
 #+hugo:more
-#+begin_src html :tangle ../../.hugo-out/layouts/_default/term.html
+#+begin_src html :tangle ../../tmp/hugo/layouts/_default/term.html
   {{ define "main" }}
       <h1>{{ .Name }}</h1>
       <ul class="article-summaries">
@@ -818,19 +860,19 @@ customized.  Most of it originated in [[https://gitlab.com/hugo-mwe/hugo-mwe][hu
 #+hugo:more
 UTF-8 ought to be enough characters for anyone.
 
-#+begin_src html :tangle ../../.hugo-out/layouts/partials/head.html
+#+begin_src html :tangle ../../tmp/hugo/layouts/partials/head.html
   <meta charset="utf-8">
 #+end_src
 
 [[https://developer.mozilla.org/en-US/docs/Web/HTML/Viewport_meta_tag][Improve responsiveness]].
 
-#+begin_src html :tangle ../../.hugo-out/layouts/partials/head.html
+#+begin_src html :tangle ../../tmp/hugo/layouts/partials/head.html
   <meta name="viewport" content="width=device-width, initial-scale=1">
 #+end_src
 
 Set the title tag.  Always include the site title.
 
-#+begin_src html :tangle ../../.hugo-out/layouts/partials/head.html
+#+begin_src html :tangle ../../tmp/hugo/layouts/partials/head.html
   {{- if .IsHome }}
       <title>{{ site.Title }}</title>
   {{- else }}
@@ -840,7 +882,7 @@ Set the title tag.  Always include the site title.
 
 Set the description, either at the site or page level.
 
-#+begin_src html :tangle ../../.hugo-out/layouts/partials/head.html
+#+begin_src html :tangle ../../tmp/hugo/layouts/partials/head.html
   {{ $description := cond .IsHome .Site.Params.Description .Params.Description }}
   {{ if $description }}
       <meta name="description" content="{{ $description }}">
@@ -849,7 +891,7 @@ Set the description, either at the site or page level.
 
 Load our own CSS and JavaScript through the [[https://gohugo.io/hugo-pipes/introduction/][Hugo asset pipeline]].
 
-#+begin_src html :tangle ../../.hugo-out/layouts/partials/head.html
+#+begin_src html :tangle ../../tmp/hugo/layouts/partials/head.html
   {{ range $css_file := site.Params.css | default (slice "bmfw.css" "ox-hugo.css") }}
       {{ $css_asset_path := printf "css/%s" $css_file }}
       {{ $css := resources.Get $css_asset_path | minify | fingerprint }}
@@ -870,7 +912,7 @@ Load our own CSS and JavaScript through the [[https://gohugo.io/hugo-pipes/intro
 Render our RSS feed.  Putting it in a ~<link>~ integrates with various
 [[https://addons.mozilla.org/en-US/firefox/search/?q=rss][RSS readers]].
 
-#+begin_src html :tangle ../../.hugo-out/layouts/partials/head.html
+#+begin_src html :tangle ../../tmp/hugo/layouts/partials/head.html
   {{ range .AlternativeOutputFormats -}}
       {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink (printf "%s for %s" (.Name | title) site.Title) | safeHTML }}
   {{ end -}}
@@ -888,7 +930,7 @@ includes the title, dates, category, tags, and either the page
 description or summary.
 #+hugo:more
 
-#+begin_src html :tangle ../../.hugo-out/layouts/partials/article-summary.html
+#+begin_src html :tangle ../../tmp/hugo/layouts/partials/article-summary.html
   <article>
       <header>
           <h1><a href="{{ .Permalink }}">{{ .Title }}</a></h1>
@@ -908,7 +950,7 @@ description or summary.
 
 A list of summaries should be unbulleted and separated by a thin line:
 
-#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
   ul.article-summaries {
       list-style: none;
       margin: 0;
@@ -938,7 +980,7 @@ summary on the site.  It describes:
 ~<dl>~ has long been my favorite idiosyncratic HTML tag.  Maybe I'm
 abusing it here, but I like the result.
 
-#+begin_src html :tangle ../../.hugo-out/layouts/partials/article-info.html
+#+begin_src html :tangle ../../tmp/hugo/layouts/partials/article-info.html
   <div class="article-info">
       <dl>
           <div class="type">
@@ -991,7 +1033,7 @@ abusing it here, but I like the result.
 
 CSS.  Lunch hour is almost over, so I'll describe it another day.
 
-#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
   .article-info {
       margin: 1em 0;
       font-size: 0.816em;
@@ -1095,7 +1137,7 @@ make any sense as a Lisp variable.
 
 Define the menu in the config:
 
-#+begin_src conf-toml :tangle ../../.hugo-out/config.toml
+#+begin_src conf-toml :tangle ../../tmp/hugo/config.toml
   [[menu.main]]
   name = 'About'
   url = '/about'
@@ -1132,7 +1174,7 @@ Define the menu in the config:
   weight = 510
 #+end_src
 
-#+begin_src html :tangle ../../.hugo-out/layouts/partials/header.html
+#+begin_src html :tangle ../../tmp/hugo/layouts/partials/header.html
   <h1><a href="{{ "/" | relURL }}">{{ .Site.Params.username }}</a></h1>
   <p>{{ .Site.Params.description }}</p>
   <nav>
@@ -1148,7 +1190,7 @@ Define the menu in the config:
 
 It's monospace, because it's "code".
 
-#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
   body > header {
       font-family: "Noto Sans Mono", monospace;
   }
@@ -1159,7 +1201,7 @@ Render each element as a flex:
 Introduce the Lisp syntax as CSS content.  The double paren on the
 last child is sloppy, but I haven't figured out another way to hug it.
 
-#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
   body > header h1::before {
       content: "(defvar ";
   }
@@ -1180,7 +1222,7 @@ last child is sloppy, but I haven't figured out another way to hug it.
 
 Mute all the frou-frou.
 
-#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
   body > header::before, body > header::after,
   body > header ::before, body > header ::after {
       color: #aaa;
@@ -1191,7 +1233,7 @@ Mute all the frou-frou.
 
 ~M-x indent-region~:
 
-#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
   body > header :first-child {
       padding-left: 0;
   }
@@ -1204,7 +1246,7 @@ Mute all the frou-frou.
 It's fine and good that the header is bold, but otherwise we want it
 to look like the rest.
 
-#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
   body > header h1 {
       font-size: 1em;
       line-height: inherit;
@@ -1215,7 +1257,7 @@ to look like the rest.
 
 The site subtitle becomes our "docstring".
 
-#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
   body > header p {
       margin: 0;
       font-style: italic;
@@ -1226,7 +1268,7 @@ The site subtitle becomes our "docstring".
 Setting ~display: inline-flex~ on the nav indents things properly in
 the quoted list, even across multiple lines.
 
-#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
   body > header > nav {
       display: inline-flex;
   }
@@ -1236,7 +1278,7 @@ The ~ul~ is also ~inline-flex~, to eat the whitespace in the HTML and
 let ~li~ set their own padding.  ~flex-wrap~ breaks it across lines
 on narrow viewports.
 
-#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
   body > header ul {
       display: inline-flex;
       flex-wrap: wrap;
@@ -1247,7 +1289,7 @@ on narrow viewports.
 
 Render the HTML list as a Lispy, inline list.
 
-#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
   body > header li {
       display: inline;
   }
@@ -1271,7 +1313,7 @@ socials.  Our social links will use the [[https://microformats.org/wiki/rel-me][
 verification.
 #+hugo:more
 
-#+begin_src html :tangle ../../.hugo-out/layouts/partials/footer.html
+#+begin_src html :tangle ../../tmp/hugo/layouts/partials/footer.html
   <address>
       Ross A. Baker
       <a href="https://pronoun.is/he">(he/him)</a>
@@ -1279,7 +1321,7 @@ verification.
   </address>
 #+end_src
 
-#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
   address {
       display: inline-block;
   }
@@ -1312,7 +1354,7 @@ our other layouts do not get these for free.
 
 Put this file in =layouts/_default/_markup/render-heading.html=:
 
-#+begin_src html :tangle ../../.hugo-out/layouts/_default/_markup/render-heading.html
+#+begin_src html :tangle ../../tmp/hugo/layouts/_default/_markup/render-heading.html
   <h{{ .Level }} id="{{ .Anchor | safeURL }}">
       {{ .Text | safeHTML }}
       <a class="heading-anchor" href="#{{ .Anchor | safeURL }}">¶</a>
@@ -1323,7 +1365,7 @@ Put this file in =layouts/_default/_markup/render-heading.html=:
 
 Mute the header anchors until hover:
 
-#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
   .heading-anchor {
       color: #ccc;
       font-size: .667em;
@@ -1335,7 +1377,7 @@ Mute the header anchors until hover:
 
 Align the symbol as a superscript:
 
-#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
   .heading-anchor {
       vertical-align: super;
   }
@@ -1356,7 +1398,7 @@ We'll store the contacts in the site parameters of ~config.toml~.  The
 icon is derived from ~network~, unless explicitly specified as ~icon~.
 It should match a [[https://forkaweso.me/Fork-Awesome/icons/][Fork Awesome icon name]].
 
-#+begin_src conf-toml :tangle ../../.hugo-out/config.toml
+#+begin_src conf-toml :tangle ../../tmp/hugo/config.toml
   [[Params.contacts]]
   network = 'Email'
   icon = 'envelope-o'
@@ -1387,7 +1429,7 @@ It should match a [[https://forkaweso.me/Fork-Awesome/icons/][Fork Awesome icon 
 
 ***** ~contact-info-icons~ partial template
 
-#+begin_src html :tangle ../../.hugo-out/layouts/partials/contact-info-icons.html
+#+begin_src html :tangle ../../tmp/hugo/layouts/partials/contact-info-icons.html
   <ul>
       {{ range .Site.Params.contacts }}
           <li><a href="{{ .url }}" {{ with (findRE "^https?://" .url 1) }}rel="me"{{ end }}><span class="fa fa-{{ .icon | default (.network | urlize) }}"></span></a></li>
@@ -1399,7 +1441,7 @@ It should match a [[https://forkaweso.me/Fork-Awesome/icons/][Fork Awesome icon 
 
 ~contact-info-dl~ renders all the contacts in a simple definition list.
 
-#+begin_src html :tangle ../../.hugo-out/layouts/shortcodes/contact-info-dl.html
+#+begin_src html :tangle ../../tmp/hugo/layouts/shortcodes/contact-info-dl.html
   <dl>
       {{ range .Site.Params.contacts }}
           <dt>{{ .network }}</dt>
@@ -1432,7 +1474,7 @@ The website is just another package in our flake.
     buildPhase = ''
       cd ..
       ${siteEmacs}/bin/emacs -Q --batch --script ${./export.el}
-      ${hugo}/bin/hugo --config .hugo-out/config.toml
+      ${hugo}/bin/hugo --config tmp/hugo/config.toml
     '';
     installPhase = ''
       mkdir $out
@@ -1452,7 +1494,7 @@ exports its contents with ox-hugo.
   (find-file "src/org/rossabaker.org")
   (setq org-confirm-babel-evaluate nil)
   (org-babel-tangle)
-  (mkdir "../../.hugo-out/static")
+  (mkdir "../../tmp/hugo/static")
   (org-hugo-export-wim-to-md t)
 #+end_src
 
@@ -1469,7 +1511,7 @@ To build the site locally into ~./result~, run:
 For a more iterative experience with live reload in the browser, try:
 
 #+begin_src sh :tangle no
-  hugo serve --disableFastRender --config .hugo-out/config.toml
+  hugo serve --disableFastRender --config tmp/hugo/config.toml
 #+end_src
 
 **** Git ignores
@@ -1477,7 +1519,7 @@ For a more iterative experience with live reload in the browser, try:
 Our build creates some detritus that we don't want checked into Git.
 
 #+begin_src gitignore :tangle ../../.gitignore
-  /.hugo-out/
+  /tmp/hugo/
   /.hugo_build.lock
 #+end_src
 
@@ -1500,7 +1542,7 @@ but could conceivably be used in future projects.
 width of an element.  This cuts out a lot of ~<div class="container">~
 nonsense.
 
-#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
   *, *::before, *::after {
       box-sizing: border-box;
   }
@@ -1513,7 +1555,7 @@ least 1.5.
 
 There are more criteria there that are probably worth revisting.
 
-#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
   body {
       line-height: 1.6;
   }
@@ -1527,7 +1569,7 @@ The [[https://en.wikipedia.org/wiki/Noto_fonts][Noto fonts]] look nice and have 
 Google Fonts [[https://cookie-script.com/blog/google-fonts-and-gdpr][violates the GDPR]], so we self host.  I downloaded all the
 Noto variants from Google Fonts, and ran them through [[https://transfonter.org/][Transfonter]].
 
-#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
   html {
       font-family: "Noto Sans", sans-serif;
   }
@@ -1545,7 +1587,7 @@ Noto variants from Google Fonts, and ran them through [[https://transfonter.org/
 
 Reset the body to take up the entire window.
 
-#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
   body {
       width: 100%;
       margin: 0;
@@ -1557,7 +1599,7 @@ Reset the body to take up the entire window.
 it, the content is 100% of the window, but shifted by the left
 padding.
 
-#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
   body > * {
       box-sizing: border-box;
       padding: 0 1.5em;
@@ -1594,7 +1636,7 @@ padding.
 
 Put a scroll bar on code samples, but only where necessary.
 
-#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
   pre {
       max-width: 100%;
       overflow-x: auto;
@@ -1603,7 +1645,7 @@ Put a scroll bar on code samples, but only where necessary.
 
 Give the code samples a little more room to breathe.
 
-#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
   pre {
       background: #f8f8f8;
       border: 1px dotted #ccc;
@@ -1644,7 +1686,7 @@ to mine.
   <iframe class="weather-station" src="https://ambientweather.net/devices/public/b78b5bb0e59646a78a623a940937335c?embed=true"></iframe>
 #+end_export
 
-#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css :exports none
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css :exports none
   .weather-station {
       width: 500px;
       height: 400px;
@@ -1685,7 +1727,7 @@ heavy load, asynchronicity, securing your application, designing
 RESTful APIs, and real-time web programming.
 #+end_quote
 
-#+begin_src css :tangle ../../.hugo-out/assets/css/cromulent.css :exports none
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css :exports none
   figure.scalatra-in-action {
       margin: 0 auto;
       max-width: 360px;

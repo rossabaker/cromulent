@@ -1,4 +1,3 @@
 gen/            -diff -merge linguist-generated=true
-
 .gitignore      -diff -merge linguist-generated=true
 .gitattributes  -diff -merge linguist-generated=true

@@ -5,5 +5,5 @@
 (find-file "src/org/rossabaker.org")
 (setq org-confirm-babel-evaluate nil)
 (org-babel-tangle)
-(mkdir "../../.hugo-out/static")
+(mkdir "../../tmp/hugo/static")
 (org-hugo-export-wim-to-md t)

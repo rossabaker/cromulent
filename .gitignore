@@ -1,4 +1,6 @@
+/tmp/
+
 /result
 
-/.hugo-out/
+/tmp/hugo/
 /.hugo_build.lock

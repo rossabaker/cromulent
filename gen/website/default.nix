@@ -12,7 +12,7 @@ stdenv.mkDerivation rec {
   buildPhase = ''
     cd ..
     ${siteEmacs}/bin/emacs -Q --batch --script ${./export.el}
-    ${hugo}/bin/hugo --config .hugo-out/config.toml
+    ${hugo}/bin/hugo --config tmp/hugo/config.toml
   '';
   installPhase = ''
     mkdir $out
