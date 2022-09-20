@@ -560,15 +560,6 @@ template provide a ~main~, but this is the expectation.
   </html>
 #+end_src
 
-Visually separate the three sections a bit.
-
-#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
-  body > main {
-      border-width: 1px 0;
-      border-style: solid;
-  }
-#+end_src
-
 **** DONE Single-page template
 CLOSED: [2022-09-02 Fri 12:53]
 :PROPERTIES:
@@ -1527,7 +1518,7 @@ Our build creates some detritus that we don't want checked into Git.
 CLOSED: [2022-08-30 Tue 14:26]
 :PROPERTIES:
 :EXPORT_FILE_NAME: style
-:EXPORT_HUGO_LASTMOD: <2022-09-10 Sat 10:51>
+:EXPORT_HUGO_LASTMOD: <2022-09-20 Tue 14:42>
 :END:
 
 We strive for [[https://en.wikipedia.org/wiki/Semantic_HTML][semantic HTML]].  The styles presented here provide a
@@ -1585,50 +1576,96 @@ Noto variants from Google Fonts, and ran them through [[https://transfonter.org/
 
 **** Responsive width
 
-Reset the body to take up the entire window.
+Lots of people use media queries for this, but the clamp function
+gives a smooth experience as the window resizes.
 
 #+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
   body {
-      width: 100%;
-      margin: 0;
+      width: clamp(10em, 100%, 70em);
       padding: 0;
+      margin: 0 auto;
   }
 #+end_src
 
-~border-box~ means that the padding is included in the 100%.  Without
-it, the content is 100% of the window, but shifted by the left
-padding.
+**** A splash of color
+
+My beloved Indiana Hoosiers wear [[https://www.thedailyhoosier.com/did-you-know-indianas-iconic-candy-stripes-didnt-originate-in-the-basketball-program/][candy-striped pants]].  So shall this website.
+
+#+begin_quote
+We will fight for
+the cream and crimson,
+for the glory of old IU
+#+end_quote
+
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
+  :root {
+      --accent-color: #9d2235;
+      --background-color: #ffffff;
+  }
+#+end_src
+
+This responsively establishes some breathing room between the header /
+main / footer and the candy stripes.
 
 #+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
   body > * {
-      box-sizing: border-box;
-      padding: 0 1.5em;
-      width: 100%;
-      margin: 1.5em auto;
+      padding: 1.5rem clamp(1.5rem, 5%, 4rem);
+      margin: 0 6px;
+  }
+#+end_src
+
+Modern CSS lets us draw stripes without a repeating background GIF.
+Neat.  Here we have to resort to media queries to reduce the stripes
+on narrower viewports.
+
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
+  body > * {
+      background: linear-gradient(
+          to right,
+          var(--accent-color) 0,
+          var(--accent-color) 2px,
+          var(--background-color) 2px,
+          var(--background-color) 4px,
+          var(--accent-color) 4px,
+          var(--accent-color) 6px,
+          var(--background-color) 6px,
+          var(--background-color) 8px,
+          var(--accent-color) 8px,
+          var(--accent-color) 10px,
+          var(--background-color) 10px
+      );
   }
 
   @media (min-width: 576px) {
       body > * {
-          max-width: 510px;
+          background: linear-gradient(
+              to right,
+              var(--accent-color) 0,
+              var(--accent-color) 2px,
+              var(--background-color) 2px,
+              var(--background-color) 4px,
+              var(--accent-color) 4px,
+              var(--accent-color) 6px,
+              var(--background-color) 6px,
+              var(--background-color) 8px,
+              var(--accent-color) 8px,
+              var(--accent-color) 10px,
+              var(--background-color) 10px,
+              var(--background-color) 12px,
+              var(--accent-color) 12px,
+              var(--accent-color) 14px,
+              var(--background-color) 14px
+          );
       }
   }
+#+end_src
 
-  @media (min-width: 768px) {
-      body > * {
-          max-width: 700px;
-      }
-  }
+Changing the headers to crimson helps tie it to the decorative
+stripes.
 
-  @media (min-width: 992px) {
-      body > * {
-          max-width: 920px;
-      }
-  }
-
-  @media (min-width: 1200px) {
-      body > * {
-          max-width: 1130px;
-      }
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
+  h1, h2, h3, h4, h5, h6 {
+      color: var(--accent-color);
   }
 #+end_src
 
