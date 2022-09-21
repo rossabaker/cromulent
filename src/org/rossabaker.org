@@ -1336,6 +1336,7 @@ verification.
 CLOSED: [2022-09-04 Sun 17:50]
 :PROPERTIES:
 :EXPORT_FILE_NAME: heading-renderer
+:EXPORT_HUGO_LASTMOD: <2022-09-21 Wed 11:45>
 :END:
 
 We [[https://gohugo.io/templates/render-hooks][hook]] into the heading renderer to generate anchor targets for subheadings.
@@ -1350,7 +1351,7 @@ Put this file in =layouts/_default/_markup/render-heading.html=:
 #+begin_src html :tangle ../../tmp/hugo/layouts/_default/_markup/render-heading.html
   <h{{ .Level }} id="{{ .Anchor | safeURL }}">
       {{ .Text | safeHTML }}
-      <a class="heading-anchor" href="#{{ .Anchor | safeURL }}">¶</a>
+      <a class="heading-anchor" href="#{{ .Anchor | safeURL }}">#</a>
   </h{{ .Level }}>
 #+end_src
 
@@ -1361,18 +1362,10 @@ Mute the header anchors until hover:
 #+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
   .heading-anchor {
       color: #ccc;
-      font-size: .667em;
+      text-decoration: none;
   }
   a.heading-anchor:hover {
       color: #00f;
-  }
-#+end_src
-
-Align the symbol as a superscript:
-
-#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
-  .heading-anchor {
-      vertical-align: super;
   }
 #+end_src
 
