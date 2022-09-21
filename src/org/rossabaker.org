@@ -924,7 +924,7 @@ description or summary.
 #+begin_src html :tangle ../../tmp/hugo/layouts/partials/article-summary.html
   <article>
       <header>
-          <h1><a href="{{ .Permalink }}">{{ .Title }}</a></h1>
+          <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
       </header>
       {{ if .Description }}
           {{ .Description | markdownify }}
@@ -1126,7 +1126,21 @@ an Emacs Lisp definition.
 We reference a ~username~ site parameter, because my full name doesn't
 make any sense as a Lisp variable.
 
-Define the menu in the config:
+#+begin_src html :tangle ../../tmp/hugo/layouts/partials/header.html
+  <strong><a href="{{ "/" | relURL }}">{{ .Site.Params.username }}</a></strong>
+  <p>{{ .Site.Params.description }}</p>
+  <nav>
+      <ul>
+          {{ range .Site.Menus.main }}
+              <li><a href="{{ .URL }}">{{ .Name | urlize }}</a></li>
+          {{ end }}
+      </ul>
+  </nav>
+#+end_src
+
+***** Configuration
+
+The menu is defined in the site config.  Higher weights come last.
 
 #+begin_src conf-toml :tangle ../../tmp/hugo/config.toml
   [[menu.main]]
@@ -1165,18 +1179,6 @@ Define the menu in the config:
   weight = 510
 #+end_src
 
-#+begin_src html :tangle ../../tmp/hugo/layouts/partials/header.html
-  <h1><a href="{{ "/" | relURL }}">{{ .Site.Params.username }}</a></h1>
-  <p>{{ .Site.Params.description }}</p>
-  <nav>
-      <ul>
-          {{ range .Site.Menus.main }}
-              <li><a href="{{ .URL }}">{{ .Name | urlize }}</a></li>
-          {{ end }}
-      </ul>
-  </nav>
-#+end_src
-
 ***** CSS
 
 It's monospace, because it's "code".
@@ -1193,7 +1195,7 @@ Introduce the Lisp syntax as CSS content.  The double paren on the
 last child is sloppy, but I haven't figured out another way to hug it.
 
 #+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
-  body > header h1::before {
+  body > header strong::before {
       content: "(defvar ";
   }
   body > header p::before {
@@ -1238,7 +1240,7 @@ It's fine and good that the header is bold, but otherwise we want it
 to look like the rest.
 
 #+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
-  body > header h1 {
+  body > header strong {
       font-size: 1em;
       line-height: inherit;
       margin: 0;
