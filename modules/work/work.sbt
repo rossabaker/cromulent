@@ -1,2 +1,5 @@
-// For obvious reasons, this file is not checked in.
-credentials += Credentials(Path.userHome / ".sbt" / "banno-credentials.properties")
+// For obvious reasons, these files are not checked in.
+credentials ++= Seq(
+  Credentials(Path.userHome / ".sbt" / "banno-credentials.properties"),
+  Credentials(Path.userHome / ".sbt" / "geezeo-credentials.properties"),
+)
