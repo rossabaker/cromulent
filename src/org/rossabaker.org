@@ -593,12 +593,61 @@ I would like to define ~article-header~ and ~article-main~ blocks in
 this template so less gets repeated in the section overrides.  I'm
 still missing something.
 
+**** DONE Home page template
+CLOSED: [2022-10-12 Wed 00:05]
+:PROPERTIES:
+:EXPORT_FILE_NAME: home
+:END:
+
+The home page is rendered as a paginated list.  We want branch bundles,
+so we have to exclude the home page, taxonomies, and terms from the
+pages.
+
+#+hugo:more
+
+#+begin_src html :tangle ../../tmp/hugo/layouts/index.html
+  {{ define "main" }}
+      {{ with .Content }}
+          {{ . }}
+      {{ end }}
+
+      <article>
+          <section class="recently-updated">
+              <h2>Recently updated</h2>
+
+              <ul class="article-summaries">
+                  {{ $paginator := .Paginate (where site.Pages.ByLastmod.Reverse "Kind" "not in" (slice "home" "term" "taxonomy")) }}
+                  {{ range $paginator.Pages }}
+                      <li>
+                          {{ partial "article-summary" . }}
+                      </li>
+                  {{ end}}
+                  {{ template "_internal/pagination.html" . }}
+              </ul>
+          </section>
+      </article>
+  {{ end }}
+#+end_src
+
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
+  ul.pagination {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: inline;
+  }
+
+  ul.pagination li {
+      display: inline;
+  }
+#+end_src
+
 **** DONE Talks template                                                :css:
 CLOSED: [2022-09-02 Fri 12:48]
 :PROPERTIES:
 :EXPORT_FILE_NAME: talks
 :END:
-
+c
 Talks get their own single-page template based on custom front matter.
 #+hugo:more
 
@@ -683,10 +732,6 @@ in reverse order of modification.
 #+begin_src html :tangle ../../tmp/hugo/layouts/_default/list.html
   {{ define "main" }}
       <article>
-          {{ if not .IsHome }}
-          <h1>{{ .Title }}</h1>
-          {{ end }}
-
           {{ with .Content }}
               {{ . }}
           {{ end }}
@@ -695,12 +740,10 @@ in reverse order of modification.
               <h2>Recently updated</h2>
 
               <ul class="article-summaries">
-                  {{ range cond .IsHome site.Pages.ByLastmod.Reverse .Pages.ByLastmod.Reverse }}
-                      {{ if and (ne .Kind "term") (ne .Kind "taxonomy") (ne .Kind "home") }}
-                          <li>
-                              {{ partial "article-summary" . }}
-                          </li>
-                      {{ end }}
+                  {{ range .Pages.ByLastmod.Reverse }}
+                      <li>
+                          {{ partial "article-summary" . }}
+                      </li>
                   {{ end}}
               </ul>
           </section>
