@@ -274,6 +274,7 @@ sub   rsa4096/0x89FB7DEA8BDEB545 2018-01-31 [E]
 ** Configurations
 :PROPERTIES:
 :EXPORT_FILE_NAME: _index
+:EXPORT_HUGO_LASTMOD: <2022-09-05 Mon 23:48>
 :END:
 
 This is my attempt at [[https://en.wikipedia.org/wiki/Literate_programming][literate programming]].  The configurations
@@ -384,6 +385,7 @@ CLOSED: [2022-08-24 Wed 15:04]
 :PROPERTIES:
 :EXPORT_FILE_NAME: _index
 :EXPORT_TITLE: Website
+:EXPORT_HUGO_LASTMOD: <2022-08-24 Wed 15:04>
 :END:
 
 [[https://rossabaker.com/][rossabaker.com]] is sourced from an Org file.  We [[https://orgmode.org/manual/Extracting-Source-Code.html][tangle]] the
