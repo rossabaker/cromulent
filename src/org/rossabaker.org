@@ -863,6 +863,7 @@ Mute the color and count, because it's all about the terms:
 CLOSED: [2022-09-02 Fri 13:10]
 :PROPERTIES:
 :EXPORT_FILE_NAME: term
+:EXPORT_HUGO_LASTMOD: <2022-10-12 Wed 22:40>
 :END:
 
 Taxonomy terms (e.g., ~/categories/tech~) are rendered in a simple
@@ -871,17 +872,20 @@ template that lists the article summaries in reverse order of modification.
 #+begin_src html :tangle ../../tmp/hugo/layouts/_default/term.html
   {{ define "main" }}
       <h1>{{ .Name }}</h1>
-      <ul class="article-summaries">
-          {{ range .Pages.ByLastmod.Reverse }}
-              <li>
-                  {{ partial "article-summary" . }}
-              </li>
-          {{ end }}
-      </ul>
 
       {{ with .Content }}
           {{ . }}
       {{ end }}
+
+      <ul class="article-summaries">
+          {{ $paginator := .Paginate .Pages.ByLastmod.Reverse 10 }}
+          {{ range $paginator.Pages }}
+              <li>
+                  {{ partial "article-summary" . }}
+              </li>
+          {{ end }}
+          {{ template "_internal/pagination.html" . }}
+      </ul>
   {{ end }}
 #+end_src
 
