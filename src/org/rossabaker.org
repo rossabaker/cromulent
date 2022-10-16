@@ -191,7 +191,9 @@ is a volunteer soccer coach at [[https://northsidesoccer.com/][Northside Soccer]
 [[https://northchurchindy.com/][North United Methodist Church]].  He cross-country skis when it's snowy
 and jogs when it's not.
 
-** External links
+** See also
+
+- [[*Contact][Contact info]]
 
 #+begin_contacts
 # Uses the [[*~contact-info-dl~ shortcode][~contact-info-dl~ shortcode]].  That's not great, if we ever export
@@ -265,6 +267,40 @@ uid                   [ultimate] Ross A. Baker <ross@rossabaker.com>
 sub   rsa4096/0x89FB7DEA8BDEB545 2018-01-31 [E]
       Key fingerprint = 7578 8CFE 8A1B E74E D17D  30AB 89FB 7DEA 8BDE B545
 #+end_example
+
+* DONE Contact                                            :@personal:contact:
+CLOSED: [2022-10-16 Sun 15:37]
+:PROPERTIES:
+:EXPORT_HUGO_SECTION: /
+:EXPORT_FILE_NAME: contact
+:EXPORT_DESCRIPTION: Supported ways to contact Ross, and deprecated ways to no longer contact Ross.
+:END:
+
+** Supported
+
+I will attempt to respond in a timely fashion to inquiries on any of these
+channels.
+
+#+begin_contacts
+# Uses the [[*~contact-info-dl~ shortcode][~contact-info-dl~ shortcode]].  That's not great, if we ever export
+# to non-Hugo targets.
+@@hugo:{{< contact-info-dl >}}@@
+#+end_contacts
+
+See my [[*Public keys][public keys]] for encryption options.
+
+** Deprecated
+
+You might find me here, but my presence is special purpose or
+vestigial, and I am unlikely to see or respond.
+
+- Discord
+- Facebook
+- GitLab
+- Gitter
+- Keybase
+- LinkedIn
+- Signal
 
 * Configurations section                                              :@tech:
 :PROPERTIES:
