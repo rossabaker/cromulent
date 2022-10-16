@@ -274,7 +274,7 @@ CLOSED: [2022-10-16 Sun 15:37]
 :EXPORT_HUGO_SECTION: /
 :EXPORT_FILE_NAME: contact
 :EXPORT_DESCRIPTION: Supported ways to contact Ross, and deprecated ways to no longer contact Ross.
-:EXPORT_HUGO_LASTMOD: <2022-10-16 Sun 16:27>
+:EXPORT_HUGO_LASTMOD: <2022-10-16 Sun 16:36>
 :END:
 
 ** Supported
@@ -303,6 +303,8 @@ vestigial, and I am unlikely to see or respond.
 - LinkedIn
 - Reddit
 - Signal
+- Twitch
+- YouTube
 
 * Configurations section                                              :@tech:
 :PROPERTIES:
