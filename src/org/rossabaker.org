@@ -1603,7 +1603,7 @@ Our build creates some detritus that we don't want checked into Git.
 CLOSED: [2022-08-30 Tue 14:26]
 :PROPERTIES:
 :EXPORT_FILE_NAME: style
-:EXPORT_HUGO_LASTMOD: <2022-09-20 Tue 14:42>
+:EXPORT_HUGO_LASTMOD: <2022-10-16 Sun 23:08>
 :END:
 
 We strive for [[https://en.wikipedia.org/wiki/Semantic_HTML][semantic HTML]].  The styles presented here provide a
@@ -1684,8 +1684,17 @@ for the glory of old IU
 
 #+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
   :root {
-      --accent-color: #9d2235;
-      --background-color: #ffffff;
+      --brand-color: #9d2235;
+      --light-color: #ffffff;
+      --dark-color: #191919;
+      --link-color: #01426a;
+      --link-visited-color: #512a44;
+      --link-hover-color: #006298;
+  }
+
+  body {
+      background-color: var(--light-color);
+      color: var(--dark-color);
   }
 #+end_src
 
@@ -1707,17 +1716,17 @@ on narrower viewports.
   body > * {
       background: linear-gradient(
           to right,
-          var(--accent-color) 0,
-          var(--accent-color) 2px,
-          var(--background-color) 2px,
-          var(--background-color) 4px,
-          var(--accent-color) 4px,
-          var(--accent-color) 6px,
-          var(--background-color) 6px,
-          var(--background-color) 8px,
-          var(--accent-color) 8px,
-          var(--accent-color) 10px,
-          var(--background-color) 10px
+          var(--brand-color) 0,
+          var(--brand-color) 2px,
+          var(--light-color) 2px,
+          var(--light-color) 4px,
+          var(--brand-color) 4px,
+          var(--brand-color) 6px,
+          var(--light-color) 6px,
+          var(--light-color) 8px,
+          var(--brand-color) 8px,
+          var(--brand-color) 10px,
+          var(--light-color) 10px
       );
   }
 
@@ -1725,21 +1734,21 @@ on narrower viewports.
       body > * {
           background: linear-gradient(
               to right,
-              var(--accent-color) 0,
-              var(--accent-color) 2px,
-              var(--background-color) 2px,
-              var(--background-color) 4px,
-              var(--accent-color) 4px,
-              var(--accent-color) 6px,
-              var(--background-color) 6px,
-              var(--background-color) 8px,
-              var(--accent-color) 8px,
-              var(--accent-color) 10px,
-              var(--background-color) 10px,
-              var(--background-color) 12px,
-              var(--accent-color) 12px,
-              var(--accent-color) 14px,
-              var(--background-color) 14px
+              var(--brand-color) 0,
+              var(--brand-color) 2px,
+              var(--light-color) 2px,
+              var(--light-color) 4px,
+              var(--brand-color) 4px,
+              var(--brand-color) 6px,
+              var(--light-color) 6px,
+              var(--light-color) 8px,
+              var(--brand-color) 8px,
+              var(--brand-color) 10px,
+              var(--light-color) 10px,
+              var(--light-color) 12px,
+              var(--brand-color) 12px,
+              var(--brand-color) 14px,
+              var(--light-color) 14px
           );
       }
   }
@@ -1750,7 +1759,21 @@ stripes.
 
 #+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
   h1, h2, h3, h4, h5, h6 {
-      color: var(--accent-color);
+      color: var(--brand-color);
+  }
+#+end_src
+
+Links are in the traditional blue and purple.
+
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
+  a {
+      color: var(--link-color);
+  }
+  a:visited {
+      color: var(--link-visited-color);
+  }
+  a:hover {
+      color: var(--link-hover-color);
   }
 #+end_src
 
