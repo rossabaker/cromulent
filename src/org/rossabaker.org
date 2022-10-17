@@ -1308,8 +1308,7 @@ Mute all the frou-frou.
 #+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
   body > header::before, body > header::after,
   body > header ::before, body > header ::after {
-      color: #aaa;
-      font-weight: normal;
+      font-weight: normal; 
       white-space: pre-wrap;
   }
 #+end_src
@@ -1344,7 +1343,6 @@ The site subtitle becomes our "docstring".
   body > header p {
       margin: 0;
       font-style: italic;
-      color: #aaa;
   }
 #+end_src
 
@@ -1603,7 +1601,7 @@ Our build creates some detritus that we don't want checked into Git.
 CLOSED: [2022-08-30 Tue 14:26]
 :PROPERTIES:
 :EXPORT_FILE_NAME: style
-:EXPORT_HUGO_LASTMOD: <2022-10-16 Sun 23:08>
+:EXPORT_HUGO_LASTMOD: <2022-10-17 Mon 14:58>
 :END:
 
 We strive for [[https://en.wikipedia.org/wiki/Semantic_HTML][semantic HTML]].  The styles presented here provide a
@@ -1682,75 +1680,56 @@ the cream and crimson,
 for the glory of old IU
 #+end_quote
 
+***** Palette
+
+Define some CSS variables. The link color is complementary to the
+crimson.
+
 #+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
   :root {
-      --brand-color: #9d2235;
-      --light-color: #ffffff;
-      --dark-color: #191919;
-      --link-color: #01426a;
-      --link-visited-color: #512a44;
-      --link-hover-color: #006298;
-  }
-
-  body {
-      background-color: var(--light-color);
-      color: var(--dark-color);
+      --color-brand: #9d2235;
+      --color-brand-darker: #731927;
+      --color-stripe: #ffffff;
+      --link-color: #229d8a;
   }
 #+end_src
 
-This responsively establishes some breathing room between the header /
-main / footer and the candy stripes.
-
-#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
-  body > * {
-      padding: 1.5rem clamp(1.5rem, 5%, 4rem);
-      margin: 0 6px;
-  }
-#+end_src
+***** Headers
 
 Modern CSS lets us draw stripes without a repeating background GIF.
-Neat.  Here we have to resort to media queries to reduce the stripes
-on narrower viewports.
+Neat.  This draws candy stripes next to the headers.  The negative
+margin and corresponding padding hang the stripes off to the left.
+
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
+    h1, h2, h3, h4, h5, h6 {
+        background: linear-gradient(
+            to right,
+            var(--color-brand) 0,
+            var(--color-brand) 2px,
+            var(--color-stripe) 2px,
+            var(--color-stripe) 4px,
+            var(--color-brand) 4px,
+            var(--color-brand) 6px,
+            var(--color-stripe) 6px,
+            var(--color-stripe) 8px,
+            var(--color-brand) 8px,
+            var(--color-brand) 10px,
+            var(--color-stripe) 10px,
+            var(--color-stripe) 12px,
+            var(--color-brand) 12px,
+            var(--color-brand) 14px,
+            var(--color-stripe) 14px
+        );
+        margin-left: -24px;
+        padding-left: 24px;
+    }
+#+end_src
+
+We need to leave space for the negative margin.
 
 #+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
   body > * {
-      background: linear-gradient(
-          to right,
-          var(--brand-color) 0,
-          var(--brand-color) 2px,
-          var(--light-color) 2px,
-          var(--light-color) 4px,
-          var(--brand-color) 4px,
-          var(--brand-color) 6px,
-          var(--light-color) 6px,
-          var(--light-color) 8px,
-          var(--brand-color) 8px,
-          var(--brand-color) 10px,
-          var(--light-color) 10px
-      );
-  }
-
-  @media (min-width: 576px) {
-      body > * {
-          background: linear-gradient(
-              to right,
-              var(--brand-color) 0,
-              var(--brand-color) 2px,
-              var(--light-color) 2px,
-              var(--light-color) 4px,
-              var(--brand-color) 4px,
-              var(--brand-color) 6px,
-              var(--light-color) 6px,
-              var(--light-color) 8px,
-              var(--brand-color) 8px,
-              var(--brand-color) 10px,
-              var(--light-color) 10px,
-              var(--light-color) 12px,
-              var(--brand-color) 12px,
-              var(--brand-color) 14px,
-              var(--light-color) 14px
-          );
-      }
+      padding: 1.5rem 24px;
   }
 #+end_src
 
@@ -1759,21 +1738,17 @@ stripes.
 
 #+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
   h1, h2, h3, h4, h5, h6 {
-      color: var(--brand-color);
+      color: var(--color-brand);
   }
 #+end_src
 
-Links are in the traditional blue and purple.
+***** Links
+
+Render the links in the complementary color.
 
 #+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
   a {
       color: var(--link-color);
-  }
-  a:visited {
-      color: var(--link-visited-color);
-  }
-  a:hover {
-      color: var(--link-hover-color);
   }
 #+end_src
 
