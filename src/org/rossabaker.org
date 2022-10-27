@@ -195,12 +195,6 @@ and jogs when it's not.
 
 - [[*Contact][Contact info]]
 
-#+begin_contacts
-# Uses the [[*~contact-info-dl~ shortcode][~contact-info-dl~ shortcode]].  That's not great, if we ever export
-# to non-Hugo targets.
-@@hugo:{{< contact-info-dl >}}@@
-#+end_contacts
-
 #+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css :exports none
   .contacts dl {
       display: grid;
@@ -274,7 +268,7 @@ CLOSED: [2022-10-16 Sun 15:37]
 :EXPORT_HUGO_SECTION: /
 :EXPORT_FILE_NAME: contact
 :EXPORT_DESCRIPTION: Supported ways to contact Ross, and deprecated ways to no longer contact Ross.
-:EXPORT_HUGO_LASTMOD: <2022-10-16 Sun 22:11>
+:EXPORT_HUGO_LASTMOD: <2022-10-26 Wed 22:41>
 :END:
 
 ** Supported
@@ -285,10 +279,21 @@ channels.
 #+begin_contacts
 # Uses the [[*~contact-info-dl~ shortcode][~contact-info-dl~ shortcode]].  That's not great, if we ever export
 # to non-Hugo targets.
-@@hugo:{{< contact-info-dl >}}@@
+@@hugo:{{< contact-info-dl support="supported" >}}@@
 #+end_contacts
 
 See my [[*Public keys][public keys]] for encryption options.
+
+** Experimental
+
+I'm not committed to any of these, but a critical mass of friends could make
+these compelling.  Connect and say "hi" if you're so inclined.
+
+#+begin_contacts
+# Uses the [[*~contact-info-dl~ shortcode][~contact-info-dl~ shortcode]].  That's not great, if we ever export
+# to non-Hugo targets.
+@@hugo:{{< contact-info-dl support="experimental" >}}@@
+#+end_contacts
 
 ** Deprecated
 
@@ -302,7 +307,6 @@ vestigial, and I am unlikely to see or respond.
 - Instagram
 - Keybase
 - LinkedIn
-- Reddit
 - Signal
 - Twitch
 - YouTube
@@ -1461,6 +1465,7 @@ Mute the header anchors until hover:
 CLOSED: [2022-09-12 Mon 22:11]
 :PROPERTIES:
 :EXPORT_FILE_NAME: contact-info
+:EXPORT_HUGO_LASTMOD: <2022-10-26 Wed 22:23>
 :END:
 
 Contact info is rendered in two places: in the [[*Footer template][footer template]] and on the
@@ -1472,40 +1477,65 @@ We'll store the contacts in the site parameters of ~config.toml~.  The
 icon is derived from ~network~, unless explicitly specified as ~icon~.
 It should match a [[https://forkaweso.me/Fork-Awesome/icons/][Fork Awesome icon name]].
 
+Support is either "supported" or "experimental".
+
 #+begin_src conf-toml :tangle ../../tmp/hugo/config.toml
   [[Params.contacts]]
   network = 'Email'
   icon = 'envelope-o'
   handle = 'ross@rossabaker.com'
   url = 'mailto:ross@rossabaker.com'
+  support = 'supported'
 
   [[Params.contacts]]
   network = 'GitHub'
   handle = '@rossabaker'
   url = 'https://github.com/rossabaker'
+  support = 'supported'
 
   [[Params.contacts]]
   network = 'Matrix'
   icon = 'matrix-org'
   handle = '@ross:rossabaker.com'
   url = 'https://matrix.to/#/@ross:rossabaker.com'
+  support = 'supported'
 
   [[Params.contacts]]
   network = 'Mastodon'
   handle = 'https://mastodon.social/@rossabaker'
   url = 'https://mastodon.social/web/@rossabaker'
+  support = 'supported'
 
   [[Params.contacts]]
   network = 'Twitter'
   handle = '@rossabaker'
   url = 'https://twitter.com/rossabaker'
+  support = 'supported'
+
+  [[Params.contacts]]
+  network = 'Codeberg'
+  handle = '@rossabaker'
+  url = 'https://codeberg.org/rossabaker'
+  support = 'experimental'
+
+  [[Params.contacts]]
+  network = 'Cohost'
+  handle = '@rossabaker'
+  url = 'https://cohost.org/rossabaker'
+  support = 'experimental'
+
+  [[Params.contacts]]
+  network = 'Reddit'
+  handle = 'u/rossabaker'
+  url = 'https://reddit.com/user/rossabaker'
+  support = 'experimental'
 #+end_src
 
 ***** ~contact-info-icons~ partial template
 
 #+begin_src html :tangle ../../tmp/hugo/layouts/partials/contact-info-icons.html
   <ul>
-      {{ range .Site.Params.contacts }}
+      {{ range where .Site.Params.contacts "support" "eq" "supported" }}
           <li><a href="{{ .url }}" {{ with (findRE "^https?://" .url 1) }}rel="me"{{ end }}><span class="fa fa-{{ .icon | default (.network | urlize) }}"></span></a></li>
       {{ end }}
   </ul>
@@ -1513,11 +1543,13 @@ It should match a [[https://forkaweso.me/Fork-Awesome/icons/][Fork Awesome icon 
 
 ***** ~contact-info-dl~ shortcode
 
-~contact-info-dl~ renders all the contacts in a simple definition list.
+~contact-info-dl~ renders all the contacts in a simple definition
+list.  It filters by a `support` parameter, so we can separate the
+supported contacts from the experimental ones.
 
 #+begin_src html :tangle ../../tmp/hugo/layouts/shortcodes/contact-info-dl.html
   <dl>
-      {{ range .Site.Params.contacts }}
+      {{ range where .Site.Params.contacts "support" "eq" (.Get "support") }}
           <dt>{{ .network }}</dt>
           <dd><a href="{{ .url }}">{{ .handle }}</a></dd>
       {{ end }}
