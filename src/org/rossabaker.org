@@ -268,7 +268,7 @@ CLOSED: [2022-10-16 Sun 15:37]
 :EXPORT_HUGO_SECTION: /
 :EXPORT_FILE_NAME: contact
 :EXPORT_DESCRIPTION: Supported ways to contact Ross, and deprecated ways to no longer contact Ross.
-:EXPORT_HUGO_LASTMOD: <2022-10-26 Wed 22:41>
+:EXPORT_HUGO_LASTMOD: <2022-10-28 Fri 11:38>
 :END:
 
 ** Supported
@@ -300,16 +300,11 @@ these compelling.  Connect and say "hi" if you're so inclined.
 You might find me here, but my presence is special purpose or
 vestigial, and I am unlikely to see or respond.
 
-- Discord
-- Facebook
-- GitLab
-- Gitter
-- Instagram
-- Keybase
-- LinkedIn
-- Signal
-- Twitch
-- YouTube
+#+begin_contacts
+# Uses the [[*~contact-info-dl~ shortcode][~contact-info-dl~ shortcode]].  That's not great, if we ever export
+# to non-Hugo targets.
+@@hugo:{{< contact-info-dl support="deprecated" >}}@@
+#+end_contacts
 
 * Configurations section                                              :@tech:
 :PROPERTIES:
@@ -1465,7 +1460,7 @@ Mute the header anchors until hover:
 CLOSED: [2022-09-12 Mon 22:11]
 :PROPERTIES:
 :EXPORT_FILE_NAME: contact-info
-:EXPORT_HUGO_LASTMOD: <2022-10-26 Wed 22:23>
+:EXPORT_HUGO_LASTMOD: <2022-10-28 Fri 11:37>
 :END:
 
 Contact info is rendered in two places: in the [[*Footer template][footer template]] and on the
@@ -1473,11 +1468,17 @@ Contact info is rendered in two places: in the [[*Footer template][footer templa
 #+hugo:more
 ***** Site parameters
 
-We'll store the contacts in the site parameters of ~config.toml~.  The
-icon is derived from ~network~, unless explicitly specified as ~icon~.
-It should match a [[https://forkaweso.me/Fork-Awesome/icons/][Fork Awesome icon name]].
+We'll store the contacts in the site parameters of ~config.toml~.
 
-Support is either "supported" or "experimental".
+Keys are:
+- ~network~ :: required
+- ~icon~ :: required when ~support~ equals ~'supported'~.  Defaults to ~network~.
+- ~handle~ :: required when ~support~ equals ~'supported'~.
+- ~url~ :: required when ~support~ equals ~'supported'~.
+- ~support~ :: should be one of
+  - ~'supported'~
+  - ~'experimental'~
+  - ~'deprecated'~
 
 #+begin_src conf-toml :tangle ../../tmp/hugo/config.toml
   [[Params.contacts]]
@@ -1507,12 +1508,6 @@ Support is either "supported" or "experimental".
   support = 'supported'
 
   [[Params.contacts]]
-  network = 'Twitter'
-  handle = '@rossabaker'
-  url = 'https://twitter.com/rossabaker'
-  support = 'supported'
-
-  [[Params.contacts]]
   network = 'Codeberg'
   handle = '@rossabaker'
   url = 'https://codeberg.org/rossabaker'
@@ -1529,6 +1524,52 @@ Support is either "supported" or "experimental".
   handle = 'u/rossabaker'
   url = 'https://reddit.com/user/rossabaker'
   support = 'experimental'
+
+  [[Params.contacts]]
+  network = 'Discord'
+  support = 'deprecated'
+
+  [[Params.contacts]]
+  network = 'Facebook'
+  support = 'deprecated'
+
+  [[Params.contacts]]
+  network = 'GitLab'
+  support = 'deprecated'
+
+  [[Params.contacts]]
+  network = 'Gitter'
+  support = 'deprecated'
+
+  [[Params.contacts]]
+  network = 'Instagram'
+  support = 'deprecated'
+
+  [[Params.contacts]]
+  network = 'Keybase'
+  support = 'deprecated'
+
+  [[Params.contacts]]
+  network = 'LinkedIn'
+  support = 'deprecated'
+
+  [[Params.contacts]]
+  network = 'Signal'
+  support = 'deprecated'
+
+  [[Params.contacts]]
+  network = 'Twitch'
+  support = 'deprecated'
+
+  [[Params.contacts]]
+  network = 'Twitter'
+  handle = '@rossabaker'
+  url = 'https://twitter.com/rossabaker'
+  support = 'deprecated'
+
+  [[Params.contacts]]
+  network = 'YouTube'
+  support = 'deprecated'
 #+end_src
 
 ***** ~contact-info-icons~ partial template
@@ -1551,7 +1592,15 @@ supported contacts from the experimental ones.
   <dl>
       {{ range where .Site.Params.contacts "support" "eq" (.Get "support") }}
           <dt>{{ .network }}</dt>
-          <dd><a href="{{ .url }}">{{ .handle }}</a></dd>
+          {{ if .handle }}
+              <dd>
+              {{ if .url }}
+                <a href="{{ .url }}">{{ .handle }}</a>
+              {{ else }}
+                {{ .handle }}
+              {{ end }}
+              </dd>
+          {{ end }}
       {{ end }}
   </dl>
 #+end_src
