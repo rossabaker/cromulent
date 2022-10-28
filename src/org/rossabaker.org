@@ -1502,7 +1502,7 @@ Support is either "supported" or "experimental".
 
   [[Params.contacts]]
   network = 'Mastodon'
-  handle = 'https://mastodon.social/@rossabaker'
+  handle = '@rossabaker@mastodon.social'
   url = 'https://mastodon.social/web/@rossabaker'
   support = 'supported'
 
