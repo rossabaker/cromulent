@@ -8,49 +8,67 @@
 CLOSED: [2022-09-05 Mon 00:30]
 :PROPERTIES:
 :EXPORT_FILE_NAME: _index
-:EXPORT_HUGO_LASTMOD: <2022-09-11 Sun 23:56>
+:EXPORT_HUGO_LASTMOD: <2022-10-29 Sat 00:44>
 :END:
 
-#+attr_html: :class construction
-#+begin_aside
-#+attr_html: :alt Under construction
-file:../hugo/static/img/under-construction.gif
-#+end_aside
+#+begin_intro
+#+attr_html: :class profile
+#+attr_html: :alt Profile photo of Ross A. Baker
+file:../hugo/static/img/profile.jpg
 
-** "Under construction"
+#+begin_text
+I had a late twentieth-century personal web site, replete with
+[[https://docs.oracle.com/javase/tutorial/deployment/applet/index.html][Java applets]], pet pictures, [[https://datatracker.ietf.org/doc/html/rfc3875][CGI scripts]], and other assorted juvenilia.
+I gave it up, and I don't know why.  It was a /perfectly cromulent/
+website.
 
-This site is /under construction/, as we said the last time I built
-a web site.  I'm a backend developer and got himself in a bit over
-my head [[/configs/website][building this one from scratch]].
-
-I struggle with the perfect being the enemy of the good.  I'm
-publishing before I'm proud of it, or else it will never happen.
+This is my Indieweb reboot.
+#+end_text
+#+end_intro
 
 #+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css :exports none
-  aside.construction {
-      float: left;
-      width: 40%;
-      max-width: 400px;
-      margin: 0 1.5em 1.5em 0;
+  .site-title {
+      font-size: 2rem;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      background: none;
   }
 
-  @media (max-width: 576px) {
-      aside.construction {
-          float: none;
-          width: 100%;
-          margin: 1.5em auto;
-      };
+  .site-title .heading-anchor {
+      display: none;
   }
 
-  aside.construction figure {
+  .intro {
+      display: grid;
+      grid-template-columns: 30% 70%;
+      gap: 1.5em;
+      grid-auto-rows: auto;
+  }
+
+  .intro .profile {
+      grid-column: 1;
+      grid-row: 1;
       margin: 0;
   }
 
-  aside.construction img {
+  .intro .profile figure {
+      margin: 0;
+  }
+
+  .intro .profile img {
       max-width: 100%;
-      border-radius: 1.5em;
+      border-radius: 50%;
+  }
+
+  .intro .text {
+      grid-column: 2;
+      grid-row: 1;
+      align-self: center;
   }
 #+end_src
+
+
 
 * DONE Ross A. Baker                                    :@personal:biography:contact:
 CLOSED: [2022-08-31 Wed 00:23]
@@ -649,6 +667,7 @@ pages.
 
 #+begin_src html :tangle ../../tmp/hugo/layouts/index.html
   {{ define "main" }}
+      <h1 class="site-title">{{ .Site.Title }}</h1>
       {{ with .Content }}
           {{ . }}
       {{ end }}
