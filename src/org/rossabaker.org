@@ -1522,8 +1522,8 @@ Keys are:
 
   [[Params.contacts]]
   network = 'Mastodon'
-  handle = '@rossabaker@mastodon.social'
-  url = 'https://mastodon.social/web/@rossabaker'
+  handle = '@rossabaker@indieweb.social'
+  url = 'https://indieweb.social/@rossabaker'
   support = 'supported'
 
   [[Params.contacts]]
@@ -2116,7 +2116,7 @@ following.  I want my efforts to reverberate.
 - I am slowly republishing my old [[*Talks][talks]] here, with a couple new ones
   to share.
 
-- I will continue to explore [[https://mastodon.social/@rossabaker][Mastodon]] for conversing on technical
+- I will continue to explore [[https://indieweb.social/@rossabaker][Mastodon]] for conversing on technical
   subjects.  You need a login to participate, but not to view.
 
 - [[https://matrix.to/#/@ross:rossabaker.com][Matrix]] is the natural, open successor to Gitter.  I've drastically
