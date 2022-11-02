@@ -8,23 +8,8 @@
 CLOSED: [2022-09-05 Mon 00:30]
 :PROPERTIES:
 :EXPORT_FILE_NAME: _index
-:EXPORT_HUGO_LASTMOD: <2022-10-29 Sat 00:44>
+:EXPORT_HUGO_LASTMOD: <2022-11-01 Tue 22:51>
 :END:
-
-#+begin_intro
-#+attr_html: :class profile
-#+attr_html: :alt Profile photo of Ross A. Baker
-file:../hugo/static/img/profile.jpg
-
-#+begin_text
-I had a late twentieth-century personal web site, replete with
-[[https://docs.oracle.com/javase/tutorial/deployment/applet/index.html][Java applets]], pet pictures, [[https://datatracker.ietf.org/doc/html/rfc3875][CGI scripts]], and other assorted juvenilia.
-I gave it up, and I don't know why.  It was a /perfectly cromulent/
-website.
-
-This is my Indieweb reboot.
-#+end_text
-#+end_intro
 
 #+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css :exports none
   .site-title {
@@ -2196,6 +2181,118 @@ told St. Peter.  "I want to look at the rules!"  She was such a
 stickler for the rules.  But not to worry, Grandma: you /always/ did
 your best.
 
+** DONE Imperfectly Indieweb :@personal:indieweb:juvenilia:facebook:twitter:perfectionism:ageing:
+CLOSED: <2022-11-01 Tue 23:17>
+:PROPERTIES:
+:EXPORT_HUGO_BUNDLE: imperfectly-indieweb
+:EXPORT_FILE_NAME: index
+:END:
+
+#+begin_description
+How the collapse of Twitter and a trip to the Wayback Machine inspired me to go all in on the Indieweb.
+#+end_description
+
+The [[https://en.wikipedia.org/wiki/Acquisition_of_Twitter_by_Elon_Musk][asteroid hurtling toward Twitter last week]] forced many of us to
+look back on our digital lives.  I reflected on perfectionism and
+proprietorship.  I've made mistakes with each, and I hope the Indieweb
+is the solution.
+
+*** Portrait of 1990s geekery
+
+#+attr_html: :alt A partially exposed dinosaur fossil :class blog-image
+#+caption: [[https://www.flickr.com/photos/nh53/48240721726/in/photolist-2guSiTu-6LsL5L-2k4wB2k-2kcQJkE-2kcLVom-a6svVS-2kcRaCQ-a6q81g-TSWgq4-a6pU5B-7uRNYN-Kb9qkv-TSWgR4-a6pJFD-TSWgMr-a6q8VD-4Lo9uM-a6pFEc-a6sSfC-TSWgCP-7VojVq-ffkmNN-a6sNAj-a6pGnz-a6pQpD-a6pwBi-a6pybc-SN3MTY-U1VuuE-TSWgUR-a6pZgv-SH3igV-a6q3sx-a6sWjq-a6spgJ-SQN6kA-a6p7Ux-a6sbff-a6shtU-REqDbZ-a6s9iN-a6pbgz-a6sQ7W-a6seeh-a6pivn-2kcQLgt-a6peYF-a6pNVe-2k6mwCq-a6pkaT][Dinosaur fossil]] by [[https://www.flickr.com/photos/nh53/][Nigel Holt]], licensed under [[https://creativecommons.org/licenses/by/2.0/][CC BY 2.0]]
+[[file:img/dinosaur_fossil.jpg]]
+
+The Wayback Machine has preserved my [[https://web.archive.org/web/19981203135416/http://user.mc.net/%7Eotis/][juvenilia]].  The soft tissue is
+gone, but here is the skeleton of a twentieth-century personal web
+page, the author not yet twenty.  There was a Perl CGI script to show
+hyperlinked football schedules before ESPN had them.  Navigation was a
+Java applet, with the crude animations that JavaScript could not yet
+render.  There was a boast about my girlfriend[fn:4].  Ugh, the
+justified margins!
+
+Unfortunately, it was all hosted at the internet service provider in
+the back of the video cassette rental store.  It's incredible we found
+any remains of Teenage Ross at all.
+
+*** A gap in the fossil record
+
+As the 21st Century dawned, the Web and I each got more serious.  It
+was time to put the applets away and drop the handle "Spanky"[fn:6].
+I had swirling thoughts about:
+- aspect-oriented programming
+- pairwise comparison algorihthms to rank intercollegiate athletic teams
+- the inadequecy of ID3 tags for organizing a large MP3 collection
+- the urgency of proportional representation
+- and so much more
+
+I was also reading too many blogs about blogging, and concluded that
+none of these thoughts where polished enough to contribute to my
+Personal Brand™.  So I didn't develop a brand at all.  Vicenarian Ross
+was lost to perfectionism.
+
+*** Social media siloes
+
+In 2008, I was cajoled into joining Facebook, and I resumed expressing
+myself in its [[https://www.spudart.org/blog/new-art-monday-pieces-flair/][Pieces of Flair]] app.  I'd show you my board, but it's
+not mine to share.  It's gone forever, unless Mark Zuckerberg elects
+to hang it on the walls of his Metaverse.
+
+A few months later, I joined Twitter.  I tweeted about 9,500 times,
+and you can read them all there today.  Will we be able to read them
+in 25 years?  Doubtful.  I downloaded my archive before I left, and I
+might rerecord the greatest hits, but the original masters belong to
+the label.
+
+Facebook and Twitter got me creating again, worry free, in chunks of
+10 kilopixels or 280 words.  But if these tech giants seem mighty, so
+did the video rental business with the 56kbps dial-up.  Tricenarian
+Ross is buried in the rubble.
+
+*** Under Construction
+
+#+attr_html: :alt A pixelated, animated GIF from the 1990s of a construction worker shoveling. :class blog-image
+#+caption: Under construction
+[[file:img/under-construction.gif]]
+
+I'm embracing imperfection and reconstructing myself on the [[https://indieweb.org/][Indieweb]].
+I've been in fiddling with the typography and navigation for weeks
+before announcing a grand opening, but that's a stall tactic: there is
+no perfect.  Platforms like Medium and Substack remove the
+distractions, but preserve nothing.
+
+So, I am finally [[*Blog][blogging]] here, in my own domain.  I'm assembling an
+archive of old [[*Talks][talks]].  I'll have more literate [[*Configurations][configurations]] to
+share.  I'm thinking about how integrate the old tweets and the new
+toots[fn:9].
+
+I cringed while revisiting my old self, but then I appreciated all the
+ways I've grown.  If I get it right, this project will preserve
+Quadragenarian Ross as an embarrassment for decades to come.[fn:8]
+
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css :exports none
+  figure.blog-image {
+      float: right;
+      max-width: 40%;
+      margin: 0 1.5em;
+  }
+
+  .blog-image img {
+      display: block;
+      width: 100%;
+      height: auto;
+      margin: 0 auto;
+  }
+
+  .blog-image figcaption {
+      font-size: smaller;
+  }
+
+  .footnotes {
+      clear: both;
+  }
+#+end_src
+
 * Local Variables :noexport:
 
 We need to prepend ~"asc"~ to the defaults to share our PGP public key.
@@ -2227,7 +2324,6 @@ I hope you find something here to enjoy, and I hope it inspires you to
 contribute to the open web, too.
 
 * Footnotes
-
 [fn:1]
 #+begin_quote
 From everyone to whom much has been given, much will be required, and from the one to whom much has been entrusted, even more will be demanded.
@@ -2241,4 +2337,13 @@ Luke 12:48, NRSV-UE
 
 [fn:3] Did someone shit in your brain and forget to stir?
 
+[fn:4] Good news: she's now my wife.
+
 [fn:5] I won't forget to stir.
+
+[fn:6] I can't remember where I got that appellation.  I am old, but
+I'm not Little Rascals old.
+
+[fn:8] Also I hope anyone still understands "cringe" is also a verb.
+
+[fn:9] And what we'll think "toots" were in 2050
