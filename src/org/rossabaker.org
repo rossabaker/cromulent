@@ -251,19 +251,29 @@ CLOSED: [2022-09-14 Wed 13:30]
 :PROPERTIES:
 :EXPORT_FILE_NAME: public-keys
 :EXPORT_DESCRIPTION: A partial enumeration of addresses, social networks, and PGP public key.
+:EXPORT_HUGO_LASTMOD: <2022-11-02 Wed 13:01>
 :END:
 
 ** PGP
 
-Download my [[file:../hugo/static/keys/0x975BE5BC29D92CA5.pub.asc][public PGP key]].  Its fingerprint is as follows:
+#+begin_src sh :results verbatim :exports none
+  mkdir -p ../../tmp/hugo/static/keys/
+  gpg --enarmor <../hugo/static/.well-known/openpgpkey/hu/eimhw3om3jynrs7fo7r7rrssmt1o4yxp >../../tmp/hugo/static/keys/0x975BE5BC29D92CA5.pub.asc
+#+end_src
 
-#+begin_example
-pub   rsa4096/0x975BE5BC29D92CA5 2018-01-31 [SC]
-      Key fingerprint = 904C 1537 33DB B010 6915  C0BD 975B E5BC 29D9 2CA5
-uid                   [ultimate] Ross A. Baker <ross@rossabaker.com>
-sub   rsa4096/0x89FB7DEA8BDEB545 2018-01-31 [E]
-      Key fingerprint = 7578 8CFE 8A1B E74E D17D  30AB 89FB 7DEA 8BDE B545
-#+end_example
+#+RESULTS:
+
+My public key is published to this domain via [[https://wiki.gnupg.org/WKD][WKD]], and can also be
+downloaded in [[/.well-known/openpgpkey/hu/eimhw3om3jynrs7fo7r7rrssmt1o4yxp][binary]] and [[file:../../tmp/hugo/static/keys/0x975BE5BC29D92CA5.pub.asc][ASCII armored]] formats.  Its fingerprint is:
+
+#+name: pgp-fingerprint
+#+begin_src sh :results verbatim :exports none
+  gpg --show-keys <../hugo/static/.well-known/openpgpkey/hu/eimhw3om3jynrs7fo7r7rrssmt1o4yxp
+#+end_src
+
+#+begin_src text :noweb yes
+  <<pgp-fingerprint()>>
+#+end_src
 
 * DONE Contact                                            :@personal:contact:
 CLOSED: [2022-10-16 Sun 15:37]
@@ -485,8 +495,13 @@ we'll use [[https://gohugo.io/hugo-modules/configuration/#module-config-mounts][
   [[module.mounts]]
     source = 'src/hugo/assets'
     target = 'assets'
+#+end_src
+
+We also generate some "static" resources that should maybe be assets?
+
+#+begin_src conf-toml :tangle ../../tmp/hugo/config.toml
   [[module.mounts]]
-    source = 'src/hugo/static'
+    source = 'tmp/hugo/static'
     target = 'static'
 #+end_src
 
@@ -2298,12 +2313,6 @@ Quadragenarian Ross as an embarrassment for decades to come.[fn:8]
 #+end_src
 
 * Local Variables :noexport:
-
-We need to prepend ~"asc"~ to the defaults to share our PGP public key.
-
-Local Variables:
-org-hugo-external-file-extensions-allowed-for-copying: ("asc" "jpg" "jpeg" "tiff" "png" "svg" "gif" "mp4" "pdf" "odt" "doc" "ppt" "xls" "docx" "pptx" "xlsx")
-End:
 
 * Stashed
 
