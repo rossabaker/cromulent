@@ -496,6 +496,9 @@ we'll use [[https://gohugo.io/hugo-modules/configuration/#module-config-mounts][
   [[module.mounts]]
     source = 'src/hugo/assets'
     target = 'assets'
+  [[module.mounts]]
+    source = 'src/hugo/static'
+    target = 'static'
 #+end_src
 
 **** General site parameters
