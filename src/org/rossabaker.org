@@ -249,22 +249,23 @@ and jogs when it's not.
 * DONE Public keys              :@tech:keys:pgp:
 CLOSED: [2022-09-14 Wed 13:30]
 :PROPERTIES:
-:EXPORT_FILE_NAME: public-keys
-:EXPORT_DESCRIPTION: A partial enumeration of addresses, social networks, and PGP public key.
-:EXPORT_HUGO_LASTMOD: <2022-11-02 Wed 13:01>
+:EXPORT_HUGO_BUNDLE: public-keys
+:EXPORT_FILE_NAME: index
+:EXPORT_DESCRIPTION: Ross A. Baker's public keys
+:EXPORT_HUGO_LASTMOD: <2022-11-02 Wed 13:23>
 :END:
 
 ** PGP
 
 #+begin_src sh :results verbatim :exports none
-  mkdir -p ../../tmp/hugo/static/keys/
-  gpg --enarmor <../hugo/static/.well-known/openpgpkey/hu/eimhw3om3jynrs7fo7r7rrssmt1o4yxp >../../tmp/hugo/static/keys/0x975BE5BC29D92CA5.pub.asc
+  mkdir -p ../../tmp/hugo/content/keys/
+  gpg --enarmor <../hugo/static/.well-known/openpgpkey/hu/eimhw3om3jynrs7fo7r7rrssmt1o4yxp >../../tmp/hugo/content/keys/0x975BE5BC29D92CA5.pub.asc
 #+end_src
 
 #+RESULTS:
 
 My public key is published to this domain via [[https://wiki.gnupg.org/WKD][WKD]], and can also be
-downloaded in [[/.well-known/openpgpkey/hu/eimhw3om3jynrs7fo7r7rrssmt1o4yxp][binary]] and [[file:../../tmp/hugo/static/keys/0x975BE5BC29D92CA5.pub.asc][ASCII armored]] formats.  Its fingerprint is:
+downloaded in [[/.well-known/openpgpkey/hu/eimhw3om3jynrs7fo7r7rrssmt1o4yxp][binary]] and [[/keys/0x975BE5BC29D92CA5.pub.asc][ASCII armored]] formats.  Its fingerprint is:
 
 #+name: pgp-fingerprint
 #+begin_src sh :results verbatim :exports none
@@ -495,14 +496,6 @@ we'll use [[https://gohugo.io/hugo-modules/configuration/#module-config-mounts][
   [[module.mounts]]
     source = 'src/hugo/assets'
     target = 'assets'
-#+end_src
-
-We also generate some "static" resources that should maybe be assets?
-
-#+begin_src conf-toml :tangle ../../tmp/hugo/config.toml
-  [[module.mounts]]
-    source = 'tmp/hugo/static'
-    target = 'static'
 #+end_src
 
 **** General site parameters
