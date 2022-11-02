@@ -252,26 +252,24 @@ CLOSED: [2022-09-14 Wed 13:30]
 :EXPORT_HUGO_BUNDLE: public-keys
 :EXPORT_FILE_NAME: index
 :EXPORT_DESCRIPTION: Ross A. Baker's public keys
-:EXPORT_HUGO_LASTMOD: <2022-11-02 Wed 14:19>
+:EXPORT_HUGO_LASTMOD: <2022-11-02 Wed 16:26>
 :END:
 
 ** PGP
 
-#+name: gpg-enarmor
-#+begin_src sh :results verbatim :exports none
-  mkdir -p ../../tmp/hugo/content/public-keys/
-  gpg --enarmor <../hugo/static/.well-known/openpgpkey/hu/eimhw3om3jynrs7fo7r7rrssmt1o4yxp >../../tmp/hugo/content/public-keys/0x975BE5BC29D92CA5.pub.asc
+#+begin_src sh :tangle ../../tmp/hugo/content/public-keys/0x975BE5BC29D92CA5.pub.asc :exports none
+  gpg --enarmor <../hugo/static/.well-known/openpgpkey/hu/eimhw3om3jynrs7fo7r7rrssmt1o4yxp
 #+end_src
 
 #+name: gpg-fingerprint
 #+begin_src sh :results verbatim :exports none
-  gpg --show-keys <../hugo/static/.well-known/openpgpkey/hu/eimhw3om3jynrs7fo7r7rrssmt1o4yxp
+  gpg --homedir "$TMPDIR" --show-keys ../hugo/static/.well-known/openpgpkey/hu/eimhw3om3jynrs7fo7r7rrssmt1o4yxp
 #+end_src
 
 My public key is published to this domain via [[https://wiki.gnupg.org/WKD][WKD]], and can also be
 downloaded in [[/.well-known/openpgpkey/hu/eimhw3om3jynrs7fo7r7rrssmt1o4yxp][binary]] and [[./0x975BE5BC29D92CA5.pub.asc][ASCII armored]] formats.  Its fingerprint is:
 
-#+begin_src text :noweb yes
+#+begin_src text :tangle ../../tmp/gpg-fingerprint :noweb yes
   <<gpg-fingerprint()>>
 #+end_src
 
@@ -1623,13 +1621,13 @@ supported contacts from the experimental ones.
 CLOSED: [2022-09-01 Thu 16:54]
 :PROPERTIES:
 :EXPORT_FILE_NAME: build
-:EXPORT_HUGO_LASTMOD: <2022-09-16 Fri 08:58>
+:EXPORT_HUGO_LASTMOD: <2022-11-02 Wed 16:10>
 :END:
 
 The website is just another package in our flake.
 #+hugo:more
 #+begin_src nix :tangle ../../gen/website/default.nix
-  { src, emacsNativeComp, hugo, stdenv }:
+  { src, emacsNativeComp, gnupg, hugo, stdenv }:
 
   let
     siteEmacs = emacsNativeComp.pkgs.withPackages (epkgs: [
@@ -1639,9 +1637,14 @@ The website is just another package in our flake.
   stdenv.mkDerivation rec {
     name = "rossabaker.com";
     inherit src;
-    buildInputs = [ siteEmacs hugo ];
+    buildInputs = [
+      siteEmacs
+      gnupg
+      hugo
+    ];
     buildPhase = ''
       cd ..
+      export PATH=${gnupg}/bin:$PATH
       ${siteEmacs}/bin/emacs -Q --batch --script ${./export.el}
       ${hugo}/bin/hugo --config tmp/hugo/config.toml
     '';

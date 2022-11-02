@@ -178,6 +178,14 @@
           command = "${hm}/bin/home-manager switch --flake $PRJ_ROOT";
         }];
 
+        env = [
+          # Needed by gpg export
+          {
+            name = "TMPDIR";
+            value = "$DEVSHELL_DIR/tmp";
+          }
+        ];
+
         packages = [
           hm
           pkgs.google-cloud-sdk

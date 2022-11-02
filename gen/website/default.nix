@@ -1,4 +1,4 @@
-{ src, emacsNativeComp, hugo, stdenv }:
+{ src, emacsNativeComp, gnupg, hugo, stdenv }:
 
 let
   siteEmacs = emacsNativeComp.pkgs.withPackages (epkgs: [
@@ -8,9 +8,14 @@ in
 stdenv.mkDerivation rec {
   name = "rossabaker.com";
   inherit src;
-  buildInputs = [ siteEmacs hugo ];
+  buildInputs = [
+    siteEmacs
+    gnupg
+    hugo
+  ];
   buildPhase = ''
     cd ..
+    export PATH=${gnupg}/bin:$PATH
     ${siteEmacs}/bin/emacs -Q --batch --script ${./export.el}
     ${hugo}/bin/hugo --config tmp/hugo/config.toml
   '';
