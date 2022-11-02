@@ -2186,16 +2186,21 @@ CLOSED: <2022-11-01 Tue 23:17>
 :PROPERTIES:
 :EXPORT_HUGO_BUNDLE: imperfectly-indieweb
 :EXPORT_FILE_NAME: index
+:EXPORT_HUGO_LASTMOD: <2022-11-02 Wed 00:00>
 :END:
 
 #+begin_description
 How the collapse of Twitter and a trip to the Wayback Machine inspired me to go all in on the Indieweb.
 #+end_description
 
+#+begin_aside
+Updated <2022-11-02 Wed>: some edits for concision
+#+end_aside
+
 The [[https://en.wikipedia.org/wiki/Acquisition_of_Twitter_by_Elon_Musk][asteroid hurtling toward Twitter last week]] forced many of us to
-look back on our digital lives.  I reflected on perfectionism and
-proprietorship.  I've made mistakes with each, and I hope the Indieweb
-is the solution.
+look back on our digital lives.  I reflected on my mistakes with
+perfectionism and proprietorship, and am looking to Indieweb for
+solutions.
 
 *** Portrait of 1990s geekery
 
@@ -2206,20 +2211,19 @@ is the solution.
 The Wayback Machine has preserved my [[https://web.archive.org/web/19981203135416/http://user.mc.net/%7Eotis/][juvenilia]].  The soft tissue is
 gone, but here is the skeleton of a twentieth-century personal web
 page, the author not yet twenty.  There was a Perl CGI script to show
-hyperlinked football schedules before ESPN had them.  Navigation was a
-Java applet, with the crude animations that JavaScript could not yet
-render.  There was a boast about my girlfriend[fn:4].  Ugh, the
-justified margins!
+football schedules.  Navigation was a Java applet, for crude
+animations that JavaScript could not yet render.  There was a boast
+about my girlfriend[fn:4].  Ugh, the justified margins!
 
 Unfortunately, it was all hosted at the internet service provider in
 the back of the video cassette rental store.  It's incredible we found
-any remains of Teenage Ross at all.
+any remains of Teenage Ross.
 
 *** A gap in the fossil record
 
-As the 21st Century dawned, the Web and I each got more serious.  It
-was time to put the applets away and drop the handle "Spanky"[fn:6].
-I had swirling thoughts about:
+As the 21st Century dawned, the Web and I each got serious.  It was
+time to put the applets away and drop the handle "Spanky"[fn:6].  I
+had swirling thoughts about:
 - aspect-oriented programming
 - pairwise comparison algorihthms to rank intercollegiate athletic teams
 - the inadequecy of ID3 tags for organizing a large MP3 collection
@@ -2228,7 +2232,7 @@ I had swirling thoughts about:
 
 I was also reading too many blogs about blogging, and concluded that
 none of these thoughts where polished enough to contribute to my
-Personal Brand™.  So I didn't develop a brand at all.  Vicenarian Ross
+Personal Brand™.  I didn't develop a brand at all.  Vicenarian Ross
 was lost to perfectionism.
 
 *** Social media siloes
@@ -2256,17 +2260,17 @@ Ross is buried in the rubble.
 [[file:img/under-construction.gif]]
 
 I'm embracing imperfection and reconstructing myself on the [[https://indieweb.org/][Indieweb]].
-I've been in fiddling with the typography and navigation for weeks
-before announcing a grand opening, but that's a stall tactic: there is
-no perfect.  Platforms like Medium and Substack remove the
-distractions, but preserve nothing.
+I've been in fiddling with the [[/website][site tooling]] for weeks before
+announcing a grand opening, but that's a stall tactic: there is no
+perfect.  Platforms like Medium and Substack remove the distractions,
+but preserve nothing.
 
 So, I am finally [[*Blog][blogging]] here, in my own domain.  I'm assembling an
 archive of old [[*Talks][talks]].  I'll have more literate [[*Configurations][configurations]] to
 share.  I'm thinking about how integrate the old tweets and the new
 toots[fn:9].
 
-I cringed while revisiting my old self, but then I appreciated all the
+I cringed while revisiting my old self, but I quickly appreciated the
 ways I've grown.  If I get it right, this project will preserve
 Quadragenarian Ross as an embarrassment for decades to come.[fn:8]
 
