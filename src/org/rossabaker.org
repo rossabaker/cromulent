@@ -1905,7 +1905,7 @@ self-publishing.
 *** Files
 
 Most of the work is serving two static files.  On a Hugo site, the
-correct place to put these is in the `static/` directory.
+correct place to put these is in the ~static/~ directory.
 
 **** ~/.well-known/openpgpkey/policy~
 
