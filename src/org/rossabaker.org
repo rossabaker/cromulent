@@ -246,7 +246,7 @@ and jogs when it's not.
 
 @@hugo:</div>@@
 
-* DONE Public keys              :@tech:keys:pgp:
+* DONE Public keys              :@tech:keys:pgp:wkd:
 CLOSED: [2022-09-14 Wed 13:30]
 :PROPERTIES:
 :EXPORT_HUGO_BUNDLE: public-keys
