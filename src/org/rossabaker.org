@@ -1888,7 +1888,7 @@ Give the code samples a little more room to breathe.
 CLOSED: [2022-11-02 Wed 23:39]
 :PROPERTIES:
 :EXPORT_FILE_NAME: web-key-directory
-:EXPORT_HUGO_LASTMOD: <2022-11-03 Thu 00:21>
+:EXPORT_HUGO_LASTMOD: <2022-11-03 Thu 00:30>
 :END:
 
 #+begin_description
@@ -1969,6 +1969,27 @@ We deploy to Netlify, and can [[https://docs.netlify.com/configure-builds/file-b
     [headers.values]
       Access-Control-Allow-Origin = "*"
 #+end_src
+
+*** Testing
+
+Test your work with ~gks-web-client~:
+
+#+begin_src sh
+  gpg-wks-client -v --check ross@rossabaker.com
+#+end_src
+
+You should see something like this:
+
+#+begin_example
+gpg-wks-client: public key for 'ross@rossabaker.com' found via WKD
+gpg-wks-client: gpg: Total number processed: 1
+gpg-wks-client: fingerprint: 904C153733DBB0106915C0BD975BE5BC29D92CA5
+gpg-wks-client:     user-id: Ross A. Baker <ross@rossabaker.com>
+gpg-wks-client:     created: Tue Jan 30 22:24:27 2018 EST
+gpg-wks-client:   addr-spec: ross@rossabaker.com
+#+end_example
+
+Alternatively, there is an [[https://metacode.biz/openpgp/web-key-directory][online checker]].
 
 * Projects section
 :PROPERTIES:
