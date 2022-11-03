@@ -1699,7 +1699,7 @@ Our build creates some detritus that we don't want checked into Git.
 CLOSED: [2022-08-30 Tue 14:26]
 :PROPERTIES:
 :EXPORT_FILE_NAME: style
-:EXPORT_HUGO_LASTMOD: <2022-10-17 Mon 14:58>
+:EXPORT_HUGO_LASTMOD: <2022-11-02 Wed 20:54>
 :END:
 
 We strive for [[https://en.wikipedia.org/wiki/Semantic_HTML][semantic HTML]].  The styles presented here provide a
@@ -1837,6 +1837,15 @@ stripes.
 #+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
   h1, h2, h3, h4, h5, h6 {
       color: var(--color-brand);
+  }
+#+end_src
+
+We'll sort out header sizes later, but the ~h1~ really needs to be
+bigger now.
+
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
+  h1 {
+      font-size: 2em;
   }
 #+end_src
 
