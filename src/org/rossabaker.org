@@ -252,9 +252,8 @@ CLOSED: [2022-09-14 Wed 13:30]
 :EXPORT_HUGO_BUNDLE: public-keys
 :EXPORT_FILE_NAME: index
 :EXPORT_DESCRIPTION: Ross A. Baker's public keys
-:EXPORT_HUGO_LASTMOD: <2022-11-02 Wed 16:26>
+:EXPORT_HUGO_LASTMOD: <2022-11-03 Thu 12:09>
 :END:
-
 ** PGP
 
 # Create an armored version
@@ -272,14 +271,21 @@ downloaded in [[/.well-known/openpgpkey/hu/eimhw3om3jynrs7fo7r7rrssmt1o4yxp][bin
 
 #+call: gpg-fingerprint()
 
-* DONE Contact                                            :@personal:contact:
+I use this key for [[*Verification][verification]].
+
+* DONE Contact                                            :@personal:contact:verification:keyoxide:
 CLOSED: [2022-10-16 Sun 15:37]
 :PROPERTIES:
 :EXPORT_HUGO_SECTION: /
 :EXPORT_FILE_NAME: contact
 :EXPORT_DESCRIPTION: Supported ways to contact Ross, and deprecated ways to no longer contact Ross.
-:EXPORT_HUGO_LASTMOD: <2022-10-28 Fri 11:38>
+:EXPORT_HUGO_LASTMOD: <2022-11-03 Thu 12:11>
 :END:
+
+** Verification
+
+Many of these identities can be verified via a [[https://keyoxide.org/wkd/ross%40rossabaker.com][Keyoxide profile]] based
+on my [[*PGP][PGP key]].
 
 ** Supported
 
