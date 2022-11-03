@@ -1702,7 +1702,7 @@ Our build creates some detritus that we don't want checked into Git.
 CLOSED: [2022-08-30 Tue 14:26]
 :PROPERTIES:
 :EXPORT_FILE_NAME: style
-:EXPORT_HUGO_LASTMOD: <2022-11-02 Wed 20:54>
+:EXPORT_HUGO_LASTMOD: <2022-11-03 Thu 00:27>
 :END:
 
 We strive for [[https://en.wikipedia.org/wiki/Semantic_HTML][semantic HTML]].  The styles presented here provide a
@@ -1798,11 +1798,11 @@ crimson.
 ***** Headers
 
 Modern CSS lets us draw stripes without a repeating background GIF.
-Neat.  This draws candy stripes next to the headers.  The negative
-margin and corresponding padding hang the stripes off to the left.
+Neat.  This draws candy stripes next to the ~h1~.  The negative margin
+and corresponding padding hang the stripes off to the left.
 
 #+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
-    h1, h2, h3, h4, h5, h6 {
+    h1 {
         background: linear-gradient(
             to right,
             var(--color-brand) 0,
