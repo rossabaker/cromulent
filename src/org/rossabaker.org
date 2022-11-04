@@ -2436,8 +2436,7 @@ Quadragenarian Ross as an embarrassment for decades to come.[fn:8]
   }
 #+end_src
 
-** DONE Computers are fun again :@personal:indieweb:fediverse:twitter:community:scala:open_source:
-CLOSED: [2022-11-04 Fri 01:09]
+** TODO Computers are fun again :@personal:indieweb:fediverse:twitter:community:scala:open_source:
 :PROPERTIES:
 :EXPORT_FILE_NAME: computers-are-fun-again
 :END:
