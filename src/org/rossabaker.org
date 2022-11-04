@@ -2341,7 +2341,6 @@ The [[https://en.wikipedia.org/wiki/Acquisition_of_Twitter_by_Elon_Musk][asteroi
 look back on our digital lives.  I reflected on my mistakes with
 perfectionism and proprietorship, and am looking to Indieweb for
 solutions.
-
 *** Portrait of 1990s geekery
 
 #+attr_html: :alt A partially exposed dinosaur fossil :class blog-image
@@ -2437,6 +2436,82 @@ Quadragenarian Ross as an embarrassment for decades to come.[fn:8]
   }
 #+end_src
 
+** DONE Computers are fun again :@personal:indieweb:fediverse:twitter:community:scala:open_source:
+CLOSED: [2022-11-04 Fri 01:09]
+:PROPERTIES:
+:EXPORT_FILE_NAME: computers-are-fun-again
+:END:
+
+#+begin_description
+Just a week of detox on the Fediverse brought back all the excitement
+of being new on the Internet.
+#+end_description
+
+I [[https://twitter.com/rossabaker/status/1585794629529501698][suspended my Twitter]] a week ago today, barely beating rush hour as
+~#twexit~ traffic clogged the Information Superhighway.  Today I
+exuberated, "[[https://indieweb.social/@rossabaker/109280455333589492][Computers are fun again!]]"
+
+*** Open Source is more than code
+
+For a decade, my online identity has been Scala.  A full community
+pathology is best left to another post, but ever since its good parts
+[[https://typelevel.org/blog/2021/05/05/discord-migration.html][retreated to Fort Discord]], I have felt adrift.  Open Source is focused
+on the license of the code, but it's not (yet) something materalized
+from a GPT-3 model.  It springs forth from human collaboration.  That
+human history is a complementary and equally valuable artifact, and
+deserves more care.
+
+I still enjoy the language.  There are still good people in it.  I
+teach it at work to wonderful mentees and still contribute to its
+libraries.  But something is missing.
+
+*** A serendipitous blog
+
+Twitter became my primary connection to the tech community.  I wrapped
+myself in a mute bubble, but maintaining its community accounts was
+corrosive.  Alexandru Nedelcu's [[https://alexn.org/blog/2022/04/01/blogging/][return to blogging]] was fresh as
+Twitter destabilized, the right words at the right time.  I decided
+then I would follow his lead, even though I'm now months behind.
+
+As I prepared, I discovered the concept of the Indieweb.  Yes!
+Gitter, the former chat home of Scala, was public, but it was never
+ours.  My Twitter was never mine.  But these people get it.
+
+#+begin_quote
+When you post something on the web, it should belong to you, not a
+corporation.
+
+#+begin_cite
+[[https://indieweb.org/]]
+#+end_cite
+#+end_quote
+
+*** Choosing an instance
+
+I had been off and on Mastodon since April 2017[fn:10], but never with
+this seriousness.  It was time for a move from "the default instance."
+
+The obvious choice is [[https://fosstodon.org/about/more][Fosstodon]], where I have many friends and subject
+matter expertise.  Its [[https://hub.fosstodon.org/why-fosstodon-is-english-only/][English-only policy]], while understandable, gave
+me pause.  Un dia me gustaria in meiner zweiten und dritten Sprache
+tuten.[fn:11] I'm glad it's there, but it's not right for me.
+
+Then I found [[https://indieweb.social/web/home][indieweb.social]].  It's a little less aligned with my
+established interests, but it has the nutrients that Scala currently
+lacks.  The Indieweb supports the human side of Open Source.  I am
+already enriched by the community I've discovered here.  There's even
+one intrepid soul trying out my blogging apparatus.
+
+*** What's next
+
+There's a certain irony in putting content on an domain containing
+~indieweb~, whose plug could be pulled at any moment.  I'm thinking
+about the best way to integrate microblogging into this static site
+generator.
+
+I'm also [[https://www.patreon.com/indiewebsocial/about][supporting my friendly admin]].  Wherever you land in the
+Fediverse, please consider supporting yours.
+
 * Local Variables :noexport:
 
 * Stashed
@@ -2462,6 +2537,7 @@ I hope you find something here to enjoy, and I hope it inspires you to
 contribute to the open web, too.
 
 * Footnotes
+
 [fn:1]
 #+begin_quote
 From everyone to whom much has been given, much will be required, and from the one to whom much has been entrusted, even more will be demanded.
@@ -2482,6 +2558,13 @@ Luke 12:48, NRSV-UE
 [fn:6] I can't remember where I got that appellation.  I am old, but
 I'm not Little Rascals old.
 
+[fn:7] Most of my Scala friends joined in April 2017, and I can't
+remember what we fled from.  Can anybody else?
+
 [fn:8] Also I hope anyone still understands "cringe" is also a verb.
 
 [fn:9] And what we'll think "toots" were in 2050
+
+[fn:10] Most of my Scala follows joined that month, and I can't remember why.  Does anyone else?
+
+[fn:11] "One day I'd like to toot in my second and third languages," in Spanish and German.
