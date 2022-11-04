@@ -263,7 +263,9 @@ CLOSED: [2022-09-14 Wed 13:30]
 
 #+name: gpg-fingerprint
 #+begin_src sh :results verbatim :exports none
-  gpg --homedir "$TMPDIR" --show-keys ../keys/0x975BE5BC29D92CA5.pub.gpg
+  export GNUPGHOME=../../tmp/gnupg
+  mkdir -p $GNUPGHOME
+  gpg --show-keys ../keys/0x975BE5BC29D92CA5.pub.gpg
 #+end_src
 
 My public key is published to this domain via [[*Web Key Directory][WKD]], and can also be
