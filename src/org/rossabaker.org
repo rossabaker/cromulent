@@ -2399,7 +2399,7 @@ Ross is buried in the rubble.
 [[file:img/under-construction.gif]]
 
 I'm embracing imperfection and reconstructing myself on the [[https://indieweb.org/][Indieweb]].
-I've been in fiddling with the [[/website][site tooling]] for weeks before
+I've been in fiddling with the [[/configs/website][site tooling]] for weeks before
 announcing a grand opening, but that's a stall tactic: there is no
 perfect.  Platforms like Medium and Substack remove the distractions,
 but preserve nothing.
