@@ -2574,7 +2574,7 @@ Fediverse, please consider supporting yours.
 :PROPERTIES:
 :EXPORT_HUGO_BUNDLE: notes
 :END:
-** DONE Notes
+** DONE Notes :@personal:indieweb:microblog:own_your_data:
 CLOSED: [2022-11-07 Mon 09:53]
 :PROPERTIES:
 :EXPORT_HUGO_TITLE: Notes
