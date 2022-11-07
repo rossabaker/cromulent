@@ -506,7 +506,7 @@ convert the Markdown to HTML with [[https://gohugo.io/][Hugo]].
 CLOSED: [2022-09-01 Thu 16:48]
 :PROPERTIES:
 :EXPORT_FILE_NAME: hugo
-:EXPORT_HUGO_LASTMOD: <2022-11-03 Thu 00:20>
+:EXPORT_HUGO_LASTMOD: <2022-11-07 Mon 09:33>
 :END:
 
 A Hugo site can be configured with either TOML or YAML.  I spent my
@@ -546,6 +546,9 @@ we'll use [[https://gohugo.io/hugo-modules/configuration/#module-config-mounts][
     target = 'layouts'
   [[module.mounts]]
     source = 'tmp/hugo/content'
+    target = 'content'
+  [[module.mounts]]
+    source = 'src/hugo/content'
     target = 'content'
   [[module.mounts]]
     source = 'tmp/hugo/assets'
@@ -1096,6 +1099,9 @@ description or summary.
           {{ .Summary }}
       {{ else }}
           {{ .Content }}
+      {{ end }}
+      {{ if .Params.Canonical }}
+          <small><a href="{{ .Params.Canonical }}">Go to original</a></small>
       {{ end }}
       <footer>
         {{ partial "article-info" . }}
@@ -2094,7 +2100,6 @@ to mine.
       margin: 1.5em auto;
   }
 #+end_src
-
 ** Books                                                               :book:
 
 *** Scalatra in Action                :@tech:scala:scalatra:http:sbt:scalate:
@@ -2564,6 +2569,29 @@ generator.
 
 I'm also [[https://www.patreon.com/indiewebsocial/about][supporting my friendly admin]].  Wherever you land in the
 Fediverse, please consider supporting yours.
+
+* Notes section
+:PROPERTIES:
+:EXPORT_HUGO_BUNDLE: notes
+:END:
+** DONE Notes
+CLOSED: [2022-11-07 Mon 09:53]
+:PROPERTIES:
+:EXPORT_HUGO_TITLE: Notes
+:EXPORT_FILE_NAME: _index
+:END:
+
+#+begin_description
+  The notes section contains Ross's microblog, mostly archived from
+  social media.
+#+end_description
+
+This is my microblog.  I archive new threads from various social
+networks here.  Replies and boosts or reteweets are out of scope.
+Content is archived here in the Indieweb spirit of [[https://indieweb.org/own_your_data][owning your data]].
+
+Includes:
+- [[https://mastodon.social/web/@rossabaker][@rossabaker@mastodon.social]] account (April 2017 — October 2022)
 
 * Local Variables :noexport:
 
