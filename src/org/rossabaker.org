@@ -2530,6 +2530,9 @@ the =me= variable.  Get ~outbox.json~ in the same directory, and run:
 
 Your toots should be in ~./src/hugo/content/notes/toots~.
 
+A nice Hugo layout is a post for another day, but the end result can
+be seen in [[*Notes][~/notes~]].
+
 *** Next steps
 
 1. Add command line parsing
