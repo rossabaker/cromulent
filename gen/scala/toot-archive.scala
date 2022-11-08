@@ -42,11 +42,11 @@ def topLevel[F[_]: ApplicativeThrow](json: Json): F[Boolean] =
     .map(_.isNull)
     .liftTo[F]
 
-def onlyMe[F[_]: ApplicativeThrow](json: Json): F[Boolean] =
+def ccsMyFollowers[F[_]: ApplicativeThrow](json: Json): F[Boolean] =
   json.hcursor
     .downField("object")
-    .get[Vector[String]]("cc")
-    .map(_ === Vector(s"${me}/followers"))
+    .get[Set[String]]("cc")
+    .map(_.contains(s"${me}/followers"))
     .liftTo[F]
 
 def getId[F[_]: ApplicativeThrow](json: Json): F[Long] =
@@ -70,6 +70,7 @@ def getHashtags(json: Json): Decoder.Result[Vector[String]] =
           case "#contentwarning" => "content-warning"
           case "#trickortreat" => "trick-or-treat"
           case "#GoingViral" => "going-viral"
+          case "#thedecision" => "the-decision"
           case other =>
             other.split("[\\W_]+")
               .filter(_.nonEmpty)
@@ -111,7 +112,7 @@ def program[F[_]: Sync: Files]: F[Unit] =
   parseToots
     .evalFilter(created[F])
     .evalFilter(topLevel[F])
-    .evalFilter(onlyMe[F])
+    .evalFilter(ccsMyFollowers[F])
     .flatMap(handleToot[F])
     .compile
     .drain

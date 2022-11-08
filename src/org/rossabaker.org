@@ -2387,15 +2387,15 @@ Our toots have a ~type~ of ~"Create"~.
 ****** Only me
 
 A few toots are "top-level", but are replies to a protected user.  We
-can filter these out by filtering tweets that only our followers are
+can filter these out by filtering tweets that our followers are
 ~cc~'ed on.
 
 #+begin_src scala :tangle ../../gen/scala/toot-archive.scala
-  def onlyMe[F[_]: ApplicativeThrow](json: Json): F[Boolean] =
+  def ccsMyFollowers[F[_]: ApplicativeThrow](json: Json): F[Boolean] =
     json.hcursor
       .downField("object")
-      .get[Vector[String]]("cc")
-      .map(_ === Vector(s"${me}/followers"))
+      .get[Set[String]]("cc")
+      .map(_.contains(s"${me}/followers"))
       .liftTo[F]
 #+end_src
 
@@ -2437,6 +2437,7 @@ In the long run, this mapping should be parameterized.
             case "#contentwarning" => "content-warning"
             case "#trickortreat" => "trick-or-treat"
             case "#GoingViral" => "going-viral"
+            case "#thedecision" => "the-decision"
             case other =>
               other.split("[\\W_]+")
                 .filter(_.nonEmpty)
@@ -2498,7 +2499,7 @@ content, and writes them to disk.
     parseToots
       .evalFilter(created[F])
       .evalFilter(topLevel[F])
-      .evalFilter(onlyMe[F])
+      .evalFilter(ccsMyFollowers[F])
       .flatMap(handleToot[F])
       .compile
       .drain
