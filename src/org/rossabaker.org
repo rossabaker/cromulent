@@ -2415,7 +2415,7 @@ URI.  We need to parse the JSON, and then get the last segment.
 
 **** Tag extractor
 
-Good Fediverse practice is to render hashtags in CamelCase, but our
+Good Fediverse practice is to [[https://indieweb.social/web/@Tam5@mastodon.social/109305286914653844][render hashtags in CamelCase]], but our
 Hugo tags are lower-kebab-case.  Some of our toots are older than this
 wisdom.  This function massages some toot tags to fit our site's tags,
 and kebab-cases the rest.
