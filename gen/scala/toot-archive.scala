@@ -63,14 +63,21 @@ def getHashtags(json: Json): Decoder.Result[Vector[String]] =
     .map(_.collect {
       case m if m.get("type") === Some("Hashtag") =>
         "\"" + (m("name") match {
+          case "#AllSaintsSunday" => "all-saints-sunday"
           case "#GoIU" => "hoosiers"
+          case "#GoingViral" => "going-viral"
+          case "#ScalaCLI" => "scala-cli"
+          case "#contentwarning" => "content-warning"
+          case "#cw" => "content-warning"
+          case "#indiewebsocial" => "indieweb-social"
           case "#italianbeef" => "italian-beef"
           case "#opentelemetry" => "open-telemetry"
-          case "#cw" => "content-warning"
-          case "#contentwarning" => "content-warning"
-          case "#trickortreat" => "trick-or-treat"
-          case "#GoingViral" => "going-viral"
+          case "#orgmode" => "org-mode"
+          case "#ownyourdata" => "own-your-data"
           case "#thedecision" => "the-decision"
+          case "#trickortreat" => "trick-or-treat"
+          case "#tuxedocat" => "tuxedo-cat"
+          case "#underconstruction" => "under-construction"
           case other =>
             other.split("[\\W_]+")
               .filter(_.nonEmpty)

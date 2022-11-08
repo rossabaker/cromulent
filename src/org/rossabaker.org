@@ -2430,14 +2430,21 @@ In the long run, this mapping should be parameterized.
       .map(_.collect {
         case m if m.get("type") === Some("Hashtag") =>
           "\"" + (m("name") match {
+            case "#AllSaintsSunday" => "all-saints-sunday"
             case "#GoIU" => "hoosiers"
+            case "#GoingViral" => "going-viral"
+            case "#ScalaCLI" => "scala-cli"
+            case "#contentwarning" => "content-warning"
+            case "#cw" => "content-warning"
+            case "#indiewebsocial" => "indieweb-social"
             case "#italianbeef" => "italian-beef"
             case "#opentelemetry" => "open-telemetry"
-            case "#cw" => "content-warning"
-            case "#contentwarning" => "content-warning"
-            case "#trickortreat" => "trick-or-treat"
-            case "#GoingViral" => "going-viral"
+            case "#orgmode" => "org-mode"
+            case "#ownyourdata" => "own-your-data"
             case "#thedecision" => "the-decision"
+            case "#trickortreat" => "trick-or-treat"
+            case "#tuxedocat" => "tuxedo-cat"
+            case "#underconstruction" => "under-construction"
             case other =>
               other.split("[\\W_]+")
                 .filter(_.nonEmpty)
@@ -2539,6 +2546,8 @@ be seen in [[*Notes][~/notes~]].
 1. Add command line parsing
 2. Package it as a Nix package, so users don't need ~scala-cli~.
 3. Create similar for Twitter and Facebook.
+4. Drop toots that link back to own domain
+5. Trim trailing hashtags
 
 * Talks section
 :PROPERTIES:
@@ -2973,6 +2982,7 @@ CLOSED: [2022-11-07 Mon 09:53]
 :PROPERTIES:
 :EXPORT_HUGO_TITLE: Notes
 :EXPORT_FILE_NAME: _index
+:EXPORT_HUGO_LASTMOD: <2022-11-08 Tue 12:04>
 :END:
 
 #+begin_description
@@ -2985,7 +2995,8 @@ networks here.  Replies and boosts or reteweets are out of scope.
 Content is archived here in the Indieweb spirit of [[https://indieweb.org/own_your_data][owning your data]].
 
 Includes:
-- [[https://mastodon.social/web/@rossabaker][@rossabaker@mastodon.social]] account (April 2017 — October 2022)
+- [[https://mastodon.social/web/@rossabaker][@rossabaker@mastodon.social]] account (April 2017 — November 2022)
+- [[https://indieweb.social/web/@rossabaker][@rossabaker@mastodon.social]] account (November 2022 — present, periodically synced)
 
 * Local Variables :noexport:
 
