@@ -2024,6 +2024,7 @@ to mine.
       margin: 1.5em auto;
   }
 #+end_src
+
 ** Books                                                               :book:
 
 *** Scalatra in Action                :@tech:scala:scalatra:http:sbt:scalate:
