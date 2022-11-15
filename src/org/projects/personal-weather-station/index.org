@@ -1,0 +1,22 @@
+#+PROPERTY: header-args :mkdirp yes
+#+title: Personal Weather Station
+#+date: <2022-08-28 Sun 21:03>
+#+lastmod: <2022-09-07 Wed 00:00>
+#+html_head_extra: <style>.weather-station { width: 500px; height: 400px; max-width: 100%; display: block; margin: 1.5em auto; }</style>
+#+filetags: Weather Indianapolis
+
+I run an [[https://ambientweather.net/][Ambient Weather]] WS-1400-IP weather station in the Castleton
+neighborhood of Indianapolis and share its [[https://ambientweather.net/devices/public/b78b5bb0e59646a78a623a940937335c][public dashboard]].  The
+anemometer is not raised high enough for accuracy, but the rest is
+reasonably accurate.
+
+#+begin_aside
+I learned on 2022-09-06 that the [[https://www.ind.com/business/general-aviation-airports/metropolitan-airport][Indianapolis Metropolitan Airport]] is
+now [[https://aviationweather.gov/metar/data?ids=kump&format=decoded&hours=24&taf=off&layout=on][publishing METAR data]].  That airport is just a mile away, and
+certainly has a more credible weather station, but it's fun to compare
+to mine.
+#+end_aside
+
+#+begin_export html
+  <iframe class="weather-station" src="https://ambientweather.net/devices/public/b78b5bb0e59646a78a623a940937335c?embed=true"></iframe>
+#+end_export
