@@ -419,7 +419,7 @@ derived.  As much as possible, we keep them in ~src~.
 Ephemeral files can be tangled on demand and disposed of at will.
 Development processes may need them, but they can be comfortably
 recreated from the original sources.  An example of these are the Hugo
-outputs when [[*Local Nix build][locally building the site]].
+outputs when locally building the site.
 
 We put as many of them as we can in ~tmp~ for organization.  The best
 way to handle them is with a [[https://git-scm.com/docs/gitignore][gitignore]].
@@ -1694,77 +1694,6 @@ CLOSED: [2022-09-01 Thu 16:54]
 :EXPORT_FILE_NAME: build
 :EXPORT_HUGO_LASTMOD: <2022-11-02 Wed 16:10>
 :END:
-
-The website is just another package in our flake.
-#+hugo:more
-#+begin_src nix :tangle ../../gen/website/default.nix
-  { src, emacsNativeComp, gnupg, hugo, stdenv }:
-
-  let
-    siteEmacs = emacsNativeComp.pkgs.withPackages (epkgs: [
-      epkgs.ox-hugo
-    ]);
-  in
-  stdenv.mkDerivation rec {
-    name = "rossabaker.com";
-    inherit src;
-    buildInputs = [
-      siteEmacs
-      gnupg
-      hugo
-    ];
-    buildPhase = ''
-      cd ..
-      export PATH=${gnupg}/bin:$PATH
-      ${siteEmacs}/bin/emacs -Q --batch --script ${./export.el}
-      ${hugo}/bin/hugo --config tmp/hugo/config.toml
-    '';
-    installPhase = ''
-      mkdir $out
-      cp -r public/. $out
-    '';
-  }
-#+end_src
-
-~export.el~ is a small Emacs script that finds the Org file and
-exports its contents with ox-hugo.
-
-#+begin_src emacs-lisp :tangle ../../gen/website/export.el
-  (require 'ox-hugo)
-  (require 'ob-shell)
-
-  (put 'org-hugo-external-file-extensions-allowed-for-copying 'safe-local-variable 'listp)
-  (find-file "src/org/rossabaker.org")
-  (setq org-confirm-babel-evaluate nil)
-  (org-babel-tangle)
-  (mkdir "../../tmp/hugo/static")
-  (org-hugo-export-wim-to-md t)
-#+end_src
-
-**** Local Nix build
-
-To build the site locally into ~./result~, run:
-
-#+begin_src sh :tangle no
-  nix build .#website
-#+end_src
-
-**** Development
-
-For a more iterative experience with live reload in the browser, try:
-
-#+begin_src sh :tangle no
-  hugo serve --disableFastRender --config tmp/hugo/config.toml
-#+end_src
-
-**** Git ignores
-
-Our build creates some detritus that we don't want checked into Git.
-
-#+begin_src gitignore :tangle ../../.gitignore
-  /tmp/hugo/
-  /.hugo_build.lock
-#+end_src
 
 *** DONE CSS foundation                               :css:google_fonts:noto:
 CLOSED: [2022-08-30 Tue 14:26]

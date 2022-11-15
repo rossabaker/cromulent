@@ -1,7 +1,7 @@
 { src, emacsNativeComp, gnupg, hugo, stdenv }:
-
 let
   siteEmacs = emacsNativeComp.pkgs.withPackages (epkgs: [
+    epkgs.htmlize
     epkgs.ox-hugo
   ]);
 in
@@ -15,12 +15,16 @@ stdenv.mkDerivation rec {
   ];
   buildPhase = ''
     cd ..
-    export PATH=${gnupg}/bin:$PATH
-    ${siteEmacs}/bin/emacs -Q --batch --script ${./export.el}
-    ${hugo}/bin/hugo --config tmp/hugo/config.toml
+    export PATH=${gnupg}/bin:${hugo}/bin:$PATH
+    export HOME=$(pwd)
+    ${siteEmacs}/bin/emacs -Q --batch \
+      --script ${./build.el} \
+      --eval "(setq org-babel-confirm-evaluate nil)" \
+      --eval "(ross-www/legacy-publish)" \
+      --eval "(ross-www/publish)"
   '';
   installPhase = ''
     mkdir $out
-    cp -r public/. $out
+    cp -r tmp/public_html/. $out
   '';
 }
