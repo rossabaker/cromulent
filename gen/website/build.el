@@ -54,7 +54,6 @@
          (output-rel (file-relative-name output-abs ross-www/public-html-directory))
          (output (concat "/" (string-remove-suffix "/index.html" output-rel))))
     (with-current-buffer buffer
-      (message "ABS %s" output-abs)
       (when-let ((redirect-from (org-publish-find-property filename :redirect-from nil 'ross-www/redirects)))
         (insert redirect-from)
         (insert "\t")
