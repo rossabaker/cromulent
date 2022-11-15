@@ -1688,13 +1688,6 @@ supported contacts from the experimental ones.
   </dl>
 #+end_src
 
-*** DONE Build website with Nix                      :hugo:ox_hugo:nix:babel:
-CLOSED: [2022-09-01 Thu 16:54]
-:PROPERTIES:
-:EXPORT_FILE_NAME: build
-:EXPORT_HUGO_LASTMOD: <2022-11-02 Wed 16:10>
-:END:
-
 *** DONE CSS foundation                               :css:google_fonts:noto:
 CLOSED: [2022-08-30 Tue 14:26]
 :PROPERTIES:
