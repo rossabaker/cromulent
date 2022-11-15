@@ -2447,22 +2447,7 @@ with, and such dreadful mediums we've built to discuss them in.
 
 This project hopes to bring the old wonder to the modern Web.  It
 hosts an experiment in [[*Configurations][literate configuration]] and an [[*Blog][inchoate blog]].
-Archives of my [[*Talks][talks]], [[/projects][projects]], and [[*Podcasts][podcasts]]Start building sites …
-hugo v0.105.0+extended darwin/amd64 BuildDate=unknown VendorInfo=nixpkgs
-
-                   | EN
--------------------+------
-  Pages            | 388
-  Paginator pages  |  16
-  Non-page files   |   4
-  Static files     | 132
-  Processed images |   0
-  Aliases          | 137
-  Sitemaps         |   1
-  Cleaned          |   0
-
-Total in 397 ms
- are under
+Archives of my [[*Talks][talks]], [[/projects][projects]], and [[*Podcasts][podcasts]] are under
 construction.  I suggest the [[/categories][categories]] (coarse) or [[/tags][tags]] (fine) to
 zoom in on shared interests.
 
