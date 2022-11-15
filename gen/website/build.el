@@ -50,6 +50,7 @@
          (output-abs (with-temp-buffer
                        (insert-file-contents filename)
                        (set-visited-file-name filename t)
+                       (not-modified)
                        (org-export-output-file-name ext nil pub-dir)))
          (output-rel (file-relative-name output-abs ross-www/public-html-directory))
          (output (concat "/" (string-remove-suffix "/index.html" output-rel))))
