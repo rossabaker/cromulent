@@ -1,0 +1,100 @@
+#+title: Web Key Directory
+#+date: <2022-11-02 Wed 23:39>
+#+lastmod: <2022-11-15 Tue 16:22>
+#+description: Walks through publishing a public key with the Web Key Directory (WKD) protocol.
+#+filetags: PGP WKD Indieweb
+
+[[https://datatracker.ietf.org/doc/draft-koch-openpgp-webkey-service/][Web Key Directory (WKD)]] is a standard to look up the PGP keys by email
+address over HTTPS.
+
+It also fits nicely with Indieweb principles: we remove the dependency
+on a third-party key server and are discoverable through
+self-publishing.  My self-hosted WKD drives my [[https://keyoxide.org/wkd/ross%40rossabaker.com][Keyoxide profile]] for
+verification.
+
+** Setup :noexport:
+
+#+begin_src emacs-lisp :results silent :exports none
+  (setq-local ross-www/public-html-directory (expand-file-name "../../../../tmp/public_html/"))
+#+end_src
+#+begin_src sh :results silent :exports none
+  gpg --import ../../../keys/0x975BE5BC29D92CA5.pub.gpg
+#+end_src
+
+** Files
+
+Most of the work is serving two static files.
+
+This tutorial assumes the root directory of your static files is =$PUBLIC_HTML=
+
+#+begin_src sh :var PUBLIC_HTML=(identity ross-www/public-html-directory) :session wkd
+  cd $PUBLIC_HTML
+#+end_src
+
+#+RESULTS:
+
+*** ~/.well-known/openpgpkey/policy~
+
+There are [[https://www.ietf.org/archive/id/draft-koch-openpgp-webkey-service-14.html#name-policy-flags][options]], but in basic usage, all we need to do is serve a
+blank file.
+
+#+begin_src sh :session wkd
+  mkdir -p .well-known/openpgpkey
+  touch .well-known/openpgpkey/policy
+#+end_src
+
+#+RESULTS:
+
+*** ~/.well-known/openpgpkey/hu/:hash~
+
+The key is stored at hash of the local part of the username.
+Calculate with ~gpg-wks-client~.  Alternatively, KeyOxide has a [[https://keyoxide.org/util/wkd][web
+implementation]].
+
+#+begin_src sh :session wkd
+  WKDHASH=$(gpg-wks-client --print-wkd-hash ross@rossabaker.com | awk '{print $1}')
+#+end_src
+
+#+RESULTS:
+
+Export your key, unarmored, to be served in that file.
+
+#+begin_src sh :session wkd
+  mkdir -p .well-known/openpgpkey/hu/
+  gpg --export ross@rossabaker.com > .well-known/openpgpkey/hu/$WKDHASH
+#+end_src
+
+#+RESULTS:
+
+** Headers
+
+These resources should allow cross-origin requests from any domain.
+We deploy to Netlify, and can [[https://docs.netlify.com/configure-builds/file-based-configuration/#headers][configure this in netlify.toml]].
+
+#+begin_src conf-toml :tangle ../../../../tmp/public_html/netlify.toml :eval no :mkdirp yes
+  [[headers]]
+    for = "/.well-known/openpgpkey/*"
+    [headers.values]
+      Access-Control-Allow-Origin = "*"
+#+end_src
+
+** Testing
+
+Test your work with ~gks-web-client~:
+
+#+begin_src sh :eval no
+  gpg-wks-client -v --check ross@rossabaker.com
+#+end_src
+
+You should see something like this:
+
+#+begin_example
+gpg-wks-client: public key for 'ross@rossabaker.com' found via WKD
+gpg-wks-client: gpg: Total number processed: 1
+gpg-wks-client: fingerprint: 904C153733DBB0106915C0BD975BE5BC29D92CA5
+gpg-wks-client:     user-id: Ross A. Baker <ross@rossabaker.com>
+gpg-wks-client:     created: Tue Jan 30 22:24:27 2018 EST
+gpg-wks-client:   addr-spec: ross@rossabaker.com
+#+end_example
+
+Alternatively, there is an [[https://metacode.biz/openpgp/web-key-directory][online checker]].

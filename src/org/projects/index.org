@@ -4,4 +4,5 @@
 - [[file:toot-archive/index.org][Archive your toots with Hugo]]
 - [[file:personal-weather-station/index.org][Personal weather station]]
 - [[file:scalatra-in-action/index.org][Scalatra in Action]]
+- [[file:wkd/index.org][Web Key Directory]]
 - [[file:www/index.org][Website colophon]]

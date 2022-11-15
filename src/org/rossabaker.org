@@ -1875,111 +1875,11 @@ Give the code samples a little more room to breathe.
 #+end_src
 
 ** DONE Web Key Directory                            :pgp:gnupg:wkd:indieweb:hugo:netlify:
-CLOSED: [2022-11-02 Wed 23:39]
+CLOSED:
 :PROPERTIES:
 :EXPORT_FILE_NAME: web-key-directory
-:EXPORT_HUGO_LASTMOD: <2022-11-03 Thu 00:30>
+:EXPORT_HUGO_LASTMOD:
 :END:
-
-#+begin_description
-Walks through publishing a public key with the Web Key Directory (WKD) protocol.
-#+end_description
-
-[[https://datatracker.ietf.org/doc/draft-koch-openpgp-webkey-service/][Web Key Directory (WKD)]] is a standard to look up the PGP keys by email
-address over HTTPS.
-
-It also fits nicely with Indieweb principles: we remove the dependency
-on a third-party key server and are discoverable through
-self-publishing.
-
-*** Files
-
-Most of the work is serving two static files.  On a Hugo site, the
-correct place to put these is in the ~static/~ directory.
-
-**** ~/.well-known/openpgpkey/policy~
-
-There are [[https://www.ietf.org/archive/id/draft-koch-openpgp-webkey-service-14.html#name-policy-flags][options]], but in basic usage, all we need to do is serve a
-blank file.
-
-#+begin_src sh :noweb yes
-  touch static/.well-known/openpgpkey/policy
-#+end_src
-
-#+name: write-empty-policy
-#+begin_src emacs-lisp :exports none
-  (mkdir "../../tmp/hugo/static/.well-known/openpgpkey/" t)
-  (write-region "" nil "../../tmp/hugo/static/.well-known/openpgpkey/policy")
-#+end_src
-
-#+call: write-empty-policy()
-
-**** ~/.well-known/openpgpkey/hu/:hash~
-
-The key is stored at hash of the local part of the username.
-Calculate with ~gpg-wks-client~.  Alternatively, KeyOxide has a [[https://keyoxide.org/util/wkd][web
-implementation]].
-
-#+name: calculate-wkd-hash
-#+begin_src sh :cache yes
-  gpg-wks-client --print-wkd-hash ross@rossabaker.com | awk '{print $1}'
-#+end_src
-
-In my case, the full path is:
-
-#+begin_src text :noweb yes
-  /.well-known/openpgpkey/hu/<<calculate-wkd-hash()>>
-#+end_src
-
-Export your key, unarmored, to be served in that file.
-
-#+begin_src sh :noweb yes
-  gpg --export ross@rossabaker.com > static/.well-known/openpgpkey/hu/<<calculate-wkd-hash()>>
-#+end_src
-
-# This actually does it for
-#+name: export-gpg-key
-#+begin_src emacs-lisp :exports none :noweb yes
-  (mkdir "../../tmp/hugo/static/.well-known/openpgpkey/hu" t)
-  (copy-file "../keys/0x975BE5BC29D92CA5.pub.gpg"
-             "../../tmp/hugo/static/.well-known/openpgpkey/hu/<<calculate-wkd-hash()>>"
-             t)
-#+end_src
-
-#+call: export-gpg-key()
-
-*** Headers
-
-These resources should allow cross-origin requests from any domain.
-We deploy to Netlify, and can [[https://docs.netlify.com/configure-builds/file-based-configuration/#headers][configure this in netlify.toml]].
-
-#+begin_src conf-toml :tangle ../../tmp/hugo/content/netlify.toml
-  [[headers]]
-    for = "/.well-known/openpgpkey/*"
-    [headers.values]
-      Access-Control-Allow-Origin = "*"
-#+end_src
-
-*** Testing
-
-Test your work with ~gks-web-client~:
-
-#+begin_src sh
-  gpg-wks-client -v --check ross@rossabaker.com
-#+end_src
-
-You should see something like this:
-
-#+begin_example
-gpg-wks-client: public key for 'ross@rossabaker.com' found via WKD
-gpg-wks-client: gpg: Total number processed: 1
-gpg-wks-client: fingerprint: 904C153733DBB0106915C0BD975BE5BC29D92CA5
-gpg-wks-client:     user-id: Ross A. Baker <ross@rossabaker.com>
-gpg-wks-client:     created: Tue Jan 30 22:24:27 2018 EST
-gpg-wks-client:   addr-spec: ross@rossabaker.com
-#+end_example
-
-Alternatively, there is an [[https://metacode.biz/openpgp/web-key-directory][online checker]].
 
 * Talks section
 :PROPERTIES:

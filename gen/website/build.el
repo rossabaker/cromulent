@@ -30,7 +30,7 @@
     (message "Default directory: %s" default-directory)
     (process-file (executable-find "hugo")
                   nil
-                  (if (getenv "NIX_BUILD_TOP") '(:file "/dev/stdout") t)
+                  (if (getenv "NIX_BUILD_TOP") '(:file "/dev/stdout") nil)
                   nil
                   "--config"
                   (expand-file-name "hugo/config.toml" ross-www/tmp-directory)
@@ -94,6 +94,11 @@
   (interactive)
   (if current-prefix-arg
       (ross-www/legacy-publish))
-  (let ((default-directory (expand-file-name "org/projects/www" ross-www/src-directory)))
-    (org-babel-tangle-file "index.org"))
+  (dolist (project '("org/projects/www/index.org" "org/projects/wkd/index.org"))
+    (let ((project-file-name (expand-file-name project ross-www/src-directory)))
+      (with-temp-buffer
+        (insert-file-contents project-file-name)
+        (set-visited-file-name project-file-name t)
+        (not-modified)
+        (org-babel-tangle))))
   (org-publish "rossabaker.com" current-prefix-arg))

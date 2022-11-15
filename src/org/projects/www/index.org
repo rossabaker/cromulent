@@ -153,8 +153,14 @@ force a rebuild and to build the legacy site.
     (interactive)
     (if current-prefix-arg
         (ross-www/legacy-publish))
-    (let ((default-directory (expand-file-name "org/projects/www" ross-www/src-directory)))
-      (org-babel-tangle-file "index.org"))
+    (dolist (project '("org/projects/www/index.org" "org/projects/wkd/index.org"))
+      (let ((project-file-name (expand-file-name project ross-www/src-directory)))
+        (with-temp-buffer
+          (insert-file-contents project-file-name)
+          (set-visited-file-name project-file-name t)n
+          (org-babel-execute-buffer)
+          (org-babel-tangle)
+          (not-modified))))
     (org-publish "rossabaker.com" current-prefix-arg))
 #+end_src
 
