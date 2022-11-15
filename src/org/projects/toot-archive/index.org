@@ -1,0 +1,405 @@
+#+title: Archive your toots to Hugo
+#+date: <2022-11-07 Mon 22:37>
+#+lastmod: <2022-11-15 Tue 12:37>
+#+filetags: Scala Scala-CLI Indieweb Hugo Pesos Mastodon ActivityStreams OwnYourData FS2 Circe
+#+description: How to batch archive an exported stream of Mastodon toots to a Hugo website using Scala CLI
+#+html_head_extra: <style>.deprecated { color: #900; }</style>
+#+h: 6
+
+#+begin_deprecated
+  This is deprecated.  I am moving off ox-hugo, but will revise
+  this for the new system. <2022-11-15 Tue 12:37>
+#+end_deprecated
+
+An important Indieweb principle is to [[https://indieweb.org/own_your_data][own your data]].  I tooted on
+[[https://mastodon.social/web/@rossabaker][mastodon.social]] sporadically for five years.  The service is public,
+the protocol open, and the implementation open source.  Still, it
+exists at the pleasure of its admins, with whom I have no contract.
+
+After moving to [[https://indieweb.social/web/@rossabaker][another instance]], I wanted to preserve my old content.
+We will use a technique called [[https://indieweb.org/PESOS][PESOS]], or Pubish Elsewhere, Syndicate
+to Own Site.
+
+* Request your archive
+
+The first step is to [[https://docs.joinmastodon.org/user/moving/#export][request your archive]].  This can be done once
+every seven days.  PESOS is typically done more often, but it's async.
+Ours just took years.[fn:12]
+
+Download the archive.  Inside the archive is an ~outbox.json~ file in
+[[https://www.w3.org/TR/activitystreams-core/][Activity Streams]] format.  The interesting part is the ~orderedItems~
+array.
+
+#+begin_details
+#+begin_summary
+An example toot in JSON
+#+end_summary
+
+#+begin_src json
+  {
+    "id": "https://mastodon.social/users/rossabaker/statuses/1426597/activity",
+    "type": "Create",
+    "actor": "https://mastodon.social/users/rossabaker",
+    "published": "2017-04-02T03:08:25Z",
+    "to": [
+      "https://www.w3.org/ns/activitystreams#Public"
+    ],
+    "cc": [
+      "https://mastodon.social/users/rossabaker/followers"
+    ],
+    "object": {
+      "id": "https://mastodon.social/users/rossabaker/statuses/1426597",
+      "type": "Note",
+      "summary": null,
+      "inReplyTo": null,
+      "published": "2017-04-02T03:08:25Z",
+      "url": "https://mastodon.social/@rossabaker/1426597",
+      "attributedTo": "https://mastodon.social/users/rossabaker",
+      "to": [
+        "https://www.w3.org/ns/activitystreams#Public"
+      ],
+      "cc": [
+        "https://mastodon.social/users/rossabaker/followers"
+      ],
+      "sensitive": false,
+      "atomUri": "tag:mastodon.social,2017-04-02:objectId=1426597:objectType=Status",
+      "inReplyToAtomUri": null,
+      "conversation": null,
+      "content": "<p>brb, importing all my Google+ circles</p>",
+      "contentMap": {
+        "en": "<p>brb, importing all my Google+ circles</p>"
+      },
+      "attachment": [],
+      "tag": [],
+      "replies": {
+        "id": "https://mastodon.social/users/rossabaker/statuses/1426597/replies",
+        "type": "Collection",
+        "first": {
+          "type": "CollectionPage",
+          "next": "https://mastodon.social/users/rossabaker/statuses/1426597/replies?only_other_accounts=true&page=true",
+          "partOf": "https://mastodon.social/users/rossabaker/statuses/1426597/replies",
+          "items": []
+        }
+      }
+    },
+    "signature": {
+      "type": "RsaSignature2017",
+      "creator": "https://mastodon.social/users/rossabaker#main-key",
+      "created": "2022-10-31T23:28:47Z",
+      "signatureValue": "XcbN0gZXgXPky8TNsxpLT81SGHkTWBu89CBUs0pKJPtmAJzr3CTNyXg9CS9mq1+Ca7NIo6uqs0r39og0WT+dtRzTCJscJKCU3YZAOnVPvBk39j6iVVMGYh/PNw+qBpbJc/SXdFyBtKWOI0M8id+yMQHUzuiIx5XVEBv2L9SFXp+btCHpJXWXr33z+RLwCozwwUXbCpiN0mNln9AB481KBOJLXddHRaad/KQLvwcRDy1c2LktqVqzZCv/aH8N5tb78Jmn84cTOqMwsp4j10wrSNGR1tj9Lca8lEIfGi+sYCCR3NSzkiTOGSmP+PKpTFKX3LWhmMqarQSBSnvKUGs9iQ=="
+    }
+  }
+#+end_src
+#+end_details
+
+* The end goal
+
+Our goal is to parse the activity stream, and render each toot to our
+website.  For Hugo, we want to render somewhere in the ~content~
+directory.
+
+Hugo content begins with [[https://gohugo.io/content-management/front-matter/][front matter]].  Our target looks like:
+- the ~date~
+- the ~canonical~ URI of the original toot
+- an array of ~tags~
+
+#+begin_details
+#+begin_summary
+  Example Hugo content for a toot
+#+end_summary
+
+#+begin_src markdown
+  +++
+  date = 2017-04-02T03:08:25Z
+  canonical = "https://mastodon.social/users/rossabaker/statuses/1426597"
+  tags = [  ]
+  +++
+
+  <p>brb, importing all my Google+ circles</p>
+#+end_src
+#+end_details
+
+We also don't want all our toots.  We will omit:
+- boosts (which are someone else's content)
+- replies (which lack context)
+
+* Extraction script
+
+We'll use [[https://scala-cli.virtuslab.org/][scala-cli]] to write a Scala script.  Scala isn't a
+traditional scripting language, but I have more silos to export, and
+all the types will come in handy if this grows into more than a
+one-off.
+
+If you have scala-cli and don't need a play-by-play, skip ahead to [[*Run it yourself][run
+it yourself]].
+
+** Dependencies
+
+This script uses [[https://fs2.io/#/][fs2]] and [[https://circe.github.io/circe/][circe]].  These lines fetch those dependencies:
+
+#+begin_src scala :tangle ../../gen/scala/toot-archive.scala
+  //> using lib "co.fs2::fs2-io:3.3.0"
+  //> using lib "io.circe::circe-parser:0.14.3"
+#+end_src
+
+** Imports
+
+The imports are boring, but we'll need them.
+
+#+begin_src scala :tangle ../../gen/scala/toot-archive.scala
+  import cats._
+  import cats.effect._
+  import cats.effect.std.Console
+  import cats.effect.unsafe.implicits.global
+  import cats.implicits._
+  import fs2.{Pipe, Stream}
+  import fs2.io.file.{Files, Path}
+  import fs2.text
+  import io.circe._
+  import io.circe.Decoder.Result
+  import io.circe.parser._
+#+end_src
+
+** Configuration
+
+=input= is the path to the Activity Stream, and =output= is the
+directory to which we'll write the Hugo content.  These ought to be
+command line arguments, but this will do.
+
+#+begin_src scala :tangle ../../gen/scala/toot-archive.scala
+  val input = Path("./outbox.json")
+  val output = Path("./src/hugo/content/notes/toots")
+#+end_src
+
+We also need to supply our identity for filtering.  No trailing slash!
+
+#+begin_src scala :tangle ../../gen/scala/toot-archive.scala
+  val me = "https://mastodon.social/users/rossabaker"
+#+end_src
+
+** Parsing
+
+*** Streaming the toot JSON
+
+This function parses =input= and returns a stream of Circe JSON
+objects, one per toot.
+
+Note that the parser itself is not streaming.  A large activity stream
+will be buffered into memory.  It would be better to use [[https://github.com/typelevel/jawn-fs2][jawn-fs2]]
+here, but that only streams top-level JSON arrays, and we have to dive
+into ~ordered-items~.  Bummer.  By returning a stream now, we're well
+poised to use a streaming parser later.
+
+#+begin_src scala :tangle ../../gen/scala/toot-archive.scala
+  def parseToots[F[_]: ApplicativeThrow: Files]: Stream[F, Json] =
+    Files[F]
+      .readAll(input)
+      .through(text.utf8.decode)
+      .foldMonoid
+      .map(parse)
+      .rethrow
+      .map(_.hcursor.get[Vector[Json]]("orderedItems"))
+      .rethrow
+      .flatMap(Stream.emits)
+#+end_src
+
+*** Filters
+
+Instead of simple predicates, our filters return an `F[Boolean]`
+to provide an error channel in case of JSON parsing failure.  If we
+made a bad assumption, we want the export to fail so we can adjust
+the script.
+
+**** Separating toots from boosts
+
+Our toots have a ~type~ of ~"Create"~.
+
+#+begin_src scala :tangle ../../gen/scala/toot-archive.scala
+  def created[F[_]: ApplicativeThrow](json: Json): F[Boolean] =
+    json.hcursor
+      .get[String]("type")
+      .map(_ === "Create")
+      .liftTo[F]
+#+end_src
+
+**** Filter out replies
+
+#+begin_src scala :tangle ../../gen/scala/toot-archive.scala
+  def topLevel[F[_]: ApplicativeThrow](json: Json): F[Boolean] =
+    json.hcursor
+      .downField("object")
+      .get[Json]("inReplyTo")
+      .map(_.isNull)
+      .liftTo[F]
+#+end_src
+
+**** Only me
+
+A few toots are "top-level", but are replies to a protected user.  We
+can filter these out by filtering tweets that our followers are
+~cc~'ed on.
+
+#+begin_src scala :tangle ../../gen/scala/toot-archive.scala
+  def ccsMyFollowers[F[_]: ApplicativeThrow](json: Json): F[Boolean] =
+    json.hcursor
+      .downField("object")
+      .get[Set[String]]("cc")
+      .map(_.contains(s"${me}/followers"))
+      .liftTo[F]
+#+end_src
+
+** ID extractor
+
+We want the numeric ID of the toot, which only appears as part of a
+URI.  We need to parse the JSON, and then get the last segment.
+
+#+begin_src scala :tangle ../../gen/scala/toot-archive.scala
+  def getId[F[_]: ApplicativeThrow](json: Json): F[Long] =
+    json.hcursor
+      .downField("object")
+      .get[String]("id")
+      .map(_.split("/").last.toLong)
+      .liftTo[F]
+#+end_src
+
+** Tag extractor
+
+Good Fediverse practice is to [[https://indieweb.social/web/@Tam5@mastodon.social/109305286914653844][render hashtags in CamelCase]], but our
+Hugo tags are lower-kebab-case.  Some of our toots are older than this
+wisdom.  This function massages some toot tags to fit our site's tags,
+and kebab-cases the rest.
+
+In the long run, this mapping should be parameterized.
+
+#+begin_src scala :tangle ../../gen/scala/toot-archive.scala
+  def getHashtags(json: Json): Decoder.Result[Vector[String]] =
+    json.hcursor
+      .downField("object")
+      .get[Vector[Map[String, String]]]("tag")
+      .map(_.collect {
+        case m if m.get("type") === Some("Hashtag") =>
+          "\"" + (m("name") match {
+            case "#AllSaintsSunday" => "all-saints-sunday"
+            case "#GoIU" => "hoosiers"
+            case "#GoingViral" => "going-viral"
+            case "#ScalaCLI" => "scala-cli"
+            case "#contentwarning" => "content-warning"
+            case "#cw" => "content-warning"
+            case "#indiewebsocial" => "indieweb-social"
+            case "#italianbeef" => "italian-beef"
+            case "#opentelemetry" => "open-telemetry"
+            case "#orgmode" => "org-mode"
+            case "#ownyourdata" => "own-your-data"
+            case "#thedecision" => "the-decision"
+            case "#trickortreat" => "trick-or-treat"
+            case "#tuxedocat" => "tuxedo-cat"
+            case "#underconstruction" => "under-construction"
+            case other =>
+              other.split("[\\W_]+")
+                .filter(_.nonEmpty)
+                .map(_.toLowerCase(java.util.Locale.ROOT))
+              .mkString("-")
+          }) + "\""
+      })
+#+end_src
+
+** Render the toot to Hugo content
+
+This function converts the JSON to Hugo content.
+
+#+begin_src scala :tangle ../../gen/scala/toot-archive.scala
+  def renderToot[F[_]: ApplicativeThrow](json: Json): F[String] =
+    (json.hcursor.downField("object").get[String]("published"),
+     json.hcursor.downField("object").get[String]("id"),
+     json.hcursor.downField("object").get[String]("content"),
+     getHashtags(json)
+    ).mapN(
+      (published, id, content, hashtags) =>
+         List(
+           "+++",
+           s"date = ${published}",
+           s"""canonical = "${id}"""",
+           s"""tags = [ ${hashtags.mkString(", ")} ]""",
+           "+++",
+           "",
+           content,
+           ""
+         ).mkString("\n")
+    )
+    .liftTo[F]
+#+end_src
+
+** Render the Hugo content string to disk
+
+Writing the file is a simple streaming operation.  The stream returns
+=Unit=, because it's run for its side effect.
+
+#+begin_src scala :tangle ../../gen/scala/toot-archive.scala
+  def handleToot[F[_]: MonadThrow: Files](json: Json): Stream[F, Unit] =
+    for {
+      id <- Stream.eval(getId(json))
+      _ <- Stream.eval(renderToot(json))
+        .through(text.utf8.encode)
+        .through(Files[F].writeAll(output / s"${id}.md"))
+    } yield ()
+#+end_src
+
+** Putting it all together
+
+Our program makes the output directory, parses the toots, filters the
+content, and writes them to disk.
+
+#+begin_src scala :tangle ../../gen/scala/toot-archive.scala
+  def program[F[_]: Sync: Files]: F[Unit] =
+    Files[F].createDirectories(output) >>
+    parseToots
+      .evalFilter(created[F])
+      .evalFilter(topLevel[F])
+      .evalFilter(ccsMyFollowers[F])
+      .flatMap(handleToot[F])
+      .compile
+      .drain
+#+end_src
+
+** Main method
+
+This is a functional program.  Nothing has run yet!  Every result is
+in a parameterized =F=.  We'll use the traditional =IO=.
+
+Scala CLI has a [[https://typelevel.org/cats-effect/docs/faq#scala-cli][known limitation]] with =unsafeRunSync()=, so the whole
+file needs to have a ~*.scala~ suffix and an =IOApp=.
+
+#+begin_src scala :tangle ../../gen/scala/toot-archive.scala
+  object Main extends IOApp.Simple {
+    def run: IO[Unit] = program[IO]
+  }
+#+end_src
+
+* Run it yourself
+
+The entire script is [[https://github.com/rossabaker/cromulent/blob/main/gen/scala/toot-archive.scala][on GitHub]].  You can run it directly, but you'll
+want to download it as ~toot-archive.scala~ and and customize at least
+the =me= variable.  Get ~outbox.json~ in the same directory, and run:
+
+#+begin_src sh
+  scala-cli run toot-archive.scala
+#+end_src
+
+Your toots should be in ~./src/hugo/content/notes/toots~.
+
+A nice Hugo layout is a post for another day, but the end result can
+be seen in [[/notes][~/notes~]].
+
+* Next steps
+
+1. Add command line parsing
+2. Package it as a Nix package, so users don't need ~scala-cli~.
+3. Create similar for Twitter and Facebook.
+4. Drop toots that link back to own domain
+5. Trim trailing hashtags
+
+* Footnotes
+
+[fn:12] Since I was moving instances, this limitation was fine.  To
+update more often from a live Mastodon, it's worth considering the RSS
+feed or a [[https://indieweb.org/POSSE][POSSE]] approach.

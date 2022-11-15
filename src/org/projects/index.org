@@ -1,0 +1,7 @@
+#+title: Projects
+#+date: <2022-11-15 Tue 12:59>
+
+- [[file:toot-archive/index.org][Archive your toots with Hugo]]
+- [[file:personal-weather-station/index.org][Personal weather station]]
+- [[file:scalatra-in-action/index.org][Scalatra in Action]]
+- [[file:www/index.org][Website colophon]]
