@@ -1991,51 +1991,6 @@ CLOSED: [2022-11-07 Mon 22:35]
 :EXPORT_FILE_NAME: _index
 :END:
 
-** Books                                                               :book:
-
-*** Scalatra in Action                :@tech:scala:scalatra:http:sbt:scalate:
-:PROPERTIES:
-:EXPORT_FILE_NAME: scalatra-in-action
-:EXPORT_DATE: <2016-05-23 Mon>
-:EXPORT_HUGO_PUBLISHDATE: <2022-08-30 Tue 22:44>
-:END:
-
-[[https://www.manning.com/books/scalatra-in-action][Scalatra in Action]] was written by [[https://constructiveproof.com/][Dave Hrycyszyn,]] Stefan Ollinger, and
-me and covers the [[https://scalatra.org/][Scalatra micro-framework]] in depth.  Scalatra is a
-port of Ruby's Sinatra to Scala.
-
-#+hugo:more
-
-#+attr_html: :alt Scalatra in Action book cover :class scalatra-in-action
-[[https://www.manning.com/books/scalatra-in-action][file:../hugo/static/img/scalatra-in-action.jpg]]
-
-From the publisher:
-
-#+begin_quote
-_Scalatra in Action_ covers the Scalatra framework in its entirety,
-starting with concepts such as request routing, input handling,
-actions, and HTTP responses. For readers who don't already know Scala,
-the book introduces the Scala language and sbt, the Simple Build
-Tool. You'll learn how to use Scalatra's powerful templating engine,
-Scalate. It also covers advanced topics such as data access, handling
-heavy load, asynchronicity, securing your application, designing
-RESTful APIs, and real-time web programming.
-#+end_quote
-
-#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css :exports none
-  figure.scalatra-in-action {
-      margin: 0 auto;
-      max-width: 360px;
-      max-height: 452px
-  }
-
-  .scalatra-in-action {
-      display: block;
-      width: auto;
-      height: auto;
-      margin: 0 auto;
-  }
-#+end_src
 ** DONE Archive your toots to Hugo :@tech:scala:scala_cli:indieweb:hugo:pesos:mastodon:activity_streams:own_your_data:fs2:cats_effect:
 CLOSED: [2022-11-07 Mon 22:37]
 :PROPERTIES:
