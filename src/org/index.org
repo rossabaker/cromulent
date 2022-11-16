@@ -1,0 +1,43 @@
+#+title: Ross A. Baker
+#+date: <2022-11-15 Tue 21:05>yy
+
+This site is under active reconstruction to ox-html.  See [[file:projects/www/index.org][the colophon]]
+for more.  Some pages are temporarily orphaned, but I'm trying not to
+break links.
+
+#+begin_src emacs-lisp :exports results :results drawer
+(defun ross-www/sitemap (project)
+  "Build a sitemap with `org-publish-sitemap` and capture it to a string."
+  (let* ((temp-file-name (make-temp-file "sitemap" nil "org"))
+         (sitemap-function (lambda (title list) (org-list-to-org list)))
+         (sitemap-project (cons (car project)
+                                (org-combine-plists `(:sitemap-function ,sitemap-function)
+                                                    (cdr project)))))
+    (unwind-protect
+        (with-temp-buffer
+          (message "%s" sitemap-project)
+          (org-publish-sitemap sitemap-project temp-file-name)
+          (insert-file-contents temp-file-name)
+          (buffer-string))
+      (delete-file temp-file-name))))
+  (ross-www/sitemap (assoc "rossabaker.com" org-publish-project-alist))
+#+end_src
+
+#+RESULTS:
+:results:
+- [[file:index.org][Ross A. Baker]]
+- projects
+  - [[file:projects/index.org][Projects]]
+  - matrix-home-server
+    - [[file:projects/matrix-home-server/index.org][Matrix home server]]
+  - personal-weather-station
+    - [[file:projects/personal-weather-station/index.org][Personal Weather Station]]
+  - scalatra-in-action
+    - [[file:projects/scalatra-in-action/index.org][Scalatra in Action]]
+  - toot-archive
+    - [[file:projects/toot-archive/index.org][Archive your toots to Hugo]]
+  - web-key-directory
+    - [[file:projects/web-key-directory/index.org][Web Key Directory]]
+  - www
+    - [[file:projects/www/index.org][How rossabaker.com is built]]
+:end:
