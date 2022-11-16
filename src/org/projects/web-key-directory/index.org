@@ -15,10 +15,8 @@ verification.
 
 ** Setup :noexport:
 
-#+begin_src emacs-lisp :results silent :exports none
-  (setq-local ross-www/public-html-directory (expand-file-name "../../../../tmp/public_html/"))
-#+end_src
-#+begin_src sh :results silent :exports none
+#+name: import-gpg-key
+#+begin_src sh :session wkd
   gpg --import ../../../keys/0x975BE5BC29D92CA5.pub.gpg
 #+end_src
 
