@@ -268,7 +268,7 @@ CLOSED: [2022-09-14 Wed 13:30]
   gpg --show-keys ../keys/0x975BE5BC29D92CA5.pub.gpg
 #+end_src
 
-My public key is published to this domain via [[*Web Key Directory][WKD]], and can also be
+My public key is published to this domain via [[/projects/web-key-directory/][WKD]], and can also be
 downloaded in [[/.well-known/openpgpkey/hu/eimhw3om3jynrs7fo7r7rrssmt1o4yxp][binary]] and [[./0x975BE5BC29D92CA5.pub.asc][ASCII armored]] formats.  Its fingerprint is:
 
 #+call: gpg-fingerprint()
@@ -1873,13 +1873,6 @@ Give the code samples a little more room to breathe.
       padding: 1em;
   }
 #+end_src
-
-** DONE Web Key Directory                            :pgp:gnupg:wkd:indieweb:hugo:netlify:
-CLOSED:
-:PROPERTIES:
-:EXPORT_FILE_NAME: web-key-directory
-:EXPORT_HUGO_LASTMOD:
-:END:
 
 * Talks section
 :PROPERTIES:

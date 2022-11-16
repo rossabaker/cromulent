@@ -94,7 +94,7 @@
   (interactive)
   (if current-prefix-arg
       (ross-www/legacy-publish))
-  (dolist (project '("org/projects/www/index.org" "org/projects/wkd/index.org"))
+  (dolist (project '("org/projects/www/index.org" "org/projects/web-key-directory/index.org"))
     (let ((project-file-name (expand-file-name project ross-www/src-directory)))
       (with-temp-buffer
         (insert-file-contents project-file-name)

@@ -3,6 +3,7 @@
 #+lastmod: <2022-11-15 Tue 16:22>
 #+description: Walks through publishing a public key with the Web Key Directory (WKD) protocol.
 #+filetags: PGP WKD Indieweb
+#+redirect_from: /configs/web-key-directory
 
 [[https://datatracker.ietf.org/doc/draft-koch-openpgp-webkey-service/][Web Key Directory (WKD)]] is a standard to look up the PGP keys by email
 address over HTTPS.
