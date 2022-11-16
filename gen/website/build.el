@@ -19,18 +19,18 @@
   "Build the legacy ox-hugo website."
   (interactive)
   (find-file (expand-file-name "org/rossabaker.org" ross-www/src-directory))
-  (setq-local org-confirm-babel-evaluate nil)
-  (message "Tangling legacy ox-hugo files")
-  (org-babel-tangle)
-  (mkdir (expand-file-name "hugo/static" ross-www/tmp-directory) t)
-  (message "Exporting legacy ox-hugo pages")
-  (org-hugo-export-wim-to-md t)
+  (let ((org-confirm-babel-evaluate nil))
+    (message "Tangling legacy ox-hugo files")
+    (org-babel-tangle)
+    (mkdir (expand-file-name "hugo/static" ross-www/tmp-directory) t)
+    (message "Exporting legacy ox-hugo pages")
+    (org-hugo-export-wim-to-md t))
   (message "Running hugo")
   (let ((default-directory (or (getenv "PRJ_ROOT") (getenv "NIX_BUILD_TOP") default-directory)))
     (message "Default directory: %s" default-directory)
     (process-file (executable-find "hugo")
                   nil
-                  (if (getenv "NIX_BUILD_TOP") '(:file "/dev/stdout") nil)
+                  (if (getenv "NIX_BUILD_TOP") '(:file "/dev/stdout") t)
                   nil
                   "--config"
                   (expand-file-name "hugo/config.toml" ross-www/tmp-directory)
@@ -99,6 +99,7 @@
       (with-temp-buffer
         (insert-file-contents project-file-name)
         (set-visited-file-name project-file-name t)
-        (not-modified)
-        (org-babel-tangle))))
-  (org-publish "rossabaker.com" current-prefix-arg))
+        (org-babel-tangle)
+        (not-modified))))
+  (let ((org-confirm-babel-evaluate nil))
+    (org-publish "rossabaker.com" current-prefix-arg)))

@@ -79,7 +79,7 @@ for this article on an eponymous domain.
 - Occupation :: software engineer
 - Style :: functional
 - Pronouns :: [[https://pronoun.is/he][he/him]]
-- Interjections :: ope
+- Interjections :: opeg
 - Personality :: BBQ
 - ~$EDITOR~ :: Emacs
 - HTML tag :: ~<dl>~

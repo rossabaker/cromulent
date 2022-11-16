@@ -40,12 +40,12 @@ This site was originally built with [[https://ox-hugo.scripter.co/][ox-hugo]].  
     "Build the legacy ox-hugo website."
     (interactive)
     (find-file (expand-file-name "org/rossabaker.org" ross-www/src-directory))
-    (setq-local org-confirm-babel-evaluate nil)
-    (message "Tangling legacy ox-hugo files")
-    (org-babel-tangle)
-    (mkdir (expand-file-name "hugo/static" ross-www/tmp-directory) t)
-    (message "Exporting legacy ox-hugo pages")
-    (org-hugo-export-wim-to-md t)
+    (let ((org-confirm-babel-evaluate nil))
+      (message "Tangling legacy ox-hugo files")
+      (org-babel-tangle)
+      (mkdir (expand-file-name "hugo/static" ross-www/tmp-directory) t)
+      (message "Exporting legacy ox-hugo pages")
+      (org-hugo-export-wim-to-md t))
     (message "Running hugo")
     (let ((default-directory (or (getenv "PRJ_ROOT") (getenv "NIX_BUILD_TOP") default-directory)))
       (message "Default directory: %s" default-directory)
@@ -157,11 +157,11 @@ force a rebuild and to build the legacy site.
       (let ((project-file-name (expand-file-name project ross-www/src-directory)))
         (with-temp-buffer
           (insert-file-contents project-file-name)
-          (set-visited-file-name project-file-name t)n
-          (org-babel-execute-buffer)
+          (set-visited-file-name project-file-name t)
           (org-babel-tangle)
           (not-modified))))
-    (org-publish "rossabaker.com" current-prefix-arg))
+    (let ((org-confirm-babel-evaluate nil))
+      (org-publish "rossabaker.com" current-prefix-arg)))
 #+end_src
 
 * Nix package
@@ -190,7 +190,6 @@ This site is built with Nix.
       export HOME=$(pwd)
       ${siteEmacs}/bin/emacs -Q --batch \
         --script ${./build.el} \
-        --eval "(setq org-babel-confirm-evaluate nil)" \
         --eval "(ross-www/legacy-publish)" \
         --eval "(ross-www/publish)"
     '';
