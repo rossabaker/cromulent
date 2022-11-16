@@ -2,6 +2,7 @@
 #+title: Website colophon
 #+redirect_from: /configs/website/build
 #+date: <2022-11-14 Mon 20:57>
+#+lastmod: <2022-11-15 Tue 19:37>
 
 [[https://rossabaker.com/][rossabaker.com]] is primarily written in [[https://orgmode.org/][Org Mode]] and exported to HTML
 via [[https://orgmode.org/manual/HTML-Export.html][ox-html]].  The result is packaged with [[https://nixos.org/][Nix]].
@@ -153,8 +154,11 @@ force a rebuild and to build the legacy site.
     (interactive)
     (if current-prefix-arg
         (ross-www/legacy-publish))
-    (dolist (project '("org/projects/www/index.org" "org/projects/web-key-directory/index.org"))
+    (dolist (project '("org/projects/matrix-home-server/index.org"
+                       "org/projects/www/index.org"
+                       "org/projects/web-key-directory/index.org"))
       (let ((project-file-name (expand-file-name project ross-www/src-directory)))
+        (message "Tangling %s" project-file-name)
         (with-temp-buffer
           (insert-file-contents project-file-name)
           (set-visited-file-name project-file-name t)

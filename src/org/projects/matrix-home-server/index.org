@@ -1,23 +1,29 @@
-#+TITLE: Infrastructure
-
-* Google Cloud
-
-** Matrix
+#+title: Matrix home server
+#+description: Documentation for the Matrix home server at rossabaker.com
+#+date: <2022-05-05 Thu 17:27>
+#+lastmod: <2022-11-15 Tue 19:37>
+#+filetags: Matrix Synapse
 
 I run my [[https://matrix.to/#/@ross:rossabaker.com][Matrix presence]] on a personal Synapse server in Google Cloud.
 Everything described here runs in the free tier, but I am not
 responsible if you run this and get a bill.
 
-Update <2022-06-02 Thu>: I got charged $0.02 for storage last month.
+#+begin_warning
+  <2022-06-02 Thu>: I got charged $0.02 for storage last month.
+#+end_warning
 
-*** Terraform
+#+begin_info
+  <2022-11-15 Tue 19:15>: I plan to move this to Hetzner Cloud.
+#+end_info
+
+* Terraform
 
 ~20.03~ is disappointingly old, but it's the newest one I can find
 publicly. I upgraded this on the instance after it was created. It
 would be good to get a fresher image on GCS, but it'll cost a few
 pennies.
 
-#+begin_src terraform :tangle main.tf
+#+begin_src terraform /*:tangle main.tf*/
   module "nixos_image" {
     source = "github.com/tweag/terraform-nixos/google_image_nixos"
     nixos_version = "20.03"
@@ -29,7 +35,7 @@ need another "admin" project to bootstrap things.  The
 ~"rossabaker-348417"~ is repeated frequently and belongs in a
 variable.
 
-#+begin_src nix :tangle main.tf
+#+begin_src terraform /*:tangle main.tf*/
   provider "google" {
     project = "rossabaker-348417"
     region  = "us-central1"
@@ -39,7 +45,7 @@ variable.
 
 These APIs need to be enabled for subsequent calls to work.
 
-#+begin_src nix :tangle main.tf
+#+begin_src terraform /*:tangle main.tf*/
   resource "google_project_service" "compute" {
     project = "rossabaker-348417"
     service = "compute.googleapis.com"
@@ -55,7 +61,7 @@ These APIs need to be enabled for subsequent calls to work.
 The ~nix-configuration~ is a handy way to expose the NixOS
 configuration, since we don't have a custom image to bake it into.
 
-#+begin_src nix
+#+begin_src terraform /*:tangle main.tf*/
   resource "google_compute_instance" "vm_instance" {
     name         = "abe"
     machine_type = "e2-micro"
@@ -93,7 +99,7 @@ The ~http-server~ tag links it up with the VM instance above so the
 firewall rules apply.  In hindsight, port ~443~ probably would have
 been sufficient here.
 
-#+begin_src nix :tangle main.tf
+#+begin_src terraform /*:tangle main.tf*/
   resource "google_compute_firewall" "http-server" {
     name    = "http-server"
     network = "default"
@@ -110,7 +116,7 @@ been sufficient here.
 
 Make ourselves an admin:
 
-#+begin_src nix :tangle main.tf
+#+begin_src terraform /*:tangle main.tf*/
   resource "google_project_iam_binding" "os-login-admin-users" {
     project = "rossabaker-348417"
     role = "roles/compute.osAdminLogin"
@@ -123,7 +129,7 @@ Make ourselves an admin:
 
 Finally, lock our dependencies:
 
-#+begin_src hcl :tangle .terraform.lock.hcl
+#+begin_src hcl /*:tangle .terraform.lock.hcl*/
   provider "registry.terraform.io/hashicorp/google" {
     version = "4.19.0"
     hashes = [
@@ -148,7 +154,7 @@ Finally, lock our dependencies:
 Most of this configuration comes from the [[https://nixos.org/manual/nixos/stable/index.html#module-services-matrix-synapse][Synapse Homeserver]] section
 of the NixOS manual.
 
-#+begin_src nix :tangle default.nix
+#+begin_src nix /*:tangle default.nix*/
   { pkgs, lib, modulesPath, ... }:
   {
     imports = [
@@ -234,7 +240,28 @@ manually ran:
   ALTER ROLE "matrix-synapse" PASSWORD null;
 #+end_src
 
-*** Federation
+* Federation
 
-Federation is configured via the [[file:../../.well-known][~.well-known~]] directory, which is
-deployed to ~rossabaker.com~ as part of the [[file:../website/index.org::+TITLE: Website][website]] package.
+Federation is configured via the ~.well-known~ directory.  All we need
+are two static files:
+
+*** ~/.well-known/matrix/server~
+
+#+begin_src json :tangle (expand-file-name ".well-known/matrix/server" ross-www/public-html-directory) :eval no :mkdirp yes
+  {
+    "m.server": "matrix.rossabaker.com:443"
+  }
+#+end_src
+
+*** ~/.well-known/matrix/client~
+
+#+begin_src json :tangle (expand-file-name ".well-known/matrix/client" ross-www/public-html-directory) :eval no :mkdirp yes
+  {
+    "m.homeserver" = {
+      "base_url" = "https://matrix.rossabaker.com"
+    },
+    "m.identity_server" = {
+       "base_url" = "https://vector.im"
+    }
+  }
+#+end_src

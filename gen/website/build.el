@@ -94,8 +94,11 @@
   (interactive)
   (if current-prefix-arg
       (ross-www/legacy-publish))
-  (dolist (project '("org/projects/www/index.org" "org/projects/web-key-directory/index.org"))
+  (dolist (project '("org/projects/matrix-home-server/index.org"
+                     "org/projects/www/index.org"
+                     "org/projects/web-key-directory/index.org"))
     (let ((project-file-name (expand-file-name project ross-www/src-directory)))
+      (message "Tangling %s" project-file-name)
       (with-temp-buffer
         (insert-file-contents project-file-name)
         (set-visited-file-name project-file-name t)
