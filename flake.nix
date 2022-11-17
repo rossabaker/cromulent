@@ -121,10 +121,10 @@
         };
     in
     {
-      overlays = [
-        emacs-overlay.overlay
-        devshell.overlay
-      ];
+      overlays = {
+        emacs = emacs-overlay.overlay;
+        devshell = devshell.overlay;
+      };
 
       # System configurations
       # Accessible via 'nixos-rebuild --flake'
@@ -157,7 +157,7 @@
     }
     // utils.lib.eachDefaultSystem (system:
     let
-      pkgs = import nixpkgs { inherit system; overlays = self.overlays; };
+      pkgs = import nixpkgs { inherit system; overlays = builtins.attrValues self.overlays; };
       hm = home-manager.defaultPackage."${system}";
     in
     {
