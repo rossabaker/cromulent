@@ -2,7 +2,7 @@
 #+title: Website colophon
 #+redirect_from: /configs/website/build
 #+date: <2022-11-14 Mon 20:57>
-#+lastmod: <2022-11-17 Thu 20:54>
+#+lastmod: <2022-11-17 Thu 21:07>
 #+property: header-args :mkdirp yes :tangle-mode `,#o444
 #+property: header-args:emacs-lisp :tangle ../../../../gen/www/build.el :results silent
 #+property: header-args:nix :tangle ../../../../gen/www/default.nix :eval never
@@ -207,14 +207,49 @@ This site is built with Nix.
   }
 #+end_src
 
-To run it locally:
+- The =siteEmacs= is a lightweight Emacs that contains just the
+  packages we need to build the site.
+- =hugo= and =ox-hugo= support the [[https://ox-hugo.scripter.co/][ox-hugo]] legacy.
+- =gnupg= is made available to export the armored public key.
+
+** Run it locally
 
 # This is slow.  You don't want to run this from org.
 #+begin_src sh :eval no :results silent :dir (getenv "PRJ_ROOT")
   nix build -L .#www
 #+end_src
 
-- The =siteEmacs= is a lightweight Emacs that contains just the
-  packages we need to build the site.
-- =hugo= and =ox-hugo= support the [[https://ox-hugo.scripter.co/][ox-hugo]] legacy.
-- =gnupg= is made available to export the armored public key.
+* Continuous integration
+
+The main branch publishes to my personal Cachix and GitHub pages.
+
+#+begin_src yaml :tangle ../../../../.github/workflows/publish.yml :eval no
+name: publish
+on:
+  workflow_dispatch: # allows manual triggering
+  push:
+    branches:
+    - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2.4.0
+      with:
+        fetch-depth: 1
+    - uses: cachix/install-nix-action@v16
+      with:
+        extra_nix_config: |
+          access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+    - uses: cachix/cachix-action@v10
+      with:
+        name: rossabaker
+        authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+        signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
+    - run: nix -L build .#www
+    - uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./result
+#+end_src
