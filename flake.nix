@@ -164,7 +164,7 @@
       # Your custom packages, plus nixpkgs and overlayed stuff
       # Accessible via 'nix build .#example' or 'nix build .#nixpkgs.example'
       packages = {
-        website = pkgs.callPackage ./gen/website { src = ./src; };
+        www = pkgs.callPackage ./gen/www { src = ./src; };
       };
 
       # Devshell for bootstrapping plus editor utilities (fmt and LSP)

@@ -2,7 +2,10 @@
 #+title: Website colophon
 #+redirect_from: /configs/website/build
 #+date: <2022-11-14 Mon 20:57>
-#+lastmod: <2022-11-15 Tue 19:37>
+#+lastmod: <2022-11-17 Thu 20:54>
+#+property: header-args :mkdirp yes :tangle-mode `,#o444
+#+property: header-args:emacs-lisp :tangle ../../../../gen/www/build.el :results silent
+#+property: header-args:nix :tangle ../../../../gen/www/default.nix :eval never
 
 [[https://rossabaker.com/][rossabaker.com]] is primarily written in [[https://orgmode.org/][Org Mode]] and exported to HTML
 via [[https://orgmode.org/manual/HTML-Export.html][ox-html]].  The result is packaged with [[https://nixos.org/][Nix]].
@@ -12,7 +15,7 @@ via [[https://orgmode.org/manual/HTML-Export.html][ox-html]].  The result is pac
 Most of the site is built with Emacs Lisp.  The site is assembled into
 =ross-www/public-html-directory=.
 
-#+begin_src emacs-lisp :tangle ../../../../gen/website/build.el :results silent
+#+begin_src emacs-lisp
   (require 'ob-shell)
   (require 'ox-hugo)
   (require 'ox-publish)
@@ -36,7 +39,7 @@ Most of the site is built with Emacs Lisp.  The site is assembled into
 This site was originally built with [[https://ox-hugo.scripter.co/][ox-hugo]].  To build the legacy site into
 `tmp/public_html`, run =ross-www/legacy-publish=.
 
-#+begin_src emacs-lisp :tangle ../../../../gen/website/build.el :results silent
+#+begin_src emacs-lisp
   (defun ross-www/legacy-publish ()
     "Build the legacy ox-hugo website."
     (interactive)
@@ -71,7 +74,7 @@ First we need a backend that knows how to parse =redirect-from=.  That
 last =t= should probably be =space=, so we get more than one, but this
 achieves liftoff.
 
-#+begin_src emacs-lisp :tangle ../../../../gen/website/build.el :results silent
+#+begin_src emacs-lisp
   (org-export-define-backend 'ross-www/redirects
     nil
     :options-alist
@@ -83,7 +86,7 @@ files are being consolidated into one.  We just append to a temporary
 buffer.  The =nil= project argument to =org-publish-find-property= is
 dubious, but works as long as =filename= is absolute.
 
-#+begin_src emacs-lisp :tangle ../../../../gen/website/build.el :results silent
+#+begin_src emacs-lisp
   (defun ross-www/publish-redirects (plist filename pub-dir)
     "Publish the _redirects file."
     (let* ((buffer (get-buffer-create " *ross-www/publish-redirects*"))
@@ -107,7 +110,7 @@ We also need a preparation action and a completion action.  The former
 creates (or clears, if existing) our temporary buffer.  The latter
 writes its contents to the ~_redirects~ file.
 
-#+begin_src emacs-lisp :tangle ../../../../gen/website/build.el :results silent
+#+begin_src emacs-lisp
   (defun ross-www/publish-redirects-prepare (plist)
     "Creates an empty buffer for publishing redirects."
     (let ((buffer (get-buffer-create " *ross-www/publish-redirects*")))
@@ -129,7 +132,7 @@ writes its contents to the ~_redirects~ file.
 We use [[https://orgmode.org/manual/Publishing.html][ox-publish]] moving forward.  It operates from a global
 =org-publish-project-alist= variable, which we'll add projects to.
 
-#+begin_src emacs-lisp :tangle ../../../../gen/website/build.el :results silent
+#+begin_src emacs-lisp
   (add-to-list 'org-publish-project-alist
                `("rossabaker.com"
                  :base-directory ,(expand-file-name "org/" ross-www/src-directory)
@@ -148,7 +151,7 @@ We use [[https://orgmode.org/manual/Publishing.html][ox-publish]] moving forward
 invoked for production builds.  Invoke with a universal argument to
 force a rebuild and to build the legacy site.
 
-#+begin_src emacs-lisp :tangle ../../../../gen/website/build.el :results silent
+#+begin_src emacs-lisp
   (defun ross-www/publish ()
     "Publish the website."
     (interactive)
@@ -172,7 +175,7 @@ force a rebuild and to build the legacy site.
 
 This site is built with Nix.
 
-#+begin_src nix :tangle ../../../../gen/website/default.nix :eval never
+#+begin_src nix
   { src, emacsNativeComp, gnupg, hugo, stdenv }:
   let
     siteEmacs = emacsNativeComp.pkgs.withPackages (epkgs: [
@@ -202,6 +205,13 @@ This site is built with Nix.
       cp -r tmp/public_html/. $out
     '';
   }
+#+end_src
+
+To run it locally:
+
+# This is slow.  You don't want to run this from org.
+#+begin_src sh :eval no :results silent :dir (getenv "PRJ_ROOT")
+  nix build -L .#www
 #+end_src
 
 - The =siteEmacs= is a lightweight Emacs that contains just the
