@@ -1,5 +1,5 @@
 #+title: Ross A. Baker
-#+date: <2022-11-15 Tue 21:05>yy
+#+date: <2022-11-15 Tue 21:05>
 
 This site is under active reconstruction to ox-html.  See [[file:projects/www/index.org][the colophon]]
 for more.  Some pages are temporarily orphaned, but I'm trying not to
