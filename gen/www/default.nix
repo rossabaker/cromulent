@@ -21,6 +21,8 @@ stdenv.mkDerivation rec {
       --script ${./build.el} \
       --eval "(ross-www/legacy-publish)" \
       --eval "(ross-www/publish)"
+    # A horrific hack
+    echo '/.well-known/webfinger resource=acct:ross@rossabaker.com https://indieweb.social/.well-known/webfinger?resource=acct%3Arossabaker%40indieweb.social 301' >> tmp/public_html/_redirects
   '';
   installPhase = ''
     mkdir $out

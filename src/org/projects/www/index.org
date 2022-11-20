@@ -2,7 +2,7 @@
 #+title: Website colophon
 #+redirect_from: /configs/website/build
 #+date: <2022-11-14 Mon 20:57>
-#+lastmod: <2022-11-17 Thu 21:07>
+#+lastmod: <2022-11-20 Sun 00:51>
 #+property: header-args :mkdirp yes :tangle-mode `,#o444
 #+property: header-args:emacs-lisp :tangle ../../../../gen/www/build.el :results silent
 #+property: header-args:nix :tangle ../../../../gen/www/default.nix :eval never
@@ -199,6 +199,8 @@ This site is built with Nix.
         --script ${./build.el} \
         --eval "(ross-www/legacy-publish)" \
         --eval "(ross-www/publish)"
+      # A horrific hack
+      echo '/.well-known/webfinger resource=acct:ross@rossabaker.com https://indieweb.social/.well-known/webfinger?resource=acct%3Arossabaker%40indieweb.social 301' >> tmp/public_html/_redirects
     '';
     installPhase = ''
       mkdir $out
