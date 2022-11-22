@@ -3355,7 +3355,143 @@ generator.
 
 I'm also [[https://www.patreon.com/indiewebsocial/about][supporting my friendly admin]].  Wherever you land in the
 Fediverse, please consider supporting yours.
+** DONE Ox. Hugo. Why not both?                 :@tech:ox_hugo:org_mode:hugo:
+CLOSED: [2022-11-22 Tue 15:53 EST]
+:PROPERTIES:
+:EXPORT_FILE_NAME: ox-hugo-why-not-both
+:END:
 
+#+begin_description
+  Why I started ripping out [[https://ox-hugo.scripter.co/][ox-hugo]], and why I came back.
+#+end_description
+
+This site is built on a static site generator (SSG).  They are a dime
+a dozen.  I chose a less mainstream one, [[https://ox-hugo.scripter.co/][ox-hugo]].  After recently
+questioning that choice, I have new clarity on why it's right for me.
+
+*** The goal
+
+I want to write and sometimes generate content in a markup language.
+The SSG generator should apply a template, create aggregate views
+(such as [[/tags][tags]]), and output a directory that can be served off a cloud
+CDN, self-hosted with open source like [[https://nginx.org/en/][nginx]], or even out of a local
+directory with a [[https://crates.io/crates/simple-http-server][simple Rust binary]].
+
+*** Markup
+
+The first choice is which markup language we use.
+
+**** HTML
+
+Of course, HTML is our target, and the ML even stands for Markup
+Language.  But we don't generally want to write HTML directly.
+
+- It's verbose.
+- It's subjectively ugly in source form.
+- It's not the right level of abstraction for templating.  We can wrap
+  a document with ~<main>~, but it still needs metadata for the
+  ~<head>~ and aggregate views.  There's [[https://www.w3.org/TR/xslt-30/][XSLT]], which makes hard things
+  possible, but easy things hard.
+
+**** Markdown
+
+[[https://daringfireball.net/projects/markdown/][Markdown]] addresses most of these concerns.  It's relatively concise.
+It imposes minimal syntax on plain text content.  There are umpteen
+generators to export it into HTML.  Its minimalism makes it easy to
+generate or collaboratively produce, and its prominence on GitHub
+means most engineers in particular can communicate in it.
+
+Why not Markdown?  The umpteen generators mean there are multiple
+dialects like [[https://commonmark.org/][CommonMark]] and [[https://github.github.com/gfm/][GitHub Flavored Markdown]] and variable
+support for extension for simple needs like tables and definition
+lists.
+
+But, eh, it's mostly fine.
+
+**** Org-Mode
+
+[[https://orgmode.org/][Org-Mode]] is a package built into [[https://www.gnu.org/software/emacs/][Emacs]], my editor of choice.  It
+defines an [[https://orgmode.org/worg/dev/org-syntax.html][Org syntax]], which is yet another markdown language[fn:13].
+The killer feature is [[https://orgmode.org/manual/Working-with-Source-Code.html][Org-Babel]], where we can embed, export, and
+execute code snippets in multiple languages, interspersed with prose
+in the practice of [[https://en.wikipedia.org/wiki/Literate_programming][literate programming]].  For example, [[*Web Key Directory][Web Key
+Directory]] page is not only a tutorial on WKD, but is an executable
+document that generates my WKD entry.
+
+It's not /just/ an Emacs tool.  There are [[https://orgmode.org/worg/org-tools/index.html#orgdf545ac][parsers]] for multiple
+languages.  But if you propose Org on a team, some Emacs users and
+/all/ Emacs infidels will look at you strange.
+
+**** Decision
+
+I chose Markdown when I'm maintaining the [[https://northsidesoccer.com/][youth soccer league's site]]
+with simple needs.  Here, where I'm a sole engineer talking tech, I
+choose Org.
+
+*** Generator
+
+**** ox-html
+
+Having settled on Org, a natural choice is [[https://orgmode.org/manual/HTML-Export.html][ox-html]], Org's built in
+HTML exporter.  It offers a plain experience out of the box, but there
+are enough hooks to fully customize the output.  I tried simplifying
+to it earlier this week, but there are so many yaks to shave:
+
+- Exported headers get non-deterministic anchors
+- No taxonomies out of the box
+- No CSS asset pipeline out the box
+- No Google sitemap out of the box
+- No RSS feeds out of the box
+
+I could solve all those, and it would be fun.  However, there are a
+lot of unsolved problems in the world, and these have been solved many
+times over.
+
+Even if I made a bespoke ox-html config, it's not fast and it's
+single-threaded.  It's plenty adequate for this modest blog and my few
+configs, but I'm starting to think about handling [[https://www.w3.org/TR/webmention/][webmentions]],
+republishing my Twitter archives, and syndicating content from social
+media like Mastodon.  Tens of documents could be come a thousand
+quickly.
+
+**** Hugo
+
+[[https://gohugo.io][Hugo]] is a prominent static site generator, written in Go.  I don't
+love writing Go, but I appreciate consuming the single static binaries
+Go produces.  This puts it ahead of predecessors like [[https://jekyllrb.com/][Jekyll]] and its
+Gemfile locks.
+
+Hugo is a mature solution that provides all the features and speed I
+miss in ox-html.  It also supports [[https://gohugo.io/content-management/formats/#list-of-content-formats][Org and Markdown]] content.  The
+markup is typically prepended with [[https://gohugo.io/content-management/front-matter/][front matter]] to provide metadata
+like titles, dates, and tags.
+
+What's wrong?  The Org support is based on [[https://github.com/niklasfasching/go-org][go-org]], which targets a
+"reasonable subset of Org mode" and "likes to follow the 80/20 rule".
+That's great, but Babel support falls into the 20%.  I still need
+Emacs.
+
+**** ox-hugo
+
+Hugo makes a compelling /compilation target/.  What if I could write
+my configs in Org-Babel and export with the full power of Emacs, but
+also generate and integrate Markdown files for projects like the [[*Archive your toots to Hugo][toot
+archive]], and rebuild it all quickly?
+
+This is exactly what ox-hugo does.  The "ox" in ox-hugo and ox-html
+refers to [[https://orgmode.org/manual/Exporting.html][Org eXport]].  ox-hugo is just another ox backend, but exports
+to markdown with front matter.  Then Hugo, agnostic to Emacs, converts
+that into the HTML you're consuming now.
+
+This tool increases the learning curve.  One needs at least a basic
+understanding of Org, Emacs, and Hugo.  It sometimes introduces
+overlapping ways to do things, like [[https://ox-hugo.scripter.co/doc/shortcodes/][Org special blocks vs. Hugo
+shortcodes]].  But I have the power where I need it, and a commmodity
+platform where a commodity suffices.
+
+I wouldn't want to impose this on the volunteer parent who eventually
+takes my spot on the youth soccer board.  But for a personal website
+of an Emacs nerd, I highly recommend checking out ox-hugo!
 * Notes section
 :PROPERTIES:
 :EXPORT_HUGO_BUNDLE: notes
@@ -3406,6 +3542,7 @@ I hope you find something here to enjoy, and I hope it inspires you to
 contribute to the open web, too.
 
 * Footnotes
+
 [fn:1]
 #+begin_quote
 From everyone to whom much has been given, much will be required, and from the one to whom much has been entrusted, even more will be demanded.
@@ -3440,3 +3577,6 @@ remember what we fled from.  Can anybody else?
 [fn:12] Since I was moving instances, this limitation was fine.  To
 update more often from a live Mastodon, it's worth considering the RSS
 feed or a [[https://indieweb.org/POSSE][POSSE]] approach.
+
+[fn:13] Today I learned [[https://yaml.org/][YAML]] doesn't stand for Yet Another Markdown
+Language, but YAML Ain't Markup Language.
