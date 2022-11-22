@@ -1695,7 +1695,7 @@ CLOSED: [2022-09-01 Thu 16:54]
 :EXPORT_HUGO_LASTMOD: <2022-11-21 Mon 13:19>
 :END:
 
-#+begin_src text :tangle ../../tmp/hugo/static/_redirects
+#+begin_src text :tangle ../../tmp/hugo/static/_redirects :exports none
   /projects/www /configs/website/build
 #+end_src
 
@@ -1977,7 +1977,7 @@ CLOSED: [2022-11-21 Mon 21:03]
   Walks through publishing a public key with the Web Key Directory (WKD) protocol.
 #+end_description
 
-#+begin_src text :tangle ../../tmp/hugo/static/_redirects
+#+begin_src text :tangle ../../tmp/hugo/static/_redirects :exports none
   /configs/web-directory /projects/web-key-directory
 #+end_src
 
