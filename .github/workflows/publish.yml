@@ -21,7 +21,7 @@ jobs:
         name: rossabaker
         authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
         signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
-    - run: nix -L build .#www
+    - run: nix -L build .#website
     - uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}

@@ -1,9 +1,0 @@
-#+title: Projects
-#+date: <2022-11-15 Tue 12:59>
-
-- [[file:toot-archive/index.org][Archive your toots with Hugo]]
-- [[file:matrix-home-server/index.org][Matrix home server]]
-- [[file:personal-weather-station/index.org][Personal weather station]]
-- [[file:scalatra-in-action/index.org][Scalatra in Action]]
-- [[file:web-key-directory/index.org][Web Key Directory]]
-- [[file:www/index.org][Website colophon]]
