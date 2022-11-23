@@ -1481,9 +1481,13 @@ verification.
 #+hugo:more
 
 #+begin_src html :tangle ../../tmp/hugo/layouts/partials/footer.html
-  <address class="vcard">
-      <a class="u-url u-uid" href="https://rossabaker.com/">Ross A. Baker</a>
-      <a class="u-pronoun" href="https://pronoun.is/he">(he/him)</a>
+  <address class="h-card vcard">
+      <a class="u-url u-uid p-name" href="https://rossabaker.com/">
+          <span class="p-given-name">Ross</span>
+          <span class="p-additional-name"><abbr>A.</abbr>
+          <span class="p-family-name">Baker</span>
+      </a>
+      <small><a class="u-pronoun" href="https://pronoun.is/he">(he/him)</a></small>
       {{ partial "contact-info-icons" . }}
   </address>
 
