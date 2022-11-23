@@ -42,7 +42,6 @@ CLOSED: [2022-09-05 Mon 00:30]
   }
 
   .intro .profile img {
-      max-width: 100%;
       border-radius: 50%;
   }
 
@@ -108,12 +107,6 @@ for this article on an eponymous domain.
       font-family: "Noto Sans", sans-serif;
       font-size: 1.25rem;
       margin: 0;
-  }
-
-  .infobox img {
-      display: block;
-      max-width: 100%;
-      margin: 0 auto;
   }
 
   .infobox dl {
@@ -506,7 +499,7 @@ convert the Markdown to HTML with [[https://gohugo.io/][Hugo]].
 CLOSED: [2022-09-01 Thu 16:48]
 :PROPERTIES:
 :EXPORT_FILE_NAME: hugo
-:EXPORT_HUGO_LASTMOD: <2022-11-07 Mon 09:33>
+:EXPORT_HUGO_LASTMOD: <2022-11-22 Tue 22:14 EST>
 :END:
 
 A Hugo site can be configured with either TOML or YAML.  I spent my
@@ -567,11 +560,16 @@ we'll use [[https://gohugo.io/hugo-modules/configuration/#module-config-mounts][
 **** General site parameters
 
 The ~css~ parameter lets us add custom stylesheets to the asset
-pipeline.  ~chroma.css~ is [[*Syntax highlighting][generated below]].
+pipeline.
+
+- [[https://csstools.github.io/sanitize.css/][sanitize.css]] is a CSS library, licensed [[https://creativecommons.org/publicdomain/zero/1.0/][CC0 1.0]].  It provides:
+  - ~sanitize.css~ is a basic reset
+  - ~assets.css~ is constraints some widths to 100%
+- ~chroma.css~ is [[*Syntax highlighting][generated below]].
 
 #+begin_src conf-toml :tangle ../../tmp/hugo/config.toml
   [Params]
-    css = [ 'cromulent.css', 'chroma.css', 'noto-fonts.css', 'fork-awesome.css', 'ox-hugo.css' ]
+    css = [ 'sanitize.css', 'assets.css', 'cromulent.css', 'chroma.css', 'noto-fonts.css', 'fork-awesome.css', 'ox-hugo.css' ]
     description = "A perfectly cromulent developer."
     username = 'rossabaker'
 
@@ -1772,7 +1770,7 @@ Our build creates some detritus that we don't want checked into Git.
 CLOSED: [2022-08-30 Tue 14:26]
 :PROPERTIES:
 :EXPORT_FILE_NAME: style
-:EXPORT_HUGO_LASTMOD: <2022-11-03 Thu 00:27>
+:EXPORT_HUGO_LASTMOD: <2022-11-22 Tue 20:25 EST>
 :END:
 
 We strive for [[https://en.wikipedia.org/wiki/Semantic_HTML][semantic HTML]].  The styles presented here provide a
@@ -1815,7 +1813,7 @@ Google Fonts [[https://cookie-script.com/blog/google-fonts-and-gdpr][violates th
 Noto variants from Google Fonts, and ran them through [[https://transfonter.org/][Transfonter]].
 
 #+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
-  html {
+  body {
       font-family: "Noto Sans", sans-serif;
   }
 
@@ -3263,13 +3261,6 @@ Quadragenarian Ross as an embarrassment for decades to come.[fn:8]
       float: right;
       max-width: 40%;
       margin: 0 1.5em;
-  }
-
-  .blog-image img {
-      display: block;
-      width: 100%;
-      height: auto;
-      margin: 0 auto;
   }
 
   .blog-image figcaption {
