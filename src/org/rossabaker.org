@@ -1472,7 +1472,7 @@ Render the HTML list as a Lispy, inline list.
 CLOSED: [2022-09-02 Fri 10:35]
 :PROPERTIES:
 :EXPORT_FILE_NAME: footer
-:EXPORT_HUGO_LASTMOD: <2022-11-06 Sun 10:42>
+:EXPORT_HUGO_LASTMOD: <2022-11-22 Tue 23:02 EST>
 :END:
 
 The footer is a simple ~<address>~ with our name, pronouns, and
@@ -1488,6 +1488,12 @@ verification.
   </address>
 
   <p><a href="/license">License</a></p>
+
+  <small>
+  <a href="https://xn--sr8hvo.ws/%E2%AC%9B%EF%B8%8F%E2%9A%93%EF%B8%8F%E2%97%BC%EF%B8%8F/previous">←</a>
+  An <a href="https://xn--sr8hvo.ws">IndieWeb Webring</a> 🕸💍
+  <a href="https://xn--sr8hvo.ws/%E2%AC%9B%EF%B8%8F%E2%9A%93%EF%B8%8F%E2%97%BC%EF%B8%8F/next">→</a>
+  </small>
 #+end_src
 
 #+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
