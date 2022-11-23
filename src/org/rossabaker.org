@@ -1482,12 +1482,13 @@ verification.
 
 #+begin_src html :tangle ../../tmp/hugo/layouts/partials/footer.html
   <address class="h-card vcard">
+      <img class="u-photo" alt="Profile photo of Ross A. Baker" src="/img/profile.jpg" />
       <a class="u-url u-uid p-name" href="https://rossabaker.com/">
           <span class="p-given-name">Ross</span>
-          <span class="p-additional-name"><abbr>A.</abbr>
+          <span class="p-additional-name"><abbr>A.</abbr></span>
           <span class="p-family-name">Baker</span>
       </a>
-      <small><a class="u-pronoun" href="https://pronoun.is/he">(he/him)</a></small>
+      <small><a class="u-pronoun" href="https://pronoun.is/he">(he/him)</a></small><br />
       {{ partial "contact-info-icons" . }}
   </address>
 
@@ -1506,7 +1507,7 @@ verification.
   }
 
   address ul {
-      display: inline-block;
+      display: inline-flex;
       list-style-type: none;
       margin: 0;
       padding-left: 0;
@@ -1515,6 +1516,19 @@ verification.
   address li {
       display: inline;
       margin-left: 1ch;
+  }
+
+  address li:first-child {
+      margin-left: 0;
+  }
+
+  .h-card .u-photo {
+      display: block;
+      float: left;
+      width: 3.2rem;
+      height: 3.2rem;
+      border-radius: 50%;
+      margin: 0 1rem;
   }
 #+end_src
 
