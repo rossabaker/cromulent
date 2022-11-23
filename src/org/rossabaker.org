@@ -1472,17 +1472,17 @@ Render the HTML list as a Lispy, inline list.
 CLOSED: [2022-09-02 Fri 10:35]
 :PROPERTIES:
 :EXPORT_FILE_NAME: footer
-:EXPORT_HUGO_LASTMOD: <2022-11-22 Tue 23:02 EST>
+:EXPORT_HUGO_LASTMOD: <2022-11-22 Tue 23:43 EST>
 :END:
 
-The footer is a simple ~<address>~ with our name, pronouns, and
+The footer is a simple ~<address>~ [[http://microformats.org/wiki/hcard][hCard]] with our name, pronouns, and
 socials.  Our social links will use the [[https://microformats.org/wiki/rel-me][rel-me microformat]] for
 verification.
 #+hugo:more
 
 #+begin_src html :tangle ../../tmp/hugo/layouts/partials/footer.html
-  <address>
-      Ross A. Baker
+  <address class="vcard">
+      <a class="url fn" href="https://rossabaker.com/about/">Ross A. Baker</a>
       <a href="https://pronoun.is/he">(he/him)</a>
       {{ partial "contact-info-icons" . }}
   </address>
