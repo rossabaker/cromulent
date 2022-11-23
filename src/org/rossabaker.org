@@ -1482,8 +1482,8 @@ verification.
 
 #+begin_src html :tangle ../../tmp/hugo/layouts/partials/footer.html
   <address class="vcard">
-      <a class="url fn" href="https://rossabaker.com/about/">Ross A. Baker</a>
-      <a href="https://pronoun.is/he">(he/him)</a>
+      <a class="u-url u-uid" href="https://rossabaker.com/">Ross A. Baker</a>
+      <a class="u-pronoun" href="https://pronoun.is/he">(he/him)</a>
       {{ partial "contact-info-icons" . }}
   </address>
 
