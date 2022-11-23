@@ -3492,7 +3492,7 @@ CLOSED: [2022-11-07 Mon 09:53]
 :PROPERTIES:
 :EXPORT_HUGO_TITLE: Notes
 :EXPORT_FILE_NAME: _index
-:EXPORT_HUGO_LASTMOD: <2022-11-08 Tue 12:04>
+:EXPORT_HUGO_LASTMOD: <2022-11-22 Tue 22:28 EST>
 :END:
 
 #+begin_description
@@ -3506,7 +3506,7 @@ Content is archived here in the Indieweb spirit of [[https://indieweb.org/own_yo
 
 Includes:
 - [[https://mastodon.social/web/@rossabaker][@rossabaker@mastodon.social]] account (April 2017 — November 2022)
-- [[https://indieweb.social/web/@rossabaker][@rossabaker@mastodon.social]] account (November 2022 — present, periodically synced)
+- [[https://indieweb.social/web/@rossabaker][@rossabaker@indieweb.social]] account (November 2022 — present, periodically synced)
 
 * Stashed
 
