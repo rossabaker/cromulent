@@ -3508,8 +3508,6 @@ Includes:
 - [[https://mastodon.social/web/@rossabaker][@rossabaker@mastodon.social]] account (April 2017 — November 2022)
 - [[https://indieweb.social/web/@rossabaker][@rossabaker@mastodon.social]] account (November 2022 — present, periodically synced)
 
-* Local Variables :noexport:
-
 * Stashed
 
 ** Old home page copy
