@@ -1078,7 +1078,7 @@ Set up [[https://indieauth.com/pgp][IndieAuth with PGP]].
 
 #+begin_src html :tangle ../../tmp/hugo/layouts/partials/head.html
   {{ if .IsHome }}
-  <link rel="pgpkey" href="/.well-known/openpgpkey/hu/eimhw3om3jynrs7fo7r7rrssmt1o4yxpkey.pub">
+  <link rel="pgpkey" href="/.well-known/openpgpkey/hu/eimhw3om3jynrs7fo7r7rrssmt1o4yxp">
   {{ end }}
 #+end_src
 
