@@ -2869,7 +2869,7 @@ CLOSED: [2022-11-22 Tue 00:14 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: webfinger
 :EXPORT_DATE: <2022-11-22 Tue 00:15>
-:EXPORT_HUGO_LASTMOD: <2022-11-22 Tue 00:57 EST>
+:EXPORT_HUGO_LASTMOD: <2022-12-01 Thu 20:50>
 :END:
 
 #+begin_description
@@ -2877,9 +2877,11 @@ CLOSED: [2022-11-22 Tue 00:14 EST]
   another server to your own domain.
 #+end_description
 
-I'm currently using [[https://indieweb.social/][indieweb.social]] for my Mastodon presence, but I'd
-like to be discoverable on my domain.  We will set up a redirect so
-~@ross@rossabaker.com~ resolves to my Mastdon.
+#+begin_warning
+  I was using [[https://indieweb.social/][indieweb.social]] for my Mastodon presence, but wanted
+  like to be discoverable on my domain.  I'm now self-hosting, but
+  leaving these instructions for others.
+#+end_warning
 
 *** How it works on your Mastodon server
 
@@ -2935,7 +2937,7 @@ The resource can also be referenced via HTTP redirect.  Our site
 deploys to Netlify, which has [[https://docs.netlify.com/routing/redirects/][redirect support]], including matching
 query strings!  A one-liner served up at ~/_redirects~ is sufficient:
 
-#+begin_src text :tangle ../../tmp/hugo/static/_redirects
+#+begin_src text
   /.well-known/webfinger resource=acct:ross@rossabaker.com https://indieweb.social/.well-known/webfinger?resource=acct%3Arossabaker%40indieweb.social 301
 #+end_src
 
@@ -2956,11 +2958,11 @@ called to return an HTTP 400 when the ~resource~ parameter is missing.
 But that's a problem for another day.
 #+end_aside
 
-*** Try it out
+*** Self-hosting :noexport:
 
-Search your favorite ActivityPub server for ~@ross@rossabaker.com~.
-You should see a redirect to my indieweb.social presence.  Follow, if
-you dare!
+#+begin_src text :tangle ../../tmp/hugo/static/_redirects
+  /.well-known/webfinger* https://mastodon.rossabaker.com/.well-known/webfinger:splat 301
+#+end_src
 
 * Talks section
 :PROPERTIES:
