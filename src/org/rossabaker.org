@@ -2962,8 +2962,10 @@ But that's a problem for another day.
 
 #+begin_src text :tangle ../../tmp/hugo/static/_redirects
   /.well-known/webfinger resource=acct:test@rossabaker.com https://fedi.rossabaker.com/.well-known/webfinger?resource=acct%3Atest%40rossabaker.com 301
-  /.well-known/webfinger* https://mastodon.rossabaker.com/.well-known/webfinger:splat 301
+  /.well-known/webfinger resource=acct:ross@rossabaker.com https://mastodon.rossabaker.com/.well-known/webfinger?resource=acct%3Aross%40rossabaker.com 301
 #+end_src
+
+# /.well-known/webfinger* https://mastodon.rossabaker.com/.well-known/webfinger:splat 301
 
 * Talks section
 :PROPERTIES:
