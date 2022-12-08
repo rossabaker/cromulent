@@ -23,36 +23,7 @@ CLOSED: [2022-09-05 Mon 00:30]
   .site-title .heading-anchor {
       display: none;
   }
-
-  .intro {
-      display: grid;
-      grid-template-columns: 30% 70%;
-      gap: 1.5em;
-      grid-auto-rows: auto;
-  }
-
-  .intro .profile {
-      grid-column: 1;
-      grid-row: 1;
-      margin: 0;
-  }
-
-  .intro .profile figure {
-      margin: 0;
-  }
-
-  .intro .profile img {
-      border-radius: 50%;
-  }
-
-  .intro .text {
-      grid-column: 2;
-      grid-row: 1;
-      align-self: center;
-  }
 #+end_src
-
-
 
 * DONE Ross A. Baker                                    :@personal:biography:contact:
 CLOSED: [2022-08-31 Wed 00:23]
