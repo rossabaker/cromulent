@@ -245,7 +245,7 @@ CLOSED: [2022-10-16 Sun 15:37]
 :EXPORT_HUGO_SECTION: /
 :EXPORT_FILE_NAME: contact
 :EXPORT_DESCRIPTION: Supported ways to contact Ross, and deprecated ways to no longer contact Ross.
-:EXPORT_HUGO_LASTMOD: <2022-11-03 Thu 12:11>
+:EXPORT_HUGO_LASTMOD: <2022-12-10 Sat 23:32>
 :END:
 
 ** Verification
@@ -1601,7 +1601,7 @@ Keys are:
   network = 'Cohost'
   handle = '@rossabaker'
   url = 'https://cohost.org/rossabaker'
-  support = 'experimental'
+  support = 'deprecated'
 
   [[Params.contacts]]
   network = 'Reddit'
