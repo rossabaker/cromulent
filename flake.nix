@@ -86,6 +86,10 @@
               inherit pkgs;
               src = ./src/org/config/nix-darwin;
             }))
+            {
+              system.keyboard.enableKeyMapping = true;
+              system.keyboard.remapCapsLockToControl = true;
+            }
           ];
         };
 
