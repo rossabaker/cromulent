@@ -14,7 +14,7 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # nix-darwin flake
-    nixpkgs-darwin.url = "github:nixos/nixpkgs/nixpkgs-21.11-darwin";
+    nixpkgs-darwin.url = "github:nixos/nixpkgs/nixpkgs-22.11-darwin";
     darwin.url = "github:LnL7/nix-darwin/master";
     darwin.inputs.nixpkgs.follows = "nixpkgs-darwin";
 
@@ -149,14 +149,22 @@
           username = "ross.baker";
           homeDirectory = "/Users/ross.baker";
         };
+
+        "RABaker@L2LYQM57XY" = mkHomeConfig {
+          system = "aarch64-darwin";
+          username = "ross.baker";
+          homeDirectory = "/Users/RABaker";
+        };
       };
 
       darwinConfigurations = {
         C02Z721ZLVCG = mkDarwinConfig { };
+        L2LYQM57XY = mkDarwinConfig { system = "aarch64-darwin"; };
       };
     }
     // utils.lib.eachDefaultSystem (system:
     let
+
       pkgs = import nixpkgs { inherit system; overlays = builtins.attrValues self.overlays; };
       hm = home-manager.defaultPackage."${system}";
     in
