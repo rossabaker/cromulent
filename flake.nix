@@ -74,7 +74,7 @@
     let
       pkgsFor = system: import nixpkgs { inherit system; };
 
-      mkDarwinConfig = { system ? "x86_64-darwin" }:
+      mkDarwinConfig = { system }:
         let
           pkgs = pkgsFor system;
         in
@@ -144,12 +144,6 @@
       };
 
       homeConfigurations = {
-        "ross.baker@C02Z721ZLVCG" = mkHomeConfig {
-          system = "x86_64-darwin";
-          username = "ross.baker";
-          homeDirectory = "/Users/ross.baker";
-        };
-
         "RABaker@L2LYQM57XY" = mkHomeConfig {
           system = "aarch64-darwin";
           username = "ross.baker";
@@ -158,7 +152,6 @@
       };
 
       darwinConfigurations = {
-        C02Z721ZLVCG = mkDarwinConfig { };
         L2LYQM57XY = mkDarwinConfig { system = "aarch64-darwin"; };
       };
     }
