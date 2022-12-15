@@ -22,6 +22,7 @@
     devshell.url = "github:numtide/devshell";
     emacs-overlay.url = "github:nix-community/emacs-overlay";
     gomod2nix.url = "github:tweag/gomod2nix";
+    firefox-darwin.url = "github:bandithedoge/nixpkgs-firefox-darwin";
 
     # Emacs packages
     ammonite-term-repl = {
