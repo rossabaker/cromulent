@@ -9,6 +9,7 @@
     pkgs.firefox-bin
     pkgs.rectangle
     pkgs.slack
+    pkgs.zoom-us
   ];
 
   home.file = {
@@ -17,5 +18,6 @@
 
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
     "slack"
+    "zoom"
   ];
 }
