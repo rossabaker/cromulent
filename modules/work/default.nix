@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }:
+{ inputs, pkgs, lib, ... }:
 
 {
   nixpkgs.overlays = [
@@ -8,9 +8,14 @@
   home.packages = [
     pkgs.firefox-bin
     pkgs.rectangle
+    pkgs.slack
   ];
 
   home.file = {
     ".sbt/1.0/work.sbt".source = ./work.sbt;
   };
+
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "slack"
+  ];
 }
