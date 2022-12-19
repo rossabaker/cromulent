@@ -124,6 +124,16 @@
           # Pass our flake inputs into the config
           extraSpecialArgs = { inherit inputs; };
         };
+
+      "RABaker@L2LYQM57XY" = mkHomeConfig {
+        system = "aarch64-darwin";
+        username = "ross.baker";
+        homeDirectory = "/Users/RABaker";
+      };
+
+      L2LYQM57XY = mkDarwinConfig {
+        system = "aarch64-darwin";
+      };
     in
     {
       overlays = {
@@ -148,15 +158,11 @@
       };
 
       homeConfigurations = {
-        "RABaker@L2LYQM57XY" = mkHomeConfig {
-          system = "aarch64-darwin";
-          username = "ross.baker";
-          homeDirectory = "/Users/RABaker";
-        };
+        inherit "RABaker@L2LYQM57XY";
       };
 
       darwinConfigurations = {
-        L2LYQM57XY = mkDarwinConfig { system = "aarch64-darwin"; };
+        inherit L2LYQM57XY;
       };
     }
     // utils.lib.eachDefaultSystem (system:
@@ -191,5 +197,12 @@
           pkgs.terraform
         ];
       };
-    });
+    }) //
+    {
+      packages.aarch64-darwin = {
+        L2LYQM57XY = L2LYQM57XY.system;
+        "RABaker@L2LYQM57XY" = "RABaker@L2LYQM57XY".activationPackage;
+      };
+    }
+  ;
 }
