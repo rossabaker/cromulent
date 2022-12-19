@@ -125,7 +125,7 @@
           extraSpecialArgs = { inherit inputs; };
         };
 
-      "RABaker@L2LYQM57XY" = mkHomeConfig {
+      RABaker-at-L2LYQM57XY = mkHomeConfig {
         system = "aarch64-darwin";
         username = "ross.baker";
         homeDirectory = "/Users/RABaker";
@@ -158,7 +158,7 @@
       };
 
       homeConfigurations = {
-        inherit "RABaker@L2LYQM57XY";
+        inherit RABaker-at-L2LYQM57XY;
       };
 
       darwinConfigurations = {
@@ -201,7 +201,7 @@
     {
       packages.aarch64-darwin = {
         L2LYQM57XY = L2LYQM57XY.system;
-        "RABaker@L2LYQM57XY" = "RABaker@L2LYQM57XY".activationPackage;
+        "RABaker@L2LYQM57XY" = RABaker-at-L2LYQM57XY.activationPackage;
       };
     }
   ;
