@@ -1,0 +1,11 @@
+builds:
+  include:
+    - '*.x86_64-linux.*'
+    - 'defaultPackage.x86_64-linux'
+    - 'devShell.x86_64-linux'
+    - 'nixosConfigurations.*'
+    - 'devShell.aarch64-darwin'
+    - 'homeConfigurations.RABaker@L2LYQM57XY.activationPackage'
+    - 'darwinConfigurations.L2LYQM57XY.system'
+  exclude:
+    - 'packages.x86_64-linux.bar'
