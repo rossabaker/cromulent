@@ -158,7 +158,7 @@
       };
 
       homeConfigurations = {
-        inherit RABaker-at-L2LYQM57XY;
+        "RABaker@L2LYQM57XY" = RABaker-at-L2LYQM57XY;
       };
 
       darwinConfigurations = {
