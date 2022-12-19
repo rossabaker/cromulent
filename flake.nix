@@ -134,18 +134,17 @@
       # System configurations
       # Accessible via 'nixos-rebuild --flake'
       nixosConfigurations = {
-        # TODO: Replace with your hostname
-        cool-computer = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
+        # cool-computer = nixpkgs.lib.nixosSystem {
+        #   system = "x86_64-linux";
 
-          modules = [
-            ./configuration.nix
-            # Adds your custom nixos modules
-            ./modules/nixos
-          ];
-          # Pass our flake inputs into the config
-          specialArgs = { inherit inputs; };
-        };
+        #   modules = [
+        #     ./configuration.nix
+        #     # Adds your custom nixos modules
+        #     ./modules/nixos
+        #   ];
+        #   # Pass our flake inputs into the config
+        #   specialArgs = { inherit inputs; };
+        # };
       };
 
       homeConfigurations = {
