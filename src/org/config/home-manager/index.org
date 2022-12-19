@@ -27,7 +27,6 @@ further.
     # programs.neovim.enable = true;
     home.packages = [
       pkgs.coreutils
-      pkgs.gomod2nix
       pkgs.jq
       pkgs.nixpkgs-fmt
     ];

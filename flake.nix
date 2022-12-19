@@ -21,7 +21,6 @@
     # Extra community flakes
     devshell.url = "github:numtide/devshell";
     emacs-overlay.url = "github:nix-community/emacs-overlay";
-    gomod2nix.url = "github:tweag/gomod2nix";
     firefox-darwin.url = "github:bandithedoge/nixpkgs-firefox-darwin";
 
     # Emacs packages
@@ -62,7 +61,6 @@
     , devshell
     , emacs-overlay
     , fill-sentences-correctly
-    , gomod2nix
     , hocon-mode
     , home-manager
     , nixpkgs
@@ -115,7 +113,7 @@
                 inherit homeDirectory username;
                 stateVersion = "21.11";
               };
-              nixpkgs.overlays = [ emacs-overlay.overlay gomod2nix.overlays.default ];
+              nixpkgs.overlays = [ emacs-overlay.overlay ];
             }
             homeModule
             emacsModule

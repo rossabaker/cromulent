@@ -139,25 +139,6 @@
         "type": "github"
       }
     },
-    "gomod2nix": {
-      "inputs": {
-        "nixpkgs": "nixpkgs_4",
-        "utils": "utils"
-      },
-      "locked": {
-        "lastModified": 1662501203,
-        "narHash": "sha256-4BKeqCX2zwgBiTdlc2DjGQ0CttKm0vSw0r/bdFdM/PQ=",
-        "owner": "tweag",
-        "repo": "gomod2nix",
-        "rev": "89cd0675b96775aa3ee86e7c0cf5bc238dd27976",
-        "type": "github"
-      },
-      "original": {
-        "owner": "tweag",
-        "repo": "gomod2nix",
-        "type": "github"
-      }
-    },
     "hardware": {
       "locked": {
         "lastModified": 1671228065,
@@ -328,7 +309,6 @@
         "emacs-overlay": "emacs-overlay",
         "fill-sentences-correctly": "fill-sentences-correctly",
         "firefox-darwin": "firefox-darwin",
-        "gomod2nix": "gomod2nix",
         "hardware": "hardware",
         "hocon-mode": "hocon-mode",
         "home-manager": "home-manager",
