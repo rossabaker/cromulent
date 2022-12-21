@@ -2,8 +2,7 @@
   description = "You new nix config";
 
   inputs = {
-    # Utilities for building flakes
-    utils.url = "github:numtide/flake-utils";
+    flake-parts.url = "github:hercules-ci/flake-parts";
 
     # Core nix flakes
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -67,16 +66,11 @@
     , ob-ammonite
     , scala-mode
     , unmodified-buffer
-    , utils
+    , flake-parts
     , ...
     }@inputs:
     let
-      pkgsFor = system: import nixpkgs { inherit system; };
-
-      mkDarwinConfig = { system }:
-        let
-          pkgs = pkgsFor system;
-        in
+      mkDarwinConfig = { pkgs, system }:
         darwin.lib.darwinSystem {
           inherit system;
           modules = [
@@ -91,10 +85,8 @@
           ];
         };
 
-      mkHomeConfig = { system, username, homeDirectory }:
+      mkHomeConfig = { pkgs, system, username, homeDirectory }:
         let
-          pkgs = pkgsFor system;
-
           homeModule = import (pkgs.callPackage ./tangle.nix {
             inherit pkgs;
             src = ./src/org/config/home-manager;
@@ -123,84 +115,77 @@
           extraSpecialArgs = { inherit inputs; };
         };
 
-      RABaker-at-L2LYQM57XY = mkHomeConfig {
+      RABaker-at-L2LYQM57XY = pkgs: mkHomeConfig {
+        inherit pkgs;
         system = "aarch64-darwin";
         username = "ross.baker";
         homeDirectory = "/Users/RABaker";
       };
 
-      L2LYQM57XY = mkDarwinConfig {
+      L2LYQM57XY = pkgs: mkDarwinConfig {
+        inherit pkgs;
         system = "aarch64-darwin";
       };
-    in
-    {
+
       overlays = {
         emacs = emacs-overlay.overlay;
         devshell = devshell.overlay;
       };
-
-      # System configurations
-      # Accessible via 'nixos-rebuild --flake'
-      nixosConfigurations = {
-        # cool-computer = nixpkgs.lib.nixosSystem {
-        #   system = "x86_64-linux";
-
-        #   modules = [
-        #     ./configuration.nix
-        #     # Adds your custom nixos modules
-        #     ./modules/nixos
-        #   ];
-        #   # Pass our flake inputs into the config
-        #   specialArgs = { inherit inputs; };
-        # };
-      };
-
-      homeConfigurations = {
-        "RABaker@L2LYQM57XY" = RABaker-at-L2LYQM57XY;
-      };
-
-      darwinConfigurations = {
-        inherit L2LYQM57XY;
-      };
-    }
-    // utils.lib.eachDefaultSystem (system:
-    let
-
-      pkgs = import nixpkgs { inherit system; overlays = builtins.attrValues self.overlays; };
-      hm = home-manager.defaultPackage."${system}";
     in
-    {
-      # Your custom packages, plus nixpkgs and overlayed stuff
-      # Accessible via 'nix build .#example' or 'nix build .#nixpkgs.example'
-      packages = {
-        website = pkgs.callPackage ./gen/website { src = ./src; };
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      flake = {
+        inherit overlays;
+
+        homeConfigurations = { pkgs, ... }: {
+          "RABaker@L2LYQM57XY" = RABaker-at-L2LYQM57XY pkgs;
+        };
+
+        darwinConfigurations = { pkgs, ... }: {
+          inherit L2LYQM57XY pkgs;
+        };
       };
 
-      # Devshell for bootstrapping plus editor utilities (fmt and LSP)
-      # Accessible via 'nix develop'
-      devShell = pkgs.devshell.mkShell {
-        name = "nix-config";
+      systems = [
+        "x86_64-linux"
+        "aarch64-darwin"
+      ];
 
-        commands = [{
-          name = "hm-switch";
-          help = "switch the home-manager config";
-          command = "${hm}/bin/home-manager switch --flake $PRJ_ROOT";
-        }];
+      perSystem = { config, self', inputs', system, ... }:
+        let
+          pkgs = import inputs.nixpkgs {
+            inherit system;
+            overlays = builtins.attrValues self.overlays;
+          };
+          hm = home-manager.defaultPackage."${system}";
 
-        packages = [
-          hm
-          pkgs.google-cloud-sdk
-          pkgs.hugo
-          pkgs.nix
-          pkgs.terraform
-        ];
-      };
-    }) //
-    {
-      packages.aarch64-darwin = {
-        L2LYQM57XY = L2LYQM57XY.system;
-        "RABaker@L2LYQM57XY" = RABaker-at-L2LYQM57XY.activationPackage;
-      };
-    }
-  ;
+          darwinPackages =
+            if (system == "aarch64-darwin") then {
+              L2LYQM57XY = (L2LYQM57XY pkgs).system;
+              "RABaker@L2LYQM57XY" = (RABaker-at-L2LYQM57XY pkgs).activationPackage;
+            } else { };
+        in
+        {
+          packages = {
+            website = pkgs.callPackage ./gen/website { src = ./src; };
+          } // darwinPackages;
+
+          devShells.default = pkgs.devshell.mkShell {
+            name = "nix-config";
+
+            commands = [{
+              name = "hm-switch";
+              help = "switch the home-manager config";
+              command = "${hm}/bin/home-manager switch --flake $PRJ_ROOT";
+            }];
+
+            packages = [
+              hm
+              pkgs.google-cloud-sdk
+              pkgs.hugo
+              pkgs.nix
+              pkgs.terraform
+            ];
+          };
+        };
+    };
 }
