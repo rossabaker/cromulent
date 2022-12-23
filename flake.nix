@@ -131,17 +131,22 @@
         emacs = emacs-overlay.overlay;
         devshell = devshell.overlay;
       };
+
+      pkgsFor = system: import inputs.nixpkgs {
+        inherit system;
+        overlays = builtins.attrValues self.overlays;
+      };
     in
     flake-parts.lib.mkFlake { inherit inputs; } {
       flake = {
         inherit overlays;
 
-        homeConfigurations = { pkgs, ... }: {
-          "RABaker@L2LYQM57XY" = RABaker-at-L2LYQM57XY pkgs;
+        homeConfigurations = {
+          "RABaker@L2LYQM57XY" = RABaker-at-L2LYQM57XY (pkgsFor "aarch64-darwin");
         };
 
-        darwinConfigurations = { pkgs, ... }: {
-          inherit L2LYQM57XY pkgs;
+        darwinConfigurations = {
+          L2LYQM57XY = L2LYQM57XY (pkgsFor "aarch64-darwin");
         };
       };
 
@@ -152,10 +157,7 @@
 
       perSystem = { config, self', inputs', system, ... }:
         let
-          pkgs = import inputs.nixpkgs {
-            inherit system;
-            overlays = builtins.attrValues self.overlays;
-          };
+          pkgs = pkgsFor system;
           hm = home-manager.defaultPackage."${system}";
 
           darwinPackages =
