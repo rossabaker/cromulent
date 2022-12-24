@@ -52,6 +52,9 @@
       url = "github:arthurcgusmao/unmodified-buffer";
       flake = false;
     };
+
+    emacs-src.url = "github:emacs-mirror/emacs/emacs-29";
+    emacs-src.flake = false;
   };
 
   outputs =
@@ -67,6 +70,7 @@
     , scala-mode
     , unmodified-buffer
     , flake-parts
+    , emacs-src
     , ...
     }@inputs:
     let
@@ -130,6 +134,13 @@
       overlays = {
         emacs = emacs-overlay.overlay;
         devshell = devshell.overlay;
+        emacs29 = (final: prev: {
+          emacs29 = prev.emacsGit.overrideAttrs (old: {
+            name = "emacs29";
+            version = emacs-src.shortRev;
+            src = emacs-src;
+          });
+        });
       };
 
       pkgsFor = system: import inputs.nixpkgs {
@@ -169,6 +180,7 @@
         {
           packages = {
             website = pkgs.callPackage ./gen/website { src = ./src; };
+            emacs = pkgs.emacs29;
           } // darwinPackages;
 
           devShells.default = pkgs.devshell.mkShell {
