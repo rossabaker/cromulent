@@ -1,5 +1,5 @@
 {
-  description = "You new nix config";
+  description = "Ross A. Baker's perfectly cromulent Nix flake";
 
   inputs = {
     flake-parts.url = "github:hercules-ci/flake-parts";
