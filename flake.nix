@@ -6,7 +6,6 @@
 
     # Core nix flakes
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    hardware.url = "github:nixos/nixos-hardware";
 
     # Home manager flake
     home-manager.url = "github:nix-community/home-manager";
@@ -20,7 +19,7 @@
     # Extra community flakes
     devshell.url = "github:numtide/devshell";
     emacs-overlay.url = "github:nix-community/emacs-overlay";
-    firefox-darwin.url = "github:bandithedoge/nixpkgs-firefox-darwin";
+    firefox-darwin.url = "github:bandithedoge/nixpkgs-firefox-darwin";g
 
     # Emacs packages
     ammonite-term-repl = {

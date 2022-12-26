@@ -447,6 +447,7 @@ We set all these gitattributes for all tangled sources.  The
   .gitignore      -diff -merge linguist-generated=true
   .gitattributes  -diff -merge linguist-generated=true
   flake.nix       -diff -merge linguist-generated=true
+  flake.lock      -diff -merge linguist-generated=true
 #+end_src
 
 ** DONE Website bundle                                              :website:
@@ -2006,7 +2007,6 @@ with [[https://flake.parts/][Flake Parts]].
 
       # Core nix flakes
       nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-      hardware.url = "github:nixos/nixos-hardware";
 
       # Home manager flake
       home-manager.url = "github:nix-community/home-manager";
@@ -2020,7 +2020,7 @@ with [[https://flake.parts/][Flake Parts]].
       # Extra community flakes
       devshell.url = "github:numtide/devshell";
       emacs-overlay.url = "github:nix-community/emacs-overlay";
-      firefox-darwin.url = "github:bandithedoge/nixpkgs-firefox-darwin";
+      firefox-darwin.url = "github:bandithedoge/nixpkgs-firefox-darwin";g
 
       # Emacs packages
       ammonite-term-repl = {
@@ -2203,7 +2203,6 @@ with [[https://flake.parts/][Flake Parts]].
           };
       };
   }
-
 #+end_src
 
 * Projects section
