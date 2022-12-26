@@ -19,7 +19,7 @@
     # Extra community flakes
     devshell.url = "github:numtide/devshell";
     emacs-overlay.url = "github:nix-community/emacs-overlay";
-    firefox-darwin.url = "github:bandithedoge/nixpkgs-firefox-darwin";g
+    firefox-darwin.url = "github:bandithedoge/nixpkgs-firefox-darwin";
 
     # Emacs packages
     ammonite-term-repl = {
@@ -56,25 +56,10 @@
     emacs-src.flake = false;
   };
 
-  outputs =
-    { self
-    , darwin
-    , devshell
-    , emacs-overlay
-    , fill-sentences-correctly
-    , hocon-mode
-    , home-manager
-    , nixpkgs
-    , ob-ammonite
-    , scala-mode
-    , unmodified-buffer
-    , flake-parts
-    , emacs-src
-    , ...
-    }@inputs:
+  outputs = inputs:
     let
       mkDarwinConfig = { pkgs, system }:
-        darwin.lib.darwinSystem {
+        inputs.darwin.lib.darwinSystem {
           inherit system;
           modules = [
             (import (pkgs.callPackage ./tangle.nix {
@@ -100,7 +85,7 @@
             src = ./src/org/config/emacs;
           });
         in
-        home-manager.lib.homeManagerConfiguration {
+        inputs.home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           modules = [
             {
@@ -108,7 +93,7 @@
                 inherit homeDirectory username;
                 stateVersion = "21.11";
               };
-              nixpkgs.overlays = [ emacs-overlay.overlay ];
+              nixpkgs.overlays = [ inputs.emacs-overlay.overlay ];
             }
             homeModule
             emacsModule
@@ -131,13 +116,13 @@
       };
 
       overlays = {
-        emacs = emacs-overlay.overlay;
-        devshell = devshell.overlay;
+        emacs = inputs.emacs-overlay.overlay;
+        devshell = inputs.devshell.overlay;
         emacs29 = (final: prev: {
           emacs29 = prev.emacsGit.overrideAttrs (old: {
             name = "emacs29";
-            version = emacs-src.shortRev;
-            src = emacs-src;
+            version = inputs.emacs-src.shortRev;
+            src = inputs.emacs-src;
           });
         });
       };
@@ -147,7 +132,7 @@
         overlays = builtins.attrValues self.overlays;
       };
     in
-    flake-parts.lib.mkFlake { inherit inputs; } {
+    inputs.flake-parts.lib.mkFlake { inherit inputs; } {
       flake = {
         inherit overlays;
 
@@ -168,7 +153,7 @@
       perSystem = { config, self', inputs', system, ... }:
         let
           pkgs = pkgsFor system;
-          hm = home-manager.defaultPackage."${system}";
+          hm = inputs.home-manager.defaultPackage."${system}";
 
           darwinPackages =
             if (system == "aarch64-darwin") then {
