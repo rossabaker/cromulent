@@ -129,7 +129,7 @@
 
       pkgsFor = system: import inputs.nixpkgs {
         inherit system;
-        overlays = builtins.attrValues self.overlays;
+        overlays = builtins.attrValues inputs.self.overlays;
       };
     in
     inputs.flake-parts.lib.mkFlake { inherit inputs; } {
