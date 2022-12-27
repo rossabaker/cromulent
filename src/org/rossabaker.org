@@ -1994,7 +1994,7 @@ contents of my flake.
 #+end_src
 #+end_details
 
-*** Flake definition
+*** Flake definition :noexport:
 
 This is a sprawling mess.  I'm in the process of modularizing it
 with [[https://flake.parts/][Flake Parts]].
