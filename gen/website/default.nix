@@ -1,7 +1,7 @@
-{ src, emacsNativeComp, gnupg, hugo, stdenv }:
+{ src, emacs29, gnupg, hugo, stdenv }:
 
 let
-  siteEmacs = emacsNativeComp.pkgs.withPackages (epkgs: [
+  siteEmacs = emacs29.pkgs.withPackages (epkgs: [
     epkgs.ox-hugo
   ]);
 in

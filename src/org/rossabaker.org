@@ -1705,10 +1705,10 @@ CLOSED: [2022-09-01 Thu 16:54]
 The website is just another package in our flake.
 #+hugo:more
 #+begin_src nix :tangle ../../gen/website/default.nix
-  { src, emacsNativeComp, gnupg, hugo, stdenv }:
+  { src, emacs29, gnupg, hugo, stdenv }:
 
   let
-    siteEmacs = emacsNativeComp.pkgs.withPackages (epkgs: [
+    siteEmacs = emacs29.pkgs.withPackages (epkgs: [
       epkgs.ox-hugo
     ]);
   in
@@ -1994,71 +1994,81 @@ contents of my flake.
 #+end_src
 #+end_details
 
-*** Flake definition :noexport:
+*** Flake source
 
-This is a sprawling mess.  I'm in the process of modularizing it
-with [[https://flake.parts/][Flake Parts]].
-
-#+begin_src nix :tangle ../../flake.nix :tangle-mode `,#o444
+#+begin_src nix :tangle ../../flake.nix :tangle-mode `,#o444 :noweb tangle
   {
     description = "Ross A. Baker's perfectly cromulent Nix flake";
+    inputs =
+      <<flake-inputs>>
+    outputs =
+      <<flake-outputs>>
+  }
+#+end_src
 
-    inputs = {
-      flake-parts.url = "github:hercules-ci/flake-parts";
+**** Flake inputs :noexport:
 
-      # Core nix flakes
-      nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+#+begin_src nix :noweb-ref flake-inputs
+  {
+    flake-parts.url = "github:hercules-ci/flake-parts";
 
-      # Home manager flake
-      home-manager.url = "github:nix-community/home-manager";
-      home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    # Core nix flakes
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-      # nix-darwin flake
-      nixpkgs-darwin.url = "github:nixos/nixpkgs/nixpkgs-22.11-darwin";
-      darwin.url = "github:LnL7/nix-darwin/master";
-      darwin.inputs.nixpkgs.follows = "nixpkgs-darwin";
+    # Home manager flake
+    home-manager.url = "github:nix-community/home-manager";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-      # Extra community flakes
-      devshell.url = "github:numtide/devshell";
-      emacs-overlay.url = "github:nix-community/emacs-overlay";
-      firefox-darwin.url = "github:bandithedoge/nixpkgs-firefox-darwin";
+    # nix-darwin flake
+    nixpkgs-darwin.url = "github:nixos/nixpkgs/nixpkgs-22.11-darwin";
+    darwin.url = "github:LnL7/nix-darwin/master";
+    darwin.inputs.nixpkgs.follows = "nixpkgs-darwin";
 
-      # Emacs packages
-      ammonite-term-repl = {
-        url = "github:zwild/ammonite-term-repl";
-        flake = false;
-      };
+    # Extra community flakes
+    devshell.url = "github:numtide/devshell";
+    emacs-overlay.url = "github:nix-community/emacs-overlay";
+    firefox-darwin.url = "github:bandithedoge/nixpkgs-firefox-darwin";
 
-      fill-sentences-correctly = {
-        url = "github:duckwork/fill-sentences-correctly.el";
-        flake = false;
-      };
-
-      hocon-mode = {
-        url = "github:jxq0/hocon-mode";
-        flake = false;
-      };
-
-      ob-ammonite = {
-        url = "github:zwild/ob-ammonite";
-        flake = false;
-      };
-
-      scala-mode = {
-        url = "github:Kazark/emacs-scala-mode?ref=scala3";
-        flake = false;
-      };
-
-      unmodified-buffer = {
-        url = "github:arthurcgusmao/unmodified-buffer";
-        flake = false;
-      };
-
-      emacs-src.url = "github:emacs-mirror/emacs/emacs-29";
-      emacs-src.flake = false;
+    # Emacs packages
+    ammonite-term-repl = {
+      url = "github:zwild/ammonite-term-repl";
+      flake = false;
     };
 
-    outputs = inputs:
+    fill-sentences-correctly = {
+      url = "github:duckwork/fill-sentences-correctly.el";
+      flake = false;
+    };
+
+    hocon-mode = {
+      url = "github:jxq0/hocon-mode";
+      flake = false;
+    };
+
+    ob-ammonite = {
+      url = "github:zwild/ob-ammonite";
+      flake = false;
+    };
+
+    scala-mode = {
+      url = "github:Kazark/emacs-scala-mode?ref=scala3";
+      flake = false;
+    };
+
+    unmodified-buffer = {
+      url = "github:arthurcgusmao/unmodified-buffer";
+      flake = false;
+    };
+
+    emacs-src.url = "github:emacs-mirror/emacs/emacs-29";
+    emacs-src.flake = false;
+  };
+#+end_src
+
+**** Flake outputs :noexport:
+
+#+begin_src nix :noweb-ref flake-outputs
+    inputs:
       let
         mkDarwinConfig = { pkgs, system }:
           inputs.darwin.lib.darwinSystem {
@@ -2188,7 +2198,6 @@ with [[https://flake.parts/][Flake Parts]].
             };
           };
       };
-  }
 #+end_src
 
 * Projects section
