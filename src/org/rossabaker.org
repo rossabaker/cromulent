@@ -2304,7 +2304,7 @@ Export your key, unarmored, to be served in that file.
 These resources should allow cross-origin requests from any domain.
 We deploy to Netlify, and can [[https://docs.netlify.com/configure-builds/file-based-configuration/#headers][configure this in netlify.toml]].
 
-#+begin_src conf-toml :tangle ../../tmp/public_html/netlify.toml :eval no :mkdirp yes
+#+begin_src conf-toml :tangle ../../tmp/hugo/content/netlify.toml :eval no :mkdirp yes
   [[headers]]
     for = "/.well-known/openpgpkey/*"
     [headers.values]
