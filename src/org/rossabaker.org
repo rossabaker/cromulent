@@ -1590,7 +1590,7 @@ Keys are:
   [[Params.contacts]]
   network = 'Mastodon'
   handle = '@ross@rossabaker.com'
-  url = 'https://fedi.rossabaker.com/@ross'
+  url = 'https://social.rossabaker.com/@ross'
   support = 'supported'
 
   [[Params.contacts]]
