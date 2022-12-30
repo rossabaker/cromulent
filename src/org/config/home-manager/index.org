@@ -27,6 +27,7 @@ further.
     # programs.neovim.enable = true;
     home.packages = [
       pkgs.coreutils
+      pkgs.element-desktop
       pkgs.jq
       pkgs.nixpkgs-fmt
     ];
