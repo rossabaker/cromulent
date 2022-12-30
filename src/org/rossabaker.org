@@ -48,7 +48,7 @@ for this article on an eponymous domain.
 - Name :: Ross A. Baker
 - Occupation :: software engineer
 - Style :: functional
-- Pronouns :: [[https://pronoun.is/he][he/him]]
+- Pronouns :: he/him
 - Interjections :: ope
 - Personality :: BBQ
 - ~$EDITOR~ :: Emacs
@@ -1461,7 +1461,7 @@ verification.
           <span class="p-additional-name"><abbr>A.</abbr></span>
           <span class="p-family-name">Baker</span>
       </a>
-      <small><a class="u-pronoun" href="https://pronoun.is/he">(he/him)</a></small><br />
+      <small><span class="u-pronoun">(he/him)</span></small><br />
       {{ partial "contact-info-icons" . }}
   </address>
 
