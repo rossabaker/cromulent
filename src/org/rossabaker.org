@@ -2133,7 +2133,10 @@ contents of my flake.
         emacs29 = (final: prev: {
           emacs29 = prev.emacsGit.overrideAttrs (old: {
             name = "emacs29";
-            version = inputs.emacs-src.shortRev;
+            # It's important this starts with the major number for Nix's
+            # Emacs infra.  For example, it's used to blank out archaic
+            # versions of the Seq package in MELPA.
+            version = "29.0-${inputs.emacs-src.shortRev}";
             src = inputs.emacs-src;
           });
         });
