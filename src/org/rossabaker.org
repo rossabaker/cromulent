@@ -2685,6 +2685,18 @@ are two static files:
   }
 #+end_src
 
+***** CORS headers
+
+The well-known files need CORS headers.  If deploying to Netlify, add this to ~netlify.toml~:
+
+#+begin_src conf-toml :tangle ../../tmp/hugo/content/netlify.toml :eval no :mkdirp yes
+  [[headers]]
+    for = "/.well-known/matrix/*"
+    [headers.values]
+      Access-Control-Allow-Origin = "*"
+#+end_src
+
+
 ** DONE Archive your toots to Hugo :@tech:scala:scala_cli:indieweb:hugo:pesos:mastodon:activity_streams:own_your_data:fs2:circe:
 CLOSED: [2022-11-21 Mon 21:04 EST]
 :PROPERTIES:
