@@ -1122,6 +1122,7 @@ in
         scala-mode = compile "scala-mode" [] inputs.scala-mode;
         unmodified-buffer = compile "unmodified-buffer" [] inputs.unmodified-buffer;
       };
+      defaultInitFile = true;
     };
     extraPackages = epkgs: [
       epkgs.use-package
@@ -1129,7 +1130,6 @@ in
   };
 
   xdg.configFile = {
-    "emacs/init.el".source = ./init.el;
     "emacs/early-init.el".source = ./early-init.el;
     "emacs/load-path.el".source = load-path;
   };
