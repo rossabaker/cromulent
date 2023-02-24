@@ -2203,7 +2203,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-02-24 Fri 14:19>
+:EXPORT_HUGO_LASTMOD: <2023-02-24 Fri 14:46>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -2225,6 +2225,19 @@ quiet startup.
     (inhibit-splash-screen t)
     (initial-major-mode 'fundamental-mode)
     (initial-scratch-message nil))
+#+end_src
+
+**** Cursor
+
+I like a non-blinking bar cursor.
+
+#+begin_src emacs-lisp
+  (use-package emacs
+    :custom
+    (cursor-type 'bar))
+  (use-package frame
+    :config
+    (blink-cursor-mode -1))
 #+end_src
 
 **** Scrollbars
