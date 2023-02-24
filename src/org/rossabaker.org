@@ -2214,6 +2214,19 @@ yet my daily driver.
 
 *** UI
 
+**** Startup
+
+I don't need a dashboard and I know where the manuals are.  I prefer a
+quiet startup.
+
+#+begin_src emacs-lisp
+  (use-package "startup"
+    :custom
+    (inhibit-splash-screen t)
+    (initial-major-mode 'fundamental-mode)
+    (initial-scratch-message nil))
+#+end_src
+
 **** Scrollbars
 
 The modeline tells us where we're at, and we mostly eschew the mouse.
