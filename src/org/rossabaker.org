@@ -1961,7 +1961,7 @@ Give the code samples a little more room to breathe.
 CLOSED: [2022-12-25 Sun 22:14]
 :PROPERTIES:
 :EXPORT_FILE_NAME: nix-flake
-:EXPORT_HUGO_LASTMOD: <2023-02-23 Thu 23:46>
+:EXPORT_HUGO_LASTMOD: <2023-02-24 Fri 12:25>
 :END:
 
 #+begin_description
@@ -2203,8 +2203,10 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-02-24 Fri 00:30>
+:EXPORT_HUGO_LASTMOD: <2023-02-24 Fri 12:25>
 :EXPORT_FILE_NAME: emacs
+:HEADER-ARGS: :tangle-mode `,#o444
+:HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
 :END:
 
 This is a "vanilla" Emacs configuration built on Emacs 29.  It's not
@@ -2228,7 +2230,7 @@ and apps.  The package has no configuration.
 Additionally, an =emacs= flake app is created.  This builds on the
 =emacs29= package with the config above to make a usable Emacs.
 
-#+begin_src nix :tangle ../../gen/emacs/package.nix
+#+begin_src nix :tangle ../../gen/emacs/default.nix
   { inputs, lib, ... }: {
     imports = [
       inputs.flake-parts.flakeModules.easyOverlay
@@ -2254,7 +2256,7 @@ Additionally, an =emacs= flake app is created.  This builds on the
         program =
           let
             emacs = pkgs.emacsWithPackagesFromUsePackage {
-              package = config.packages.emacs;
+              package = config.packages.emacs29;
               config = ./init.el;
               defaultInitFile = true;
             };

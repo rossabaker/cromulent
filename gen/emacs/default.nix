@@ -8,9 +8,9 @@
       overlays = [ inputs.emacs-overlay.overlays.default ];
     };
     overlayAttrs = {
-      emacs29 = config.packages.emacs;
+      inherit (config.packages) emacs29;
     };
-    packages.emacs = pkgs.emacsGit.overrideAttrs (old: {
+    packages.emacs29 = pkgs.emacsGit.overrideAttrs (old: {
       name = "emacs29";
       # It's important this starts with the major number for Nix's
       # Emacs infra.  For example, it's used to blank out archaic
@@ -23,7 +23,7 @@
       program =
         let
           emacs = pkgs.emacsWithPackagesFromUsePackage {
-            package = config.packages.emacs;
+            package = config.packages.emacs29;
             config = ./init.el;
             defaultInitFile = true;
           };
