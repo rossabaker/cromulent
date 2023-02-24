@@ -26,6 +26,7 @@
             package = config.packages.emacs29;
             config = ./init.el;
             defaultInitFile = true;
+            alwaysEnsure = false;
           };
         in "${emacs}/bin/emacs";
     };

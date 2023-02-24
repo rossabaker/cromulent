@@ -2203,7 +2203,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-02-24 Fri 12:25>
+:EXPORT_HUGO_LASTMOD: <2023-02-24 Fri 14:19>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -2212,8 +2212,27 @@ CLOSED: <2023-02-23 Thu 23:59>
 This is a "vanilla" Emacs configuration built on Emacs 29.  It's not
 yet my daily driver.
 
-#+begin_src emacs-lisp :tangle ../../gen/emacs/init.el
-  (message "It's a perfectly cromulent Emacs config.")
+*** UI
+
+**** Scrollbars
+
+The modeline tells us where we're at, and we mostly eschew the mouse.
+
+#+begin_src emacs-lisp
+  (use-package scroll-bar
+    :config
+    (scroll-bar-mode -1))
+#+end_src
+
+**** Toolbars
+
+The much despised tool bar is not a terrible default for the Emacs
+neophyte, but I'm old and grizzled.
+
+#+begin_src emacs-lisp
+  (use-package tool-bar
+    :config
+    (tool-bar-mode -1))
 #+end_src
 
 *** Nix module
@@ -2259,6 +2278,7 @@ Additionally, an =emacs= flake app is created.  This builds on the
               package = config.packages.emacs29;
               config = ./init.el;
               defaultInitFile = true;
+              alwaysEnsure = false;
             };
           in "${emacs}/bin/emacs";
       };
