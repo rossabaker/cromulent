@@ -1961,7 +1961,7 @@ Give the code samples a little more room to breathe.
 CLOSED: [2022-12-25 Sun 22:14]
 :PROPERTIES:
 :EXPORT_FILE_NAME: nix-flake
-:EXPORT_HUGO_LASTMOD: <2022-12-25 Sun 22:34>
+:EXPORT_HUGO_LASTMOD: <2023-02-23 Thu 23:46>
 :END:
 
 #+begin_description
@@ -2130,16 +2130,6 @@ contents of my flake.
       overlays = {
         emacs = inputs.emacs-overlay.overlay;
         devshell = inputs.devshell.overlay;
-        emacs29 = (final: prev: {
-          emacs29 = prev.emacsGit.overrideAttrs (old: {
-            name = "emacs29";
-            # It's important this starts with the major number for Nix's
-            # Emacs infra.  For example, it's used to blank out archaic
-            # versions of the Seq package in MELPA.
-            version = "29.0-${inputs.emacs-src.shortRev}";
-            src = inputs.emacs-src;
-          });
-        });
       };
 
       pkgsFor = system: import inputs.nixpkgs {
@@ -2148,6 +2138,10 @@ contents of my flake.
       };
     in
     inputs.flake-parts.lib.mkFlake { inherit inputs; } {
+      imports = [
+        ./gen/emacs
+      ];
+
       flake = {
         inherit overlays;
 
@@ -2157,6 +2151,10 @@ contents of my flake.
 
         darwinConfigurations = {
           L2LYQM57XY = L2LYQM57XY (pkgsFor "aarch64-darwin");
+        };
+
+        flakeModules = {
+          emacs = ./gen/emacs;
         };
       };
 
@@ -2179,7 +2177,6 @@ contents of my flake.
         {
           packages = {
             website = pkgs.callPackage ./gen/website { src = ./src; };
-            emacs = pkgs.emacs29;
           } // darwinPackages;
 
           devShells.default = pkgs.devshell.mkShell {
@@ -2204,14 +2201,73 @@ contents of my flake.
 #+end_src
 
 ** DONE Emacs config                                             :emacs:
-CLOSED: <2023-02-23 Thu 20:13>
+CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
+:EXPORT_HUGO_LASTMOD: <2023-02-24 Fri 00:30>
 :EXPORT_FILE_NAME: emacs
 :END:
 
-This Emacs is under reconstruction.  Mine is published as a [[*Nix flake][Nix flake]],
-for easy installation anywhere I have Nix.  There's little reason for
-you to use mine over a starter kit, but if you're nosey:
+This is a "vanilla" Emacs configuration built on Emacs 29.  It's not
+yet my daily driver.
+
+#+begin_src emacs-lisp :tangle ../../gen/emacs/init.el
+  (message "It's a perfectly cromulent Emacs config.")
+#+end_src
+
+*** Nix module
+
+This Emacs configuration is built with Nix using [[https://github.com/nix-community/emacs-overlay][emacs-overlay]] and
+published to my [[*Nix flake][Nix flake]].
+
+Even though Emacs 29 is not released at the time of writing, git is on
+Emacs 30!  We publish an =emacs29= flake package with the desired
+branch pinned via the =emacs-src= input.  It's also added to our
+default overlay, so it can be used as a dependency by other packages
+and apps.  The package has no configuration.
+
+Additionally, an =emacs= flake app is created.  This builds on the
+=emacs29= package with the config above to make a usable Emacs.
+
+#+begin_src nix :tangle ../../gen/emacs/package.nix
+  { inputs, lib, ... }: {
+    imports = [
+      inputs.flake-parts.flakeModules.easyOverlay
+    ];
+    perSystem = { config, self', inputs', pkgs, system, ... }: {
+      _module.args.pkgs = import inputs.nixpkgs {
+        inherit system;
+        overlays = [ inputs.emacs-overlay.overlays.default ];
+      };
+      overlayAttrs = {
+        inherit (config.packages) emacs29;
+      };
+      packages.emacs29 = pkgs.emacsGit.overrideAttrs (old: {
+        name = "emacs29";
+        # It's important this starts with the major number for Nix's
+        # Emacs infra.  For example, it's used to blank out archaic
+        # versions of the Seq package in MELPA.
+        version = "29.0-${inputs.emacs-src.shortRev}";
+        src = inputs.emacs-src;
+      });
+      apps.emacs = {
+        type = "app";
+        program =
+          let
+            emacs = pkgs.emacsWithPackagesFromUsePackage {
+              package = config.packages.emacs;
+              config = ./init.el;
+              defaultInitFile = true;
+            };
+          in "${emacs}/bin/emacs";
+      };
+    };
+  }
+#+end_src
+
+As long as I have access to Nix, I can install and run my complete
+Emacs app as a one-liner.  There's little reason for you to choose it
+over a starter kit or your own configuration, but there's also nothing
+stopping you!
 
 #+begin_src sh :eval no
   nix run github:rossabaker/cromulent#emacs

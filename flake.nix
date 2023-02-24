@@ -118,16 +118,6 @@
         overlays = {
           emacs = inputs.emacs-overlay.overlay;
           devshell = inputs.devshell.overlay;
-          emacs29 = (final: prev: {
-            emacs29 = prev.emacsGit.overrideAttrs (old: {
-              name = "emacs29";
-              # It's important this starts with the major number for Nix's
-              # Emacs infra.  For example, it's used to blank out archaic
-              # versions of the Seq package in MELPA.
-              version = "29.0-${inputs.emacs-src.shortRev}";
-              src = inputs.emacs-src;
-            });
-          });
         };
     
         pkgsFor = system: import inputs.nixpkgs {
@@ -136,6 +126,10 @@
         };
       in
       inputs.flake-parts.lib.mkFlake { inherit inputs; } {
+        imports = [
+          ./gen/emacs
+        ];
+    
         flake = {
           inherit overlays;
     
@@ -145,6 +139,10 @@
     
           darwinConfigurations = {
             L2LYQM57XY = L2LYQM57XY (pkgsFor "aarch64-darwin");
+          };
+    
+          flakeModules = {
+            emacs = ./gen/emacs;
           };
         };
     
@@ -167,7 +165,6 @@
           {
             packages = {
               website = pkgs.callPackage ./gen/website { src = ./src; };
-              emacs = pkgs.emacs29;
             } // darwinPackages;
     
             devShells.default = pkgs.devshell.mkShell {

@@ -1,0 +1,33 @@
+{ inputs, lib, ... }: {
+  imports = [
+    inputs.flake-parts.flakeModules.easyOverlay
+  ];
+  perSystem = { config, self', inputs', pkgs, system, ... }: {
+    _module.args.pkgs = import inputs.nixpkgs {
+      inherit system;
+      overlays = [ inputs.emacs-overlay.overlays.default ];
+    };
+    overlayAttrs = {
+      emacs29 = config.packages.emacs;
+    };
+    packages.emacs = pkgs.emacsGit.overrideAttrs (old: {
+      name = "emacs29";
+      # It's important this starts with the major number for Nix's
+      # Emacs infra.  For example, it's used to blank out archaic
+      # versions of the Seq package in MELPA.
+      version = "29.0-${inputs.emacs-src.shortRev}";
+      src = inputs.emacs-src;
+    });
+    apps.emacs = {
+      type = "app";
+      program =
+        let
+          emacs = pkgs.emacsWithPackagesFromUsePackage {
+            package = config.packages.emacs;
+            config = ./init.el;
+            defaultInitFile = true;
+          };
+        in "${emacs}/bin/emacs";
+    };
+  };
+}
