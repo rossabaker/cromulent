@@ -24,6 +24,12 @@
         let
           emacs = pkgs.emacsWithPackagesFromUsePackage {
             package = config.packages.emacs29;
+            override = epkgs: epkgs // {
+              on = epkgs.trivialBuild {
+                pname = "on.el";
+                src = inputs.on-el;
+              };
+            };
             config = ./init.el;
             defaultInitFile = true;
             alwaysEnsure = false;

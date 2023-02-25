@@ -42,6 +42,11 @@
         flake = false;
       };
     
+      on-el = {
+        url = "gitlab:ajgrf/on.el";
+        flake = false;
+      };
+    
       scala-mode = {
         url = "github:Kazark/emacs-scala-mode?ref=scala3";
         flake = false;

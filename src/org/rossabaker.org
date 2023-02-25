@@ -2050,6 +2050,11 @@ contents of my flake.
       flake = false;
     };
 
+    on-el = {
+      url = "gitlab:ajgrf/on.el";
+      flake = false;
+    };
+  
     scala-mode = {
       url = "github:Kazark/emacs-scala-mode?ref=scala3";
       flake = false;
@@ -2212,6 +2217,18 @@ CLOSED: <2023-02-23 Thu 23:59>
 This is a "vanilla" Emacs configuration built on Emacs 29.  It's not
 yet my daily driver.
 
+*** Hooks
+
+I don't [[https://github.com/doomemacs/doomemacs/blob/35865ef5e89442e3809b8095199977053dd4210f/docs/faq.org#how-does-doom-start-up-so-quickly][care as much about startup time as Doom]], but they're the state
+of the art.  And with my Nix setup, I'm restarting Emacs a lot
+whenever I'm trying new packages.  We're going to use [[https://gitlab.com/ajgrf/on.el][on.el]] to provide
+some Doom-like hooks.
+
+#+begin_src emacs-lisp
+  (use-package on
+    :ensure)
+#+end_src
+
 *** UI
 
 **** Startup
@@ -2271,8 +2288,7 @@ bell.
 #+begin_src emacs-lisp
   (use-package mode-line-bell
     :ensure
-    :config
-    (mode-line-bell-mode))
+    :hook (on-first-input . #'mode-line-bell-mode))
 #+end_src
 
 *** Nix module
@@ -2316,6 +2332,12 @@ Additionally, an =emacs= flake app is created.  This builds on the
           let
             emacs = pkgs.emacsWithPackagesFromUsePackage {
               package = config.packages.emacs29;
+              override = epkgs: epkgs // {
+                on = epkgs.trivialBuild {
+                  pname = "on.el";
+                  src = inputs.on-el;
+                };
+              };
               config = ./init.el;
               defaultInitFile = true;
               alwaysEnsure = false;

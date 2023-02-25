@@ -1,3 +1,6 @@
+(use-package on
+  :ensure)
+
 (use-package "startup"
   :custom
   (inhibit-splash-screen t)
@@ -21,5 +24,4 @@
 
 (use-package mode-line-bell
   :ensure
-  :config
-  (mode-line-bell-mode))
+  :hook (on-first-input . #'mode-line-bell-mode))
