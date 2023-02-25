@@ -2261,6 +2261,20 @@ neophyte, but I'm old and grizzled.
     (tool-bar-mode -1))
 #+end_src
 
+**** Beep beep, your ass
+
+Decades ago, there was a meme of Wile E. Coyote, having finally caught
+Road Runner, saying "Beep beep your ass."  This comes from
+approximately the same era as the last time anyone wanted a system
+bell.
+
+#+begin_src emacs-lisp
+  (use-package mode-line-bell
+    :ensure
+    :config
+    (mode-line-bell-mode))
+#+end_src
+
 *** Nix module
 
 This Emacs configuration is built with Nix using [[https://github.com/nix-community/emacs-overlay][emacs-overlay]] and

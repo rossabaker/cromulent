@@ -18,3 +18,8 @@
 (use-package tool-bar
   :config
   (tool-bar-mode -1))
+
+(use-package mode-line-bell
+  :ensure
+  :config
+  (mode-line-bell-mode))
