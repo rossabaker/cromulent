@@ -24,6 +24,11 @@
   :config
   (blink-cursor-mode -1))
 
+(use-package modus-themes
+  :ensure t
+  :config
+  (load-theme 'modus-operandi :no-confirm))
+
 (use-package scroll-bar
   :config
   (scroll-bar-mode -1))

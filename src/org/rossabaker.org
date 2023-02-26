@@ -2281,6 +2281,19 @@ I like a non-blinking bar cursor.
     (blink-cursor-mode -1))
 #+end_src
 
+**** Theme
+
+I like the [[https://protesilaos.com/emacs/modus-themes][modus-themes]].  They are built into modern Emacs, but the
+author continues to work on them, so we grab them from ELPA with
+~:ensure t~.
+
+#+begin_src emacs-lisp
+  (use-package modus-themes
+    :ensure t
+    :config
+    (load-theme 'modus-operandi :no-confirm))
+#+end_src
+
 **** Scrollbars
 
 The modeline tells us where we're at, and we mostly eschew the mouse.
