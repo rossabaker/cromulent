@@ -2328,6 +2328,23 @@ bell.
     :hook (on-first-input . #'mode-line-bell-mode))
 #+end_src
 
+*** Tools
+**** Magit
+
+I have known people to leave Emacs, but continuing to use [[https://magit.vc/][Magit]] for
+version control.  It's that good.
+
+I am giving builtins the benefit of the doubt in this config, and
+would like to get into ~vc-mode~.  But I'm an advanced enough Git user
+that something tailor-made carries its weight here.
+
+#+begin_src emacs-lisp
+  (use-package magit
+    :ensure t
+    :defer 1
+    :bind ("C-c g g" . magit-status))
+#+end_src
+
 *** Nix module
 
 This Emacs configuration is built with Nix using [[https://github.com/nix-community/emacs-overlay][emacs-overlay]] and

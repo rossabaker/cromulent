@@ -40,3 +40,8 @@
 (use-package mode-line-bell
   :ensure
   :hook (on-first-input . #'mode-line-bell-mode))
+
+(use-package magit
+  :ensure t
+  :defer 1
+  :bind ("C-c g g" . magit-status))
