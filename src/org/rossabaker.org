@@ -2208,7 +2208,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-02-26 Sun 01:20>
+:EXPORT_HUGO_LASTMOD: <2023-02-26 Sun 01:26>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -2227,6 +2227,16 @@ some Doom-like hooks.
 #+begin_src emacs-lisp
   (use-package on
     :ensure)
+#+end_src
+
+*** Package management
+
+[[https://github.com/jwiegley/use-package][use-package]] is built-in as of Emacs 29, but since we use =:bind=, we
+need to load ~bind-key~.  If we forget, we get the error: ~Symbol's
+value as variable is void: personal-keybindings~.
+
+#+begin_src emacs-lisp
+  (require 'bind-key)
 #+end_src
 
 *** UI

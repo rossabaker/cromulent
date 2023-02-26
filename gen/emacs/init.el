@@ -1,6 +1,8 @@
 (use-package on
   :ensure)
 
+(require 'bind-key)
+
 (use-package "startup"
   :custom
   (inhibit-splash-screen t)
