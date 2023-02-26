@@ -9,6 +9,16 @@
 
 (use-package emacs
   :custom
+  (line-spacing 0.25)
+  :custom-face
+  (default ((t :height 140)))
+  :config
+  (cond
+   ((find-font (font-spec :name "IBM Plex Mono"))
+    (set-face-attribute 'default nil :font "IBM Plex Mono"))))
+
+(use-package emacs
+  :custom
   (cursor-type 'bar))
 (use-package frame
   :config

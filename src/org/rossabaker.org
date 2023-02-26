@@ -2208,7 +2208,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-02-24 Fri 14:46>
+:EXPORT_HUGO_LASTMOD: <2023-02-26 Sun 00:34>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -2242,6 +2242,30 @@ quiet startup.
     (inhibit-splash-screen t)
     (initial-major-mode 'fundamental-mode)
     (initial-scratch-message nil))
+#+end_src
+
+**** Fonts
+
+We'll default to a 14-point font.  Emacs uses "printer's points", which
+are ten to the point.
+
+[[https://www.ibm.com/plex/][IBM Plex Mono]] is used if it's installed.  Their [[https://www.ibm.com/design/language/typography/type-specs-ui/][~code-02~ utility
+claas]] suggests a line height of 20px, which translates to a
+=line-spacing= of 6.  This is too much.  Particularly, the cursor gets
+distractingly tall when the point is not at a character.  [[https://lists.gnu.org/archive/html/bug-gnu-emacs/2015-11/msg00236.html][Bug#21835]] is
+related.  ~0.25~ gives the text room to breathe, without the cursor
+growing and shrinking by leaps and bounds.
+
+#+begin_src emacs-lisp
+  (use-package emacs
+    :custom
+    (line-spacing 0.25)
+    :custom-face
+    (default ((t :height 140)))
+    :config
+    (cond
+     ((find-font (font-spec :name "IBM Plex Mono"))
+      (set-face-attribute 'default nil :font "IBM Plex Mono"))))
 #+end_src
 
 **** Cursor
