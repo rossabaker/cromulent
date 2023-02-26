@@ -2208,7 +2208,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-02-26 Sun 00:34>
+:EXPORT_HUGO_LASTMOD: <2023-02-26 Sun 01:20>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -2329,6 +2329,7 @@ bell.
 #+end_src
 
 *** Tools
+
 **** Magit
 
 I have known people to leave Emacs, but continuing to use [[https://magit.vc/][Magit]] for
@@ -2343,6 +2344,25 @@ that something tailor-made carries its weight here.
     :ensure t
     :defer 1
     :bind ("C-c g g" . magit-status))
+#+end_src
+
+**** ws-butler
+
+I like builtin packages, but I like minimal diffs more.  [[https://github.com/lewang/ws-butler][ws-butler]] is
+"unobtrusive", which wins the day for me.
+
+#+begin_quote
+- Only lines touched get trimmed. If the white space at end of buffer
+  is changed, then blank lines at the end of buffer are truncated
+  respecting =require-final-newline=.
+- Trimming only happens when saving.
+#+end_quote
+
+#+begin_src emacs-lisp
+  (use-package ws-butler
+    :ensure t
+    :config
+    (ws-butler-global-mode))
 #+end_src
 
 *** Nix module

@@ -45,3 +45,8 @@
   :ensure t
   :defer 1
   :bind ("C-c g g" . magit-status))
+
+(use-package ws-butler
+  :ensure t
+  :config
+  (ws-butler-global-mode))
