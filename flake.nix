@@ -117,7 +117,7 @@
     
         overlays = {
           emacs = inputs.emacs-overlay.overlay;
-          devshell = inputs.devshell.overlay;
+          devshell = inputs.devshell.overlays.default;
         };
     
         pkgsFor = system: import inputs.nixpkgs {
