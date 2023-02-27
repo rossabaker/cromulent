@@ -2203,7 +2203,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-02-26 Sun 01:26>
+:EXPORT_HUGO_LASTMOD: <2023-02-27 Mon 11:05>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -2212,12 +2212,24 @@ CLOSED: <2023-02-23 Thu 23:59>
 This is a "vanilla" Emacs configuration built on Emacs 29.  It's not
 yet my daily driver.
 
-*** Hooks
+*** Startup time
 
 I don't [[https://github.com/doomemacs/doomemacs/blob/35865ef5e89442e3809b8095199977053dd4210f/docs/faq.org#how-does-doom-start-up-so-quickly][care as much about startup time as Doom]], but they're the state
 of the art.  And with my Nix setup, I'm restarting Emacs a lot
-whenever I'm trying new packages.  We're going to use [[https://gitlab.com/ajgrf/on.el][on.el]] to provide
-some Doom-like hooks.
+whenever I'm trying new packages.
+
+First, we'll benchmark it:
+
+#+begin_src emacs-lisp
+  (use-package benchmark-init
+    :ensure t
+    :demand t
+    :hook (after-init . benchmark-init/deactivate)
+    :config
+    (benchmark-init/activate))
+#+end_src
+
+We're going to use [[https://gitlab.com/ajgrf/on.el][on.el]] to provide some Doom-like hooks.
 
 #+begin_src emacs-lisp
   (use-package on

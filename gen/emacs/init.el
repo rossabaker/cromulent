@@ -1,3 +1,10 @@
+(use-package benchmark-init
+  :ensure t
+  :demand t
+  :hook (after-init . benchmark-init/deactivate)
+  :config
+  (benchmark-init/activate))
+
 (use-package on
   :ensure)
 
