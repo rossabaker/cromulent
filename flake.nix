@@ -84,11 +84,6 @@
               inherit pkgs;
               src = ./src/org/config/home-manager;
             });
-    
-            emacsModule = import (pkgs.callPackage ./tangle.nix {
-              inherit pkgs;
-              src = ./src/org/config/emacs;
-            });
           in
           inputs.home-manager.lib.homeManagerConfiguration {
             inherit pkgs;
@@ -101,7 +96,7 @@
                 nixpkgs.overlays = [ inputs.emacs-overlay.overlay ];
               }
               homeModule
-              emacsModule
+              inputs.self.homeManagerModules.emacs
               ./modules/work
             ];
             # Pass our flake inputs into the config

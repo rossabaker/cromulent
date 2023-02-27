@@ -1,4 +1,4 @@
-{ inputs, lib, ... }: {
+{ inputs, lib, moduleWithSystem, ... }: {
   imports = [
     inputs.flake-parts.flakeModules.easyOverlay
   ];
@@ -18,23 +18,31 @@
       version = "29.0-${inputs.emacs-src.shortRev}";
       src = inputs.emacs-src;
     });
+    packages.emacs-ross = pkgs.emacsWithPackagesFromUsePackage {
+      package = config.packages.emacs29;
+      override = epkgs: epkgs // {
+        on = epkgs.trivialBuild {
+          pname = "on.el";
+          src = inputs.on-el;
+        };
+      };
+      config = ./init.el;
+      defaultInitFile = true;
+      alwaysEnsure = false;
+    };
     apps.emacs = {
       type = "app";
-      program =
-        let
-          emacs = pkgs.emacsWithPackagesFromUsePackage {
-            package = config.packages.emacs29;
-            override = epkgs: epkgs // {
-              on = epkgs.trivialBuild {
-                pname = "on.el";
-                src = inputs.on-el;
-              };
-            };
-            config = ./init.el;
-            defaultInitFile = true;
-            alwaysEnsure = false;
-          };
-        in "${emacs}/bin/emacs";
+      program = "${config.packages.emacs-ross}/bin/emacs";
     };
+  };
+  flake = {
+    homeManagerModules.emacs = moduleWithSystem (
+      perSystem@{ config }: {
+        programs.emacs = {
+          enable = true;
+          package = config.packages.emacs-ross;
+        };
+      }
+    );
   };
 }

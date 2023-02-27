@@ -2096,11 +2096,6 @@ contents of my flake.
             inherit pkgs;
             src = ./src/org/config/home-manager;
           });
-
-          emacsModule = import (pkgs.callPackage ./tangle.nix {
-            inherit pkgs;
-            src = ./src/org/config/emacs;
-          });
         in
         inputs.home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
@@ -2113,7 +2108,7 @@ contents of my flake.
               nixpkgs.overlays = [ inputs.emacs-overlay.overlay ];
             }
             homeModule
-            emacsModule
+            inputs.self.homeManagerModules.emacs
             ./modules/work
           ];
           # Pass our flake inputs into the config
@@ -2389,8 +2384,10 @@ and apps.  The package has no configuration.
 Additionally, an =emacs= flake app is created.  This builds on the
 =emacs29= package with the config above to make a usable Emacs.
 
+Finally, we add a Home Manager module based on the configured app.
+
 #+begin_src nix :tangle ../../gen/emacs/default.nix
-  { inputs, lib, ... }: {
+  { inputs, lib, moduleWithSystem, ... }: {
     imports = [
       inputs.flake-parts.flakeModules.easyOverlay
     ];
@@ -2410,24 +2407,32 @@ Additionally, an =emacs= flake app is created.  This builds on the
         version = "29.0-${inputs.emacs-src.shortRev}";
         src = inputs.emacs-src;
       });
+      packages.emacs-ross = pkgs.emacsWithPackagesFromUsePackage {
+        package = config.packages.emacs29;
+        override = epkgs: epkgs // {
+          on = epkgs.trivialBuild {
+            pname = "on.el";
+            src = inputs.on-el;
+          };
+        };
+        config = ./init.el;
+        defaultInitFile = true;
+        alwaysEnsure = false;
+      };
       apps.emacs = {
         type = "app";
-        program =
-          let
-            emacs = pkgs.emacsWithPackagesFromUsePackage {
-              package = config.packages.emacs29;
-              override = epkgs: epkgs // {
-                on = epkgs.trivialBuild {
-                  pname = "on.el";
-                  src = inputs.on-el;
-                };
-              };
-              config = ./init.el;
-              defaultInitFile = true;
-              alwaysEnsure = false;
-            };
-          in "${emacs}/bin/emacs";
+        program = "${config.packages.emacs-ross}/bin/emacs";
       };
+    };
+    flake = {
+      homeManagerModules.emacs = moduleWithSystem (
+        perSystem@{ config }: {
+          programs.emacs = {
+            enable = true;
+            package = config.packages.emacs-ross;
+          };
+        }
+      );
     };
   }
 #+end_src
