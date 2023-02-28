@@ -151,9 +151,8 @@
           "aarch64-darwin"
         ];
     
-        perSystem = { config, self', inputs', system, ... }:
+        perSystem = { config, self', inputs', system, pkgs, ... }:
           let
-    	pkgs = pkgsFor system;
     	hm = inputs.home-manager.defaultPackage."${system}";
     
     	darwinPackages =
