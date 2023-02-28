@@ -2174,6 +2174,14 @@ contents of my flake.
 	    } else { };
 	in
 	{
+	  _module.args.pkgs = import inputs.nixpkgs {
+	    inherit system;
+	    overlays = [
+	      inputs.devshell.overlays.default
+              inputs.emacs-overlay.overlays.default
+	    ];
+	  };
+
 	  packages = {
 	    website = pkgs.callPackage ./gen/website {
 	      emacs29 = self'.packages.emacs29;
@@ -2428,10 +2436,6 @@ Finally, we add a Home Manager module based on the configured app.
       inputs.flake-parts.flakeModules.easyOverlay
     ];
     perSystem = { config, self', inputs', pkgs, system, ... }: {
-      _module.args.pkgs = import inputs.nixpkgs {
-	inherit system;
-	overlays = [ inputs.emacs-overlay.overlays.default ];
-      };
       overlayAttrs = {
 	inherit (config.packages) emacs29;
       };

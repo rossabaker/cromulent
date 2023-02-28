@@ -162,6 +162,14 @@
     	  } else { };
           in
           {
+    	_module.args.pkgs = import inputs.nixpkgs {
+    	  inherit system;
+    	  overlays = [
+    	    inputs.devshell.overlays.default
+                inputs.emacs-overlay.overlays.default
+    	  ];
+    	};
+    
     	packages = {
     	  website = pkgs.callPackage ./gen/website {
     	    emacs29 = self'.packages.emacs29;
