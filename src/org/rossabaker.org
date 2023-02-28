@@ -2203,7 +2203,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-02-27 Mon 11:05>
+:EXPORT_HUGO_LASTMOD: <2023-02-28 Tue 00:32>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -2392,6 +2392,18 @@ I like builtin packages, but I like minimal diffs more.  [[https://github.com/le
     :defer t)
 #+end_src
 
+*** Lookup
+
+**** ffap
+
+~ffap~, or Find File At Point, is a transitive dependency of nix-mode.
+It invokes ~gcc~ and ~g++~, which is fine, except on a Mac without
+Xcode, that brings up a dialog box.
+
+#+begin_src nix :noweb-ref emacs-home-packages
+  ({ pkgs, ...}: { home.packages = [ pkgs.gcc ]; })
+#+end_src
+
 *** Nix module
 
 This Emacs configuration is built with Nix using [[https://github.com/nix-community/emacs-overlay][emacs-overlay]] and
@@ -2408,7 +2420,7 @@ Additionally, an =emacs= flake app is created.  This builds on the
 
 Finally, we add a Home Manager module based on the configured app.
 
-#+begin_src nix :tangle ../../gen/emacs/default.nix
+#+begin_src nix :tangle ../../gen/emacs/default.nix :noweb tangle
   { inputs, lib, moduleWithSystem, ... }: {
     imports = [
       inputs.flake-parts.flakeModules.easyOverlay
@@ -2449,13 +2461,13 @@ Finally, we add a Home Manager module based on the configured app.
     flake = {
       homeManagerModules.emacs = moduleWithSystem (
 	perSystem@{ config, pkgs }: {
+	  imports = [
+            <<emacs-home-packages>>
+	  ];
 	  programs.emacs = {
 	    enable = true;
 	    package = config.packages.emacs-ross;
 	  };
-	  home.packages = [
-	    pkgs.gcc # ffap bizarrely calls gcc and g++
-	  ];
 	}
       );
     };

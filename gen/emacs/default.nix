@@ -38,13 +38,13 @@
   flake = {
     homeManagerModules.emacs = moduleWithSystem (
       perSystem@{ config, pkgs }: {
+	imports = [
+          ({ pkgs, ...}: { home.packages = [ pkgs.gcc ]; })
+	];
 	programs.emacs = {
 	  enable = true;
 	  package = config.packages.emacs-ross;
 	};
-	home.packages = [
-	  pkgs.gcc # ffap bizarrely calls gcc and g++
-	];
       }
     );
   };
