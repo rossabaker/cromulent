@@ -2342,7 +2342,7 @@ bell.
 #+begin_src emacs-lisp
   (use-package mode-line-bell
     :ensure
-    :hook (on-first-input . #'mode-line-bell-mode))
+    :hook (on-first-input . mode-line-bell-mode))
 #+end_src
 
 *** Tools
