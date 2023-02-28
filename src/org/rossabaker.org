@@ -362,7 +362,7 @@ corresponding configuration is reconfigured.
 CLOSED: [2022-08-24 Wed 15:04]
 :PROPERTIES:
 :EXPORT_FILE_NAME: managing-generated-sources-in-git
-:EXPORT_HUGO_LASTMOD: <2022-11-14 Mon 21:16>
+:EXPORT_HUGO_LASTMOD: <2023-02-28 Tue 12:09>
 :EXPORT_OPTIONS: H:6
 :END:
 
@@ -443,7 +443,7 @@ We set all these gitattributes for all tangled sources.  The
 ~.gitattributes~ file itself gets gitattributes set on it!
 
 #+begin_src gitattributes :tangle ../../.gitattributes
-  gen/            -diff -merge linguist-generated=true
+  gen/*           -diff -merge linguist-generated=true
   .gitignore      -diff -merge linguist-generated=true
   .gitattributes  -diff -merge linguist-generated=true
   flake.nix       -diff -merge linguist-generated=true
