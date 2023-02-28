@@ -2382,6 +2382,16 @@ I like builtin packages, but I like minimal diffs more.  [[https://github.com/le
     (ws-butler-global-mode))
 #+end_src
 
+*** Programming modes
+
+**** Nix
+
+#+begin_src emacs-lisp
+  (use-package nix-mode
+    :ensure t
+    :defer t)
+#+end_src
+
 *** Nix module
 
 This Emacs configuration is built with Nix using [[https://github.com/nix-community/emacs-overlay][emacs-overlay]] and
@@ -2405,45 +2415,48 @@ Finally, we add a Home Manager module based on the configured app.
     ];
     perSystem = { config, self', inputs', pkgs, system, ... }: {
       _module.args.pkgs = import inputs.nixpkgs {
-        inherit system;
-        overlays = [ inputs.emacs-overlay.overlays.default ];
+	inherit system;
+	overlays = [ inputs.emacs-overlay.overlays.default ];
       };
       overlayAttrs = {
-        inherit (config.packages) emacs29;
+	inherit (config.packages) emacs29;
       };
       packages.emacs29 = pkgs.emacsGit.overrideAttrs (old: {
-        name = "emacs29";
-        # It's important this starts with the major number for Nix's
-        # Emacs infra.  For example, it's used to blank out archaic
-        # versions of the Seq package in MELPA.
-        version = "29.0-${inputs.emacs-src.shortRev}";
-        src = inputs.emacs-src;
+	name = "emacs29";
+	# It's important this starts with the major number for Nix's
+	# Emacs infra.  For example, it's used to blank out archaic
+	# versions of the Seq package in MELPA.
+	version = "29.0-${inputs.emacs-src.shortRev}";
+	src = inputs.emacs-src;
       });
       packages.emacs-ross = pkgs.emacsWithPackagesFromUsePackage {
-        package = config.packages.emacs29;
-        override = epkgs: epkgs // {
-          on = epkgs.trivialBuild {
-            pname = "on.el";
-            src = inputs.on-el;
-          };
-        };
-        config = ./init.el;
-        defaultInitFile = true;
-        alwaysEnsure = false;
+	package = config.packages.emacs29;
+	override = epkgs: epkgs // {
+	  on = epkgs.trivialBuild {
+	    pname = "on.el";
+	    src = inputs.on-el;
+	  };
+	};
+	config = ./init.el;
+	defaultInitFile = true;
+	alwaysEnsure = false;
       };
       apps.emacs = {
-        type = "app";
-        program = "${config.packages.emacs-ross}/bin/emacs";
+	type = "app";
+	program = "${config.packages.emacs-ross}/bin/emacs";
       };
     };
     flake = {
       homeManagerModules.emacs = moduleWithSystem (
-        perSystem@{ config }: {
-          programs.emacs = {
-            enable = true;
-            package = config.packages.emacs-ross;
-          };
-        }
+	perSystem@{ config, pkgs }: {
+	  programs.emacs = {
+	    enable = true;
+	    package = config.packages.emacs-ross;
+	  };
+	  home.packages = [
+	    pkgs.gcc # ffap bizarrely calls gcc and g++
+	  ];
+	}
       );
     };
   }

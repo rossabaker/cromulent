@@ -59,3 +59,7 @@
   :ensure t
   :config
   (ws-butler-global-mode))
+
+(use-package nix-mode
+  :ensure t
+  :defer t)
