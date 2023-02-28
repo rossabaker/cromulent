@@ -1771,11 +1771,11 @@ Our build creates some detritus that we don't want checked into Git.
   /.hugo_build.lock
 #+end_src
 
-*** DONE CSS foundation                               :css:google_fonts:noto:
+*** DONE CSS foundation                               :css:google_fonts:
 CLOSED: [2022-08-30 Tue 14:26]
 :PROPERTIES:
 :EXPORT_FILE_NAME: style
-:EXPORT_HUGO_LASTMOD: <2022-11-22 Tue 20:25 EST>
+:EXPORT_HUGO_LASTMOD: <2023-02-28 Tue 10:27>
 :END:
 
 We strive for [[https://en.wikipedia.org/wiki/Semantic_HTML][semantic HTML]].  The styles presented here provide a
@@ -1811,23 +1811,23 @@ There are more criteria there that are probably worth revisting.
 
 **** Fonts
 
-The [[https://en.wikipedia.org/wiki/Noto_fonts][Noto fonts]] look nice and have a full glyph set.
+The [[https://www.ibm.com/plex/][Plex fonts]] look nice and have a full glyph set.
 
 +We serve them up with [[https://fonts.google.com/][Google Fonts]] with these links in our ~<head>~+.
 Google Fonts [[https://cookie-script.com/blog/google-fonts-and-gdpr][violates the GDPR]], so we self host.  I downloaded all the
-Noto variants from Google Fonts, and ran them through [[https://transfonter.org/][Transfonter]].
+Plex variants from Google Fonts, and ran them through woff2.
 
 #+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
   body {
-      font-family: "Noto Sans", sans-serif;
+      font-family: "IBM Plex Sans", sans-serif;
   }
 
   h1, h2, h3, h4, h5, h6 {
-      font-family: "Noto Serif", serif;
+      font-family: "IBM Plex Serif", serif;
   }
 
   code, kbd, pre, samp, var {
-      font-family: "Noto Sans Mono", monospace;
+      font-family: "IBM Plex Mono", monospace;
   }
 #+end_src
 
