@@ -71,6 +71,10 @@
 
 (use-package eglot :defer t)
 
+(use-package corfu
+  :ensure t
+  :hook (on-first-buffer . global-corfu-mode))
+
 (use-package nix-mode
   :ensure t
   :defer t)
