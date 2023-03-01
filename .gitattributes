@@ -1,4 +1,4 @@
-gen/*           -diff -merge linguist-generated=true
+gen/**          -diff -merge linguist-generated=true
 .gitignore      -diff -merge linguist-generated=true
 .gitattributes  -diff -merge linguist-generated=true
 flake.nix       -diff -merge linguist-generated=true
