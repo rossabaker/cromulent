@@ -2418,10 +2418,12 @@ I like builtin packages, but I like minimal diffs more.  [[https://github.com/le
 
 *** IDE
 
+**** Language server protocol
+
 We're going to give [[https://joaotavora.github.io/eglot/][eglot]] a try now that it's built into Emacs.  It's
 a bit more minimalist than the excellent [[https://emacs-lsp.github.io/lsp-mode/][lsp-mode]].
 
-#+begin_src
+#+begin_src emacs-lisp
   (use-package eglot :defer t)
 #+end_src
 
