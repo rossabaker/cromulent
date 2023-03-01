@@ -282,7 +282,6 @@ Automatically revert all buffers with no unsaved changes.
 
 #+begin_src emacs-lisp
 (use-package autorevert
-  :delight auto-revert-mode
   :custom
   (global-auto-revert-non-file-buffers t)
   :config
@@ -623,12 +622,6 @@ This is the vestige of my old init.el.  It is gradually being made literate.
   (require 'editorconfig-core)		;unclear why this isn't happening for free
   (editorconfig-mode))
 
-(use-package envrc
-  :delight
-  :ensure
-  :config
-  (envrc-global-mode))
-
 (use-package fill-sentences-correctly
   ;; I'm a double spacer.  It works better with abbreviations.  It
   ;; looks better in monospace.  It collapses by default in most
@@ -702,24 +695,14 @@ This is the vestige of my old init.el.  It is gradually being made literate.
   :config
   (whole-line-or-region-global-mode))
 
-(use-package ws-butler
-  :ensure
-  :delight
-  :hook
-  ((prog-mode-hook text-mode-hook conf-mode-hook) . ws-butler-mode))
-
 ;;; UI
 
 (use-package emacs
   :no-require
   :custom
-  (cursor-type 'bar)
   (frame-resize-pixelwise t)
   (use-dialog-box nil)
-  (visible-bell nil)
-  (window-combination-resize t)
-  :custom-face
-  (default ((t :height 140))))
+  (window-combination-resize t))
 
 (use-package ansi-color
   :custom
@@ -730,20 +713,7 @@ This is the vestige of my old init.el.  It is gradually being made literate.
   :config
   (default-text-scale-mode))
 
-(use-package faces
-  :custom
-  (ring-bell-function 'ross/flash-mode-line)
-  :config
-  (defun ross/flash-mode-line ()
-    (let ((old-fg (face-foreground 'mode-line)))
-      (set-face-foreground 'mode-line "red")
-      (run-with-idle-timer 0.1 nil
-			   (lambda (fg) (set-face-foreground 'mode-line fg))
-			   old-fg))))
-
 (use-package frame
-  :config
-  (blink-cursor-mode -1)
   :bind
   ("C-z" . nil)				; Previously suspend-frame
   )
@@ -796,10 +766,6 @@ This is the vestige of my old init.el.  It is gradually being made literate.
   :hook
   (after-init-hook . projectile-discover-projects-in-search-path))
 
-(use-package scroll-bar
-  :config
-  (scroll-bar-mode -1))
-
 (use-package simple
   :no-require
   :config
@@ -809,13 +775,8 @@ This is the vestige of my old init.el.  It is gradually being made literate.
 (use-package startup
   :no-require
   :custom
-  (initial-scratch-message nil)
   (inhibit-startup-echo-area-message t)
   (inhibit-startup-screen t))
-
-(use-package tool-bar
-  :config
-  (tool-bar-mode -1))
 
 (use-package tooltip
   :config
@@ -914,9 +875,6 @@ This is the vestige of my old init.el.  It is gradually being made literate.
   (flycheck-emacs-lisp-initialize-packages nil)
   :config
   (global-flycheck-mode))
-
-(use-package magit
-  :ensure)
 
 (use-package smerge-mode
   :config
@@ -1052,10 +1010,6 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
   :ensure
   :hook
   (scala-mode-hook . subword-mode))
-
-(use-package eglot
-  :ensure
-  :hook (scala-mode . eglot-ensure))
 
 ;;;; YAML
 
