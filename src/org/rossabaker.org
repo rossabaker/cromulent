@@ -2357,6 +2357,21 @@ bell.
 
 *** Tools
 
+**** Direnv
+
+I maintain a minimal home environment and push as much as I can to Nix
+flakes.  This insulates me from conflicting dependencies, makes my
+projects more portable, and helps me share with Nix-enabled teammates.
+
+Where possible, I add an ~.envrc~ file to load the environment from
+the flake.
+
+#+begin_src emacs-lisp
+  (use-package envrc
+    :ensure t
+    :hook (on-first-file . envrc-global-mode))
+#+end_src
+
 **** Magit
 
 I have known people to leave Emacs, but continuing to use [[https://magit.vc/][Magit]] for

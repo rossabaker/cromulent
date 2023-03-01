@@ -50,6 +50,10 @@
   :ensure
   :hook (on-first-input . mode-line-bell-mode))
 
+(use-package envrc
+  :ensure t
+  :hook (on-first-file . envrc-global-mode))
+
 (use-package magit
   :ensure t
   :defer 1
