@@ -2213,7 +2213,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-02-28 Tue 00:32>
+:EXPORT_HUGO_LASTMOD: <2023-03-01 Wed 13:04>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -2293,6 +2293,15 @@ growing and shrinking by leaps and bounds.
     (cond
      ((find-font (font-spec :name "IBM Plex Mono"))
       (set-face-attribute 'default nil :font "IBM Plex Mono"))))
+#+end_src
+
+An easy way to scale up the font when presenting:
+
+#+begin_src emacs-lisp
+  (defun ross/set-font-height (height)
+    "Sets the default font height to HEIGHT."
+    (interactive "NFont height: ")
+    (set-face-attribute 'default nil :height height))
 #+end_src
 
 **** Cursor

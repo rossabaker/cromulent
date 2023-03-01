@@ -26,6 +26,11 @@
    ((find-font (font-spec :name "IBM Plex Mono"))
     (set-face-attribute 'default nil :font "IBM Plex Mono"))))
 
+(defun ross/set-font-height (height)
+  "Sets the default font height to HEIGHT."
+  (interactive "NFont height: ")
+  (set-face-attribute 'default nil :height height))
+
 (use-package emacs
   :custom
   (cursor-type 'bar))
