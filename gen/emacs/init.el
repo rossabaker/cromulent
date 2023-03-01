@@ -67,3 +67,12 @@
 (use-package nix-mode
   :ensure t
   :defer t)
+
+(use-package scala-mode
+  :ensure t
+  :interpreter ("scala" . scala-mode)
+  :hook (scala-mode . eglot-ensure))
+
+(use-package sbt-mode
+  :ensure t
+  :commands sbt-start sbt-command)

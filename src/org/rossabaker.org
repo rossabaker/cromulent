@@ -2407,6 +2407,15 @@ I like builtin packages, but I like minimal diffs more.  [[https://github.com/le
     (ws-butler-global-mode))
 #+end_src
 
+*** IDE
+
+We're going to give [[https://joaotavora.github.io/eglot/][eglot]] a try now that it's built into Emacs.  It's
+a bit more minimalist than the excellent [[https://emacs-lsp.github.io/lsp-mode/][lsp-mode]].
+
+#+begin_src
+  (use-package eglot :defer t)
+#+end_src
+
 *** Programming modes
 
 **** Nix
@@ -2415,6 +2424,21 @@ I like builtin packages, but I like minimal diffs more.  [[https://github.com/le
   (use-package nix-mode
     :ensure t
     :defer t)
+#+end_src
+
+**** Scala
+
+Much of this configuration starts from the [[https://scalameta.org/metals/docs/editors/emacs/][Metals guide]].
+
+#+begin_src emacs-lisp
+  (use-package scala-mode
+    :ensure t
+    :interpreter ("scala" . scala-mode)
+    :hook (scala-mode . eglot-ensure))
+
+  (use-package sbt-mode
+    :ensure t
+    :commands sbt-start sbt-command)
 #+end_src
 
 *** Lookup
