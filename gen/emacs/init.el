@@ -64,15 +64,34 @@
   :config
   (ws-butler-global-mode))
 
+(use-package lsp-mode
+  :ensure t
+  :defer t
+  :commands (lsp lsp-deferred)
+  :init
+  (setq lsp-keymap-prefix "C-c l")
+  :custom
+  (lsp-headerline-breadcrumb-enable nil))
+
+(use-package lsp-ui
+  :ensure t
+  :defer t
+  :custom
+  (lsp-ui-doc-show-with-mouse nil)
+  (lsp-ui-sideline-enable nil))
+
 (use-package nix-mode
   :ensure t
   :defer t)
 
 (use-package scala-mode
   :ensure t
-  :interpreter ("scala" . scala-mode)
-  :hook (scala-mode . eglot-ensure))
+  :interpreter ("scala" . scala-mode))
 
 (use-package sbt-mode
   :ensure t
   :commands sbt-start sbt-command)
+
+(use-package lsp-metals
+  :ensure t
+  :hook (scala-mode . lsp-deferred))

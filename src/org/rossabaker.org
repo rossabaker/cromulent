@@ -2213,7 +2213,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-02-28 Tue 00:32>
+:EXPORT_HUGO_LASTMOD: <2023-03-01 Wed 00:49>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -2409,11 +2409,25 @@ I like builtin packages, but I like minimal diffs more.  [[https://github.com/le
 
 *** IDE
 
-We're going to give [[https://joaotavora.github.io/eglot/][eglot]] a try now that it's built into Emacs.  It's
-a bit more minimalist than the excellent [[https://emacs-lsp.github.io/lsp-mode/][lsp-mode]].
+[[https://joaotavora.github.io/eglot/][eglot]] is built in and I like its minimalism, but [[https://emacs-lsp.github.io/lsp-mode/][lsp-mode]]'s
+[[https://emacs-lsp.github.io/lsp-mode/manual-language-docs/lsp-org/][support for Org]] is compelling.
 
-#+begin_src
-  (use-package eglot :defer t)
+#+begin_src emacs-lisp
+  (use-package lsp-mode
+    :ensure t
+    :defer t
+    :commands (lsp lsp-deferred)
+    :init
+    (setq lsp-keymap-prefix "C-c l")
+    :custom
+    (lsp-headerline-breadcrumb-enable nil))
+
+  (use-package lsp-ui
+    :ensure t
+    :defer t
+    :custom
+    (lsp-ui-doc-show-with-mouse nil)
+    (lsp-ui-sideline-enable nil))
 #+end_src
 
 *** Programming modes
@@ -2433,12 +2447,20 @@ Much of this configuration starts from the [[https://scalameta.org/metals/docs/e
 #+begin_src emacs-lisp
   (use-package scala-mode
     :ensure t
-    :interpreter ("scala" . scala-mode)
-    :hook (scala-mode . eglot-ensure))
+    :interpreter ("scala" . scala-mode))
 
   (use-package sbt-mode
     :ensure t
     :commands sbt-start sbt-command)
+#+end_src
+
+~lsp-deferred~ gives ~envrc-mode~ time to finish loading and put
+~metals~ on our path.
+
+#+begin_src emacs-lisp
+  (use-package lsp-metals
+    :ensure t
+    :hook (scala-mode . lsp-deferred))
 #+end_src
 
 *** Lookup
