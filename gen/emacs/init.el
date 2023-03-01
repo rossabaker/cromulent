@@ -10,6 +10,8 @@
 
 (require 'bind-key)
 
+(use-package diminish :ensure t)
+
 (use-package "startup"
   :custom
   (inhibit-splash-screen t)
@@ -66,8 +68,13 @@
 
 (use-package ws-butler
   :ensure t
+  :diminish
   :config
   (ws-butler-global-mode))
+
+(use-package autorevert
+  :defer t
+  :diminish auto-revert-mode)
 
 (use-package eglot :defer t)
 

@@ -2213,7 +2213,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-03-01 Wed 17:29>
+:EXPORT_HUGO_LASTMOD: <2023-03-01 Wed 17:37>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -2254,6 +2254,13 @@ value as variable is void: personal-keybindings~.
 
 #+begin_src emacs-lisp
   (require 'bind-key)
+#+end_src
+
+We also want to "diminish" most minor-mode indicators on the mode
+line.  They're only interesting if they're in an unexpected state.
+
+#+begin_src emacs-lisp
+  (use-package diminish :ensure t)
 #+end_src
 
 *** UI
@@ -2397,7 +2404,7 @@ that something tailor-made carries its weight here.
     :bind ("C-c g g" . magit-status))
 #+end_src
 
-**** ws-butler
+**** Whitespace
 
 I like builtin packages, but I like minimal diffs more.  [[https://github.com/lewang/ws-butler][ws-butler]] is
 "unobtrusive", which wins the day for me.
@@ -2412,8 +2419,22 @@ I like builtin packages, but I like minimal diffs more.  [[https://github.com/le
 #+begin_src emacs-lisp
   (use-package ws-butler
     :ensure t
+    :diminish
     :config
     (ws-butler-global-mode))
+#+end_src
+
+*** Files
+
+**** Auto-revert
+
+Magit is turning this on, even if I'm not.  While I ponder that, clear
+it off the mode line.
+
+#+begin_src emacs-lisp
+  (use-package autorevert
+    :defer t
+    :diminish auto-revert-mode)
 #+end_src
 
 *** IDE
