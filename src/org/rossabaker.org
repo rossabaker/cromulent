@@ -2225,9 +2225,10 @@ everywhere.
 
 *** Startup time
 
-I don't [[https://github.com/doomemacs/doomemacs/blob/35865ef5e89442e3809b8095199977053dd4210f/docs/faq.org#how-does-doom-start-up-so-quickly][care as much about startup time as Doom]], but they're the state
-of the art.  And with my Nix setup, I'm restarting Emacs a lot
-whenever I'm trying new packages.
+I don't go to [[https://github.com/doomemacs/doomemacs/blob/35865ef5e89442e3809b8095199977053dd4210f/docs/faq.org#how-does-doom-start-up-so-quickly][Doom's extreme lengths]] to optimize startup time, but
+there are usually a few heavy hitters, and [[https://github.com/dholm/benchmark-init-el][benchmark-init-el]] helps
+find them.  And with my Nix setup, I'm restarting Emacs a lot whenever
+I'm trying new packages, so it's worth a modest effort.
 
 First, we'll benchmark it:
 
@@ -2240,7 +2241,7 @@ First, we'll benchmark it:
     (benchmark-init/activate))
 #+end_src
 
-We're going to use [[https://gitlab.com/ajgrf/on.el][on.el]] to provide some Doom-like hooks.
+We're also going to use [[https://gitlab.com/ajgrf/on.el][on.el]] to provide some Doom-like hooks.
 
 #+begin_src emacs-lisp
   (use-package on
