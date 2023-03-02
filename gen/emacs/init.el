@@ -89,6 +89,10 @@
   :custom
   (grab-mac-link-dwim-favourite-app 'firefox))
 
+(use-package titlecase
+  :ensure t
+  :defer t)
+
 (use-package ws-butler
   :ensure t
   :diminish

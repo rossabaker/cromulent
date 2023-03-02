@@ -2213,7 +2213,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-03-01 Wed 21:13>
+:EXPORT_HUGO_LASTMOD: <2023-03-01 Wed 21:38>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -2449,6 +2449,16 @@ Terminal full access to Firefox, which seems scary.
     :commands (grab-mac-link grab-mac-link-dwim)
     :custom
     (grab-mac-link-dwim-favourite-app 'firefox))
+#+end_src
+
+**** Titlecase
+
+Gosh, I wish I'd had this when I was so active on [[https://musicbrainz.org/][MusicBrainz]].
+
+#+begin_src emacs-lisp
+  (use-package titlecase
+    :ensure t
+    :defer t)
 #+end_src
 
 **** Whitespace
