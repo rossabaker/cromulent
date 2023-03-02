@@ -82,6 +82,13 @@
   :ensure t
   :hook (on-first-file . envrc-global-mode))
 
+(use-package grab-mac-link
+  :disabled t
+  :ensure t
+  :commands (grab-mac-link grab-mac-link-dwim)
+  :custom
+  (grab-mac-link-dwim-favourite-app 'firefox))
+
 (use-package ws-butler
   :ensure t
   :diminish
