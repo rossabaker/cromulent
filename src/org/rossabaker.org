@@ -2213,7 +2213,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-03-01 Wed 17:42>
+:EXPORT_HUGO_LASTMOD: <2023-03-01 Wed 20:55>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -2281,8 +2281,18 @@ quiet startup.
 
 **** Fonts
 
-We'll default to a 14-point font.  Emacs uses "printer's points", which
-are ten to the point.
+I like tiled windows more than I need Emacs to maintain a static
+number of columns and rows.
+
+#+begin_src emacs-lisp
+  (use-package emacs
+    :custom
+    (frame-inhibit-implied-resize t))
+#+end_src
+
+I give an increasing number of live presentations at work.  The
+[[https://protesilaos.com/emacs/fontaine][Fontaine]] package lets me scale up the font for screen sharing, and
+return to normalcy.
 
 [[https://www.ibm.com/plex/][IBM Plex Mono]] is used if it's installed.  Their [[https://www.ibm.com/design/language/typography/type-specs-ui/][~code-02~ utility
 claas]] suggests a line height of 20px, which translates to a
@@ -2291,25 +2301,29 @@ distractingly tall when the point is not at a character.  [[https://lists.gnu.or
 related.  ~0.25~ gives the text room to breathe, without the cursor
 growing and shrinking by leaps and bounds.
 
+Note that Emacs line heights are "printer's points," which are ten to
+the rest of the world's points.
+
 #+begin_src emacs-lisp
-  (use-package emacs
+  (use-package fontaine
+    :ensure t
+    :demand t
     :custom
-    (line-spacing 0.25)
-    :custom-face
-    (default ((t :height 140)))
+    (fontaine-presets
+     `((regular
+	:default-height 140
+	:line-spacing 0.25)
+       (presentation
+	:default-height 210
+	:line-spacing 0.125)
+       (t ;; defaults
+	:default-family
+	,(cond
+	  ((find-font (font-spec :name "IBM Plex Mono"))
+	   "IBM Plex Mono")
+	  ("Monospace")))))
     :config
-    (cond
-     ((find-font (font-spec :name "IBM Plex Mono"))
-      (set-face-attribute 'default nil :font "IBM Plex Mono"))))
-#+end_src
-
-An easy way to scale up the font when presenting:
-
-#+begin_src emacs-lisp
-  (defun ross/set-font-height (height)
-    "Sets the default font height to HEIGHT."
-    (interactive "NFont height: ")
-    (set-face-attribute 'default nil :height height))
+    (fontaine-set-preset (or fontaine-current-preset 'regular)))
 #+end_src
 
 **** Cursor

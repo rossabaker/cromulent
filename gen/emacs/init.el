@@ -20,18 +20,27 @@
 
 (use-package emacs
   :custom
-  (line-spacing 0.25)
-  :custom-face
-  (default ((t :height 140)))
-  :config
-  (cond
-   ((find-font (font-spec :name "IBM Plex Mono"))
-    (set-face-attribute 'default nil :font "IBM Plex Mono"))))
+  (frame-inhibit-implied-resize t))
 
-(defun ross/set-font-height (height)
-  "Sets the default font height to HEIGHT."
-  (interactive "NFont height: ")
-  (set-face-attribute 'default nil :height height))
+(use-package fontaine
+  :ensure t
+  :demand t
+  :custom
+  (fontaine-presets
+   `((regular
+      :default-height 140
+      :line-spacing 0.25)
+     (presentation
+      :default-height 210
+      :line-spacing 0.125)
+     (t ;; defaults
+      :default-family
+      ,(cond
+	((find-font (font-spec :name "IBM Plex Mono"))
+	 "IBM Plex Mono")
+	("Monospace")))))
+  :config
+  (fontaine-set-preset (or fontaine-current-preset 'regular)))
 
 (use-package emacs
   :custom
