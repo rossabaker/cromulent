@@ -26,7 +26,7 @@ jobs:
           app_id: ${{ secrets.FLAKE_STEWARD_APP_ID }}
           private_key: ${{ secrets.FLAKE_STEWARD_KEY }}
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v3
+        uses: peter-evans/create-pull-request@v4
         with:
           title: "Update flake inputs"
           branch: "automation/update-flake-inputs"
