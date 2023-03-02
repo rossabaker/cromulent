@@ -72,6 +72,12 @@
   :config
   (tool-bar-mode -1))
 
+(use-package display-line-numbers
+  :custom
+  (display-line-numbers-widen t)
+  :hook
+  ((prog-mode conf-mode) . display-line-numbers-mode))
+
 (use-package mode-line-bell
   :ensure
   :hook (on-first-input . mode-line-bell-mode))
