@@ -86,15 +86,6 @@ is the recommended approach...)
 
 ** Helpers
 
-*** Delight
-
-[[https://savannah.nongnu.org/projects/delight][Delight]] removes uninteresting indicators from the mode line. It
-enables the use of ~:delight~ in ~use-package~ stanzas.
-
-#+begin_src emacs-lisp
-(use-package delight :ensure)
-#+end_src
-
 *** General
 
 [[https://github.com/noctuid/general.el][General]] is known for keybindings, particularly among [[https://github.com/emacs-evil/evil][the evil]].  A
