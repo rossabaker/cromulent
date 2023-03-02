@@ -2213,7 +2213,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-03-01 Wed 21:38>
+:EXPORT_HUGO_LASTMOD: <2023-03-01 Wed 23:06>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -2245,6 +2245,34 @@ We're going to use [[https://gitlab.com/ajgrf/on.el][on.el]] to provide some Doo
 #+begin_src emacs-lisp
   (use-package on
     :ensure)
+#+end_src
+
+*** No littering
+
+Many packages leave crumbs in ~user-emacs-directory~ or even ~$HOME~.
+Finding and configuring them individually is a hassle, so we rely on
+the community configuration of [[https://github.com/emacscollective/no-littering][~no-littering~]].  Run this early,
+because many of the crumb droppers are configured below!
+
+The default is to put everything under ~user-emacs-directory~, which
+for me is under ~~/.config~.  If I considered any of this data to be
+config, they'd be in this file!  I keep mine in ~~/.cache~.
+
+Cleaning up the [[https://github.com/emacscollective/no-littering#native-compilation-cache][native compilation cache]] is "preferably" supposed to
+happen in ~early-init.el~, but I'm trying to keep that as light as
+possible so as much as possible works without Home Manager.  This
+seems early enough to avoid crapping in =~/.config/emacs=.
+
+#+begin_src emacs-lisp
+  (use-package no-littering
+    :ensure t
+    :init
+    (setq no-littering-etc-directory "~/.cache/emacs/etc/"
+	  no-littering-var-directory "~/.cache/emacs/var/")
+    (when (fboundp 'startup-redirect-eln-cache)
+      (startup-redirect-eln-cache
+       (convert-standard-filename
+	(expand-file-name  "eln-cache/" no-littering-var-directory)))))
 #+end_src
 
 *** Package management

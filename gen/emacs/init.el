@@ -8,6 +8,16 @@
 (use-package on
   :ensure)
 
+(use-package no-littering
+  :ensure t
+  :init
+  (setq no-littering-etc-directory "~/.cache/emacs/etc/"
+	no-littering-var-directory "~/.cache/emacs/var/")
+  (when (fboundp 'startup-redirect-eln-cache)
+    (startup-redirect-eln-cache
+     (convert-standard-filename
+      (expand-file-name  "eln-cache/" no-littering-var-directory)))))
+
 (require 'bind-key)
 
 (use-package diminish :ensure t)
