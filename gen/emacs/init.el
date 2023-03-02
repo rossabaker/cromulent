@@ -115,6 +115,19 @@
   :config
   (ws-butler-global-mode))
 
+(use-package ox-hugo
+  :defer
+  :ensure t
+  :config
+  (defun ross/ox-hugo-update-lastmod ()
+    "Updates the EXPORT_HUGO_LAST_MOD property of the nearest element with EXPORT_FILE_NAME."
+    (interactive)
+      (save-excursion
+	(when-let* ((elem (car (org-hugo--get-elem-with-prop :EXPORT_FILE_NAME)))
+		    (begin (org-element-property :begin elem))
+		    (time (format-time-string (org-time-stamp-format t) (current-time))))
+	  (org-entry-put begin "EXPORT_HUGO_LASTMOD" time)))))
+
 (use-package autorevert
   :defer t
   :diminish auto-revert-mode)

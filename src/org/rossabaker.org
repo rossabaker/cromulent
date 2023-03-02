@@ -2213,7 +2213,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-03-02 Thu 00:28>
+:EXPORT_HUGO_LASTMOD: <2023-03-02 Thu 14:40>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -2522,6 +2522,30 @@ I like builtin packages, but I like minimal diffs more.  [[https://github.com/le
     :diminish
     :config
     (ws-butler-global-mode))
+#+end_src
+
+**** Publishing
+
+***** ox-hugo
+
+We use [[https://github.com/kaushalmodi/ox-hugo][ox-hugo]] for publishing.
+
+=ross/ox-hugo-update-lastmod= can be used to update the timestamp of
+the exported tree at the current point.
+
+#+begin_src emacs-lisp
+  (use-package ox-hugo
+    :defer
+    :ensure t
+    :config
+    (defun ross/ox-hugo-update-lastmod ()
+      "Updates the EXPORT_HUGO_LAST_MOD property of the nearest element with EXPORT_FILE_NAME."
+      (interactive)
+	(save-excursion
+	  (when-let* ((elem (car (org-hugo--get-elem-with-prop :EXPORT_FILE_NAME)))
+		      (begin (org-element-property :begin elem))
+		      (time (format-time-string (org-time-stamp-format t) (current-time))))
+	    (org-entry-put begin "EXPORT_HUGO_LASTMOD" time)))))
 #+end_src
 
 *** Files
