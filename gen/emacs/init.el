@@ -66,14 +66,21 @@
   :ensure
   :hook (on-first-input . mode-line-bell-mode))
 
-(use-package envrc
-  :ensure t
-  :hook (on-first-file . envrc-global-mode))
-
 (use-package magit
   :ensure t
   :defer 1
   :bind ("C-c g g" . magit-status))
+
+(use-package git-link
+  :ensure t
+  :custom
+  (git-link-use-commit t)
+  (git-link-use-single-line-number t)
+  :commands (git-link git-link-commit git-link-homepage))
+
+(use-package envrc
+  :ensure t
+  :hook (on-first-file . envrc-global-mode))
 
 (use-package ws-butler
   :ensure t

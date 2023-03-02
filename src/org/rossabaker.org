@@ -2213,7 +2213,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-03-01 Wed 20:55>
+:EXPORT_HUGO_LASTMOD: <2023-03-01 Wed 21:13>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -2386,22 +2386,7 @@ bell.
     :hook (on-first-input . mode-line-bell-mode))
 #+end_src
 
-*** Tools
-
-**** Direnv
-
-I maintain a minimal home environment and push as much as I can to Nix
-flakes.  This insulates me from conflicting dependencies, makes my
-projects more portable, and helps me share with Nix-enabled teammates.
-
-Where possible, I add an ~.envrc~ file to load the environment from
-the flake.
-
-#+begin_src emacs-lisp
-  (use-package envrc
-    :ensure t
-    :hook (on-first-file . envrc-global-mode))
-#+end_src
+*** Version control
 
 **** Magit
 
@@ -2417,6 +2402,36 @@ that something tailor-made carries its weight here.
     :ensure t
     :defer 1
     :bind ("C-c g g" . magit-status))
+#+end_src
+
+**** Linking
+
+[[https://github.com/sshaw/git-link/][git-link]] grabs links to lines, regions, commits, or home pages.
+
+#+begin_src emacs-lisp
+  (use-package git-link
+    :ensure t
+    :custom
+    (git-link-use-commit t)
+    (git-link-use-single-line-number t)
+    :commands (git-link git-link-commit git-link-homepage))
+#+end_src
+
+*** Tools
+
+**** Direnv
+
+I maintain a minimal home environment and push as much as I can to Nix
+flakes.  This insulates me from conflicting dependencies, makes my
+projects more portable, and helps me share with Nix-enabled teammates.
+
+Where possible, I add an ~.envrc~ file to load the environment from
+the flake.
+
+#+begin_src emacs-lisp
+  (use-package envrc
+    :ensure t
+    :hook (on-first-file . envrc-global-mode))
 #+end_src
 
 **** Whitespace
