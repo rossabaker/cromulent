@@ -114,6 +114,10 @@
   :custom
   (grab-mac-link-dwim-favourite-app 'firefox))
 
+(use-package rfc-mode
+  :ensure t
+  :defer t)
+
 (use-package titlecase
   :ensure t
   :defer t)

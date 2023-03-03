@@ -2213,7 +2213,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-03-02 Thu 23:04>
+:EXPORT_HUGO_LASTMOD: <2023-03-02 Thu 23:30>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -2519,6 +2519,16 @@ Terminal full access to Firefox, which seems scary.
     :commands (grab-mac-link grab-mac-link-dwim)
     :custom
     (grab-mac-link-dwim-favourite-app 'firefox))
+#+end_src
+
+**** RFC
+
+As an http4s author, I refer to RFCs constantly.
+
+#+begin_src emacs-lisp
+  (use-package rfc-mode
+    :ensure t
+    :defer t)
 #+end_src
 
 **** Titlecase
