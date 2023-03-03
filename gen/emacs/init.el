@@ -94,7 +94,9 @@
 (use-package magit
   :ensure t
   :defer 1
-  :bind ("C-c g g" . magit-status))
+  :bind ("C-c g g" . magit-status)
+  :custom
+  (magit-clone-default-directory "~/src/"))
 
 (use-package git-link
   :ensure t

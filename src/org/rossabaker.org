@@ -2213,7 +2213,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-03-02 Thu 23:30>
+:EXPORT_HUGO_LASTMOD: <2023-03-03 Fri 12:00>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -2471,7 +2471,9 @@ that something tailor-made carries its weight here.
   (use-package magit
     :ensure t
     :defer 1
-    :bind ("C-c g g" . magit-status))
+    :bind ("C-c g g" . magit-status)
+    :custom
+    (magit-clone-default-directory "~/src/"))
 #+end_src
 
 **** Linking
