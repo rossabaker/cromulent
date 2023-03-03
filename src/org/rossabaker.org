@@ -2213,7 +2213,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-03-02 Thu 14:40>
+:EXPORT_HUGO_LASTMOD: <2023-03-02 Thu 20:09>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -2429,6 +2429,21 @@ bell.
     :hook (on-first-input . mode-line-bell-mode))
 #+end_src
 
+*** Editing
+**** Mark ring
+
+The mark ring is the trail of breadcrumbs we leave with various
+commands.  Vernon Grant gives a [[https://vernon-grant.com/discovering-emacs/efficiency-with-the-mark-ring/\]\[Vernon Grant][good tutorial]] in his Discovering Emacs
+series.
+
+=set-mark-command-repeat-pop= means we only need to hit ~C-u~ or ~C-x~
+once before subsequent ~C-SPC~, which makes it much nicer to navigate.
+
+#+begin_src emacs-lisp
+  (use-package simple
+    :custom
+    (set-mark-command-repeat-pop t))
+#+end_src
 *** Version control
 
 **** Magit
