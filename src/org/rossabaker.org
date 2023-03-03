@@ -2257,7 +2257,7 @@ connections!
   (use-package gnutls
     :defer t
     :custom
-    (gnutls-verify-error t)
+    (gnutls-verify-error t))
 #+end_src
 
 *** No littering
