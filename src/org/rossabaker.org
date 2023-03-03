@@ -2213,7 +2213,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-03-02 Thu 21:02>
+:EXPORT_HUGO_LASTMOD: <2023-03-02 Thu 22:18>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -2600,6 +2600,27 @@ a bit more minimalist than the excellent [[https://emacs-lsp.github.io/lsp-mode/
 #+end_src
 
 **** Completion
+
+**** Minibuffer
+
+[[https://github.com/minad/vertico][Vertico]] is a little bit nicer version of the builtin
+~icomplete-vertical~.
+
+#+begin_src emacs-lisp
+  (use-package vertico
+    :ensure t
+    :hook (on-first-input . vertico-mode))
+#+end_src
+
+~vertico-quick~ gives us home-row selection of lines in the minibuffer.
+
+#+begin_src emacs-lisp
+  (use-package vertico-quick
+    :after vertico
+    :bind (:map vertico-map
+		("M-q" . vertico-quick-insert)
+		("C-q" . vertico-quick-exit)))
+#+end_src
 
 **** Popups
 

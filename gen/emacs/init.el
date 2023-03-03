@@ -143,6 +143,16 @@
 
 (use-package eglot :defer t)
 
+(use-package vertico
+  :ensure t
+  :hook (on-first-input . vertico-mode))
+
+(use-package vertico-quick
+  :after vertico
+  :bind (:map vertico-map
+	      ("M-q" . vertico-quick-insert)
+	      ("C-q" . vertico-quick-exit)))
+
 (use-package corfu
   :ensure t
   :hook (on-first-buffer . global-corfu-mode))
