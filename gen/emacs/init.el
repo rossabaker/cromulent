@@ -8,6 +8,11 @@
 (use-package on
   :ensure)
 
+(use-package gnutls
+  :defer t
+  :custom
+  (gnutls-verify-error t)
+
 (use-package no-littering
   :ensure t
   :init

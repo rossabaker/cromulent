@@ -2213,7 +2213,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-03-02 Thu 20:19>
+:EXPORT_HUGO_LASTMOD: <2023-03-02 Thu 21:02>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -2246,6 +2246,18 @@ We're also going to use [[https://gitlab.com/ajgrf/on.el][on.el]] to provide som
 #+begin_src emacs-lisp
   (use-package on
     :ensure)
+#+end_src
+
+*** Security
+
+For the love of all that is holy, do not continue with untrusted
+connections!
+
+#+begin_src emacs-lisp
+  (use-package gnutls
+    :defer t
+    :custom
+    (gnutls-verify-error t)
 #+end_src
 
 *** No littering
