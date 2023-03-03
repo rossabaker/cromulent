@@ -2213,7 +2213,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-03-02 Thu 22:39>
+:EXPORT_HUGO_LASTMOD: <2023-03-02 Thu 23:04>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -2629,6 +2629,21 @@ a bit more minimalist than the excellent [[https://emacs-lsp.github.io/lsp-mode/
     :after vertico
     :hook (minibuffer-setup . vertico-repeat-save)
     :bind ("M-R" . vertico-repeat))
+#+end_src
+
+~vertico-directory~ does some smarter things when completing directories:
+- =RET= continues completing in that directory instead of jumping to
+  dired.
+- =DEL= and =M-DEL= delete whole directories at a time if the prompt
+  ends in a slash.
+
+#+begin_src emacs-lisp
+  (use-package vertico-directory
+    :after vertico
+    :bind (:map vertico-map)
+                ("RET" . vertico-directory-enter)
+		("DEL" . vertico-directory-delete-char)
+		("M-DEL" . vertico-directory-delete-word))
 #+end_src
 
 **** Popups
