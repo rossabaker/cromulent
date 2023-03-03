@@ -2612,14 +2612,13 @@ a bit more minimalist than the excellent [[https://emacs-lsp.github.io/lsp-mode/
     :hook (on-first-input . vertico-mode))
 #+end_src
 
-~vertico-quick~ gives us home-row selection of lines in the minibuffer.
+~vertico-indexed~ lets us select candidates by number with =C-u RET=.
+It's an alternative to ~vertico-quick~.
 
 #+begin_src emacs-lisp
   (use-package vertico-quick
     :after vertico
-    :bind (:map vertico-map
-		("M-q" . vertico-quick-insert)
-		("C-q" . vertico-quick-exit)))
+    :config (vertico-indexed-mode))
 #+end_src
 
 ~vertico-repeat~ resumes a prior completion session.

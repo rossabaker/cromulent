@@ -149,9 +149,7 @@
 
 (use-package vertico-quick
   :after vertico
-  :bind (:map vertico-map
-	      ("M-q" . vertico-quick-insert)
-	      ("C-q" . vertico-quick-exit)))
+  :config (vertico-indexed-mode))
 
 (use-package vertico-repeat
   :after vertico
