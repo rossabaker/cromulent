@@ -92,11 +92,17 @@
   (set-mark-command-repeat-pop t))
 
 (use-package magit
-  :ensure t
-  :defer 1
-  :bind ("C-c g g" . magit-status)
-  :custom
-  (magit-clone-default-directory "~/src/"))
+   :ensure t
+   :defer 1
+   :bind ("C-c g g" . magit-status)
+   :custom
+   (magit-clone-default-directory "~/src/")
+   :config
+   (defun ross/magit-clone-read-args-a (orig-fun &rest args)
+     "Sets vertico-preselect to 'prompt when cloning repos, so we clone to the default prompted directory, and not some random existing directory under magit-clone-default-directory."
+     (let ((vertico-preselect 'prompt))
+       (apply orig-fun args)))
+   (advice-add 'magit-clone-read-args :around #'ross/magit-clone-read-args-a))
 
 (use-package git-link
   :ensure t
