@@ -2213,7 +2213,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-03-02 Thu 20:09>
+:EXPORT_HUGO_LASTMOD: <2023-03-02 Thu 20:19>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -2618,7 +2618,9 @@ Much of this configuration starts from the [[https://scalameta.org/metals/docs/e
   (use-package scala-mode
     :ensure t
     :interpreter ("scala" . scala-mode)
-    :hook (scala-mode . eglot-ensure))
+    :hook
+    (scala-mode . eglot-ensure)
+    (scala-mode . subword-mode))
 
   (use-package sbt-mode
     :ensure t

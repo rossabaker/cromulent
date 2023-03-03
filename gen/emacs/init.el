@@ -149,7 +149,9 @@
 (use-package scala-mode
   :ensure t
   :interpreter ("scala" . scala-mode)
-  :hook (scala-mode . eglot-ensure))
+  :hook
+  (scala-mode . eglot-ensure)
+  (scala-mode . subword-mode))
 
 (use-package sbt-mode
   :ensure t
