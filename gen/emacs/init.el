@@ -153,6 +153,11 @@
 	      ("M-q" . vertico-quick-insert)
 	      ("C-q" . vertico-quick-exit)))
 
+(use-package vertico-repeat
+  :after vertico
+  :hook (minibuffer-setup . vertico-repeat-save)
+  :bind ("M-R" . vertico-repeat))
+
 (use-package corfu
   :ensure t
   :hook (on-first-buffer . global-corfu-mode))
