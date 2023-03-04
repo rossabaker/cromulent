@@ -97,6 +97,10 @@
   :custom
   (set-mark-command-repeat-pop t))
 
+(use-package simple
+  :custom
+  (save-interprogram-paste-before-kill t))
+
 (use-package magit
   :ensure t
   :defer 1
@@ -104,7 +108,7 @@
   :bind ("C-c g g" . magit-status)
   :custom
   (magit-clone-default-directory "~/src/")
-  (magit-no-message ("Turning on magit-auto-revert-mode..."))
+  (magit-no-message (list "Turning on magit-auto-revert-mode..."))
   :config
   (defun ross/magit-clone-read-args-a (orig-fun &rest args)
     "Sets `vertico-preselect' to `prompt' when cloning repos, so we
