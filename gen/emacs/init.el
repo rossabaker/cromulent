@@ -142,14 +142,12 @@ existing directory under `magit-clone-default-directory'."
 (use-package ws-butler
   :ensure t
   :diminish
-  :functions ws-butler-global-mode
   :config
   (ws-butler-global-mode))
 
 (use-package ox-hugo
   :ensure t
   :after org
-  :functions (org-entry-put org-time-stamp-format org-hugo--get-elem-with-prop)
   :config
   (defun ross/ox-hugo-update-lastmod ()
     "Updates the EXPORT_HUGO_LAST_MOD property of the nearest element
@@ -173,8 +171,7 @@ with EXPORT_FILE_NAME."
 
 (use-package vertico-indexed
   :after vertico
-  :config
-  (vertico-indexed-mode))
+  :config (vertico-indexed-mode))
 
 (use-package vertico-repeat
   :after vertico
@@ -206,3 +203,12 @@ with EXPORT_FILE_NAME."
 (use-package sbt-mode
   :ensure t
   :commands sbt-start sbt-command)
+
+(use-package which-key
+  :ensure t
+  :hook (on-first-input . which-key-mode)
+  :diminish
+  :custom
+  (which-key-show-early-on-C-h t)
+  (which-key-idle-delay most-positive-fixnum)
+  (which-key-idle-secondary-delay 1e-9))

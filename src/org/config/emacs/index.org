@@ -783,14 +783,8 @@ This is the vestige of my old init.el.  It is gradually being made literate.
 
 (use-package which-key
   :ensure
-  :delight
   :custom
-  (which-key-show-early-on-C-h t)
-  (which-key-idle-delay 1.0)
-  (which-key-idle-secondary-delay 0.05)
-  (which-key-sort-order 'which-key-key-order-alpha)
-  :config
-  (which-key-mode))
+  (which-key-sort-order 'which-key-key-order-alpha))
 
 ;;; Tools
 

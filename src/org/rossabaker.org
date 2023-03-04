@@ -2729,6 +2729,24 @@ Xcode, that brings up a dialog box.
   ({ pkgs, ...}: { home.packages = [ pkgs.gcc ]; })
 #+end_src
 
+*** Help
+
+**** Keyboard shortcuts
+
+[[https://github.com/justbur/emacs-which-key][~which-key~]] pops up a menu of keybindings.  The traditional way is to
+run it on a timer, but I prefer [[https://github.com/justbur/emacs-which-key#manual-activation][manual activation]].
+
+#+begin_src emacs-lisp
+  (use-package which-key
+    :ensure t
+    :hook (on-first-input . which-key-mode)
+    :diminish
+    :custom
+    (which-key-show-early-on-C-h t)
+    (which-key-idle-delay most-positive-fixnum)
+    (which-key-idle-secondary-delay 1e-9))
+#+end_src
+
 *** Nix module
 
 This Emacs configuration is built with Nix using [[https://github.com/nix-community/emacs-overlay][emacs-overlay]] and
