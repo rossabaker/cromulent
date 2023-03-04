@@ -29,8 +29,6 @@ From preliterate times.  Note that [[*General][~general-setq~]] is not yet
 available.
 
 #+begin_src emacs-lisp :tangle early-init.el
-(setq gc-cons-threshold most-positive-fixnum)
-
 ;; All our packages come from Nix
 (setq package-enable-at-startup nil
       package-archives nil)
@@ -582,12 +580,6 @@ This is the vestige of my old init.el.  It is gradually being made literate.
 (use-package files
   :custom
   (confirm-kill-emacs 'yes-or-no-p))
-
-(use-package gcmh
-  :ensure
-  :delight
-  :hook
-  (after-init-hook . gcmh-mode))
 
 (use-package hydra
   :ensure)

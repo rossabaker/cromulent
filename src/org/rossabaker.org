@@ -2213,7 +2213,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-03-03 Fri 12:30>
+:EXPORT_HUGO_LASTMOD: <2023-03-03 Fri 19:41>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -2239,6 +2239,17 @@ First, we'll benchmark it:
     :hook (after-init . benchmark-init/deactivate)
     :config
     (benchmark-init/activate))
+#+end_src
+
+Increasing the garbage collector threshold is reputed to help at init.
+After startup, we revert on the [[https://gitlab.com/koral/gcmh][Garbage Collector Magic Hack]].
+
+#+begin_src emacs-lisp
+  (use-package gcmh
+    :ensure t
+    :diminish
+    :init (setq gc-cons-threshold (* 80 1024 1024))
+    :hook (emacs-startup . gcmh-mode))
 #+end_src
 
 We're also going to use [[https://gitlab.com/ajgrf/on.el][on.el]] to provide some Doom-like hooks.
