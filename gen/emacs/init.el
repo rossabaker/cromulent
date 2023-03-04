@@ -100,12 +100,15 @@
 (use-package magit
   :ensure t
   :defer 1
+  :functions ross/magit-clone-read-args-a
   :bind ("C-c g g" . magit-status)
   :custom
   (magit-clone-default-directory "~/src/")
   :config
   (defun ross/magit-clone-read-args-a (orig-fun &rest args)
-    "Sets vertico-preselect to 'prompt when cloning repos, so we clone to the default prompted directory, and not some random existing directory under magit-clone-default-directory."
+    "Sets `vertico-preselect' to `prompt' when cloning repos, so we
+clone to the default prompted directory, and not some random
+existing directory under `magit-clone-default-directory'."
     (let ((vertico-preselect 'prompt))
       (apply orig-fun args)))
   (advice-add 'magit-clone-read-args :around #'ross/magit-clone-read-args-a))
@@ -139,15 +142,18 @@
 (use-package ws-butler
   :ensure t
   :diminish
+  :functions ws-butler-global-mode
   :config
   (ws-butler-global-mode))
 
 (use-package ox-hugo
   :ensure t
   :after org
+  :functions (org-entry-put org-time-stamp-format org-hugo--get-elem-with-prop)
   :config
   (defun ross/ox-hugo-update-lastmod ()
-    "Updates the EXPORT_HUGO_LAST_MOD property of the nearest element with EXPORT_FILE_NAME."
+    "Updates the EXPORT_HUGO_LAST_MOD property of the nearest element
+with EXPORT_FILE_NAME."
     (interactive)
       (save-excursion
 	(when-let* ((elem (car (org-hugo--get-elem-with-prop :EXPORT_FILE_NAME)))
@@ -165,9 +171,10 @@
   :ensure t
   :hook (on-first-input . vertico-mode))
 
-(use-package vertico-quick
+(use-package vertico-indexed
   :after vertico
-  :config (vertico-indexed-mode))
+  :config
+  (vertico-indexed-mode))
 
 (use-package vertico-repeat
   :after vertico
