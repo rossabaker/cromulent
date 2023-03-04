@@ -2213,7 +2213,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-03-03 Fri 19:49>
+:EXPORT_HUGO_LASTMOD: <2023-03-03 Fri 19:55>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -2580,7 +2580,7 @@ I like builtin packages, but I like minimal diffs more.  [[https://github.com/le
     (ws-butler-global-mode))
 #+end_src
 
-**** Publishing
+**** Org
 
 ***** ox-hugo
 
@@ -2591,8 +2591,8 @@ the exported tree at the current point.
 
 #+begin_src emacs-lisp
   (use-package ox-hugo
-    :defer
     :ensure t
+    :after org
     :config
     (defun ross/ox-hugo-update-lastmod ()
       "Updates the EXPORT_HUGO_LAST_MOD property of the nearest element with EXPORT_FILE_NAME."
