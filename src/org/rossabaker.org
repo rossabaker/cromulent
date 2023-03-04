@@ -2213,7 +2213,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-03-03 Fri 19:41>
+:EXPORT_HUGO_LASTMOD: <2023-03-03 Fri 19:49>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -2662,16 +2662,17 @@ It's an alternative to ~vertico-quick~.
 ~vertico-directory~ does some smarter things when completing directories:
 - =RET= continues completing in that directory instead of jumping to
   dired.
-- =DEL= and =M-DEL= delete whole directories at a time if the prompt
-  ends in a slash.
+- =M-DEL= deletes whole directories at a time if the prompt ends in a
+  slash.  There's a recommended binding for =DEL=, but I'd rather keep
+  that deleting chars.
 
 #+begin_src emacs-lisp
   (use-package vertico-directory
     :after vertico
-    :bind (:map vertico-map)
-                ("RET" . vertico-directory-enter)
-		("DEL" . vertico-directory-delete-char)
-		("M-DEL" . vertico-directory-delete-word))
+    :bind
+    (:map vertico-map
+	  ("RET" . vertico-directory-enter)
+	  ("M-DEL" . vertico-directory-delete-word)))
 #+end_src
 
 **** Popups

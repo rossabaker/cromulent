@@ -176,10 +176,10 @@
 
 (use-package vertico-directory
   :after vertico
-  :bind (:map vertico-map)
-              ("RET" . vertico-directory-enter)
-	      ("DEL" . vertico-directory-delete-char)
-	      ("M-DEL" . vertico-directory-delete-word))
+  :bind
+  (:map vertico-map
+	("RET" . vertico-directory-enter)
+	("M-DEL" . vertico-directory-delete-word)))
 
 (use-package corfu
   :ensure t
