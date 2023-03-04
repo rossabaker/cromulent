@@ -104,6 +104,7 @@
   :bind ("C-c g g" . magit-status)
   :custom
   (magit-clone-default-directory "~/src/")
+  (magit-no-message '("Turning on magit-auto-revert-mode..."))
   :config
   (defun ross/magit-clone-read-args-a (orig-fun &rest args)
     "Sets `vertico-preselect' to `prompt' when cloning repos, so we
