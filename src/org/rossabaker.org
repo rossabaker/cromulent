@@ -2213,7 +2213,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-03-03 Fri 20:43>
+:EXPORT_HUGO_LASTMOD: <2023-03-03 Fri 21:28>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -2452,7 +2452,8 @@ bell.
     :hook (on-first-input . mode-line-bell-mode))
 #+end_src
 
-*** Editing
+*** History
+
 **** Mark ring
 
 The mark ring is the trail of breadcrumbs we leave with various
@@ -2478,6 +2479,13 @@ Emacs isn't as violent as it sometimes sounds, I swear.
   (use-package simple
     :custom
     (save-interprogram-paste-before-kill t))
+#+end_src
+
+**** Places in files
+
+#+begin_src emacs-lisp
+  (use-package saveplace
+    :hook (on-first-buffer . save-place-mode))
 #+end_src
 
 *** Version control

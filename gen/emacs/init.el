@@ -101,6 +101,9 @@
   :custom
   (save-interprogram-paste-before-kill t))
 
+(use-package saveplace
+  :hook (on-first-buffer . save-place-mode))
+
 (use-package magit
   :ensure t
   :defer 1
