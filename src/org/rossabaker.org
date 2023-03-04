@@ -2481,7 +2481,20 @@ Emacs isn't as violent as it sometimes sounds, I swear.
     (save-interprogram-paste-before-kill t))
 #+end_src
 
+**** Recent files
+
+This maintains a list of recent files, as we often find in other
+applications.  I wonder if it can or should be integrated with MacOS'
+list of recent files?
+
+#+begin_src emacs-lisp
+  (use-package recentf
+    :hook (on-first-file-hook . recentf-mode))
+#+end_src
+
 **** Places in files
+
+This mode saves our place for when we revisit a file.
 
 #+begin_src emacs-lisp
   (use-package saveplace

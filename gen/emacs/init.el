@@ -101,6 +101,9 @@
   :custom
   (save-interprogram-paste-before-kill t))
 
+(use-package recentf
+  :hook (on-first-file-hook . recentf-mode))
+
 (use-package saveplace
   :hook (on-first-buffer . save-place-mode))
 
