@@ -2306,7 +2306,8 @@ need to load ~bind-key~.  If we forget, we get the error: ~Symbol's
 value as variable is void: personal-keybindings~.
 
 #+begin_src emacs-lisp
-  (require 'bind-key)
+  (use-package bind-key
+    :demand t)
 #+end_src
 
 We also want to "diminish" most minor-mode indicators on the mode
@@ -2771,6 +2772,10 @@ Xcode, that brings up a dialog box.
 [[https://github.com/justbur/emacs-which-key][~which-key~]] pops up a menu of keybindings.  The traditional way is to
 run it on a timer, but I prefer [[https://github.com/justbur/emacs-which-key#manual-activation][manual activation]].
 
+I also relabel all my keymaps of the form ~ross/blah-map~ to ~blah~.
+Neither =:prefix-docstring= nor =:menu-item= in ~bind-key~ seem to do
+the trick.
+
 #+begin_src emacs-lisp
   (use-package which-key
     :ensure t
@@ -2779,7 +2784,10 @@ run it on a timer, but I prefer [[https://github.com/justbur/emacs-which-key#man
     :custom
     (which-key-show-early-on-C-h t)
     (which-key-idle-delay most-positive-fixnum)
-    (which-key-idle-secondary-delay 1e-9))
+    (which-key-idle-secondary-delay 1e-9)
+    (let ((ross-map (rx "ross/" (group (1+ (or alnum "-"))) "-map")))
+      (push `((nil . ,ross-map) . (nil . (rx (backref 1))))
+	      which-key-replacement-alist)))
 #+end_src
 
 *** Nix module

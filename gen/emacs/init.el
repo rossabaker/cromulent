@@ -29,7 +29,8 @@
      (convert-standard-filename
       (expand-file-name  "eln-cache/" no-littering-var-directory)))))
 
-(require 'bind-key)
+(use-package bind-key
+  :demand t)
 
 (use-package diminish :ensure t)
 
@@ -111,7 +112,10 @@
   :ensure t
   :defer 1
   :functions ross/magit-clone-read-args-a
-  :bind ("C-c g g" . magit-status)
+  :bind
+  (:prefix-map ross/git-map
+   :prefix "C-c g"
+   ("g" . magit-status))
   :custom
   (magit-clone-default-directory "~/src/")
   (magit-no-message (list "Turning on magit-auto-revert-mode..."))
@@ -222,4 +226,7 @@ with EXPORT_FILE_NAME."
   :custom
   (which-key-show-early-on-C-h t)
   (which-key-idle-delay most-positive-fixnum)
-  (which-key-idle-secondary-delay 1e-9))
+  (which-key-idle-secondary-delay 1e-9)
+  (let ((ross-map (rx "ross/" (group (1+ (or alnum "-"))) "-map")))
+    (push `((nil . ,ross-map) . (nil . (rx (backref 1))))
+	    which-key-replacement-alist)))
