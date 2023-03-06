@@ -112,7 +112,10 @@
   :ensure t
   :defer 1
   :functions ross/magit-clone-read-args-a
-  :bind ("C-c g g" . magit-status)
+  :bind
+  (:prefix-map ross/git-map
+   :prefix "C-c g"
+   ("g" . magit-status))
   :custom
   (magit-clone-default-directory "~/src/")
   (magit-no-message (list "Turning on magit-auto-revert-mode..."))
