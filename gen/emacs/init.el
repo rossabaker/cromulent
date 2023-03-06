@@ -153,9 +153,8 @@ existing directory under `magit-clone-default-directory'."
 
 (use-package ws-butler
   :ensure t
-  :diminish
-  :config
-  (ws-butler-global-mode))
+  :hook (on-first-buffer . ws-butler-global-mode)
+  :diminish)
 
 (use-package ox-hugo
   :ensure t

@@ -2213,7 +2213,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-03-05 Sun 20:06>
+:EXPORT_HUGO_LASTMOD: <2023-03-05 Sun 20:13>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -2614,9 +2614,8 @@ I like builtin packages, but I like minimal diffs more.  [[https://github.com/le
 #+begin_src emacs-lisp
   (use-package ws-butler
     :ensure t
-    :diminish
-    :config
-    (ws-butler-global-mode))
+    :hook (on-first-buffer . ws-butler-global-mode)
+    :diminish)
 #+end_src
 
 **** Org
