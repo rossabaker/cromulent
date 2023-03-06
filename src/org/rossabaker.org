@@ -2213,7 +2213,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-03-03 Fri 21:28>
+:EXPORT_HUGO_LASTMOD: <2023-03-05 Sun 20:06>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -2785,9 +2785,10 @@ the trick.
     (which-key-show-early-on-C-h t)
     (which-key-idle-delay most-positive-fixnum)
     (which-key-idle-secondary-delay 1e-9)
-    (let ((ross-map (rx "ross/" (group (1+ (or alnum "-"))) "-map")))
-      (push `((nil . ,ross-map) . (nil . (rx (backref 1))))
-	      which-key-replacement-alist)))
+    :config
+    (push `((nil . ,(rx bos "ross/" (group (1+ any)) "-map" eos)) .
+	    (nil . ,(rx (backref 1))))
+	  which-key-replacement-alist))
 #+end_src
 
 *** Nix module

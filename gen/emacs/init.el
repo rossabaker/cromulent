@@ -112,10 +112,7 @@
   :ensure t
   :defer 1
   :functions ross/magit-clone-read-args-a
-  :bind
-  (:prefix-map ross/git-map
-   :prefix "C-c g"
-   ("g" . magit-status))
+  :bind ("C-c g g" . magit-status)
   :custom
   (magit-clone-default-directory "~/src/")
   (magit-no-message (list "Turning on magit-auto-revert-mode..."))
@@ -227,6 +224,7 @@ with EXPORT_FILE_NAME."
   (which-key-show-early-on-C-h t)
   (which-key-idle-delay most-positive-fixnum)
   (which-key-idle-secondary-delay 1e-9)
-  (let ((ross-map (rx "ross/" (group (1+ (or alnum "-"))) "-map")))
-    (push `((nil . ,ross-map) . (nil . (rx (backref 1))))
-	    which-key-replacement-alist)))
+  :config
+  (push `((nil . ,(rx bos "ross/" (group (1+ any)) "-map" eos)) .
+	  (nil . ,(rx (backref 1))))
+	which-key-replacement-alist))
