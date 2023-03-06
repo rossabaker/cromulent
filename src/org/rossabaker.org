@@ -2213,7 +2213,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-03-05 Sun 20:45>
+:EXPORT_HUGO_LASTMOD: <2023-03-05 Sun 20:49>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -2307,7 +2307,10 @@ value as variable is void: personal-keybindings~.
 
 #+begin_src emacs-lisp
   (use-package bind-key
-    :demand t)
+    :demand t
+    :bind
+    (:prefix-map ross/files-map
+     :prefix "C-c f"))
 #+end_src
 
 We also want to "diminish" most minor-mode indicators on the mode
@@ -2490,7 +2493,10 @@ list of recent files?
 
 #+begin_src emacs-lisp
   (use-package recentf
-    :hook (on-first-file-hook . recentf-mode))
+    :hook (on-first-file-hook . recentf-mode)
+    :bind
+    (:map ross/files-map
+     ("r" . recentf-open)))
 #+end_src
 
 **** Places in files

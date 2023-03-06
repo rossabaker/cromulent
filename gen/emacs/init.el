@@ -30,7 +30,10 @@
       (expand-file-name  "eln-cache/" no-littering-var-directory)))))
 
 (use-package bind-key
-  :demand t)
+  :demand t
+  :bind
+  (:prefix-map ross/files-map
+   :prefix "C-c f"))
 
 (use-package diminish :ensure t)
 
@@ -103,7 +106,10 @@
   (save-interprogram-paste-before-kill t))
 
 (use-package recentf
-  :hook (on-first-file-hook . recentf-mode))
+  :hook (on-first-file-hook . recentf-mode)
+  :bind
+  (:map ross/files-map
+   ("r" . recentf-open)))
 
 (use-package saveplace
   :hook (on-first-buffer . save-place-mode))
@@ -196,8 +202,8 @@ with EXPORT_FILE_NAME."
   :after vertico
   :bind
   (:map vertico-map
-	("RET" . vertico-directory-enter)
-	("M-DEL" . vertico-directory-delete-word)))
+   ("RET" . vertico-directory-enter)
+   ("M-DEL" . vertico-directory-delete-word)))
 
 (use-package corfu
   :ensure t
