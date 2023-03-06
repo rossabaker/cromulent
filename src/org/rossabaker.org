@@ -2713,8 +2713,8 @@ It's an alternative to ~vertico-quick~.
     :after vertico
     :bind
     (:map vertico-map
-	  ("RET" . vertico-directory-enter)
-	  ("M-DEL" . vertico-directory-delete-word)))
+     ("RET" . vertico-directory-enter)
+     ("M-DEL" . vertico-directory-delete-word)))
 #+end_src
 
 **** Popups
