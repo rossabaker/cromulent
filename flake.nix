@@ -18,7 +18,7 @@
     
       # Extra community flakes
       devshell.url = "github:numtide/devshell";
-      emacs-overlay.url = "github:rossabaker/emacs-overlay";
+      emacs-overlay.url = "github:nix-community/emacs-overlay";
       firefox-darwin.url = "github:bandithedoge/nixpkgs-firefox-darwin";
     
       # Emacs packages
