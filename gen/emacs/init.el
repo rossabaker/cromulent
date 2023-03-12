@@ -104,6 +104,10 @@
   :ensure
   :hook (on-first-input . mode-line-bell-mode))
 
+(use-package comp
+  :custom
+  (native-comp-async-report-warnings-errors 'silent))
+
 (use-package simple
   :custom
   (set-mark-command-repeat-pop t))

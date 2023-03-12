@@ -2213,7 +2213,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-03-11 Sat 23:15>
+:EXPORT_HUGO_LASTMOD: <2023-03-11 Sat 23:25>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -2469,6 +2469,18 @@ bell.
   (use-package mode-line-bell
     :ensure
     :hook (on-first-input . mode-line-bell-mode))
+#+end_src
+
+**** Warnings buffer
+
+I get a bunch of asynchronous warnings from native compilation in a
+~*Warnings*~ popup.  It's nice that they're there, but unless they're
+an error, I don't need them all up in my business.
+
+#+begin_src emacs-lisp
+  (use-package comp
+    :custom
+    (native-comp-async-report-warnings-errors 'silent))
 #+end_src
 
 *** History
