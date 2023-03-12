@@ -2213,7 +2213,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-03-11 Sat 23:45>
+:EXPORT_HUGO_LASTMOD: <2023-03-12 Sun 10:39>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -2498,6 +2498,8 @@ but a better default.
     ([remap upcase-word] . upcase-dwim))
 #+end_src
 
+****
+
 *** History
 
 **** Mark ring
@@ -2569,7 +2571,8 @@ that something tailor-made carries its weight here.
     :bind
     (:prefix-map ross/git-map
      :prefix "C-c g"
-     ("g" . magit-status))
+     ("g" . magit-status)
+     ("c" . magit-clone))
     :custom
     (magit-clone-default-directory "~/src/")
     (magit-no-message (list "Turning on magit-auto-revert-mode..."))

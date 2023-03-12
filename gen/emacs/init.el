@@ -108,6 +108,12 @@
   :custom
   (native-comp-async-report-warnings-errors 'silent))
 
+(use-package emacs
+  :bind
+  ([remap capitalize-word] . capitalize-dwim)
+  ([remap downcase-word] . downcase-dwim)
+  ([remap upcase-word] . upcase-dwim))
+
 (use-package simple
   :custom
   (set-mark-command-repeat-pop t))
@@ -132,7 +138,8 @@
   :bind
   (:prefix-map ross/git-map
    :prefix "C-c g"
-   ("g" . magit-status))
+   ("g" . magit-status)
+   ("c" . magit-clone))
   :custom
   (magit-clone-default-directory "~/src/")
   (magit-no-message (list "Turning on magit-auto-revert-mode..."))
