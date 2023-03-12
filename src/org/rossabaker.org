@@ -2498,7 +2498,15 @@ but a better default.
     ([remap upcase-word] . upcase-dwim))
 #+end_src
 
-****
+**** Indentation
+
+Tabs are the devil's whitespace.
+
+#+begin_src
+  (use-package simple
+    :config
+    (setq-default indent-tabs-mode nil))
+#+end_src
 
 *** History
 
