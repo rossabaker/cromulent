@@ -198,8 +198,10 @@ with EXPORT_FILE_NAME."
 	  (org-entry-put begin "EXPORT_HUGO_LASTMOD" time)))))
 
 (use-package autorevert
-  :defer t
-  :diminish auto-revert-mode)
+  :diminish auto-revert-mode
+  :hook (on-first-buffer . global-auto-revert-mode)
+  :custom
+  (global-auto-revert-non-file-buffers t))
 
 (use-package emacs
   :custom

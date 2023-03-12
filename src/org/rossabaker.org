@@ -2213,7 +2213,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-03-12 Sun 10:39>
+:EXPORT_HUGO_LASTMOD: <2023-03-12 Sun 10:45>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -2701,13 +2701,12 @@ the exported tree at the current point.
 
 **** Auto-revert
 
-Magit is turning this on, even if I'm not.  While I ponder that, clear
-it off the mode line.
-
 #+begin_src emacs-lisp
   (use-package autorevert
-    :defer t
-    :diminish auto-revert-mode)
+    :diminish auto-revert-mode
+    :hook (on-first-buffer . global-auto-revert-mode)
+    :custom
+    (global-auto-revert-non-file-buffers t))
 #+end_src
 
 **** Lockfiles
