@@ -2213,7 +2213,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-03-11 Sat 23:38>
+:EXPORT_HUGO_LASTMOD: <2023-03-11 Sat 23:45>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -2481,6 +2481,21 @@ an error, I don't need them all up in my business.
   (use-package comp
     :custom
     (native-comp-async-report-warnings-errors 'silent))
+#+end_src
+
+*** Editing
+
+**** Casing regions
+
+These do-what-I-mean bindings are newer than the classic keybindings,
+but a better default.
+
+#+begin_src emacs-lisp
+  (use-package emacs
+    :bind
+    ([remap capitalize-word] . capitalize-dwim)
+    ([remap downcase-word] . downcase-dwim)
+    ([remap upcase-word] . upcase-dwim))
 #+end_src
 
 *** History
