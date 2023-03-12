@@ -2213,7 +2213,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-03-11 Sat 23:25>
+:EXPORT_HUGO_LASTMOD: <2023-03-11 Sat 23:38>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -2690,6 +2690,18 @@ it off the mode line.
   (use-package autorevert
     :defer t
     :diminish auto-revert-mode)
+#+end_src
+
+**** Lockfiles
+
+On single-user environments, as we tend to run Emacs these days, those
+~.#*~ files are more likely to confuse some other program as they are
+to protect us from conflicting edits.
+
+#+begin_src emacs-lisp
+  (use-package emacs
+    :custom
+    (create-lockfiles nil))
 #+end_src
 
 *** IDE

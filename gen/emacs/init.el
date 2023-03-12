@@ -194,6 +194,10 @@ with EXPORT_FILE_NAME."
   :defer t
   :diminish auto-revert-mode)
 
+(use-package emacs
+  :custom
+  (create-lockfiles nil))
+
 (use-package eglot :defer t)
 
 (use-package vertico
