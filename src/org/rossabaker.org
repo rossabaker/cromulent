@@ -2213,7 +2213,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-03-05 Sun 20:49>
+:EXPORT_HUGO_LASTMOD: <2023-03-11 Sat 23:15>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -2318,6 +2318,21 @@ line.  They're only interesting if they're in an unexpected state.
 
 #+begin_src emacs-lisp
   (use-package diminish :ensure t)
+#+end_src
+
+*** Path
+
+Launching Emacs from the MacOS dock does not source my shell config,
+which leads to my Nix profile not being on the ~$PATH~, which leads to
+errors, or worse, trying to install the execrable Xcode.
+
+#+begin_src emacs-lisp
+  (use-package exec-path-from-shell
+    :ensure t
+    :demand t
+    :if (memq window-system '(mac ns x))
+    :config
+    (exec-path-from-shell-initialize))
 #+end_src
 
 *** UI

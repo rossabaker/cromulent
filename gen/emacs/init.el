@@ -37,6 +37,13 @@
 
 (use-package diminish :ensure t)
 
+(use-package exec-path-from-shell
+  :ensure t
+  :demand t
+  :if (memq window-system '(mac ns x))
+  :config
+  (exec-path-from-shell-initialize))
+
 (use-package "startup"
   :custom
   (inhibit-splash-screen t)
