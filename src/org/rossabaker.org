@@ -2213,7 +2213,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-03-12 Sun 10:45>
+:EXPORT_HUGO_LASTMOD: <2023-03-12 Sun 20:12>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -2525,16 +2525,19 @@ once before subsequent ~C-SPC~, which makes it much nicer to navigate.
     (set-mark-command-repeat-pop t))
 #+end_src
 
-**** Clipboard
+**** Kill ring
 
 Put the clipboard on the kill ring before killing something else.
-
 Emacs isn't as violent as it sometimes sounds, I swear.
+
+We also don't want to clutter the ring with consecutively duplicate
+values.
 
 #+begin_src emacs-lisp
   (use-package simple
     :custom
-    (save-interprogram-paste-before-kill t))
+    (save-interprogram-paste-before-kill t)
+    (kill-do-not-save-duplicates t))
 #+end_src
 
 **** Recent files

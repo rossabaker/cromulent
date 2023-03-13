@@ -120,7 +120,8 @@
 
 (use-package simple
   :custom
-  (save-interprogram-paste-before-kill t))
+  (save-interprogram-paste-before-kill t)
+  (kill-do-not-save-duplicates t))
 
 (use-package recentf
   :hook (on-first-file-hook . recentf-mode)
