@@ -33,7 +33,12 @@
   :demand t
   :bind
   (:prefix-map ross/files-map
-   :prefix "C-c f"))
+   :prefix "C-c f")
+  :config
+  (defun ross/unbind-all (fn)
+    "Unbinds a function everywhere."
+    (dolist (key (where-is-internal fn nil))
+      (unbind-key key))))
 
 (use-package diminish :ensure t)
 
@@ -73,6 +78,11 @@
 	("Monospace")))))
   :config
   (fontaine-set-preset (or fontaine-current-preset 'regular)))
+
+(use-package mwheel
+  :defer
+  :config
+  (ross/unbind-all 'mouse-wheel-text-scale))
 
 (use-package emacs
   :custom
@@ -442,10 +452,9 @@ with EXPORT_FILE_NAME."
   (which-key-idle-secondary-delay 1e-9)
   :config
   (push `((nil . ,(rx bos "ross/" (group (1+ any)) "-map" eos)) .
-          (nil . ,(rx (backref 1))))
-        which-key-replacement-alist))
+	  (nil . ,(rx (backref 1))))
+	which-key-replacement-alist))
 
 (use-package help
   :config
-  (dolist (key (where-is-internal 'help-for-help nil))
-    (unbind-key key)))
+  (ross/unbind-all 'help-for-help))

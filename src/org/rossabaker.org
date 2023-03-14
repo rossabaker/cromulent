@@ -2213,7 +2213,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-03-14 Tue 08:28>
+:EXPORT_HUGO_LASTMOD: <2023-03-14 Tue 11:24>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -2310,7 +2310,12 @@ value as variable is void: personal-keybindings~.
     :demand t
     :bind
     (:prefix-map ross/files-map
-     :prefix "C-c f"))
+     :prefix "C-c f")
+    :config
+    (defun ross/unbind-all (fn)
+      "Unbinds a function everywhere."
+      (dolist (key (where-is-internal fn nil))
+        (unbind-key key))))
 #+end_src
 
 We also want to "diminish" most minor-mode indicators on the mode
@@ -2395,6 +2400,16 @@ the rest of the world's points.
 	  ("Monospace")))))
     :config
     (fontaine-set-preset (or fontaine-current-preset 'regular)))
+#+end_src
+
+Also, I keep hitting control with the mousewheel during presentations,
+which is never intentional.
+
+#+begin_src emacs-lisp
+  (use-package mwheel
+    :defer
+    :config
+    (ross/unbind-all 'mouse-wheel-text-scale))
 #+end_src
 
 **** Cursor
@@ -3081,8 +3096,7 @@ the trick.
 #+begin_src emacs-lisp
   (use-package help
     :config
-    (dolist (key (where-is-internal 'help-for-help nil))
-      (unbind-key key)))
+    (ross/unbind-all 'help-for-help))
 #+end_src
 
 *** Nix module
