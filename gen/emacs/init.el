@@ -234,6 +234,9 @@ with EXPORT_FILE_NAME."
   :ensure t
   :hook (on-first-buffer . global-corfu-mode))
 
+(use-package csharp-mode
+  :mode ((rx ".cs" eos) . 'csharp-ts-mode))
+
 (use-package lisp-mode
   :defer
   :config

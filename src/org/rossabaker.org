@@ -2213,7 +2213,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-03-12 Sun 20:12>
+:EXPORT_HUGO_LASTMOD: <2023-03-13 Mon 20:34>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -2802,6 +2802,16 @@ Autocompletion of method names in code is a classic use case.
 #+end_src
 
 *** Programming modes
+**** C#
+
+I am not a C# developer, but I've been known to interview them.
+
+#+begin_src emacs-lisp
+  (use-package csharp-mode
+    :mode ((rx ".cs" eos) . 'csharp-ts-mode)
+    :hook (csharp-ts-mode . subword-mode))
+#+end_src
+
 **** Lisp
 
 I would like my property lists to align not like this
