@@ -2213,7 +2213,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-03-13 Mon 20:34>
+:EXPORT_HUGO_LASTMOD: <2023-03-14 Tue 08:28>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -3074,6 +3074,15 @@ the trick.
     (push `((nil . ,(rx bos "ross/" (group (1+ any)) "-map" eos)) .
 	    (nil . ,(rx (backref 1))))
 	  which-key-replacement-alist))
+#+end_src
+
+~C-h C-h~ shadows which-key with something less useful.
+
+#+begin_src emacs-lisp
+  (use-package help
+    :config
+    (dolist (key (where-is-internal 'help-for-help nil))
+      (unbind-key key)))
 #+end_src
 
 *** Nix module

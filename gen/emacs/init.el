@@ -235,7 +235,8 @@ with EXPORT_FILE_NAME."
   :hook (on-first-buffer . global-corfu-mode))
 
 (use-package csharp-mode
-  :mode ((rx ".cs" eos) . 'csharp-ts-mode))
+  :mode ((rx ".cs" eos) . 'csharp-ts-mode)
+  :hook (csharp-ts-mode . subword-mode))
 
 (use-package lisp-mode
   :defer
@@ -441,5 +442,10 @@ with EXPORT_FILE_NAME."
   (which-key-idle-secondary-delay 1e-9)
   :config
   (push `((nil . ,(rx bos "ross/" (group (1+ any)) "-map" eos)) .
-	  (nil . ,(rx (backref 1))))
-	which-key-replacement-alist))
+          (nil . ,(rx (backref 1))))
+        which-key-replacement-alist))
+
+(use-package help
+  :config
+  (dolist (key (where-is-internal 'help-for-help nil))
+    (unbind-key key)))
