@@ -2213,7 +2213,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-03-15 Wed 22:12>
+:EXPORT_HUGO_LASTMOD: <2023-03-15 Wed 22:22>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -3046,6 +3046,13 @@ The answer is almost verbatim from [[https://emacs.stackexchange.com/a/52789][St
   (use-package nix-mode
     :ensure t
     :defer t)
+#+end_src
+
+**** Python
+
+#+begin_src emacs-lisp
+  (use-package python-mode
+    :mode ((rx ".py" eos) . 'python-ts-mode))
 #+end_src
 
 **** Ruby

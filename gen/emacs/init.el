@@ -443,6 +443,9 @@ with EXPORT_FILE_NAME."
   :ensure t
   :defer t)
 
+(use-package python-mode
+  :mode ((rx ".py" eos) . 'python-ts-mode))
+
 (use-package ruby-mode
   :mode ((rx ".rb" eos) . 'ruby-ts-mode))
 
