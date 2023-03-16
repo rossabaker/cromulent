@@ -316,8 +316,8 @@ with EXPORT_FILE_NAME."
 			;; condition is more debatable. It's so that I can have
 			;; unquoted plists in macros. It assumes that you won't
 			;; make a function whose name is a keyword.
-			;; (when-let (char-after (char-after (1+ containing-sexp)))
-			;;   (char-equal char-after ?:))
+			(when-let (char-after (char-after (1+ containing-sexp)))
+			  (char-equal char-after ?:))
 
 			;; Check for quotes or backquotes around.
 			(let* ((positions (elt state 9))

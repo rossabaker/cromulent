@@ -2213,7 +2213,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-03-14 Tue 11:24>
+:EXPORT_HUGO_LASTMOD: <2023-03-15 Wed 21:34>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -2916,8 +2916,8 @@ The answer is almost verbatim from [[https://emacs.stackexchange.com/a/52789][St
 			  ;; condition is more debatable. It's so that I can have
 			  ;; unquoted plists in macros. It assumes that you won't
 			  ;; make a function whose name is a keyword.
-			  ;; (when-let (char-after (char-after (1+ containing-sexp)))
-			  ;;   (char-equal char-after ?:))
+			  (when-let (char-after (char-after (1+ containing-sexp)))
+			    (char-equal char-after ?:))
 
 			  ;; Check for quotes or backquotes around.
 			  (let* ((positions (elt state 9))
