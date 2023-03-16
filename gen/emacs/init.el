@@ -34,6 +34,8 @@
   :bind
   (:prefix-map ross/files-map
    :prefix "C-c f")
+  (:prefix-map ross/toggles-map
+   :prefix "C-c t")
   :config
   (defun ross/unbind-all (fn)
     "Unbinds a function everywhere."
@@ -62,6 +64,9 @@
 (use-package fontaine
   :ensure t
   :demand t
+  :bind
+  (:map ross/toggles-map
+   ("p" . ross/presentation-mode))
   :custom
   (fontaine-presets
    `((regular
@@ -77,7 +82,14 @@
 	 "IBM Plex Mono")
 	("Monospace")))))
   :config
-  (fontaine-set-preset (or fontaine-current-preset 'regular)))
+  (fontaine-set-preset (or fontaine-current-preset 'regular))
+  (define-minor-mode ross/presentation-mode
+    "Toggles global ross/presentation-mode."
+    nil
+    :global t
+    (if ross/presentation-mode
+	(fontaine-set-preset 'presentation)
+      (fontaine-set-preset 'regular))))
 
 (use-package mwheel
   :defer

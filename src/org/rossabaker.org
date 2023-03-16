@@ -2213,7 +2213,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-03-15 Wed 21:34>
+:EXPORT_HUGO_LASTMOD: <2023-03-15 Wed 21:46>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -2311,6 +2311,8 @@ value as variable is void: personal-keybindings~.
     :bind
     (:prefix-map ross/files-map
      :prefix "C-c f")
+    (:prefix-map ross/toggles-map
+     :prefix "C-c t")
     :config
     (defun ross/unbind-all (fn)
       "Unbinds a function everywhere."
@@ -2384,6 +2386,9 @@ the rest of the world's points.
   (use-package fontaine
     :ensure t
     :demand t
+    :bind
+    (:map ross/toggles-map
+     ("p" . ross/presentation-mode))
     :custom
     (fontaine-presets
      `((regular
@@ -2399,7 +2404,14 @@ the rest of the world's points.
 	   "IBM Plex Mono")
 	  ("Monospace")))))
     :config
-    (fontaine-set-preset (or fontaine-current-preset 'regular)))
+    (fontaine-set-preset (or fontaine-current-preset 'regular))
+    (define-minor-mode ross/presentation-mode
+      "Toggles global ross/presentation-mode."
+      nil
+      :global t
+      (if ross/presentation-mode
+	  (fontaine-set-preset 'presentation)
+	(fontaine-set-preset 'regular))))
 #+end_src
 
 Also, I keep hitting control with the mousewheel during presentations,
