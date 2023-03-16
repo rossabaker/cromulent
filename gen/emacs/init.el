@@ -256,6 +256,12 @@ with EXPORT_FILE_NAME."
   :ensure t
   :hook (on-first-buffer . global-corfu-mode))
 
+(use-package treesit-auto
+  :ensure t
+  :demand t
+  :config
+  (global-treesit-auto-mode))
+
 (use-package csharp-mode
   :mode ((rx ".cs" eos) . 'csharp-ts-mode)
   :hook (csharp-ts-mode . subword-mode))
@@ -442,12 +448,6 @@ with EXPORT_FILE_NAME."
 (use-package nix-mode
   :ensure t
   :defer t)
-
-(use-package python-mode
-  :mode ((rx ".py" eos) . 'python-ts-mode))
-
-(use-package ruby-mode
-  :mode ((rx ".rb" eos) . 'ruby-ts-mode))
 
 (use-package scala-mode
   :ensure t

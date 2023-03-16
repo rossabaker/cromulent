@@ -2213,7 +2213,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-03-15 Wed 22:22>
+:EXPORT_HUGO_LASTMOD: <2023-03-15 Wed 22:26>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -2829,6 +2829,19 @@ Autocompletion of method names in code is a classic use case.
 #+end_src
 
 *** Programming modes
+
+**** treesit-auto
+
+[[https://github.com/renzmann/treesit-auto][~treesit-auto~]] finds treesitter modes by naming convention.
+
+#+begin_src emacs-lisp
+  (use-package treesit-auto
+    :ensure t
+    :demand t
+    :config
+    (global-treesit-auto-mode))
+#+end_src
+
 **** C#
 
 I am not a C# developer, but I've been known to interview them.
@@ -3046,20 +3059,6 @@ The answer is almost verbatim from [[https://emacs.stackexchange.com/a/52789][St
   (use-package nix-mode
     :ensure t
     :defer t)
-#+end_src
-
-**** Python
-
-#+begin_src emacs-lisp
-  (use-package python-mode
-    :mode ((rx ".py" eos) . 'python-ts-mode))
-#+end_src
-
-**** Ruby
-
-#+begin_src emacs-lisp
-  (use-package ruby-mode
-    :mode ((rx ".rb" eos) . 'ruby-ts-mode))
 #+end_src
 
 **** Scala
