@@ -443,6 +443,9 @@ with EXPORT_FILE_NAME."
   :ensure t
   :defer t)
 
+(use-package ruby-mode
+  :mode ((rx ".rb" eos) . 'ruby-ts-mode))
+
 (use-package scala-mode
   :ensure t
   :interpreter ("scala" . scala-mode)
