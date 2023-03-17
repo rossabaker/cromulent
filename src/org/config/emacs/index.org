@@ -153,16 +153,6 @@ by rebinding the built-in ~describe-*~ functions.
 
 * Editing
 
-** Killing
-
-Don't add _consecutive_ duplicates to the kill ring.
-
-#+begin_src emacs-lisp
-(use-package simple
-  :custom
-  (kill-do-not-save-duplicates t))
-#+end_src
-
 ** Undo
 
 [[https://github.com/casouri/vundo][Vundo]] displays the undo history as a tree. Unlike [[https://www.dr-qubit.org/undo-tree.html][undo-tree]], it
@@ -215,30 +205,6 @@ Credit: [[https://karthinks.com/software/batteries-included-with-emacs/][Karthik
 
 * Files
 
-** Autorevert
-
-Automatically revert all buffers with no unsaved changes.
-~global-auto-revert-non-file-buffers~ includes buffers like Dired.
-
-#+begin_src emacs-lisp
-(use-package autorevert
-  :custom
-  (global-auto-revert-non-file-buffers t)
-  :config
-  (global-auto-revert-mode))
-#+end_src
-
-** Recent files
-
-Enable tracking of recently owned files. Sadly, this doesn't integrate
-with the operating system.  Happily, we don't leave Emacs very often.
-
-#+begin_src emacs-lisp
-(use-package recentf
-  :config
-  (recentf-mode))
-#+end_src
-
 ** Executable
 
 If a file starts with a [[https://en.wikipedia.org/wiki/Shebang_(Unix)][shebang]], and is not already executable, make
@@ -267,14 +233,6 @@ from Ben Simon worked for me:
 
 The function exists [[https://github.com/emacs-mirror/emacs/blob/master/lisp/filenotify.el#L483-L489][upstream]], so we should be able to remove it
 someday.
-
-* Indentation
-
-Tabs are the Devil's whitespace.
-
-#+begin_src emacs-lisp
-(customize-set-variable 'indent-tabs-mode nil)
-#+end_src
 
 * Text
 
@@ -386,20 +344,6 @@ Emacs.
 #+end_src
 
 * Environment
-
-** Paths
-
-[[https://github.com/purcell/exec-path-from-shell][exec-path-from-shell]] ensures that our paths are always loaded from our
-shell, even when Emacs is launched from a GUI.  This is particularly a
-problem on MacOS.
-
-#+begin_src emacs-lisp
-(use-package exec-path-from-shell
-  :ensure
-  :if (memq window-system '(mac ns x))
-  :config
-  (exec-path-from-shell-initialize))
-#+end_src
 
 * Languages
 
@@ -513,7 +457,6 @@ This is the vestige of my old init.el.  It is gradually being made literate.
 (use-package emacs
   :no-require
   :custom
-  (create-lockfiles nil)
   (echo-keystrokes 0.01)
   (load-prefer-newer t)
   :config
@@ -598,8 +541,6 @@ This is the vestige of my old init.el.  It is gradually being made literate.
 
 (use-package simple
   :requires cl-lib
-  :custom
-  (save-interprogram-paste-before-kill t)
   :config
   (defun ross/ad-keyboard-escape-quit (fun &rest args)
     (cl-letf (((symbol-function 'one-window-p) (lambda (&rest _) t)))
@@ -641,11 +582,6 @@ This is the vestige of my old init.el.  It is gradually being made literate.
 (use-package ansi-color
   :custom
   (ansi-color-for-comint-mode t))
-
-(use-package default-text-scale
-  :ensure
-  :config
-  (default-text-scale-mode))
 
 (use-package frame
   :bind
@@ -706,16 +642,6 @@ This is the vestige of my old init.el.  It is gradually being made literate.
   (column-number-mode)
   (size-indication-mode))
 
-(use-package startup
-  :no-require
-  :custom
-  (inhibit-startup-echo-area-message t)
-  (inhibit-startup-screen t))
-
-(use-package tooltip
-  :config
-  (tooltip-mode -1))
-
 ;;; Completion
 
 (use-package consult
@@ -765,21 +691,8 @@ This is the vestige of my old init.el.  It is gradually being made literate.
 
 (use-package vertico
   :ensure
-  :config
-  (vertico-mode)
-  (use-package vertico-directory
-    :disabled
-    :bind (:map vertico-map
-		("RET" . vertico-directory-enter)
-		;; I don't like vertico-directory-delete-char
-		("M-DEL" . vertico-directory-delete-word))
-    ;; I don't know what this does, but it's recommended
-    :hook
-    (rfn-eshadow-update-overlay-hook . vertico-directory-tidy))
-  (use-package vertico-indexed
-    :disabled
-    :config
-    (vertico-indexed-mode)))
+  :hook
+  (rfn-eshadow-update-overlay-hook . vertico-directory-tidy))
 
 (use-package which-key
   :ensure
@@ -787,9 +700,6 @@ This is the vestige of my old init.el.  It is gradually being made literate.
   (which-key-sort-order 'which-key-key-order-alpha))
 
 ;;; Tools
-
-(use-package ox-hugo
-  :ensure)
 
 (use-package ox-reveal
   :ensure)
@@ -933,11 +843,6 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
   :ensure
   :hook
   (sbt-mode-hook . subword-mode))
-
-(use-package scala-mode
-  :ensure
-  :hook
-  (scala-mode-hook . subword-mode))
 
 ;;;; YAML
 
