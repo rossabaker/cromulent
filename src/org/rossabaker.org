@@ -2213,15 +2213,36 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-03-16 Thu 22:16>
+:EXPORT_HUGO_LASTMOD: <2023-03-17 Fri 00:42>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
 :END:
 
-This is a "vanilla" Emacs configuration built on Emacs 29.  It's
-undergoing an intense rebuild in March 2023, but I'm already using it
-everywhere.
+*** Introduction
+
+**** The flavor of the day is vanilla
+
+This is a "vanilla" configuration, or an "Emacs from scratch," built
+on a prerelease of Emacs 29 from Git.
+
+Some users use a community configuration such as [[https://www.spacemacs.org/][Spacemacs]] or [[https://github.com/doomemacs/doomemacs][Doom]].  A
+more moderate approach is a starter kit like like [[https://github.com/bbatsov/prelude][Prelude]] or [[https://github.com/SystemCrafters/crafted-emacs][Crafted
+Emacs]], which hew closer to vanilla Emacs but give users a sensible
+head start.  These are recommended paths for new users, and remain
+reasonable even after decades of experience.
+
+I choose to start from the wretched defaults.
+
+- It helps me better understand how it works.
+- I am less likely to be surprised on upgrades.
+- It's relaxing.  Editor bonsai, if you will.
+
+**** Guiding principles
+
+The default is to try built-in packages first, but be unafraid to
+augment with [[https://elpa.gnu.org/][ELPA]], [[https://melpa.org/][MELPA]], or even Git.  These extra moving parts are
+managed by rigorously pinning all dependencies with Nix.
 
 *** Startup time
 
