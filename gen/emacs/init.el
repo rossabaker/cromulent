@@ -34,6 +34,7 @@
   :bind
   (:prefix-map ross/files-map
    :prefix "C-c f")
+  :bind
   (:prefix-map ross/toggles-map
    :prefix "C-c t")
   :config

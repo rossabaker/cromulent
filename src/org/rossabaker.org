@@ -2213,7 +2213,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-03-15 Wed 22:26>
+:EXPORT_HUGO_LASTMOD: <2023-03-16 Thu 22:16>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -2311,6 +2311,7 @@ value as variable is void: personal-keybindings~.
     :bind
     (:prefix-map ross/files-map
      :prefix "C-c f")
+    :bind
     (:prefix-map ross/toggles-map
      :prefix "C-c t")
     :config
