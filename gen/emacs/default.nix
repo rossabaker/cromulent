@@ -17,10 +17,10 @@
     packages.emacs-ross = pkgs.emacsWithPackagesFromUsePackage {
       package = config.packages.emacs29;
       override = epkgs: epkgs // {
-	on = epkgs.trivialBuild {
-	  pname = "on.el";
-	  src = inputs.on-el;
-	};
+        on = epkgs.trivialBuild {
+          pname = "on.el";
+          src = inputs.on-el;
+        };
       };
       config = ./init.el;
       defaultInitFile = true;
@@ -34,13 +34,13 @@
   flake = {
     homeManagerModules.emacs = moduleWithSystem (
       perSystem@{ config, pkgs }: {
-	imports = [
+        imports = [
           ({ pkgs, ...}: { home.packages = [ pkgs.gcc ]; })
-	];
-	programs.emacs = {
-	  enable = true;
-	  package = config.packages.emacs-ross;
-	};
+        ];
+        programs.emacs = {
+          enable = true;
+          package = config.packages.emacs-ross;
+        };
       }
     );
   };

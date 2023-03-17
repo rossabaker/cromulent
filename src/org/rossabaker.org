@@ -2076,137 +2076,137 @@ contents of my flake.
   inputs:
     let
       mkDarwinConfig = { pkgs, system }:
-	inputs.darwin.lib.darwinSystem {
-	  inherit system;
-	  modules = [
-	    (import (pkgs.callPackage ./tangle.nix {
-	      inherit pkgs;
-	      src = ./src/org/config/nix-darwin;
-	    }))
-	    {
-	      system.keyboard.enableKeyMapping = true;
-	      system.keyboard.remapCapsLockToControl = true;
-	    }
-	  ];
-	};
+        inputs.darwin.lib.darwinSystem {
+          inherit system;
+          modules = [
+            (import (pkgs.callPackage ./tangle.nix {
+              inherit pkgs;
+              src = ./src/org/config/nix-darwin;
+            }))
+            {
+              system.keyboard.enableKeyMapping = true;
+              system.keyboard.remapCapsLockToControl = true;
+            }
+          ];
+        };
 
       mkHomeConfig = { pkgs, system, username, homeDirectory }:
-	let
-	  homeModule = import (pkgs.callPackage ./tangle.nix {
-	    inherit pkgs;
-	    src = ./src/org/config/home-manager;
-	  });
-	in
-	inputs.home-manager.lib.homeManagerConfiguration {
-	  inherit pkgs;
-	  modules = [
-	    {
-	      home = {
-		inherit homeDirectory username;
-		stateVersion = "21.11";
-	      };
-	      nixpkgs.overlays = [ inputs.emacs-overlay.overlay ];
-	    }
-	    homeModule
-	    inputs.self.homeManagerModules.emacs
-	    ./modules/work
-	  ];
-	  # Pass our flake inputs into the config
-	  extraSpecialArgs = { inherit inputs; };
-	};
+        let
+          homeModule = import (pkgs.callPackage ./tangle.nix {
+            inherit pkgs;
+            src = ./src/org/config/home-manager;
+          });
+        in
+        inputs.home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = [
+            {
+              home = {
+                inherit homeDirectory username;
+                stateVersion = "21.11";
+              };
+              nixpkgs.overlays = [ inputs.emacs-overlay.overlay ];
+            }
+            homeModule
+            inputs.self.homeManagerModules.emacs
+            ./modules/work
+          ];
+          # Pass our flake inputs into the config
+          extraSpecialArgs = { inherit inputs; };
+        };
 
       RABaker-at-L2LYQM57XY = pkgs: mkHomeConfig {
-	inherit pkgs;
-	system = "aarch64-darwin";
-	username = "ross.baker";
-	homeDirectory = "/Users/RABaker";
+        inherit pkgs;
+        system = "aarch64-darwin";
+        username = "ross.baker";
+        homeDirectory = "/Users/RABaker";
       };
 
       L2LYQM57XY = pkgs: mkDarwinConfig {
-	inherit pkgs;
-	system = "aarch64-darwin";
+        inherit pkgs;
+        system = "aarch64-darwin";
       };
 
       overlays = {
-	emacs = inputs.emacs-overlay.overlay;
-	devshell = inputs.devshell.overlays.default;
+        emacs = inputs.emacs-overlay.overlay;
+        devshell = inputs.devshell.overlays.default;
       };
 
       pkgsFor = system: import inputs.nixpkgs {
-	inherit system;
-	overlays = builtins.attrValues inputs.self.overlays;
+        inherit system;
+        overlays = builtins.attrValues inputs.self.overlays;
       };
     in
     inputs.flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [
-	./gen/emacs
+        ./gen/emacs
       ];
 
       flake = {
-	inherit overlays;
+        inherit overlays;
 
-	homeConfigurations = {
-	  "RABaker@L2LYQM57XY" = RABaker-at-L2LYQM57XY (pkgsFor "aarch64-darwin");
-	};
+        homeConfigurations = {
+          "RABaker@L2LYQM57XY" = RABaker-at-L2LYQM57XY (pkgsFor "aarch64-darwin");
+        };
 
-	darwinConfigurations = {
-	  L2LYQM57XY = L2LYQM57XY (pkgsFor "aarch64-darwin");
-	};
+        darwinConfigurations = {
+          L2LYQM57XY = L2LYQM57XY (pkgsFor "aarch64-darwin");
+        };
 
-	flakeModules = {
-	  emacs = ./gen/emacs;
-	};
+        flakeModules = {
+          emacs = ./gen/emacs;
+        };
       };
 
       systems = [
-	"x86_64-linux"
-	"aarch64-darwin"
+        "x86_64-linux"
+        "aarch64-darwin"
       ];
 
       perSystem = { config, self', inputs', system, pkgs, ... }:
-	let
-	  hm = inputs.home-manager.defaultPackage."${system}";
+        let
+          hm = inputs.home-manager.defaultPackage."${system}";
 
-	  darwinPackages =
-	    if (system == "aarch64-darwin") then {
-	      L2LYQM57XY = (L2LYQM57XY pkgs).system;
-	      "RABaker@L2LYQM57XY" = (RABaker-at-L2LYQM57XY pkgs).activationPackage;
-	    } else { };
-	in
-	{
-	  _module.args.pkgs = import inputs.nixpkgs {
-	    inherit system;
-	    overlays = [
-	      inputs.devshell.overlays.default
+          darwinPackages =
+            if (system == "aarch64-darwin") then {
+              L2LYQM57XY = (L2LYQM57XY pkgs).system;
+              "RABaker@L2LYQM57XY" = (RABaker-at-L2LYQM57XY pkgs).activationPackage;
+            } else { };
+        in
+        {
+          _module.args.pkgs = import inputs.nixpkgs {
+            inherit system;
+            overlays = [
+              inputs.devshell.overlays.default
               inputs.emacs-overlay.overlays.default
-	    ];
-	  };
+            ];
+          };
 
-	  packages = {
-	    website = pkgs.callPackage ./gen/website {
-	      emacs29 = self'.packages.emacs29;
-	      src = ./src;
-	    };
-	  } // darwinPackages;
+          packages = {
+            website = pkgs.callPackage ./gen/website {
+              emacs29 = self'.packages.emacs29;
+              src = ./src;
+            };
+          } // darwinPackages;
 
-	  devShells.default = pkgs.devshell.mkShell {
-	    name = "nix-config";
+          devShells.default = pkgs.devshell.mkShell {
+            name = "nix-config";
 
-	    commands = [{
-	      name = "hm-switch";
-	      help = "switch the home-manager config";
-	      command = "${hm}/bin/home-manager switch --flake $PRJ_ROOT";
-	    }];
+            commands = [{
+              name = "hm-switch";
+              help = "switch the home-manager config";
+              command = "${hm}/bin/home-manager switch --flake $PRJ_ROOT";
+            }];
 
-	    packages = [
-	      hm
-	      pkgs.google-cloud-sdk
-	      pkgs.hugo
-	      pkgs.nix
-	      pkgs.terraform
-	    ];
-	  };
-	};
+            packages = [
+              hm
+              pkgs.google-cloud-sdk
+              pkgs.hugo
+              pkgs.nix
+              pkgs.terraform
+            ];
+          };
+        };
     };
 #+end_src
 
@@ -2292,11 +2292,11 @@ seems early enough to avoid crapping in =~/.config/emacs=.
     :ensure t
     :init
     (setq no-littering-etc-directory "~/.cache/emacs/etc/"
-	  no-littering-var-directory "~/.cache/emacs/var/")
+          no-littering-var-directory "~/.cache/emacs/var/")
     (when (fboundp 'startup-redirect-eln-cache)
       (startup-redirect-eln-cache
        (convert-standard-filename
-	(expand-file-name  "eln-cache/" no-littering-var-directory)))))
+        (expand-file-name  "eln-cache/" no-littering-var-directory)))))
 #+end_src
 
 *** Package management
@@ -2393,17 +2393,17 @@ the rest of the world's points.
     :custom
     (fontaine-presets
      `((regular
-	:default-height 140
-	:line-spacing 0.25)
+        :default-height 140
+        :line-spacing 0.25)
        (presentation
-	:default-height 210
-	:line-spacing 0.125)
+        :default-height 210
+        :line-spacing 0.125)
        (t ;; defaults
-	:default-family
-	,(cond
-	  ((find-font (font-spec :name "IBM Plex Mono"))
-	   "IBM Plex Mono")
-	  ("Monospace")))))
+        :default-family
+        ,(cond
+          ((find-font (font-spec :name "IBM Plex Mono"))
+           "IBM Plex Mono")
+          ("Monospace")))))
     :config
     (fontaine-set-preset (or fontaine-current-preset 'regular))
     (define-minor-mode ross/presentation-mode
@@ -2411,8 +2411,8 @@ the rest of the world's points.
       nil
       :global t
       (if ross/presentation-mode
-	  (fontaine-set-preset 'presentation)
-	(fontaine-set-preset 'regular))))
+          (fontaine-set-preset 'presentation)
+        (fontaine-set-preset 'regular))))
 #+end_src
 
 Also, I keep hitting control with the mousewheel during presentations,
@@ -2621,7 +2621,7 @@ that something tailor-made carries its weight here.
   clone to the default prompted directory, and not some random
   existing directory under `magit-clone-default-directory'."
       (let ((vertico-preselect 'prompt))
-	(apply orig-fun args)))
+        (apply orig-fun args)))
     (advice-add 'magit-clone-read-args :around #'ross/magit-clone-read-args-a))
 #+end_src
 
@@ -2729,11 +2729,11 @@ the exported tree at the current point.
       "Updates the EXPORT_HUGO_LAST_MOD property of the nearest element
   with EXPORT_FILE_NAME."
       (interactive)
-	(save-excursion
-	  (when-let* ((elem (car (org-hugo--get-elem-with-prop :EXPORT_FILE_NAME)))
-		      (begin (org-element-property :begin elem))
-		      (time (format-time-string (org-time-stamp-format t) (current-time))))
-	    (org-entry-put begin "EXPORT_HUGO_LASTMOD" time)))))
+        (save-excursion
+          (when-let* ((elem (car (org-hugo--get-elem-with-prop :EXPORT_FILE_NAME)))
+                      (begin (org-element-property :begin elem))
+                      (time (format-time-string (org-time-stamp-format t) (current-time))))
+            (org-entry-put begin "EXPORT_HUGO_LASTMOD" time)))))
 #+end_src
 
 *** Files
@@ -2859,7 +2859,7 @@ I would like my property lists to align not like this
 
 #+begin_src emacs-lisp :tangle no
   (:prefix-map ross/git-map
-	       :prefix "C-c g")
+               :prefix "C-c g")
 #+end_src
 
 but like this:
@@ -2884,173 +2884,173 @@ The answer is almost verbatim from [[https://emacs.stackexchange.com/a/52789][St
       ;; if you don't have this, you'll get a void variable error.
       (defvar calculate-lisp-indent-last-sexp)
       (save-excursion
-	(beginning-of-line)
-	(let ((indent-point (point))
-	      state
-	      ;; setting this to a number inhibits calling hook
-	      (desired-indent nil)
-	      (retry t)
-	      calculate-lisp-indent-last-sexp containing-sexp)
-	  (cond ((or (markerp parse-start) (integerp parse-start))
-		 (goto-char parse-start))
-		((null parse-start) (beginning-of-defun))
-		(t (setq state parse-start)))
-	  (unless state
-	    ;; Find outermost containing sexp
-	    (while (< (point) indent-point)
-	      (setq state (parse-partial-sexp (point) indent-point 0))))
-	  ;; Find innermost containing sexp
-	  (while (and retry
-		      state
-		      (> (elt state 0) 0))
-	    (setq retry nil)
-	    (setq calculate-lisp-indent-last-sexp (elt state 2))
-	    (setq containing-sexp (elt state 1))
-	    ;; Position following last unclosed open.
-	    (goto-char (1+ containing-sexp))
-	    ;; Is there a complete sexp since then?
-	    (if (and calculate-lisp-indent-last-sexp
-		     (> calculate-lisp-indent-last-sexp (point)))
-		;; Yes, but is there a containing sexp after that?
-		(let ((peek (parse-partial-sexp calculate-lisp-indent-last-sexp
-						indent-point 0)))
-		  (if (setq retry (car (cdr peek))) (setq state peek)))))
-	  (if retry
-	      nil
-	    ;; Innermost containing sexp found
-	    (goto-char (1+ containing-sexp))
-	    (if (not calculate-lisp-indent-last-sexp)
-		;; indent-point immediately follows open paren.
-		;; Don't call hook.
-		(setq desired-indent (current-column))
-	      ;; Find the start of first element of containing sexp.
-	      (parse-partial-sexp (point) calculate-lisp-indent-last-sexp 0 t)
-	      (cond ((looking-at "\\s(")
-		     ;; First element of containing sexp is a list.
-		     ;; Indent under that list.
-		     )
-		    ((> (save-excursion (forward-line 1) (point))
-			calculate-lisp-indent-last-sexp)
-		     ;; This is the first line to start within the containing sexp.
-		     ;; It's almost certainly a function call.
-		     (if (or
-			  ;; Containing sexp has nothing before this line
-			  ;; except the first element. Indent under that element.
-			  (= (point) calculate-lisp-indent-last-sexp)
+        (beginning-of-line)
+        (let ((indent-point (point))
+              state
+              ;; setting this to a number inhibits calling hook
+              (desired-indent nil)
+              (retry t)
+              calculate-lisp-indent-last-sexp containing-sexp)
+          (cond ((or (markerp parse-start) (integerp parse-start))
+                 (goto-char parse-start))
+                ((null parse-start) (beginning-of-defun))
+                (t (setq state parse-start)))
+          (unless state
+            ;; Find outermost containing sexp
+            (while (< (point) indent-point)
+              (setq state (parse-partial-sexp (point) indent-point 0))))
+          ;; Find innermost containing sexp
+          (while (and retry
+                      state
+                      (> (elt state 0) 0))
+            (setq retry nil)
+            (setq calculate-lisp-indent-last-sexp (elt state 2))
+            (setq containing-sexp (elt state 1))
+            ;; Position following last unclosed open.
+            (goto-char (1+ containing-sexp))
+            ;; Is there a complete sexp since then?
+            (if (and calculate-lisp-indent-last-sexp
+                     (> calculate-lisp-indent-last-sexp (point)))
+                ;; Yes, but is there a containing sexp after that?
+                (let ((peek (parse-partial-sexp calculate-lisp-indent-last-sexp
+                                                indent-point 0)))
+                  (if (setq retry (car (cdr peek))) (setq state peek)))))
+          (if retry
+              nil
+            ;; Innermost containing sexp found
+            (goto-char (1+ containing-sexp))
+            (if (not calculate-lisp-indent-last-sexp)
+                ;; indent-point immediately follows open paren.
+                ;; Don't call hook.
+                (setq desired-indent (current-column))
+              ;; Find the start of first element of containing sexp.
+              (parse-partial-sexp (point) calculate-lisp-indent-last-sexp 0 t)
+              (cond ((looking-at "\\s(")
+                     ;; First element of containing sexp is a list.
+                     ;; Indent under that list.
+                     )
+                    ((> (save-excursion (forward-line 1) (point))
+                        calculate-lisp-indent-last-sexp)
+                     ;; This is the first line to start within the containing sexp.
+                     ;; It's almost certainly a function call.
+                     (if (or
+                          ;; Containing sexp has nothing before this line
+                          ;; except the first element. Indent under that element.
+                          (= (point) calculate-lisp-indent-last-sexp)
 
-			  ;; First sexp after `containing-sexp' is a keyword. This
-			  ;; condition is more debatable. It's so that I can have
-			  ;; unquoted plists in macros. It assumes that you won't
-			  ;; make a function whose name is a keyword.
-			  (when-let (char-after (char-after (1+ containing-sexp)))
-			    (char-equal char-after ?:))
+                          ;; First sexp after `containing-sexp' is a keyword. This
+                          ;; condition is more debatable. It's so that I can have
+                          ;; unquoted plists in macros. It assumes that you won't
+                          ;; make a function whose name is a keyword.
+                          (when-let (char-after (char-after (1+ containing-sexp)))
+                            (char-equal char-after ?:))
 
-			  ;; Check for quotes or backquotes around.
-			  (let* ((positions (elt state 9))
-				 (last (car (last positions)))
-				 (rest (reverse (butlast positions)))
-				 (any-quoted-p nil)
-				 (point nil))
-			    (or
-			     (when-let (char (char-before last))
-			       (or (char-equal char ?')
-				   (char-equal char ?`)))
-			     (progn
-			       (while (and rest (not any-quoted-p))
-				 (setq point (pop rest))
-				 (setq any-quoted-p
-				       (or
-					(when-let (char (char-before point))
-					  (or (char-equal char ?')
-					      (char-equal char ?`)))
-					(save-excursion
-					  (goto-char (1+ point))
-					  (looking-at-p
-					   "\\(?:back\\)?quote[\t\n\f\s]+(")))))
-			       any-quoted-p))))
-			 ;; Containing sexp has nothing before this line
-			 ;; except the first element.  Indent under that element.
-			 nil
-		       ;; Skip the first element, find start of second (the first
-		       ;; argument of the function call) and indent under.
-		       (progn (forward-sexp 1)
-			      (parse-partial-sexp (point)
-						  calculate-lisp-indent-last-sexp
-						  0 t)))
-		     (backward-prefix-chars))
-		    (t
-		     ;; Indent beneath first sexp on same line as
-		     ;; `calculate-lisp-indent-last-sexp'.  Again, it's
-		     ;; almost certainly a function call.
-		     (goto-char calculate-lisp-indent-last-sexp)
-		     (beginning-of-line)
-		     (parse-partial-sexp (point) calculate-lisp-indent-last-sexp
-					 0 t)
-		     (backward-prefix-chars)))))
-	  ;; Point is at the point to indent under unless we are inside a string.
-	  ;; Call indentation hook except when overridden by lisp-indent-offset
-	  ;; or if the desired indentation has already been computed.
-	  (let ((normal-indent (current-column)))
-	    (cond ((elt state 3)
-		   ;; Inside a string, don't change indentation.
-		   nil)
-		  ((and (integerp lisp-indent-offset) containing-sexp)
-		   ;; Indent by constant offset
-		   (goto-char containing-sexp)
-		   (+ (current-column) lisp-indent-offset))
-		  ;; in this case calculate-lisp-indent-last-sexp is not nil
-		  (calculate-lisp-indent-last-sexp
-		   (or
-		    ;; try to align the parameters of a known function
-		    (and lisp-indent-function
-			 (not retry)
-			 (funcall lisp-indent-function indent-point state))
-		    ;; If the function has no special alignment
-		    ;; or it does not apply to this argument,
-		    ;; try to align a constant-symbol under the last
-		    ;; preceding constant symbol, if there is such one of
-		    ;; the last 2 preceding symbols, in the previous
-		    ;; uncommented line.
-		    (and (save-excursion
-			   (goto-char indent-point)
-			   (skip-chars-forward " \t")
-			   (looking-at ":"))
-			 ;; The last sexp may not be at the indentation
-			 ;; where it begins, so find that one, instead.
-			 (save-excursion
-			   (goto-char calculate-lisp-indent-last-sexp)
-			   ;; Handle prefix characters and whitespace
-			   ;; following an open paren.  (Bug#1012)
-			   (backward-prefix-chars)
-			   (while (not (or (looking-back "^[ \t]*\\|([ \t]+"
-							 (line-beginning-position))
-					   (and containing-sexp
-						(>= (1+ containing-sexp) (point)))))
-			     (forward-sexp -1)
-			     (backward-prefix-chars))
-			   (setq calculate-lisp-indent-last-sexp (point)))
-			 (> calculate-lisp-indent-last-sexp
-			    (save-excursion
-			      (goto-char (1+ containing-sexp))
-			      (parse-partial-sexp (point) calculate-lisp-indent-last-sexp 0 t)
-			      (point)))
-			 (let ((parse-sexp-ignore-comments t)
-			       indent)
-			   (goto-char calculate-lisp-indent-last-sexp)
-			   (or (and (looking-at ":")
-				    (setq indent (current-column)))
-			       (and (< (line-beginning-position)
-				       (prog2 (backward-sexp) (point)))
-				    (looking-at ":")
-				    (setq indent (current-column))))
-			   indent))
-		    ;; another symbols or constants not preceded by a constant
-		    ;; as defined above.
-		    normal-indent))
-		  ;; in this case calculate-lisp-indent-last-sexp is nil
-		  (desired-indent)
-		  (t
-		   normal-indent))))))
+                          ;; Check for quotes or backquotes around.
+                          (let* ((positions (elt state 9))
+                                 (last (car (last positions)))
+                                 (rest (reverse (butlast positions)))
+                                 (any-quoted-p nil)
+                                 (point nil))
+                            (or
+                             (when-let (char (char-before last))
+                               (or (char-equal char ?')
+                                   (char-equal char ?`)))
+                             (progn
+                               (while (and rest (not any-quoted-p))
+                                 (setq point (pop rest))
+                                 (setq any-quoted-p
+                                       (or
+                                        (when-let (char (char-before point))
+                                          (or (char-equal char ?')
+                                              (char-equal char ?`)))
+                                        (save-excursion
+                                          (goto-char (1+ point))
+                                          (looking-at-p
+                                           "\\(?:back\\)?quote[\t\n\f\s]+(")))))
+                               any-quoted-p))))
+                         ;; Containing sexp has nothing before this line
+                         ;; except the first element.  Indent under that element.
+                         nil
+                       ;; Skip the first element, find start of second (the first
+                       ;; argument of the function call) and indent under.
+                       (progn (forward-sexp 1)
+                              (parse-partial-sexp (point)
+                                                  calculate-lisp-indent-last-sexp
+                                                  0 t)))
+                     (backward-prefix-chars))
+                    (t
+                     ;; Indent beneath first sexp on same line as
+                     ;; `calculate-lisp-indent-last-sexp'.  Again, it's
+                     ;; almost certainly a function call.
+                     (goto-char calculate-lisp-indent-last-sexp)
+                     (beginning-of-line)
+                     (parse-partial-sexp (point) calculate-lisp-indent-last-sexp
+                                         0 t)
+                     (backward-prefix-chars)))))
+          ;; Point is at the point to indent under unless we are inside a string.
+          ;; Call indentation hook except when overridden by lisp-indent-offset
+          ;; or if the desired indentation has already been computed.
+          (let ((normal-indent (current-column)))
+            (cond ((elt state 3)
+                   ;; Inside a string, don't change indentation.
+                   nil)
+                  ((and (integerp lisp-indent-offset) containing-sexp)
+                   ;; Indent by constant offset
+                   (goto-char containing-sexp)
+                   (+ (current-column) lisp-indent-offset))
+                  ;; in this case calculate-lisp-indent-last-sexp is not nil
+                  (calculate-lisp-indent-last-sexp
+                   (or
+                    ;; try to align the parameters of a known function
+                    (and lisp-indent-function
+                         (not retry)
+                         (funcall lisp-indent-function indent-point state))
+                    ;; If the function has no special alignment
+                    ;; or it does not apply to this argument,
+                    ;; try to align a constant-symbol under the last
+                    ;; preceding constant symbol, if there is such one of
+                    ;; the last 2 preceding symbols, in the previous
+                    ;; uncommented line.
+                    (and (save-excursion
+                           (goto-char indent-point)
+                           (skip-chars-forward " \t")
+                           (looking-at ":"))
+                         ;; The last sexp may not be at the indentation
+                         ;; where it begins, so find that one, instead.
+                         (save-excursion
+                           (goto-char calculate-lisp-indent-last-sexp)
+                           ;; Handle prefix characters and whitespace
+                           ;; following an open paren.  (Bug#1012)
+                           (backward-prefix-chars)
+                           (while (not (or (looking-back "^[ \t]*\\|([ \t]+"
+                                                         (line-beginning-position))
+                                           (and containing-sexp
+                                                (>= (1+ containing-sexp) (point)))))
+                             (forward-sexp -1)
+                             (backward-prefix-chars))
+                           (setq calculate-lisp-indent-last-sexp (point)))
+                         (> calculate-lisp-indent-last-sexp
+                            (save-excursion
+                              (goto-char (1+ containing-sexp))
+                              (parse-partial-sexp (point) calculate-lisp-indent-last-sexp 0 t)
+                              (point)))
+                         (let ((parse-sexp-ignore-comments t)
+                               indent)
+                           (goto-char calculate-lisp-indent-last-sexp)
+                           (or (and (looking-at ":")
+                                    (setq indent (current-column)))
+                               (and (< (line-beginning-position)
+                                       (prog2 (backward-sexp) (point)))
+                                    (looking-at ":")
+                                    (setq indent (current-column))))
+                           indent))
+                    ;; another symbols or constants not preceded by a constant
+                    ;; as defined above.
+                    normal-indent))
+                  ;; in this case calculate-lisp-indent-last-sexp is nil
+                  (desired-indent)
+                  (t
+                   normal-indent))))))
     (advice-add #'calculate-lisp-indent :override #'ross/calculate-lisp-indent))
 #+end_src
 
@@ -3113,8 +3113,8 @@ the trick.
     (which-key-idle-secondary-delay 1e-9)
     :config
     (push `((nil . ,(rx bos "ross/" (group (1+ any)) "-map" eos)) .
-	    (nil . ,(rx (backref 1))))
-	  which-key-replacement-alist))
+            (nil . ,(rx (backref 1))))
+          which-key-replacement-alist))
 #+end_src
 
 ~C-h C-h~ shadows which-key with something less useful.
@@ -3148,44 +3148,44 @@ Finally, we add a Home Manager module based on the configured app.
     ];
     perSystem = { config, self', inputs', pkgs, system, ... }: {
       overlayAttrs = {
-	inherit (config.packages) emacs29;
+        inherit (config.packages) emacs29;
       };
       packages.emacs29 = pkgs.emacsGit.overrideAttrs (old: {
-	name = "emacs29";
-	# It's important this starts with the major number for Nix's
-	# Emacs infra.  For example, it's used to blank out archaic
-	# versions of the Seq package in MELPA.
-	version = "29.0-${inputs.emacs-src.shortRev}";
-	src = inputs.emacs-src;
+        name = "emacs29";
+        # It's important this starts with the major number for Nix's
+        # Emacs infra.  For example, it's used to blank out archaic
+        # versions of the Seq package in MELPA.
+        version = "29.0-${inputs.emacs-src.shortRev}";
+        src = inputs.emacs-src;
       });
       packages.emacs-ross = pkgs.emacsWithPackagesFromUsePackage {
-	package = config.packages.emacs29;
-	override = epkgs: epkgs // {
-	  on = epkgs.trivialBuild {
-	    pname = "on.el";
-	    src = inputs.on-el;
-	  };
-	};
-	config = ./init.el;
-	defaultInitFile = true;
-	alwaysEnsure = false;
+        package = config.packages.emacs29;
+        override = epkgs: epkgs // {
+          on = epkgs.trivialBuild {
+            pname = "on.el";
+            src = inputs.on-el;
+          };
+        };
+        config = ./init.el;
+        defaultInitFile = true;
+        alwaysEnsure = false;
       };
       apps.emacs = {
-	type = "app";
-	program = "${config.packages.emacs-ross}/bin/emacs";
+        type = "app";
+        program = "${config.packages.emacs-ross}/bin/emacs";
       };
     };
     flake = {
       homeManagerModules.emacs = moduleWithSystem (
-	perSystem@{ config, pkgs }: {
-	  imports = [
+        perSystem@{ config, pkgs }: {
+          imports = [
             <<emacs-home-packages>>
-	  ];
-	  programs.emacs = {
-	    enable = true;
-	    package = config.packages.emacs-ross;
-	  };
-	}
+          ];
+          programs.emacs = {
+            enable = true;
+            package = config.packages.emacs-ross;
+          };
+        }
       );
     };
   }
