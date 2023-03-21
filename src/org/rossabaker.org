@@ -2805,7 +2805,7 @@ a bit more minimalist than the excellent [[https://emacs-lsp.github.io/lsp-mode/
 
 **** Completion
 
-**** Minibuffer
+***** Minibuffer
 
 [[https://github.com/minad/vertico][Vertico]] is a little bit nicer version of the builtin
 ~icomplete-vertical~.
@@ -2850,7 +2850,7 @@ It's an alternative to ~vertico-quick~.
      ("M-DEL" . vertico-directory-delete-word)))
 #+end_src
 
-**** Popups
+***** Popups
 
 We use [[https://github.com/minad/corfu][Corfu]] for small, in-buffer popups of completion candidates.
 Autocompletion of method names in code is a classic use case.
