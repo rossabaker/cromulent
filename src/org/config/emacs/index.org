@@ -679,20 +679,10 @@ This is the vestige of my old init.el.  It is gradually being made literate.
   :after (embark consult)
   :demand t)
 
-(use-package marginalia
-  :ensure
-  :config
-  (marginalia-mode))
-
 (use-package orderless
   :ensure
   :custom
   (completion-styles '(orderless)))
-
-(use-package vertico
-  :ensure
-  :hook
-  (rfn-eshadow-update-overlay-hook . vertico-directory-tidy))
 
 (use-package which-key
   :ensure
