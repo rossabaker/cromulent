@@ -211,6 +211,11 @@ existing directory under `magit-clone-default-directory'."
   :hook (on-first-buffer . ws-butler-global-mode)
   :diminish)
 
+(use-package uuidgen
+  :disabled t
+  :ensure t
+  :defer t)
+
 (use-package ox-hugo
   :ensure t
   :after org

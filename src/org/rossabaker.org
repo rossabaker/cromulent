@@ -2213,7 +2213,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-03-21 Tue 00:02>
+:EXPORT_HUGO_LASTMOD: <2023-03-21 Tue 00:16>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -2741,6 +2741,18 @@ I like builtin packages, but I like minimal diffs more.  [[https://github.com/le
     :ensure t
     :hook (on-first-buffer . ws-butler-global-mode)
     :diminish)
+#+end_src
+
+**** UUID generation
+
+[[https://github.com/kanru/uuidgen-el][uuidgen-el]] comes in handy, except I'm getting a segfault byte
+compiling it.
+
+#+begin_src emacs-lisp
+  (use-package uuidgen
+    :disabled t
+    :ensure t
+    :defer t)
 #+end_src
 
 **** Org
