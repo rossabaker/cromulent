@@ -269,6 +269,15 @@ with EXPORT_FILE_NAME."
    ("RET" . vertico-directory-enter)
    ("M-DEL" . vertico-directory-delete-word)))
 
+(use-package marginalia
+  :ensure t
+  :after vertico
+  :bind
+  (:map minibuffer-local-map
+   ("M-A" . marginalia-cycle))
+  :config
+  (marginalia-mode))
+
 (use-package corfu
   :ensure t
   :hook (on-first-buffer . global-corfu-mode))
