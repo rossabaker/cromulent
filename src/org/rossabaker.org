@@ -2213,7 +2213,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-03-17 Fri 00:42>
+:EXPORT_HUGO_LASTMOD: <2023-03-20 Mon 21:19>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -2530,6 +2530,17 @@ an error, I don't need them all up in my business.
   (use-package comp
     :custom
     (native-comp-async-report-warnings-errors 'silent))
+#+end_src
+
+**** Don't minimize
+
+I don't much care for minimizing windows in the first place, and
+particularly not my favorite window with a keybinding that's too easy to hit.
+
+#+begin_src emacs-lisp
+  (use-package frame
+    :bind
+    ("C-z" . nil))
 #+end_src
 
 *** Editing

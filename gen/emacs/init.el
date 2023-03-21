@@ -131,6 +131,10 @@
   :custom
   (native-comp-async-report-warnings-errors 'silent))
 
+(use-package frame
+  :bind
+  ("C-z" . nil))
+
 (use-package emacs
   :bind
   ([remap capitalize-word] . capitalize-dwim)
