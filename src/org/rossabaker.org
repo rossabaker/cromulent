@@ -2213,7 +2213,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-03-20 Mon 21:19>
+:EXPORT_HUGO_LASTMOD: <2023-03-20 Mon 23:38>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -2801,6 +2801,40 @@ a bit more minimalist than the excellent [[https://emacs-lsp.github.io/lsp-mode/
 
 #+begin_src emacs-lisp
   (use-package eglot :defer t)
+#+end_src
+
+**** Dumb jump
+
+[[https://github.com/jacktasia/dumb-jump][dumb-jump]] is dumber than LSP, but it's a lot less fussy and makes for
+a wonderful fallback option.
+
+~git-grep~ is not working for me.  It appears to be [[https://github.com/jacktasia/dumb-jump/issues/428][option rot]].
+
+#+begin_src emacs-lisp
+  (use-package dumb-jump
+    :ensure t
+    :config
+    (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
+    :custom
+    (dumb-jump-force-searcher 'rg))
+#+end_src
+
+Make sure ripgrep is available.
+
+#+begin_src nix :noweb-ref emacs-home-packages
+  ({ pkgs, ...}: { home.packages = [ pkgs.ripgrep ]; })
+#+end_src
+
+**** Xref
+
+Regardless of LSP or dumb-jump, we want Vertico to handle when
+multiple definitions are found.
+
+#+begin_src emacs-lisp
+  (use-package xref
+    :defer
+    :custom
+    (xref-show-definitions-function #'xref-show-definitions-completing-read))
 #+end_src
 
 **** Completion

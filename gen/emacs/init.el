@@ -237,6 +237,18 @@ with EXPORT_FILE_NAME."
 
 (use-package eglot :defer t)
 
+(use-package dumb-jump
+  :ensure t
+  :config
+  (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
+  :custom
+  (dumb-jump-force-searcher 'rg))
+
+(use-package xref
+  :defer
+  :custom
+  (xref-show-definitions-function #'xref-show-definitions-completing-read))
+
 (use-package vertico
   :ensure t
   :hook (on-first-input . vertico-mode))

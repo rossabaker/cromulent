@@ -35,6 +35,7 @@
     homeManagerModules.emacs = moduleWithSystem (
       perSystem@{ config, pkgs }: {
         imports = [
+          ({ pkgs, ...}: { home.packages = [ pkgs.ripgrep ]; })
           ({ pkgs, ...}: { home.packages = [ pkgs.gcc ]; })
         ];
         programs.emacs = {
