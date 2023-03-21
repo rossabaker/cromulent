@@ -2213,7 +2213,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-03-20 Mon 23:59>
+:EXPORT_HUGO_LASTMOD: <2023-03-21 Tue 00:02>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -2875,13 +2875,18 @@ It's an alternative to ~vertico-quick~.
   slash.  There's a recommended binding for =DEL=, but I'd rather keep
   that deleting chars.
 
+I never understood =vertico-directory-tidy= before [[https://kristofferbalintona.me/posts/202202211546/#niceties][this demo]].  When we
+start with ~/~ or ~~/~, it cleans up the leading default prompt that's
+"shadowed".
+
 #+begin_src emacs-lisp
   (use-package vertico-directory
     :after vertico
     :bind
     (:map vertico-map
      ("RET" . vertico-directory-enter)
-     ("M-DEL" . vertico-directory-delete-word)))
+     ("M-DEL" . vertico-directory-delete-word))
+    :hook (rfn-eshadow-update-overlay . vertico-directory-tidy))
 #+end_src
 
 [[https://github.com/minad/marginalia][Marginalia]] annotates minibuffer completions with some useful info.

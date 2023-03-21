@@ -267,7 +267,8 @@ with EXPORT_FILE_NAME."
   :bind
   (:map vertico-map
    ("RET" . vertico-directory-enter)
-   ("M-DEL" . vertico-directory-delete-word)))
+   ("M-DEL" . vertico-directory-delete-word))
+  :hook (rfn-eshadow-update-overlay . vertico-directory-tidy))
 
 (use-package marginalia
   :ensure t
