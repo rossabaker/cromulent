@@ -58,6 +58,8 @@
   (initial-major-mode 'fundamental-mode)
   (initial-scratch-message nil))
 
+(setopt confirm-kill-emacs 'yes-or-no-p)
+
 (use-package emacs
   :custom
   (frame-inhibit-implied-resize t))

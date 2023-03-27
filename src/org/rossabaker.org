@@ -2213,7 +2213,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-03-21 Tue 00:16>
+:EXPORT_HUGO_LASTMOD: <2023-03-27 Mon 01:02>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -2377,6 +2377,14 @@ quiet startup.
     (inhibit-splash-screen t)
     (initial-major-mode 'fundamental-mode)
     (initial-scratch-message nil))
+#+end_src
+
+**** Shutdown
+
+I'd usually rather exit Slack, to be quite honest.
+
+#+begin_src emacs-lisp
+  (setopt confirm-kill-emacs 'yes-or-no-p)
 #+end_src
 
 **** Fonts
