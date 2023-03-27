@@ -2383,37 +2383,50 @@ errors, or worse, trying to install the execrable Xcode.
     (exec-path-from-shell-initialize))
 #+end_src
 
-*** Topics
+*** General customization
 
-I've struggled with ways to organize a large configuration.  The
-topics in ~finder-by-keyword~, bound to ~C-h p~, have the great virtue
-that somebody else thought of them so I didn't have to.
+I spun my wheels for a while over how to arrange my customizations,
+ignoring that Emacs has already done most of that work!  I don't use
+Emacs' customize interface, preferring this version-controlled,
+literate config.  However, its tree of ~defgroups~ is pretty
+reasonable, and more importantly, stops me from agonizing over them.
+This structure is modeled after that.
 
-**** Abbrev                                                        :noexport:
-#+begin_quote
-Abbreviation handling, typing shortcuts, and macros
-#+end_quote
-**** Bib                                                           :noexport:
-#+begin_quote
-Bibliography processors
-#+end_quote
-**** C                                                             :noexport:
-#+begin_quote
-C and related programming languages
-#+end_quote
-**** Calendar                                                      :noexport:
-#+begin_quote
-Calendar and time management tools
-#+end_quote
-**** Comm                                                          :noexport:
-#+begin_quote
-Communications, networking, and remote file access
-#+end_quote
+**** Editing
+
+***** Indentation
+
+Tabs are the devil's whitespace.
+
+#+begin_src
+  (use-package simple
+    :config
+    (setq-default indent-tabs-mode nil))
+#+end_src
+
+***** Case
+
+These do-what-I-mean bindings are newer than the classic keybindings,
+but a better default.
+
+#+begin_src emacs-lisp
+  (use-package emacs
+    :bind
+    ([remap capitalize-word] . capitalize-dwim)
+    ([remap downcase-word] . downcase-dwim)
+    ([remap upcase-word] . upcase-dwim))
+#+end_src
+
 **** Convenience
-#+begin_quote
-Convenience features for faster editing
-#+end_Quote
-***** Line numbers
+***** Exiting
+
+I'd usually rather exit Slack, to be quite honest.
+
+#+begin_src emacs-lisp
+  (setopt confirm-kill-emacs 'yes-or-no-p)
+#+end_src
+
+***** Display line numbers
 
 ~display-line-numbers~ is a more performant replacement for the
 venerable old ~linum~.  We turn it on for program and configuration
@@ -2427,7 +2440,78 @@ modes.
     ((prog-mode conf-mode) . display-line-numbers-mode))
 #+end_src
 
-***** Beep beep, your ass
+
+**** Development
+
+***** Lisp
+
+****** Compilation
+
+I get a bunch of asynchronous warnings from native compilation in a
+~*Warnings*~ popup.  It's nice that they're there, but unless they're
+an error, I don't need them all up in my business.
+
+#+begin_src emacs-lisp
+  (use-package comp
+    :custom
+    (native-comp-async-report-warnings-errors 'silent))
+#+end_src
+
+**** Environment
+
+***** Frames
+
+I like tiled windows more than I need Emacs to maintain a static
+number of columns and rows.
+
+#+begin_src emacs-lisp
+  (setopt frame-inhibit-implied-resize t)
+#+end_src
+
+****** Cursor
+
+I like a non-blinking bar cursor.
+
+#+begin_src emacs-lisp
+  (setopt cursor-type 'bar)
+  (use-package frame
+    :config
+    (blink-cursor-mode -1))
+#+end_src
+
+****** Scroll bars
+
+The modeline tells us where we're at, and we mostly eschew the mouse.
+
+#+begin_src emacs-lisp
+  (use-package scroll-bar
+    :config
+    (scroll-bar-mode -1))
+#+end_src
+
+****** Tool bars
+
+The much despised tool bar is not a terrible default for the Emacs
+neophyte, but I'm old and grizzled.
+
+#+begin_src emacs-lisp
+  (use-package tool-bar
+    :config
+    (tool-bar-mode -1))
+#+end_src
+
+****** Minimization: let's not
+
+I don't much care for minimizing windows in the first place, and
+particularly not my favorite window with a keybinding that's too easy to hit.
+
+#+begin_src emacs-lisp
+  (use-package frame
+    :bind
+    ("C-z" . nil))
+#+end_src
+
+****** Beep beep, your ass
 
 Decades ago, there was a meme of Wile E. Coyote, having finally caught
 Road Runner, saying "Beep beep your ass."  This comes from
@@ -2440,35 +2524,9 @@ bell.
     :hook (on-first-input . mode-line-bell-mode))
 #+end_src
 
-**** Data                                                          :noexport:
-#+begin_quote
-Editing data (non-text) files
-#+end_quote
-**** Docs                                                          :noexport:
-#+begin_quote
-Emacs documentation facilities
-#+end_quote
-**** Emulations                                                    :noexport:
-#+begin_quote
-Emulations of other editors
-#+end_quote
-**** Extensions                                                    :noexport:
-#+begin_quote
-Emacs Lisp language extensions
-#+end_quote
-**** Faces
-#+begin_quote
-Fonts and colors for text
-#+end_quote
+***** Faces
 
-I like tiled windows more than I need Emacs to maintain a static
-number of columns and rows.
-
-#+begin_src emacs-lisp
-  (setopt frame-inhibit-implied-resize t)
-#+end_src
-
-***** Font presets
+****** Fontaine
 
 I give an increasing number of live presentations at work.  The
 [[https://protesilaos.com/emacs/fontaine][Fontaine]] package lets me scale up the font for screen sharing, and
@@ -2516,7 +2574,7 @@ the rest of the world's points.
         (fontaine-set-preset 'regular))))
 #+end_src
 
-***** Theme
+****** Modus themes
 
 I like the [[https://protesilaos.com/emacs/modus-themes][modus-themes]].  They are built into modern Emacs, but the
 author continues to work on them, so we grab them from ELPA with
@@ -2529,84 +2587,7 @@ author continues to work on them, so we grab them from ELPA with
     (load-theme 'modus-operandi :no-confirm))
 #+end_src
 
-**** Files                                                         :noexport:
-#+begin_quote
-File editing and manipulation
-#+end_quote
-**** Frames
-#+begin_quote
-Emacs frames and window systems
-#+end_quote
-
-***** Cursor
-
-I like a non-blinking bar cursor.
-
-#+begin_src emacs-lisp
-  (setopt cursor-type 'bar)
-  (use-package frame
-    :config
-    (blink-cursor-mode -1))
-#+end_src
-
-***** Scroll bars
-
-The modeline tells us where we're at, and we mostly eschew the mouse.
-
-#+begin_src emacs-lisp
-  (use-package scroll-bar
-    :config
-    (scroll-bar-mode -1))
-#+end_src
-
-***** Tool bars
-
-The much despised tool bar is not a terrible default for the Emacs
-neophyte, but I'm old and grizzled.
-
-#+begin_src emacs-lisp
-  (use-package tool-bar
-    :config
-    (tool-bar-mode -1))
-#+end_src
-
-***** Minimization: let's not
-
-I don't much care for minimizing windows in the first place, and
-particularly not my favorite window with a keybinding that's too easy to hit.
-
-#+begin_src emacs-lisp
-  (use-package frame
-    :bind
-    ("C-z" . nil))
-#+end_src
-
-**** Games                                                         :noexport:
-#+begin_quote
-Games, jokes and amusements
-#+end_quote
-**** Hardware                                                      :noexport:
-#+begin_quote
-Interfacing with system hardware
-#+end_quote
-**** Help                                                          :noexport:
-#+begin_quote
-Emacs help systems
-#+end_quote
-**** Hypermedia                                                    :noexport:
-#+begin_quote
-Links between text or other media types
-#+end_quote
-**** I18n                                                          :noexport:
-#+begin_quote
-Internationalization and character-set support
-#+end_quote
-**** Internal
-#+begin_quote
-Code for Emacs internals, build process, defaults
-#+end_quote
-
-***** Startup
+***** Initialization
 
 I don't need a dashboard and I know where the manuals are.  I prefer a
 quiet startup.
@@ -2619,135 +2600,9 @@ quiet startup.
     (initial-scratch-message nil))
 #+end_src
 
-***** Exiting
-
-I'd usually rather exit Slack, to be quite honest.
-
-#+begin_src emacs-lisp
-  (setopt confirm-kill-emacs 'yes-or-no-p)
-#+end_src
-
-**** Languages                                                     :noexport:
-#+begin_quote
-Specialized modes for editing programming languages
-#+end_quote
-**** Lisp
-#+begin_quote
-Lisp support, including Emacs Lisp
-#+end_quote
-
-***** Compilation
-
-I get a bunch of asynchronous warnings from native compilation in a
-~*Warnings*~ popup.  It's nice that they're there, but unless they're
-an error, I don't need them all up in my business.
-
-#+begin_src emacs-lisp
-  (use-package comp
-    :custom
-    (native-comp-async-report-warnings-errors 'silent))
-#+end_src
-
-**** Local                                                         :noexport:
-#+begin_quote
-Code local to your site
-#+end_quote
-**** Maint                                                         :noexport:
-#+begin_quote
-Emacs development tools and aids
-#+end_quote
-**** Mail                                                          :noexport:
-#+begin_quote
-Email reading and posting
-#+end_quote
-**** Matching                                                      :noexport:
-#+begin_quote
-Searching, matching, and sorting
-#+end_quote
-**** Mouse
-#+begin_quote
-Mouse support
-#+end_quote
-
-I keep hitting control with the mouse wheel during presentations,
-which is never intentional.
-
-#+begin_src emacs-lisp
-  (use-package mwheel
-    :defer
-    :config
-    (ross/unbind-all 'mouse-wheel-text-scale))
-#+end_src
-
-**** Multimedia                                                    :noexport:
-#+begin_quote
-Images and sound
-#+end_quote
-**** News                                                          :noexport:
-#+begin_quote
-Usenet news reading and posting
-#+end_quote
-**** Outlines                                                      :noexport:
-#+begin_quote
-Hierarchical outlining and note taking
-#+end_quote
-**** Processes                                                     :noexport:
-#+begin_quote
-Processes, subshells, and compilation
-#+end_quote
-**** Terminals                                                     :noexport:
-#+begin_quote
-Text terminals (ttys)
-#+end_quote
-**** TeX                                                           :noexport:
-#+begin_quote
-The TeX document formatter
-#+end_quote
-**** Tools                                                         :noexport:
-#+begin_quote
-Programming tools
-#+end_quote
-**** Unix                                                          :noexport:
-#+begin_quote
-Unix feature interfaces and emulators
-#+end_quote
-**** VC                                                            :noexport:
-#+begin_quote
-Version control
-#+end_quote
-**** WP                                                            :noexport:
-#+begin_quote
-Word processing
-#+end_quote
-
 *** Uncategorized
 
 These should be refiled under the topics above, but it's late.
-
-**** Editing
-
-***** Casing regions
-
-These do-what-I-mean bindings are newer than the classic keybindings,
-but a better default.
-
-#+begin_src emacs-lisp
-  (use-package emacs
-    :bind
-    ([remap capitalize-word] . capitalize-dwim)
-    ([remap downcase-word] . downcase-dwim)
-    ([remap upcase-word] . upcase-dwim))
-#+end_src
-
-***** Indentation
-
-Tabs are the devil's whitespace.
-
-#+begin_src
-  (use-package simple
-    :config
-    (setq-default indent-tabs-mode nil))
-#+end_src
 
 **** History
 

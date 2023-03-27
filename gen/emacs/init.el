@@ -52,17 +52,46 @@
   :config
   (exec-path-from-shell-initialize))
 
+(use-package emacs
+  :bind
+  ([remap capitalize-word] . capitalize-dwim)
+  ([remap downcase-word] . downcase-dwim)
+  ([remap upcase-word] . upcase-dwim))
+
+(setopt confirm-kill-emacs 'yes-or-no-p)
+
 (use-package display-line-numbers
   :custom
   (display-line-numbers-widen t)
   :hook
   ((prog-mode conf-mode) . display-line-numbers-mode))
 
+(use-package comp
+  :custom
+  (native-comp-async-report-warnings-errors 'silent))
+
+(setopt frame-inhibit-implied-resize t)
+
+(setopt cursor-type 'bar)
+(use-package frame
+  :config
+  (blink-cursor-mode -1))
+
+(use-package scroll-bar
+  :config
+  (scroll-bar-mode -1))
+
+(use-package tool-bar
+  :config
+  (tool-bar-mode -1))
+
+(use-package frame
+  :bind
+  ("C-z" . nil))
+
 (use-package mode-line-bell
   :ensure
   :hook (on-first-input . mode-line-bell-mode))
-
-(setopt frame-inhibit-implied-resize t)
 
 (use-package fontaine
   :ensure t
@@ -99,45 +128,11 @@
   :config
   (load-theme 'modus-operandi :no-confirm))
 
-(setopt cursor-type 'bar)
-(use-package frame
-  :config
-  (blink-cursor-mode -1))
-
-(use-package scroll-bar
-  :config
-  (scroll-bar-mode -1))
-
-(use-package tool-bar
-  :config
-  (tool-bar-mode -1))
-
-(use-package frame
-  :bind
-  ("C-z" . nil))
-
 (use-package "startup"
   :custom
   (inhibit-splash-screen t)
   (initial-major-mode 'fundamental-mode)
   (initial-scratch-message nil))
-
-(setopt confirm-kill-emacs 'yes-or-no-p)
-
-(use-package comp
-  :custom
-  (native-comp-async-report-warnings-errors 'silent))
-
-(use-package mwheel
-  :defer
-  :config
-  (ross/unbind-all 'mouse-wheel-text-scale))
-
-(use-package emacs
-  :bind
-  ([remap capitalize-word] . capitalize-dwim)
-  ([remap downcase-word] . downcase-dwim)
-  ([remap upcase-word] . upcase-dwim))
 
 (use-package simple
   :custom
