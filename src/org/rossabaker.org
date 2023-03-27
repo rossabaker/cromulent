@@ -2213,7 +2213,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-03-27 Mon 01:02>
+:EXPORT_HUGO_LASTMOD: <2023-03-27 Mon 01:12>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -2244,14 +2244,24 @@ The default is to try built-in packages first, but be unafraid to
 augment with [[https://elpa.gnu.org/][ELPA]], [[https://melpa.org/][MELPA]], or even Git.  These extra moving parts are
 managed by rigorously pinning all dependencies with Nix.
 
-*** Startup time
+*** Early tasks
+
+An Emacs configuration can mostly be declared in any order,
+particularly with intelligent use of ~use-package~'s ~:after~ keyword.
+But there are a few things that benefit from going first.
+
+**** Startup time
 
 I don't go to [[https://github.com/doomemacs/doomemacs/blob/35865ef5e89442e3809b8095199977053dd4210f/docs/faq.org#how-does-doom-start-up-so-quickly][Doom's extreme lengths]] to optimize startup time, but
 there are usually a few heavy hitters, and [[https://github.com/dholm/benchmark-init-el][benchmark-init-el]] helps
 find them.  And with my Nix setup, I'm restarting Emacs a lot whenever
 I'm trying new packages, so it's worth a modest effort.
 
-First, we'll benchmark it:
+***** Benchmark
+
+[[https://github.com/dholm/benchmark-init-el][benchmark-init]] is a simple package that may or may not carry its
+weight versus ~usepackage-compute-statistics~.  Run
+~benchmark-init/show-durations-tabulated~ to check this one out.
 
 #+begin_src emacs-lisp
   (use-package benchmark-init
@@ -2261,6 +2271,8 @@ First, we'll benchmark it:
     :config
     (benchmark-init/activate))
 #+end_src
+
+***** Garbage collection
 
 Increasing the garbage collector threshold is reputed to help at init.
 After startup, we revert on the [[https://gitlab.com/koral/gcmh][Garbage Collector Magic Hack]].
@@ -2273,14 +2285,17 @@ After startup, we revert on the [[https://gitlab.com/koral/gcmh][Garbage Collect
     :hook (emacs-startup . gcmh-mode))
 #+end_src
 
-We're also going to use [[https://gitlab.com/ajgrf/on.el][on.el]] to provide some Doom-like hooks.
+***** Doom-like hooks
+
+We're also going to use [[https://gitlab.com/ajgrf/on.el][on.el]] to provide some of the same hooks Doom
+uses.
 
 #+begin_src emacs-lisp
   (use-package on
     :ensure)
 #+end_src
 
-*** Security
+**** Security
 
 For the love of all that is holy, do not continue with untrusted
 connections!
@@ -2292,7 +2307,7 @@ connections!
     (gnutls-verify-error t))
 #+end_src
 
-*** No littering
+**** No littering
 
 Many packages leave crumbs in ~user-emacs-directory~ or even ~$HOME~.
 Finding and configuring them individually is a hassle, so we rely on
@@ -2320,7 +2335,9 @@ seems early enough to avoid crapping in =~/.config/emacs=.
         (expand-file-name  "eln-cache/" no-littering-var-directory)))))
 #+end_src
 
-*** Package management
+**** use-package keywords
+
+***** bind-key
 
 [[https://github.com/jwiegley/use-package][use-package]] is built-in as of Emacs 29, but since we use =:bind=, we
 need to load ~bind-key~.  If we forget, we get the error: ~Symbol's
@@ -2342,6 +2359,8 @@ value as variable is void: personal-keybindings~.
         (unbind-key key))))
 #+end_src
 
+***** Diminish
+
 We also want to "diminish" most minor-mode indicators on the mode
 line.  They're only interesting if they're in an unexpected state.
 
@@ -2349,7 +2368,7 @@ line.  They're only interesting if they're in an unexpected state.
   (use-package diminish :ensure t)
 #+end_src
 
-*** Path
+**** Path setup
 
 Launching Emacs from the MacOS dock does not source my shell config,
 which leads to my Nix profile not being on the ~$PATH~, which leads to
