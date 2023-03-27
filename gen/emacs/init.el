@@ -52,6 +52,13 @@
   :config
   (exec-path-from-shell-initialize))
 
+(setopt set-mark-command-repeat-pop t)
+
+(use-package simple
+  :custom
+  (save-interprogram-paste-before-kill t)
+  (kill-do-not-save-duplicates t))
+
 (use-package emacs
   :bind
   ([remap capitalize-word] . capitalize-dwim)
@@ -65,6 +72,15 @@
   (display-line-numbers-widen t)
   :hook
   ((prog-mode conf-mode) . display-line-numbers-mode))
+
+(use-package saveplace
+  :hook (on-first-buffer . save-place-mode))
+
+(use-package recentf
+  :hook (on-first-file-hook . recentf-mode)
+  :bind
+  (:map ross/files-map
+   ("r" . recentf-open)))
 
 (use-package comp
   :custom
@@ -133,24 +149,6 @@
   (inhibit-splash-screen t)
   (initial-major-mode 'fundamental-mode)
   (initial-scratch-message nil))
-
-(use-package simple
-  :custom
-  (set-mark-command-repeat-pop t))
-
-(use-package simple
-  :custom
-  (save-interprogram-paste-before-kill t)
-  (kill-do-not-save-duplicates t))
-
-(use-package recentf
-  :hook (on-first-file-hook . recentf-mode)
-  :bind
-  (:map ross/files-map
-   ("r" . recentf-open)))
-
-(use-package saveplace
-  :hook (on-first-buffer . save-place-mode))
 
 (use-package magit
   :ensure t
