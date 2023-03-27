@@ -2213,10 +2213,11 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-03-27 Mon 10:45>
+:EXPORT_HUGO_LASTMOD: <2023-03-27 Mon 11:36>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
+:EXPORT_OPTIONS: H:7
 :END:
 
 *** Introduction
@@ -2496,6 +2497,54 @@ list of recent files?
      ("r" . recentf-open)))
 #+end_src
 
+**** Programming
+***** Tools
+****** Git
+******* Magit
+
+I have known people to leave Emacs, but continuing to use [[https://magit.vc/][Magit]] for
+version control.  It's that good.
+
+I am giving builtins the benefit of the doubt in this config, and
+would like to get into ~vc-mode~.  But I'm an advanced enough Git user
+that something tailor-made carries its weight here.
+
+#+begin_src emacs-lisp
+  (use-package magit
+    :ensure t
+    :defer 1
+    :functions ross/magit-clone-read-args-a
+    :bind
+    (:prefix-map ross/git-map
+     :prefix "C-c g"
+     ("g" . magit-status)
+     ("c" . magit-clone))
+    :custom
+    (magit-clone-default-directory "~/src/")
+    (magit-no-message (list "Turning on magit-auto-revert-mode..."))
+    :config
+    (defun ross/magit-clone-read-args-a (orig-fun &rest args)
+      "Sets `vertico-preselect' to `prompt' when cloning repos, so we
+  clone to the default prompted directory, and not some random
+  existing directory under `magit-clone-default-directory'."
+      (let ((vertico-preselect 'prompt))
+        (apply orig-fun args)))
+    (advice-add 'magit-clone-read-args :around #'ross/magit-clone-read-args-a))
+#+end_src
+
+******* Git-Link
+
+[[https://github.com/sshaw/git-link/][git-link]] grabs links to lines, regions, commits, or home pages.
+
+#+begin_src emacs-lisp
+  (use-package git-link
+    :ensure t
+    :custom
+    (git-link-use-commit t)
+    (git-link-use-single-line-number t)
+    :commands (git-link git-link-commit git-link-homepage))
+#+end_src
+
 
 **** Development
 
@@ -2658,53 +2707,6 @@ quiet startup.
 *** Uncategorized
 
 These should be refiled under the topics above, but it's late.
-
-**** Version control
-
-***** Magit
-
-I have known people to leave Emacs, but continuing to use [[https://magit.vc/][Magit]] for
-version control.  It's that good.
-
-I am giving builtins the benefit of the doubt in this config, and
-would like to get into ~vc-mode~.  But I'm an advanced enough Git user
-that something tailor-made carries its weight here.
-
-#+begin_src emacs-lisp
-  (use-package magit
-    :ensure t
-    :defer 1
-    :functions ross/magit-clone-read-args-a
-    :bind
-    (:prefix-map ross/git-map
-     :prefix "C-c g"
-     ("g" . magit-status)
-     ("c" . magit-clone))
-    :custom
-    (magit-clone-default-directory "~/src/")
-    (magit-no-message (list "Turning on magit-auto-revert-mode..."))
-    :config
-    (defun ross/magit-clone-read-args-a (orig-fun &rest args)
-      "Sets `vertico-preselect' to `prompt' when cloning repos, so we
-  clone to the default prompted directory, and not some random
-  existing directory under `magit-clone-default-directory'."
-      (let ((vertico-preselect 'prompt))
-        (apply orig-fun args)))
-    (advice-add 'magit-clone-read-args :around #'ross/magit-clone-read-args-a))
-#+end_src
-
-***** Linking
-
-[[https://github.com/sshaw/git-link/][git-link]] grabs links to lines, regions, commits, or home pages.
-
-#+begin_src emacs-lisp
-  (use-package git-link
-    :ensure t
-    :custom
-    (git-link-use-commit t)
-    (git-link-use-single-line-number t)
-    :commands (git-link git-link-commit git-link-homepage))
-#+end_src
 
 **** Tools
 

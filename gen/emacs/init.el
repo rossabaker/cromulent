@@ -82,6 +82,34 @@
   (:map ross/files-map
    ("r" . recentf-open)))
 
+(use-package magit
+  :ensure t
+  :defer 1
+  :functions ross/magit-clone-read-args-a
+  :bind
+  (:prefix-map ross/git-map
+   :prefix "C-c g"
+   ("g" . magit-status)
+   ("c" . magit-clone))
+  :custom
+  (magit-clone-default-directory "~/src/")
+  (magit-no-message (list "Turning on magit-auto-revert-mode..."))
+  :config
+  (defun ross/magit-clone-read-args-a (orig-fun &rest args)
+    "Sets `vertico-preselect' to `prompt' when cloning repos, so we
+clone to the default prompted directory, and not some random
+existing directory under `magit-clone-default-directory'."
+    (let ((vertico-preselect 'prompt))
+      (apply orig-fun args)))
+  (advice-add 'magit-clone-read-args :around #'ross/magit-clone-read-args-a))
+
+(use-package git-link
+  :ensure t
+  :custom
+  (git-link-use-commit t)
+  (git-link-use-single-line-number t)
+  :commands (git-link git-link-commit git-link-homepage))
+
 (use-package comp
   :custom
   (native-comp-async-report-warnings-errors 'silent))
@@ -149,34 +177,6 @@
   (inhibit-splash-screen t)
   (initial-major-mode 'fundamental-mode)
   (initial-scratch-message nil))
-
-(use-package magit
-  :ensure t
-  :defer 1
-  :functions ross/magit-clone-read-args-a
-  :bind
-  (:prefix-map ross/git-map
-   :prefix "C-c g"
-   ("g" . magit-status)
-   ("c" . magit-clone))
-  :custom
-  (magit-clone-default-directory "~/src/")
-  (magit-no-message (list "Turning on magit-auto-revert-mode..."))
-  :config
-  (defun ross/magit-clone-read-args-a (orig-fun &rest args)
-    "Sets `vertico-preselect' to `prompt' when cloning repos, so we
-clone to the default prompted directory, and not some random
-existing directory under `magit-clone-default-directory'."
-    (let ((vertico-preselect 'prompt))
-      (apply orig-fun args)))
-  (advice-add 'magit-clone-read-args :around #'ross/magit-clone-read-args-a))
-
-(use-package git-link
-  :ensure t
-  :custom
-  (git-link-use-commit t)
-  (git-link-use-single-line-number t)
-  :commands (git-link git-link-commit git-link-homepage))
 
 (use-package envrc
   :ensure t
