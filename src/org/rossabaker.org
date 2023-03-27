@@ -2213,7 +2213,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-03-27 Mon 01:46>
+:EXPORT_HUGO_LASTMOD: <2023-03-27 Mon 10:04>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -2389,13 +2389,30 @@ I've struggled with ways to organize a large configuration.  The
 topics in ~finder-by-keyword~, bound to ~C-h p~, have the great virtue
 that somebody else thought of them so I didn't have to.
 
-**** abbrev: abbreviation handling, typing shortcuts, and macros   :noexport:
-**** bib: bibliography processors                                  :noexport:
-**** c: C and related programming languages                        :noexport:
-**** calendar: calendar and time management tools                  :noexport:
-**** comm: communications, networking, and remote file access      :noexport:
-**** convenience: convenience features for faster editing
-
+**** Abbrev                                                        :noexport:
+#+begin_quote
+Abbreviation handling, typing shortcuts, and macros
+#+end_quote
+**** Bib                                                           :noexport:
+#+begin_quote
+Bibliography processors
+#+end_quote
+**** C                                                             :noexport:
+#+begin_quote
+C and related programming languages
+#+end_quote
+**** Calendar                                                      :noexport:
+#+begin_quote
+Calendar and time management tools
+#+end_quote
+**** Comm                                                          :noexport:
+#+begin_quote
+Communications, networking, and remote file access
+#+end_quote
+**** Convenience
+#+begin_quote
+Convenience features for faster editing
+#+end_Quote
 ***** Line numbers
 
 ~display-line-numbers~ is a more performant replacement for the
@@ -2423,11 +2440,26 @@ bell.
     :hook (on-first-input . mode-line-bell-mode))
 #+end_src
 
-**** data: editing data (non-text) files                           :noexport:
-**** docs: Emacs documentation facilities                          :noexport:
-**** emulations: emulations of other editors                       :noexport:
-**** extensions: Emacs Lisp language extensions                    :noexport:
-**** faces: fonts and colors for text
+**** Data                                                          :noexport:
+#+begin_quote
+Editing data (non-text) files
+#+end_quote
+**** Docs                                                          :noexport:
+#+begin_quote
+Emacs documentation facilities
+#+end_quote
+**** Emulations                                                    :noexport:
+#+begin_quote
+Emulations of other editors
+#+end_quote
+**** Extensions                                                    :noexport:
+#+begin_quote
+Emacs Lisp language extensions
+#+end_quote
+**** Faces
+#+begin_quote
+Fonts and colors for text
+#+end_quote
 
 I like tiled windows more than I need Emacs to maintain a static
 number of columns and rows.
@@ -2497,8 +2529,14 @@ author continues to work on them, so we grab them from ELPA with
     (load-theme 'modus-operandi :no-confirm))
 #+end_src
 
-**** files: file editing and manipulation                          :noexport:
-**** frames: Emacs frames and window systems
+**** Files                                                         :noexport:
+#+begin_quote
+File editing and manipulation
+#+end_quote
+**** Frames
+#+begin_quote
+Emacs frames and window systems
+#+end_quote
 
 ***** Cursor
 
@@ -2543,12 +2581,30 @@ particularly not my favorite window with a keybinding that's too easy to hit.
     ("C-z" . nil))
 #+end_src
 
-**** games: games, jokes and amusements                            :noexport:
-**** hardware: interfacing with system hardware                    :noexport:
-**** help: Emacs help systems                                      :noexport:
-**** hypermedia: links between text or other media types           :noexport:
-**** i18n: internationalization and character-set support          :noexport:
-**** internal: code for Emacs internals, build process, defaults
+**** Games                                                         :noexport:
+#+begin_quote
+Games, jokes and amusements
+#+end_quote
+**** Hardware                                                      :noexport:
+#+begin_quote
+Interfacing with system hardware
+#+end_quote
+**** Help                                                          :noexport:
+#+begin_quote
+Emacs help systems
+#+end_quote
+**** Hypermedia                                                    :noexport:
+#+begin_quote
+Links between text or other media types
+#+end_quote
+**** I18n                                                          :noexport:
+#+begin_quote
+Internationalization and character-set support
+#+end_quote
+**** Internal
+#+begin_quote
+Code for Emacs internals, build process, defaults
+#+end_quote
 
 ***** Startup
 
@@ -2571,8 +2627,14 @@ I'd usually rather exit Slack, to be quite honest.
   (setopt confirm-kill-emacs 'yes-or-no-p)
 #+end_src
 
-**** languages: specialized modes for editing programming languages :noexport:
-**** lisp: Lisp support, including Emacs Lisp
+**** Languages                                                     :noexport:
+#+begin_quote
+Specialized modes for editing programming languages
+#+end_quote
+**** Lisp
+#+begin_quote
+Lisp support, including Emacs Lisp
+#+end_quote
 
 ***** Compilation
 
@@ -2586,11 +2648,26 @@ an error, I don't need them all up in my business.
     (native-comp-async-report-warnings-errors 'silent))
 #+end_src
 
-**** local: code local to your site                                :noexport:
-**** maint: Emacs development tools and aids                       :noexport:
-**** mail: email reading and posting                               :noexport:
-**** matching: searching, matching, and sorting                    :noexport:
-**** mouse: mouse support
+**** Local                                                         :noexport:
+#+begin_quote
+Code local to your site
+#+end_quote
+**** Maint                                                         :noexport:
+#+begin_quote
+Emacs development tools and aids
+#+end_quote
+**** Mail                                                          :noexport:
+#+begin_quote
+Email reading and posting
+#+end_quote
+**** Matching                                                      :noexport:
+#+begin_quote
+Searching, matching, and sorting
+#+end_quote
+**** Mouse
+#+begin_quote
+Mouse support
+#+end_quote
 
 I keep hitting control with the mouse wheel during presentations,
 which is never intentional.
@@ -2602,16 +2679,46 @@ which is never intentional.
     (ross/unbind-all 'mouse-wheel-text-scale))
 #+end_src
 
-**** multimedia: images and sound                                  :noexport:
-**** news: USENET news reading and posting                         :noexport:
-**** outlines: hierarchical outlining and note taking              :noexport:
-**** processes: processes, subshells, and compilation              :noexport:
-**** terminals: text terminals (ttys)                              :noexport:
-**** tex: the TeX document formatter                               :noexport:
-**** tools: programming tools                                      :noexport:
-**** unix: UNIX feature interfaces and emulators                   :noexport:
-**** vc: version control                                           :noexport:
-**** wp: word processing                                           :noexport:
+**** Multimedia                                                    :noexport:
+#+begin_quote
+Images and sound
+#+end_quote
+**** News                                                          :noexport:
+#+begin_quote
+Usenet news reading and posting
+#+end_quote
+**** Outlines                                                      :noexport:
+#+begin_quote
+Hierarchical outlining and note taking
+#+end_quote
+**** Processes                                                     :noexport:
+#+begin_quote
+Processes, subshells, and compilation
+#+end_quote
+**** Terminals                                                     :noexport:
+#+begin_quote
+Text terminals (ttys)
+#+end_quote
+**** TeX                                                           :noexport:
+#+begin_quote
+The TeX document formatter
+#+end_quote
+**** Tools                                                         :noexport:
+#+begin_quote
+Programming tools
+#+end_quote
+**** Unix                                                          :noexport:
+#+begin_quote
+Unix feature interfaces and emulators
+#+end_quote
+**** VC                                                            :noexport:
+#+begin_quote
+Version control
+#+end_quote
+**** WP                                                            :noexport:
+#+begin_quote
+Word processing
+#+end_quote
 
 *** Uncategorized
 
