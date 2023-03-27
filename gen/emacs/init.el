@@ -52,17 +52,17 @@
   :config
   (exec-path-from-shell-initialize))
 
-(use-package "startup"
+(use-package display-line-numbers
   :custom
-  (inhibit-splash-screen t)
-  (initial-major-mode 'fundamental-mode)
-  (initial-scratch-message nil))
+  (display-line-numbers-widen t)
+  :hook
+  ((prog-mode conf-mode) . display-line-numbers-mode))
 
-(setopt confirm-kill-emacs 'yes-or-no-p)
+(use-package mode-line-bell
+  :ensure
+  :hook (on-first-input . mode-line-bell-mode))
 
-(use-package emacs
-  :custom
-  (frame-inhibit-implied-resize t))
+(setopt frame-inhibit-implied-resize t)
 
 (use-package fontaine
   :ensure t
@@ -94,22 +94,15 @@
         (fontaine-set-preset 'presentation)
       (fontaine-set-preset 'regular))))
 
-(use-package mwheel
-  :defer
-  :config
-  (ross/unbind-all 'mouse-wheel-text-scale))
-
-(use-package emacs
-  :custom
-  (cursor-type 'bar))
-(use-package frame
-  :config
-  (blink-cursor-mode -1))
-
 (use-package modus-themes
   :ensure t
   :config
   (load-theme 'modus-operandi :no-confirm))
+
+(setopt cursor-type 'bar)
+(use-package frame
+  :config
+  (blink-cursor-mode -1))
 
 (use-package scroll-bar
   :config
@@ -119,23 +112,26 @@
   :config
   (tool-bar-mode -1))
 
-(use-package display-line-numbers
-  :custom
-  (display-line-numbers-widen t)
-  :hook
-  ((prog-mode conf-mode) . display-line-numbers-mode))
+(use-package frame
+  :bind
+  ("C-z" . nil))
 
-(use-package mode-line-bell
-  :ensure
-  :hook (on-first-input . mode-line-bell-mode))
+(use-package "startup"
+  :custom
+  (inhibit-splash-screen t)
+  (initial-major-mode 'fundamental-mode)
+  (initial-scratch-message nil))
+
+(setopt confirm-kill-emacs 'yes-or-no-p)
 
 (use-package comp
   :custom
   (native-comp-async-report-warnings-errors 'silent))
 
-(use-package frame
-  :bind
-  ("C-z" . nil))
+(use-package mwheel
+  :defer
+  :config
+  (ross/unbind-all 'mouse-wheel-text-scale))
 
 (use-package emacs
   :bind

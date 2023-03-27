@@ -2213,7 +2213,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-03-27 Mon 01:12>
+:EXPORT_HUGO_LASTMOD: <2023-03-27 Mon 01:46>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -2295,7 +2295,7 @@ uses.
     :ensure)
 #+end_src
 
-**** Security
+***** Security
 
 For the love of all that is holy, do not continue with untrusted
 connections!
@@ -2307,7 +2307,7 @@ connections!
     (gnutls-verify-error t))
 #+end_src
 
-**** No littering
+***** No littering
 
 Many packages leave crumbs in ~user-emacs-directory~ or even ~$HOME~.
 Finding and configuring them individually is a hassle, so we rely on
@@ -2383,39 +2383,60 @@ errors, or worse, trying to install the execrable Xcode.
     (exec-path-from-shell-initialize))
 #+end_src
 
-*** UI
+*** Topics
 
-**** Startup
+I've struggled with ways to organize a large configuration.  The
+topics in ~finder-by-keyword~, bound to ~C-h p~, have the great virtue
+that somebody else thought of them so I didn't have to.
 
-I don't need a dashboard and I know where the manuals are.  I prefer a
-quiet startup.
+**** abbrev: abbreviation handling, typing shortcuts, and macros   :noexport:
+**** bib: bibliography processors                                  :noexport:
+**** c: C and related programming languages                        :noexport:
+**** calendar: calendar and time management tools                  :noexport:
+**** comm: communications, networking, and remote file access      :noexport:
+**** convenience: convenience features for faster editing
+
+***** Line numbers
+
+~display-line-numbers~ is a more performant replacement for the
+venerable old ~linum~.  We turn it on for program and configuration
+modes.
 
 #+begin_src emacs-lisp
-  (use-package "startup"
+  (use-package display-line-numbers
     :custom
-    (inhibit-splash-screen t)
-    (initial-major-mode 'fundamental-mode)
-    (initial-scratch-message nil))
+    (display-line-numbers-widen t)
+    :hook
+    ((prog-mode conf-mode) . display-line-numbers-mode))
 #+end_src
 
-**** Shutdown
+***** Beep beep, your ass
 
-I'd usually rather exit Slack, to be quite honest.
+Decades ago, there was a meme of Wile E. Coyote, having finally caught
+Road Runner, saying "Beep beep your ass."  This comes from
+approximately the same era as the last time anyone wanted a system
+bell.
 
 #+begin_src emacs-lisp
-  (setopt confirm-kill-emacs 'yes-or-no-p)
+  (use-package mode-line-bell
+    :ensure
+    :hook (on-first-input . mode-line-bell-mode))
 #+end_src
 
-**** Fonts
+**** data: editing data (non-text) files                           :noexport:
+**** docs: Emacs documentation facilities                          :noexport:
+**** emulations: emulations of other editors                       :noexport:
+**** extensions: Emacs Lisp language extensions                    :noexport:
+**** faces: fonts and colors for text
 
 I like tiled windows more than I need Emacs to maintain a static
 number of columns and rows.
 
 #+begin_src emacs-lisp
-  (use-package emacs
-    :custom
-    (frame-inhibit-implied-resize t))
+  (setopt frame-inhibit-implied-resize t)
 #+end_src
+
+***** Font presets
 
 I give an increasing number of live presentations at work.  The
 [[https://protesilaos.com/emacs/fontaine][Fontaine]] package lets me scale up the font for screen sharing, and
@@ -2463,30 +2484,7 @@ the rest of the world's points.
         (fontaine-set-preset 'regular))))
 #+end_src
 
-Also, I keep hitting control with the mousewheel during presentations,
-which is never intentional.
-
-#+begin_src emacs-lisp
-  (use-package mwheel
-    :defer
-    :config
-    (ross/unbind-all 'mouse-wheel-text-scale))
-#+end_src
-
-**** Cursor
-
-I like a non-blinking bar cursor.
-
-#+begin_src emacs-lisp
-  (use-package emacs
-    :custom
-    (cursor-type 'bar))
-  (use-package frame
-    :config
-    (blink-cursor-mode -1))
-#+end_src
-
-**** Theme
+***** Theme
 
 I like the [[https://protesilaos.com/emacs/modus-themes][modus-themes]].  They are built into modern Emacs, but the
 author continues to work on them, so we grab them from ELPA with
@@ -2499,7 +2497,21 @@ author continues to work on them, so we grab them from ELPA with
     (load-theme 'modus-operandi :no-confirm))
 #+end_src
 
-**** Scrollbars
+**** files: file editing and manipulation                          :noexport:
+**** frames: Emacs frames and window systems
+
+***** Cursor
+
+I like a non-blinking bar cursor.
+
+#+begin_src emacs-lisp
+  (setopt cursor-type 'bar)
+  (use-package frame
+    :config
+    (blink-cursor-mode -1))
+#+end_src
+
+***** Scroll bars
 
 The modeline tells us where we're at, and we mostly eschew the mouse.
 
@@ -2509,7 +2521,7 @@ The modeline tells us where we're at, and we mostly eschew the mouse.
     (scroll-bar-mode -1))
 #+end_src
 
-**** Toolbars
+***** Tool bars
 
 The much despised tool bar is not a terrible default for the Emacs
 neophyte, but I'm old and grizzled.
@@ -2520,34 +2532,49 @@ neophyte, but I'm old and grizzled.
     (tool-bar-mode -1))
 #+end_src
 
-**** Line numbers
+***** Minimization: let's not
 
-~display-line-numbers~ is a more performant replacement for the
-venerable old ~linum~.  We turn it on for program and configuration
-modes.
+I don't much care for minimizing windows in the first place, and
+particularly not my favorite window with a keybinding that's too easy to hit.
 
 #+begin_src emacs-lisp
-  (use-package display-line-numbers
+  (use-package frame
+    :bind
+    ("C-z" . nil))
+#+end_src
+
+**** games: games, jokes and amusements                            :noexport:
+**** hardware: interfacing with system hardware                    :noexport:
+**** help: Emacs help systems                                      :noexport:
+**** hypermedia: links between text or other media types           :noexport:
+**** i18n: internationalization and character-set support          :noexport:
+**** internal: code for Emacs internals, build process, defaults
+
+***** Startup
+
+I don't need a dashboard and I know where the manuals are.  I prefer a
+quiet startup.
+
+#+begin_src emacs-lisp
+  (use-package "startup"
     :custom
-    (display-line-numbers-widen t)
-    :hook
-    ((prog-mode conf-mode) . display-line-numbers-mode))
+    (inhibit-splash-screen t)
+    (initial-major-mode 'fundamental-mode)
+    (initial-scratch-message nil))
 #+end_src
 
-**** Beep beep, your ass
+***** Exiting
 
-Decades ago, there was a meme of Wile E. Coyote, having finally caught
-Road Runner, saying "Beep beep your ass."  This comes from
-approximately the same era as the last time anyone wanted a system
-bell.
+I'd usually rather exit Slack, to be quite honest.
 
 #+begin_src emacs-lisp
-  (use-package mode-line-bell
-    :ensure
-    :hook (on-first-input . mode-line-bell-mode))
+  (setopt confirm-kill-emacs 'yes-or-no-p)
 #+end_src
 
-**** Warnings buffer
+**** languages: specialized modes for editing programming languages :noexport:
+**** lisp: Lisp support, including Emacs Lisp
+
+***** Compilation
 
 I get a bunch of asynchronous warnings from native compilation in a
 ~*Warnings*~ popup.  It's nice that they're there, but unless they're
@@ -2559,20 +2586,40 @@ an error, I don't need them all up in my business.
     (native-comp-async-report-warnings-errors 'silent))
 #+end_src
 
-**** Don't minimize
+**** local: code local to your site                                :noexport:
+**** maint: Emacs development tools and aids                       :noexport:
+**** mail: email reading and posting                               :noexport:
+**** matching: searching, matching, and sorting                    :noexport:
+**** mouse: mouse support
 
-I don't much care for minimizing windows in the first place, and
-particularly not my favorite window with a keybinding that's too easy to hit.
+I keep hitting control with the mouse wheel during presentations,
+which is never intentional.
 
 #+begin_src emacs-lisp
-  (use-package frame
-    :bind
-    ("C-z" . nil))
+  (use-package mwheel
+    :defer
+    :config
+    (ross/unbind-all 'mouse-wheel-text-scale))
 #+end_src
 
-*** Editing
+**** multimedia: images and sound                                  :noexport:
+**** news: USENET news reading and posting                         :noexport:
+**** outlines: hierarchical outlining and note taking              :noexport:
+**** processes: processes, subshells, and compilation              :noexport:
+**** terminals: text terminals (ttys)                              :noexport:
+**** tex: the TeX document formatter                               :noexport:
+**** tools: programming tools                                      :noexport:
+**** unix: UNIX feature interfaces and emulators                   :noexport:
+**** vc: version control                                           :noexport:
+**** wp: word processing                                           :noexport:
 
-**** Casing regions
+*** Uncategorized
+
+These should be refiled under the topics above, but it's late.
+
+**** Editing
+
+***** Casing regions
 
 These do-what-I-mean bindings are newer than the classic keybindings,
 but a better default.
@@ -2585,7 +2632,7 @@ but a better default.
     ([remap upcase-word] . upcase-dwim))
 #+end_src
 
-**** Indentation
+***** Indentation
 
 Tabs are the devil's whitespace.
 
@@ -2595,9 +2642,9 @@ Tabs are the devil's whitespace.
     (setq-default indent-tabs-mode nil))
 #+end_src
 
-*** History
+**** History
 
-**** Mark ring
+***** Mark ring
 
 The mark ring is the trail of breadcrumbs we leave with various
 commands.  Vernon Grant gives a [[https://vernon-grant.com/discovering-emacs/efficiency-with-the-mark-ring/\]\[Vernon Grant][good tutorial]] in his Discovering Emacs
@@ -2612,7 +2659,7 @@ once before subsequent ~C-SPC~, which makes it much nicer to navigate.
     (set-mark-command-repeat-pop t))
 #+end_src
 
-**** Kill ring
+***** Kill ring
 
 Put the clipboard on the kill ring before killing something else.
 Emacs isn't as violent as it sometimes sounds, I swear.
@@ -2627,7 +2674,7 @@ values.
     (kill-do-not-save-duplicates t))
 #+end_src
 
-**** Recent files
+***** Recent files
 
 This maintains a list of recent files, as we often find in other
 applications.  I wonder if it can or should be integrated with MacOS'
@@ -2641,7 +2688,7 @@ list of recent files?
      ("r" . recentf-open)))
 #+end_src
 
-**** Places in files
+***** Places in files
 
 This mode saves our place for when we revisit a file.
 
@@ -2650,9 +2697,9 @@ This mode saves our place for when we revisit a file.
     :hook (on-first-buffer . save-place-mode))
 #+end_src
 
-*** Version control
+**** Version control
 
-**** Magit
+***** Magit
 
 I have known people to leave Emacs, but continuing to use [[https://magit.vc/][Magit]] for
 version control.  It's that good.
@@ -2684,7 +2731,7 @@ that something tailor-made carries its weight here.
     (advice-add 'magit-clone-read-args :around #'ross/magit-clone-read-args-a))
 #+end_src
 
-**** Linking
+***** Linking
 
 [[https://github.com/sshaw/git-link/][git-link]] grabs links to lines, regions, commits, or home pages.
 
@@ -2697,9 +2744,9 @@ that something tailor-made carries its weight here.
     :commands (git-link git-link-commit git-link-homepage))
 #+end_src
 
-*** Tools
+**** Tools
 
-**** Direnv
+***** Direnv
 
 I maintain a minimal home environment and push as much as I can to Nix
 flakes.  This insulates me from conflicting dependencies, makes my
@@ -2714,7 +2761,7 @@ the flake.
     :hook (on-first-file . envrc-global-mode))
 #+end_src
 
-**** Grab Mac Link
+***** Grab Mac Link
 
 [[https://github.com/xuchunyang/grab-mac-link.el/][grab-mac-link.el]] gets the link in the current window of certain MacOS
 apps, notably, Firefox.  The "dwim" version is even major-mode-aware!
@@ -2731,7 +2778,7 @@ Terminal full access to Firefox, which seems scary.
     (grab-mac-link-dwim-favourite-app 'firefox))
 #+end_src
 
-**** RFC
+***** RFC
 
 As an http4s author, I refer to RFCs constantly.
 
@@ -2741,7 +2788,7 @@ As an http4s author, I refer to RFCs constantly.
     :defer t)
 #+end_src
 
-**** Titlecase
+***** Titlecase
 
 Gosh, I wish I'd had this when I was so active on [[https://musicbrainz.org/][MusicBrainz]].
 
@@ -2751,7 +2798,7 @@ Gosh, I wish I'd had this when I was so active on [[https://musicbrainz.org/][Mu
     :defer t)
 #+end_src
 
-**** Whitespace
+***** Whitespace
 
 I like builtin packages, but I like minimal diffs more.  [[https://github.com/lewang/ws-butler][ws-butler]] is
 "unobtrusive", which wins the day for me.
@@ -2770,7 +2817,7 @@ I like builtin packages, but I like minimal diffs more.  [[https://github.com/le
     :diminish)
 #+end_src
 
-**** UUID generation
+***** UUID generation
 
 [[https://github.com/kanru/uuidgen-el][uuidgen-el]] comes in handy, except I'm getting a segfault byte
 compiling it.
@@ -2782,9 +2829,9 @@ compiling it.
     :defer t)
 #+end_src
 
-**** Org
+***** Org
 
-***** ox-hugo
+****** ox-hugo
 
 We use [[https://github.com/kaushalmodi/ox-hugo][ox-hugo]] for publishing.
 
@@ -2807,9 +2854,9 @@ the exported tree at the current point.
             (org-entry-put begin "EXPORT_HUGO_LASTMOD" time)))))
 #+end_src
 
-*** Files
+**** Files
 
-**** Auto-revert
+***** Auto-revert
 
 #+begin_src emacs-lisp
   (use-package autorevert
@@ -2819,7 +2866,7 @@ the exported tree at the current point.
     (global-auto-revert-non-file-buffers t))
 #+end_src
 
-**** Lockfiles
+***** Lockfiles
 
 On single-user environments, as we tend to run Emacs these days, those
 ~.#*~ files are more likely to confuse some other program as they are
@@ -2831,9 +2878,9 @@ to protect us from conflicting edits.
     (create-lockfiles nil))
 #+end_src
 
-*** IDE
+**** IDE
 
-**** Language server protocol
+***** Language server protocol
 
 We're going to give [[https://joaotavora.github.io/eglot/][eglot]] a try now that it's built into Emacs.  It's
 a bit more minimalist than the excellent [[https://emacs-lsp.github.io/lsp-mode/][lsp-mode]].
@@ -2842,7 +2889,7 @@ a bit more minimalist than the excellent [[https://emacs-lsp.github.io/lsp-mode/
   (use-package eglot :defer t)
 #+end_src
 
-**** Dumb jump
+***** Dumb jump
 
 [[https://github.com/jacktasia/dumb-jump][dumb-jump]] is dumber than LSP, but it's a lot less fussy and makes for
 a wonderful fallback option.
@@ -2864,7 +2911,7 @@ Make sure ripgrep is available.
   ({ pkgs, ...}: { home.packages = [ pkgs.ripgrep ]; })
 #+end_src
 
-**** Xref
+***** Xref
 
 Regardless of LSP or dumb-jump, we want Vertico to handle when
 multiple definitions are found.
@@ -2876,9 +2923,9 @@ multiple definitions are found.
     (xref-show-definitions-function #'xref-show-definitions-completing-read))
 #+end_src
 
-**** Completion
+***** Completion
 
-***** Minibuffer
+****** Minibuffer
 
 [[https://github.com/minad/vertico][Vertico]] is a little bit nicer version of the builtin
 ~icomplete-vertical~.
@@ -2941,7 +2988,7 @@ start with ~/~ or ~~/~, it cleans up the leading default prompt that's
     (marginalia-mode))
 #+end_src
 
-***** Popups
+****** Popups
 
 We use [[https://github.com/minad/corfu][Corfu]] for small, in-buffer popups of completion candidates.
 Autocompletion of method names in code is a classic use case.
@@ -2952,9 +2999,9 @@ Autocompletion of method names in code is a classic use case.
     :hook (on-first-buffer . global-corfu-mode))
 #+end_src
 
-*** Programming modes
+**** Programming modes
 
-**** treesit-auto
+***** treesit-auto
 
 [[https://github.com/renzmann/treesit-auto][~treesit-auto~]] finds treesitter modes by naming convention.
 
@@ -2966,7 +3013,7 @@ Autocompletion of method names in code is a classic use case.
     (global-treesit-auto-mode))
 #+end_src
 
-**** C#
+***** C#
 
 I am not a C# developer, but I've been known to interview them.
 
@@ -2976,7 +3023,7 @@ I am not a C# developer, but I've been known to interview them.
     :hook (csharp-ts-mode . subword-mode))
 #+end_src
 
-**** Lisp
+***** Lisp
 
 I would like my property lists to align not like this
 
@@ -3177,7 +3224,7 @@ The answer is almost verbatim from [[https://emacs.stackexchange.com/a/52789][St
     (advice-add #'calculate-lisp-indent :override #'ross/calculate-lisp-indent))
 #+end_src
 
-**** Nix
+***** Nix
 
 #+begin_src emacs-lisp
   (use-package nix-mode
@@ -3185,7 +3232,7 @@ The answer is almost verbatim from [[https://emacs.stackexchange.com/a/52789][St
     :defer t)
 #+end_src
 
-**** Scala
+***** Scala
 
 Much of this configuration starts from the [[https://scalameta.org/metals/docs/editors/emacs/][Metals guide]].
 
@@ -3202,9 +3249,9 @@ Much of this configuration starts from the [[https://scalameta.org/metals/docs/e
     :commands sbt-start sbt-command)
 #+end_src
 
-*** Lookup
+**** Lookup
 
-**** ffap
+***** ffap
 
 ~ffap~, or Find File At Point, is a transitive dependency of nix-mode.
 It invokes ~gcc~ and ~g++~, which is fine, except on a Mac without
@@ -3214,9 +3261,9 @@ Xcode, that brings up a dialog box.
   ({ pkgs, ...}: { home.packages = [ pkgs.gcc ]; })
 #+end_src
 
-*** Help
+**** Help
 
-**** Keyboard shortcuts
+***** Keyboard shortcuts
 
 [[https://github.com/justbur/emacs-which-key][~which-key~]] pops up a menu of keybindings.  The traditional way is to
 run it on a timer, but I prefer [[https://github.com/justbur/emacs-which-key#manual-activation][manual activation]].
