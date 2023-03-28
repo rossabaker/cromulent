@@ -160,6 +160,12 @@ existing directory under `magit-clone-default-directory'."
   (git-link-use-single-line-number t)
   :commands (git-link git-link-commit git-link-homepage))
 
+(use-package treesit-auto
+  :ensure t
+  :demand t
+  :config
+  (global-treesit-auto-mode))
+
 (use-package xref
   :defer
   :custom
@@ -276,12 +282,6 @@ existing directory under `magit-clone-default-directory'."
   :disabled t
   :ensure t
   :defer t)
-
-(use-package treesit-auto
-  :ensure t
-  :demand t
-  :config
-  (global-treesit-auto-mode))
 
 (use-package csharp-mode
   :mode ((rx ".cs" eos) . 'csharp-ts-mode)
