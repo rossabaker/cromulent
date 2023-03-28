@@ -100,6 +100,12 @@
   :ensure t
   :defer t)
 
+(use-package jinx
+  :ensure t
+  :defer t
+  :bind
+  ([remap ispell-word] . jinx-correct))
+
 (use-package ox-hugo
   :ensure t
   :after org
@@ -368,6 +374,10 @@ existing directory under `magit-clone-default-directory'."
   :config
   (global-treesit-auto-mode))
 
+(use-package uuidgen
+  :ensure t
+  :defer t)
+
 (use-package xref
   :defer
   :custom
@@ -468,10 +478,6 @@ existing directory under `magit-clone-default-directory'."
    ("RET" . vertico-directory-enter)
    ("M-DEL" . vertico-directory-delete-word))
   :hook (rfn-eshadow-update-overlay . vertico-directory-tidy))
-
-(use-package uuidgen
-  :ensure t
-  :defer t)
 
 (use-package which-key
   :ensure t

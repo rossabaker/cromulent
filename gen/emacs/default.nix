@@ -17,10 +17,37 @@
     packages.emacs-ross = pkgs.emacsWithPackagesFromUsePackage {
       package = config.packages.emacs29;
       override = epkgs: epkgs // {
-        on = epkgs.trivialBuild {
-          pname = "on.el";
-          src = inputs.on-el;
-        };
+	on = epkgs.trivialBuild {
+	  pname = "on.el";
+	  src = inputs.on-el;
+	};
+	jinx =
+	  epkgs.trivialBuild {
+	    pname = "jinx";
+	    src = inputs.jinx;
+	    buildInputs = with pkgs; [
+	      config.packages.emacs29
+	      enchant2
+	      gcc
+	    ];
+	    buildPhase = ''
+	      runHook preBuild
+	      emacs -L . --batch -f batch-byte-compile *.el
+	      cc -O2 -Wall -Wextra -fPIC -shared \
+	        -I. -I${pkgs.enchant2.dev}/include/enchant-2 -lenchant-2 \
+	        -o jinx-mod.so jinx-mod.c
+	    '';
+	    installPhase = ''
+	      runHook preInstall
+	      LISPDIR=$out/share/emacs/site-lisp
+	      install -d $LISPDIR
+	      install *.el *.elc $LISPDIR
+	      install jinx-mod.so $LISPDIR/jinx-mod.dylib
+	      runHook postInstall
+	    '';
+	    packageRequires = [ epkgs.compat ];
+	  }
+	  ;
       };
       config = ./init.el;
       defaultInitFile = true;
@@ -34,14 +61,20 @@
   flake = {
     homeManagerModules.emacs = moduleWithSystem (
       perSystem@{ config, pkgs }: {
-        imports = [
-          ({ pkgs, ...}: { home.packages = [ pkgs.gcc ]; })
-          ({ pkgs, ...}: { home.packages = [ pkgs.ripgrep ]; })
-        ];
-        programs.emacs = {
-          enable = true;
-          package = config.packages.emacs-ross;
-        };
+	imports = [
+	  ({ pkgs, ...}: { home.packages = [ pkgs.gcc ]; })
+	  ({ pkgs, ...}: {
+	    home.packages = [
+	      pkgs.nuspell
+	      pkgs.hunspellDicts.en_US
+	    ];
+	  })
+	  ({ pkgs, ...}: { home.packages = [ pkgs.ripgrep ]; })
+	];
+	programs.emacs = {
+	  enable = true;
+	  package = config.packages.emacs-ross;
+	};
       }
     );
   };

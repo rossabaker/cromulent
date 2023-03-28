@@ -59,6 +59,11 @@
     
       emacs-src.url = "github:emacs-mirror/emacs/emacs-29";
       emacs-src.flake = false;
+    
+      jinx = {
+        url = "github:minad/jinx";
+        flake = false;
+      };
     };
   outputs =
     inputs:

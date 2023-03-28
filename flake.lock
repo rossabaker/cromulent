@@ -211,6 +211,22 @@
         "type": "github"
       }
     },
+    "jinx": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1679946220,
+        "narHash": "sha256-vnS7I+p06rzdHHiEfaB5fiD0YKdtfhglcj8qb6D4E18=",
+        "owner": "minad",
+        "repo": "jinx",
+        "rev": "68b579d715c4be5a255852130b9009151fb0c41e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "minad",
+        "repo": "jinx",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1677383253,
@@ -353,6 +369,7 @@
         "flake-parts": "flake-parts",
         "hocon-mode": "hocon-mode",
         "home-manager": "home-manager",
+        "jinx": "jinx",
         "nixpkgs": "nixpkgs_4",
         "nixpkgs-darwin": "nixpkgs-darwin",
         "ob-ammonite": "ob-ammonite",
