@@ -2213,7 +2213,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-03-27 Mon 11:36>
+:EXPORT_HUGO_LASTMOD: <2023-03-27 Mon 22:43>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -2433,19 +2433,6 @@ values.
     (kill-do-not-save-duplicates t))
 #+end_src
 
-***** Casing
-
-These do-what-I-mean bindings are newer than the classic keybindings,
-but a better default.
-
-#+begin_src emacs-lisp
-  (use-package emacs
-    :bind
-    ([remap capitalize-word] . capitalize-dwim)
-    ([remap downcase-word] . downcase-dwim)
-    ([remap upcase-word] . upcase-dwim))
-#+end_src
-
 **** Convenience
 ***** Exiting
 
@@ -2469,16 +2456,23 @@ modes.
     ((prog-mode conf-mode) . display-line-numbers-mode))
 #+end_src
 
+***** Whitespace butler
 
-**** Data
+I like builtin packages, but I like minimal diffs more.  [[https://github.com/lewang/ws-butler][ws-butler]] is
+"unobtrusive", which wins the day for me.
 
-***** Save place
-
-This mode saves our place for when we revisit a file.
+#+begin_quote
+- Only lines touched get trimmed. If the white space at end of buffer
+  is changed, then blank lines at the end of buffer are truncated
+  respecting =require-final-newline=.
+- Trimming only happens when saving.
+#+end_quote
 
 #+begin_src emacs-lisp
-  (use-package saveplace
-    :hook (on-first-buffer . save-place-mode))
+  (use-package ws-butler
+    :ensure t
+    :hook (on-first-buffer . ws-butler-global-mode)
+    :diminish)
 #+end_src
 
 **** Files
@@ -2495,6 +2489,69 @@ list of recent files?
     :bind
     (:map ross/files-map
      ("r" . recentf-open)))
+#+end_src
+**** Text
+
+***** Case
+****** DWIM case
+
+These do-what-I-mean bindings are newer than the classic keybindings,
+but a better default.
+
+#+begin_src emacs-lisp
+  (use-package emacs
+    :bind
+    ([remap capitalize-word] . capitalize-dwim)
+    ([remap downcase-word] . downcase-dwim)
+    ([remap upcase-word] . upcase-dwim))
+#+end_src
+
+****** Titlecase
+
+Gosh, I wish I'd had this when I was so active on [[https://musicbrainz.org/][MusicBrainz]].
+
+#+begin_src emacs-lisp
+  (use-package titlecase
+    :ensure t
+    :defer t)
+#+end_src
+
+**** Data
+
+***** Save place
+
+This mode saves our place for when we revisit a file.
+
+#+begin_src emacs-lisp
+  (use-package saveplace
+    :hook (on-first-buffer . save-place-mode))
+#+end_src
+
+**** External
+***** Processes
+***** RFC mode
+
+As an http4s author, I refer to RFCs constantly.
+
+#+begin_src emacs-lisp
+  (use-package rfc-mode
+    :ensure t
+    :defer t)
+#+end_src
+
+****** Envrc
+
+I maintain a minimal home environment and push as much as I can to Nix
+flakes.  This insulates me from conflicting dependencies, makes my
+projects more portable, and helps me share with Nix-enabled teammates.
+
+Where possible, I add an ~.envrc~ file to load the environment from
+the flake.
+
+#+begin_src emacs-lisp
+  (use-package envrc
+    :ensure t
+    :hook (on-first-file . envrc-global-mode))
 #+end_src
 
 **** Programming
@@ -2710,21 +2767,6 @@ These should be refiled under the topics above, but it's late.
 
 **** Tools
 
-***** Direnv
-
-I maintain a minimal home environment and push as much as I can to Nix
-flakes.  This insulates me from conflicting dependencies, makes my
-projects more portable, and helps me share with Nix-enabled teammates.
-
-Where possible, I add an ~.envrc~ file to load the environment from
-the flake.
-
-#+begin_src emacs-lisp
-  (use-package envrc
-    :ensure t
-    :hook (on-first-file . envrc-global-mode))
-#+end_src
-
 ***** Grab Mac Link
 
 [[https://github.com/xuchunyang/grab-mac-link.el/][grab-mac-link.el]] gets the link in the current window of certain MacOS
@@ -2740,45 +2782,6 @@ Terminal full access to Firefox, which seems scary.
     :commands (grab-mac-link grab-mac-link-dwim)
     :custom
     (grab-mac-link-dwim-favourite-app 'firefox))
-#+end_src
-
-***** RFC
-
-As an http4s author, I refer to RFCs constantly.
-
-#+begin_src emacs-lisp
-  (use-package rfc-mode
-    :ensure t
-    :defer t)
-#+end_src
-
-***** Titlecase
-
-Gosh, I wish I'd had this when I was so active on [[https://musicbrainz.org/][MusicBrainz]].
-
-#+begin_src emacs-lisp
-  (use-package titlecase
-    :ensure t
-    :defer t)
-#+end_src
-
-***** Whitespace
-
-I like builtin packages, but I like minimal diffs more.  [[https://github.com/lewang/ws-butler][ws-butler]] is
-"unobtrusive", which wins the day for me.
-
-#+begin_quote
-- Only lines touched get trimmed. If the white space at end of buffer
-  is changed, then blank lines at the end of buffer are truncated
-  respecting =require-final-newline=.
-- Trimming only happens when saving.
-#+end_quote
-
-#+begin_src emacs-lisp
-  (use-package ws-butler
-    :ensure t
-    :hook (on-first-buffer . ws-butler-global-mode)
-    :diminish)
 #+end_src
 
 ***** UUID generation

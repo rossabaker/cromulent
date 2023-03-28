@@ -59,12 +59,6 @@
   (save-interprogram-paste-before-kill t)
   (kill-do-not-save-duplicates t))
 
-(use-package emacs
-  :bind
-  ([remap capitalize-word] . capitalize-dwim)
-  ([remap downcase-word] . downcase-dwim)
-  ([remap upcase-word] . upcase-dwim))
-
 (setopt confirm-kill-emacs 'yes-or-no-p)
 
 (use-package display-line-numbers
@@ -73,14 +67,37 @@
   :hook
   ((prog-mode conf-mode) . display-line-numbers-mode))
 
-(use-package saveplace
-  :hook (on-first-buffer . save-place-mode))
+(use-package ws-butler
+  :ensure t
+  :hook (on-first-buffer . ws-butler-global-mode)
+  :diminish)
 
 (use-package recentf
   :hook (on-first-file-hook . recentf-mode)
   :bind
   (:map ross/files-map
    ("r" . recentf-open)))
+
+(use-package emacs
+  :bind
+  ([remap capitalize-word] . capitalize-dwim)
+  ([remap downcase-word] . downcase-dwim)
+  ([remap upcase-word] . upcase-dwim))
+
+(use-package titlecase
+  :ensure t
+  :defer t)
+
+(use-package saveplace
+  :hook (on-first-buffer . save-place-mode))
+
+(use-package rfc-mode
+  :ensure t
+  :defer t)
+
+(use-package envrc
+  :ensure t
+  :hook (on-first-file . envrc-global-mode))
 
 (use-package magit
   :ensure t
@@ -178,29 +195,12 @@ existing directory under `magit-clone-default-directory'."
   (initial-major-mode 'fundamental-mode)
   (initial-scratch-message nil))
 
-(use-package envrc
-  :ensure t
-  :hook (on-first-file . envrc-global-mode))
-
 (use-package grab-mac-link
   :disabled t
   :ensure t
   :commands (grab-mac-link grab-mac-link-dwim)
   :custom
   (grab-mac-link-dwim-favourite-app 'firefox))
-
-(use-package rfc-mode
-  :ensure t
-  :defer t)
-
-(use-package titlecase
-  :ensure t
-  :defer t)
-
-(use-package ws-butler
-  :ensure t
-  :hook (on-first-buffer . ws-butler-global-mode)
-  :diminish)
 
 (use-package uuidgen
   :disabled t
