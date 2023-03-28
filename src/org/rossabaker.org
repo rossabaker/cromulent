@@ -2213,7 +2213,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-03-27 Mon 22:47>
+:EXPORT_HUGO_LASTMOD: <2023-03-27 Mon 22:49>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -2476,6 +2476,26 @@ I like builtin packages, but I like minimal diffs more.  [[https://github.com/le
 #+end_src
 
 **** Files
+
+***** Lockfiles
+
+On single-user environments, as we tend to run Emacs these days, those
+~.#*~ files are more likely to confuse some other program as they are
+to protect us from conflicting edits.
+
+#+begin_src emacs-lisp
+  (setopt create-lockfiles nil)
+#+end_src
+
+***** Auto-revert
+
+#+begin_src emacs-lisp
+  (use-package autorevert
+    :diminish auto-revert-mode
+    :hook (on-first-buffer . global-auto-revert-mode)
+    :custom
+    (global-auto-revert-non-file-buffers t))
+#+end_src
 
 ***** Recent files
 
@@ -2824,28 +2844,6 @@ compiling it.
 
 
 **** Files
-
-***** Auto-revert
-
-#+begin_src emacs-lisp
-  (use-package autorevert
-    :diminish auto-revert-mode
-    :hook (on-first-buffer . global-auto-revert-mode)
-    :custom
-    (global-auto-revert-non-file-buffers t))
-#+end_src
-
-***** Lockfiles
-
-On single-user environments, as we tend to run Emacs these days, those
-~.#*~ files are more likely to confuse some other program as they are
-to protect us from conflicting edits.
-
-#+begin_src emacs-lisp
-  (use-package emacs
-    :custom
-    (create-lockfiles nil))
-#+end_src
 
 **** IDE
 

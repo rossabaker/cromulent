@@ -72,6 +72,14 @@
   :hook (on-first-buffer . ws-butler-global-mode)
   :diminish)
 
+(setopt create-lockfiles nil)
+
+(use-package autorevert
+  :diminish auto-revert-mode
+  :hook (on-first-buffer . global-auto-revert-mode)
+  :custom
+  (global-auto-revert-non-file-buffers t))
+
 (use-package recentf
   :hook (on-first-file-hook . recentf-mode)
   :bind
@@ -220,16 +228,6 @@ existing directory under `magit-clone-default-directory'."
   :disabled t
   :ensure t
   :defer t)
-
-(use-package autorevert
-  :diminish auto-revert-mode
-  :hook (on-first-buffer . global-auto-revert-mode)
-  :custom
-  (global-auto-revert-non-file-buffers t))
-
-(use-package emacs
-  :custom
-  (create-lockfiles nil))
 
 (use-package eglot :defer t)
 
