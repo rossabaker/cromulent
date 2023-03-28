@@ -132,7 +132,7 @@ Team]] team to an abysmal [[http://www.collegebowl.com/schoolhistoryrpt.asp?Cust
 Baker has worked as a software engineer on school library circulation
 systems, commercial insurance, mail-order music clubs, automobile
 auctions, 340B compliance, cybersecurity, IP television, rewards
-clubs, cloud infrastructure, and fintech.  He currently works as a
+clubs, cloud infrastructure, and fin tech.  He currently works as a
 staff engineer with a heavy emphasis on mentoring.
 
 He taught himself Scala and got deeply involved in Open Source and the
@@ -392,18 +392,18 @@ way to handle them is with a [[https://git-scm.com/docs/gitignore][gitignore]].
   /tmp/
 #+end_src
 
-Nix builds create a ~result~ symlink by default that should laso be
+Nix builds create a ~result~ symlink by default that should also be
 ignored.
 
 #+begin_src gitignore :tangle ../../.gitignore
   /result
 #+end_src
 
-*** Commited, generated sources
+*** Committed, generated sources
 
 There are files that are neither original, nor can they be generated
 on demand from originals.  This class of files is generally to be
-avoided, but with the right mitigations, we can live with it and still
+avoided, but with the right mitigation, we can live with it and still
 live in our Org Mode bubble within a world that isn't ready for it.
 
 **** Location
@@ -416,7 +416,7 @@ Other files need to be tangled for non-Org tooling, but are imported
 by something else.  The [[*Build website with Nix][Nix package for our website]], included in
 ~flake.nix~.  We stow all such files we can in the ~gen~ directory.
 
-**** Problems and mitigations
+**** Problems and mitigation
 
 ***** Desycnhronization
 
@@ -436,7 +436,7 @@ merge conflicts.  [[https://git-scm.com/docs/gitattributes#_merge][~-merge~]] av
 file as a conflict.  Typically the file needs to be regenerated
 in these cases.
 
-Finally, seeting [[https://github.com/github/linguist/blob/97bc889ce840208652bf09b45f3b7859de43fe8e/docs/overrides.md#generated-code][~linguist-generated~]] suppresses these files from
+Finally, setting [[https://github.com/github/linguist/blob/97bc889ce840208652bf09b45f3b7859de43fe8e/docs/overrides.md#generated-code][~linguist-generated~]] suppresses these files from
 rendered diffs.  It also excludes them from GitHub language stats.
 
 We set all these gitattributes for all tangled sources.  The
@@ -532,7 +532,7 @@ we'll use [[https://gohugo.io/hugo-modules/configuration/#module-config-mounts][
 
 **** General site parameters
 
-The ~css~ parameter lets us add custom stylesheets to the asset
+The ~css~ parameter lets us add custom style sheets to the asset
 pipeline.
 
 - [[https://csstools.github.io/sanitize.css/][sanitize.css]] is a CSS library, licensed [[https://creativecommons.org/publicdomain/zero/1.0/][CC0 1.0]].  It provides:
@@ -676,7 +676,7 @@ Think of them as the articles.  Indeed, we mark them up in an
   {{ end }}
 #+end_src
 
-Futher customization is possible by [[https://gohugo.io/content-management/types/][type]].  Certain types get their own
+Further customization is possible by [[https://gohugo.io/content-management/types/][type]].  Certain types get their own
 custom [[https://gohugo.io/content-management/front-matter/][front matter]], which we can render with a consistent look and feel.
 
 I would like to define ~article-header~ and ~article-main~ blocks in
@@ -742,7 +742,7 @@ c
 Talks get their own single-page template based on custom front matter.
 #+hugo:more
 
-- ~.Venue~ :: Where the talk was delivered.  Supports markdown.  Protip:
+- ~.Venue~ :: Where the talk was delivered.  Supports markdown.  Pro-tip:
   put it in quotes if it begins with a link.
 - ~.Source~ :: The source repository associated with the talk.
 - ~.Slides~ :: If it's a =*.pdf=, it's rendered as an ~<object>~.
@@ -904,7 +904,7 @@ Look at all the CSS we didn't have to write:
   <<terms-sizes-css()>>
 #+end_src
 
-We still need to handwrite a bit.  This centers the ~.terms~ and
+We still need to hand write a bit.  This centers the ~.terms~ and
 reserves enough line height for the largest:
 
 #+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
@@ -1801,7 +1801,7 @@ nonsense.
 The [[https://www.w3.org/TR/WCAG22/#visual-presentation][Web Content Accessibility Guidelines]] call for a line height of at
 least 1.5.
 
-There are more criteria there that are probably worth revisting.
+There are more criteria there that are probably worth revisiting.
 
 #+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
   body {
@@ -2502,7 +2502,7 @@ I like builtin packages, but I like minimal diffs more.  [[https://github.com/le
 
 **** Files
 
-***** Lockfiles
+***** Lock files
 
 On single-user environments, as we tend to run Emacs these days, those
 ~.#*~ files are more likely to confuse some other program as they are
@@ -2551,7 +2551,7 @@ but a better default.
     ([remap upcase-word] . upcase-dwim))
 #+end_src
 
-****** Titlecase
+****** Title case
 
 Gosh, I wish I'd had this when I was so active on [[https://musicbrainz.org/][MusicBrainz]].
 
@@ -2963,7 +2963,7 @@ Make sure ripgrep is available.
 I have known people to leave Emacs, but continuing to use [[https://magit.vc/][Magit]] for
 version control.  It's that good.
 
-I am giving builtins the benefit of the doubt in this config, and
+I am giving built-ins the benefit of the doubt in this config, and
 would like to get into ~vc-mode~.  But I'm an advanced enough Git user
 that something tailor-made carries its weight here.
 
@@ -3067,7 +3067,7 @@ I like a non-blinking bar cursor.
 
 ****** Scroll bars
 
-The modeline tells us where we're at, and we mostly eschew the mouse.
+The mode line tells us where we're at, and we mostly eschew the mouse.
 
 #+begin_src emacs-lisp
   (use-package scroll-bar
@@ -3559,7 +3559,7 @@ _Scalatra in Action_ covers the Scalatra framework in its entirety,
 starting with concepts such as request routing, input handling,
 actions, and HTTP responses. For readers who don't already know Scala,
 the book introduces the Scala language and sbt, the Simple Build
-Tool. You'll learn how to use Scalatra's powerful templating engine,
+Tool. You'll learn how to use Scalatra's powerful template engine,
 Scalate. It also covers advanced topics such as data access, handling
 heavy load, asynchronicity, securing your application, designing
 RESTful APIs, and real-time web programming.
@@ -3817,7 +3817,7 @@ of the NixOS manual.
 
 The password in ~initialScript~ is gross, but NixOS' PostgreSQL
 defaults to peer authentication for domain sockets, and we don't
-expose Postgres outside the localhost.  Just to be extra safe, I
+expose PostgreSQL outside the localhost.  Just to be extra safe, I
 manually ran:
 
 #+begin_src sql
@@ -3878,7 +3878,7 @@ the protocol open, and the implementation open source.  Still, it
 exists at the pleasure of its admins, with whom I have no contract.
 
 After moving to [[https://indieweb.social/web/@rossabaker][another instance]], I wanted to preserve my old content.
-We will use a technique called [[https://indieweb.org/PESOS][PESOS]], or Pubish Elsewhere, Syndicate
+We will use a technique called [[https://indieweb.org/PESOS][PESOS]], or Publish Elsewhere, Syndicate
 to Own Site.
 
 *** Request your archive
@@ -4521,7 +4521,7 @@ following.  I want my efforts to reverberate.
   curtailed my chatting, but you might nerdsnipe me into a public room
   there.
 
-# TODO absoulte link, because bundle names can't be tag names
+# TODO absolute link, because bundle names can't be tag names
 
 - I challenge you to contribute back to the open web.  [[/configs/website][My setup]] is
   arcane, but it's documented and I've recaptured some Joy of
@@ -4637,8 +4637,8 @@ As the 21st Century dawned, the Web and I each got serious.  It was
 time to put the applets away and drop the handle "Spanky"[fn:6].  I
 had swirling thoughts about:
 - aspect-oriented programming
-- pairwise comparison algorihthms to rank intercollegiate athletic teams
-- the inadequecy of ID3 tags for organizing a large MP3 collection
+- pairwise comparison algorithms to rank intercollegiate athletic teams
+- the inadequacy of ID3 tags for organizing a large MP3 collection
 - the urgency of proportional representation
 - and so much more
 
@@ -4647,7 +4647,7 @@ none of these thoughts where polished enough to contribute to my
 Personal Brand™.  I didn't develop a brand at all.  Vicenarian Ross
 was lost to perfectionism.
 
-*** Social media siloes
+*** Social media silos
 
 In 2008, I was cajoled into joining Facebook, and I resumed expressing
 myself in its [[https://www.spudart.org/blog/new-art-monday-pieces-flair/][Pieces of Flair]] app.  I'd show you my board, but it's
@@ -4721,7 +4721,7 @@ exuberated, "[[https://indieweb.social/@rossabaker/109280455333589492][Computers
 For a decade, my online identity has been Scala.  A full community
 pathology is best left to another post, but ever since its good parts
 [[https://typelevel.org/blog/2021/05/05/discord-migration.html][retreated to Fort Discord]], I have felt adrift.  Open Source is focused
-on the license of the code, but it's not (yet) something materalized
+on the license of the code, but it's not (yet) something materialized
 from a GPT-3 model.  It springs forth from human collaboration.  That
 human history is a complementary and equally valuable artifact, and
 deserves more care.
@@ -4907,7 +4907,7 @@ that into the HTML you're consuming now.
 This tool increases the learning curve.  One needs at least a basic
 understanding of Org, Emacs, and Hugo.  It sometimes introduces
 overlapping ways to do things, like [[https://ox-hugo.scripter.co/doc/shortcodes/][Org special blocks vs. Hugo
-shortcodes]].  But I have the power where I need it, and a commmodity
+shortcodes]].  But I have the power where I need it, and a commodity
 platform where a commodity suffices.
 
 I wouldn't want to impose this on the volunteer parent who eventually
@@ -4931,7 +4931,7 @@ CLOSED: [2022-11-07 Mon 09:53]
 #+end_description
 
 This is my microblog.  I archive new threads from various social
-networks here.  Replies and boosts or reteweets are out of scope.
+networks here.  Replies and boosts or retweets are out of scope.
 Content is archived here in the Indieweb spirit of [[https://indieweb.org/own_your_data][owning your data]].
 
 Includes:
