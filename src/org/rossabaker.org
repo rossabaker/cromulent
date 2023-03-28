@@ -2213,7 +2213,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-03-27 Mon 23:06>
+:EXPORT_HUGO_LASTMOD: <2023-03-27 Mon 23:07>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -3190,6 +3190,39 @@ start with ~/~ or ~~/~, it cleans up the leading default prompt that's
     :hook (rfn-eshadow-update-overlay . vertico-directory-tidy))
 #+end_src
 
+**** Help
+***** Which Key
+
+[[https://github.com/justbur/emacs-which-key][~which-key~]] pops up a menu of keybindings.  The traditional way is to
+run it on a timer, but I prefer [[https://github.com/justbur/emacs-which-key#manual-activation][manual activation]].
+
+I also relabel all my keymaps of the form ~ross/blah-map~ to ~blah~.
+Neither =:prefix-docstring= nor =:menu-item= in ~bind-key~ seem to do
+the trick.
+
+#+begin_src emacs-lisp
+  (use-package which-key
+    :ensure t
+    :hook (on-first-input . which-key-mode)
+    :diminish
+    :custom
+    (which-key-show-early-on-C-h t)
+    (which-key-idle-delay most-positive-fixnum)
+    (which-key-idle-secondary-delay 1e-9)
+    :config
+    (push `((nil . ,(rx bos "ross/" (group (1+ any)) "-map" eos)) .
+            (nil . ,(rx (backref 1))))
+          which-key-replacement-alist))
+#+end_src
+
+~C-h C-h~ shadows which-key with something less useful.
+
+#+begin_src emacs-lisp
+  (use-package help
+    :config
+    (ross/unbind-all 'help-for-help))
+#+end_src
+
 *** Uncategorized
 
 These should be refiled under the topics above, but it's late.
@@ -3226,40 +3259,6 @@ compiling it.
 #+end_src
 
 
-
-**** Help
-
-***** Keyboard shortcuts
-
-[[https://github.com/justbur/emacs-which-key][~which-key~]] pops up a menu of keybindings.  The traditional way is to
-run it on a timer, but I prefer [[https://github.com/justbur/emacs-which-key#manual-activation][manual activation]].
-
-I also relabel all my keymaps of the form ~ross/blah-map~ to ~blah~.
-Neither =:prefix-docstring= nor =:menu-item= in ~bind-key~ seem to do
-the trick.
-
-#+begin_src emacs-lisp
-  (use-package which-key
-    :ensure t
-    :hook (on-first-input . which-key-mode)
-    :diminish
-    :custom
-    (which-key-show-early-on-C-h t)
-    (which-key-idle-delay most-positive-fixnum)
-    (which-key-idle-secondary-delay 1e-9)
-    :config
-    (push `((nil . ,(rx bos "ross/" (group (1+ any)) "-map" eos)) .
-            (nil . ,(rx (backref 1))))
-          which-key-replacement-alist))
-#+end_src
-
-~C-h C-h~ shadows which-key with something less useful.
-
-#+begin_src emacs-lisp
-  (use-package help
-    :config
-    (ross/unbind-all 'help-for-help))
-#+end_src
 
 *** Nix module
 
