@@ -22,32 +22,31 @@
 	  src = inputs.on-el;
 	};
 	jinx =
-	  epkgs.trivialBuild {
-	    pname = "jinx";
-	    src = inputs.jinx;
-	    buildInputs = with pkgs; [
-	      config.packages.emacs29
-	      enchant2
-	      gcc
-	    ];
-	    buildPhase = ''
-	      runHook preBuild
-	      emacs -L . --batch -f batch-byte-compile *.el
-	      cc -O2 -Wall -Wextra -fPIC -shared \
-	        -I. -I${pkgs.enchant2.dev}/include/enchant-2 -lenchant-2 \
-	        -o jinx-mod.so jinx-mod.c
-	    '';
-	    installPhase = ''
-	      runHook preInstall
-	      LISPDIR=$out/share/emacs/site-lisp
-	      install -d $LISPDIR
-	      install *.el *.elc $LISPDIR
-	      install jinx-mod.so $LISPDIR/jinx-mod.dylib
-	      runHook postInstall
-	    '';
-	    packageRequires = [ epkgs.compat ];
-	  }
-	  ;
+	  let
+	    jinx-lisp = epkgs.trivialBuild {
+	      pname = "jinx-lisp";
+	      src = inputs.jinx;
+	      packageRequires = [ epkgs.compat ];
+	    };
+	    jinx-mod = pkgs.stdenv.mkDerivation {
+	      name = "jinx-mod";
+	      src = inputs.jinx;
+	      buildInputs = [ pkgs.enchant2 ];
+	      buildPhase = ''
+	        cc -I. -O2 -Wall -Wextra -fPIC -shared -o jinx-mod.dylib jinx-mod.c \
+	  	-I${pkgs.enchant2.dev}/include/enchant-2 -lenchant-2
+	      '';
+	      installPhase = ''
+	        LISPDIR=$out/share/emacs/site-lisp
+	        install -d $LISPDIR
+	        install *.dylib $LISPDIR
+	      '';
+	    };
+	  in
+	    pkgs.symlinkJoin {
+	      name = "jinx";
+	      paths = [ jinx-lisp jinx-mod ];
+	    };
       };
       config = ./init.el;
       defaultInitFile = true;

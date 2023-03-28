@@ -2218,7 +2218,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-03-28 Tue 01:36>
+:EXPORT_HUGO_LASTMOD: <2023-03-28 Tue 09:49>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -2573,35 +2573,34 @@ Gosh, I wish I'd had this when I was so active on [[https://musicbrainz.org/][Mu
     ([remap ispell-word] . jinx-correct))
 #+end_src
 
-This one requires a Nix build, [[https://github.com/GTrunSec/hive/blob/ce7c0087a055fb3f91a402ec0d2caeb4a3579d5f/nix/emacs/homeModules/packages.nix#L16][pilfered from hive-std]]:
+This one requires a Nix build, [[https://github.com/GTrunSec/hive/blob/ce7c0087a055fb3f91a402ec0d2caeb4a3579d5f/nix/emacs/homeModules/packages.nix#L16][inspired by hive-std]]:
 
 #+begin_src nix :noweb-ref emacs-jinx
-  epkgs.trivialBuild {
-    pname = "jinx";
-    src = inputs.jinx;
-    buildInputs = with pkgs; [
-      config.packages.emacs29
-      enchant2
-      gcc
-    ];
-    buildPhase = ''
-      runHook preBuild
-      emacs -L . --batch -f batch-byte-compile *.el
-      cc -O2 -Wall -Wextra -fPIC -shared \
-	-I. -I${pkgs.enchant2.dev}/include/enchant-2 -lenchant-2 \
-	-o jinx-mod.so jinx-mod.c
-    '';
-    installPhase = ''
-      runHook preInstall
-      LISPDIR=$out/share/emacs/site-lisp
-      install -d $LISPDIR
-      install *.el *.elc $LISPDIR
-      install jinx-mod.so $LISPDIR/jinx-mod.dylib
-      runHook postInstall
-    '';
-    packageRequires = [ epkgs.compat ];
-  }
-
+  let
+    jinx-lisp = epkgs.trivialBuild {
+      pname = "jinx-lisp";
+      src = inputs.jinx;
+      packageRequires = [ epkgs.compat ];
+    };
+    jinx-mod = pkgs.stdenv.mkDerivation {
+      name = "jinx-mod";
+      src = inputs.jinx;
+      buildInputs = [ pkgs.enchant2 ];
+      buildPhase = ''
+	cc -I. -O2 -Wall -Wextra -fPIC -shared -o jinx-mod.dylib jinx-mod.c \
+	  -I${pkgs.enchant2.dev}/include/enchant-2 -lenchant-2
+      '';
+      installPhase = ''
+	LISPDIR=$out/share/emacs/site-lisp
+	install -d $LISPDIR
+	install *.dylib $LISPDIR
+      '';
+    };
+  in
+    pkgs.symlinkJoin {
+      name = "jinx";
+      paths = [ jinx-lisp jinx-mod ];
+    }
 #+end_src
 
 Let's not forget a dictionary.
