@@ -2213,7 +2213,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-03-27 Mon 22:49>
+:EXPORT_HUGO_LASTMOD: <2023-03-27 Mon 22:56>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -2434,6 +2434,16 @@ values.
 #+end_src
 
 **** Convenience
+***** Corfu
+We use [[https://github.com/minad/corfu][Corfu]] for small, in-buffer popups of completion candidates.
+Autocompletion of method names in code is a classic use case.
+
+#+begin_src emacs-lisp
+  (use-package corfu
+    :ensure t
+    :hook (on-first-buffer . global-corfu-mode))
+#+end_src
+
 ***** Exiting
 
 I'd usually rather exit Slack, to be quite honest.
@@ -2602,6 +2612,29 @@ the flake.
 
 **** Programming
 ***** Tools
+
+****** Dumb jump
+
+[[https://github.com/jacktasia/dumb-jump][dumb-jump]] is dumber than LSP, but it's a lot less fussy and makes for
+a wonderful fallback option.
+
+~git-grep~ is not working for me.  It appears to be [[https://github.com/jacktasia/dumb-jump/issues/428][option rot]].
+
+#+begin_src emacs-lisp
+  (use-package dumb-jump
+    :ensure t
+    :config
+    (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
+    :custom
+    (dumb-jump-force-searcher 'rg))
+#+end_src
+
+Make sure ripgrep is available.
+
+#+begin_src nix :noweb-ref emacs-home-packages
+  ({ pkgs, ...}: { home.packages = [ pkgs.ripgrep ]; })
+#+end_src
+
 ****** Git
 ******* Magit
 
@@ -2648,6 +2681,27 @@ that something tailor-made carries its weight here.
     :commands (git-link git-link-commit git-link-homepage))
 #+end_src
 
+
+****** Xref
+
+Regardless of LSP or dumb-jump, we want Vertico to handle when
+multiple definitions are found.
+
+#+begin_src emacs-lisp
+  (use-package xref
+    :defer
+    :custom
+    (xref-show-definitions-function #'xref-show-definitions-completing-read))
+#+end_src
+**** Applications
+***** Language server protocol
+
+We're going to give [[https://joaotavora.github.io/eglot/][eglot]] a try now that it's built into Emacs.  It's
+a bit more minimalist than the excellent [[https://emacs-lsp.github.io/lsp-mode/][lsp-mode]].
+
+#+begin_src emacs-lisp
+  (use-package eglot :defer t)
+#+end_src
 
 **** Development
 
@@ -2807,6 +2861,77 @@ quiet startup.
     (initial-scratch-message nil))
 #+end_src
 
+***** Marginalia
+
+[[https://github.com/minad/marginalia][Marginalia]] annotates minibuffer completions with some useful info.
+
+#+begin_src emacs-lisp
+  (use-package marginalia
+    :ensure t
+    :after vertico
+    :bind
+    (:map minibuffer-local-map
+     ("M-A" . marginalia-cycle))
+    :config
+    (marginalia-mode))
+#+end_src
+
+***** Vertico
+
+[[https://github.com/minad/vertico][Vertico]] is a little bit nicer version of the builtin
+~icomplete-vertical~.
+
+#+begin_src emacs-lisp
+  (use-package vertico
+    :ensure t
+    :hook (on-first-input . vertico-mode))
+#+end_src
+
+****** Vertico indexed
+
+~vertico-indexed~ lets us select candidates by number with =C-u RET=.
+It's an alternative to ~vertico-quick~.
+
+#+begin_src emacs-lisp
+  (use-package vertico-indexed
+    :after vertico
+    :config (vertico-indexed-mode))
+#+end_src
+
+****** Vertico repeat
+
+~vertico-repeat~ resumes a prior completion session.
+
+#+begin_src emacs-lisp
+  (use-package vertico-repeat
+    :after vertico
+    :hook (minibuffer-setup . vertico-repeat-save)
+    :bind ("M-R" . vertico-repeat))
+#+end_src
+
+****** Vertico directory
+
+~vertico-directory~ does some smarter things when completing directories:
+- =RET= continues completing in that directory instead of jumping to
+  dired.
+- =M-DEL= deletes whole directories at a time if the prompt ends in a
+  slash.  There's a recommended binding for =DEL=, but I'd rather keep
+  that deleting chars.
+
+I never understood =vertico-directory-tidy= before [[https://kristofferbalintona.me/posts/202202211546/#niceties][this demo]].  When we
+start with ~/~ or ~~/~, it cleans up the leading default prompt that's
+"shadowed".
+
+#+begin_src emacs-lisp
+  (use-package vertico-directory
+    :after vertico
+    :bind
+    (:map vertico-map
+     ("RET" . vertico-directory-enter)
+     ("M-DEL" . vertico-directory-delete-word))
+    :hook (rfn-eshadow-update-overlay . vertico-directory-tidy))
+#+end_src
+
 *** Uncategorized
 
 These should be refiled under the topics above, but it's late.
@@ -2842,129 +2967,6 @@ compiling it.
     :defer t)
 #+end_src
 
-
-**** Files
-
-**** IDE
-
-***** Language server protocol
-
-We're going to give [[https://joaotavora.github.io/eglot/][eglot]] a try now that it's built into Emacs.  It's
-a bit more minimalist than the excellent [[https://emacs-lsp.github.io/lsp-mode/][lsp-mode]].
-
-#+begin_src emacs-lisp
-  (use-package eglot :defer t)
-#+end_src
-
-***** Dumb jump
-
-[[https://github.com/jacktasia/dumb-jump][dumb-jump]] is dumber than LSP, but it's a lot less fussy and makes for
-a wonderful fallback option.
-
-~git-grep~ is not working for me.  It appears to be [[https://github.com/jacktasia/dumb-jump/issues/428][option rot]].
-
-#+begin_src emacs-lisp
-  (use-package dumb-jump
-    :ensure t
-    :config
-    (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
-    :custom
-    (dumb-jump-force-searcher 'rg))
-#+end_src
-
-Make sure ripgrep is available.
-
-#+begin_src nix :noweb-ref emacs-home-packages
-  ({ pkgs, ...}: { home.packages = [ pkgs.ripgrep ]; })
-#+end_src
-
-***** Xref
-
-Regardless of LSP or dumb-jump, we want Vertico to handle when
-multiple definitions are found.
-
-#+begin_src emacs-lisp
-  (use-package xref
-    :defer
-    :custom
-    (xref-show-definitions-function #'xref-show-definitions-completing-read))
-#+end_src
-
-***** Completion
-
-****** Minibuffer
-
-[[https://github.com/minad/vertico][Vertico]] is a little bit nicer version of the builtin
-~icomplete-vertical~.
-
-#+begin_src emacs-lisp
-  (use-package vertico
-    :ensure t
-    :hook (on-first-input . vertico-mode))
-#+end_src
-
-~vertico-indexed~ lets us select candidates by number with =C-u RET=.
-It's an alternative to ~vertico-quick~.
-
-#+begin_src emacs-lisp
-  (use-package vertico-indexed
-    :after vertico
-    :config (vertico-indexed-mode))
-#+end_src
-
-~vertico-repeat~ resumes a prior completion session.
-
-#+begin_src emacs-lisp
-  (use-package vertico-repeat
-    :after vertico
-    :hook (minibuffer-setup . vertico-repeat-save)
-    :bind ("M-R" . vertico-repeat))
-#+end_src
-
-~vertico-directory~ does some smarter things when completing directories:
-- =RET= continues completing in that directory instead of jumping to
-  dired.
-- =M-DEL= deletes whole directories at a time if the prompt ends in a
-  slash.  There's a recommended binding for =DEL=, but I'd rather keep
-  that deleting chars.
-
-I never understood =vertico-directory-tidy= before [[https://kristofferbalintona.me/posts/202202211546/#niceties][this demo]].  When we
-start with ~/~ or ~~/~, it cleans up the leading default prompt that's
-"shadowed".
-
-#+begin_src emacs-lisp
-  (use-package vertico-directory
-    :after vertico
-    :bind
-    (:map vertico-map
-     ("RET" . vertico-directory-enter)
-     ("M-DEL" . vertico-directory-delete-word))
-    :hook (rfn-eshadow-update-overlay . vertico-directory-tidy))
-#+end_src
-
-[[https://github.com/minad/marginalia][Marginalia]] annotates minibuffer completions with some useful info.
-
-#+begin_src emacs-lisp
-  (use-package marginalia
-    :ensure t
-    :after vertico
-    :bind
-    (:map minibuffer-local-map
-     ("M-A" . marginalia-cycle))
-    :config
-    (marginalia-mode))
-#+end_src
-
-****** Popups
-
-We use [[https://github.com/minad/corfu][Corfu]] for small, in-buffer popups of completion candidates.
-Autocompletion of method names in code is a classic use case.
-
-#+begin_src emacs-lisp
-  (use-package corfu
-    :ensure t
-    :hook (on-first-buffer . global-corfu-mode))
-#+end_src
 
 **** Programming modes
 

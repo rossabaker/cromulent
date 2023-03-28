@@ -59,6 +59,10 @@
   (save-interprogram-paste-before-kill t)
   (kill-do-not-save-duplicates t))
 
+(use-package corfu
+  :ensure t
+  :hook (on-first-buffer . global-corfu-mode))
+
 (setopt confirm-kill-emacs 'yes-or-no-p)
 
 (use-package display-line-numbers
@@ -121,6 +125,13 @@ with EXPORT_FILE_NAME."
   :ensure t
   :hook (on-first-file . envrc-global-mode))
 
+(use-package dumb-jump
+  :ensure t
+  :config
+  (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
+  :custom
+  (dumb-jump-force-searcher 'rg))
+
 (use-package magit
   :ensure t
   :defer 1
@@ -148,6 +159,13 @@ existing directory under `magit-clone-default-directory'."
   (git-link-use-commit t)
   (git-link-use-single-line-number t)
   :commands (git-link git-link-commit git-link-homepage))
+
+(use-package xref
+  :defer
+  :custom
+  (xref-show-definitions-function #'xref-show-definitions-completing-read))
+
+(use-package eglot :defer t)
 
 (use-package comp
   :custom
@@ -217,31 +235,14 @@ existing directory under `magit-clone-default-directory'."
   (initial-major-mode 'fundamental-mode)
   (initial-scratch-message nil))
 
-(use-package grab-mac-link
-  :disabled t
+(use-package marginalia
   :ensure t
-  :commands (grab-mac-link grab-mac-link-dwim)
-  :custom
-  (grab-mac-link-dwim-favourite-app 'firefox))
-
-(use-package uuidgen
-  :disabled t
-  :ensure t
-  :defer t)
-
-(use-package eglot :defer t)
-
-(use-package dumb-jump
-  :ensure t
+  :after vertico
+  :bind
+  (:map minibuffer-local-map
+   ("M-A" . marginalia-cycle))
   :config
-  (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
-  :custom
-  (dumb-jump-force-searcher 'rg))
-
-(use-package xref
-  :defer
-  :custom
-  (xref-show-definitions-function #'xref-show-definitions-completing-read))
+  (marginalia-mode))
 
 (use-package vertico
   :ensure t
@@ -264,18 +265,17 @@ existing directory under `magit-clone-default-directory'."
    ("M-DEL" . vertico-directory-delete-word))
   :hook (rfn-eshadow-update-overlay . vertico-directory-tidy))
 
-(use-package marginalia
+(use-package grab-mac-link
+  :disabled t
   :ensure t
-  :after vertico
-  :bind
-  (:map minibuffer-local-map
-   ("M-A" . marginalia-cycle))
-  :config
-  (marginalia-mode))
+  :commands (grab-mac-link grab-mac-link-dwim)
+  :custom
+  (grab-mac-link-dwim-favourite-app 'firefox))
 
-(use-package corfu
+(use-package uuidgen
+  :disabled t
   :ensure t
-  :hook (on-first-buffer . global-corfu-mode))
+  :defer t)
 
 (use-package treesit-auto
   :ensure t
