@@ -125,164 +125,6 @@ with EXPORT_FILE_NAME."
   :ensure t
   :hook (on-first-file . envrc-global-mode))
 
-(use-package dumb-jump
-  :ensure t
-  :config
-  (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
-  :custom
-  (dumb-jump-force-searcher 'rg))
-
-(use-package magit
-  :ensure t
-  :defer 1
-  :functions ross/magit-clone-read-args-a
-  :bind
-  (:prefix-map ross/git-map
-   :prefix "C-c g"
-   ("g" . magit-status)
-   ("c" . magit-clone))
-  :custom
-  (magit-clone-default-directory "~/src/")
-  (magit-no-message (list "Turning on magit-auto-revert-mode..."))
-  :config
-  (defun ross/magit-clone-read-args-a (orig-fun &rest args)
-    "Sets `vertico-preselect' to `prompt' when cloning repos, so we
-clone to the default prompted directory, and not some random
-existing directory under `magit-clone-default-directory'."
-    (let ((vertico-preselect 'prompt))
-      (apply orig-fun args)))
-  (advice-add 'magit-clone-read-args :around #'ross/magit-clone-read-args-a))
-
-(use-package git-link
-  :ensure t
-  :custom
-  (git-link-use-commit t)
-  (git-link-use-single-line-number t)
-  :commands (git-link git-link-commit git-link-homepage))
-
-(use-package treesit-auto
-  :ensure t
-  :demand t
-  :config
-  (global-treesit-auto-mode))
-
-(use-package xref
-  :defer
-  :custom
-  (xref-show-definitions-function #'xref-show-definitions-completing-read))
-
-(use-package eglot :defer t)
-
-(use-package comp
-  :custom
-  (native-comp-async-report-warnings-errors 'silent))
-
-(setopt frame-inhibit-implied-resize t)
-
-(setopt cursor-type 'bar)
-(use-package frame
-  :config
-  (blink-cursor-mode -1))
-
-(use-package scroll-bar
-  :config
-  (scroll-bar-mode -1))
-
-(use-package tool-bar
-  :config
-  (tool-bar-mode -1))
-
-(use-package frame
-  :bind
-  ("C-z" . nil))
-
-(use-package mode-line-bell
-  :ensure
-  :hook (on-first-input . mode-line-bell-mode))
-
-(use-package fontaine
-  :ensure t
-  :demand t
-  :bind
-  (:map ross/toggles-map
-   ("p" . ross/presentation-mode))
-  :custom
-  (fontaine-presets
-   `((regular
-      :default-height 140
-      :line-spacing 0.25)
-     (presentation
-      :default-height 210
-      :line-spacing 0.125)
-     (t ;; defaults
-      :default-family
-      ,(cond
-        ((find-font (font-spec :name "IBM Plex Mono"))
-         "IBM Plex Mono")
-        ("Monospace")))))
-  :config
-  (fontaine-set-preset (or fontaine-current-preset 'regular))
-  (define-minor-mode ross/presentation-mode
-    "Toggles global ross/presentation-mode."
-    nil
-    :global t
-    (if ross/presentation-mode
-        (fontaine-set-preset 'presentation)
-      (fontaine-set-preset 'regular))))
-
-(use-package modus-themes
-  :ensure t
-  :config
-  (load-theme 'modus-operandi :no-confirm))
-
-(use-package "startup"
-  :custom
-  (inhibit-splash-screen t)
-  (initial-major-mode 'fundamental-mode)
-  (initial-scratch-message nil))
-
-(use-package marginalia
-  :ensure t
-  :after vertico
-  :bind
-  (:map minibuffer-local-map
-   ("M-A" . marginalia-cycle))
-  :config
-  (marginalia-mode))
-
-(use-package vertico
-  :ensure t
-  :hook (on-first-input . vertico-mode))
-
-(use-package vertico-indexed
-  :after vertico
-  :config (vertico-indexed-mode))
-
-(use-package vertico-repeat
-  :after vertico
-  :hook (minibuffer-setup . vertico-repeat-save)
-  :bind ("M-R" . vertico-repeat))
-
-(use-package vertico-directory
-  :after vertico
-  :bind
-  (:map vertico-map
-   ("RET" . vertico-directory-enter)
-   ("M-DEL" . vertico-directory-delete-word))
-  :hook (rfn-eshadow-update-overlay . vertico-directory-tidy))
-
-(use-package grab-mac-link
-  :disabled t
-  :ensure t
-  :commands (grab-mac-link grab-mac-link-dwim)
-  :custom
-  (grab-mac-link-dwim-favourite-app 'firefox))
-
-(use-package uuidgen
-  :disabled t
-  :ensure t
-  :defer t)
-
 (use-package csharp-mode
   :mode ((rx ".cs" eos) . 'csharp-ts-mode)
   :hook (csharp-ts-mode . subword-mode))
@@ -466,6 +308,10 @@ existing directory under `magit-clone-default-directory'."
                  normal-indent))))))
   (advice-add #'calculate-lisp-indent :override #'ross/calculate-lisp-indent))
 
+(use-package comp
+  :custom
+  (native-comp-async-report-warnings-errors 'silent))
+
 (use-package nix-mode
   :ensure t
   :defer t)
@@ -480,6 +326,160 @@ existing directory under `magit-clone-default-directory'."
 (use-package sbt-mode
   :ensure t
   :commands sbt-start sbt-command)
+
+(use-package dumb-jump
+  :ensure t
+  :config
+  (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
+  :custom
+  (dumb-jump-force-searcher 'rg))
+
+(use-package magit
+  :ensure t
+  :defer 1
+  :functions ross/magit-clone-read-args-a
+  :bind
+  (:prefix-map ross/git-map
+   :prefix "C-c g"
+   ("g" . magit-status)
+   ("c" . magit-clone))
+  :custom
+  (magit-clone-default-directory "~/src/")
+  (magit-no-message (list "Turning on magit-auto-revert-mode..."))
+  :config
+  (defun ross/magit-clone-read-args-a (orig-fun &rest args)
+    "Sets `vertico-preselect' to `prompt' when cloning repos, so we
+clone to the default prompted directory, and not some random
+existing directory under `magit-clone-default-directory'."
+    (let ((vertico-preselect 'prompt))
+      (apply orig-fun args)))
+  (advice-add 'magit-clone-read-args :around #'ross/magit-clone-read-args-a))
+
+(use-package git-link
+  :ensure t
+  :custom
+  (git-link-use-commit t)
+  (git-link-use-single-line-number t)
+  :commands (git-link git-link-commit git-link-homepage))
+
+(use-package treesit-auto
+  :ensure t
+  :demand t
+  :config
+  (global-treesit-auto-mode))
+
+(use-package xref
+  :defer
+  :custom
+  (xref-show-definitions-function #'xref-show-definitions-completing-read))
+
+(use-package eglot :defer t)
+
+(setopt frame-inhibit-implied-resize t)
+
+(setopt cursor-type 'bar)
+(use-package frame
+  :config
+  (blink-cursor-mode -1))
+
+(use-package scroll-bar
+  :config
+  (scroll-bar-mode -1))
+
+(use-package tool-bar
+  :config
+  (tool-bar-mode -1))
+
+(use-package frame
+  :bind
+  ("C-z" . nil))
+
+(use-package mode-line-bell
+  :ensure
+  :hook (on-first-input . mode-line-bell-mode))
+
+(use-package fontaine
+  :ensure t
+  :demand t
+  :bind
+  (:map ross/toggles-map
+   ("p" . ross/presentation-mode))
+  :custom
+  (fontaine-presets
+   `((regular
+      :default-height 140
+      :line-spacing 0.25)
+     (presentation
+      :default-height 210
+      :line-spacing 0.125)
+     (t ;; defaults
+      :default-family
+      ,(cond
+        ((find-font (font-spec :name "IBM Plex Mono"))
+         "IBM Plex Mono")
+        ("Monospace")))))
+  :config
+  (fontaine-set-preset (or fontaine-current-preset 'regular))
+  (define-minor-mode ross/presentation-mode
+    "Toggles global ross/presentation-mode."
+    nil
+    :global t
+    (if ross/presentation-mode
+        (fontaine-set-preset 'presentation)
+      (fontaine-set-preset 'regular))))
+
+(use-package modus-themes
+  :ensure t
+  :config
+  (load-theme 'modus-operandi :no-confirm))
+
+(use-package "startup"
+  :custom
+  (inhibit-splash-screen t)
+  (initial-major-mode 'fundamental-mode)
+  (initial-scratch-message nil))
+
+(use-package marginalia
+  :ensure t
+  :after vertico
+  :bind
+  (:map minibuffer-local-map
+   ("M-A" . marginalia-cycle))
+  :config
+  (marginalia-mode))
+
+(use-package vertico
+  :ensure t
+  :hook (on-first-input . vertico-mode))
+
+(use-package vertico-indexed
+  :after vertico
+  :config (vertico-indexed-mode))
+
+(use-package vertico-repeat
+  :after vertico
+  :hook (minibuffer-setup . vertico-repeat-save)
+  :bind ("M-R" . vertico-repeat))
+
+(use-package vertico-directory
+  :after vertico
+  :bind
+  (:map vertico-map
+   ("RET" . vertico-directory-enter)
+   ("M-DEL" . vertico-directory-delete-word))
+  :hook (rfn-eshadow-update-overlay . vertico-directory-tidy))
+
+(use-package grab-mac-link
+  :disabled t
+  :ensure t
+  :commands (grab-mac-link grab-mac-link-dwim)
+  :custom
+  (grab-mac-link-dwim-favourite-app 'firefox))
+
+(use-package uuidgen
+  :disabled t
+  :ensure t
+  :defer t)
 
 (use-package which-key
   :ensure t

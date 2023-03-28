@@ -2213,7 +2213,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-03-27 Mon 23:04>
+:EXPORT_HUGO_LASTMOD: <2023-03-27 Mon 23:06>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -2464,6 +2464,16 @@ modes.
     (display-line-numbers-widen t)
     :hook
     ((prog-mode conf-mode) . display-line-numbers-mode))
+#+end_src
+
+***** ffap
+
+~ffap~, or Find File At Point, is a transitive dependency of nix-mode.
+It invokes ~gcc~ and ~g++~, which is fine, except on a Mac without
+Xcode, that brings up a dialog box.
+
+#+begin_src nix :noweb-ref emacs-home-packages
+  ({ pkgs, ...}: { home.packages = [ pkgs.gcc ]; })
 #+end_src
 
 ***** Whitespace butler
@@ -3216,17 +3226,6 @@ compiling it.
 #+end_src
 
 
-**** Lookup
-
-***** ffap
-
-~ffap~, or Find File At Point, is a transitive dependency of nix-mode.
-It invokes ~gcc~ and ~g++~, which is fine, except on a Mac without
-Xcode, that brings up a dialog box.
-
-#+begin_src nix :noweb-ref emacs-home-packages
-  ({ pkgs, ...}: { home.packages = [ pkgs.gcc ]; })
-#+end_src
 
 **** Help
 
