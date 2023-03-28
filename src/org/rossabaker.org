@@ -2213,7 +2213,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-03-27 Mon 23:07>
+:EXPORT_HUGO_LASTMOD: <2023-03-27 Mon 23:11>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -2954,6 +2954,13 @@ that something tailor-made carries its weight here.
     (global-treesit-auto-mode))
 #+end_src
 
+****** UUID Generation
+
+#+begin_src emacs-lisp
+  (use-package uuidgen
+    :ensure t
+    :defer t)
+#+end_src
 
 ****** Xref
 
@@ -3228,19 +3235,6 @@ the trick.
 These should be refiled under the topics above, but it's late.
 
 **** Tools
-
-***** UUID generation
-
-[[https://github.com/kanru/uuidgen-el][uuidgen-el]] comes in handy, except I'm getting a segfault byte
-compiling it.
-
-#+begin_src emacs-lisp
-  (use-package uuidgen
-    :disabled t
-    :ensure t
-    :defer t)
-#+end_src
-
 
 
 *** Nix module

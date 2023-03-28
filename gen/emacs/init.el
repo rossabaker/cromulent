@@ -469,6 +469,10 @@ existing directory under `magit-clone-default-directory'."
    ("M-DEL" . vertico-directory-delete-word))
   :hook (rfn-eshadow-update-overlay . vertico-directory-tidy))
 
+(use-package uuidgen
+  :ensure t
+  :defer t)
+
 (use-package which-key
   :ensure t
   :hook (on-first-input . which-key-mode)
@@ -485,15 +489,3 @@ existing directory under `magit-clone-default-directory'."
 (use-package help
   :config
   (ross/unbind-all 'help-for-help))
-
-(use-package grab-mac-link
-  :disabled t
-  :ensure t
-  :commands (grab-mac-link grab-mac-link-dwim)
-  :custom
-  (grab-mac-link-dwim-favourite-app 'firefox))
-
-(use-package uuidgen
-  :disabled t
-  :ensure t
-  :defer t)
