@@ -2213,7 +2213,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-03-27 Mon 22:43>
+:EXPORT_HUGO_LASTMOD: <2023-03-27 Mon 22:47>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -2516,6 +2516,32 @@ Gosh, I wish I'd had this when I was so active on [[https://musicbrainz.org/][Mu
     :defer t)
 #+end_src
 
+***** Outlines
+****** Org
+
+******* ox-hugo
+
+We use [[https://github.com/kaushalmodi/ox-hugo][ox-hugo]] for publishing.
+
+=ross/ox-hugo-update-lastmod= can be used to update the timestamp of
+the exported tree at the current point.
+
+#+begin_src emacs-lisp
+  (use-package ox-hugo
+    :ensure t
+    :after org
+    :config
+    (defun ross/ox-hugo-update-lastmod ()
+      "Updates the EXPORT_HUGO_LAST_MOD property of the nearest element
+  with EXPORT_FILE_NAME."
+      (interactive)
+        (save-excursion
+          (when-let* ((elem (car (org-hugo--get-elem-with-prop :EXPORT_FILE_NAME)))
+                      (begin (org-element-property :begin elem))
+                      (time (format-time-string (org-time-stamp-format t) (current-time))))
+            (org-entry-put begin "EXPORT_HUGO_LASTMOD" time)))))
+#+end_src
+
 **** Data
 
 ***** Save place
@@ -2796,30 +2822,6 @@ compiling it.
     :defer t)
 #+end_src
 
-***** Org
-
-****** ox-hugo
-
-We use [[https://github.com/kaushalmodi/ox-hugo][ox-hugo]] for publishing.
-
-=ross/ox-hugo-update-lastmod= can be used to update the timestamp of
-the exported tree at the current point.
-
-#+begin_src emacs-lisp
-  (use-package ox-hugo
-    :ensure t
-    :after org
-    :config
-    (defun ross/ox-hugo-update-lastmod ()
-      "Updates the EXPORT_HUGO_LAST_MOD property of the nearest element
-  with EXPORT_FILE_NAME."
-      (interactive)
-        (save-excursion
-          (when-let* ((elem (car (org-hugo--get-elem-with-prop :EXPORT_FILE_NAME)))
-                      (begin (org-element-property :begin elem))
-                      (time (format-time-string (org-time-stamp-format t) (current-time))))
-            (org-entry-put begin "EXPORT_HUGO_LASTMOD" time)))))
-#+end_src
 
 **** Files
 

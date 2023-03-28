@@ -88,6 +88,20 @@
   :ensure t
   :defer t)
 
+(use-package ox-hugo
+  :ensure t
+  :after org
+  :config
+  (defun ross/ox-hugo-update-lastmod ()
+    "Updates the EXPORT_HUGO_LAST_MOD property of the nearest element
+with EXPORT_FILE_NAME."
+    (interactive)
+      (save-excursion
+        (when-let* ((elem (car (org-hugo--get-elem-with-prop :EXPORT_FILE_NAME)))
+                    (begin (org-element-property :begin elem))
+                    (time (format-time-string (org-time-stamp-format t) (current-time))))
+          (org-entry-put begin "EXPORT_HUGO_LASTMOD" time)))))
+
 (use-package saveplace
   :hook (on-first-buffer . save-place-mode))
 
@@ -206,20 +220,6 @@ existing directory under `magit-clone-default-directory'."
   :disabled t
   :ensure t
   :defer t)
-
-(use-package ox-hugo
-  :ensure t
-  :after org
-  :config
-  (defun ross/ox-hugo-update-lastmod ()
-    "Updates the EXPORT_HUGO_LAST_MOD property of the nearest element
-with EXPORT_FILE_NAME."
-    (interactive)
-      (save-excursion
-        (when-let* ((elem (car (org-hugo--get-elem-with-prop :EXPORT_FILE_NAME)))
-                    (begin (org-element-property :begin elem))
-                    (time (format-time-string (org-time-stamp-format t) (current-time))))
-          (org-entry-put begin "EXPORT_HUGO_LASTMOD" time)))))
 
 (use-package autorevert
   :diminish auto-revert-mode
