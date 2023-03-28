@@ -3229,23 +3229,6 @@ These should be refiled under the topics above, but it's late.
 
 **** Tools
 
-***** Grab Mac Link
-
-[[https://github.com/xuchunyang/grab-mac-link.el/][grab-mac-link.el]] gets the link in the current window of certain MacOS
-apps, notably, Firefox.  The "dwim" version is even major-mode-aware!
-
-As convenient as it is, I'm disabling, because it requires giving
-Terminal full access to Firefox, which seems scary.
-
-#+begin_src emacs-lisp
-  (use-package grab-mac-link
-    :disabled t
-    :ensure t
-    :commands (grab-mac-link grab-mac-link-dwim)
-    :custom
-    (grab-mac-link-dwim-favourite-app 'firefox))
-#+end_src
-
 ***** UUID generation
 
 [[https://github.com/kanru/uuidgen-el][uuidgen-el]] comes in handy, except I'm getting a segfault byte
