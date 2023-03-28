@@ -3230,12 +3230,6 @@ the trick.
     (ross/unbind-all 'help-for-help))
 #+end_src
 
-*** Uncategorized
-
-These should be refiled under the topics above, but it's late.
-
-**** Tools
-
 
 *** Nix module
 
