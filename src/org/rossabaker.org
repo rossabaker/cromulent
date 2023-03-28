@@ -2218,7 +2218,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-03-28 Tue 09:49>
+:EXPORT_HUGO_LASTMOD: <2023-03-28 Tue 10:54>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -2568,9 +2568,12 @@ Gosh, I wish I'd had this when I was so active on [[https://musicbrainz.org/][Mu
 #+begin_src emacs-lisp
   (use-package jinx
     :ensure t
-    :defer t
+    :hook (on-first-buffer . global-jinx-mode)
     :bind
-    ([remap ispell-word] . jinx-correct))
+    ([remap ispell-word] . jinx-correct)
+    :bind
+    (:map ross/toggles-map
+     ("$" . jinx-mode)))
 #+end_src
 
 This one requires a Nix build, [[https://github.com/GTrunSec/hive/blob/ce7c0087a055fb3f91a402ec0d2caeb4a3579d5f/nix/emacs/homeModules/packages.nix#L16][inspired by hive-std]]:

@@ -102,7 +102,7 @@
 
 (use-package jinx
   :ensure t
-  :defer t
+  :hook (on-first-buffer . global-jinx-mode)
   :bind
   ([remap ispell-word] . jinx-correct))
 
