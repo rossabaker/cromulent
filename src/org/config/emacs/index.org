@@ -520,10 +520,6 @@ This is the vestige of my old init.el.  It is gradually being made literate.
   (general-setq ffap-machine-p-known 'reject)	;default slows load and sounds terrifying
   )
 
-(use-package files
-  :custom
-  (confirm-kill-emacs 'yes-or-no-p))
-
 (use-package hydra
   :ensure)
 
@@ -582,11 +578,6 @@ This is the vestige of my old init.el.  It is gradually being made literate.
 (use-package ansi-color
   :custom
   (ansi-color-for-comint-mode t))
-
-(use-package frame
-  :bind
-  ("C-z" . nil)				; Previously suspend-frame
-  )
 
 (use-package hl-line
   :config
