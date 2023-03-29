@@ -47,6 +47,31 @@
 	      name = "jinx";
 	      paths = [ jinx-lisp jinx-mod ];
 	    };
+	copilot =
+	  let
+	    copilot-lisp = epkgs.trivialBuild {
+	      pname = "copilot-lisp";
+	      src = inputs.copilot-el;
+	      packageRequires = [
+	        epkgs.dash
+	        epkgs.editorconfig
+	        epkgs.s
+	      ];
+	    };
+	    copilot-dist = pkgs.stdenv.mkDerivation {
+	      name = "copilot-dist";
+	      src = inputs.copilot-el;
+	      installPhase = ''
+	        LISPDIR=$out/share/emacs/site-lisp
+	        mkdir -p $LISPDIR
+	        cp -R dist $LISPDIR
+	      '';
+	    };
+	  in
+	    pkgs.symlinkJoin {
+	      name = "jinx";
+	      paths = [ copilot-lisp copilot-dist ];
+	    };
       };
       config = ./init.el;
       defaultInitFile = true;
@@ -61,6 +86,9 @@
     homeManagerModules.emacs = moduleWithSystem (
       perSystem@{ config, pkgs }: {
 	imports = [
+	  ({ pkgs, ...}: {
+	    home.packages = [ pkgs.nodejs ];
+	  })
 	  ({ pkgs, ...}: { home.packages = [ pkgs.gcc ]; })
 	  ({ pkgs, ...}: {
 	    home.packages = [

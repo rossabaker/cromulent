@@ -64,6 +64,11 @@
         url = "github:minad/jinx";
         flake = false;
       };
+    
+      copilot-el = {
+        url = "github:zerolfx/copilot.el";
+        flake = false;
+      };
     };
   outputs =
     inputs:

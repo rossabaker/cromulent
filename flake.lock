@@ -16,6 +16,22 @@
         "type": "github"
       }
     },
+    "copilot-el": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1680068090,
+        "narHash": "sha256-fTOknVvBbw/YkY/c0UKQVqv3A2MISuOX2U07MknbhZ0=",
+        "owner": "zerolfx",
+        "repo": "copilot.el",
+        "rev": "22e36b29a052d873bcc384d0bdda608121d0221c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "zerolfx",
+        "repo": "copilot.el",
+        "type": "github"
+      }
+    },
     "darwin": {
       "inputs": {
         "nixpkgs": [
@@ -360,6 +376,7 @@
     "root": {
       "inputs": {
         "ammonite-term-repl": "ammonite-term-repl",
+        "copilot-el": "copilot-el",
         "darwin": "darwin",
         "devshell": "devshell",
         "emacs-overlay": "emacs-overlay",

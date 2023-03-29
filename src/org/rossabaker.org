@@ -1961,7 +1961,7 @@ Give the code samples a little more room to breathe.
 CLOSED: [2022-12-25 Sun 22:14]
 :PROPERTIES:
 :EXPORT_FILE_NAME: nix-flake
-:EXPORT_HUGO_LASTMOD: <2023-02-28 Tue 00:58>
+:EXPORT_HUGO_LASTMOD: <2023-03-29 Wed 12:16>
 :END:
 
 #+begin_description
@@ -2054,7 +2054,7 @@ contents of my flake.
       url = "gitlab:ajgrf/on.el";
       flake = false;
     };
-  
+
     scala-mode = {
       url = "github:Kazark/emacs-scala-mode?ref=scala3";
       flake = false;
@@ -2070,6 +2070,11 @@ contents of my flake.
 
     jinx = {
       url = "github:minad/jinx";
+      flake = false;
+    };
+
+    copilot-el = {
+      url = "github:zerolfx/copilot.el";
       flake = false;
     };
   };
@@ -2218,7 +2223,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-03-29 Wed 00:13>
+:EXPORT_HUGO_LASTMOD: <2023-03-29 Wed 15:49>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -2450,6 +2455,67 @@ values.
 #+end_src
 
 **** Convenience
+***** Completion
+****** Copilot
+
+I think Copilot's training was unethical, and I'm skeptical of its
+utility, but I need to get some experience with it.
+
+#+begin_src emacs-lisp
+  (use-package copilot
+    :ensure t
+    :custom
+    (copilot-idle-delay 0.5)
+    :bind
+    (:map ross/toggles-map
+     ("<tab>" . copilot-mode))
+    :bind
+    (:map copilot-completion-map
+     ("C-g" . 'copilot-clear-overlay)
+     ("M-p" . 'copilot-previous-completion)
+     ("M-n" . 'copilot-next-completion)
+     ("<tab>" . 'copilot-accept-completion)
+     ("M-f" . 'copilot-accept-completion-by-word)
+     ("M-<return>" . 'copilot-accept-completion-by-line)))
+#+end_src
+
+It's not in MELPA, but it's a trivial build:
+
+#+begin_src nix :noweb-ref emacs-copilot
+  let
+    copilot-lisp = epkgs.trivialBuild {
+      pname = "copilot-lisp";
+      src = inputs.copilot-el;
+      packageRequires = [
+	epkgs.dash
+	epkgs.editorconfig
+	epkgs.s
+      ];
+    };
+    copilot-dist = pkgs.stdenv.mkDerivation {
+      name = "copilot-dist";
+      src = inputs.copilot-el;
+      installPhase = ''
+	LISPDIR=$out/share/emacs/site-lisp
+	mkdir -p $LISPDIR
+	cp -R dist $LISPDIR
+      '';
+    };
+  in
+    pkgs.symlinkJoin {
+      name = "jinx";
+      paths = [ copilot-lisp copilot-dist ];
+    }
+#+end_src
+
+It also depends on Node.
+
+#+begin_src nix :noweb-ref emacs-home-packages
+  ({ pkgs, ...}: {
+    home.packages = [ pkgs.nodejs ];
+  })
+#+end_src
+
 ***** Corfu
 We use [[https://github.com/minad/corfu][Corfu]] for small, in-buffer popups of completion candidates.
 Autocompletion of method names in code is a classic use case.
@@ -3344,6 +3410,8 @@ Finally, we add a Home Manager module based on the configured app.
 	    };
 	    jinx =
 	      <<emacs-jinx>>;
+	    copilot =
+	      <<emacs-copilot>>;
 	  };
 	  config = ./init.el;
 	  defaultInitFile = true;

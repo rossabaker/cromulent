@@ -52,12 +52,30 @@
   :config
   (exec-path-from-shell-initialize))
 
+(setopt read-quoted-char-radix 16)
+
 (setopt set-mark-command-repeat-pop t)
 
 (use-package simple
   :custom
   (save-interprogram-paste-before-kill t)
   (kill-do-not-save-duplicates t))
+
+(use-package copilot
+  :ensure t
+  :custom
+  (copilot-idle-delay 0.5)
+  :bind
+  (:map ross/toggles-map
+   ("<tab>" . copilot-mode))
+  :bind
+  (:map copilot-completion-map
+   ("C-g" . 'copilot-clear-overlay)
+   ("M-p" . 'copilot-previous-completion)
+   ("M-n" . 'copilot-next-completion)
+   ("<tab>" . 'copilot-accept-completion)
+   ("M-f" . 'copilot-accept-completion-by-word)
+   ("M-<return>" . 'copilot-accept-completion-by-line)))
 
 (use-package corfu
   :ensure t
@@ -104,7 +122,10 @@
   :ensure t
   :hook (on-first-buffer . global-jinx-mode)
   :bind
-  ([remap ispell-word] . jinx-correct))
+  ([remap ispell-word] . jinx-correct)
+  :bind
+  (:map ross/toggles-map
+   ("$" . jinx-mode)))
 
 (use-package ox-hugo
   :ensure t
