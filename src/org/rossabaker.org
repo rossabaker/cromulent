@@ -2218,7 +2218,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-03-28 Tue 10:54>
+:EXPORT_HUGO_LASTMOD: <2023-03-29 Wed 00:13>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -2400,6 +2400,15 @@ This structure is modeled after that.
 
 **** Editing
 ***** Editing basics
+****** Character radix
+
+Make =C-q= read a hex sequence instead of the default octal.  Obscure,
+but I know more characters by their hex codes.
+
+#+begin_src emacs-lisp
+  (setopt read-quoted-char-radix 16)
+#+end_src
+
 ****** Mark ring
 
 The mark ring is the trail of breadcrumbs we leave with various
