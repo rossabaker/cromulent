@@ -2403,7 +2403,9 @@ This structure is modeled after that.
 ****** Character radix
 
 Make =C-q= read a hex sequence instead of the default octal.  Obscure,
-but I know more characters by their hex codes.
+but I know more characters by their hex codes.  This is also
+consistent with =C-x 8 <RET>=, which is more chars, but offers
+minibuffer completion.
 
 #+begin_src emacs-lisp
   (setopt read-quoted-char-radix 16)
