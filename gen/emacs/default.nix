@@ -68,10 +68,10 @@
 	      '';
 	    };
 	  in
-	    pkgs.symlinkJoin {
-	      name = "jinx";
-	      paths = [ copilot-lisp copilot-dist ];
-	    };
+	  pkgs.symlinkJoin {
+	    name = "jinx";
+	    paths = [ copilot-lisp copilot-dist ];
+	  };
       };
       config = ./init.el;
       defaultInitFile = true;

@@ -2223,7 +2223,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-03-29 Wed 15:49>
+:EXPORT_HUGO_LASTMOD: <2023-03-29 Wed 21:12>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -2461,17 +2461,25 @@ values.
 I think Copilot's training was unethical, and I'm skeptical of its
 utility, but I need to get some experience with it.
 
+~always~ in ~copilot-disable-predicates~ turns off _automatic_
+completion.  We can still reach it from ~M-`~, which is chosen to be
+close to ~M-TAB~ and bound to a menubar command I don't ever use.
+
 #+begin_src emacs-lisp
   (use-package copilot
     :ensure t
     :custom
-    (copilot-idle-delay 0.5)
+    (copilot-disable-predicates '(always))
+    :hook
+    (prog-mode . copilot-mode)
+    :bind
+    ("M-`" . copilot-complete)
     :bind
     (:map ross/toggles-map
-     ("<tab>" . copilot-mode))
+     ("`" . copilot-mode))
     :bind
     (:map copilot-completion-map
-     ("C-g" . 'copilot-clear-overlay)
+     ("C-g" .  'copilot-clear-overlay)
      ("M-p" . 'copilot-previous-completion)
      ("M-n" . 'copilot-next-completion)
      ("<tab>" . 'copilot-accept-completion)
@@ -2502,10 +2510,10 @@ It's not in MELPA, but it's a trivial build:
       '';
     };
   in
-    pkgs.symlinkJoin {
-      name = "jinx";
-      paths = [ copilot-lisp copilot-dist ];
-    }
+  pkgs.symlinkJoin {
+    name = "jinx";
+    paths = [ copilot-lisp copilot-dist ];
+  }
 #+end_src
 
 It also depends on Node.

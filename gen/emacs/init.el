@@ -64,7 +64,11 @@
 (use-package copilot
   :ensure t
   :custom
-  (copilot-idle-delay 0.5)
+  (copilot-disable-predicates '(always))
+  :hook
+  (prog-mode . copilot-mode)
+  :bind
+  ("M-`" . copilot-complete)
   :bind
   (:map ross/toggles-map
    ("<tab>" . copilot-mode))
