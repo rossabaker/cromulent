@@ -3393,57 +3393,57 @@ Additionally, an =emacs= flake app is created.  This builds on the
 Finally, we add a Home Manager module based on the configured app.
 
 #+begin_src nix :tangle ../../gen/emacs/default.nix :noweb tangle
-    { inputs, lib, moduleWithSystem, ... }: {
-      imports = [
-	inputs.flake-parts.flakeModules.easyOverlay
-      ];
-      perSystem = { config, self', inputs', pkgs, system, ... }: {
-	overlayAttrs = {
-	  inherit (config.packages) emacs29;
-	};
-	packages.emacs29 = pkgs.emacsGit.overrideAttrs (old: {
-	  name = "emacs29";
-	  # It's important this starts with the major number for Nix's
-	  # Emacs infra.  For example, it's used to blank out archaic
-	  # versions of the Seq package in MELPA.
-	  version = "29.0-${inputs.emacs-src.shortRev}";
-	  src = inputs.emacs-src;
-	});
-	packages.emacs-ross = pkgs.emacsWithPackagesFromUsePackage {
-	  package = config.packages.emacs29;
-	  override = epkgs: epkgs // {
-	    on = epkgs.trivialBuild {
-	      pname = "on.el";
-	      src = inputs.on-el;
-	    };
-	    jinx =
-	      <<emacs-jinx>>;
-	    copilot =
-	      <<emacs-copilot>>;
+  { inputs, lib, moduleWithSystem, ... }: {
+    imports = [
+      inputs.flake-parts.flakeModules.easyOverlay
+    ];
+    perSystem = { config, self', inputs', pkgs, system, ... }: {
+      overlayAttrs = {
+	inherit (config.packages) emacs29;
+      };
+      packages.emacs29 = pkgs.emacsGit.overrideAttrs (old: {
+	name = "emacs29";
+	# It's important this starts with the major number for Nix's
+	# Emacs infra.  For example, it's used to blank out archaic
+	# versions of the Seq package in MELPA.
+	version = "29.0-${inputs.emacs-src.shortRev}";
+	src = inputs.emacs-src;
+      });
+      packages.emacs-ross = pkgs.emacsWithPackagesFromUsePackage {
+	package = config.packages.emacs29;
+	override = epkgs: epkgs // {
+	  on = epkgs.trivialBuild {
+	    pname = "on.el";
+	    src = inputs.on-el;
 	  };
-	  config = ./init.el;
-	  defaultInitFile = true;
-	  alwaysEnsure = false;
+	  jinx =
+	    <<emacs-jinx>>;
+	  copilot =
+	    <<emacs-copilot>>;
 	};
-	apps.emacs = {
-	  type = "app";
-	  program = "${config.packages.emacs-ross}/bin/emacs";
-	};
+	config = ./init.el;
+	defaultInitFile = true;
+	alwaysEnsure = false;
       };
-      flake = {
-	homeManagerModules.emacs = moduleWithSystem (
-	  perSystem@{ config, pkgs }: {
-	    imports = [
-	      <<emacs-home-packages>>
-	    ];
-	    programs.emacs = {
-	      enable = true;
-	      package = config.packages.emacs-ross;
-	    };
-	  }
-	);
+      apps.emacs = {
+	type = "app";
+	program = "${config.packages.emacs-ross}/bin/emacs";
       };
-    }
+    };
+    flake = {
+      homeManagerModules.emacs = moduleWithSystem (
+	perSystem@{ config, pkgs }: {
+	  imports = [
+	    <<emacs-home-packages>>
+	  ];
+	  programs.emacs = {
+	    enable = true;
+	    package = config.packages.emacs-ross;
+	  };
+	}
+      );
+    };
+  }
 #+end_src
 
 As long as I have access to Nix, I can install and run my complete
