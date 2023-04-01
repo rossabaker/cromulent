@@ -71,10 +71,10 @@
   ("M-`" . copilot-complete)
   :bind
   (:map ross/toggles-map
-   ("<tab>" . copilot-mode))
+   ("`" . copilot-mode))
   :bind
   (:map copilot-completion-map
-   ("C-g" . 'copilot-clear-overlay)
+   ("C-g" .  'copilot-clear-overlay)
    ("M-p" . 'copilot-previous-completion)
    ("M-n" . 'copilot-next-completion)
    ("<tab>" . 'copilot-accept-completion)
@@ -520,3 +520,12 @@ existing directory under `magit-clone-default-directory'."
 (use-package help
   :config
   (ross/unbind-all 'help-for-help))
+
+(defun ross/refresh-load-path ()
+  "Refresh the load path written by home-manager to pick up new
+ packages without restarting Emacs."
+  (interactive)
+  (load-file "~/.config/emacs/load-path.el"))
+
+(use-package markdown-mode
+  :ensure t)

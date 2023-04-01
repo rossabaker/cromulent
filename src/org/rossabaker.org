@@ -2223,7 +2223,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-03-29 Wed 21:12>
+:EXPORT_HUGO_LASTMOD: <2023-04-01 Sat 00:26>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -3435,6 +3435,7 @@ Finally, we add a Home Manager module based on the configured app.
 	perSystem@{ config, pkgs }: {
 	  imports = [
 	    <<emacs-home-packages>>
+            ./load-path.nix
 	  ];
 	  programs.emacs = {
 	    enable = true;
@@ -3453,6 +3454,44 @@ stopping you!
 
 #+begin_src sh :eval no
   nix run github:rossabaker/cromulent#emacs
+#+end_src
+
+**** On-the-fly load-paths
+
+A disadvantage to a Nix-based Emacs config is that we have to restart
+Emacs every time we install a new package.  [[https://discourse.nixos.org/t/emacs-exwm-home-manager-and-loading-new-emacs-modules/10097/3][This hack]] from the Nix
+forums lets us update the =load-path= after a home-manager switch.
+From the original posting, we change ~finalPackage~ to ~package~:
+~finalPackage~ refers to a wrapper with an empty site-lisp.
+
+#+begin_src nix :tangle ../../gen/emacs/load-path.nix
+  { pkgs, home, config, ... }:
+  let
+    cfg = config.programs.emacs;
+  in
+  {
+    xdg.configFile."emacs/load-path.el".source = pkgs.writeText "load-path.el" ''
+      (let ((default-directory (file-name-as-directory
+				"${cfg.package.deps}/share/emacs/site-lisp/"))
+	    (normal-top-level-add-subdirs-inode-list nil))
+      (normal-top-level-add-subdirs-to-load-path))
+    '';
+  }
+#+end_src
+
+Finally, a convenience function to reload it:
+
+#+begin_src emacs-lisp
+  (defun ross/refresh-load-path ()
+    "Refresh the load path written by home-manager to pick up new
+   packages without restarting Emacs."
+    (interactive)
+    (load-file "~/.config/emacs/load-path.el"))
+#+end_src
+
+#+begin_src emacs-lisp
+  (use-package markdown-mode
+    :ensure t)
 #+end_src
 
 * Projects section

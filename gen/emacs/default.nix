@@ -97,6 +97,7 @@
 	    ];
 	  })
 	  ({ pkgs, ...}: { home.packages = [ pkgs.ripgrep ]; })
+          ./load-path.nix
 	];
 	programs.emacs = {
 	  enable = true;
