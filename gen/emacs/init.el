@@ -483,6 +483,8 @@ existing directory under `magit-clone-default-directory'."
   :config
   (marginalia-mode))
 
+(setopt use-dialog-box nil)
+
 (use-package vertico
   :ensure t
   :hook (on-first-input . vertico-mode))
