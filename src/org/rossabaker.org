@@ -2223,7 +2223,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-04-06 Thu 10:57>
+:EXPORT_HUGO_LASTMOD: <2023-04-06 Thu 17:25>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -2726,6 +2726,16 @@ the exported tree at the current point.
                       (begin (org-element-property :begin elem))
                       (time (format-time-string (org-time-stamp-format t) (current-time))))
             (org-entry-put begin "EXPORT_HUGO_LASTMOD" time)))))
+#+end_src
+
+******* ox-slack
+
+Mostly useful for =org-slack-export-to-clipboard-as-slack=.
+
+#+begin_src emacs-lisp
+  (use-package ox-slack
+    :ensure t
+    :after org)
 #+end_src
 
 **** Data

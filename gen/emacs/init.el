@@ -145,6 +145,10 @@ with EXPORT_FILE_NAME."
                     (time (format-time-string (org-time-stamp-format t) (current-time))))
           (org-entry-put begin "EXPORT_HUGO_LASTMOD" time)))))
 
+(use-package ox-slack
+  :ensure t
+  :after org)
+
 (use-package saveplace
   :hook (on-first-buffer . save-place-mode))
 
