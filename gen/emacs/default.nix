@@ -72,6 +72,10 @@
 	    name = "jinx";
 	    paths = [ copilot-lisp copilot-dist ];
 	  };
+	ox-slack =
+	  epkgs.ox-slack.overrideAttrs(old: {
+	    patches = [ ../../src/emacs/ox-slack/github-9.patch ];
+	  });
       };
       config = ./init.el;
       defaultInitFile = true;
@@ -97,7 +101,7 @@
 	    ];
 	  })
 	  ({ pkgs, ...}: { home.packages = [ pkgs.ripgrep ]; })
-          ./load-path.nix
+	  ./load-path.nix
 	];
 	programs.emacs = {
 	  enable = true;

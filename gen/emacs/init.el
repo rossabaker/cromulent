@@ -147,7 +147,12 @@ with EXPORT_FILE_NAME."
 
 (use-package ox-slack
   :ensure t
-  :after org)
+  :after org
+  :bind
+  (:map org-mode-map
+   :prefix-map ross/org-mode-map
+   :prefix "C-c m"
+   ("w" . org-slack-export-to-clipboard-as-slack)))
 
 (use-package saveplace
   :hook (on-first-buffer . save-place-mode))

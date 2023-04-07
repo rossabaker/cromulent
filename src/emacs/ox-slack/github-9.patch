@@ -1,0 +1,25 @@
+From ae8ef085ebbcf2992db580e6a905bb7a617e652f Mon Sep 17 00:00:00 2001
+From: Nick Anderson <nick@cmdln.org>
+Date: Mon, 6 Jun 2022 10:02:07 -0500
+Subject: [PATCH] Changed link with text to markdown syntax
+
+This change makes links with text more nicely formatted.
+
+Closes: #8
+---
+ ox-slack.el | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/ox-slack.el b/ox-slack.el
+index ea18c7c..7f93027 100644
+--- a/ox-slack.el
++++ b/ox-slack.el
+@@ -169,7 +169,7 @@ a communication channel."
+                   (org-export-file-uri (funcall link-org-files-as-md raw-path)))
+                  (t raw-path))))
+           (if (not contents) (format "%s" path)
+-            (format "*%s* (%s)" contents path)))))))
++            (format "[%s](%s)" contents path)))))))
+
+ (defun org-slack-verbatim (_verbatim contents _info)
+   "Transcode VERBATIM from Org to Slack.

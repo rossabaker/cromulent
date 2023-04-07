@@ -2223,7 +2223,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-04-06 Thu 17:25>
+:EXPORT_HUGO_LASTMOD: <2023-04-07 Fri 11:22>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -2735,7 +2735,21 @@ Mostly useful for =org-slack-export-to-clipboard-as-slack=.
 #+begin_src emacs-lisp
   (use-package ox-slack
     :ensure t
-    :after org)
+    :after org
+    :bind
+    (:map org-mode-map
+     :prefix-map ross/org-mode-map
+     :prefix "C-c m"
+     ("w" . org-slack-export-to-clipboard-as-slack)))
+#+end_src
+
+Apply [[https://github.com/titaniumbones/ox-slack/pull/9][this patch]] to fix the syntax for links.  In Slack, turn on
+"Format messages with markup" in Advanced settings for link support.
+
+#+begin_src nix :noweb-ref emacs-ox-slack
+  epkgs.ox-slack.overrideAttrs(old: {
+    patches = [ ../../src/emacs/ox-slack/github-9.patch ];
+  })
 #+end_src
 
 **** Data
@@ -3438,6 +3452,8 @@ Finally, we add a Home Manager module based on the configured app.
 	    <<emacs-jinx>>;
 	  copilot =
 	    <<emacs-copilot>>;
+	  ox-slack =
+	    <<emacs-ox-slack>>;
 	};
 	config = ./init.el;
 	defaultInitFile = true;
@@ -3453,7 +3469,7 @@ Finally, we add a Home Manager module based on the configured app.
 	perSystem@{ config, pkgs }: {
 	  imports = [
 	    <<emacs-home-packages>>
-            ./load-path.nix
+	    ./load-path.nix
 	  ];
 	  programs.emacs = {
 	    enable = true;
