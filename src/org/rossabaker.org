@@ -2223,7 +2223,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-04-14 Fri 19:31>
+:EXPORT_HUGO_LASTMOD: <2023-04-14 Fri 19:48>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -3224,6 +3224,15 @@ I like a non-blinking bar cursor.
   (use-package frame
     :config
     (blink-cursor-mode -1))
+#+end_src
+
+****** Mode line
+
+Put the buffer size in the mode line.  ~k~, ~M~, and ~G~ reflect SI
+units (base 1000), not binary (base 1024).
+
+#+begin_src emacs-lisp
+  (add-hook 'on-first-buffer-hook #'size-indication-mode)
 #+end_src
 
 ****** Scroll bars

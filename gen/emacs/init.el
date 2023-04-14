@@ -439,6 +439,8 @@ existing directory under `magit-clone-default-directory'."
   :config
   (blink-cursor-mode -1))
 
+(add-hook 'on-first-buffer-hook #'size-indication-mode)
+
 (use-package scroll-bar
   :config
   (scroll-bar-mode -1))
