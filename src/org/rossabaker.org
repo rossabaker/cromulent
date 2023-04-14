@@ -1695,7 +1695,7 @@ supported contacts from the experimental ones.
 CLOSED: [2022-09-01 Thu 16:54]
 :PROPERTIES:
 :EXPORT_FILE_NAME: build
-:EXPORT_HUGO_LASTMOD: <2022-11-21 Mon 13:19>
+:EXPORT_HUGO_LASTMOD: <2023-04-14 Fri 15:23>
 :END:
 
 #+begin_src text :tangle ../../tmp/hugo/static/_redirects :exports none
@@ -2223,7 +2223,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-04-14 Fri 15:12>
+:EXPORT_HUGO_LASTMOD: <2023-04-14 Fri 15:41>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -3171,6 +3171,29 @@ a bit more minimalist than the excellent [[https://emacs-lsp.github.io/lsp-mode/
 
 #+begin_src emacs-lisp
   (use-package eglot :defer t)
+#+end_src
+
+**** Development
+***** Extensions
+****** Mermaid
+
+These graphs are supported inline by GitHub.
+
+#+begin_src emacs-lisp
+  (use-package mermaid-mode
+    :ensure t
+    :defer t)
+#+end_src
+
+Install the Mermaid compiler.  It needs Chromium, which is presently
+broken on aarch64-darwin, but ~mermaid-open-browser~ works.
+
+#+begin_src nix :noweb-ref emacs-home-packages
+  ({ pkgs, ...}: {
+    home.packages = [
+      pkgs.nodePackages.mermaid-cli
+    ];
+  })
 #+end_src
 
 **** Environment
