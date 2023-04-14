@@ -154,6 +154,10 @@ with EXPORT_FILE_NAME."
    :prefix "C-c m"
    ("w" . org-slack-export-to-clipboard-as-slack)))
 
+(use-package subword
+  :defer t
+  :diminish)
+
 (use-package saveplace
   :hook (on-first-buffer . save-place-mode))
 

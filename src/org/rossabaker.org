@@ -2223,7 +2223,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-04-07 Fri 11:22>
+:EXPORT_HUGO_LASTMOD: <2023-04-14 Fri 10:22>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -2752,6 +2752,17 @@ Apply [[https://github.com/titaniumbones/ox-slack/pull/9][this patch]] to fix th
   })
 #+end_src
 
+***** Subword mode
+
+Subword mode helps us move around camel-case languages, and is mostly
+configured as a hook in those major modes.  The only thing we
+customize about it is not wanting it cluttering the mode line.
+
+#+begin_src emacs-lisp
+  (use-package subword
+    :defer t
+    :diminish)
+#+end_src
 **** Data
 
 ***** Save place
