@@ -158,6 +158,8 @@ with EXPORT_FILE_NAME."
   :defer t
   :diminish)
 
+(bind-key [remap count-words-region] 'count-words)
+
 (use-package saveplace
   :hook (on-first-buffer . save-place-mode))
 

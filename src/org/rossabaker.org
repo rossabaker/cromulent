@@ -2223,7 +2223,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-04-14 Fri 10:22>
+:EXPORT_HUGO_LASTMOD: <2023-04-14 Fri 15:12>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -2763,6 +2763,15 @@ customize about it is not wanting it cluttering the mode line.
     :defer t
     :diminish)
 #+end_src
+***** Counting words
+
+The default binding of =M-== is ~count-words-region~.  The newer
+~count-words~ counts the buffer when there's no active region.
+
+#+begin_src emacs-lisp
+  (bind-key [remap count-words-region] 'count-words)
+#+end_src
+
 **** Data
 
 ***** Save place
