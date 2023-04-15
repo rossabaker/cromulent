@@ -439,6 +439,16 @@ existing directory under `magit-clone-default-directory'."
   :config
   (blink-cursor-mode -1))
 
+(defun ross/mode-line-binary-size-indication ()
+  "Replaces the size indication in the mode line with base 1024 units."
+  (require 'cl-seq)
+  (setopt mode-line-position
+	  (cl-subst-if
+	   '(size-indication-mode
+	     (8 " of " (:eval (file-size-human-readable (buffer-size) nil "" "B"))))
+	   (lambda (x) (and (listp x) (eq 'size-indication-mode (car x))))
+	   mode-line-position)))
+(add-hook 'on-first-buffer-hook #'ross/mode-line-binary-size-indication)
 (add-hook 'on-first-buffer-hook #'size-indication-mode)
 
 (use-package scroll-bar

@@ -2223,7 +2223,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-04-14 Fri 19:48>
+:EXPORT_HUGO_LASTMOD: <2023-04-14 Fri 21:04>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -3227,11 +3227,22 @@ I like a non-blinking bar cursor.
 #+end_src
 
 ****** Mode line
-
-Put the buffer size in the mode line.  ~k~, ~M~, and ~G~ reflect SI
-units (base 1000), not binary (base 1024).
+******* Size indication
+Put the buffer size in the mode line.  coreutils use binary
+(base 1024) units, so I will too.  I mostly wanted to see if I could.
+Of course I could.  This is Emacs.
 
 #+begin_src emacs-lisp
+  (defun ross/mode-line-binary-size-indication ()
+    "Replaces the size indication in the mode line with base 1024 units."
+    (require 'cl-seq)
+    (setopt mode-line-position
+	    (cl-subst-if
+	     '(size-indication-mode
+	       (8 " of " (:eval (file-size-human-readable (buffer-size) nil "" "B"))))
+	     (lambda (x) (and (listp x) (eq 'size-indication-mode (car x))))
+	     mode-line-position)))
+  (add-hook 'on-first-buffer-hook #'ross/mode-line-binary-size-indication)
   (add-hook 'on-first-buffer-hook #'size-indication-mode)
 #+end_src
 
