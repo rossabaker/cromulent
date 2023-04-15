@@ -445,7 +445,7 @@ existing directory under `magit-clone-default-directory'."
   (setopt mode-line-position
 	  (cl-subst-if
 	   '(size-indication-mode
-	     (8 " of " (:eval (file-size-human-readable (buffer-size) nil "" "B"))))
+	     (8 " of " (:eval (file-size-human-readable (buffer-size) 'iec "" "B"))))
 	   (lambda (x) (and (listp x) (eq 'size-indication-mode (car x))))
 	   mode-line-position)))
 (add-hook 'on-first-buffer-hook #'ross/mode-line-binary-size-indication)
