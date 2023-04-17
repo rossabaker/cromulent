@@ -101,11 +101,6 @@
 	    ];
 	  })
 	  ({ pkgs, ...}: { home.packages = [ pkgs.ripgrep ]; })
-	  ({ pkgs, ...}: {
-	    home.packages = [
-	      pkgs.nodePackages.mermaid-cli
-	    ];
-	  })
 	  ./load-path.nix
 	];
 	programs.emacs = {
