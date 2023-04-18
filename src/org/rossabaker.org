@@ -2223,7 +2223,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-04-17 Mon 22:12>
+:EXPORT_HUGO_LASTMOD: <2023-04-17 Mon 23:20>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -2567,9 +2567,16 @@ Highlight the current line, only in the current buffer.
 
 ***** ffap
 
-~ffap~, or Find File At Point, is a transitive dependency of nix-mode.
-It invokes ~gcc~ and ~g++~, which is fine, except on a Mac without
-Xcode, that brings up a dialog box.
+~ffap~, short for "find file at point," guesses a default file from the
+point.  =ffap-bindings= rebinds several commands with ffap equivalents.
+
+#+begin_src emacs-lisp
+  (use-package ffap
+    :hook (on-first-input . ffap-bindings))
+#+end_src
+
+ffap invokes ~gcc~ and ~g++~, which is fine, except on a Mac without
+Xcode.  That brings up a dreaded dialog box.
 
 #+begin_src nix :noweb-ref emacs-home-packages
   ({ pkgs, ...}: { home.packages = [ pkgs.gcc ]; })

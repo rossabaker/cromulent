@@ -96,6 +96,9 @@
 (use-package hl-line
   :hook (on-first-buffer . global-hl-line-mode))
 
+(use-package ffap
+  :hook (on-first-input . ffap-bindings))
+
 (use-package ws-butler
   :ensure t
   :hook (on-first-buffer . ws-butler-global-mode)
