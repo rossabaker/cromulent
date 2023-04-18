@@ -2223,7 +2223,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-04-16 Sun 23:18>
+:EXPORT_HUGO_LASTMOD: <2023-04-17 Mon 22:12>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -3173,6 +3173,27 @@ multiple definitions are found.
     (xref-show-definitions-function #'xref-show-definitions-completing-read))
 #+end_src
 **** Applications
+***** Dictionary
+
+The ~M-#~ keybinding is dubious because it's not reserved, but it's
+[[https://www.masteringemacs.org/article/wordsmithing-in-emacs][good enough for Mickey Petersen]].
+
+#+begin_src emacs-lisp
+  (use-package dictionary
+    :bind
+    ("M-#" . dictionary-lookup-definition))
+#+end_src
+
+Until I find a working dictd for MacOS on Nix, we'll sigh heavily and
+use dict.org.
+
+#+begin_src emacs-lisp
+  (use-package dictionary
+    :if (memq window-system '(mac ns x))
+    :custom
+    (dictionary-server "dict.org"))
+#+end_src
+
 ***** Language server protocol
 
 We're going to give [[https://joaotavora.github.io/eglot/][eglot]] a try now that it's built into Emacs.  It's

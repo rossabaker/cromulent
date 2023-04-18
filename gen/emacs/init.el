@@ -426,6 +426,15 @@ existing directory under `magit-clone-default-directory'."
   :custom
   (xref-show-definitions-function #'xref-show-definitions-completing-read))
 
+(use-package dictionary
+  :bind
+  ("M-#" . dictionary-lookup-definition))
+
+(use-package dictionary
+  :if (memq window-system '(mac ns x))
+  :custom
+  (dictionary-server "dict.org"))
+
 (use-package eglot :defer t)
 
 (setopt frame-inhibit-implied-resize t)
