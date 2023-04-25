@@ -73,44 +73,42 @@
   outputs =
     inputs:
       let
-        mkDarwinConfig = { pkgs, system }:
-          inputs.darwin.lib.darwinSystem {
-            inherit system;
-            modules = [
-              (import (pkgs.callPackage ./tangle.nix {
-                inherit pkgs;
-                src = ./src/org/config/nix-darwin;
-              }))
-              {
-                system.keyboard.enableKeyMapping = true;
-                system.keyboard.remapCapsLockToControl = true;
-              }
-            ];
-          };
+        mkDarwinConfigModule = { pkgs }: {
+          imports = [
+    	(import (pkgs.callPackage ./tangle.nix {
+    	  inherit pkgs;
+    	  src = ./src/org/config/nix-darwin;
+    	}))
+    	{
+    	  system.keyboard.enableKeyMapping = true;
+    	  system.keyboard.remapCapsLockToControl = true;
+    	}
+          ];
+        };
     
         mkHomeConfig = { pkgs, system, username, homeDirectory }:
           let
-            homeModule = import (pkgs.callPackage ./tangle.nix {
-              inherit pkgs;
-              src = ./src/org/config/home-manager;
-            });
+    	homeModule = import (pkgs.callPackage ./tangle.nix {
+    	  inherit pkgs;
+    	  src = ./src/org/config/home-manager;
+    	});
           in
           inputs.home-manager.lib.homeManagerConfiguration {
-            inherit pkgs;
-            modules = [
-              {
-                home = {
-                  inherit homeDirectory username;
-                  stateVersion = "21.11";
-                };
-                nixpkgs.overlays = [ inputs.emacs-overlay.overlay ];
-              }
-              homeModule
-              inputs.self.homeManagerModules.emacs
-              ./modules/work
-            ];
-            # Pass our flake inputs into the config
-            extraSpecialArgs = { inherit inputs; };
+    	inherit pkgs;
+    	modules = [
+    	  {
+    	    home = {
+    	      inherit homeDirectory username;
+    	      stateVersion = "21.11";
+    	    };
+    	    nixpkgs.overlays = [ inputs.emacs-overlay.overlay ];
+    	  }
+    	  homeModule
+    	  inputs.self.homeManagerModules.emacs
+    	  ./modules/work
+    	];
+    	# Pass our flake inputs into the config
+    	extraSpecialArgs = { inherit inputs; };
           };
     
         RABaker-at-L2LYQM57XY = pkgs: mkHomeConfig {
@@ -120,9 +118,8 @@
           homeDirectory = "/Users/RABaker";
         };
     
-        L2LYQM57XY = pkgs: mkDarwinConfig {
+        aarch64-darwin-config-base = pkgs: mkDarwinConfigModule {
           inherit pkgs;
-          system = "aarch64-darwin";
         };
     
         overlays = {
@@ -144,15 +141,15 @@
           inherit overlays;
     
           homeConfigurations = {
-            "RABaker@L2LYQM57XY" = RABaker-at-L2LYQM57XY (pkgsFor "aarch64-darwin");
+    	"RABaker@L2LYQM57XY" = RABaker-at-L2LYQM57XY (pkgsFor "aarch64-darwin");
           };
     
-          darwinConfigurations = {
-            L2LYQM57XY = L2LYQM57XY (pkgsFor "aarch64-darwin");
+          darwinConfigurationModules = {
+    	aarch64-base = aarch64-darwin-config-base (pkgsFor "aarch64-darwin");
           };
     
           flakeModules = {
-            emacs = ./gen/emacs;
+    	emacs = ./gen/emacs;
           };
         };
     
@@ -163,47 +160,47 @@
     
         perSystem = { config, self', inputs', system, pkgs, ... }:
           let
-            hm = inputs.home-manager.defaultPackage."${system}";
+    	hm = inputs.home-manager.defaultPackage."${system}";
     
-            darwinPackages =
-              if (system == "aarch64-darwin") then {
-                L2LYQM57XY = (L2LYQM57XY pkgs).system;
-                "RABaker@L2LYQM57XY" = (RABaker-at-L2LYQM57XY pkgs).activationPackage;
-              } else { };
+    	darwinPackages =
+    	  if (system == "aarch64-darwin") then {
+    	    aarch64-darwin-config-base = (aarch64-darwin-config-base pkgs).system;
+    	    "RABaker@L2LYQM57XY" = (RABaker-at-L2LYQM57XY pkgs).activationPackage;
+    	  } else { };
           in
           {
-            _module.args.pkgs = import inputs.nixpkgs {
-              inherit system;
-              overlays = [
-                inputs.devshell.overlays.default
-                inputs.emacs-overlay.overlays.default
-              ];
-            };
+    	_module.args.pkgs = import inputs.nixpkgs {
+    	  inherit system;
+    	  overlays = [
+    	    inputs.devshell.overlays.default
+    	    inputs.emacs-overlay.overlays.default
+    	  ];
+    	};
     
-            packages = {
-              website = pkgs.callPackage ./gen/website {
-                emacs29 = self'.packages.emacs29;
-                src = ./src;
-              };
-            } // darwinPackages;
+    	packages = {
+    	  website = pkgs.callPackage ./gen/website {
+    	    emacs29 = self'.packages.emacs29;
+    	    src = ./src;
+    	  };
+    	} // darwinPackages;
     
-            devShells.default = pkgs.devshell.mkShell {
-              name = "nix-config";
+    	devShells.default = pkgs.devshell.mkShell {
+    	  name = "nix-config";
     
-              commands = [{
-                name = "hm-switch";
-                help = "switch the home-manager config";
-                command = "${hm}/bin/home-manager switch --flake $PRJ_ROOT";
-              }];
+    	  commands = [{
+    	    name = "hm-switch";
+    	    help = "switch the home-manager config";
+    	    command = "${hm}/bin/home-manager switch --flake $PRJ_ROOT";
+    	  }];
     
-              packages = [
-                hm
-                pkgs.google-cloud-sdk
-                pkgs.hugo
-                pkgs.nix
-                pkgs.terraform
-              ];
-            };
+    	  packages = [
+    	    hm
+    	    pkgs.google-cloud-sdk
+    	    pkgs.hugo
+    	    pkgs.nix
+    	    pkgs.terraform
+    	  ];
+    	};
           };
       };
 }
