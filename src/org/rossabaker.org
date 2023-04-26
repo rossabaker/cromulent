@@ -5147,6 +5147,370 @@ platform where a commodity suffices.
 I wouldn't want to impose this on the volunteer parent who eventually
 takes my spot on the youth soccer board.  But for a personal website
 of an Emacs nerd, I highly recommend checking out ox-hugo!
+
+** DONE Scala affixes
+CLOSED: [2023-04-26 Wed 09:28]
+:PROPERTIES:
+:EXPORT_FILE_NAME: scala-affixes
+:EXPORT_HUGO_LASTMOD: <2023-04-26 Wed 09:27>
+:END:
+
+#+begin_description
+  A study of prefixes and suffixes in Scala can help build our
+  function vocabulary, just as surely as studying them in a natural
+  language.
+#+end_description
+
+A powerful way to build one's vocabulary is to study prefixes and
+suffixes.  In elementary school, we learn that bi- means two.  We can
+see it in common words like bicycle and bilingual.  As we progress
+through school into binomials and bivalence, we're ready.  It's not
+perfect: is biennial twice a year or once every two years?  Biryani
+isn't two helpings of ryani.  Still, they are surely worth studying.
+
+A colleague in our Scala study group asked, "Can we do the same with
+Scala?"  Yes!  Some, like "bi-", are familiar from English.  Others
+like "semi-" and "sub-" are known in English but not obvious in Scala.
+As a newcomer to FP, I was overwhelmed with the cryptic "-T" and "-M"
+suffixes I saw everywhere.
+
+This article is not a tutorial on the underlying concepts, but we'll
+link to some references or motivating examples.  The hope is that this
+is a reference for patterns you've seen but not understood, and
+patterns you haven't even realized.  Furthermore, as you begin to
+write your own combinators, consider whether these naming conventions
+apply and help newcomers understand what you wrote!
+
+*** Prefixes
+
+**** ~bi-~
+
+~bi-~ means two.  It usually generalizes one type parameter to two.
+This is useful when you have an error channel, like ~Either~.
+
+[[https://typelevel.org/cats/typeclasses/functor.html][~Functor~]] vs. [[https://typelevel.org/cats/typeclasses/bifunctor.html][~Bifunctor~]].
+
+#+begin_src scala
+  trait Functor[F[_]] {
+    def map[A, B](fa: F[A])(f: A => B): F[B]
+  }
+
+  trait Bifunctor[F[_, _]] {
+    def bimap[A, B, C, D](fab: F[A, B])(f: A => C, g: B => D): F[C, D]
+  }
+#+end_src
+
+[[https://typelevel.org/cats/typeclasses/traverse.html][~Traverse~]] vs. ~Bitraverse~.
+
+#+begin_src scala
+  trait Traverse[F[_]] {
+    def traverse[G[_]: Applicative, A, B](fa: F[A])(f: A => G[B]): G[F[B]]
+  }
+
+  trait Bitraverse[F[_, _]] {
+    def bitraverse[G[_]: Applicative, A, B, C, D](fab: F[A, B])(f: A => G[C], g: B => G[D]): G[F[C, D]]
+  }
+#+end_src
+
+Weirdly, [[https://typelevel.org/cats/typeclasses/bimonad.html][~Bimonad~]] doesn't introduce a second parameter, but rather
+unifies a category and its dual.  [[*~co-~][More on duals]] in a bit.
+
+#+begin_src scala
+  trait Bimonad[F[_]] extends Monad[F] with Comonad[F]
+#+end_src
+
+**** ~co-~
+
+~co-~ represents a [[https://eed3si9n.com/herding-cats/Duality.html][categorical dual]].  The naive way to think about
+this is "flipping around the arrows".
+
+~FlatMap~ and ~CoflatMap~.  ~CoflatMap~ is a lesser-known supertype of
+[[https://typelevel.org/cats/typeclasses/comonad.html][~Comonad~]].  Rebecca Mark has a great talk on a [[https://www.47deg.com/presentations/2020/03/13/comonads-game-of-life/][game of life with
+comonads]].
+
+#+begin_src scala
+  trait FlatMap[F[_]] {
+    // F[F[A]] → F[A]
+    def flatten[A](ffa: F[F[A]]): F[A]
+  }
+
+  trait CoflatMap[F[_]] {
+    // F[F[A]] ← F[A]
+    def coflatten[A](fa: F[A]): F[F[A]]
+  }
+#+end_src
+
+There's also [[https://typelevel.org/cats/datatypes/kleisli.html][Kleisli]] and Cokleisli.  I don't have a good use case, but
+Scalaz used to alias it to [[https://github.com/scalaz/scalaz/blob/v6.0.4/core/src/main/scala/scalaz/Cokleisli.scala#L20][~⋆~]]!
+
+#+begin_src scala
+  // A → F[B]
+  final case class Kleisli[F[_], -A, B](run: A => F[B])
+  // A ← F[B]
+  final case class Cokleisli[F[_], B, A](run: F[B] => A)
+  // equivalently
+  final case class Cokleisli[F[_], A, B](run: F[A] => B)
+#+end_src
+
+What about ~Cofunctor~?  Well, ~Functor~ is self-dual.  When we flip
+the arrows, we get a structurally equivalent type!
+
+#+begin_src scala
+  trait Functor[F[_]] {
+    // F[A] → (A → B) → F[B]
+    def map[A, B](fa: F[A])(f: A => B): F[B]
+  }
+
+  trait Cofunctor[F[_]] {
+    // F[A] ← (A ← B) ← F[B]
+    def comap[B, A](fb: F[B])(f: B => A): F[A]
+    // equivalently
+    def comap[A, B](fb: F[A])(f: A => B): F[B]
+  }
+#+end_src
+
+**** ~contra-~
+
+Covariant ~Functor~ maps outputs. [[https://typelevel.org/cats/typeclasses/contravariant.html][~Contravariant~ functors]] map inputs.
+Do you see the difference between ~contramap~ and ~comap~?
+
+#+begin_src scala
+  trait Functor[F[_]] {
+    def map[A, B](fa: F[A])(f: A => B): F[B]
+  }
+
+  trait Contravariant[F[_]] {
+    def contramap[A, B](fa: F[A])(f: B => A): F[B]
+  }
+#+end_src
+
+**** ~di-~
+
+Whereas ~bimap~ maps both sides, ~dimap~ contramaps one side and maps
+another.  Single-argument functions are a simple example of an [[https://typelevel.org/cats/typeclasses/arrow.html][Arrow]].
+
+#+begin_src scala
+  trait Arrow[F[_, _]] {
+    def dimap[A, B, C, D](fab: F[A, B])(f: C => A)(g: B => D): F[C, D]
+  }
+#+end_src
+
+**** ~flat-~
+
+~flat-~ flattens things.
+
+#+begin_src scala
+  trait FlatMap[F[_]] {
+    def     map[A, B](fa: F[A])(f: (A) =>   B ): F[B]
+    def flatMap[A, B](fa: F[A])(f: (A) => F[B]): F[B]
+    //      tap[A, B](fa: F[A])(f: (A) =>   B ): F[A]
+    def flatTap[A, B](fa: F[A])(f: (A) => F[B]): F[A]
+  }
+#+end_src
+
+Where is ~tap~ in Cats?  If we're discarding the result, and not
+capturing an effect, we've left the world of FP.  But the standard
+library [[https://www.scala-lang.org/api/2.13.10/scala/util/ChainingOps.html#tap\[U\](f:A=%3EU):A][defines a ~tap~]].
+
+**** ~par-~
+
+~par-~ is for parallel operations.  The standard library used to have
+parallel collections, banished to [[https://github.com/scala/scala-parallel-collections][a module]] as of Scala 2.13.
+
+#+begin_src scala
+  trait ParIterable[+T]
+  trait ParSeq[+T]
+  trait ParMap[K, +V]
+  trait ParSet[T]
+#+end_src
+
+In Cats, we can use the [[https://typelevel.org/cats/typeclasses/parallel.html][Parallel]] type class to "parallelize" some
+operations.  For some monads, like ~IO~, this is refers to parallel
+execution.  ~Parallel[Either]~ is about error accumulation, and
+~Parallel[List]~ is about zipping.  Those cases say nothing about
+threading, but delegate to some other ~Applicative~ instance to
+escape the sequentiality [[https://typelevel.org/cats/datatypes/validated.html#of-flatmaps-and-eithers][demanded by the monad laws]].
+
+#+begin_src scala
+  trait Applicative[F[_]] {
+    def productL[A, B](fa: F[A])(fb: F[B]): F[A]
+  }
+
+  trait Parallel[M[_]] {
+    // Same, but uses the alternate Applicative instance associated with M
+    def parProductL[A, B](ma: M[A])(mb: M[B]): M[A]
+  }
+#+end_src
+
+There's [[https://www.javadoc.io/doc/org.typelevel/cats-docs_2.13/latest/cats/syntax/ParallelSyntax.html?search=parallel][a lot of parallel in Cats]].
+
+**** ~semi-~
+
+~semi-~ is used by various monad transformers for operations that
+return a base monad instead of the transformed monad:
+
+#+begin_src scala
+  case class OptionT[F[_], A](value: F[Option[A]]) {
+    def     flatMap[B](f: (A) => OptionT[F, B])(implicit F: Monad[F]): OptionT[F, B]
+    def semiflatMap[B](f: (A) =>         F [B])(implicit F: Monad[F]): OptionT[F, B]
+  }
+#+end_src
+
+**** ~sub-~
+
+~sub-~ is used by various monad transformers for operations that
+return the inner monad instead of the transformed monad:
+
+#+begin_src scala
+  case class OptionT[F[_], A](value: F[Option[A]]) {
+    def    flatMap[B](f: (A) => OptionT[F, B])(implicit F: Monad[F]):   OptionT[F, B]
+    def subflatMap[B](f: (A) => Option [   B])(implicit F: Functor[F]): OptionT[F, B]
+  }
+#+end_src
+
+*** Suffixes
+
+**** ~-A~
+
+~-A~ is for [[https://typelevel.org/cats/typeclasses/applicative.html][Applicative]] operations.
+
+#+begin_src scala
+  trait Applicative[F[_]] {
+    def replicateA[A](n: Int, fa: F[A]): F[List[A]]
+    def unlessA[A](cond: Boolean)(f: => F[A]): F[Unit]
+    def whenA[A](cond: Boolean)(f: => F[A]): F[Unit]
+  }
+#+end_src
+
+Let us speak of [[https://www.javadoc.io/static/org.typelevel/cats-docs_2.13/2.9.0/cats/Applicative.html#ifA\[A\](fcond:F\[Boolean\])(ifTrue:F\[A\],ifFalse:F\[A\]):F\[A\]][~ifA~]] no more.
+
+**** ~-F~
+
+~-F~ is for [[https://typelevel.org/cats/typeclasses/functor.html][Functor]] operations.
+
+#+begin_src scala
+  trait Functor[F[_]] {
+    def ifF[A](fb: F[Boolean])(ifTrue: => A, ifFalse: => A): F[A]
+  }
+#+end_src
+
+It's also used to lift values into a more complicated type.  Sometimes
+~Functor~ is all that's needed.  Sometimes more, sometimes less.  In
+this case, it's better to think of ~F~ as for "effect".
+
+#+begin_src scala
+  object Kleisli {
+    def liftF[F[_], A, B](x: F[B]): Kleisli[F, A, B]
+  }
+  object OptionT {
+    def liftF[F[_], A](fa: F[A])(F: Functor[F]): OptionT[F, A]
+  }
+  object IorT {
+    def liftF[F[_], A, B](fb: F[B])(F: Applicative[F]): IorT[F, A, B]
+  }
+  object ContT {
+    def liftF[F[_], A, B](mb: M[B])(M: FlatMap[M]): ContT[M, A, B]
+  }
+#+end_src
+
+Things called ~eval~ in Cats-Effect and FS2 look a lot like ~liftF~,
+but that breaks our etymology.
+
+#+begin_src scala
+  object Resource {
+    def eval[F[_], A](fa: F[A]): Resource[F, A]
+  }
+
+  object Stream {
+    def eval[F[_], O](fo: F[O]): Stream[F, O]
+  }
+#+end_src
+
+**** ~-K~
+
+~-K~ is for "higher kinded" and is typically agnostic to "what's inside the box".
+
+[[https://typelevel.org/cats/typeclasses/monoidk.html][~MonoidK~]] and [[https://typelevel.org/cats/typeclasses/monoid.html][~Monoid~]]:
+
+#+begin_src scala
+  trait Monoid[A] {
+    def combine(x: A, y: A): A
+  }
+  trait MonoidK[F[_]] {
+    def combineK[A](x: F[A], y: F[A]): F[A]
+  }
+#+end_src
+
+~FunctionK~ and ~Function~:
+
+#+begin_src scala
+  trait Function1[-T1, +R] { // or =>
+    def apply(v1: T1): R
+  }
+  trait FunctionK[F[_], G[_]] { // or ~>
+    def apply[A](fa: F[A]): G[A]
+  }
+#+end_src
+
+**** ~-L~, ~-R~
+
+~-L~ and ~-R~ stand for "left" and "right".
+
+#+begin_src scala
+  trait Applicative[F[_]] {
+    // Better known as `<*`
+    def productL[A, B](fa: F[A])(fb: F[B]): F[A]
+    // Better known as `*>`
+    def productR[A, B](fa: F[A])(fb: F[B]): F[B]
+  }
+#+end_src
+
+**** ~-M~
+
+~-M~ is for monadic operations.
+
+#+begin_src scala
+  trait Monad[F[_]] {
+    def ifM(fa: F[Boolean])(ifTrue: => F[B], ifFalse: => F[B]): F[B]
+    def untilM[G[_], A](f: F[A])(cond: => F[Boolean])(implicit G: Alternative[G]): F[G[A]]
+    def whileM[G[_], A](p: F[Boolean])(body: => F[A])(implicit G: Alternative[G]): F[G[A]]
+  }
+#+end_src
+
+**** ~-T~
+
+~-T~ is for monad transformers.
+
+#+begin_src scala
+  final case class EitherT[F[_], A, B](value: F[Either[A, B]])
+  final case class IdT[F[_], A](value: F[A])
+  final case class IorT[F[_], A, B](value: F[Ior[A, B]])
+  final case class OptionT[F[_], A](value: F[Option[A]])
+  final case class WriterT[F[_], L, V](run: F[(L, V)])
+  // And a few aliases as well.
+  type ReaderT[F[_], -A, B] = Kleisli[F, A, B]
+  type StateT[F[_], S, A] = IndexedStateT[F, S, S, A]
+  type StoreT[W[_], S, A] = RepresentableStoreT[W, [β$2$](S) => β$2$, S, A]
+#+end_src
+
+**** ~_-~
+
+An underscore suffix is usually how we say "I care about the effect,
+not the result inside."  Implementations can be optimized if they know
+the caller is just going to ~void~ it out anyway.
+
+#+begin_src scala
+  trait Traverse[F[_]] {
+    def traverse [G[_]: Applicative, A, B](fa: F[A])(f: A => G[B]): G[F[B]]
+    def traverse_[G[_]: Applicative, A, B](fa: F[A])(f: A => G[B]): G[Unit]
+  }
+#+end_src
+
+*** Did we forget any?
+
+Surely this list isn't complete.  Did I overlook your favorite?
+[[*Contact][Contact me]], and we'll make this a living post.
+
 * Notes section
 :PROPERTIES:
 :EXPORT_HUGO_BUNDLE: notes
