@@ -5148,11 +5148,11 @@ I wouldn't want to impose this on the volunteer parent who eventually
 takes my spot on the youth soccer board.  But for a personal website
 of an Emacs nerd, I highly recommend checking out ox-hugo!
 
-** DONE Scala affixes                                 :@tech:scala:
+** DONE Build your vocabulary with Scala affixes                :@tech:scala:
 CLOSED: [2023-04-26 Wed 09:28]
 :PROPERTIES:
 :EXPORT_FILE_NAME: scala-affixes
-:EXPORT_HUGO_LASTMOD: <2023-04-26 Wed 09:27>
+:EXPORT_HUGO_LASTMOD: <2023-04-26 Wed 11:33>
 :END:
 
 #+begin_description
