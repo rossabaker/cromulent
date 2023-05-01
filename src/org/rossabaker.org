@@ -1961,7 +1961,7 @@ Give the code samples a little more room to breathe.
 CLOSED: [2022-12-25 Sun 22:14]
 :PROPERTIES:
 :EXPORT_FILE_NAME: nix-flake
-:EXPORT_HUGO_LASTMOD: <2023-04-25 Tue 08:46>
+:EXPORT_HUGO_LASTMOD: <2023-05-01 Mon 15:00>
 :END:
 
 #+begin_description
@@ -2143,6 +2143,10 @@ contents of my flake.
 	inherit system;
 	overlays = builtins.attrValues inputs.self.overlays;
       };
+
+      darwinConfigurationModules = {
+        aarch64-base = aarch64-darwin-config-base (pkgsFor "aarch64-darwin");
+      };
     in
     inputs.flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [
@@ -2150,14 +2154,10 @@ contents of my flake.
       ];
 
       flake = {
-	inherit overlays;
+	inherit overlays darwinConfigurationModules;
 
 	homeConfigurations = {
 	  "RABaker@L2LYQM57XY" = RABaker-at-L2LYQM57XY (pkgsFor "aarch64-darwin");
-	};
-
-	darwinConfigurationModules = {
-	  aarch64-base = aarch64-darwin-config-base (pkgsFor "aarch64-darwin");
 	};
 
 	flakeModules = {
@@ -2176,7 +2176,10 @@ contents of my flake.
 
 	  darwinPackages =
 	    if (system == "aarch64-darwin") then {
-	      aarch64-darwin-config-base = (aarch64-darwin-config-base pkgs).system;
+	      aarch64-darwin-config-base = (inputs.darwin.lib.darwinSystem {
+                system = "aarch64-darwin";
+                modules = [ darwinConfigurationModules.aarch64-base ];
+              }).system;
 	      "RABaker@L2LYQM57XY" = (RABaker-at-L2LYQM57XY pkgs).activationPackage;
 	    } else { };
 	in

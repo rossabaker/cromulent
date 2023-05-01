@@ -131,6 +131,10 @@
           inherit system;
           overlays = builtins.attrValues inputs.self.overlays;
         };
+    
+        darwinConfigurationModules = {
+          aarch64-base = aarch64-darwin-config-base (pkgsFor "aarch64-darwin");
+        };
       in
       inputs.flake-parts.lib.mkFlake { inherit inputs; } {
         imports = [
@@ -138,14 +142,10 @@
         ];
     
         flake = {
-          inherit overlays;
+          inherit overlays darwinConfigurationModules;
     
           homeConfigurations = {
     	"RABaker@L2LYQM57XY" = RABaker-at-L2LYQM57XY (pkgsFor "aarch64-darwin");
-          };
-    
-          darwinConfigurationModules = {
-    	aarch64-base = aarch64-darwin-config-base (pkgsFor "aarch64-darwin");
           };
     
           flakeModules = {
@@ -164,7 +164,10 @@
     
     	darwinPackages =
     	  if (system == "aarch64-darwin") then {
-    	    aarch64-darwin-config-base = (aarch64-darwin-config-base pkgs).system;
+    	    aarch64-darwin-config-base = (inputs.darwin.lib.darwinSystem {
+                  system = "aarch64-darwin";
+                  modules = [ darwinConfigurationModules.aarch64-base ];
+                }).system;
     	    "RABaker@L2LYQM57XY" = (RABaker-at-L2LYQM57XY pkgs).activationPackage;
     	  } else { };
           in
