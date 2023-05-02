@@ -76,6 +76,11 @@
 	  epkgs.ox-slack.overrideAttrs(old: {
 	    patches = [ ../../src/emacs/ox-slack/github-9.patch ];
 	  });
+	git-related =
+	  epkgs.trivialBuild {
+	    pname = "git-related";
+	    src = inputs.git-related;
+	  };
       };
       config = ./init.el;
       defaultInitFile = true;

@@ -2040,6 +2040,11 @@ contents of my flake.
       flake = false;
     };
 
+    git-related = {
+      url = "git+https://codeberg.org/rossabaker/git-related";
+      flake = false;
+    };
+
     hocon-mode = {
       url = "github:jxq0/hocon-mode";
       flake = false;
@@ -3148,6 +3153,33 @@ that something tailor-made carries its weight here.
     :commands (git-link git-link-commit git-link-homepage))
 #+end_src
 
+******* Git-Related
+
+[[https://macroexpand.net/pages/git-related.html][~git-related~]] sorts files in a project by a similarity score derived
+from how often they change in the same commit.
+
+#+begin_src emacs-lisp
+  (use-package git-related
+    :bind
+    (:map ross/files-map
+     ("g" . git-related-find-file)))
+#+end_src
+
+The original is not in a public Git repository, so I [[https://codeberg.org/rossabaker/git-related][forked it]].
+
+I don't prefer the way it propertizes the string with the score.  The
+main thing I want is the sort, so I lightly customized it.  The score
+might still be compelling as an ~:annotation-function~.
+
+#+begin_src nix :noweb-ref emacs-git-related
+  epkgs.trivialBuild {
+    pname = "git-related";
+    src = inputs.git-related;
+  }
+#+end_src
+
+The sort order is customized in [[*Vertico multiform][vertico-multiform]].
+
 ****** Treesitter
 
 [[https://github.com/renzmann/treesit-auto][~treesit-auto~]] finds treesitter modes by naming convention.
@@ -3451,6 +3483,17 @@ start with ~/~ or ~~/~, it cleans up the leading default prompt that's
     :hook (rfn-eshadow-update-overlay . vertico-directory-tidy))
 #+end_src
 
+****** Vertico multiform
+
+#+begin_src emacs-lisp
+  (use-package vertico-multiform
+    :after vertico
+    :custom
+    (vertico-multiform-commands '((git-related-find-file (vertico-sort-function . nil))))
+    :config
+    (vertico-multiform-mode))
+#+end_src
+
 ***** Windows
 
 I reflexively call ~other-window~ after splitting.  [[https://macowners.club/posts/custom-functions-5-navigation/#windows-splitting][This idea]] from
@@ -3557,6 +3600,8 @@ Finally, we add a Home Manager module based on the configured app.
 	    <<emacs-copilot>>;
 	  ox-slack =
 	    <<emacs-ox-slack>>;
+	  git-related =
+	    <<emacs-git-related>>;
 	};
 	config = ./init.el;
 	defaultInitFile = true;

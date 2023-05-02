@@ -414,6 +414,11 @@ existing directory under `magit-clone-default-directory'."
   (git-link-use-single-line-number t)
   :commands (git-link git-link-commit git-link-homepage))
 
+(use-package git-related
+  :bind
+  (:map ross/files-map
+   ("g" . git-related-find-file)))
+
 (use-package treesit-auto
   :ensure t
   :demand t
@@ -548,19 +553,31 @@ existing directory under `magit-clone-default-directory'."
    ("M-DEL" . vertico-directory-delete-word))
   :hook (rfn-eshadow-update-overlay . vertico-directory-tidy))
 
-(defun ross/nav-split-and-follow-below ()
+(use-package vertico-multiform
+  :after vertico
+  :custom
+  (vertico-multiform-commands '((git-related-find-file (vertico-sort-function . nil))))
+  :config
+  (vertico-multiform-mode))
+
+(use-package window
+  :config
+  (defun ross/nav-split-and-follow-below ()
     "Split the selected window in two with the new window is bellow.
 This uses `split-window-below' but follows with the cursor."
-      (interactive)
-      (split-window-below)
-      (other-window 1))
+    (interactive)
+    (split-window-below)
+    (other-window 1))
 
-  (defun timu-nav-split-and-follow-right ()
+  (defun ross/nav-split-and-follow-right ()
     "Split the selected window in two with the new window is to the right.
 This uses `split-window-right' but follows with the cursor."
     (interactive)
     (split-window-right)
     (other-window 1))
+  :bind
+  ([remap split-window-below] . ross/nav-split-and-follow-below)
+  ([remap split-window-right] . ross/nav-split-and-follow-right))'
 
 (use-package which-key
   :ensure t

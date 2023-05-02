@@ -190,6 +190,22 @@
         "type": "github"
       }
     },
+    "git-related": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1683041226,
+        "narHash": "sha256-OGkyK8Jvoglp6IxbNV8nrsQZacFaN5iW4db5HpvEDyA=",
+        "ref": "refs/heads/main",
+        "rev": "a2d32f1455c28d88d75b03c820358569d4bb7a9b",
+        "revCount": 3,
+        "type": "git",
+        "url": "https://codeberg.org/rossabaker/git-related"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://codeberg.org/rossabaker/git-related"
+      }
+    },
     "hocon-mode": {
       "flake": false,
       "locked": {
@@ -383,6 +399,7 @@
         "fill-sentences-correctly": "fill-sentences-correctly",
         "firefox-darwin": "firefox-darwin",
         "flake-parts": "flake-parts",
+        "git-related": "git-related",
         "hocon-mode": "hocon-mode",
         "home-manager": "home-manager",
         "jinx": "jinx",

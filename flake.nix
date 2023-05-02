@@ -32,6 +32,11 @@
         flake = false;
       };
     
+      git-related = {
+        url = "git+https://codeberg.org/rossabaker/git-related";
+        flake = false;
+      };
+    
       hocon-mode = {
         url = "github:jxq0/hocon-mode";
         flake = false;
