@@ -548,6 +548,20 @@ existing directory under `magit-clone-default-directory'."
    ("M-DEL" . vertico-directory-delete-word))
   :hook (rfn-eshadow-update-overlay . vertico-directory-tidy))
 
+(defun ross/nav-split-and-follow-below ()
+    "Split the selected window in two with the new window is bellow.
+This uses `split-window-below' but follows with the cursor."
+      (interactive)
+      (split-window-below)
+      (other-window 1))
+
+  (defun timu-nav-split-and-follow-right ()
+    "Split the selected window in two with the new window is to the right.
+This uses `split-window-right' but follows with the cursor."
+    (interactive)
+    (split-window-right)
+    (other-window 1))
+
 (use-package which-key
   :ensure t
   :hook (on-first-input . which-key-mode)

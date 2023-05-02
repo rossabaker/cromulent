@@ -2223,7 +2223,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-04-17 Mon 23:20>
+:EXPORT_HUGO_LASTMOD: <2023-05-01 Mon 21:16>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -3449,6 +3449,32 @@ start with ~/~ or ~~/~, it cleans up the leading default prompt that's
      ("RET" . vertico-directory-enter)
      ("M-DEL" . vertico-directory-delete-word))
     :hook (rfn-eshadow-update-overlay . vertico-directory-tidy))
+#+end_src
+
+***** Windows
+
+I reflexively call ~other-window~ after splitting.  [[https://macowners.club/posts/custom-functions-5-navigation/#windows-splitting][This idea]] from
+Aimé Bertrand is compelling.
+
+#+begin_src emacs-lisp
+  (use-package window
+    :config
+    (defun ross/nav-split-and-follow-below ()
+      "Split the selected window in two with the new window is bellow.
+  This uses `split-window-below' but follows with the cursor."
+      (interactive)
+      (split-window-below)
+      (other-window 1))
+
+    (defun ross/nav-split-and-follow-right ()
+      "Split the selected window in two with the new window is to the right.
+  This uses `split-window-right' but follows with the cursor."
+      (interactive)
+      (split-window-right)
+      (other-window 1))
+    :bind
+    ([remap split-window-below] . ross/nav-split-and-follow-below)
+    ([remap split-window-right] . ross/nav-split-and-follow-right))'
 #+end_src
 
 **** Help
