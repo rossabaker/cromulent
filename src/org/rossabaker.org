@@ -2228,7 +2228,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-05-01 Mon 21:16>
+:EXPORT_HUGO_LASTMOD: <2023-05-03 Wed 00:01>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -3264,6 +3264,14 @@ I like a non-blinking bar cursor.
 #+end_src
 
 ****** Mode line
+******* Column number
+
+#+begin_src emacs-lisp
+  (use-package simple
+    :hook
+    (on-first-buffer . column-number-mode))
+#+end_src
+
 ******* Size indication
 Put the buffer size in the mode line.  coreutils use binary
 (base 1024) units, so I will too.  I mostly wanted to see if I could.

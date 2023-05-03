@@ -452,6 +452,10 @@ existing directory under `magit-clone-default-directory'."
   :config
   (blink-cursor-mode -1))
 
+(use-package simple
+  :hook
+  (on-first-buffer .column-number-mode))
+
 (defun ross/mode-line-binary-size-indication ()
   "Replaces the size indication in the mode line with base 1024 units."
   (require 'cl-seq)
