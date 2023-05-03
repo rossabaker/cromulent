@@ -454,7 +454,7 @@ existing directory under `magit-clone-default-directory'."
 
 (use-package simple
   :hook
-  (on-first-buffer .column-number-mode))
+  (on-first-buffer . column-number-mode))
 
 (defun ross/mode-line-binary-size-indication ()
   "Replaces the size indication in the mode line with base 1024 units."
@@ -535,6 +535,10 @@ existing directory under `magit-clone-default-directory'."
   (marginalia-mode))
 
 (setopt use-dialog-box nil)
+
+(use-package pixel-scroll
+  :hook
+  (on-first-buffer . pixel-scroll-precision-mode))
 
 (use-package vertico
   :ensure t

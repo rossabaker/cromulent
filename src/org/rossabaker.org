@@ -2228,7 +2228,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-05-03 Wed 00:01>
+:EXPORT_HUGO_LASTMOD: <2023-05-03 Wed 00:08>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -3433,6 +3433,18 @@ Dialog boxes are an unemacsian abomination.
 
 #+begin_src emacs-lisp
   (setopt use-dialog-box nil)
+#+end_src
+
+***** Mouse
+
+I don't use the mouse much in Emacs, but if I do, it's the scroll
+wheel.  This makes it feel less like a trip back to a time before
+scroll wheels.
+
+#+begin_src emacs-lisp
+  (use-package pixel-scroll
+    :hook
+    (on-first-buffer . pixel-scroll-precision-mode))
 #+end_src
 
 ***** Vertico
