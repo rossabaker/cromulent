@@ -640,20 +640,11 @@ This is the vestige of my old init.el.  It is gradually being made literate.
   :custom
   (consult-narrow-key (kbd "C-+"))
   (consult-project-root-function #'projectile-project-root)
-  (xref-show-xrefs-function #'consult-xref)
-  (xref-show-definitions-function #'consult-xref)
   :config
   (advice-add #'completing-read-multiple :override #'consult-completing-read-multiple)
   :bind
-  ([remap switch-to-buffer] . consult-buffer)
-  ([remap switch-to-buffer-other-window] . consult-buffer-other-window)
-  ([remap switch-to-buffer-other-frame] . consult-buffer-other-frame)
-  ([remap yank-pop] . consult-yank-pop)
-  ([remap goto-line] . consult-goto-line)
-  ([remap repeat-complex-command] . consult-history)
   ([remap apropros] . consult-apropos)
   ([remap man] . consult-man)
-  ([remap isearch-edit-string] . consult-isearch-history)
   ([remap projectile-ripgrep] . consult-ripgrep))
 
 (use-package embark

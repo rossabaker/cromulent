@@ -2228,7 +2228,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-05-03 Wed 00:08>
+:EXPORT_HUGO_LASTMOD: <2023-05-06 Sat 23:55>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -3425,6 +3425,53 @@ quiet startup.
      ("M-A" . marginalia-cycle))
     :config
     (marginalia-mode))
+#+end_src
+
+***** Minibuffer
+****** Consult
+
+[[https://github.com/minad/consult][Consult]] provides several enhanced functions for ~completing-read~.  It fits nicely with [[*Vertico][Vertico]].
+
+I generally remapped everything obvious.
+~consult-yank-from-kill-ring~ as a remapping of ~yank~ proved a bit
+too disorienting.
+
+#+begin_src emacs-lisp
+  (use-package consult
+    :ensure t
+    :bind
+    ([remap switch-to-buffer] . consult-buffer)
+    ([remap switch-to-buffer-other-window] . consult-buffer-other-window)
+    ([remap switch-to-buffer-other-frame] . consult-buffer-other-frame)
+    ([remap project-switch-to-buffer] . consult-project-buffer)
+    ([remap bookmark-jump] . consult-bookmark)
+    ([remap recentf-open] . consult-recent-file)
+    ([remap yank] . nil)
+    ([remap yank-pop] . consult-yank-pop)
+    ([remap goto-line] . consult-goto-line)
+    ("M-g m" . consult-mark)
+    ("M-g M" . consult-global-mark)
+    ("M-g o" . consult-outline)
+    ("M-g i" . consult-imenu)
+    ("M-g I" . consult-imenu-multi)
+    ("M-s l" . consult-line)
+    ("M-s L" . consult-line-multi)
+    ("M-s k" . consult-keep-lines)
+    ("M-s u" . consult-focus-lines)
+    ("M-s r" . consult-ripgrep)
+    ("M-s f" . consult-find)
+    ("M-s F" . consult-locate)
+    ("M-g e" . consult-compile-error)
+    ("M-g f" . consult-flymake)
+    ([remap repeat-complex-command] . consult-complex-command)
+    ("M-s e" . consult-isearch-history)
+    ([remap isearch-edit-string] . consult-isearch-history)
+    ([remap next-matching-history-element] . consult-history)
+    ([remap previous-matching-history-element] . consult-history)
+    ([remap Info-search] . consult-info)
+    :custom
+    (xref-show-xrefs-function 'consult-xref)
+    (xref-show-definitions-function 'consult-xref))
 #+end_src
 
 ***** Menu

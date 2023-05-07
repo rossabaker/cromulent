@@ -534,6 +534,42 @@ existing directory under `magit-clone-default-directory'."
   :config
   (marginalia-mode))
 
+(use-package consult
+  :ensure t
+  :bind
+  ([remap switch-to-buffer] . consult-buffer)
+  ([remap switch-to-buffer-other-window] . consult-buffer-other-window)
+  ([remap switch-to-buffer-other-frame] . consult-buffer-other-frame)
+  ([remap project-switch-to-buffer] . consult-project-buffer)
+  ([remap bookmark-jump] . consult-bookmark)
+  ([remap recentf-open] . consult-recent-file)
+  ([remap yank] . nil)
+  ([remap yank-pop] . consult-yank-pop)
+  ([remap goto-line] . consult-goto-line)
+  ("M-g m" . consult-mark)
+  ("M-g M" . consult-global-mark)
+  ("M-g o" . consult-outline)
+  ("M-g i" . consult-imenu)
+  ("M-g I" . consult-imenu-multi)
+  ("M-s l" . consult-line)
+  ("M-s L" . consult-line-multi)
+  ("M-s k" . consult-keep-lines)
+  ("M-s u" . consult-focus-lines)
+  ("M-s r" . consult-ripgrep)
+  ("M-s f" . consult-find)
+  ("M-s F" . consult-locate)
+  ("M-g e" . consult-compile-error)
+  ("M-g f" . consult-flymake)
+  ([remap repeat-complex-command] . consult-complex-command)
+  ("M-s e" . consult-isearch-history)
+  ([remap isearch-edit-string] . consult-isearch-history)
+  ([remap next-matching-history-element] . consult-history)
+  ([remap previous-matching-history-element] . consult-history)
+  ([remap Info-search] . consult-info)
+  :custom
+  (xref-show-xrefs-function 'consult-xref)
+  (xref-show-definitions-function 'consult-xref))
+
 (setopt use-dialog-box nil)
 
 (use-package pixel-scroll
