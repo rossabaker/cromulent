@@ -3760,7 +3760,7 @@ CLOSED: [2023-05-09 Tue 09:27]
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :EXPORT_OPTIONS: H:7
 :EXPORT_DESCRIPTION: A home-manager module for a Scala development environment
-:EXPORT_HUGO_LASTMOD: <2023-05-09 Tue 09:51>
+:EXPORT_HUGO_LASTMOD: <2023-05-09 Tue 13:12>
 :END:
 
 This is a home-manager module that sets up a global [[https://www.scala-sbt.org/][sbt]], a few
@@ -3837,8 +3837,21 @@ The venerable sbt-dependency-graph was [[https://www.scala-sbt.org/1.x/docs/sbt-
 comes with a ~MiniDependencyTreePlugin~ out of the box, but we want
 the fully caffeinated version.
 
+This is available starting in 1.4.0, but it causes scala-xml eviction
+madness up until 1.8.0.
+
 #+begin_src scala :tangle ../../gen/scala/dependency-tree.sbt
-  addDependencyTreePlugin
+  libraryDependencies ++= (
+    if (VersionNumber(sbtVersion.value).matchesSemVer(SemanticSelector(">=1.8"))) {
+      Seq(
+	Defaults.sbtPluginExtra(
+	  ModuleID("org.scala-sbt", "sbt-dependency-tree", sbtVersion.value),
+	  sbtBinaryVersion.value,
+	  scalaBinaryVersion.value
+	)
+      )
+    } else Seq.empty
+  )
 #+end_src
 
 * Projects section
