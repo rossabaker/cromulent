@@ -110,6 +110,7 @@
     	  }
     	  homeModule
     	  inputs.self.homeManagerModules.emacs
+              ./gen/scala
     	  ./modules/work
     	];
     	# Pass our flake inputs into the config
@@ -170,9 +171,9 @@
     	darwinPackages =
     	  if (system == "aarch64-darwin") then {
     	    aarch64-darwin-config-base = (inputs.darwin.lib.darwinSystem {
-                  system = "aarch64-darwin";
-                  modules = [ darwinConfigurationModules.aarch64-base ];
-                }).system;
+    	      system = "aarch64-darwin";
+    	      modules = [ darwinConfigurationModules.aarch64-base ];
+    	    }).system;
     	    "RABaker@L2LYQM57XY" = (RABaker-at-L2LYQM57XY pkgs).activationPackage;
     	  } else { };
           in

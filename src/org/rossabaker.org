@@ -2122,6 +2122,7 @@ contents of my flake.
 	    }
 	    homeModule
 	    inputs.self.homeManagerModules.emacs
+            ./gen/scala
 	    ./modules/work
 	  ];
 	  # Pass our flake inputs into the config
@@ -2150,7 +2151,7 @@ contents of my flake.
       };
 
       darwinConfigurationModules = {
-        aarch64-base = aarch64-darwin-config-base (pkgsFor "aarch64-darwin");
+	aarch64-base = aarch64-darwin-config-base (pkgsFor "aarch64-darwin");
       };
     in
     inputs.flake-parts.lib.mkFlake { inherit inputs; } {
@@ -2182,9 +2183,9 @@ contents of my flake.
 	  darwinPackages =
 	    if (system == "aarch64-darwin") then {
 	      aarch64-darwin-config-base = (inputs.darwin.lib.darwinSystem {
-                system = "aarch64-darwin";
-                modules = [ darwinConfigurationModules.aarch64-base ];
-              }).system;
+		system = "aarch64-darwin";
+		modules = [ darwinConfigurationModules.aarch64-base ];
+	      }).system;
 	      "RABaker@L2LYQM57XY" = (RABaker-at-L2LYQM57XY pkgs).activationPackage;
 	    } else { };
 	in
@@ -3741,6 +3742,82 @@ Finally, a convenience function to reload it:
 #+begin_src emacs-lisp
   (use-package markdown-mode
     :ensure t)
+#+end_src
+
+** DONE Scala config
+CLOSED: [2023-05-09 Tue 09:27]
+:PROPERTIES:
+:EXPORT_FILE_NAME: scala
+:HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
+:EXPORT_OPTIONS: H:7
+:END:
+
+*** Scala
+
+This is a home-manager module that sets up a global [[https://www.scala-sbt.org/][sbt]], a few
+plugins, and some gitignores.
+
+#+begin_src nix :tangle ../../gen/scala/default.nix
+  { pkgs, ... }:
+
+  {
+    home.file = {
+      ".sbt/1.0/sonatype.sbt".source = ./sonatype.sbt;
+      ".sbt/1.0/plugins/sbt-rewarn.sbt".source = ./sbt-rewarn.sbt;
+      ".sbt/1.0/plugins/sbt-updates.sbt".source = ./sbt-updates.sbt;
+    };
+
+    home.packages = [
+      pkgs.sbt
+    ];
+
+    programs.git = {
+      ignores = [
+        ".bloop/"
+        ".bsp/"
+        ".metals/"
+        "metals.sbt"
+      ];
+    };
+  }
+#+end_src
+
+**** Sonatype credentials
+
+This tells sbt where to look for our [[https://central.sonatype.org/publish/publish-guide/][Sonatype]] credentials.
+
+#+begin_src scala :tangle ../../gen/scala/sonatype.sbt
+credentials += Credentials(Path.userHome / ".sbt" / "sonatype-credentials.properties")
+#+end_src
+
+This will not work until a ~~/.sbt/sonatype-credentials.properties~
+file is added.  Add the password yourself:
+
+#+begin_src properties
+realm=Sonatype Nexus Repository Manager
+host=oss.sonatype.org
+user=rossabaker
+password=???
+#+end_src
+
+**** Plugins
+
+***** sbt-rewarn
+
+[[https://github.com/rtimush/sbt-rewarn][sbt-rewarn]] preserves warnings across incremental compilations.
+
+#+begin_src scala :tangle ../../gen/scala/sbt-rewarn.sbt
+  addSbtPlugin("com.timushev.sbt" % "sbt-rewarn" % "0.1.3")
+#+end_src
+
+***** sbt-updates
+
+[[https://github.com/rtimush/sbt-updates][sbt-updates]] shows available updates to library and plugin
+dependencies.  [[https://github.com/scala-steward-org/scala-steward][Scala Steward]] takes care of this on many modern
+projects, but it's still handy for local checking.
+
+#+begin_src scala :tangle ../../gen/scala/sbt-updates.sbt
+  addSbtPlugin("com.timushev.sbt" % "sbt-updates" % "0.6.1")
 #+end_src
 
 * Projects section
