@@ -640,6 +640,8 @@ This uses `split-window-right' but follows with the cursor."
   :config
   (ross/unbind-all 'help-for-help))
 
+(put 'narrow-to-region 'disabled nil)
+
 (defun ross/refresh-load-path ()
   "Refresh the load path written by home-manager to pick up new
  packages without restarting Emacs."

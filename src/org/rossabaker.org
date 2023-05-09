@@ -2229,7 +2229,7 @@ contents of my flake.
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-05-06 Sat 23:55>
+:EXPORT_HUGO_LASTMOD: <2023-05-09 Tue 09:37>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -3621,6 +3621,15 @@ the trick.
     (ross/unbind-all 'help-for-help))
 #+end_src
 
+**** Junk drawer
+
+These customizations don't fit anywhere else.
+
+***** Remove the training wheels
+
+#+begin_src emacs-lisp
+  (put 'narrow-to-region 'disabled nil)
+#+end_src
 
 *** Nix module
 
@@ -3750,9 +3759,8 @@ CLOSED: [2023-05-09 Tue 09:27]
 :EXPORT_FILE_NAME: scala
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :EXPORT_OPTIONS: H:7
+:EXPORT_DESCRIPTION: A home-manager module for a Scala development environment
 :END:
-
-*** Scala
 
 This is a home-manager module that sets up a global [[https://www.scala-sbt.org/][sbt]], a few
 plugins, and some gitignores.
@@ -3782,7 +3790,7 @@ plugins, and some gitignores.
   }
 #+end_src
 
-**** Sonatype credentials
+*** Sonatype credentials
 
 This tells sbt where to look for our [[https://central.sonatype.org/publish/publish-guide/][Sonatype]] credentials.
 
@@ -3800,9 +3808,9 @@ user=rossabaker
 password=???
 #+end_src
 
-**** Plugins
+*** Plugins
 
-***** sbt-rewarn
+**** sbt-rewarn
 
 [[https://github.com/rtimush/sbt-rewarn][sbt-rewarn]] preserves warnings across incremental compilations.
 
@@ -3810,7 +3818,7 @@ password=???
   addSbtPlugin("com.timushev.sbt" % "sbt-rewarn" % "0.1.3")
 #+end_src
 
-***** sbt-updates
+**** sbt-updates
 
 [[https://github.com/rtimush/sbt-updates][sbt-updates]] shows available updates to library and plugin
 dependencies.  [[https://github.com/scala-steward-org/scala-steward][Scala Steward]] takes care of this on many modern
