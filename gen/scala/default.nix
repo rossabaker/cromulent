@@ -10,6 +10,7 @@
 
   home.packages = [
     (pkgs.sbt.override { jre = pkgs.jdk17; })
+    (pkgs.scala-cli.override { jre = pkgs.jdk17; })
   ];
 
   programs.git = {
