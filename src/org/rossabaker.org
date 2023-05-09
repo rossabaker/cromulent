@@ -3760,6 +3760,7 @@ CLOSED: [2023-05-09 Tue 09:27]
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :EXPORT_OPTIONS: H:7
 :EXPORT_DESCRIPTION: A home-manager module for a Scala development environment
+:EXPORT_HUGO_LASTMOD: <2023-05-09 Tue 09:42>
 :END:
 
 This is a home-manager module that sets up a global [[https://www.scala-sbt.org/][sbt]], a few
@@ -3773,6 +3774,7 @@ plugins, and some gitignores.
       ".sbt/1.0/sonatype.sbt".source = ./sonatype.sbt;
       ".sbt/1.0/plugins/sbt-rewarn.sbt".source = ./sbt-rewarn.sbt;
       ".sbt/1.0/plugins/sbt-updates.sbt".source = ./sbt-updates.sbt;
+      ".sbt/1.0/plugins/dependency-tree.sbt".source = ./dependency-tree.sbt;
     };
 
     home.packages = [
@@ -3781,10 +3783,10 @@ plugins, and some gitignores.
 
     programs.git = {
       ignores = [
-        ".bloop/"
-        ".bsp/"
-        ".metals/"
-        "metals.sbt"
+	".bloop/"
+	".bsp/"
+	".metals/"
+	"metals.sbt"
       ];
     };
   }
@@ -3826,6 +3828,16 @@ projects, but it's still handy for local checking.
 
 #+begin_src scala :tangle ../../gen/scala/sbt-updates.sbt
   addSbtPlugin("com.timushev.sbt" % "sbt-updates" % "0.6.1")
+#+end_src
+
+**** Dependency graphs
+
+The venerable sbt-dependency-graph was [[https://www.scala-sbt.org/1.x/docs/sbt-1.4-Release-Notes.html#sbt-dependency-graph+is+in-sourced][insourced to sbt-1.4.0]].  It
+comes with a ~MiniDependencyTreePlugin~ out of the box, but we want
+the fully caffeinated version.
+
+#+begin_src scala :tangle ../../gen/scala/dependency-tree.sbt
+  addDependencyTreePlugin
 #+end_src
 
 * Projects section
