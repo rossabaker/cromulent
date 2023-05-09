@@ -3760,7 +3760,7 @@ CLOSED: [2023-05-09 Tue 09:27]
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :EXPORT_OPTIONS: H:7
 :EXPORT_DESCRIPTION: A home-manager module for a Scala development environment
-:EXPORT_HUGO_LASTMOD: <2023-05-09 Tue 09:42>
+:EXPORT_HUGO_LASTMOD: <2023-05-09 Tue 09:49>
 :END:
 
 This is a home-manager module that sets up a global [[https://www.scala-sbt.org/][sbt]], a few
@@ -3778,7 +3778,7 @@ plugins, and some gitignores.
     };
 
     home.packages = [
-      pkgs.sbt
+      (pkgs.sbt.override { jre = pkgs.jdk17; })
     ];
 
     programs.git = {

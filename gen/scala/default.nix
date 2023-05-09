@@ -9,7 +9,7 @@
   };
 
   home.packages = [
-    pkgs.sbt
+    (pkgs.sbt.override { jre = pkgs.jdk17; })
   ];
 
   programs.git = {
