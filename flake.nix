@@ -110,7 +110,7 @@
     	  }
     	  homeModule
     	  inputs.self.homeManagerModules.emacs
-              ./gen/scala
+    	  inputs.self.homeManagerModules.scala
     	  ./modules/work
     	];
     	# Pass our flake inputs into the config
@@ -141,10 +141,17 @@
         darwinConfigurationModules = {
           aarch64-base = aarch64-darwin-config-base (pkgsFor "aarch64-darwin");
         };
+    
+        flakeModules = {
+          emacs = ./gen/emacs;
+          scala = ./gen/scala;
+        };
       in
       inputs.flake-parts.lib.mkFlake { inherit inputs; } {
         imports = [
-          ./gen/emacs
+          ./modules/homeManagerModules
+          flakeModules.emacs
+          flakeModules.scala
         ];
     
         flake = {
@@ -154,9 +161,7 @@
     	"RABaker@L2LYQM57XY" = RABaker-at-L2LYQM57XY (pkgsFor "aarch64-darwin");
           };
     
-          flakeModules = {
-    	emacs = ./gen/emacs;
-          };
+          inherit flakeModules;
         };
     
         systems = [

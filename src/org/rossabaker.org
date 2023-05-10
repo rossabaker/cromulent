@@ -1961,7 +1961,7 @@ Give the code samples a little more room to breathe.
 CLOSED: [2022-12-25 Sun 22:14]
 :PROPERTIES:
 :EXPORT_FILE_NAME: nix-flake
-:EXPORT_HUGO_LASTMOD: <2023-05-01 Mon 15:00>
+:EXPORT_HUGO_LASTMOD: <2023-05-09 Tue 23:57>
 :END:
 
 #+begin_description
@@ -2122,7 +2122,7 @@ contents of my flake.
 	    }
 	    homeModule
 	    inputs.self.homeManagerModules.emacs
-            ./gen/scala
+	    inputs.self.homeManagerModules.scala
 	    ./modules/work
 	  ];
 	  # Pass our flake inputs into the config
@@ -2156,11 +2156,14 @@ contents of my flake.
 
       flakeModules = {
 	emacs = ./gen/emacs;
+	scala = ./gen/scala;
       };
     in
     inputs.flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [
+	./modules/homeManagerModules
 	flakeModules.emacs
+	flakeModules.scala
       ];
 
       flake = {
@@ -3762,36 +3765,38 @@ CLOSED: [2023-05-09 Tue 09:27]
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :EXPORT_OPTIONS: H:7
 :EXPORT_DESCRIPTION: A home-manager module for a Scala development environment
-:EXPORT_HUGO_LASTMOD: <2023-05-09 Tue 13:12>
+:EXPORT_HUGO_LASTMOD: <2023-05-09 Tue 23:58>
 :END:
 
-This is a home-manager module that sets up a global [[https://www.scala-sbt.org/][sbt]], a few
-plugins, and some gitignores.
+This flake module provides only a home-manager module.  It sets up a global SBT, a few plugins,
+and some gitignores relevant to Scala.
 
 #+begin_src nix :tangle ../../gen/scala/default.nix
-  { pkgs, ... }:
+  { moduleWithSystem, ... }: {
+    flake.homeManagerModules.scala = moduleWithSystem(
+	    perSystem@{ pkgs }: {
+	home.file = {
+		".sbt/1.0/sonatype.sbt".source = ./sonatype.sbt;
+		".sbt/1.0/plugins/sbt-rewarn.sbt".source = ./sbt-rewarn.sbt;
+		".sbt/1.0/plugins/sbt-updates.sbt".source = ./sbt-updates.sbt;
+		".sbt/1.0/plugins/dependency-tree.sbt".source = ./dependency-tree.sbt;
+	};
 
-  {
-    home.file = {
-      ".sbt/1.0/sonatype.sbt".source = ./sonatype.sbt;
-      ".sbt/1.0/plugins/sbt-rewarn.sbt".source = ./sbt-rewarn.sbt;
-      ".sbt/1.0/plugins/sbt-updates.sbt".source = ./sbt-updates.sbt;
-      ".sbt/1.0/plugins/dependency-tree.sbt".source = ./dependency-tree.sbt;
-    };
+	home.packages = [
+		(pkgs.sbt.override { jre = pkgs.jdk17; })
+		(pkgs.scala-cli.override { jre = pkgs.jdk17; })
+	];
 
-    home.packages = [
-      (pkgs.sbt.override { jre = pkgs.jdk17; })
-      (pkgs.scala-cli.override { jre = pkgs.jdk17; })
-    ];
-
-    programs.git = {
-      ignores = [
-	".bloop/"
-	".bsp/"
-	".metals/"
-	"metals.sbt"
-      ];
-    };
+	programs.git = {
+		ignores = [
+			".bloop/"
+			".bsp/"
+			".metals/"
+			"metals.sbt"
+		];
+	};
+      }
+    );
   }
 #+end_src
 
