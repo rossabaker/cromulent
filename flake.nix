@@ -149,7 +149,7 @@
       in
       inputs.flake-parts.lib.mkFlake { inherit inputs; } {
         imports = [
-          ./modules/homeManagerModules
+          ./gen/flake/modules/homeManagerModules.nix
           flakeModules.emacs
           flakeModules.scala
         ];

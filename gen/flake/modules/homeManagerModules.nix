@@ -1,6 +1,6 @@
 # Adapted from https://github.com/hercules-ci/flake-parts/blob/006c75898cf814ef9497252b022e91c946ba8e17/modules/nixosModules.nix
-#
-# It is needed so we can define flake.homeManagerModules in multiple flakeModules.
+# MIT License
+# Copyright (c) 2021 Hercules CI
 
 { config, self, lib, flake-parts-lib, ... }:
 let
@@ -19,9 +19,9 @@ in
   options = {
     flake = mkSubmoduleOptions {
       homeManagerModules = mkOption {
-        type = types.lazyAttrsOf types.unspecified;
-        default = { };
-        apply = mapAttrs (k: v: { _file = "${toString self.outPath}/flake.nix#homeManagerModules.${k}"; imports = [ v ]; });
+	type = types.lazyAttrsOf types.unspecified;
+	default = { };
+	apply = mapAttrs (k: v: { _file = "${toString self.outPath}/flake.nix#homeManagerModules.${k}"; imports = [ v ]; });
       };
     };
   };

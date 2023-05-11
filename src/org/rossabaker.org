@@ -1961,7 +1961,7 @@ Give the code samples a little more room to breathe.
 CLOSED: [2022-12-25 Sun 22:14]
 :PROPERTIES:
 :EXPORT_FILE_NAME: nix-flake
-:EXPORT_HUGO_LASTMOD: <2023-05-09 Tue 23:57>
+:EXPORT_HUGO_LASTMOD: <2023-05-10 Wed 23:20>
 :END:
 
 #+begin_description
@@ -2161,7 +2161,7 @@ contents of my flake.
     in
     inputs.flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [
-	./modules/homeManagerModules
+	./gen/flake/modules/homeManagerModules.nix
 	flakeModules.emacs
 	flakeModules.scala
       ];
@@ -2230,6 +2230,48 @@ contents of my flake.
 	};
     };
 #+end_src
+
+*** Home Manager modules
+
+Our flake is split into multiple modules, via the ~flake.flakeModules~
+configuration.  These flake modules may themselves provide Home
+Manager modules.  The ~flake~ schema supports other types of modules,
+like ~nixosModules~, but ~homeManagerModules~ is unofficial.  As such,
+it's not handled by Flake Parts like [[https://github.com/hercules-ci/flake-parts/blob/006c75898cf814ef9497252b022e91c946ba8e17/modules/nixosModules.nix][~nixosModules~]] is.  We fix that
+with a copy and paste:
+
+#+begin_src nix :tangle ../../gen/flake/modules/homeManagerModules.nix
+  # Adapted from https://github.com/hercules-ci/flake-parts/blob/006c75898cf814ef9497252b022e91c946ba8e17/modules/nixosModules.nix
+  # MIT License
+  # Copyright (c) 2021 Hercules CI
+
+  { config, self, lib, flake-parts-lib, ... }:
+  let
+    inherit (lib)
+      filterAttrs
+      mapAttrs
+      mkOption
+      optionalAttrs
+      types
+      ;
+    inherit (flake-parts-lib)
+      mkSubmoduleOptions
+      ;
+  in
+  {
+    options = {
+      flake = mkSubmoduleOptions {
+	homeManagerModules = mkOption {
+	  type = types.lazyAttrsOf types.unspecified;
+	  default = { };
+	  apply = mapAttrs (k: v: { _file = "${toString self.outPath}/flake.nix#homeManagerModules.${k}"; imports = [ v ]; });
+	};
+      };
+    };
+  }
+
+#+end_src
+
 
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
