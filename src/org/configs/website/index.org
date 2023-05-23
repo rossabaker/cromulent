@@ -7,9 +7,14 @@ not live yet.
 
 #+begin_src emacs-lisp
   (defun rab/html-template (contents info)
-    (esxml-to-xml
-     `(html ()
-       (body () (raw-string ,contents)))))
+    (let ((title (org-export-data (plist-get info :title) info)))
+      (concat
+       "<!DOCTYPE html>\n"
+       (esxml-to-xml
+	`(html ()
+	  (head ()
+	   (title () ,title))
+	  (body () (raw-string ,contents)))))))
 #+end_src
 
 #+RESULTS:
