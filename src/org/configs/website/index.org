@@ -1,0 +1,24 @@
+#+title: Experimenting with ox-publish
+
+This is an experiment.  It might replace ox-hugo.  It might not.  It's
+not live yet.
+
+#+begin_src emacs-lisp
+  (setq user-full-name "Ross A. Baker")
+
+  (setq org-publish-project-alist
+	`(("org"
+	   :base-directory "../../"
+	   :recursive t
+	   :exclude ,(rx (or (seq (or "config" "img" "talks" "tmp") "/" (* nonl)) "rossabaker.org"))
+	   :publishing-function org-html-publish-to-html
+	   :publishing-directory "../../../../tmp/public_html")))
+
+  (org-publish-all)
+#+end_src
+
+#+RESULTS:
+
+# Local Variables:
+# org-confirm-babel-evaluate: nil
+# End:
