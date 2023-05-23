@@ -3,6 +3,39 @@
 This is an experiment.  It might replace ox-hugo.  It might not.  It's
 not live yet.
 
+* Template
+
+#+begin_src emacs-lisp
+  (defun rab/html-template (contents info)
+    (esxml-to-xml
+     `(html ()
+       (body () (raw-string ,contents)))))
+#+end_src
+
+#+RESULTS:
+: rab/html-template
+
+* Backend
+
+#+begin_src emacs-lisp
+  (org-export-define-derived-backend 'rab/html 'html
+    :translate-alist
+    '((template . rab/html-template)))
+
+  (defun rab/publish-to-html (plist filename pub-dir)
+    (org-publish-org-to 'rab/html filename
+			(concat (when (> (length org-html-extension) 0) ".")
+				(or (plist-get plist :html-extension)
+				    org-html-extension
+				    "html"))
+			plist pub-dir))
+#+end_src
+
+#+RESULTS:
+: rab/publish-to-html
+
+* Publish
+
 #+begin_src emacs-lisp
   (setq user-full-name "Ross A. Baker")
 
@@ -11,7 +44,7 @@ not live yet.
 	   :base-directory "../../"
 	   :recursive t
 	   :exclude ,(rx (or (seq (or "config" "img" "talks" "tmp") "/" (* nonl)) "rossabaker.org"))
-	   :publishing-function org-html-publish-to-html
+	   :publishing-function rab/publish-to-html
 	   :publishing-directory "../../../../tmp/public_html")))
 
   (org-publish-all)
