@@ -5,6 +5,8 @@ not live yet.
 
 * Template
 
+** Base HTML template
+
 #+begin_src emacs-lisp
   (defun rab/html-template (contents info)
     (let ((title (org-export-data (plist-get info :title) info)))
@@ -14,11 +16,32 @@ not live yet.
 	`(html ()
 	  (head ()
 	   (title () ,title))
-	  (body () (raw-string ,contents)))))))
+	  (body ()
+	   ,(rab/site-header)
+	   (main () (raw-string ,contents))))))))
 #+end_src
 
 #+RESULTS:
 : rab/html-template
+
+** Site header
+
+#+begin_src emacs-lisp
+  (defun rab/site-header ()
+    `(header ()
+      (strong () (a ((href . "/")) "rossabaker"))
+      (p () "A perfectly cromulent developer.")
+      (nav ()
+       (ul ()
+	,@(mapcar (lambda (entry)
+		    (let ((href (car entry))
+			  (body (cdr entry)))
+		     `(li () (a ((href . ,href)) ,body))))
+	   '(("/configs" . "Configs")))))))
+#+end_src
+
+#+RESULTS:
+: rab/site-header
 
 * Backend
 
