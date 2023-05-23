@@ -2276,7 +2276,7 @@ with a copy and paste:
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-05-09 Tue 09:37>
+:EXPORT_HUGO_LASTMOD: <2023-05-23 Tue 00:09>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -3130,6 +3130,16 @@ Much of this configuration starts from the [[https://scalameta.org/metals/docs/e
     :ensure t
     :commands sbt-start sbt-command)
 #+end_src
+****** XML
+
+[[https://github.com/tali713/esxml][esxml]] essentially turns Lisp into an XML (or XHTML) templating engine.
+
+#+begin_src emacs-lisp
+  (use-package esxml
+    :ensure t
+    :defer t)
+#+end_src
+
 
 ***** Tools
 

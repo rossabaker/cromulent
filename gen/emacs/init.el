@@ -379,6 +379,10 @@ with EXPORT_FILE_NAME."
   :ensure t
   :commands sbt-start sbt-command)
 
+(use-package esxml
+  :ensure t
+  :defer t)
+
 (use-package dumb-jump
   :ensure t
   :config
