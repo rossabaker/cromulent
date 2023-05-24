@@ -1,4 +1,5 @@
 #+title: Experimenting with ox-publish
+#+PROPERTY: header-args    :results silent
 
 This is an experiment.  It might replace ox-hugo.  It might not.  It's
 not live yet.
@@ -21,9 +22,6 @@ not live yet.
 	   (main () (raw-string ,contents))))))))
 #+end_src
 
-#+RESULTS:
-: rab/html-template
-
 ** Site header
 
 #+begin_src emacs-lisp
@@ -39,9 +37,6 @@ not live yet.
 		     `(li () (a ((href . ,href)) ,body))))
 	   '(("/configs" . "Configs")))))))
 #+end_src
-
-#+RESULTS:
-: rab/site-header
 
 * Backend
 
@@ -59,10 +54,20 @@ not live yet.
 			plist pub-dir))
 #+end_src
 
-#+RESULTS:
-: rab/publish-to-html
-
 * Publish
+
+** Legacy ox-hugo build
+
+#+begin_src emacs-lisp
+  (require 'ox-hugo)
+  (require 'ob-shell)
+  (with-current-buffer (find-file-noselect "../../rossabaker.org")
+    (let ((org-confirm-babel-evaluate nil))
+      (org-babel-tangle)
+      (org-hugo-export-wim-to-md t)))
+#+end_src
+
+** ox-html setup
 
 #+begin_src emacs-lisp
   (setq user-full-name "Ross A. Baker")
@@ -73,12 +78,10 @@ not live yet.
 	   :recursive t
 	   :exclude ,(rx (or (seq (or "config" "img" "talks" "tmp") "/" (* nonl)) "rossabaker.org"))
 	   :publishing-function rab/publish-to-html
-	   :publishing-directory "../../../../tmp/public_html")))
+	   :publishing-directory "../../../../tmp/hugo/static")))
 
   (org-publish-all)
 #+end_src
-
-#+RESULTS:
 
 # Local Variables:
 # org-confirm-babel-evaluate: nil

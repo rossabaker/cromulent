@@ -459,7 +459,7 @@ CLOSED: [2022-08-24 Wed 15:04]
 
 *** Website
 :PROPERTIES:
-:EXPORT_FILE_NAME: _index
+# :EXPORT_FILE_NAME: _index
 :EXPORT_TITLE: Website
 :EXPORT_HUGO_LASTMOD: <2022-08-24 Wed 15:04>
 :END:
@@ -1731,19 +1731,6 @@ The website is just another package in our flake.
       cp -r public/. $out
     '';
   }
-#+end_src
-
-~export.el~ is a small Emacs script that finds the Org file and
-exports its contents with ox-hugo.
-
-#+begin_src emacs-lisp :tangle ../../gen/website/export.el
-  (require 'ox-hugo)
-  (require 'ob-shell)
-
-  (with-current-buffer (find-file-noselect "src/org/rossabaker.org")
-    (let ((org-confirm-babel-evaluate nil))
-      (org-babel-tangle)
-      (org-hugo-export-wim-to-md t)))
 #+end_src
 
 **** Local Nix build
