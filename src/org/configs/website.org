@@ -1,7 +1,7 @@
 #+title: Experimenting with ox-publish
 #+PROPERTY: header-args      :results silent
 #+PROPERTY: header-args:nix  :eval no
-#+LAST_MODIFIED: <2023-05-24 Wed 23:14>
+#+LAST_MODIFIED: <2023-05-24 Wed 23:33>
 
 This is an experiment.  It might replace ox-hugo.  It might not.  It's
 not live yet.
@@ -11,7 +11,7 @@ not live yet.
 The website is a package within our flake.
 
 #+begin_src nix :tangle ../../../gen/website/default.nix
-  { src, emacs29, gnupg, hugo, stdenv }:
+  { src, emacs29, gnupg, hugo, html5validator, stdenv }:
 
   let
     siteEmacs = emacs29.pkgs.withPackages (epkgs: [
@@ -27,6 +27,7 @@ The website is a package within our flake.
       siteEmacs
       gnupg
       hugo
+      html5validator
     ];
     buildPhase = ''
       cd ..
@@ -40,6 +41,12 @@ The website is a package within our flake.
       "
       ${hugo}/bin/hugo --config tmp/hugo/config.toml
     '';
+
+    doCheck = true;
+    checkPhase = ''
+      html5validator --log INFO --root tmp/hugo/static
+    '';
+
     installPhase = ''
       mkdir $out
       cp -r public/. $out

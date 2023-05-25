@@ -1,4 +1,4 @@
-{ src, emacs29, gnupg, hugo, stdenv }:
+{ src, emacs29, gnupg, hugo, html5validator, stdenv }:
 
 let
   siteEmacs = emacs29.pkgs.withPackages (epkgs: [
@@ -14,6 +14,7 @@ stdenv.mkDerivation rec {
     siteEmacs
     gnupg
     hugo
+    html5validator
   ];
   buildPhase = ''
     cd ..
@@ -27,6 +28,12 @@ stdenv.mkDerivation rec {
     "
     ${hugo}/bin/hugo --config tmp/hugo/config.toml
   '';
+
+  doCheck = true;
+  checkPhase = ''
+    html5validator --log INFO --root tmp/hugo/static
+  '';
+
   installPhase = ''
     mkdir $out
     cp -r public/. $out
