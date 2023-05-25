@@ -1,7 +1,7 @@
 #+title: Experimenting with ox-publish
 #+PROPERTY: header-args      :results silent
 #+PROPERTY: header-args:nix  :eval no
-#+LAST_MODIFIED: <2023-05-24 Wed 00:07>
+#+LAST_MODIFIED: <2023-05-24 Wed 23:14>
 
 This is an experiment.  It might replace ox-hugo.  It might not.  It's
 not live yet.
@@ -10,11 +10,12 @@ not live yet.
 
 The website is a package within our flake.
 
-#+begin_src nix :tangle ../../../../gen/website/default.nix
+#+begin_src nix :tangle ../../../gen/website/default.nix
   { src, emacs29, gnupg, hugo, stdenv }:
 
   let
     siteEmacs = emacs29.pkgs.withPackages (epkgs: [
+      epkgs.dash
       epkgs.esxml
       epkgs.ox-hugo
     ]);
@@ -33,7 +34,7 @@ The website is a package within our flake.
       # https://emacs.stackexchange.com/a/70847
       ${siteEmacs}/bin/emacs --batch -l ob -l ob-shell --eval "
 	(let ((org-confirm-babel-evaluate nil))
-	  (with-current-buffer (find-file-noselect \"src/org/configs/website/index.org\")
+	  (with-current-buffer (find-file-noselect \"src/org/configs/website.org\")
 	    (org-babel-execute-buffer)
 	    (save-buffer)))
       "
@@ -57,6 +58,7 @@ To build the site locally into ~./result~, run:
 * Setup
 
 #+begin_src emacs-lisp
+  (require 'dash)
   (require 'ox)
   (require 'esxml)
 #+end_src
@@ -97,18 +99,42 @@ To build the site locally into ~./result~, run:
 
 * Backend
 
+** Derived from HTML
+
+We use the ox-html backend as a starting point, customizing individual
+components as necessary.
+
+One obvious one is =template=, which lets us use our esxml template.
+
 #+begin_src emacs-lisp
   (org-export-define-derived-backend 'rab/html 'html
     :translate-alist
     '((template . rab/html-template)))
+#+end_src
 
+** Pretty URLs
+
+We have to do some jiggery pokery to get "clean URLs" (e.g., make
+~/configs/website.org~ render to ~/config/website/~).  We need to
+locally redefine =org-export-output-file-name=.
+
+#+begin_src emacs-lisp
   (defun rab/publish-to-html (plist filename pub-dir)
-    (org-publish-org-to 'rab/html filename
-			(concat (when (> (length org-html-extension) 0) ".")
-				(or (plist-get plist :html-extension)
-				    org-html-extension
-				    "html"))
-			plist pub-dir))
+    (let ((output-dir (concat pub-dir
+			      (->> filename
+				   file-name-nondirectory
+				   file-name-sans-extension
+				   file-name-as-directory))))
+      (cl-letf (((symbol-function 'org-export-output-file-name)
+		 (lambda (extension &optional subtreep pub-dir)
+		   (concat output-dir "index" extension))))
+	(org-publish-org-to 'rab/html filename
+			    (concat (when (> (length org-html-extension) 0) ".")
+				    (or (plist-get plist :html-extension)
+					org-html-extension
+					"html"))
+			    plist
+			    output-dir))))
 #+end_src
 
 * Publish
@@ -121,7 +147,7 @@ while we unwind the ox-hugo setup.
 #+begin_src emacs-lisp
   (require 'ox-hugo)
   (require 'ob-shell)
-  (with-current-buffer (find-file-noselect "../../rossabaker.org")
+  (with-current-buffer (find-file-noselect "../rossabaker.org")
     (let ((org-confirm-babel-evaluate nil))
       (org-babel-tangle)
       (org-hugo-export-wim-to-md t)))
@@ -133,15 +159,15 @@ This will be the main build moving forward.
 
 #+begin_src emacs-lisp
   (setq-local user-full-name "Ross A. Baker"
-	      org-publish-timestamp-directory "../../../../tmp/org-timestamps")
+	      org-publish-timestamp-directory "../../../tmp/org-timestamps")
 
   (setq org-publish-project-alist
 	`(("org"
-	   :base-directory "../../"
+	   :base-directory "../"
 	   :recursive t
 	   :exclude ,(rx (or (seq (or "config" "img" "talks" "tmp") "/" (* nonl)) "rossabaker.org"))
 	   :publishing-function rab/publish-to-html
-	   :publishing-directory "../../../../tmp/hugo/static")))
+	   :publishing-directory "../../../tmp/hugo/static")))
 
   (org-publish-all)
 #+end_src
