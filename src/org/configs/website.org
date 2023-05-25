@@ -1,14 +1,27 @@
 #+title: Experimenting with ox-publish
 #+PROPERTY: header-args      :results silent
 #+PROPERTY: header-args:nix  :eval no
-#+LAST_MODIFIED: <2023-05-24 Wed 23:33>
+#+LAST_MODIFIED: <2023-05-25 Thu 00:14>
 
+#+begin_warning
 This is an experiment.  It might replace ox-hugo.  It might not.  It's
 not live yet.
+#+end_warning
 
 * Nix build
 
-The website is a package within our flake.
+The website is a package within our flake.  To avoid [[https://nixos.wiki/wiki/Import_From_Derivation][Import From
+Derivation]], this Nix expression needs to be [[https://orgmode.org/manual/Extracting-Source-Code.html][tangled]] into the Git
+repository.
+
+The build loads this document and runs ~org-babel-execute-buffer~.
+While we are porting from the old ox-hugo site, this renders a
+Hugo site to =tmp/hugo=.  We then run Hugo to create the site.
+
+The generated HTML is validated with [[https://github.com/svenkreiss/html5validator][html5validator]] in a check phase.
+
+Finally, the =public/= directory rendered by Hugo is copied to the
+derivation output.
 
 #+begin_src nix :tangle ../../../gen/website/default.nix
   { src, emacs29, gnupg, hugo, html5validator, stdenv }:
@@ -64,6 +77,9 @@ To build the site locally into ~./result~, run:
 
 * Setup
 
+This document defines an Emacs script that generates =rossabaker.com=.
+We'll need a few libraries.
+
 #+begin_src emacs-lisp
   (require 'dash)
   (require 'ox)
@@ -72,7 +88,15 @@ To build the site locally into ~./result~, run:
 
 * Template
 
-** Base HTML template
+Lisp is a delightful templating language for HTML:
+
+- S-expressions naturally translate into HTML.
+- It's a real coding language for logic
+- The macro system makes it trivial to interweave markup and logic.
+
+We use the [[https://github.com/tali713/esxml][esxml]] library.
+
+** Base template
 
 #+begin_src emacs-lisp
   (defun rab/html-template (contents info)
@@ -106,12 +130,10 @@ To build the site locally into ~./result~, run:
 
 * Backend
 
-** Derived from HTML
+** Derived from ox-html
 
-We use the ox-html backend as a starting point, customizing individual
-components as necessary.
-
-One obvious one is =template=, which lets us use our esxml template.
+Org Mode exports require a backend.  We dervice from the stock [[https://orgmode.org/manual/HTML-Export.html][ox-html]]
+backend, overriding components as necessary to inject our own templates.
 
 #+begin_src emacs-lisp
   (org-export-define-derived-backend 'rab/html 'html
@@ -121,9 +143,12 @@ One obvious one is =template=, which lets us use our esxml template.
 
 ** Pretty URLs
 
-We have to do some jiggery pokery to get "clean URLs" (e.g., make
-~/configs/website.org~ render to ~/config/website/~).  We need to
-locally redefine =org-export-output-file-name=.
+"Pretty URLs" (e.g., ~/configs/website/~ instead of
+~/configs/website.html~) require a bit of jiggery pokery unless we
+want all our files named ~index.org~.
+
+We need to locally redefine =org-export-output-file-name= to turn the
+file's base name into a directory and inject the =index= name.
 
 #+begin_src emacs-lisp
   (defun rab/publish-to-html (plist filename pub-dir)
@@ -144,12 +169,12 @@ locally redefine =org-export-output-file-name=.
 			    output-dir))))
 #+end_src
 
-* Publish
+* Publishing
 
 ** Legacy ox-hugo build
 
-This is the =export.el= referred to in the Nix build.  It is temporary
-while we unwind the ox-hugo setup.
+As mentioned earlier, we're migrating from an [[https://github.com/kaushalmodi/ox-hugo][ox-hugo]] setup.  We need
+export all the pages from that document before our own export.
 
 #+begin_src emacs-lisp
   (require 'ox-hugo)
@@ -178,6 +203,10 @@ This will be the main build moving forward.
 
   (org-publish-all)
 #+end_src
+
+* Credits
+
+This process is heavily inspired by the [[https://systemcrafters.net/live-streams/may-12-2023/][System Crafters]] redesign.
 
 # Local Variables:
 # org-confirm-babel-evaluate: nil
