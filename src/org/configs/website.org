@@ -1,7 +1,7 @@
 #+title: Experimenting with ox-publish
 #+PROPERTY: header-args      :results silent
 #+PROPERTY: header-args:nix  :eval no
-#+LAST_MODIFIED: <2023-05-25 Thu 00:14>
+#+LAST_MODIFIED: <2023-05-25 Thu 14:21>
 
 #+begin_warning
 This is an experiment.  It might replace ox-hugo.  It might not.  It's
@@ -109,7 +109,8 @@ We use the [[https://github.com/tali713/esxml][esxml]] library.
 	   (title () ,title))
 	  (body ()
 	   ,(rab/site-header)
-	   (main () (raw-string ,contents))))))))
+	   (main () (raw-string ,contents))
+	   ,(rab/site-footer)))))))
 #+end_src
 
 ** Site header
@@ -126,6 +127,36 @@ We use the [[https://github.com/tali713/esxml][esxml]] library.
 			  (body (cdr entry)))
 		     `(li () (a ((href . ,href)) ,body))))
 	   '(("/configs" . "Configs")))))))
+#+end_src
+
+** Site footer
+
+#+begin_src emacs-lisp
+  (defun rab/site-footer ()
+    '(footer ()
+      (address ((class . "h-card vcard"))
+       ;; (img ((class . "u-photo")
+       ;; 	   (alt . "Profile photo of Ross A. Baker")
+       ;; 	   (src . "/img/profile.jpg")))
+       (a ((class . "u-url u-uid p-name")
+	   (href . "https://rossabaker.com/"))
+	(span ((class . "p-given-name")) "Ross")
+	" "
+	(span ((class . "p-additional-name")) (abbr () "A."))
+	" "
+	(span ((class . "p-family-name")) "Baker"))
+       " "
+       (small () (span ((class . "u-pronoun")) "(he/him)"))
+       (br)
+       (ul ()
+	(li () (a ((href . "mailto:ross@rossabaker.com"))
+		(span ((class . "fa fa-envelope-o")) "Email")))
+	(li () (a ((href . "https://github.com/rossabaker") (rel . "me"))
+		(span ((class . "fa fa-github")) "GitHub")))
+	(li () (a ((href . "https://matrix.to/#/@ross:rossabaker.com") (rel . "me"))
+		(span ((class . "fa fa-matrix-org")) "Matrix")))
+	(li () (a ((href . "https://social.rossabaker.com") (rel . "me"))
+		(span ((class . "fa fa-mastodon")) "Fediverse")))))))
 #+end_src
 
 * Backend
