@@ -1,8 +1,65 @@
 #+title: Experimenting with ox-publish
-#+PROPERTY: header-args    :results silent
+#+PROPERTY: header-args      :results silent
+#+PROPERTY: header-args:nix  :eval no
+#+LAST_MODIFIED: <2023-05-24 Wed 00:07>
 
 This is an experiment.  It might replace ox-hugo.  It might not.  It's
 not live yet.
+
+* Nix build
+
+The website is a package within our flake.
+
+#+begin_src nix :tangle ../../../../gen/website/default.nix
+  { src, emacs29, gnupg, hugo, stdenv }:
+
+  let
+    siteEmacs = emacs29.pkgs.withPackages (epkgs: [
+      epkgs.esxml
+      epkgs.ox-hugo
+    ]);
+  in
+  stdenv.mkDerivation rec {
+    name = "rossabaker.com";
+    inherit src;
+    nativeBuildInputs = [
+      siteEmacs
+      gnupg
+      hugo
+    ];
+    buildPhase = ''
+      cd ..
+      export PATH=${gnupg}/bin:$PATH
+      # https://emacs.stackexchange.com/a/70847
+      ${siteEmacs}/bin/emacs --batch -l ob -l ob-shell --eval "
+	(let ((org-confirm-babel-evaluate nil))
+	  (with-current-buffer (find-file-noselect \"src/org/configs/website/index.org\")
+	    (org-babel-execute-buffer)
+	    (save-buffer)))
+      "
+      ${hugo}/bin/hugo --config tmp/hugo/config.toml
+    '';
+    installPhase = ''
+      mkdir $out
+      cp -r public/. $out
+    '';
+  }
+#+end_src
+
+** Try it locally
+
+To build the site locally into ~./result~, run:
+
+#+begin_src sh :tangle no
+  nix build .#website
+#+end_src
+
+* Setup
+
+#+begin_src emacs-lisp
+  (require 'ox)
+  (require 'esxml)
+#+end_src
 
 * Template
 
@@ -58,6 +115,9 @@ not live yet.
 
 ** Legacy ox-hugo build
 
+This is the =export.el= referred to in the Nix build.  It is temporary
+while we unwind the ox-hugo setup.
+
 #+begin_src emacs-lisp
   (require 'ox-hugo)
   (require 'ob-shell)
@@ -69,8 +129,11 @@ not live yet.
 
 ** ox-html setup
 
+This will be the main build moving forward.
+
 #+begin_src emacs-lisp
-  (setq user-full-name "Ross A. Baker")
+  (setq-local user-full-name "Ross A. Baker"
+	      org-publish-timestamp-directory "../../../../tmp/org-timestamps")
 
   (setq org-publish-project-alist
 	`(("org"

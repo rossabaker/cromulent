@@ -383,7 +383,7 @@ derived.  As much as possible, we keep them in ~src~.
 Ephemeral files can be tangled on demand and disposed of at will.
 Development processes may need them, but they can be comfortably
 recreated from the original sources.  An example of these are the Hugo
-outputs when [[*Local Nix build][locally building the site]].
+outputs when locally building the site.
 
 We put as many of them as we can in ~tmp~ for organization.  The best
 way to handle them is with a [[https://git-scm.com/docs/gitignore][gitignore]].
@@ -1694,51 +1694,12 @@ supported contacts from the experimental ones.
 *** DONE Build website with Nix                      :hugo:ox_hugo:nix:babel:
 CLOSED: [2022-09-01 Thu 16:54]
 :PROPERTIES:
-:EXPORT_FILE_NAME: build
+# :EXPORT_FILE_NAME: build
 :EXPORT_HUGO_LASTMOD: <2023-04-14 Fri 15:23>
 :END:
 
 #+begin_src text :tangle ../../tmp/hugo/static/_redirects :exports none
-  /projects/www /configs/website/build
-#+end_src
-
-The website is just another package in our flake.
-#+hugo:more
-#+begin_src nix :tangle ../../gen/website/default.nix
-  { src, emacs29, gnupg, hugo, stdenv }:
-
-  let
-    siteEmacs = emacs29.pkgs.withPackages (epkgs: [
-      epkgs.ox-hugo
-    ]);
-  in
-  stdenv.mkDerivation rec {
-    name = "rossabaker.com";
-    inherit src;
-    nativeBuildInputs = [
-      siteEmacs
-      gnupg
-      hugo
-    ];
-    buildPhase = ''
-      cd ..
-      export PATH=${gnupg}/bin:$PATH
-      ${siteEmacs}/bin/emacs -Q --batch --script ${./export.el}
-      ${hugo}/bin/hugo --config tmp/hugo/config.toml
-    '';
-    installPhase = ''
-      mkdir $out
-      cp -r public/. $out
-    '';
-  }
-#+end_src
-
-**** Local Nix build
-
-To build the site locally into ~./result~, run:
-
-#+begin_src sh :tangle no
-  nix build .#website
+  /projects/www /configs/website
 #+end_src
 
 **** Development
