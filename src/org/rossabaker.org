@@ -2224,7 +2224,7 @@ with a copy and paste:
 ** DONE Emacs config                                             :emacs:
 CLOSED: <2023-02-23 Thu 23:59>
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: <2023-05-23 Tue 00:09>
+:EXPORT_HUGO_LASTMOD: <2023-05-25 Thu 22:53>
 :EXPORT_FILE_NAME: emacs
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :HEADER-ARGS:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444
@@ -3246,6 +3246,18 @@ a bit more minimalist than the excellent [[https://emacs-lsp.github.io/lsp-mode/
 
 #+begin_src emacs-lisp
   (use-package eglot :defer t)
+#+end_src
+
+**** Development
+***** Extensions
+****** htmlize
+
+[[https://github.com/hniksic/emacs-htmlize/blob/master/htmlize.el][=htmlize=]] provides syntax highlighting for our code snippets when
+exported to HTML.
+
+#+begin_src emacs-lisp
+  (use-package htmlize
+    :after ox-html)
 #+end_src
 
 **** Environment

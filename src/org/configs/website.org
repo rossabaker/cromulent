@@ -30,6 +30,7 @@ derivation output.
     siteEmacs = emacs29.pkgs.withPackages (epkgs: [
       epkgs.dash
       epkgs.esxml
+      epkgs.htmlize
       epkgs.ox-hugo
     ]);
   in
@@ -82,6 +83,7 @@ We'll need a few libraries.
 
 #+begin_src emacs-lisp
   (require 'dash)
+  (require 'htmlize)
   (require 'ox)
   (require 'esxml)
 #+end_src
