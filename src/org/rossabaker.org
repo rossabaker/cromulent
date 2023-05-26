@@ -361,93 +361,13 @@ corresponding configuration is reconfigured.
 ** DONE Managing generated sources in Git :git:gitattributes:gitignore:babel:
 CLOSED: [2022-08-24 Wed 15:04]
 :PROPERTIES:
-:EXPORT_FILE_NAME: managing-generated-sources-in-git
+# :EXPORT_FILE_NAME: managing-generated-sources-in-git
 :EXPORT_HUGO_LASTMOD: <2023-03-01 Wed 00:49>
 :EXPORT_OPTIONS: H:6
 :END:
 
-My [[https://github.com/rossabaker/cromulent][personal Git repository]] hosts my configurations and this web site.
-Most of it is sourced from a single [[https://github.com/rossabaker/cromulent/blob/main/src/org/rossabaker.org][Org Mode file]], but most tools
-don't read Org directly.  We need to commit some [[https://orgmode.org/manual/Extracting-Source-Code.html][tangled]] sources to
-interoperate with various tools.  We must deal with three sorts of
-files.
-#+hugo:more
-
-*** Original sources
-
-This is the minimal set of files from which all other files can be
-derived.  As much as possible, we keep them in ~src~.
-
-*** Ephemeral files
-
-Ephemeral files can be tangled on demand and disposed of at will.
-Development processes may need them, but they can be comfortably
-recreated from the original sources.  An example of these are the Hugo
-outputs when locally building the site.
-
-We put as many of them as we can in ~tmp~ for organization.  The best
-way to handle them is with a [[https://git-scm.com/docs/gitignore][gitignore]].
-
-#+begin_src gitignore :tangle ../../.gitignore
-  /tmp/
-#+end_src
-
-Nix builds create a ~result~ symlink by default that should also be
-ignored.
-
-#+begin_src gitignore :tangle ../../.gitignore
-  /result
-#+end_src
-
-*** Committed, generated sources
-
-There are files that are neither original, nor can they be generated
-on demand from originals.  This class of files is generally to be
-avoided, but with the right mitigation, we can live with it and still
-live in our Org Mode bubble within a world that isn't ready for it.
-
-**** Location
-
-Some files must be tangled to specific locations in the repository to
-be loaded by other tools.  For example, Git looks for ~.gitignore~ and
-in the project root.
-
-Other files need to be tangled for non-Org tooling, but are imported
-by something else.  The [[*Build website with Nix][Nix package for our website]], included in
-~flake.nix~.  We stow all such files we can in the ~gen~ directory.
-
-**** Problems and mitigation
-
-***** Desycnhronization
-
-The tangled source may be desynchronized with the Org Mode source.  We
-could check for this with a GitHub workflow, but don't yet.
-
-***** Bloated diffs
-
-When we commit tangled sources, each hunk of the diff may be
-duplicated between the original source and the tangled source.  This
-is distracting in review.  We can set a gitattribute of [[https://git-scm.com/docs/gitattributes#_diff][~-diff~]], which
-treats the specified file as binary.  It's a little white lie, but
-it prevents repeating each hunk.
-
-A second problem is that a larger diff has a larger surface area for
-merge conflicts.  [[https://git-scm.com/docs/gitattributes#_merge][~-merge~]] avoids 3-way merges, but still flags the
-file as a conflict.  Typically the file needs to be regenerated
-in these cases.
-
-Finally, setting [[https://github.com/github/linguist/blob/97bc889ce840208652bf09b45f3b7859de43fe8e/docs/overrides.md#generated-code][~linguist-generated~]] suppresses these files from
-rendered diffs.  It also excludes them from GitHub language stats.
-
-We set all these gitattributes for all tangled sources.  The
-~.gitattributes~ file itself gets gitattributes set on it!
-
-#+begin_src gitattributes :tangle ../../.gitattributes
-  gen/**          -diff -merge linguist-generated=true
-  .gitignore      -diff -merge linguist-generated=true
-  .gitattributes  -diff -merge linguist-generated=true
-  flake.nix       -diff -merge linguist-generated=true
-  flake.lock      -diff -merge linguist-generated=true
+#+begin_src text :tangle ../../tmp/hugo/static/_redirects :exports none
+  /configs/managing-generated-sources-in-git /configs/git-repository
 #+end_src
 
 ** DONE Website bundle                                              :website:
