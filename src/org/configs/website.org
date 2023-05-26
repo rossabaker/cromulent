@@ -112,7 +112,11 @@ We use the [[https://github.com/tali713/esxml][esxml]] library.
 	   (title () ,title))
 	  (body ()
 	   ,(rab/site-header)
-	   (main () (raw-string ,contents))
+	   (main ()
+	    (article ()
+	     (header ()
+	      (h1 () ,title))
+	     (raw-string ,contents)))
 	   ,(rab/site-footer)))))))
 #+end_src
 
