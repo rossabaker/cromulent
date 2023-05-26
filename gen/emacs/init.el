@@ -449,6 +449,10 @@ existing directory under `magit-clone-default-directory'."
 
 (use-package eglot :defer t)
 
+(use-package htmlize
+  :ensure t
+  :after ox-html)
+
 (setopt frame-inhibit-implied-resize t)
 
 (setopt cursor-type 'bar)

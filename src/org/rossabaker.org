@@ -3257,6 +3257,7 @@ exported to HTML.
 
 #+begin_src emacs-lisp
   (use-package htmlize
+    :ensure t
     :after ox-html)
 #+end_src
 

@@ -84,6 +84,7 @@ We'll need a few libraries.
 #+begin_src emacs-lisp
   (require 'dash)
   (require 'htmlize)
+  (require 'ob-shell)
   (require 'ox)
   (require 'esxml)
 #+end_src
