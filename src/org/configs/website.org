@@ -1,86 +1,12 @@
 #+title: Experimenting with ox-publish
 #+PROPERTY: header-args      :results silent
 #+PROPERTY: header-args:nix  :eval no
-#+LAST_MODIFIED: <2023-05-26 Fri 22:58>
+#+LAST_MODIFIED: <2023-05-26 Fri 23:13>
 
 #+begin_warning
 This is an experiment.  It might replace ox-hugo.  It might not.  It's
 not live yet.
 #+end_warning
-
-* Nix build
-:PROPERTIES:
-:CUSTOM_ID: nix-build
-:END:
-
-The website is a package within our flake.  To avoid [[https://nixos.wiki/wiki/Import_From_Derivation][Import From
-Derivation]], this Nix expression needs to be [[https://orgmode.org/manual/Extracting-Source-Code.html][tangled]] into the Git
-repository.
-
-The build loads this document and runs ~org-babel-execute-buffer~.
-While we are porting from the old ox-hugo site, this renders a
-Hugo site to =tmp/hugo=.  We then run Hugo to create the site.
-
-The generated HTML is validated with [[https://github.com/svenkreiss/html5validator][html5validator]] in a check phase.
-
-Finally, the =public/= directory rendered by Hugo is copied to the
-derivation output.
-
-#+begin_src nix :tangle ../../../gen/website/default.nix
-  { src, emacs29, gnupg, hugo, html5validator, stdenv }:
-
-  let
-    siteEmacs = emacs29.pkgs.withPackages (epkgs: [
-      epkgs.dash
-      epkgs.esxml
-      epkgs.htmlize
-      epkgs.ox-hugo
-    ]);
-  in
-  stdenv.mkDerivation rec {
-    name = "rossabaker.com";
-    inherit src;
-    nativeBuildInputs = [
-      siteEmacs
-      gnupg
-      hugo
-      html5validator
-    ];
-    buildPhase = ''
-      cd ..
-      export PATH=${gnupg}/bin:$PATH
-      # https://emacs.stackexchange.com/a/70847
-      ${siteEmacs}/bin/emacs --batch -l ob -l ob-shell --eval "
-	(let ((org-confirm-babel-evaluate nil))
-	  (with-current-buffer (find-file-noselect \"src/org/configs/website.org\")
-	    (org-babel-execute-buffer)
-	    (save-buffer)))
-      "
-      ${hugo}/bin/hugo --config tmp/hugo/config.toml
-    '';
-
-    doCheck = true;
-    checkPhase = ''
-      html5validator --log INFO --root tmp/hugo/static
-    '';
-
-    installPhase = ''
-      mkdir $out
-      cp -r public/. $out
-    '';
-  }
-#+end_src
-
-** Try it locally
-:PROPERTIES:
-:CUSTOM_ID: try-it-locally
-:END:
-
-To build the site locally into ~./result~, run:
-
-#+begin_src sh :tangle no
-  nix build .#website
-#+end_src
 
 * Setup
 :PROPERTIES:
@@ -98,7 +24,83 @@ We'll need a few libraries.
   (require 'esxml)
 #+end_src
 
-* Template
+* Pretty URLs
+:PROPERTIES:
+:CUSTOM_ID: pretty-urls
+:END:
+
+"Pretty URLs" (e.g., ~/configs/website/~ instead of
+~/configs/website.html~) require a bit of jiggery pokery unless we
+want all our files named ~index.org~.
+
+We need to locally redefine =org-export-output-file-name= to turn the
+file's base name into a directory and inject the =index= name.
+
+#+begin_src emacs-lisp
+  (defun rab/publish-to-html (plist filename pub-dir)
+    (let ((output-dir (concat pub-dir
+			      (->> filename
+				   file-name-nondirectory
+				   file-name-sans-extension
+				   file-name-as-directory))))
+      (cl-letf (((symbol-function 'org-export-output-file-name)
+		 (lambda (extension &optional subtreep pub-dir)
+		   (concat output-dir "index" extension))))
+	(org-publish-org-to 'rab/html filename
+			    (concat (when (> (length org-html-extension) 0) ".")
+				    (or (plist-get plist :html-extension)
+					org-html-extension
+					"html"))
+			    plist
+			    output-dir))))
+#+end_src
+
+
+
+* Stable anchors
+:PROPERTIES:
+:CUSTOM_ID: stable-anchors
+:END:
+
+Org generates non-deterministic anchors for headers, but respects the
+~CUSTOM_ID~ property.  Instead of something like ~#orgae149c8~, we'd
+like this section to have a "slug" id, like ~stable-anchors~.
+
+#+begin_src emacs-lisp
+  (defun rab/slug (title)
+    "Converts TITLE to a 'slug' appropriate for URI anchors."
+    (->> title
+	 s-downcase
+	 (replace-regexp-in-string (rx (not (in word space ?- ?_))) "")
+	 (replace-regexp-in-string (rx (one-or-more (in space ?_ ?-))) "-")
+	 (replace-regexp-in-string (rx bos (one-or-more ?-)) "")
+	 (replace-regexp-in-string (rx (one-or-more ?-) eos) "")))
+#+end_src
+
+We only want to generate a slug for headlines that have no ~CUSTOM_ID~.
+
+#+begin_src emacs-lisp
+  (defun rab/org-put-slug-as-custom-id ()
+    "Puts a CUSTOM_ID from a slug of the current headline, unless
+  already present.  This is useful for stable URI anchors."
+    (unless (org-entry-get nil "CUSTOM_ID")
+      (->> (org-heading-components)
+	   (nth 4)
+	   rab/slug
+	   (org-entry-put nil "CUSTOM_ID"))))
+#+end_src
+
+We want a convenient way to generate them for the entire document.
+
+#+begin_src emacs-lisp
+  (defun rab/org-put-slugs-as-custom-id ()
+    "Puts a CUSTOM_ID from a slug of the current headline, unless
+  already present.  This is useful for stable URI anchors."
+    (interactive)
+    (org-map-entries (lambda () (rab/org-put-slug-as-custom-id))))
+#+end_src
+
+* Templates
 :PROPERTIES:
 :CUSTOM_ID: template
 :END:
@@ -187,97 +189,18 @@ We use the [[https://github.com/tali713/esxml][esxml]] library.
 		(span ((class . "fa fa-mastodon")) "Fediverse")))))))
 #+end_src
 
-** Stable anchors
-:PROPERTIES:
-:CUSTOM_ID: stable-anchors
-:END:
-
-Org generates non-deterministic anchors for headers, but respects the
-~CUSTOM_ID~ property.  Instead of something like ~#orgae149c8~, we'd
-like this section to have a "slug" id, like ~stable-anchors~.
-
-#+begin_src emacs-lisp
-  (defun rab/slug (title)
-    "Converts TITLE to a 'slug' appropriate for URI anchors."
-    (->> title
-	 s-downcase
-	 (replace-regexp-in-string (rx (not (in word space ?- ?_))) "")
-	 (replace-regexp-in-string (rx (one-or-more (in space ?_ ?-))) "-")
-	 (replace-regexp-in-string (rx bos (one-or-more ?-)) "")
-	 (replace-regexp-in-string (rx (one-or-more ?-) eos) "")))
-#+end_src
-
-We only want to generate a slug for headlines that have no ~CUSTOM_ID~.
-
-#+begin_src emacs-lisp
-  (defun rab/org-put-slug-as-custom-id ()
-    "Puts a CUSTOM_ID from a slug of the current headline, unless
-  already present.  This is useful for stable URI anchors."
-    (unless (org-entry-get nil "CUSTOM_ID")
-      (->> (org-heading-components)
-	   (nth 4)
-	   rab/slug
-	   (org-entry-put nil "CUSTOM_ID"))))
-#+end_src
-
-We want a convenient way to generate them for the entire document.
-
-#+begin_src emacs-lisp
-  (defun rab/org-put-slugs-as-custom-id ()
-    "Puts a CUSTOM_ID from a slug of the current headline, unless
-  already present.  This is useful for stable URI anchors."
-    (interactive)
-    (org-map-entries (lambda () (rab/org-put-slug-as-custom-id))))
-#+end_src
-
 * Backend
 :PROPERTIES:
 :CUSTOM_ID: backend
 :END:
 
-** Derived from ox-html
-:PROPERTIES:
-:CUSTOM_ID: derived-from-ox-html
-:END:
-
-Org Mode exports require a backend.  We dervice from the stock [[https://orgmode.org/manual/HTML-Export.html][ox-html]]
-backend, overriding components as necessary to inject our own templates.
+To hook our templates into Org export, we derive from the stock
+[[https://orgmode.org/manual/HTML-Export.html][ox-html]] backend.
 
 #+begin_src emacs-lisp
   (org-export-define-derived-backend 'rab/html 'html
     :translate-alist
     '((template . rab/html-template)))
-#+end_src
-
-** Pretty URLs
-:PROPERTIES:
-:CUSTOM_ID: pretty-urls
-:END:
-
-"Pretty URLs" (e.g., ~/configs/website/~ instead of
-~/configs/website.html~) require a bit of jiggery pokery unless we
-want all our files named ~index.org~.
-
-We need to locally redefine =org-export-output-file-name= to turn the
-file's base name into a directory and inject the =index= name.
-
-#+begin_src emacs-lisp
-  (defun rab/publish-to-html (plist filename pub-dir)
-    (let ((output-dir (concat pub-dir
-			      (->> filename
-				   file-name-nondirectory
-				   file-name-sans-extension
-				   file-name-as-directory))))
-      (cl-letf (((symbol-function 'org-export-output-file-name)
-		 (lambda (extension &optional subtreep pub-dir)
-		   (concat output-dir "index" extension))))
-	(org-publish-org-to 'rab/html filename
-			    (concat (when (> (length org-html-extension) 0) ".")
-				    (or (plist-get plist :html-extension)
-					org-html-extension
-					"html"))
-			    plist
-			    output-dir))))
 #+end_src
 
 * Publishing
@@ -323,6 +246,82 @@ This will be the main build moving forward.
 
   (org-publish-all)
 #+end_src
+
+* Nix build
+:PROPERTIES:
+:CUSTOM_ID: nix-build
+:END:
+
+The website is just another package within our flake.  The derivation
+loads this document and runs ~org-babel-execute-buffer~.  While we are
+porting from the old ox-hugo site, this renders a Hugo site to
+=tmp/hugo=.  We then run Hugo to create the site.
+
+The generated HTML is validated with [[https://github.com/svenkreiss/html5validator][html5validator]] in a check phase.
+
+Finally, the =public/= directory rendered by Hugo is copied to the
+derivation output.
+
+#+begin_src nix :tangle ../../../gen/website/default.nix
+  { src, emacs29, gnupg, hugo, html5validator, stdenv }:
+
+  let
+    siteEmacs = emacs29.pkgs.withPackages (epkgs: [
+      epkgs.dash
+      epkgs.esxml
+      epkgs.htmlize
+      epkgs.ox-hugo
+    ]);
+  in
+  stdenv.mkDerivation rec {
+    name = "rossabaker.com";
+    inherit src;
+    nativeBuildInputs = [
+      siteEmacs
+      gnupg
+      hugo
+      html5validator
+    ];
+    buildPhase = ''
+      cd ..
+      export PATH=${gnupg}/bin:$PATH
+      # https://emacs.stackexchange.com/a/70847
+      ${siteEmacs}/bin/emacs --batch -l ob -l ob-shell --eval "
+	(let ((org-confirm-babel-evaluate nil))
+	  (with-current-buffer (find-file-noselect \"src/org/configs/website.org\")
+	    (org-babel-execute-buffer)
+	    (save-buffer)))
+      "
+      ${hugo}/bin/hugo --config tmp/hugo/config.toml
+    '';
+
+    doCheck = true;
+    checkPhase = ''
+      html5validator --log INFO --root tmp/hugo/static
+    '';
+
+    installPhase = ''
+      mkdir $out
+      cp -r public/. $out
+    '';
+  }
+#+end_src
+
+To avoid [[https://nixos.wiki/wiki/Import_From_Derivation][Import From Derivation]], this Nix expression is [[https://orgmode.org/manual/Extracting-Source-Code.html][tangled]] and
+[[file:git-repository.org::#committed-generated-sources][committed as generated source]].
+
+** Try it locally
+:PROPERTIES:
+:CUSTOM_ID: try-it-locally
+:END:
+
+To build the site locally into ~./result~, run:
+
+#+begin_src sh :tangle no
+  nix build .#website
+#+end_src
+
+
 
 * Credits
 :PROPERTIES:
