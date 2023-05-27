@@ -10,11 +10,17 @@ interoperate with various tools.  We must deal with three sorts of
 files.
 
 *** Original sources
+:PROPERTIES:
+:CUSTOM_ID: original-sources
+:END:
 
 This is the minimal set of files from which all other files can be
 derived.  As much as possible, we keep them in ~src/~.
 
 *** Ephemeral files
+:PROPERTIES:
+:CUSTOM_ID: ephemeral-files
+:END:
 
 Ephemeral files can be tangled on demand and disposed of at will.
 Development processes may need them, but they can be comfortably
@@ -36,6 +42,9 @@ ignored.
 #+end_src
 
 *** Committed, generated sources
+:PROPERTIES:
+:CUSTOM_ID: committed-generated-sources
+:END:
 
 There are files that are neither original, nor can they be generated
 on demand from originals.  This class of files is generally to be
@@ -43,6 +52,9 @@ avoided, but with the right mitigation, we can live with it and still
 live in our Org Mode bubble within a world that isn't ready for it.
 
 **** Location
+:PROPERTIES:
+:CUSTOM_ID: location
+:END:
 
 Some files must be tangled to specific locations in the repository to
 be loaded by other tools.  For example, Git looks for ~.gitignore~ and
@@ -54,13 +66,22 @@ imported into ~flake.nix~.  We stow all such files we can in the
 ~gen/~ directory.
 
 **** Problems and mitigation
+:PROPERTIES:
+:CUSTOM_ID: problems-and-mitigation
+:END:
 
 ***** Desycnhronization
+:PROPERTIES:
+:CUSTOM_ID: desycnhronization
+:END:
 
 The tangled source may be desynchronized with the Org Mode source.  We
 could check for this with a GitHub workflow, but don't yet.
 
 ***** Bloated diffs
+:PROPERTIES:
+:CUSTOM_ID: bloated-diffs
+:END:
 
 When we commit tangled sources, each hunk of the diff may be
 duplicated between the original source and the tangled source.  This

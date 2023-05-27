@@ -1,7 +1,7 @@
 #+title: Experimenting with ox-publish
 #+PROPERTY: header-args      :results silent
 #+PROPERTY: header-args:nix  :eval no
-#+LAST_MODIFIED: <2023-05-25 Thu 14:21>
+#+LAST_MODIFIED: <2023-05-26 Fri 22:58>
 
 #+begin_warning
 This is an experiment.  It might replace ox-hugo.  It might not.  It's
@@ -9,6 +9,9 @@ not live yet.
 #+end_warning
 
 * Nix build
+:PROPERTIES:
+:CUSTOM_ID: nix-build
+:END:
 
 The website is a package within our flake.  To avoid [[https://nixos.wiki/wiki/Import_From_Derivation][Import From
 Derivation]], this Nix expression needs to be [[https://orgmode.org/manual/Extracting-Source-Code.html][tangled]] into the Git
@@ -69,6 +72,9 @@ derivation output.
 #+end_src
 
 ** Try it locally
+:PROPERTIES:
+:CUSTOM_ID: try-it-locally
+:END:
 
 To build the site locally into ~./result~, run:
 
@@ -77,6 +83,9 @@ To build the site locally into ~./result~, run:
 #+end_src
 
 * Setup
+:PROPERTIES:
+:CUSTOM_ID: setup
+:END:
 
 This document defines an Emacs script that generates =rossabaker.com=.
 We'll need a few libraries.
@@ -90,6 +99,9 @@ We'll need a few libraries.
 #+end_src
 
 * Template
+:PROPERTIES:
+:CUSTOM_ID: template
+:END:
 
 Lisp is a delightful templating language for HTML:
 
@@ -100,6 +112,9 @@ Lisp is a delightful templating language for HTML:
 We use the [[https://github.com/tali713/esxml][esxml]] library.
 
 ** Base template
+:PROPERTIES:
+:CUSTOM_ID: base-template
+:END:
 
 #+begin_src emacs-lisp
   (defun rab/html-template (contents info)
@@ -121,6 +136,9 @@ We use the [[https://github.com/tali713/esxml][esxml]] library.
 #+end_src
 
 ** Site header
+:PROPERTIES:
+:CUSTOM_ID: site-header
+:END:
 
 #+begin_src emacs-lisp
   (defun rab/site-header ()
@@ -137,6 +155,9 @@ We use the [[https://github.com/tali713/esxml][esxml]] library.
 #+end_src
 
 ** Site footer
+:PROPERTIES:
+:CUSTOM_ID: site-footer
+:END:
 
 #+begin_src emacs-lisp
   (defun rab/site-footer ()
@@ -166,9 +187,58 @@ We use the [[https://github.com/tali713/esxml][esxml]] library.
 		(span ((class . "fa fa-mastodon")) "Fediverse")))))))
 #+end_src
 
+** Stable anchors
+:PROPERTIES:
+:CUSTOM_ID: stable-anchors
+:END:
+
+Org generates non-deterministic anchors for headers, but respects the
+~CUSTOM_ID~ property.  Instead of something like ~#orgae149c8~, we'd
+like this section to have a "slug" id, like ~stable-anchors~.
+
+#+begin_src emacs-lisp
+  (defun rab/slug (title)
+    "Converts TITLE to a 'slug' appropriate for URI anchors."
+    (->> title
+	 s-downcase
+	 (replace-regexp-in-string (rx (not (in word space ?- ?_))) "")
+	 (replace-regexp-in-string (rx (one-or-more (in space ?_ ?-))) "-")
+	 (replace-regexp-in-string (rx bos (one-or-more ?-)) "")
+	 (replace-regexp-in-string (rx (one-or-more ?-) eos) "")))
+#+end_src
+
+We only want to generate a slug for headlines that have no ~CUSTOM_ID~.
+
+#+begin_src emacs-lisp
+  (defun rab/org-put-slug-as-custom-id ()
+    "Puts a CUSTOM_ID from a slug of the current headline, unless
+  already present.  This is useful for stable URI anchors."
+    (unless (org-entry-get nil "CUSTOM_ID")
+      (->> (org-heading-components)
+	   (nth 4)
+	   rab/slug
+	   (org-entry-put nil "CUSTOM_ID"))))
+#+end_src
+
+We want a convenient way to generate them for the entire document.
+
+#+begin_src emacs-lisp
+  (defun rab/org-put-slugs-as-custom-id ()
+    "Puts a CUSTOM_ID from a slug of the current headline, unless
+  already present.  This is useful for stable URI anchors."
+    (interactive)
+    (org-map-entries (lambda () (rab/org-put-slug-as-custom-id))))
+#+end_src
+
 * Backend
+:PROPERTIES:
+:CUSTOM_ID: backend
+:END:
 
 ** Derived from ox-html
+:PROPERTIES:
+:CUSTOM_ID: derived-from-ox-html
+:END:
 
 Org Mode exports require a backend.  We dervice from the stock [[https://orgmode.org/manual/HTML-Export.html][ox-html]]
 backend, overriding components as necessary to inject our own templates.
@@ -180,6 +250,9 @@ backend, overriding components as necessary to inject our own templates.
 #+end_src
 
 ** Pretty URLs
+:PROPERTIES:
+:CUSTOM_ID: pretty-urls
+:END:
 
 "Pretty URLs" (e.g., ~/configs/website/~ instead of
 ~/configs/website.html~) require a bit of jiggery pokery unless we
@@ -208,8 +281,14 @@ file's base name into a directory and inject the =index= name.
 #+end_src
 
 * Publishing
+:PROPERTIES:
+:CUSTOM_ID: publishing
+:END:
 
 ** Legacy ox-hugo build
+:PROPERTIES:
+:CUSTOM_ID: legacy-ox-hugo-build
+:END:
 
 As mentioned earlier, we're migrating from an [[https://github.com/kaushalmodi/ox-hugo][ox-hugo]] setup.  We need
 export all the pages from that document before our own export.
@@ -224,6 +303,9 @@ export all the pages from that document before our own export.
 #+end_src
 
 ** ox-html setup
+:PROPERTIES:
+:CUSTOM_ID: ox-html-setup
+:END:
 
 This will be the main build moving forward.
 
@@ -243,6 +325,9 @@ This will be the main build moving forward.
 #+end_src
 
 * Credits
+:PROPERTIES:
+:CUSTOM_ID: credits
+:END:
 
 This process is heavily inspired by the [[https://systemcrafters.net/live-streams/may-12-2023/][System Crafters]] redesign.
 
