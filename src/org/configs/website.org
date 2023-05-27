@@ -1,7 +1,7 @@
 #+title: Experimenting with ox-publish
 #+PROPERTY: header-args      :results silent
 #+PROPERTY: header-args:nix  :eval no
-#+LAST_MODIFIED: <2023-05-26 Fri 23:13>
+#+LAST_MODIFIED: <2023-05-27 Sat 00:00>
 
 #+begin_warning
 This is an experiment.  It might replace ox-hugo.  It might not.  It's
@@ -33,16 +33,24 @@ We'll need a few libraries.
 ~/configs/website.html~) require a bit of jiggery pokery unless we
 want all our files named ~index.org~.
 
-We need to locally redefine =org-export-output-file-name= to turn the
-file's base name into a directory and inject the =index= name.
+First, we need a way to convert a source filename to a directory
+relative to where we publish.
+
+#+begin_src emacs-lisp
+  (defun rab/org-pretty-url-output-dir (filename pub-dir)
+    (concat pub-dir
+	    (->> filename
+		 file-name-nondirectory
+		 file-name-sans-extension
+		 file-name-as-directory)))
+#+end_src
+
+When publishing, we need to locally redefine
+=org-export-output-file-name= to inject =index= into the filename.
 
 #+begin_src emacs-lisp
   (defun rab/publish-to-html (plist filename pub-dir)
-    (let ((output-dir (concat pub-dir
-			      (->> filename
-				   file-name-nondirectory
-				   file-name-sans-extension
-				   file-name-as-directory))))
+    (let ((output-dir (rab/org-pretty-url-output-dir filename pub-dir)))
       (cl-letf (((symbol-function 'org-export-output-file-name)
 		 (lambda (extension &optional subtreep pub-dir)
 		   (concat output-dir "index" extension))))
@@ -55,7 +63,24 @@ file's base name into a directory and inject the =index= name.
 			    output-dir))))
 #+end_src
 
+The jiggery pokery also changes how we render links.  For links to
+local org files, we need to prepend ~../~ to get out of the artificial
+~index.html~ we're in, and then strip the ~.org~ extension from the
+target to point at the ~index.html~ _that_ will be in.
 
+#+begin_src emacs-lisp
+  (defun rab/org-html-link (link contents info)
+    "If LINK is an org file reference, strip the extension from the
+  path so it points to the exported index.html."
+    (when (and (string= 'file (org-element-property :type link))
+	       (string= "org" (file-name-extension (org-element-property :path link))))
+      (org-element-put-property link :path
+				(->> link
+				     (org-element-property :path)
+				     file-name-sans-extension
+				     (concat "../"))))
+    (org-export-with-backend 'html link contents info))
+#+end_src
 
 * Stable anchors
 :PROPERTIES:
@@ -200,7 +225,8 @@ To hook our templates into Org export, we derive from the stock
 #+begin_src emacs-lisp
   (org-export-define-derived-backend 'rab/html 'html
     :translate-alist
-    '((template . rab/html-template)))
+    '((template . rab/html-template)
+      (link . rab/org-html-link)))
 #+end_src
 
 * Publishing
