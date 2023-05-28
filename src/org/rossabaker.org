@@ -347,16 +347,9 @@ Commons Attribution 4.0 International (CC BY 4.0) License]].
 
 ** Configurations
 :PROPERTIES:
-:EXPORT_FILE_NAME: _index
+# :EXPORT_FILE_NAME: _index
 :EXPORT_HUGO_LASTMOD: <2022-09-05 Mon 23:48>
 :END:
-
-This is my attempt at [[https://en.wikipedia.org/wiki/Literate_programming][literate programming]].  The configurations
-presented here run my apps, provision my systems, and build this
-website.
-
-These are intended to be living documents, revised whenever the
-corresponding configuration is reconfigured.
 
 ** DONE Managing generated sources in Git :git:gitattributes:gitignore:babel:
 CLOSED: [2022-08-24 Wed 15:04]
