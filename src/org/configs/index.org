@@ -1,0 +1,7 @@
+#+TITLE: Configurations
+
+#+call: website.org:project-sitemap() :results value list
+
+# Local Variables:
+# org-confirm-babel-evaluate: nil
+# End:

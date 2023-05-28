@@ -1,7 +1,7 @@
 #+title: Experimenting with ox-publish
 #+PROPERTY: header-args      :results silent
 #+PROPERTY: header-args:nix  :eval no
-#+LAST_MODIFIED: <2023-05-27 Sat 00:00>
+#+LAST_MODIFIED: <2023-05-27 Sat 22:54>
 
 #+begin_warning
 This is an experiment.  It might replace ox-hugo.  It might not.  It's
@@ -38,11 +38,13 @@ relative to where we publish.
 
 #+begin_src emacs-lisp
   (defun rab/org-pretty-url-output-dir (filename pub-dir)
-    (concat pub-dir
-	    (->> filename
-		 file-name-nondirectory
-		 file-name-sans-extension
-		 file-name-as-directory)))
+    (if (string= "index.org" (file-name-nondirectory filename))
+	pub-dir
+      (concat pub-dir
+	      (->> filename
+		   file-name-nondirectory
+		   file-name-sans-extension
+		   file-name-as-directory))))
 #+end_src
 
 When publishing, we need to locally redefine
@@ -74,11 +76,15 @@ target to point at the ~index.html~ _that_ will be in.
   path so it points to the exported index.html."
     (when (and (string= 'file (org-element-property :type link))
 	       (string= "org" (file-name-extension (org-element-property :path link))))
-      (org-element-put-property link :path
-				(->> link
-				     (org-element-property :path)
-				     file-name-sans-extension
-				     (concat "../"))))
+      (let ((prefix (if (string= "index.org" (file-name-nondirectory (buffer-file-name)))
+			""
+		      "../")))
+	(message "PREFIX %s %s" (buffer-file-name) prefix)
+	(org-element-put-property link :path
+				  (->> link
+				       (org-element-property :path)
+				       file-name-sans-extension
+				       (concat prefix)))))
     (org-export-with-backend 'html link contents info))
 #+end_src
 
@@ -123,6 +129,30 @@ We want a convenient way to generate them for the entire document.
   already present.  This is useful for stable URI anchors."
     (interactive)
     (org-map-entries (lambda () (rab/org-put-slug-as-custom-id))))
+#+end_src
+
+* Sitemaps
+
+Org has [[https://orgmode.org/manual/Site-map.html][built-in sitemap support]].  The problem is, it generates source
+in the same directory, when Org is perfectly capable of calculating it
+on the fly!
+
+#+name: project-sitemap
+#+begin_src emacs-lisp
+  (let* ((file-name (buffer-file-name))
+         (file-dir (file-name-directory file-name))
+	 (project (org-publish-get-project-from-filename (buffer-file-name) 'up))
+	 (pages (org-publish-get-base-files project)))
+    (mapcar (lambda (page)
+	      (let ((title (org-publish-find-title page project)))
+		(org-link-make-string (concat "./" (file-relative-name page file-dir)) title)))
+	    (remove file-name pages)))
+#+end_src
+
+To include it in an index page:
+
+#+begin_src org
+  ,#+call: path/to/website.org:project-sitemap()
 #+end_src
 
 * Templates
@@ -263,12 +293,12 @@ This will be the main build moving forward.
 	      org-publish-timestamp-directory "../../../tmp/org-timestamps")
 
   (setq org-publish-project-alist
-	`(("org"
-	   :base-directory "../"
+	`(("rossabaker.com:configs"
+	   :base-directory "./"
 	   :recursive t
 	   :exclude ,(rx (or (seq (or "config" "img" "talks" "tmp") "/" (* nonl)) "rossabaker.org"))
 	   :publishing-function rab/publish-to-html
-	   :publishing-directory "../../../tmp/hugo/static")))
+	   :publishing-directory "../../../tmp/hugo/static/configs")))
 
   (org-publish-all)
 #+end_src
