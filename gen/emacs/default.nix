@@ -13,6 +13,8 @@
       # versions of the Seq package in MELPA.
       version = "29.0-${inputs.emacs-src.shortRev}";
       src = inputs.emacs-src;
+      # This doesn't apply to Emacs29.
+      patches = builtins.filter (p: baseNameOf p != "bytecomp-revert.patch") old.patches;
     });
     packages.emacs-ross = pkgs.emacsWithPackagesFromUsePackage {
       package = config.packages.emacs29;
