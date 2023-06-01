@@ -345,16 +345,16 @@ Commons Attribution 4.0 International (CC BY 4.0) License]].
 :EXPORT_HUGO_BUNDLE: configs
 :END:
 
-** Configurations
+** Configurations :noexport:
 :PROPERTIES:
-# :EXPORT_FILE_NAME: _index
+:EXPORT_FILE_NAME: _index
 :EXPORT_HUGO_LASTMOD: <2022-09-05 Mon 23:48>
 :END:
 
-** DONE Managing generated sources in Git :git:gitattributes:gitignore:babel:
+** DONE Managing generated sources in Git :git:gitattributes:gitignore:babel:noexport:
 CLOSED: [2022-08-24 Wed 15:04]
 :PROPERTIES:
-# :EXPORT_FILE_NAME: managing-generated-sources-in-git
+:EXPORT_FILE_NAME: managing-generated-sources-in-git
 :EXPORT_HUGO_LASTMOD: <2023-03-01 Wed 00:49>
 :EXPORT_OPTIONS: H:6
 :END:
@@ -370,9 +370,9 @@ CLOSED: [2022-08-24 Wed 15:04]
 :EXPORT_DESCRIPTION: A colophon for rossabaker.com.  Describes the way we convert an Org-Mode file into a website with ox-hugo and Nix.
 :END:
 
-*** Website
+*** Website :noexport:
 :PROPERTIES:
-# :EXPORT_FILE_NAME: _index
+:EXPORT_FILE_NAME: _index
 :EXPORT_TITLE: Website
 :EXPORT_HUGO_LASTMOD: <2022-08-24 Wed 15:04>
 :END:
@@ -1604,10 +1604,10 @@ supported contacts from the experimental ones.
   </dl>
 #+end_src
 
-*** DONE Build website with Nix                      :hugo:ox_hugo:nix:babel:
+*** DONE Build website with Nix                      :hugo:ox_hugo:nix:babel:noexport:
 CLOSED: [2022-09-01 Thu 16:54]
 :PROPERTIES:
-# :EXPORT_FILE_NAME: build
+:EXPORT_FILE_NAME: build
 :EXPORT_HUGO_LASTMOD: <2023-04-14 Fri 15:23>
 :END:
 
@@ -1845,6 +1845,49 @@ contents of my flake.
   nix --option allow-import-from-derivation true flake show github:rossabaker/cromulent
 #+end_src
 
+#+RESULTS: flake-show-outputs
+#+begin_example
+[1mgithub:rossabaker/cromulent/a979838336d80960216b73fff7165378157fbc7c[0m
+[32;1m├───[0m[1mapps[0m
+[32;1m│   ├───[0m[1maarch64-darwin[0m
+[32;1m│   │   └───[0m[1memacs[0m: app
+[32;1m│   └───[0m[1mx86_64-linux[0m
+[32;1m│       └───[0m[1memacs[0m: app
+[32;1m├───[0m[1mchecks[0m
+[32;1m│   ├───[0m[1maarch64-darwin[0m
+[32;1m│   └───[0m[1mx86_64-linux[0m
+[32;1m├───[0m[1mdarwinConfigurationModules[0m: [35;1munknown[0m
+[32;1m├───[0m[1mdevShells[0m
+[32;1m│   ├───[0m[1maarch64-darwin[0m
+[32;1m│   │   └───[0m[1mdefault[0m: development environment 'nix-config'
+[32;1m│   └───[0m[1mx86_64-linux[0m
+[32;1m│       └───[0m[1mdefault[0m: development environment 'nix-config'
+[32;1m├───[0m[1mflakeModules[0m: [35;1munknown[0m
+[32;1m├───[0m[1mformatter[0m
+[32;1m├───[0m[1mhomeConfigurations[0m: [35;1munknown[0m
+[32;1m├───[0m[1mhomeManagerModules[0m: [35;1munknown[0m
+[32;1m├───[0m[1mlegacyPackages[0m
+[32;1m│   ├───[0m[1maarch64-darwin[0m [35;1momitted[0m (use '--legacy' to show)
+[32;1m│   └───[0m[1mx86_64-linux[0m [35;1momitted[0m (use '--legacy' to show)
+[32;1m├───[0m[1mnixosConfigurations[0m
+[32;1m├───[0m[1mnixosModules[0m
+[32;1m├───[0m[1moverlays[0m
+[32;1m│   ├───[0m[1mdefault[0m: [35;1mNixpkgs overlay[0m
+[32;1m│   ├───[0m[1mdevshell[0m: [35;1mNixpkgs overlay[0m
+[32;1m│   └───[0m[1memacs[0m: [35;1mNixpkgs overlay[0m
+[32;1m└───[0m[1mpackages[0m
+[32;1m    ├───[0m[1maarch64-darwin[0m
+[32;1m    │   ├───[0m[1m"RABaker@L2LYQM57XY"[0m: package 'home-manager-generation'
+[32;1m    │   ├───[0m[1maarch64-darwin-config-base[0m: package 'darwin-system-22.11.20230528.c8a17ce+darwin4.b8c286c'
+[32;1m    │   ├───[0m[1memacs-ross[0m: package 'emacs29-with-packages-'
+[32;1m    │   ├───[0m[1memacs29[0m: package 'emacs29'
+[32;1m    │   └───[0m[1mwebsite[0m: package 'rossabaker.com'
+[32;1m    └───[0m[1mx86_64-linux[0m
+[32;1m        ├───[0m[1memacs-ross[0m: package 'emacs29-with-packages-'
+[32;1m        ├───[0m[1memacs29[0m: package 'emacs29'
+[32;1m        └───[0m[1mwebsite[0m: package 'rossabaker.com'
+#+end_example
+
 #+begin_details
 #+begin_summary
   Results
@@ -1853,6 +1896,50 @@ contents of my flake.
 #+begin_src emacs-lisp :eval yes :var in=flake-show-outputs() :exports results
   (ansi-color-filter-apply in)
 #+end_src
+
+#+RESULTS:
+#+begin_example
+github:rossabaker/cromulent/a979838336d80960216b73fff7165378157fbc7c
+├───apps
+│   ├───aarch64-darwin
+│   │   └───emacs: app
+│   └───x86_64-linux
+│       └───emacs: app
+├───checks
+│   ├───aarch64-darwin
+│   └───x86_64-linux
+├───darwinConfigurationModules: unknown
+├───devShells
+│   ├───aarch64-darwin
+│   │   └───default: development environment 'nix-config'
+│   └───x86_64-linux
+│       └───default: development environment 'nix-config'
+├───flakeModules: unknown
+├───formatter
+├───homeConfigurations: unknown
+├───homeManagerModules: unknown
+├───legacyPackages
+│   ├───aarch64-darwin omitted (use '--legacy' to show)
+│   └───x86_64-linux omitted (use '--legacy' to show)
+├───nixosConfigurations
+├───nixosModules
+├───overlays
+│   ├───default: Nixpkgs overlay
+│   ├───devshell: Nixpkgs overlay
+│   └───emacs: Nixpkgs overlay
+└───packages
+    ├───aarch64-darwin
+    │   ├───"RABaker@L2LYQM57XY": package 'home-manager-generation'
+    │   ├───aarch64-darwin-config-base: package 'darwin-system-22.11.20230528.c8a17ce+darwin4.b8c286c'
+    │   ├───emacs-ross: package 'emacs29-with-packages-'
+    │   ├───emacs29: package 'emacs29'
+    │   └───website: package 'rossabaker.com'
+    └───x86_64-linux
+        ├───emacs-ross: package 'emacs29-with-packages-'
+        ├───emacs29: package 'emacs29'
+        └───website: package 'rossabaker.com'
+#+end_example
+
 #+end_details
 
 *** Flake source
@@ -2197,6 +2284,9 @@ weight versus ~usepackage-compute-statistics~.  Run
     (benchmark-init/activate))
 #+end_src
 
+#+RESULTS:
+| org-persist-load-all | benchmark-init/deactivate | tramp-register-archive-autoload-file-name-handler | magit-maybe-define-global-key-bindings | table--make-cell-map |
+
 ***** Garbage collection
 
 Increasing the garbage collector threshold is reputed to help at init.
@@ -2209,6 +2299,9 @@ After startup, we revert on the [[https://gitlab.com/koral/gcmh][Garbage Collect
     :init (setq gc-cons-threshold (* 80 1024 1024))
     :hook (emacs-startup . gcmh-mode))
 #+end_src
+
+#+RESULTS:
+| gcmh-mode |
 
 ***** Doom-like hooks
 
@@ -3686,10 +3779,10 @@ Finally, a convenience function to reload it:
     :ensure t)
 #+end_src
 
-** DONE Scala config
+** DONE Scala config :noexport:
 CLOSED: [2023-05-09 Tue 09:27]
 :PROPERTIES:
-# :EXPORT_FILE_NAME: scala
+:EXPORT_FILE_NAME: scala
 :HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
 :EXPORT_OPTIONS: H:7
 :EXPORT_DESCRIPTION: A home-manager module for a Scala development environment
