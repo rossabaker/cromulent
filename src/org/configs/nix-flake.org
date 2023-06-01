@@ -1,0 +1,413 @@
+#+TITLE: Nix flake
+#+CREATED: [2022-12-25 Sun 22:14]
+#+LAST_MODIFIED: <2023-06-01 Thu 00:27>
+
+At the root of my [[https://github.com/rossabaker/cromulent][cromulent repository]] is a [[https://nixos.wiki/wiki/Flakes][Nix flake]].  It contains
+all my system configurations, home environment configurations,
+packages, development shells, and more.
+
+* What's in the flake
+:PROPERTIES:
+:CUSTOM_ID: what's-in-the-flake
+:END:
+
+My flake currently performs [[https://nixos.wiki/wiki/Import_From_Derivation][Import From Deriviation]], but I'm trying to
+remove it.  For now, we need to explicitly allow it to see the
+contents of my flake.
+
+#+name: flake-show-outputs
+#+begin_src sh :eval yes :exports code :results output verbatim
+  nix --option allow-import-from-derivation true flake show github:rossabaker/cromulent
+#+end_src
+
+#+RESULTS: flake-show-outputs
+#+begin_example
+[1mgithub:rossabaker/cromulent/a979838336d80960216b73fff7165378157fbc7c[0m
+[32;1m├───[0m[1mapps[0m
+[32;1m│   ├───[0m[1maarch64-darwin[0m
+[32;1m│   │   └───[0m[1memacs[0m: app
+[32;1m│   └───[0m[1mx86_64-linux[0m
+[32;1m│       └───[0m[1memacs[0m: app
+[32;1m├───[0m[1mchecks[0m
+[32;1m│   ├───[0m[1maarch64-darwin[0m
+[32;1m│   └───[0m[1mx86_64-linux[0m
+[32;1m├───[0m[1mdarwinConfigurationModules[0m: [35;1munknown[0m
+[32;1m├───[0m[1mdevShells[0m
+[32;1m│   ├───[0m[1maarch64-darwin[0m
+[32;1m│   │   └───[0m[1mdefault[0m: development environment 'nix-config'
+[32;1m│   └───[0m[1mx86_64-linux[0m
+[32;1m│       └───[0m[1mdefault[0m: development environment 'nix-config'
+[32;1m├───[0m[1mflakeModules[0m: [35;1munknown[0m
+[32;1m├───[0m[1mformatter[0m
+[32;1m├───[0m[1mhomeConfigurations[0m: [35;1munknown[0m
+[32;1m├───[0m[1mhomeManagerModules[0m: [35;1munknown[0m
+[32;1m├───[0m[1mlegacyPackages[0m
+[32;1m│   ├───[0m[1maarch64-darwin[0m [35;1momitted[0m (use '--legacy' to show)
+[32;1m│   └───[0m[1mx86_64-linux[0m [35;1momitted[0m (use '--legacy' to show)
+[32;1m├───[0m[1mnixosConfigurations[0m
+[32;1m├───[0m[1mnixosModules[0m
+[32;1m├───[0m[1moverlays[0m
+[32;1m│   ├───[0m[1mdefault[0m: [35;1mNixpkgs overlay[0m
+[32;1m│   ├───[0m[1mdevshell[0m: [35;1mNixpkgs overlay[0m
+[32;1m│   └───[0m[1memacs[0m: [35;1mNixpkgs overlay[0m
+[32;1m└───[0m[1mpackages[0m
+[32;1m    ├───[0m[1maarch64-darwin[0m
+[32;1m    │   ├───[0m[1m"RABaker@L2LYQM57XY"[0m: package 'home-manager-generation'
+[32;1m    │   ├───[0m[1maarch64-darwin-config-base[0m: package 'darwin-system-22.11.20230528.c8a17ce+darwin4.b8c286c'
+[32;1m    │   ├───[0m[1memacs-ross[0m: package 'emacs29-with-packages-'
+[32;1m    │   ├───[0m[1memacs29[0m: package 'emacs29'
+[32;1m    │   └───[0m[1mwebsite[0m: package 'rossabaker.com'
+[32;1m    └───[0m[1mx86_64-linux[0m
+[32;1m        ├───[0m[1memacs-ross[0m: package 'emacs29-with-packages-'
+[32;1m        ├───[0m[1memacs29[0m: package 'emacs29'
+[32;1m        └───[0m[1mwebsite[0m: package 'rossabaker.com'
+#+end_example
+
+#+begin_details
+#+begin_summary
+  Results
+#+end_summary
+
+#+begin_src emacs-lisp :eval yes :var in=flake-show-outputs() :exports results
+  (ansi-color-filter-apply in)
+#+end_src
+
+#+RESULTS:
+#+begin_example
+github:rossabaker/cromulent/a979838336d80960216b73fff7165378157fbc7c
+├───apps
+│   ├───aarch64-darwin
+│   │   └───emacs: app
+│   └───x86_64-linux
+│       └───emacs: app
+├───checks
+│   ├───aarch64-darwin
+│   └───x86_64-linux
+├───darwinConfigurationModules: unknown
+├───devShells
+│   ├───aarch64-darwin
+│   │   └───default: development environment 'nix-config'
+│   └───x86_64-linux
+│       └───default: development environment 'nix-config'
+├───flakeModules: unknown
+├───formatter
+├───homeConfigurations: unknown
+├───homeManagerModules: unknown
+├───legacyPackages
+│   ├───aarch64-darwin omitted (use '--legacy' to show)
+│   └───x86_64-linux omitted (use '--legacy' to show)
+├───nixosConfigurations
+├───nixosModules
+├───overlays
+│   ├───default: Nixpkgs overlay
+│   ├───devshell: Nixpkgs overlay
+│   └───emacs: Nixpkgs overlay
+└───packages
+    ├───aarch64-darwin
+    │   ├───"RABaker@L2LYQM57XY": package 'home-manager-generation'
+    │   ├───aarch64-darwin-config-base: package 'darwin-system-22.11.20230528.c8a17ce+darwin4.b8c286c'
+    │   ├───emacs-ross: package 'emacs29-with-packages-'
+    │   ├───emacs29: package 'emacs29'
+    │   └───website: package 'rossabaker.com'
+    └───x86_64-linux
+        ├───emacs-ross: package 'emacs29-with-packages-'
+        ├───emacs29: package 'emacs29'
+        └───website: package 'rossabaker.com'
+#+end_example
+
+#+end_details
+
+* Flake source
+:PROPERTIES:
+:CUSTOM_ID: flake-source
+:END:
+
+#+begin_warning
+This isn't particularly compelling reading yet.  It needs to be made
+more "literate".
+#+end_warning
+
+#+begin_src nix :tangle ../../../flake.nix :tangle-mode `,#o444 :noweb tangle
+  {
+    description = "Ross A. Baker's perfectly cromulent Nix flake";
+    inputs =
+      <<flake-inputs>>
+    outputs =
+      <<flake-outputs>>
+  }
+#+end_src
+
+** Flake inputs
+:PROPERTIES:
+:CUSTOM_ID: flake-inputs
+:END:
+
+#+begin_src nix :noweb-ref flake-inputs
+  {
+    flake-parts.url = "github:hercules-ci/flake-parts";
+
+    # Core nix flakes
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+
+    # Home manager flake
+    home-manager.url = "github:nix-community/home-manager";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    # nix-darwin flake
+    nixpkgs-darwin.url = "github:nixos/nixpkgs/nixpkgs-22.11-darwin";
+    darwin.url = "github:LnL7/nix-darwin/master";
+    darwin.inputs.nixpkgs.follows = "nixpkgs-darwin";
+
+    # Extra community flakes
+    devshell.url = "github:numtide/devshell";
+    emacs-overlay.url = "github:nix-community/emacs-overlay";
+    firefox-darwin.url = "github:bandithedoge/nixpkgs-firefox-darwin";
+
+    # Emacs packages
+    ammonite-term-repl = {
+      url = "github:zwild/ammonite-term-repl";
+      flake = false;
+    };
+
+    fill-sentences-correctly = {
+      url = "github:duckwork/fill-sentences-correctly.el";
+      flake = false;
+    };
+
+    git-related = {
+      url = "git+https://codeberg.org/rossabaker/git-related";
+      flake = false;
+    };
+
+    hocon-mode = {
+      url = "github:jxq0/hocon-mode";
+      flake = false;
+    };
+
+    ob-ammonite = {
+      url = "github:zwild/ob-ammonite";
+      flake = false;
+    };
+
+    on-el = {
+      url = "gitlab:ajgrf/on.el";
+      flake = false;
+    };
+
+    scala-mode = {
+      url = "github:Kazark/emacs-scala-mode?ref=scala3";
+      flake = false;
+    };
+
+    unmodified-buffer = {
+      url = "github:arthurcgusmao/unmodified-buffer";
+      flake = false;
+    };
+
+    emacs-src.url = "github:emacs-mirror/emacs/emacs-29";
+    emacs-src.flake = false;
+
+    jinx = {
+      url = "github:minad/jinx";
+      flake = false;
+    };
+
+    copilot-el = {
+      url = "github:zerolfx/copilot.el";
+      flake = false;
+    };
+  };
+#+end_src
+
+** Flake outputs
+:PROPERTIES:
+:CUSTOM_ID: flake-outputs
+:END:
+
+#+begin_src nix :noweb-ref flake-outputs
+  inputs:
+    let
+      mkDarwinConfigModule = { pkgs }: {
+	imports = [
+	  (import (pkgs.callPackage ./tangle.nix {
+	    inherit pkgs;
+	    src = ./src/org/config/nix-darwin;
+	  }))
+	  {
+	    system.keyboard.enableKeyMapping = true;
+	    system.keyboard.remapCapsLockToControl = true;
+	  }
+	];
+      };
+
+      mkHomeConfig = { pkgs, system, username, homeDirectory }:
+	let
+	  homeModule = import (pkgs.callPackage ./tangle.nix {
+	    inherit pkgs;
+	    src = ./src/org/config/home-manager;
+	  });
+	in
+	inputs.home-manager.lib.homeManagerConfiguration {
+	  inherit pkgs;
+	  modules = [
+	    {
+	      home = {
+		inherit homeDirectory username;
+		stateVersion = "21.11";
+	      };
+	      nixpkgs.overlays = [ inputs.emacs-overlay.overlay ];
+	    }
+	    homeModule
+	    inputs.self.homeManagerModules.emacs
+	    inputs.self.homeManagerModules.scala
+	    ./modules/work
+	  ];
+	  # Pass our flake inputs into the config
+	  extraSpecialArgs = { inherit inputs; };
+	};
+
+      RABaker-at-L2LYQM57XY = pkgs: mkHomeConfig {
+	inherit pkgs;
+	system = "aarch64-darwin";
+	username = "ross.baker";
+	homeDirectory = "/Users/RABaker";
+      };
+
+      aarch64-darwin-config-base = pkgs: mkDarwinConfigModule {
+	inherit pkgs;
+      };
+
+      overlays = {
+	emacs = inputs.emacs-overlay.overlay;
+	devshell = inputs.devshell.overlays.default;
+      };
+
+      pkgsFor = system: import inputs.nixpkgs {
+	inherit system;
+	overlays = builtins.attrValues inputs.self.overlays;
+      };
+
+      darwinConfigurationModules = {
+	aarch64-base = aarch64-darwin-config-base (pkgsFor "aarch64-darwin");
+      };
+
+      flakeModules = {
+	emacs = ./gen/emacs;
+	scala = ./gen/scala;
+      };
+    in
+    inputs.flake-parts.lib.mkFlake { inherit inputs; } {
+      imports = [
+	./gen/flake/modules/homeManagerModules.nix
+	flakeModules.emacs
+	flakeModules.scala
+      ];
+
+      flake = {
+	inherit overlays darwinConfigurationModules;
+
+	homeConfigurations = {
+	  "RABaker@L2LYQM57XY" = RABaker-at-L2LYQM57XY (pkgsFor "aarch64-darwin");
+	};
+
+	inherit flakeModules;
+      };
+
+      systems = [
+	"x86_64-linux"
+	"aarch64-darwin"
+      ];
+
+      perSystem = { config, self', inputs', system, pkgs, ... }:
+	let
+	  hm = inputs.home-manager.defaultPackage."${system}";
+
+	  darwinPackages =
+	    if (system == "aarch64-darwin") then {
+	      aarch64-darwin-config-base = (inputs.darwin.lib.darwinSystem {
+		system = "aarch64-darwin";
+		modules = [ darwinConfigurationModules.aarch64-base ];
+	      }).system;
+	      "RABaker@L2LYQM57XY" = (RABaker-at-L2LYQM57XY pkgs).activationPackage;
+	    } else { };
+	in
+	{
+	  _module.args.pkgs = import inputs.nixpkgs {
+	    inherit system;
+	    overlays = [
+	      inputs.devshell.overlays.default
+	      inputs.emacs-overlay.overlays.default
+	    ];
+	  };
+
+	  packages = {
+	    website = pkgs.callPackage ./gen/website {
+	      emacs29 = self'.packages.emacs29;
+	      src = ./src;
+	    };
+	  } // darwinPackages;
+
+	  devShells.default = pkgs.devshell.mkShell {
+	    name = "nix-config";
+
+	    commands = [{
+	      name = "hm-switch";
+	      help = "switch the home-manager config";
+	      command = "${hm}/bin/home-manager switch --flake $PRJ_ROOT";
+	    }];
+
+	    packages = [
+	      hm
+	      pkgs.google-cloud-sdk
+	      pkgs.hugo
+	      pkgs.nix
+	      pkgs.terraform
+	    ];
+	  };
+	};
+    };
+#+end_src
+
+* Home Manager modules
+:PROPERTIES:
+:CUSTOM_ID: home-manager-modules
+:END:
+
+Our flake is split into multiple modules, via the ~flake.flakeModules~
+configuration.  These flake modules may themselves provide Home
+Manager modules.  The ~flake~ schema supports other types of modules,
+like ~nixosModules~, but ~homeManagerModules~ is unofficial.  As such,
+it's not handled by Flake Parts like [[https://github.com/hercules-ci/flake-parts/blob/006c75898cf814ef9497252b022e91c946ba8e17/modules/nixosModules.nix][~nixosModules~]] is.  We fix that
+with a copy and paste:
+
+#+begin_src nix :tangle ../../../gen/flake/modules/homeManagerModules.nix
+  # Adapted from https://github.com/hercules-ci/flake-parts/blob/006c75898cf814ef9497252b022e91c946ba8e17/modules/nixosModules.nix
+  # MIT License
+  # Copyright (c) 2021 Hercules CI
+
+  { config, self, lib, flake-parts-lib, ... }:
+  let
+    inherit (lib)
+      filterAttrs
+      mapAttrs
+      mkOption
+      optionalAttrs
+      types
+      ;
+    inherit (flake-parts-lib)
+      mkSubmoduleOptions
+      ;
+  in
+  {
+    options = {
+      flake = mkSubmoduleOptions {
+	homeManagerModules = mkOption {
+	  type = types.lazyAttrsOf types.unspecified;
+	  default = { };
+	  apply = mapAttrs (k: v: { _file = "${toString self.outPath}/flake.nix#homeManagerModules.${k}"; imports = [ v ]; });
+	};
+      };
+    };
+  }
+
+#+end_src
