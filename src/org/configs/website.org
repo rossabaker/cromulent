@@ -138,7 +138,7 @@ in the same directory, when Org is perfectly capable of calculating it
 on the fly!
 
 #+name: project-sitemap
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :eval no
   (let* ((file-name (buffer-file-name))
          (file-dir (file-name-directory file-name))
 	 (project (org-publish-get-project-from-filename (buffer-file-name) 'up))
@@ -151,7 +151,7 @@ on the fly!
 
 To include it in an index page:
 
-#+begin_src org
+#+begin_src org :eval no
   ,#+call: path/to/website.org:project-sitemap()
 #+end_src
 
