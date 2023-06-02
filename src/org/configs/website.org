@@ -79,7 +79,6 @@ target to point at the ~index.html~ _that_ will be in.
       (let ((prefix (if (string= "index.org" (file-name-nondirectory (buffer-file-name)))
 			""
 		      "../")))
-	(message "PREFIX %s %s" (buffer-file-name) prefix)
 	(org-element-put-property link :path
 				  (->> link
 				       (org-element-property :path)
