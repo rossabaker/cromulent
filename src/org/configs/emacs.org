@@ -1,7 +1,4 @@
-** DONE Emacs config                                             :emacs:
-:PROPERTIES:
-:CUSTOM_ID: emacs-config
-:END:
+#+TITLE: Emacs config
 #+CREATED: <2023-02-23 Thu 23:59>
 #+AST_MODIFIED: <2023-05-25 Thu 22:53>
 #+PROPERRY: header-args :tangle-mode `,#o444 :mkdirp yes
