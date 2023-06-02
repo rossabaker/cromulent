@@ -4,6 +4,7 @@ let
   siteEmacs = emacs29.pkgs.withPackages (epkgs: [
     epkgs.dash
     epkgs.esxml
+    epkgs.git-link
     epkgs.htmlize
     epkgs.ox-hugo
   ]);
