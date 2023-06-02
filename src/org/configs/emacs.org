@@ -1,8 +1,9 @@
 #+TITLE: Emacs config
 #+CREATED: <2023-02-23 Thu 23:59>
-#+AST_MODIFIED: <2023-05-25 Thu 22:53>
+#+AST_MODIFIED: <2023-06-02 Fri 14:40>
 #+PROPERRY: header-args :tangle-mode `,#o444 :mkdirp yes
 #+PROPERTY: header-args:emacs-lisp: :tangle ../../../gen/emacs/init.el :tangle-mode `,#o444
+#+OPTIONS: H:6
 
 * Introduction
 ** The flavor of the day is vanilla
@@ -1016,6 +1017,12 @@ an error, I don't need them all up in my business.
 
 Much of this configuration starts from the [[https://scalameta.org/metals/docs/editors/emacs/][Metals guide]].
 
+#+begin_warning
+This doesn't work well with Scala 3's Significant Whitespace
+Traveshamockery.  Once we're ready for that, we'll take a look at
+[[https://github.com/KaranAhlawat/scala-ts-mode/issues/1#issuecomment-1573884094][scala-ts-mode]].
+#+end_warning
+
 #+begin_src emacs-lisp
   (use-package scala-mode
     :ensure t
@@ -1028,6 +1035,7 @@ Much of this configuration starts from the [[https://scalameta.org/metals/docs/e
     :ensure t
     :commands sbt-start sbt-command)
 #+end_src
+
 **** XML
 :PROPERTIES:
 :CUSTOM_ID: xml
