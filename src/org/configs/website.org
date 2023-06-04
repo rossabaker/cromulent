@@ -1,7 +1,7 @@
 #+title: Experimenting with ox-publish
 #+PROPERTY: header-args      :results silent
 #+PROPERTY: header-args:nix  :eval no
-#+LAST_MODIFIED: <2023-06-04 Sun 00:01>
+#+LAST_MODIFIED: <2023-06-04 Sun 00:28>
 
 #+begin_warning
 This is an experiment.  It might replace ox-hugo.  It might not.  It's
@@ -175,13 +175,30 @@ We use the [[https://github.com/tali713/esxml][esxml]] library.
 
 #+begin_src emacs-lisp
   (defun rab/html-template (contents info)
-    (let ((title (org-export-data (plist-get info :title) info)))
+    (let* ((title (org-export-data (plist-get info :title) info))
+	   (charset "utf-8")
+	   (author (and (plist-get info :with-author)
+			(let ((auth (plist-get info :author)))
+			  (and auth (org-element-interpret-data auth)))))
+	   (viewport-options '((width . "device-width")
+			       (initial-scale . 1))))
       (concat
        "<!DOCTYPE html>\n"
        (esxml-to-xml
 	`(html ()
 	  (head ()
-	   (meta ((charset . "utf-8")))
+	   (meta ((charset . ,charset)))
+	   ,(when author
+	     `(meta ((name . "author")
+		     (content . ,(org-no-properties author)))))
+	   (meta ((name . "viewport")
+		  (content . ,(mapconcat (lambda (entry)
+					   ;; Assumes no funny business
+					   (message "%s=%s"
+					    (symbol-name (car entry))
+					    (cdr entry)))
+			       viewport-options
+			       ","))))
 	   (title () ,title))
 	  (body ()
 	   ,(rab/site-header)
