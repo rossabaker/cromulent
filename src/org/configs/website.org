@@ -175,31 +175,14 @@ We use the [[https://github.com/tali713/esxml][esxml]] library.
 
 #+begin_src emacs-lisp
   (defun rab/html-template (contents info)
-    (let* ((title (org-export-data (plist-get info :title) info))
-	   (charset "utf-8")
-	   (author (and (plist-get info :with-author)
-			(let ((auth (plist-get info :author)))
-			  (and auth (org-element-interpret-data auth)))))
-	   (viewport-options '((width . "device-width")
-			       (initial-scale . 1))))
+    (let* ((title (org-export-data (plist-get info :title) info)))
       (concat
        "<!DOCTYPE html>\n"
        (esxml-to-xml
 	`(html ()
 	  (head ()
-	   (meta ((charset . ,charset)))
-	   ,(when author
-	     `(meta ((name . "author")
-		     (content . ,(org-no-properties author)))))
-	   (meta ((name . "viewport")
-		  (content . ,(mapconcat (lambda (entry)
-					   ;; Assumes no funny business
-					   (message "%s=%s"
-					    (symbol-name (car entry))
-					    (cdr entry)))
-			       viewport-options
-			       ","))))
-	   (title () ,title))
+	   ;; The default meta tags rendering is ... fine
+	   (raw-string ,(org-html--build-meta-info info)))
 	  (body ()
 	   ,(rab/site-header)
 	   (main ()
@@ -324,7 +307,8 @@ This will be the main build moving forward.
 
 #+begin_src emacs-lisp
   (setq-local user-full-name "Ross A. Baker"
-	      org-publish-timestamp-directory "../../../tmp/org-timestamps")
+	      org-publish-timestamp-directory "../../../tmp/org-timestamps"
+	      org-html-doctype "html5")
 
   (setq org-publish-project-alist
 	`(("rossabaker.com:configs"
