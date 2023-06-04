@@ -1,7 +1,7 @@
 #+title: Experimenting with ox-publish
 #+PROPERTY: header-args      :results silent
 #+PROPERTY: header-args:nix  :eval no
-#+LAST_MODIFIED: <2023-06-04 Sun 00:56>
+#+LAST_MODIFIED: <2023-06-04 Sun 10:40>
 
 #+begin_warning
 This is an experiment.  It might replace ox-hugo.  It might not.  It's
@@ -132,6 +132,9 @@ We want a convenient way to generate them for the entire document.
 #+end_src
 
 * Sitemaps
+:PROPERTIES:
+:CUSTOM_ID: sitemaps
+:END:
 
 Org has [[https://orgmode.org/manual/Site-map.html][built-in sitemap support]].  The problem is, it generates source
 in the same directory, when Org is perfectly capable of calculating it
@@ -185,11 +188,7 @@ We use the [[https://github.com/tali713/esxml][esxml]] library.
 	   (raw-string ,(org-html--build-meta-info info)))
 	  (body ()
 	   ,(rab/site-header)
-	   (main ()
-	    (article ()
-	     (header ()
-	      (h1 () ,title))
-	     (raw-string ,contents)))
+	   (raw-string ,contents)
 	   ,(rab/site-footer)))))))
 #+end_src
 
@@ -210,6 +209,31 @@ We use the [[https://github.com/tali713/esxml][esxml]] library.
 			  (body (cdr entry)))
 		     `(li () (a ((href . ,href)) ,body))))
 	   '(("/configs" . "Configs")))))))
+#+end_src
+
+** Main
+:PROPERTIES:
+:CUSTOM_ID: main
+:END:
+
+#+begin_src emacs-lisp
+  (defun rab/org-html-inner-template (contents info)
+    (esxml-to-xml (rab/site-main contents info)))
+
+  (defun rab/site-main (contents info)
+    (let ((title (org-export-data (plist-get info :title) info)))
+      `(main ()
+	(article ()
+	 (header ()
+	  (h1 () ,title))
+	 ,(when-let ((depth (plist-get info :with-toc)))
+	   `(details ()
+	     (summary () "Table of Contents")
+	     (raw-string ,(org-html-toc depth info))))
+	 (raw-string ,contents)
+	 ,(when-let (footnotes (org-html-footnote-section info))
+	   (footer ()
+	    `(raw-string ,footnotes)))))))
 #+end_src
 
 ** Site footer
@@ -273,7 +297,8 @@ To hook our templates into Org export, we derive from the stock
   (org-export-define-derived-backend 'rab/html 'html
     :translate-alist
     '((template . rab/html-template)
-      (link . rab/org-html-link)))
+      (link . rab/org-html-link)
+      (inner-template . rab/org-html-inner-template)))
 #+end_src
 
 * Publishing
