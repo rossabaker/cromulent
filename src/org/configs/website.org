@@ -1,7 +1,7 @@
 #+title: Experimenting with ox-publish
 #+PROPERTY: header-args      :results silent
 #+PROPERTY: header-args:nix  :eval no
-#+LAST_MODIFIED: <2023-06-02 Fri 14:35>
+#+LAST_MODIFIED: <2023-06-04 Sun 00:01>
 
 #+begin_warning
 This is an experiment.  It might replace ox-hugo.  It might not.  It's
@@ -181,6 +181,7 @@ We use the [[https://github.com/tali713/esxml][esxml]] library.
        (esxml-to-xml
 	`(html ()
 	  (head ()
+	   (meta ((charset . "utf-8")))
 	   (title () ,title))
 	  (body ()
 	   ,(rab/site-header)
