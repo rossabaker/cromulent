@@ -184,6 +184,7 @@ We use the [[https://github.com/tali713/esxml][esxml]] library.
        (esxml-to-xml
 	`(html ()
 	  (head ()
+	   (link ((rel . "stylesheet") (type . "text/css") (href . "/css/htmlize.css")))
 	   ;; The default meta tags rendering is ... fine
 	   (raw-string ,(org-html--build-meta-info info)))
 	  (body ()
@@ -283,6 +284,35 @@ This is hardcoded to GitHub, but, alas, aren't we all?
 	(li () (a ((href . "https://social.rossabaker.com") (rel . "me"))
 		(span ((class . "fa fa-mastodon")) "Fediverse"))))
        (a ((href . ,(rab/github-edit-link))) "Edit on GitHub"))))
+#+end_src
+
+* Code highlighting
+
+We use [[https://github.com/hniksic/emacs-htmlize][htmlize]] for code highlighting.  It's nicer to render CSS classes
+and externalize the style.
+
+#+begin_src emacs-lisp
+  (setq org-html-htmlize-output-type 'css)
+#+end_src
+
+Extract all the fonts known to Emacs into a stylesheet.  This couples
+the website to the Emacs theme, but it's my site and my choice of
+theme, so neener neener.
+
+#+begin_src emacs-lisp :eval yes
+  (org-html-htmlize-generate-css)
+  (with-current-buffer "*html*"
+    (save-excursion
+      (beginning-of-buffer)
+      (set-mark (point))
+      (search-forward "<!--")
+      (delete-region (point) (mark))
+      (end-of-buffer)
+      (set-mark (point))
+      (search-backward "-->")
+      (delete-region (point) (mark))
+      (mkdir "../../../tmp/static/css/" t)
+      (write-file "../../../tmp/static/css/htmlize.css")))
 #+end_src
 
 * Backend
