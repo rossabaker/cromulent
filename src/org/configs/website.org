@@ -1,7 +1,7 @@
 #+title: Experimenting with ox-publish
 #+PROPERTY: header-args      :results silent
 #+PROPERTY: header-args:nix  :eval no
-#+LAST_MODIFIED: <2023-06-04 Sun 10:40>
+#+LAST_MODIFIED: <2023-06-05 Mon 00:25>
 
 #+begin_warning
 This is an experiment.  It might replace ox-hugo.  It might not.  It's
@@ -224,17 +224,20 @@ We use the [[https://github.com/tali713/esxml][esxml]] library.
   (defun rab/site-main (contents info)
     (let ((title (org-export-data (plist-get info :title) info)))
       `(main ()
-	(article ()
-	 (header ()
-	  (h1 () ,title))
-	 ,(when-let ((depth (plist-get info :with-toc)))
-	   `(details ()
-	     (summary () "Table of Contents")
-	     (raw-string ,(org-html-toc depth info))))
-	 (raw-string ,contents)
-	 ,(when-let (footnotes (org-html-footnote-section info))
-	   (footer ()
-	    `(raw-string ,footnotes)))))))
+	,(cl-list* 'article ()
+	  (delq nil
+	   (list
+	    `(header ()
+	      (h1 () ,title))
+	    (when-let* ((depth (plist-get info :with-toc))
+			(toc (org-html-toc depth info)))
+	     `(details ()
+	       (summary () "Table of Contents")
+	       (raw-string ,toc)))
+	    `(raw-string ,contents)
+	    (when-let (footnotes (org-html-footnote-section info))
+	     `(footer ()
+	       (raw-string ,footnotes)))))))))
 #+end_src
 
 ** Site footer
