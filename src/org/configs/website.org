@@ -1,7 +1,7 @@
 #+title: Experimenting with ox-publish
 #+PROPERTY: header-args      :results silent
 #+PROPERTY: header-args:nix  :eval no
-#+LAST_MODIFIED: <2023-06-05 Mon 00:25>
+#+LAST_MODIFIED: <2023-06-06 Tue 22:47 CDT>
 
 #+begin_warning
 This is an experiment.  It might replace ox-hugo.  It might not.  It's
@@ -302,20 +302,28 @@ Extract all the fonts known to Emacs into a stylesheet.  This couples
 the website to the Emacs theme, but it's my site and my choice of
 theme, so neener neener.
 
-#+begin_src emacs-lisp :eval yes
-  (org-html-htmlize-generate-css)
-  (with-current-buffer "*html*"
-    (save-excursion
-      (beginning-of-buffer)
-      (set-mark (point))
-      (search-forward "<!--")
-      (delete-region (point) (mark))
-      (end-of-buffer)
-      (set-mark (point))
-      (search-backward "-->")
-      (delete-region (point) (mark))
-      (mkdir "../../../tmp/static/css/" t)
-      (write-file "../../../tmp/static/css/htmlize.css")))
+#+begin_aside
+This should run as part of the site build, but the text properties of
+the faces disappear in batch mode.  It doesn't change that often, so
+we grudgingly check it in.
+#+end_aside
+
+#+begin_src emacs-lisp
+  (defun rab/org-html-generate-htmlize-css ()
+    (interactive)
+    (org-html-htmlize-generate-css)
+    (with-current-buffer "*html*"
+      (let ((file "../../../src/hugo/static/css/htmlize.css")
+	    (start end))
+	(save-excursion
+	  (goto-char (point-min))
+	  (when-let ((end (search-forward "<!--")))
+	    (delete-region (point-min) end))
+	  (goto-char (point-max))
+	  (when-let ((start (search-backward "-->")))
+	    (delete-region start (point-max)))
+	  (mkdir (file-name-directory file) t)
+	  (write-file file)))))
 #+end_src
 
 * Backend
