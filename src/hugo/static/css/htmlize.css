@@ -3372,6 +3372,8 @@
         text-decoration: underline;
         text-decoration: overline;
       }
+      .org-textsec-suspicious {
+      }
       .org-tool-bar {
         /* tool-bar */
         color: #000000;
@@ -3669,14 +3671,4 @@
         /* xref-match */
         color: #000000;
         background-color: #ffddff;
-      }
-
-      a {
-        color: inherit;
-        background-color: inherit;
-        font: inherit;
-        text-decoration: inherit;
-      }
-      a:hover {
-        text-decoration: underline;
       }
