@@ -1,7 +1,7 @@
 #+title: Experimenting with ox-publish
 #+PROPERTY: header-args      :results silent
 #+PROPERTY: header-args:nix  :eval no
-#+LAST_MODIFIED: <2023-06-06 Tue 22:47 CDT>
+#+LAST_MODIFIED: <2023-06-07 Wed 22:50 CDT>
 
 #+begin_warning
 This is an experiment.  It might replace ox-hugo.  It might not.  It's

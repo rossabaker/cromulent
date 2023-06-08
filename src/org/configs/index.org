@@ -4,7 +4,7 @@ This is my attempt at [[https://en.wikipedia.org/wiki/Literate_programming][lite
 presented here run my apps, provision my systems, and build this
 website.  These are living documents.
 
-#+call: website.org:project-sitemap() :results value list
+#+call: website.org:project-sitemap() :results value list :eval yes
 
 # Local Variables:
 # org-confirm-babel-evaluate: nil
