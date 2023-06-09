@@ -381,7 +381,7 @@ CLOSED: [2022-08-24 Wed 15:04]
 configuration, export the content to Markdown with with [[https://ox-hugo.scripter.co][ox-hugo]], and
 convert the Markdown to HTML with [[https://gohugo.io/][Hugo]].
 
-*** DONE Site configuration                       :hugo:org_mode:ox_hugo:nix:
+*** DONE Site configuration                       :hugo:org_mode:ox_hugo:nix:noexport:
 CLOSED: [2022-09-01 Thu 16:48]
 :PROPERTIES:
 :EXPORT_FILE_NAME: hugo

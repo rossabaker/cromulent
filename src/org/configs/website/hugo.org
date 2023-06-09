@@ -1,0 +1,7 @@
+#+title: Hugo configuration
+#+LAST_MODIFIED: <2023-06-08 Thu 21:29 CDT>
+
+#+begin_warning
+I abandoned my ox-hugo setup in favor of a [[file:../website.org][bespoke ox-publish
+configuration]].
+#+end_warning
