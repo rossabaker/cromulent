@@ -1818,14 +1818,6 @@ Give the code samples a little more room to breathe.
   }
 #+end_src
 
-** DONE Scala config :noexport:
-CLOSED: [2023-05-09 Tue 09:27]
-:PROPERTIES:
-:EXPORT_FILE_NAME: scala
-:HEADER-ARGS: :tangle-mode `,#o444 :mkdirp yes
-:EXPORT_OPTIONS: H:7
-:EXPORT_DESCRIPTION: A home-manager module for a Scala development environment
-:END:
 
 * Projects section
 :PROPERTIES:
