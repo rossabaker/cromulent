@@ -254,7 +254,7 @@ minibuffer completion.
 :END:
 
 The mark ring is the trail of breadcrumbs we leave with various
-commands.  Vernon Grant gives a [[https://vernon-grant.com/discovering-emacs/efficiency-with-the-mark-ring/\]\[Vernon Grant][good tutorial]] in his Discovering Emacs
+commands.  Vernon Grant gives a [[https://vernon-grant.com/discovering-emacs/efficiency-with-the-mark-ring/][good tutorial]] in his Discovering Emacs
 series.
 
 =set-mark-command-repeat-pop= means we only need to hit ~C-u~ or ~C-x~
@@ -1748,7 +1748,7 @@ These customizations don't fit anywhere else.
 :END:
 
 This Emacs configuration is built with Nix using [[https://github.com/nix-community/emacs-overlay][emacs-overlay]] and
-published to my [[file:configs/nix-flake.org::#what's-in-the-flake][Nix flake]].
+published to my [[file:nix-flake.org::#what's-in-the-flake][Nix flake]].
 
 Even though Emacs 29 is not released at the time of writing, git is on
 Emacs 30!  We publish an =emacs29= flake package with the desired
