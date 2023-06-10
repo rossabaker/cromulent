@@ -1,7 +1,7 @@
 #+title: Experimenting with ox-publish
 #+PROPERTY: header-args      :results silent
 #+PROPERTY: header-args:nix  :eval no
-#+LAST_MODIFIED: <2023-06-10 Sat 17:42 EDT>
+#+LAST_MODIFIED: <2023-06-10 Sat 18:07 EDT>
 
 #+begin_warning
 This is an experiment.  It might replace ox-hugo.  It might not.  It's
@@ -409,13 +409,14 @@ loads this document and runs ~org-babel-execute-buffer~.  While we are
 porting from the old ox-hugo site, this renders a Hugo site to
 =tmp/hugo=.  We then run Hugo to create the site.
 
-The generated HTML is validated with [[https://github.com/svenkreiss/html5validator][html5validator]] in a check phase.
+We run [[https://github.com/svenkreiss/html5validator][html5validator]] and [[https://github.com/lycheeverse/lychee][lychee]] to validate HTML and links in the
+check phase.
 
 Finally, the =public/= directory rendered by Hugo is copied to the
 derivation output.
 
 #+begin_src nix :tangle ../../../gen/website/default.nix
-  { src, emacs29, gnupg, hugo, html5validator, stdenv }:
+  { src, emacs29, gnupg, hugo, html5validator, lychee, stdenv }:
 
   let
     siteEmacs = emacs29.pkgs.withPackages (epkgs: [
@@ -434,6 +435,7 @@ derivation output.
       gnupg
       hugo
       html5validator
+      lychee
     ];
     buildPhase = ''
       cd ..
@@ -451,6 +453,7 @@ derivation output.
     doCheck = true;
     checkPhase = ''
       html5validator --log INFO --root tmp/hugo/static
+      lychee --offline tmp/hugo/static
     '';
 
     installPhase = ''
