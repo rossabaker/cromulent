@@ -1,7 +1,7 @@
 #+title: Experimenting with ox-publish
 #+PROPERTY: header-args      :results silent
 #+PROPERTY: header-args:nix  :eval no
-#+LAST_MODIFIED: <2023-06-10 Sat 18:07 EDT>
+#+LAST_MODIFIED: <2023-06-10 Sat 19:12 EDT>
 
 #+begin_warning
 This is an experiment.  It might replace ox-hugo.  It might not.  It's
@@ -18,11 +18,12 @@ We'll need a few libraries.
 
 #+begin_src emacs-lisp
   (require 'dash)
+  (require 'esxml)
   (require 'git-link)
   (require 'htmlize)
   (require 'ob-shell)
   (require 'ox)
-  (require 'esxml)
+  (require 's)
 #+end_src
 
 * Pretty URLs
@@ -80,12 +81,14 @@ target to point at the ~index.html~ _that_ will be in.
       (let ((prefix (if (string= "index.org" (file-name-nondirectory (buffer-file-name)))
 			""
 		      "../")))
-	(org-element-put-property link :path
-				  (->> link
-				       (org-element-property :path)
-				       file-name-sans-extension
-				       (concat prefix)
-				       (format "%s/")))))
+	(org-element-put-property
+	 link :path
+	 (->> link
+	      (org-element-property :path)
+	      file-name-sans-extension
+	      (s-chop-suffix "index")
+	      (format "%s%s/" prefix)
+	      (replace-regexp-in-string (rx (one-or-more "/")) "/")))))
     (org-export-with-backend 'html link contents info))
 #+end_src
 
@@ -156,7 +159,7 @@ on the fly!
 To include it in an index page:
 
 #+begin_src org :eval no
-  ,#+call: path/to/website.org:project-sitemap()
+  ,#+call: path/to/website/index.org:project-sitemap()
 #+end_src
 
 * Templates
@@ -314,7 +317,7 @@ we grudgingly check it in.
     (interactive)
     (org-html-htmlize-generate-css)
     (with-current-buffer "*html*"
-      (let ((file "../../../src/hugo/static/css/htmlize.css"))
+      (let ((file "../../../../src/hugo/static/css/htmlize.css"))
 	(save-excursion
 	  (goto-char (point-min))
 	  (when-let ((end (search-forward "<!--")))
@@ -369,7 +372,7 @@ export all the pages from that document before our own export.
 #+begin_src emacs-lisp
   (require 'ox-hugo)
   (require 'ob-shell)
-  (with-current-buffer (find-file-noselect "../rossabaker.org")
+  (with-current-buffer (find-file-noselect "../../rossabaker.org")
     (let ((org-confirm-babel-evaluate nil))
       (org-babel-tangle)
       (org-hugo-export-wim-to-md t)))
@@ -384,17 +387,17 @@ This will be the main build moving forward.
 
 #+begin_src emacs-lisp
   (setq-local user-full-name "Ross A. Baker"
-	      org-publish-timestamp-directory "../../../tmp/org-timestamps"
+	      org-publish-timestamp-directory "../../../../tmp/org-timestamps"
 	      org-html-doctype "html5"
 	      org-html-html5-fancy t)
 
   (setq org-publish-project-alist
 	`(("rossabaker.com:configs"
-	   :base-directory "./"
+	   :base-directory "../"
 	   :recursive t
 	   :exclude ,(rx (or (seq (or "config" "img" "talks" "tmp") "/" (* nonl)) "rossabaker.org"))
 	   :publishing-function rab/publish-to-html
-	   :publishing-directory "../../../tmp/hugo/static/configs")))
+	   :publishing-directory "../../../../tmp/hugo/static/configs")))
 
   (org-publish-all)
 #+end_src
@@ -415,7 +418,7 @@ check phase.
 Finally, the =public/= directory rendered by Hugo is copied to the
 derivation output.
 
-#+begin_src nix :tangle ../../../gen/website/default.nix
+#+begin_src nix :tangle ../../../../gen/website/default.nix
   { src, emacs29, gnupg, hugo, html5validator, lychee, stdenv }:
 
   let
@@ -425,6 +428,7 @@ derivation output.
       epkgs.git-link
       epkgs.htmlize
       epkgs.ox-hugo
+      epkgs.s
     ]);
   in
   stdenv.mkDerivation rec {
@@ -443,7 +447,7 @@ derivation output.
       # https://emacs.stackexchange.com/a/70847
       ${siteEmacs}/bin/emacs --batch -l ob -l ob-shell --eval "
 	(let ((org-confirm-babel-evaluate nil))
-	  (with-current-buffer (find-file-noselect \"src/org/configs/website.org\")
+	  (with-current-buffer (find-file-noselect \"src/org/configs/website/index.org\")
 	    (org-babel-execute-buffer)
 	    (save-buffer)))
       "
@@ -464,7 +468,7 @@ derivation output.
 #+end_src
 
 To avoid [[https://nixos.wiki/wiki/Import_From_Derivation][Import From Derivation]], this Nix expression is [[https://orgmode.org/manual/Extracting-Source-Code.html][tangled]] and
-[[file:git-repository.org::#committed-generated-sources][committed as generated source]].
+[[file:../git-repository.org::#committed-generated-sources][committed as generated source]].
 
 ** Try it locally
 :PROPERTIES:

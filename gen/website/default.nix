@@ -7,6 +7,7 @@ let
     epkgs.git-link
     epkgs.htmlize
     epkgs.ox-hugo
+    epkgs.s
   ]);
 in
 stdenv.mkDerivation rec {
@@ -25,7 +26,7 @@ stdenv.mkDerivation rec {
     # https://emacs.stackexchange.com/a/70847
     ${siteEmacs}/bin/emacs --batch -l ob -l ob-shell --eval "
       (let ((org-confirm-babel-evaluate nil))
-	(with-current-buffer (find-file-noselect \"src/org/configs/website.org\")
+	(with-current-buffer (find-file-noselect \"src/org/configs/website/index.org\")
 	  (org-babel-execute-buffer)
 	  (save-buffer)))
     "
