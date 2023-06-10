@@ -1,7 +1,7 @@
 #+title: Experimenting with ox-publish
 #+PROPERTY: header-args      :results silent
 #+PROPERTY: header-args:nix  :eval no
-#+LAST_MODIFIED: <2023-06-07 Wed 23:12 CDT>
+#+LAST_MODIFIED: <2023-06-10 Sat 17:42 EDT>
 
 #+begin_warning
 This is an experiment.  It might replace ox-hugo.  It might not.  It's
@@ -84,7 +84,8 @@ target to point at the ~index.html~ _that_ will be in.
 				  (->> link
 				       (org-element-property :path)
 				       file-name-sans-extension
-				       (concat prefix)))))
+				       (concat prefix)
+				       (format "%s/")))))
     (org-export-with-backend 'html link contents info))
 #+end_src
 
