@@ -7,7 +7,6 @@ let
     epkgs.git-link
     epkgs.htmlize
     epkgs.ox-hugo
-    epkgs.s
   ]);
 in
 stdenv.mkDerivation rec {

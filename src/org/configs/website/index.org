@@ -23,7 +23,6 @@ We'll need a few libraries.
   (require 'htmlize)
   (require 'ob-shell)
   (require 'ox)
-  (require 's)
 #+end_src
 
 * Pretty URLs
@@ -86,9 +85,8 @@ target to point at the ~index.html~ _that_ will be in.
 	 (->> link
 	      (org-element-property :path)
 	      file-name-sans-extension
-	      (s-chop-suffix "index")
-	      (format "%s%s/" prefix)
-	      (replace-regexp-in-string (rx (one-or-more "/")) "/")))))
+	      (replace-regexp-in-string (rx (or bos "/") "index" eos) "")
+	      (format "%s%s/" prefix)))))
     (org-export-with-backend 'html link contents info))
 #+end_src
 
@@ -428,7 +426,6 @@ derivation output.
       epkgs.git-link
       epkgs.htmlize
       epkgs.ox-hugo
-      epkgs.s
     ]);
   in
   stdenv.mkDerivation rec {
