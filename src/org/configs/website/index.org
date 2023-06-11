@@ -1,7 +1,7 @@
 #+title: Experimenting with ox-publish
 #+PROPERTY: header-args      :results silent
 #+PROPERTY: header-args:nix  :eval no
-#+LAST_MODIFIED: <2023-06-10 Sat 19:12 EDT>
+#+LAST_MODIFIED: <2023-06-10 Sat 20:41 EDT>
 
 #+begin_warning
 This is an experiment.  It might replace ox-hugo.  It might not.  It's
@@ -406,7 +406,7 @@ This will be the main build moving forward.
 	   :publishing-function rab/publish-to-html
 	   :publishing-directory "../../../../tmp/hugo/static/configs")))
 
-  (org-publish-all)
+  (org-publish-all t)
 #+end_src
 
 * Nix build
