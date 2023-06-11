@@ -497,11 +497,18 @@ Generate the ~chroma.css~ file.
   <<chroma-css()>>
 #+end_src
 
-*** DONE Templates                                                :hugo:html:
+*** DONE Templates                                   :hugo:html:noexport:
 CLOSED: [2022-09-01 Thu 16:53]
 :PROPERTIES:
 :EXPORT_HUGO_BUNDLE: templates
 :END:
+
+#+begin_src text :tangle ../../tmp/hugo/static/_redirects :exports none
+  /configs/website/templates/base-template /configs/website/#base-template
+  /configs/website/templates/header /configs/website/#site-header
+  /configs/website/templates/footer /configs/website/#site-footer
+  /configs/website/templates/* /configs/website/#templates
+#+end_src
 
 **** DONE Index
 CLOSED: [2022-09-02 Fri 11:28]

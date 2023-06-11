@@ -166,7 +166,7 @@ To include it in an index page:
 
 * Templates
 :PROPERTIES:
-:CUSTOM_ID: template
+:CUSTOM_ID: templates
 :END:
 
 Lisp is a delightful templating language for HTML:
