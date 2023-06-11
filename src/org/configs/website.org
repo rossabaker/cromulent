@@ -1,10 +1,7 @@
-#+title: Experimenting with ox-publish
+#+title: Website generator with Org and Nix
 #+PROPERTY: header-args      :results silent
 #+PROPERTY: header-args:nix  :eval no
 #+LAST_MODIFIED: <2023-06-10 Sat 23:41 EDT>
-
-This defines the custom [[https://orgmode.org/worg/dev/org-export-reference.html#back-end][Org Export backend]] and derivation that drives
-rossabaker.com.
 
 * Setup
 :PROPERTIES:
