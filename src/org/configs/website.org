@@ -502,6 +502,12 @@ To build the site locally into ~./result~, run:
 
 This process is heavily inspired by the [[https://systemcrafters.net/live-streams/may-12-2023/][System Crafters]] redesign.
 
+* TODO Outstanding work                                            :noexport:
+
+- [ ] RSS feed
+- [ ] Minimize HTML
+- [ ] Cache busting
+
 # Local Variables:
 # org-confirm-babel-evaluate: nil
 # End:
