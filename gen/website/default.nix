@@ -22,6 +22,7 @@ stdenv.mkDerivation rec {
   buildPhase = ''
     cd ..
     export PATH=${gnupg}/bin:$PATH
+
     # https://emacs.stackexchange.com/a/70847
     ${siteEmacs}/bin/emacs --batch -l ob -l ob-shell --eval "
       (let ((org-confirm-babel-evaluate nil))

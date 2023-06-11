@@ -1,7 +1,7 @@
 #+title: Experimenting with ox-publish
 #+PROPERTY: header-args      :results silent
 #+PROPERTY: header-args:nix  :eval no
-#+LAST_MODIFIED: <2023-06-10 Sat 20:41 EDT>
+#+LAST_MODIFIED: <2023-06-10 Sat 22:46 EDT>
 
 #+begin_warning
 This is an experiment.  It might replace ox-hugo.  It might not.  It's
@@ -163,8 +163,6 @@ To include it in an index page:
 #+begin_src org :eval no
   ,#+call: path/to/website/index.org:project-sitemap()
 #+end_src
-
-#+call: project-sitemap() :results value list :eval yes
 
 * Templates
 :PROPERTIES:
@@ -398,13 +396,21 @@ This will be the main build moving forward.
 	      org-html-doctype "html5"
 	      org-html-html5-fancy t)
 
+  (defvar rab/site--root (or (getenv "NIX_BUILD_TOP")
+			     (project-root (project-current))
+			     "../"))
+  (defun rab/site-root (name)
+    "Expands NAME relative to the project root.  Works in Nix or
+  interactively."
+    (expand-file-name name rab/site--root))
+
   (setq org-publish-project-alist
 	`(("rossabaker.com:configs"
-	   :base-directory "../"
+	   :base-directory ,(rab/site-root "src/org/configs")
 	   :recursive t
 	   :exclude ,(rx (or (seq (or "config" "img" "talks" "tmp") "/" (* nonl)) "rossabaker.org"))
 	   :publishing-function rab/publish-to-html
-	   :publishing-directory "../../../../tmp/hugo/static/configs")))
+	   :publishing-directory ,(rab/site-root "tmp/hugo/static/configs"))))
 
   (org-publish-all t)
 #+end_src
@@ -450,6 +456,7 @@ derivation output.
     buildPhase = ''
       cd ..
       export PATH=${gnupg}/bin:$PATH
+
       # https://emacs.stackexchange.com/a/70847
       ${siteEmacs}/bin/emacs --batch -l ob -l ob-shell --eval "
 	(let ((org-confirm-babel-evaluate nil))
