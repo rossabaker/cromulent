@@ -1,7 +1,7 @@
 #+title: Website generator with Org and Nix
 #+PROPERTY: header-args      :results silent
 #+PROPERTY: header-args:nix  :eval no
-#+LAST_MODIFIED: <2023-06-10 Sat 23:41 EDT>
+#+LAST_MODIFIED: [2023-06-11 Sun 00:25 EDT]
 
 * Setup
 :PROPERTIES:
@@ -400,9 +400,7 @@ This will be the main build moving forward.
 
 #+begin_src emacs-lisp
   (setq-local user-full-name "Ross A. Baker"
-	      org-publish-timestamp-directory (rab/site-root "tmp/org-timestamps")
-	      org-html-doctype "html5"
-	      org-html-html5-fancy t)
+	      org-publish-timestamp-directory (rab/site-root "tmp/org-timestamps"))
 
   (setq org-publish-project-alist
 	`(("rossabaker.com:configs"
@@ -410,7 +408,10 @@ This will be the main build moving forward.
 	   :recursive t
 	   :exclude ,(rx (or (seq (or "config" "img" "talks" "tmp") "/" (* nonl)) "rossabaker.org"))
 	   :publishing-function rab/site-publish
-	   :publishing-directory ,(rab/site-root "tmp/hugo/static/configs"))))
+	   :publishing-directory ,(rab/site-root "tmp/hugo/static/configs")
+	   :html-doctype "html5"
+	   :html-html5-fancy t
+	   :html-container "section")))
 
   (org-publish-all t)
 #+end_src
