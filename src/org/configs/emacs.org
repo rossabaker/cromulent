@@ -1770,7 +1770,7 @@ Finally, we add a Home Manager module based on the configured app.
       overlayAttrs = {
 	inherit (config.packages) emacs29;
       };
-      packages.emacs29 = pkgs.emacsGit.overrideAttrs (old: {
+      packages.emacs29 = pkgs.emacs-git.overrideAttrs (old: {
 	name = "emacs29";
 	# It's important this starts with the major number for Nix's
 	# Emacs infra.  For example, it's used to blank out archaic
