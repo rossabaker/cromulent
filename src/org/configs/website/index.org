@@ -1,12 +1,10 @@
 #+title: Experimenting with ox-publish
 #+PROPERTY: header-args      :results silent
 #+PROPERTY: header-args:nix  :eval no
-#+LAST_MODIFIED: <2023-06-10 Sat 22:55 EDT>
+#+LAST_MODIFIED: <2023-06-10 Sat 23:33 EDT>
 
-#+begin_warning
-This is an experiment.  It might replace ox-hugo.  It might not.  It's
-not live yet.
-#+end_warning
+This defines the custom [[https://orgmode.org/worg/dev/org-export-reference.html#back-end][Org Export backend]] and derivation that drives
+rossabaker.com.
 
 * Setup
 :PROPERTIES:

@@ -388,6 +388,10 @@ CLOSED: [2022-09-01 Thu 16:48]
 :EXPORT_HUGO_LASTMOD: <2022-11-22 Tue 22:14 EST>
 :END:
 
+#+begin_src text :tangle ../../tmp/hugo/static/_redirects :exports none
+  /configs/website/hugo /configs/website
+#+end_src
+
 A Hugo site can be configured with either TOML or YAML.  I spent my
 weirdness budget on a literate config, so let's stick to the default.
 #+hugo:more
