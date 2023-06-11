@@ -1,7 +1,7 @@
 #+title: Website generator with Org and Nix
 #+PROPERTY: header-args      :results silent
 #+PROPERTY: header-args:nix  :eval no
-#+LAST_MODIFIED: [2023-06-11 Sun 15:12 EDT]
+#+LAST_MODIFIED: [2023-06-11 Sun 16:43 EDT]
 
 * Setup
 :PROPERTIES:
@@ -307,6 +307,27 @@ This is hardcoded to GitHub, but, alas, aren't we all?
        (a ((href . ,(rab/site-github-edit-link))) "Edit on GitHub"))))
 #+end_src
 
+** Summary blocks
+
+The HTML =<summary>= element can't contain =<p>= tags.  Our default
+rendering within a =#begin_summary= special block puts them there.
+Let's get them out.
+
+=org-str= should be exported as =rab/site-html=, but I haven't figured
+out how to get that to respect =:body-only= yet.
+
+#+begin_src emacs-lisp
+  (defun rab/site-special-block (special-block contents info)
+    (let ((block-type (org-element-property :type special-block)))
+      (message "SPECIAL BLOCK %s" block-type)
+      (cond ((string= block-type "summary")
+	     (let* ((org-str (org-element-interpret-data (org-element-contents special-block)))
+		    (text (org-export-string-as org-str 'html :body-only))
+		    (cleaned (replace-regexp-in-string (rx "<" (zero-or-one "/") "p>") "" text)))
+	       (format "<summary>%s</summary>" cleaned)))
+	    (t (org-html-special-block special-block contents info)))))
+#+end_src
+
 * Style
 :PROPERTIES:
 :CUSTOM_ID: style
@@ -381,8 +402,9 @@ To hook our templates into Org export, we derive from the stock
   (org-export-define-derived-backend 'rab/site 'html
     :translate-alist
     '((template . rab/site-html-template)
+      (inner-template . rab/site-inner-html-template)
       (link . rab/site-link)
-      (inner-template . rab/site-inner-html-template))
+      (special-block . rab/site-special-block))
     :options-alist
     '((:filetags "FILETAGS" nil nil split)))
 #+end_src
