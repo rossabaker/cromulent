@@ -145,13 +145,17 @@ on the fly!
 #+name: project-sitemap
 #+begin_src emacs-lisp :eval no
   (let* ((file-name (buffer-file-name))
-         (file-dir (file-name-directory file-name))
+	 (file-dir (file-name-directory file-name))
 	 (project (org-publish-get-project-from-filename (buffer-file-name) 'up))
 	 (pages (org-publish-get-base-files project)))
     (mapcar (lambda (page)
 	      (let ((title (org-publish-find-title page project)))
 		(org-link-make-string (concat "./" (file-relative-name page file-dir)) title)))
-	    (remove file-name pages)))
+	    (->> pages
+		 (remove file-name)
+		 (seq-filter (lambda (f)
+			       (let ((tags (org-publish-find-property f :filetags 'rab/html)))
+				 (not (member "deprecated" tags))))))))
 #+end_src
 
 To include it in an index page:
@@ -159,6 +163,8 @@ To include it in an index page:
 #+begin_src org :eval no
   ,#+call: path/to/website/index.org:project-sitemap()
 #+end_src
+
+#+call: project-sitemap() :results value list :eval yes
 
 * Templates
 :PROPERTIES:
@@ -338,6 +344,7 @@ we grudgingly check it in.
 	  (write-file file)))))
 #+end_src
 
+* Tags
 * Backend
 :PROPERTIES:
 :CUSTOM_ID: backend
@@ -351,7 +358,9 @@ To hook our templates into Org export, we derive from the stock
     :translate-alist
     '((template . rab/html-template)
       (link . rab/org-html-link)
-      (inner-template . rab/org-html-inner-template)))
+      (inner-template . rab/org-html-inner-template))
+    :options-alist
+    '((:filetags "FILETAGS" nil nil split)))
 #+end_src
 
 * Publishing
