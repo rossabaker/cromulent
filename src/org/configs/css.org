@@ -1,0 +1,158 @@
+#+TITLE: A generic CSS baseline
+#+CREATED: [2022-08-30 Tue 14:26 EDT]
+#+LAST_MODIFIED: [2023-06-11 Sun 15:10 EDT]
+#+PROPERTY: header-args:css  :eval no :tangle `,(rab/site-root "tmp/hugo/static/css/baseline.css") :mkdirp yes
+
+We strive for [[https://en.wikipedia.org/wiki/Semantic_HTML][semantic HTML]], which means we can get far with a generic
+stylesheet.  The styles here are meant as a baseline that can be used
+to bootstrap multiple projects.  It isn't a [[https://en.wikipedia.org/wiki/Reset_style_sheet][CSS reset]] per se, but sets
+up some more agreeable defaults.
+
+Most settings that a project might want to override are defined as
+variables within the ~--cromulent-~ namespace.
+
+* Boxes
+:PROPERTIES:
+:CUSTOM_ID: boxes
+:END:
+
+** Box sizing
+:PROPERTIES:
+:CUSTOM_ID: box-sizing
+:END:
+
+# That's a zero-width space to escape the = in the code sample
+# https://stackoverflow.com/a/73432359
+
+[[https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing][=border-box=]] includes the widths of the border and padding in the
+width of an element.  This cuts out a lot of =<div class​="container">=
+nonsense.
+
+#+begin_src css
+  *, *::before, *::after {
+      box-sizing: border-box;
+  }
+#+end_src
+
+* Responsivity
+:PROPERTIES:
+:CUSTOM_ID: responsivity
+:END:
+
+** A smoothly clamped viewport
+:PROPERTIES:
+:CUSTOM_ID: a-smoothly-clamped-viewport
+:END:
+
+Many people use media queries for this, but the clamp function gives a
+smooth experience as the window resizes.
+
+#+begin_src css
+  :root {
+      --cromulent-min-body-width: 40ch;
+      --cromulent-max-body-width: 80ch;
+      --cromulent-body-padding: 1.5em;
+  }
+
+  body {
+      width: clamp(var(--cromulent-min-body-width), 100%, var(--cromulent-max-body-width));
+      padding: var(--cromulent-body-padding);
+      margin: 0 auto;
+  }
+#+end_src
+
+* Typography
+:PROPERTIES:
+:CUSTOM_ID: typography
+:END:
+
+** More accessible leading
+:PROPERTIES:
+:CUSTOM_ID: more-accessible-leading
+:END:
+
+The [[https://www.w3.org/TR/WCAG22/#visual-presentation][Web Content Accessibility Guidelines]] call for a line height of at
+least ~1.5~.
+
+#+begin_src css
+  :root {
+      --cromulent-line-height: 1.6;
+  }
+
+  html {
+      line-height: var(--cromulent-line-height);
+  }
+#+end_src
+
+** Font faces
+:PROPERTIES:
+:CUSTOM_ID: font-faces
+:END:
+
+We render the body in sans-serif, headings in serif, and the monospace
+elements as monospace.
+
+#+begin_src css
+  :root {
+      --cromulent-face-sans-serif: sans-serif;
+      --cromulent-face-serif: serif;
+      --cromulent-face-monospace: monospace;
+  }
+
+  body {
+      font-family: var(--cromulent-face-sans-serif), sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+      font-family: var(--cromulent-face-serif), serif;
+  }
+
+  code, kbd, pre, samp, var {
+      font-family: var(--cromulent-face-monospace), monospace;
+  }
+#+end_src
+
+** Code
+:PROPERTIES:
+:CUSTOM_ID: code
+:END:
+
+*** Listings
+:PROPERTIES:
+:CUSTOM_ID: listings
+:END:
+
+Indent them and give them a subtle border.
+
+#+begin_src css
+  :root {
+      --cromulent-color-trim: #eee;
+  }
+
+  pre {
+      border-left: 0.2em solid var(--cromulent-color-trim);
+      padding-left: 0.8em;
+  }
+#+end_src
+
+Scroll their overflows.
+
+#+begin_src css
+  pre {
+      max-width: 100%;
+      overflow-x: auto;
+  }
+#+end_src
+
+*** Inline
+:PROPERTIES:
+:CUSTOM_ID: inline
+:END:
+
+#+begin_src css
+  code {
+      padding: 0.25em 0.5ch;
+      background: var(--cromulent-color-trim);
+      border-radius: 0.25em;
+  }
+#+end_src

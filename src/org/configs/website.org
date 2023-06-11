@@ -1,7 +1,7 @@
 #+title: Website generator with Org and Nix
 #+PROPERTY: header-args      :results silent
 #+PROPERTY: header-args:nix  :eval no
-#+LAST_MODIFIED: [2023-06-11 Sun 00:25 EDT]
+#+LAST_MODIFIED: [2023-06-11 Sun 15:12 EDT]
 
 * Setup
 :PROPERTIES:
@@ -198,7 +198,11 @@ We use the [[https://github.com/tali713/esxml][esxml]] library.
        (esxml-to-xml
 	`(html ()
 	  (head ()
-	   (link ((rel . "stylesheet") (type . "text/css") (href . "/css/htmlize.css")))
+	   ,@(mapcar (lambda (css)
+		       `(link ((rel . "stylesheet")
+			       (type . "text/css")
+			       (href . ,(format "/css/%s.css" css)))))
+	      '("baseline" "htmlize"))
 	   ;; The default meta tags rendering is ... fine
 	   (raw-string ,(org-html--build-meta-info info)))
 	  (body ()
@@ -303,7 +307,18 @@ This is hardcoded to GitHub, but, alas, aren't we all?
        (a ((href . ,(rab/site-github-edit-link))) "Edit on GitHub"))))
 #+end_src
 
-* Code highlighting
+* Style
+:PROPERTIES:
+:CUSTOM_ID: style
+:END:
+
+Much of our styling comes from the [[file:css.org][CSS baseline]].  Some specific
+branding and tweaks specific to this site follow.
+
+** Code highlighting
+:PROPERTIES:
+:CUSTOM_ID: code-highlighting
+:END:
 
 We use [[https://github.com/hniksic/emacs-htmlize][htmlize]] for code highlighting.  It's nicer to render CSS classes
 and externalize the style.
@@ -351,6 +366,9 @@ we grudgingly check it in.
 #+end_src
 
 * Tags
+:PROPERTIES:
+:CUSTOM_ID: tags
+:END:
 * Backend
 :PROPERTIES:
 :CUSTOM_ID: backend
@@ -503,6 +521,9 @@ To build the site locally into ~./result~, run:
 This process is heavily inspired by the [[https://systemcrafters.net/live-streams/may-12-2023/][System Crafters]] redesign.
 
 * TODO Outstanding work                                            :noexport:
+:PROPERTIES:
+:CUSTOM_ID: outstanding-work
+:END:
 
 - [ ] RSS feed
 - [ ] Minimize HTML
