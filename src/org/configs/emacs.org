@@ -6,6 +6,10 @@
 #+OPTIONS: H:6
 
 * Introduction
+:PROPERTIES:
+:CUSTOM_ID: introduction
+:END:
+
 ** The flavor of the day is vanilla
 :PROPERTIES:
 :CUSTOM_ID: the-flavor-of-the-day-is-vanilla
