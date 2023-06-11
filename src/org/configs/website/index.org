@@ -1,7 +1,7 @@
 #+title: Experimenting with ox-publish
 #+PROPERTY: header-args      :results silent
 #+PROPERTY: header-args:nix  :eval no
-#+LAST_MODIFIED: <2023-06-10 Sat 22:46 EDT>
+#+LAST_MODIFIED: <2023-06-10 Sat 22:55 EDT>
 
 #+begin_warning
 This is an experiment.  It might replace ox-hugo.  It might not.  It's
@@ -38,7 +38,7 @@ First, we need a way to convert a source filename to a directory
 relative to where we publish.
 
 #+begin_src emacs-lisp
-  (defun rab/org-pretty-url-output-dir (filename pub-dir)
+  (defun rab/site-pretty-url-output-dir (filename pub-dir)
     (if (string= "index.org" (file-name-nondirectory filename))
 	pub-dir
       (concat pub-dir
@@ -52,12 +52,12 @@ When publishing, we need to locally redefine
 =org-export-output-file-name= to inject =index= into the filename.
 
 #+begin_src emacs-lisp
-  (defun rab/publish-to-html (plist filename pub-dir)
-    (let ((output-dir (rab/org-pretty-url-output-dir filename pub-dir)))
+  (defun rab/site-publish (plist filename pub-dir)
+    (let ((output-dir (rab/site-pretty-url-output-dir filename pub-dir)))
       (cl-letf (((symbol-function 'org-export-output-file-name)
 		 (lambda (extension &optional subtreep pub-dir)
 		   (concat output-dir "index" extension))))
-	(org-publish-org-to 'rab/html filename
+	(org-publish-org-to 'rab/site filename
 			    (concat (when (> (length org-html-extension) 0) ".")
 				    (or (plist-get plist :html-extension)
 					org-html-extension
@@ -72,7 +72,7 @@ local org files, we need to prepend ~../~ to get out of the artificial
 target to point at the ~index.html~ _that_ will be in.
 
 #+begin_src emacs-lisp
-  (defun rab/org-html-link (link contents info)
+  (defun rab/site-link (link contents info)
     "If LINK is an org file reference, strip the extension from the
   path so it points to the exported index.html."
     (when (and (string= 'file (org-element-property :type link))
@@ -100,7 +100,7 @@ Org generates non-deterministic anchors for headers, but respects the
 like this section to have a "slug" id, like ~stable-anchors~.
 
 #+begin_src emacs-lisp
-  (defun rab/slug (title)
+  (defun rab/site-slug (title)
     "Converts TITLE to a 'slug' appropriate for URI anchors."
     (->> title
 	 s-downcase
@@ -113,24 +113,24 @@ like this section to have a "slug" id, like ~stable-anchors~.
 We only want to generate a slug for headlines that have no ~CUSTOM_ID~.
 
 #+begin_src emacs-lisp
-  (defun rab/org-put-slug-as-custom-id ()
+  (defun rab/site-put-slug-as-custom-id ()
     "Puts a CUSTOM_ID from a slug of the current headline, unless
   already present.  This is useful for stable URI anchors."
     (unless (org-entry-get nil "CUSTOM_ID")
       (->> (org-heading-components)
 	   (nth 4)
-	   rab/slug
+	   rab/site-slug
 	   (org-entry-put nil "CUSTOM_ID"))))
 #+end_src
 
 We want a convenient way to generate them for the entire document.
 
 #+begin_src emacs-lisp
-  (defun rab/org-put-slugs-as-custom-id ()
+  (defun rab/site-put-slugs-as-custom-id ()
     "Puts a CUSTOM_ID from a slug of the current headline, unless
   already present.  This is useful for stable URI anchors."
     (interactive)
-    (org-map-entries (lambda () (rab/org-put-slug-as-custom-id))))
+    (org-map-entries (lambda () (rab/site-put-slug-as-custom-id))))
 #+end_src
 
 * Sitemaps
@@ -154,7 +154,7 @@ on the fly!
 	    (->> pages
 		 (remove file-name)
 		 (seq-filter (lambda (f)
-			       (let ((tags (org-publish-find-property f :filetags 'rab/html)))
+			       (let ((tags (org-publish-find-property f :filetags 'rab/site)))
 				 (not (member "deprecated" tags))))))))
 #+end_src
 
@@ -183,7 +183,7 @@ We use the [[https://github.com/tali713/esxml][esxml]] library.
 :END:
 
 #+begin_src emacs-lisp
-  (defun rab/html-template (contents info)
+  (defun rab/site-html-template (contents info)
     (let* ((title (org-export-data (plist-get info :title) info)))
       (concat
        "<!DOCTYPE html>\n"
@@ -224,7 +224,7 @@ We use the [[https://github.com/tali713/esxml][esxml]] library.
 :END:
 
 #+begin_src emacs-lisp
-  (defun rab/org-html-inner-template (contents info)
+  (defun rab/site-inner-html-template (contents info)
     (esxml-to-xml (rab/site-main contents info)))
 
   (defun rab/site-main (contents info)
@@ -258,7 +258,7 @@ We use the [[https://github.com/tali713/esxml][esxml]] library.
 This is hardcoded to GitHub, but, alas, aren't we all?
 
 #+begin_src emacs-lisp
-  (defun rab/github-edit-link ()
+  (defun rab/site-github-edit-link ()
     "Return a link to edit this file on GitHub."
     (let ((filename (git-link--relative-filename))
 	  (branch (git-link--branch)))
@@ -292,7 +292,7 @@ This is hardcoded to GitHub, but, alas, aren't we all?
 		(span ((class . "fa fa-matrix-org")) "Matrix")))
 	(li () (a ((href . "https://social.rossabaker.com") (rel . "me"))
 		(span ((class . "fa fa-mastodon")) "Fediverse"))))
-       (a ((href . ,(rab/github-edit-link))) "Edit on GitHub"))))
+       (a ((href . ,(rab/site-github-edit-link))) "Edit on GitHub"))))
 #+end_src
 
 * Code highlighting
@@ -315,7 +315,7 @@ we grudgingly check it in.
 #+end_aside
 
 #+begin_src emacs-lisp
-  (defun rab/org-html-generate-htmlize-css ()
+  (defun rab/site-generate-htmlize-css ()
     (interactive)
     (org-html-htmlize-generate-css)
     (with-current-buffer "*html*"
@@ -352,11 +352,11 @@ To hook our templates into Org export, we derive from the stock
 [[https://orgmode.org/manual/HTML-Export.html][ox-html]] backend.
 
 #+begin_src emacs-lisp
-  (org-export-define-derived-backend 'rab/html 'html
+  (org-export-define-derived-backend 'rab/site 'html
     :translate-alist
-    '((template . rab/html-template)
-      (link . rab/org-html-link)
-      (inner-template . rab/org-html-inner-template))
+    '((template . rab/site-html-template)
+      (link . rab/site-link)
+      (inner-template . rab/site-inner-html-template))
     :options-alist
     '((:filetags "FILETAGS" nil nil split)))
 #+end_src
@@ -409,7 +409,7 @@ This will be the main build moving forward.
 	   :base-directory ,(rab/site-root "src/org/configs")
 	   :recursive t
 	   :exclude ,(rx (or (seq (or "config" "img" "talks" "tmp") "/" (* nonl)) "rossabaker.org"))
-	   :publishing-function rab/publish-to-html
+	   :publishing-function rab/site-publish
 	   :publishing-directory ,(rab/site-root "tmp/hugo/static/configs"))))
 
   (org-publish-all t)
