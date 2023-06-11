@@ -1,7 +1,7 @@
 #+title: Experimenting with ox-publish
 #+PROPERTY: header-args      :results silent
 #+PROPERTY: header-args:nix  :eval no
-#+LAST_MODIFIED: <2023-06-10 Sat 23:33 EDT>
+#+LAST_MODIFIED: <2023-06-10 Sat 23:41 EDT>
 
 This defines the custom [[https://orgmode.org/worg/dev/org-export-reference.html#back-end][Org Export backend]] and derivation that drives
 rossabaker.com.
@@ -21,6 +21,19 @@ We'll need a few libraries.
   (require 'htmlize)
   (require 'ob-shell)
   (require 'ox)
+#+end_src
+
+It's also helpful to know the root, whether we're in Nix or an
+interactive session.
+
+#+begin_src emacs-lisp
+  (defvar rab/site--root (or (getenv "NIX_BUILD_TOP")
+			     (project-root (project-current))
+			     "../"))
+  (defun rab/site-root (name)
+    "Expands NAME relative to the project root.  Works in Nix or
+  interactively."
+    (expand-file-name name rab/site--root))
 #+end_src
 
 * Pretty URLs
@@ -159,7 +172,7 @@ on the fly!
 To include it in an index page:
 
 #+begin_src org :eval no
-  ,#+call: path/to/website/index.org:project-sitemap()
+  ,#+call: path/to/website.org:project-sitemap()
 #+end_src
 
 * Templates
@@ -317,7 +330,7 @@ we grudgingly check it in.
     (interactive)
     (org-html-htmlize-generate-css)
     (with-current-buffer "*html*"
-      (let ((file "../../../../src/hugo/static/css/htmlize.css"))
+      (let ((file (rab/site-root "src/hugo/static/css/htmlize.css")))
 	(save-excursion
 	  (goto-char (point-min))
 	  (when-let ((end (search-forward "<!--")))
@@ -375,7 +388,7 @@ export all the pages from that document before our own export.
 #+begin_src emacs-lisp
   (require 'ox-hugo)
   (require 'ob-shell)
-  (with-current-buffer (find-file-noselect "../../rossabaker.org")
+  (with-current-buffer (find-file-noselect (rab/site-root "src/org/rossabaker.org"))
     (let ((org-confirm-babel-evaluate nil))
       (org-babel-tangle)
       (org-hugo-export-wim-to-md t)))
@@ -390,17 +403,9 @@ This will be the main build moving forward.
 
 #+begin_src emacs-lisp
   (setq-local user-full-name "Ross A. Baker"
-	      org-publish-timestamp-directory "../../../../tmp/org-timestamps"
+	      org-publish-timestamp-directory (rab/site-root "tmp/org-timestamps")
 	      org-html-doctype "html5"
 	      org-html-html5-fancy t)
-
-  (defvar rab/site--root (or (getenv "NIX_BUILD_TOP")
-			     (project-root (project-current))
-			     "../"))
-  (defun rab/site-root (name)
-    "Expands NAME relative to the project root.  Works in Nix or
-  interactively."
-    (expand-file-name name rab/site--root))
 
   (setq org-publish-project-alist
 	`(("rossabaker.com:configs"
@@ -429,7 +434,7 @@ check phase.
 Finally, the =public/= directory rendered by Hugo is copied to the
 derivation output.
 
-#+begin_src nix :tangle ../../../../gen/website/default.nix
+#+begin_src nix :tangle `,(rab/site-root "gen/website/default.nix")
   { src, emacs29, gnupg, hugo, html5validator, lychee, stdenv }:
 
   let
@@ -458,7 +463,7 @@ derivation output.
       # https://emacs.stackexchange.com/a/70847
       ${siteEmacs}/bin/emacs --batch -l ob -l ob-shell --eval "
 	(let ((org-confirm-babel-evaluate nil))
-	  (with-current-buffer (find-file-noselect \"src/org/configs/website/index.org\")
+	  (with-current-buffer (find-file-noselect \"src/org/configs/website.org\")
 	    (org-babel-execute-buffer)
 	    (save-buffer)))
       "
@@ -479,7 +484,7 @@ derivation output.
 #+end_src
 
 To avoid [[https://nixos.wiki/wiki/Import_From_Derivation][Import From Derivation]], this Nix expression is [[https://orgmode.org/manual/Extracting-Source-Code.html][tangled]] and
-[[file:../git-repository.org::#committed-generated-sources][committed as generated source]].
+[[file:git-repository.org::#committed-generated-sources][committed as generated source]].
 
 ** Try it locally
 :PROPERTIES:

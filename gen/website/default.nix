@@ -26,7 +26,7 @@ stdenv.mkDerivation rec {
     # https://emacs.stackexchange.com/a/70847
     ${siteEmacs}/bin/emacs --batch -l ob -l ob-shell --eval "
       (let ((org-confirm-babel-evaluate nil))
-	(with-current-buffer (find-file-noselect \"src/org/configs/website/index.org\")
+	(with-current-buffer (find-file-noselect \"src/org/configs/website.org\")
 	  (org-babel-execute-buffer)
 	  (save-buffer)))
     "
