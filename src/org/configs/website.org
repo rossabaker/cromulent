@@ -1,7 +1,7 @@
 #+title: Website generator with Org and Nix
 #+PROPERTY: header-args      :results silent
 #+PROPERTY: header-args:nix  :eval no
-#+LAST_MODIFIED: [2023-06-12 Mon 00:32 EDT]
+#+LAST_MODIFIED: [2023-06-12 Mon 00:48 EDT]
 
 * Setup
 :PROPERTIES:
@@ -246,7 +246,11 @@ We use the [[https://github.com/tali713/esxml][esxml]] library.
 	  (delq nil
 	   (list
 	    `(header ()
-	      (h1 () ,title))
+	      (h1 () ,title)
+	      (span
+	       ((class . "last-modified"))
+	       "Modfied: "
+	       (raw-string ,(org-export-data (plist-get info :last-modified) info))))
 	    (when-let* ((depth (plist-get info :with-toc))
 			(toc (org-html-toc depth info)))
 	     `(details ()
@@ -406,7 +410,8 @@ To hook our templates into Org export, we derive from the stock
       (link . rab/site-link)
       (special-block . rab/site-special-block))
     :options-alist
-    '((:filetags "FILETAGS" nil nil split)))
+    '((:filetags "FILETAGS" nil nil split)
+      (:last-modified "LAST_MODIFIED" nil nil parse)))
 #+end_src
 
 * Publishing
@@ -566,6 +571,7 @@ This process is heavily inspired by the [[https://systemcrafters.net/live-stream
 - [ ] RSS feed
 - [ ] Minimize HTML
 - [ ] Cache busting
+- [ ] Proper =<datetime>= elements
 
 # Local Variables:
 # org-confirm-babel-evaluate: nil
