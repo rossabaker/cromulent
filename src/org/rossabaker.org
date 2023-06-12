@@ -1650,11 +1650,44 @@ CLOSED: [2022-08-30 Tue 14:26]
 :EXPORT_HUGO_LASTMOD: <2022-11-22 Tue 20:25 EST>
 :END:
 
+We strive for [[https://en.wikipedia.org/wiki/Semantic_HTML][semantic HTML]].  The styles presented here provide a
+solid foundation, independent of the [[https://gohugo.io/hugo-modules/theme-components/][Hugo theme]], or even the choice to
+use Hugo at all.  These rules are presently deployed to rossabaker.com,
+but could conceivably be used in future projects.
+#+hugo:more
+
+**** Box sizing
+
+[[https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing][~border-box~]] includes the widths of the border and padding in the
+width of an element.  This cuts out a lot of ~<div class="container">~
+nonsense.
+
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
+  *, *::before, *::after {
+      box-sizing: border-box;
+  }
+#+end_src
+
+**** Let the body breathe
+
+The [[https://www.w3.org/TR/WCAG22/#visual-presentation][Web Content Accessibility Guidelines]] call for a line height of at
+least 1.5.
+
+There are more criteria there that are probably worth revisiting.
+
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
+  body {
+      line-height: 1.6;
+  }
+#+end_src
+
 **** Fonts
 
-The [[https://en.wikipedia.org/wiki/Noto_fonts][Noto fonts]] look nice and have a full glyph set.  Google Fonts
-[[https://cookie-script.com/blog/google-fonts-and-gdpr][violates the GDPR]], so we self host.  I downloaded all the Noto
-variants from Google Fonts, and ran them through [[https://transfonter.org/][Transfonter]].
+The [[https://en.wikipedia.org/wiki/Noto_fonts][Noto fonts]] look nice and have a full glyph set.
+
++We serve them up with [[https://fonts.google.com/][Google Fonts]] with these links in our ~<head>~+.
+Google Fonts [[https://cookie-script.com/blog/google-fonts-and-gdpr][violates the GDPR]], so we self host.  I downloaded all the
+Noto variants from Google Fonts, and ran them through [[https://transfonter.org/][Transfonter]].
 
 #+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
   body {
@@ -1667,6 +1700,19 @@ variants from Google Fonts, and ran them through [[https://transfonter.org/][Tra
 
   code, kbd, pre, samp, var {
       font-family: "Noto Sans Mono", monospace;
+  }
+#+end_src
+
+**** Responsive width
+
+Lots of people use media queries for this, but the clamp function
+gives a smooth experience as the window resizes.
+
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
+  body {
+      width: clamp(10em, 100%, 70em);
+      padding: 0;
+      margin: 0 auto;
   }
 #+end_src
 
@@ -1748,14 +1794,6 @@ bigger now.
 #+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
   h1 {
       font-size: 2em;
-
-
-
-
-
-
-
-
   }
 #+end_src
 
@@ -1768,6 +1806,29 @@ Render the links in the complementary color.
       color: var(--link-color);
   }
 #+end_src
+
+*** Code rendering
+
+Put a scroll bar on code samples, but only where necessary.
+
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
+  pre {
+      max-width: 100%;
+      overflow-x: auto;
+  }
+#+end_src
+
+Give the code samples a little more room to breathe.
+
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
+  pre {
+      background: #f8f8f8;
+      border: 1px dotted #ccc;
+      border-radius: 1em;
+      padding: 1em;
+  }
+#+end_src
+
 
 * Projects section
 :PROPERTIES:
@@ -2995,7 +3056,7 @@ told St. Peter.  "I want to look at the rules!"  She was such a
 stickler for the rules.  But not to worry, Grandma: you /always/ did
 your best.
 
-** Imperfectly Indieweb :@personal:indieweb:juvenilia:facebook:twitter:perfectionism:ageing:
+** DONE Imperfectly Indieweb :@personal:indieweb:juvenilia:facebook:twitter:perfectionism:ageing:
 CLOSED: <2022-11-01 Tue 23:17>
 :PROPERTIES:
 :EXPORT_HUGO_BUNDLE: imperfectly-indieweb
