@@ -4,26 +4,12 @@
 #+startup: logdone
 #+property: header-args :eval never :mkdirp yes
 
-* DONE Home page
+* DONE Home page                                                   :noexport:
 CLOSED: [2022-09-05 Mon 00:30]
 :PROPERTIES:
 :EXPORT_FILE_NAME: _index
 :EXPORT_HUGO_LASTMOD: <2022-11-01 Tue 22:51>
 :END:
-
-#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css :exports none
-  .site-title {
-      font-size: 2rem;
-      text-align: center;
-      margin: 0;
-      padding: 0;
-      background: none;
-  }
-
-  .site-title .heading-anchor {
-      display: none;
-  }
-#+end_src
 
 * DONE Ross A. Baker                                    :@personal:biography:contact:
 CLOSED: [2022-08-31 Wed 00:23]

@@ -1,7 +1,7 @@
 #+title: Website generator with Org and Nix
 #+PROPERTY: header-args      :results silent
 #+PROPERTY: header-args:nix  :eval no
-#+LAST_MODIFIED: [2023-06-11 Sun 16:43 EDT]
+#+LAST_MODIFIED: [2023-06-12 Mon 00:32 EDT]
 
 * Setup
 :PROPERTIES:
@@ -443,7 +443,22 @@ This will be the main build moving forward.
 	      org-publish-timestamp-directory (rab/site-root "tmp/org-timestamps"))
 
   (setq org-publish-project-alist
-	`(("rossabaker.com:configs"
+	`(("rossabaker.com:static"
+	   :base-directory ,(rab/site-root "src/org")
+	   :base-extension ,(rx (or "css" "js" "png" "jpg" "gif" "pdf"))
+	   :recursive t
+	   :publishing-function org-publish-attachment
+	   :publishing-directory ,(rab/site-root "tmp/hugo/static"))
+	  ("rossabaker.com:meta"
+	   :base-directory ,(rab/site-root "src/org")
+	   :recursive nil
+	   :exclude ,(rx "rossabaker.org")
+	   :publishing-function rab/site-publish
+	   :publishing-directory ,(rab/site-root "tmp/hugo/static")
+	   :html-doctype "html5"
+	   :html-html5-fancy t
+	   :html-container "section")
+	  ("rossabaker.com:configs"
 	   :base-directory ,(rab/site-root "src/org/configs")
 	   :recursive t
 	   :exclude ,(rx (or (seq (or "config" "img" "talks" "tmp") "/" (* nonl)) "rossabaker.org"))
@@ -467,7 +482,8 @@ porting from the old ox-hugo site, this renders a Hugo site to
 =tmp/hugo=.  We then run Hugo to create the site.
 
 We run [[https://github.com/svenkreiss/html5validator][html5validator]] and [[https://github.com/lycheeverse/lychee][lychee]] to validate HTML and links in the
-check phase.
+check phase.  The ~tmp/hugo/static/blog~ link is temporarily excluded
+until it migrates from ox-hugo.
 
 Finally, the =public/= directory rendered by Hugo is copied to the
 derivation output.
@@ -511,7 +527,7 @@ derivation output.
     doCheck = true;
     checkPhase = ''
       html5validator --log INFO --root tmp/hugo/static
-      lychee --offline tmp/hugo/static
+      lychee --offline tmp/hugo/static --exclude tmp/hugo/static/blog
     '';
 
     installPhase = ''

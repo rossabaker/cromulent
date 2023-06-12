@@ -36,7 +36,7 @@ stdenv.mkDerivation rec {
   doCheck = true;
   checkPhase = ''
     html5validator --log INFO --root tmp/hugo/static
-    lychee --offline tmp/hugo/static
+    lychee --offline tmp/hugo/static --exclude tmp/hugo/static/blog
   '';
 
   installPhase = ''
