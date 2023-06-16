@@ -83,27 +83,27 @@
     
     #+begin_src nix :noweb-ref flake-outputs
       inputs:
-        let
-          mkDarwinConfigModule = { pkgs }: {
-    	imports = [
-    	  (import (pkgs.callPackage ./tangle.nix {
-    	    inherit pkgs;
-    	    src = ./src/org/config/nix-darwin;
-    	  }))
-    	  {
-    	    system.keyboard.enableKeyMapping = true;
-    	    system.keyboard.remapCapsLockToControl = true;
-    	  }
-    	];
-          };
+      let
+        mkDarwinConfigModule = { pkgs }: {
+          imports = [
+    	(import (pkgs.callPackage ./tangle.nix {
+    	  inherit pkgs;
+    	  src = ./src/org/config/nix-darwin;
+    	}))
+    	{
+    	  system.keyboard.enableKeyMapping = true;
+    	  system.keyboard.remapCapsLockToControl = true;
+    	}
+          ];
+        };
     
-          mkHomeConfig = { pkgs, system, username, homeDirectory }:
-    	let
-    	  homeModule = import (pkgs.callPackage ./tangle.nix {
-    	    inherit pkgs;
-    	    src = ./src/org/config/home-manager;
-    	  });
-    	in
+        mkHomeConfig = { pkgs, system, username, homeDirectory }:
+          let
+    	homeModule = import (pkgs.callPackage ./tangle.nix {
+    	  inherit pkgs;
+    	  src = ./src/org/config/home-manager;
+    	});
+          in
     	inputs.home-manager.lib.homeManagerConfiguration {
     	  inherit pkgs;
     	  modules = [
@@ -123,79 +123,81 @@
     	  extraSpecialArgs = { inherit inputs; };
     	};
     
-          RABaker-at-L2LYQM57XY = pkgs: mkHomeConfig {
-    	inherit pkgs;
-    	system = "aarch64-darwin";
-    	username = "ross.baker";
-    	homeDirectory = "/Users/RABaker";
+        RABaker-at-L2LYQM57XY = pkgs: mkHomeConfig {
+          inherit pkgs;
+          system = "aarch64-darwin";
+          username = "ross.baker";
+          homeDirectory = "/Users/RABaker";
+        };
+    
+        aarch64-darwin-config-base = pkgs: mkDarwinConfigModule {
+          inherit pkgs;
+        };
+    
+        overlays = {
+          emacs = inputs.emacs-overlay.overlay;
+          devshell = inputs.devshell.overlays.default;
+        };
+    
+        pkgsFor = system: import inputs.nixpkgs {
+          inherit system;
+          overlays = builtins.attrValues inputs.self.overlays;
+        };
+    
+        darwinConfigurationModules = {
+          aarch64-base = aarch64-darwin-config-base (pkgsFor "aarch64-darwin");
+        };
+    
+        flakeModules = {
+          emacs = ./gen/emacs;
+          scala = ./gen/scala;
+        };
+      in
+      inputs.flake-parts.lib.mkFlake { inherit inputs; } {
+        imports = [
+          ./gen/flake/modules/homeManagerModules.nix
+          flakeModules.emacs
+          flakeModules.scala
+          inputs.flake-parts.flakeModules.easyOverlay
+        ];
+    
+        flake = {
+          inherit overlays darwinConfigurationModules;
+    
+          homeConfigurations = {
+    	"RABaker@L2LYQM57XY" = RABaker-at-L2LYQM57XY (pkgsFor "aarch64-darwin");
           };
     
-          aarch64-darwin-config-base = pkgs: mkDarwinConfigModule {
-    	inherit pkgs;
-          };
+          inherit flakeModules;
+        };
     
-          overlays = {
-    	emacs = inputs.emacs-overlay.overlay;
-    	devshell = inputs.devshell.overlays.default;
-    	default = (import ./src/nix/overlays { inherit inputs; }).default;
-          };
+        systems = [
+          "x86_64-linux"
+          "aarch64-darwin"
+        ];
     
-          pkgsFor = system: import inputs.nixpkgs {
-    	inherit system;
-    	overlays = builtins.attrValues inputs.self.overlays;
-          };
+        perSystem = { config, self', inputs', system, pkgs, ... }:
+          let
+    	hm = inputs.home-manager.defaultPackage."${system}";
     
-          darwinConfigurationModules = {
-    	aarch64-base = aarch64-darwin-config-base (pkgsFor "aarch64-darwin");
-          };
-    
-          flakeModules = {
-    	emacs = ./gen/emacs;
-    	scala = ./gen/scala;
-          };
-        in
-        inputs.flake-parts.lib.mkFlake { inherit inputs; } {
-          imports = [
-    	./gen/flake/modules/homeManagerModules.nix
-    	flakeModules.emacs
-    	flakeModules.scala
-          ];
-    
-          flake = {
-    	inherit overlays darwinConfigurationModules;
-    
-    	homeConfigurations = {
-    	  "RABaker@L2LYQM57XY" = RABaker-at-L2LYQM57XY (pkgsFor "aarch64-darwin");
-    	};
-    
-    	inherit flakeModules;
-          };
-    
-          systems = [
-    	"x86_64-linux"
-    	"aarch64-darwin"
-          ];
-    
-          perSystem = { config, self', inputs', system, pkgs, ... }:
-    	let
-    	  hm = inputs.home-manager.defaultPackage."${system}";
-    
-    	  darwinPackages =
-    	    if (system == "aarch64-darwin") then {
-    	      aarch64-darwin-config-base = (inputs.darwin.lib.darwinSystem {
-    		system = "aarch64-darwin";
-    		modules = [ darwinConfigurationModules.aarch64-base ];
-    	      }).system;
-    	      "RABaker@L2LYQM57XY" = (RABaker-at-L2LYQM57XY pkgs).activationPackage;
-    	    } else { };
-    	in
+    	darwinPackages =
+    	  if (system == "aarch64-darwin") then {
+    	    aarch64-darwin-config-base = (inputs.darwin.lib.darwinSystem {
+    	      system = "aarch64-darwin";
+    	      modules = [ darwinConfigurationModules.aarch64-base ];
+    	    }).system;
+    	    "RABaker@L2LYQM57XY" = (RABaker-at-L2LYQM57XY pkgs).activationPackage;
+    	  } else { };
+          in
     	{
     	  _module.args.pkgs = import inputs.nixpkgs {
     	    inherit system;
     	    overlays = [
     	      inputs.devshell.overlays.default
     	      inputs.emacs-overlay.overlays.default
-    	      overlays.default
+    	      (final: prev: {
+    		hyperlink = config.packages.hyperlink;
+    	      })
     	    ];
     	  };
     
@@ -205,7 +207,7 @@
     	      src = ./src;
     	    };
     
-    	    hyperlink = pkgs.callPackage ./src/nix/hyperlink.nix {};
+    	    hyperlink = pkgs.callPackage ./src/nix/pkgs/hyperlink {};
     	  } // darwinPackages;
     
     	  devShells.default = pkgs.devshell.mkShell {
@@ -225,8 +227,12 @@
     	      pkgs.terraform
     	    ];
     	  };
+    
+    	  overlayAttrs = {
+    	    hyperlink = config.packages.hyperlink;
+    	  };
     	};
-        };
+      };
     #+end_src
     
 }
