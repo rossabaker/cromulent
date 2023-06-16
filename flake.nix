@@ -203,7 +203,7 @@
     
     	  packages = {
     	    website = pkgs.callPackage ./gen/website {
-    	      emacs29 = self'.packages.emacs29;
+    	      emacs = self'.packages.emacs-ross;
     	      src = ./src;
     	    };
     

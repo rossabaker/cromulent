@@ -1,19 +1,10 @@
-{ src, emacs29, gnupg, hugo, html5validator, hyperlink, stdenv }:
+{ src, emacs, gnupg, hugo, html5validator, hyperlink, stdenv }:
 
-let
-  siteEmacs = emacs29.pkgs.withPackages (epkgs: [
-    epkgs.dash
-    epkgs.esxml
-    epkgs.git-link
-    epkgs.htmlize
-    epkgs.ox-hugo
-  ]);
-in
 stdenv.mkDerivation rec {
   name = "rossabaker.com";
   inherit src;
   nativeBuildInputs = [
-    siteEmacs
+    emacs
     gnupg
     hugo
     html5validator
@@ -24,7 +15,7 @@ stdenv.mkDerivation rec {
     export PATH=${gnupg}/bin:$PATH
 
     # https://emacs.stackexchange.com/a/70847
-    ${siteEmacs}/bin/emacs --batch -l ob -l ob-shell --eval "
+    ${emacs}/bin/emacs --batch -l ob -l ob-shell --eval "
       (let ((org-confirm-babel-evaluate nil))
 	(with-current-buffer (find-file-noselect \"src/org/configs/website.org\")
 	  (org-babel-execute-buffer)

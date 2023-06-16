@@ -1,7 +1,7 @@
 #+TITLE: Nix flake
 #+CREATED: [2022-12-25 Sun 22:14]
 #+PROPERTY: header-args :mkdirp yes
-#+LAST_MODIFIED: [2023-06-16 Fri 00:46 EDT]
+#+LAST_MODIFIED: [2023-06-16 Fri 09:18 EDT]
 
 At the root of my [[https://github.com/rossabaker/cromulent][cromulent repository]] is a [[https://nixos.wiki/wiki/Flakes][Nix flake]].  It contains
 all my system configurations, home environment configurations,
@@ -347,11 +347,11 @@ more "literate".
 
 	  packages = {
 	    website = pkgs.callPackage ./gen/website {
-	      emacs29 = self'.packages.emacs29;
+	      emacs = self'.packages.emacs-ross;
 	      src = ./src;
 	    };
 
-	    hyperlink = pkgs.callPackage ./src/nix/pkgs/ghyperlink {};
+	    hyperlink = pkgs.callPackage ./src/nix/pkgs/hyperlink {};
 	  } // darwinPackages;
 
 	  devShells.default = pkgs.devshell.mkShell {
