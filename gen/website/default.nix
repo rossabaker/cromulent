@@ -1,4 +1,4 @@
-{ src, emacs29, gnupg, hugo, html5validator, lychee, stdenv }:
+{ src, emacs29, gnupg, hugo, html5validator, hyperlink, stdenv }:
 
 let
   siteEmacs = emacs29.pkgs.withPackages (epkgs: [
@@ -17,7 +17,7 @@ stdenv.mkDerivation rec {
     gnupg
     hugo
     html5validator
-    lychee
+    hyperlink
   ];
   buildPhase = ''
     cd ..
@@ -36,7 +36,7 @@ stdenv.mkDerivation rec {
   doCheck = true;
   checkPhase = ''
     html5validator --log INFO --root tmp/hugo/static
-    lychee --offline tmp/hugo/static --exclude tmp/hugo/static/blog
+    hyperlink public/ --check-anchors
   '';
 
   installPhase = ''

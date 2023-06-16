@@ -137,6 +137,7 @@
           overlays = {
     	emacs = inputs.emacs-overlay.overlay;
     	devshell = inputs.devshell.overlays.default;
+    	default = (import ./src/nix/overlays { inherit inputs; }).default;
           };
     
           pkgsFor = system: import inputs.nixpkgs {
@@ -194,6 +195,7 @@
     	    overlays = [
     	      inputs.devshell.overlays.default
     	      inputs.emacs-overlay.overlays.default
+    	      overlays.default
     	    ];
     	  };
     
@@ -202,6 +204,8 @@
     	      emacs29 = self'.packages.emacs29;
     	      src = ./src;
     	    };
+    
+    	    hyperlink = pkgs.callPackage ./src/nix/hyperlink.nix {};
     	  } // darwinPackages;
     
     	  devShells.default = pkgs.devshell.mkShell {

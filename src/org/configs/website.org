@@ -1,7 +1,7 @@
 #+title: Website generator with Org and Nix
 #+PROPERTY: header-args      :results silent
-#+PROPERTY: header-args:nix  :eval no
-#+LAST_MODIFIED: [2023-06-12 Mon 00:48 EDT]
+#+PROPERTY: header-args:nix  :eval no :mkdirp yes
+#+LAST_MODIFIED: [2023-06-16 Fri 00:15 EDT]
 
 * Setup
 :PROPERTIES:
@@ -227,7 +227,8 @@ We use the [[https://github.com/tali713/esxml][esxml]] library.
 		    (let ((href (car entry))
 			  (body (cdr entry)))
 		     `(li () (a ((href . ,href)) ,body))))
-	   '(("/configs" . "Configs")))))))
+	   '(("/blog" . "Blog")
+	     ("/configs" . "Configs")))))))
 #+end_src
 
 ** Main
@@ -436,6 +437,18 @@ export all the pages from that document before our own export.
       (org-hugo-export-wim-to-md t)))
 #+end_src
 
+** Tangle multiple files
+
+~org-babel-tangle-publish~ is almost what we want, except it flattens
+everything into ~:publishing-directory~.  We've already specified
+where everything needs to go!
+
+#+begin_src emacs-lisp
+  (defun rab/site-tangle-file (_ filename _)
+    "Tangle FILENAME."
+    (org-babel-tangle-file filename))
+#+end_src
+
 ** ox-html setup
 :PROPERTIES:
 :CUSTOM_ID: ox-html-setup
@@ -471,7 +484,13 @@ This will be the main build moving forward.
 	   :publishing-directory ,(rab/site-root "tmp/hugo/static/configs")
 	   :html-doctype "html5"
 	   :html-html5-fancy t
-	   :html-container "section")))
+	   :html-container "section")
+	  ("rossabaker.com:tangles"
+	   :base-directory ,(rab/site-root "src/org")
+	   :publishing-directory ,(rab/site-root "")
+	   :recursive t
+	   :exclude ,(rx (or (seq (or "config" "img" "talks" "tmp") "/" (* nonl)) "rossabaker.org"))
+	   :publishing-function rab/site-tangle-file)))
 
   (org-publish-all t)
 #+end_src
@@ -494,7 +513,7 @@ Finally, the =public/= directory rendered by Hugo is copied to the
 derivation output.
 
 #+begin_src nix :tangle `,(rab/site-root "gen/website/default.nix")
-  { src, emacs29, gnupg, hugo, html5validator, lychee, stdenv }:
+  { src, emacs29, gnupg, hugo, html5validator, hyperlink, stdenv }:
 
   let
     siteEmacs = emacs29.pkgs.withPackages (epkgs: [
@@ -513,7 +532,7 @@ derivation output.
       gnupg
       hugo
       html5validator
-      lychee
+      hyperlink
     ];
     buildPhase = ''
       cd ..
@@ -532,7 +551,7 @@ derivation output.
     doCheck = true;
     checkPhase = ''
       html5validator --log INFO --root tmp/hugo/static
-      lychee --offline tmp/hugo/static --exclude tmp/hugo/static/blog
+      hyperlink public/ --check-anchors
     '';
 
     installPhase = ''

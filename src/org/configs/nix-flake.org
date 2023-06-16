@@ -1,6 +1,7 @@
 #+TITLE: Nix flake
 #+CREATED: [2022-12-25 Sun 22:14]
-#+LAST_MODIFIED: <2023-06-01 Thu 00:27>
+#+PROPERTY: header-args :mkdirp yes
+#+LAST_MODIFIED: [2023-06-15 Thu 15:44 EDT]
 
 At the root of my [[https://github.com/rossabaker/cromulent][cromulent repository]] is a [[https://nixos.wiki/wiki/Flakes][Nix flake]].  It contains
 all my system configurations, home environment configurations,
@@ -280,6 +281,7 @@ more "literate".
       overlays = {
 	emacs = inputs.emacs-overlay.overlay;
 	devshell = inputs.devshell.overlays.default;
+	default = (import ./src/nix/overlays { inherit inputs; }).default;
       };
 
       pkgsFor = system: import inputs.nixpkgs {
@@ -337,6 +339,7 @@ more "literate".
 	    overlays = [
 	      inputs.devshell.overlays.default
 	      inputs.emacs-overlay.overlays.default
+	      overlays.default
 	    ];
 	  };
 
@@ -345,6 +348,8 @@ more "literate".
 	      emacs29 = self'.packages.emacs29;
 	      src = ./src;
 	    };
+
+	    hyperlink = pkgs.callPackage ./src/nix/hyperlink.nix {};
 	  } // darwinPackages;
 
 	  devShells.default = pkgs.devshell.mkShell {

@@ -1765,7 +1765,7 @@ Additionally, an =emacs= flake app is created.  This builds on the
 
 Finally, we add a Home Manager module based on the configured app.
 
-#+begin_src nix :tangle ../../../gen/emacs/default.nix :noweb tangle
+#+begin_src nix :tangle ../../../gen/emacs/default.nix :noweb tangle :mkdirp yes
   { inputs, lib, moduleWithSystem, ... }: {
     imports = [
       inputs.flake-parts.flakeModules.easyOverlay
