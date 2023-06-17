@@ -1,6 +1,6 @@
 #+TITLE: A generic CSS baseline
 #+CREATED: [2022-08-30 Tue 14:26 EDT]
-#+LAST_MODIFIED: [2023-06-11 Sun 15:10 EDT]
+#+LAST_MODIFIED: [2023-06-17 Sat 00:18]
 #+PROPERTY: header-args:css  :eval no :tangle `,(rab/site-root "tmp/hugo/static/css/baseline.css") :mkdirp yes
 
 We strive for [[https://en.wikipedia.org/wiki/Semantic_HTML][semantic HTML]], which means we can get far with a generic
@@ -135,12 +135,12 @@ Indent them and give them a subtle border.
   }
 #+end_src
 
-Scroll their overflows.
+Prefer breaks to horizontal scroll bars in preformatted text.
 
 #+begin_src css
   pre {
-      max-width: 100%;
-      overflow-x: auto;
+      word-wrap: break-word;
+      white-space: pre-wrap;
   }
 #+end_src
 
