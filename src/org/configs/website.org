@@ -1,7 +1,8 @@
 #+title: Website generator with Org and Nix
 #+PROPERTY: header-args      :results silent
 #+PROPERTY: header-args:nix  :eval no :mkdirp yes
-#+LAST_MODIFIED: [2023-06-16 Fri 12:34]
+#+PROPERTY: header-args:css  :eval no :tangle `,(rab/site-root "tmp/hugo/static/css/cromulent.css") :mkdirp yes
+#+LAST_MODIFIED: [2023-06-18 Sun 00:30]
 
 * Setup
 :PROPERTIES:
@@ -208,7 +209,7 @@ We use the [[https://github.com/tali713/esxml][esxml]] library.
 		       `(link ((rel . "stylesheet")
 			       (type . "text/css")
 			       (href . ,(format "/css/%s.css" css)))))
-	      '("baseline" "htmlize"))
+	      '("baseline" "htmlize" "cromulent"))
 	   ;; The default meta tags rendering is ... fine
 	   (raw-string ,(org-html--build-meta-info info)))
 	  (body ()
@@ -248,8 +249,10 @@ We use the [[https://github.com/tali713/esxml][esxml]] library.
 
   (defun rab/site-main (contents info)
     (let ((title (org-export-data (plist-get info :title) info)))
-      `(main ()
-	,(cl-list* 'article ()
+      (cl-list* 'main () (delq nil (list
+	(when-let* ((depth (plist-get info :with-toc)))
+	  `(raw-string ,(org-html-toc depth info)))
+	(cl-list* 'article ()
 	  (delq nil
 	   (list
 	    `(header ()
@@ -259,15 +262,10 @@ We use the [[https://github.com/tali713/esxml][esxml]] library.
 	       "Modfied: "
 	       (raw-string ,(org-export-data
 			     (plist-get info :last-modified) info))))
-	    (when-let* ((depth (plist-get info :with-toc))
-			(toc (org-html-toc depth info)))
-	     `(details ()
-	       (summary () "Table of Contents")
-	       (raw-string ,toc)))
 	    `(raw-string ,contents)
 	    (when-let (footnotes (org-html-footnote-section info))
 	     `(footer ()
-	       (raw-string ,footnotes)))))))))
+	       (raw-string ,footnotes)))))))))))
 #+end_src
 
 ** Site footer
@@ -326,6 +324,9 @@ This is hardcoded to GitHub, but, alas, aren't we all?
 #+end_src
 
 ** Summary blocks
+:PROPERTIES:
+:CUSTOM_ID: summary-blocks
+:END:
 
 The HTML =<summary>= element can't contain =<p>= tags.  Our default
 rendering within a =#begin_summary= special block puts them there.
@@ -412,6 +413,53 @@ we grudgingly check it in.
 	  (write-file file)))))
 #+end_src
 
+** Table of contents
+:PROPERTIES:
+:CUSTOM_ID: table-of-contents
+:END:
+
+#+begin_src css
+  nav#table-of-contents h2 {
+      display: none;
+  }
+
+  nav#table-of-contents ul {
+      padding-left: 1em;
+  }
+
+  nav#table-of-contents li {
+      list-style: none;
+      list-margin: 1em;
+  }
+#+end_src
+
+** Responsive Layout
+:PROPERTIES:
+:CUSTOM_ID: responsive-layout
+:END:
+
+#+begin_src css
+  main > article { grid-area: article; }
+  main > nav     { grid-area: nav; }
+
+  @media all and (min-width: 70ch) {
+      body {
+	  width: clamp(70ch, 100%, 110ch);
+      }
+
+      main {
+	  display: grid;
+	  grid-template-columns: 1fr, 30ch;
+	  grid-template-areas:
+	      'article nav';
+      }
+
+      nav {
+	  font-size: 80%;
+      }
+  }
+#+end_src
+
 * Tags
 :PROPERTIES:
 :CUSTOM_ID: tags
@@ -460,6 +508,9 @@ export all the pages from that document before our own export.
 #+end_src
 
 ** Tangle multiple files
+:PROPERTIES:
+:CUSTOM_ID: tangle-multiple-files
+:END:
 
 ~org-babel-tangle-publish~ is almost what we want, except it flattens
 everything into ~:publishing-directory~.  We've already specified
