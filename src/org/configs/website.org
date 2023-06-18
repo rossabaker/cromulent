@@ -257,7 +257,8 @@ We use the [[https://github.com/tali713/esxml][esxml]] library.
 	      (span
 	       ((class . "last-modified"))
 	       "Modfied: "
-	       (raw-string ,(org-export-data (plist-get info :last-modified) info))))
+	       (raw-string ,(org-export-data
+			     (plist-get info :last-modified) info))))
 	    (when-let* ((depth (plist-get info :with-toc))
 			(toc (org-html-toc depth info)))
 	     `(details ()
@@ -281,13 +282,15 @@ We use the [[https://github.com/tali713/esxml][esxml]] library.
 This is hardcoded to GitHub, but, alas, aren't we all?
 
 #+begin_src emacs-lisp
-  (defun rab/site-github-edit-link ()
-    "Return a link to edit this file on GitHub."
-    (let ((filename (git-link--relative-filename))
-	  (branch (git-link--branch)))
-      (format "https://github.com/rossabaker/cromulent/edit/%s/%s"
-	      branch
-	      (url-hexify-string filename (url--allowed-chars (cons ?/ url-unreserved-chars))))))
+    (defun rab/site-github-edit-link ()
+      "Return a link to edit this file on GitHub."
+      (let ((filename (git-link--relative-filename))
+	    (branch (git-link--branch)))
+	(format "https://github.com/rossabaker/cromulent/edit/%s/%s"
+		branch
+		(url-hexify-string
+		 filename
+		 (url--allowed-chars (cons ?/ url-unreserved-chars))))))
 #+end_src
 
 #+begin_src emacs-lisp
@@ -309,13 +312,17 @@ This is hardcoded to GitHub, but, alas, aren't we all?
        (ul ()
 	(li () (a ((href . "mailto:ross@rossabaker.com"))
 		(span ((class . "fa fa-envelope-o")) "Email")))
-	(li () (a ((href . "https://github.com/rossabaker") (rel . "me"))
+	(li () (a ((href . "https://github.com/rossabaker")
+		   (rel . "me"))
 		(span ((class . "fa fa-github")) "GitHub")))
-	(li () (a ((href . "https://matrix.to/#/@ross:rossabaker.com") (rel . "me"))
+	(li () (a ((href . "https://matrix.to/#/@ross:rossabaker.com")
+		   (rel . "me"))
 		(span ((class . "fa fa-matrix-org")) "Matrix")))
-	(li () (a ((href . "https://social.rossabaker.com") (rel . "me"))
+	(li () (a ((href . "https://social.rossabaker.com")
+		   (rel . "me"))
 		(span ((class . "fa fa-mastodon")) "Fediverse"))))
-       (a ((href . ,(rab/site-github-edit-link))) "Edit on GitHub"))))
+       (a ((href . ,(rab/site-github-edit-link)))
+	"Edit on GitHub"))))
 #+end_src
 
 ** Summary blocks
@@ -332,11 +339,17 @@ out how to get that to respect =:body-only= yet.
     (let ((block-type (org-element-property :type special-block)))
       (message "SPECIAL BLOCK %s" block-type)
       (cond ((string= block-type "summary")
-	     (let* ((org-str (org-element-interpret-data (org-element-contents special-block)))
-		    (text (org-export-string-as org-str 'html :body-only))
-		    (cleaned (replace-regexp-in-string (rx "<" (zero-or-one "/") "p>") "" text)))
+	     (let* ((org-str (org-element-interpret-data
+			      (org-element-contents special-block)))
+		    (text (org-export-string-as
+			   org-str 'html :body-only))
+		    (cleaned (replace-regexp-in-string
+			      (rx "<" (zero-or-one "/") "p>")
+			      ""
+			      text)))
 	       (format "<summary>%s</summary>" cleaned)))
-	    (t (org-html-special-block special-block contents info)))))
+	    (t (org-html-special-block
+		special-block contents info)))))
 #+end_src
 
 * Style
@@ -384,12 +397,14 @@ we grudgingly check it in.
 	    (delete-region start (point-max)))
 	  (goto-char (point-min))
 	  (cl-flet ((delete-css-rule (name)
-		      (when-let ((start (and (search-forward (format " %s {" name))
-					     (progn (beginning-of-line) (point))))
-				 (end (progn (end-of-line)
-					     (backward-up-list)
-					     (forward-sexp)
-					     (point))))
+		      (when-let
+			  ((start
+			    (and (search-forward (format " %s {" name))
+				 (progn (beginning-of-line) (point))))
+			   (end (progn (end-of-line)
+				       (backward-up-list)
+				       (forward-sexp)
+				       (point))))
 			(delete-region start end))))
 	    (delete-css-rule "a")
 	    (delete-css-rule "a:hover"))
@@ -437,7 +452,8 @@ export all the pages from that document before our own export.
 #+begin_src emacs-lisp
   (require 'ox-hugo)
   (require 'ob-shell)
-  (with-current-buffer (find-file-noselect (rab/site-root "src/org/rossabaker.org"))
+  (with-current-buffer (find-file-noselect
+			(rab/site-root "src/org/rossabaker.org"))
     (let ((org-confirm-babel-evaluate nil))
       (org-babel-tangle)
       (org-hugo-export-wim-to-md t)))
@@ -469,7 +485,8 @@ This will be the main build moving forward.
   (setq org-publish-project-alist
 	`(("rossabaker.com:static"
 	   :base-directory ,(rab/site-root "src/org")
-	   :base-extension ,(rx (or "css" "js" "png" "jpg" "gif" "pdf"))
+	   :base-extension ,(rx (or "css" "js" "png"
+				 "jpg" "gif" "pdf"))
 	   :recursive t
 	   :publishing-function org-publish-attachment
 	   :publishing-directory ,(rab/site-root "tmp/hugo/static"))
@@ -485,9 +502,11 @@ This will be the main build moving forward.
 	  ("rossabaker.com:configs"
 	   :base-directory ,(rab/site-root "src/org/configs")
 	   :recursive t
-	   :exclude ,(rx (or (seq (or "config" "img" "talks" "tmp") "/" (* nonl)) "rossabaker.org"))
+	   :exclude ,(rx (or (seq (or "config" "img" "talks" "tmp")
+			      "/" (* nonl)) "rossabaker.org"))
 	   :publishing-function rab/site-publish
-	   :publishing-directory ,(rab/site-root "tmp/hugo/static/configs")
+	   :publishing-directory ,(rab/site-root
+				   "tmp/hugo/static/configs")
 	   :html-doctype "html5"
 	   :html-html5-fancy t
 	   :html-container "section")
@@ -495,7 +514,8 @@ This will be the main build moving forward.
 	   :base-directory ,(rab/site-root "src/org")
 	   :publishing-directory ,(rab/site-root "")
 	   :recursive t
-	   :exclude ,(rx (or (seq (or "config" "img" "talks" "tmp") "/" (* nonl)) "rossabaker.org"))
+	   :exclude ,(rx (or (seq (or "config" "img" "talks" "tmp")
+			      "/" (* nonl)) "rossabaker.org"))
 	   :publishing-function rab/site-tangle-file)))
 
   (org-publish-all t)
