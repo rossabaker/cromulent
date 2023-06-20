@@ -1,8 +1,8 @@
 #+TITLE: Emacs config
 #+CREATED: <2023-02-23 Thu 23:59>
-#+LAST_MODIFIED: [2023-06-19 Mon 23:45 EDT]
+#+LAST_MODIFIED: [2023-06-19 Mon 23:57 EDT]
 #+PROPERRY: header-args :tangle-mode `,#o444 :mkdirp yes
-#+PROPERTY: header-args:emacs-lisp: :tangle ../../../gen/emacs/init.el :tangle-mode `,#o444
+#+PROPERTY: header-args:emacs-lisp :tangle ../../../gen/emacs/init.el :tangle-mode `,#o444
 #+OPTIONS: H:6
 
 * Introduction

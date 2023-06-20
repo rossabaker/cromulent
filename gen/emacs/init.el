@@ -99,6 +99,11 @@
 (use-package ffap
   :hook (on-first-input . ffap-bindings))
 
+(use-package persist-state
+  :ensure t
+  :hook
+  (on-first-input . persist-state-mode))
+
 (use-package ws-butler
   :ensure t
   :hook (on-first-buffer . ws-butler-global-mode)
@@ -630,6 +635,12 @@ This uses `split-window-right' but follows with the cursor."
   :bind
   ([remap split-window-below] . ross/nav-split-and-follow-below)
   ([remap split-window-right] . ross/nav-split-and-follow-right))'
+
+(use-package zoom
+  :ensure t
+  :custom
+  (zoom-size ,(let ((phi (- (/ (+ 1 (sqrt 5)) 2) 1)))
+		(cons phi phi))))
 
 (use-package which-key
   :ensure t
