@@ -1,6 +1,6 @@
 #+TITLE: Emacs config
 #+CREATED: <2023-02-23 Thu 23:59>
-#+LAST_MODIFIED: [2023-06-19 Mon 23:57 EDT]
+#+LAST_MODIFIED: [2023-06-20 Tue 00:15 EDT]
 #+PROPERRY: header-args :tangle-mode `,#o444 :mkdirp yes
 #+PROPERTY: header-args:emacs-lisp :tangle ../../../gen/emacs/init.el :tangle-mode `,#o444
 #+OPTIONS: H:6
@@ -640,6 +640,15 @@ Let's not forget a dictionary.
 :PROPERTIES:
 :CUSTOM_ID: org
 :END:
+
+Org Mode's timestamps are sadly not aware of time zones, but we can
+[[https://emacs.stackexchange.com/a/60590][crudely approximate support]] by setting ~org-time-stamp-formats~.
+
+#+begin_src emacs-lisp
+  (use-package org
+    :config
+    (setq org-time-stamp-formats '("<%Y-%m-%d %a>" . "<%Y-%m-%d %a %H:%M %Z>")))
+#+end_src
 
 ***** ox-hugo
 :PROPERTIES:

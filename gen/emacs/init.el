@@ -142,6 +142,10 @@
   (:map ross/toggles-map
    ("$" . jinx-mode)))
 
+(use-package org
+  :config
+  (setq org-time-stamp-formats '("<%Y-%m-%d %a>" . "<%Y-%m-%d %a %H:%M %Z>")))
+
 (use-package ox-hugo
   :ensure t
   :after org
