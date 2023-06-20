@@ -126,7 +126,7 @@
         RABaker-at-L2LYQM57XY = pkgs: mkHomeConfig {
           inherit pkgs;
           system = "aarch64-darwin";
-          username = "ross.baker";
+          username = "RABaker";
           homeDirectory = "/Users/RABaker";
         };
     
