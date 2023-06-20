@@ -1,6 +1,6 @@
 #+TITLE: Emacs config
 #+CREATED: <2023-02-23 Thu 23:59>
-#+LAST_MODIFIED: <2023-06-02 Fri 14:40>
+#+LAST_MODIFIED: [2023-06-19 Mon 22:18 EDT]
 #+PROPERRY: header-args :tangle-mode `,#o444 :mkdirp yes
 #+PROPERTY: header-args:emacs-lisp: :tangle ../../../gen/emacs/init.el :tangle-mode `,#o444
 #+OPTIONS: H:6
@@ -1689,6 +1689,22 @@ Aimé Bertrand is compelling.
     :bind
     ([remap split-window-below] . ross/nav-split-and-follow-below)
     ([remap split-window-right] . ross/nav-split-and-follow-right))'
+#+end_src
+
+**** Zoom
+:PROPERTIES:
+:CUSTOM_ID: zoom
+:END:
+
+[[https://github.com/cyrus-and/zoom][Zoom]] resizes the selected window.  It's a modernized version of
+[[https://github.com/roman/golden-ratio.el][golden-ratio.el]], and indeed, we configure it to use the golden ratio.
+
+#+begin_src emacs-lisp
+  (use-package zoom
+    :ensure t
+    :custom
+    (zoom-size ,(let ((phi (- (/ (+ 1 (sqrt 5)) 2) 1)))
+		  (cons phi phi))))
 #+end_src
 
 ** Help
