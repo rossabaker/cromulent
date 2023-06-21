@@ -1,6 +1,6 @@
 #+TITLE: Emacs config
 #+CREATED: <2023-02-23 Thu 23:59>
-#+LAST_MODIFIED: [2023-06-20 Tue 00:15 EDT]
+#+LAST_MODIFIED: [2023-06-21 Wed 00:12 EDT]
 #+PROPERRY: header-args :tangle-mode `,#o444 :mkdirp yes
 #+PROPERTY: header-args:emacs-lisp :tangle ../../../gen/emacs/init.el :tangle-mode `,#o444 :mkdirp yes
 #+OPTIONS: H:6
@@ -1077,6 +1077,16 @@ Traveshamockery.  Once we're ready for that, we'll take a look at
     :defer t)
 #+end_src
 
+**** YAML
+:PROPERTIES:
+:CUSTOM_ID: yaml
+:END:
+
+#+begin_src emacs-lisp
+  (use-package yaml-mode
+    :ensure t
+    :defer t)
+#+end_src
 
 *** Tools
 :PROPERTIES:
