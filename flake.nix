@@ -20,8 +20,13 @@
     
         # Extra community flakes
         devshell.url = "github:numtide/devshell";
+        devshell.inputs.nixpkgs.follows = "nixpkgs";
+    
         emacs-overlay.url = "github:nix-community/emacs-overlay";
+        emacs-overlay.inputs.nixpkgs.follows = "nixpkgs";
+    
         firefox-darwin.url = "github:bandithedoge/nixpkgs-firefox-darwin";
+        firefox-darwin.inputs.nixpkgs.follows = "nixpkgs-darwin";
     
         # Emacs packages
         ammonite-term-repl = {
