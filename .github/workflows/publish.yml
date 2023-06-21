@@ -20,7 +20,7 @@ jobs:
       uses: DeterminateSystems/flake-checker-action@main
       with:
         fail-mode: true
-	send-statistics: false
+        send-statistics: false
     - uses: cachix/cachix-action@v12
       with:
         name: rossabaker
