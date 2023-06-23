@@ -21,6 +21,12 @@ stdenv.mkDerivation rec {
 	  (org-babel-execute-buffer)
 	  (save-buffer)))
     "
+
+    # Reassemble netlify.toml from its constitutents
+    for toml in tmp/netlify.toml.d/*; do
+      cat $toml >> tmp/hugo/static/netlify.toml
+    done
+
     ${hugo}/bin/hugo --config tmp/hugo/config.toml
   '';
 

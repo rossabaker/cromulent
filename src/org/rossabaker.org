@@ -218,12 +218,15 @@ CLOSED: [2022-09-14 Wed 13:30]
   gpg --show-keys ../keys/0x975BE5BC29D92CA5.pub.gpg
 #+end_src
 
-My public key is published to this domain via [[*Web Key Directory][WKD]], and can also be
+My public key is published to this domain via [[/configs/web-key-directory/][WKD]], and can also be
 downloaded in [[/.well-known/openpgpkey/hu/eimhw3om3jynrs7fo7r7rrssmt1o4yxp][binary]] and [[./0x975BE5BC29D92CA5.pub.asc][ASCII armored]] formats.  Its fingerprint is:
 
 #+call: gpg-fingerprint()
 
 I use this key for [[*Verification][verification]].
+
+** TODO                                                            :noexport:
+- [ ] Relative link for WKD
 
 * DONE Contact                                            :@personal:contact:verification:keyoxide:
 CLOSED: [2022-10-16 Sun 15:37]
@@ -1825,8 +1828,8 @@ CLOSED: [2022-11-07 Mon 22:35]
 :PROPERTIES:
 :EXPORT_FILE_NAME: _index
 :END:
-** DONE Web Key Directory                                  :pgp:wkd:indieweb:
-CLOSED: [2022-11-21 Mon 21:03]
+** DONE Web Key Directory                                  :pgp:wkd:indieweb:noexport:
+CLOSED:
 :PROPERTIES:
 :EXPORT_DATE: <2022-11-02 Wed 23:39>
 :EXPORT_HUGO_LASTMOD: <2022-11-15 Tue 16:22>
@@ -1839,114 +1842,10 @@ CLOSED: [2022-11-21 Mon 21:03]
 #+end_description
 
 #+begin_src text :tangle ../../tmp/hugo/static/_redirects :exports none
-  /configs/web-directory /projects/web-key-directory
+  /configs/web-directory /configs/web-key-directory
+  /projects/web-key-directory /configs/web-key-directory
 #+end_src
 
-[[https://datatracker.ietf.org/doc/draft-koch-openpgp-webkey-service/][Web Key Directory (WKD)]] is a standard to look up the PGP keys by email
-address over HTTPS.
-
-It also fits nicely with Indieweb principles: we remove the dependency
-on a third-party key server and are discoverable through
-self-publishing.  My self-hosted WKD drives my [[https://keyoxide.org/wkd/ross%40rossabaker.com][Keyoxide profile]] for
-verification.
-
-*** Setup                                                          :noexport:
-
-#+begin_src sh :session wkd
-  export GNUPGHOME=$PWD/../../tmp/gnupg
-  mkdir -p $GNUPGHOME
-  gpg --import ../keys/0x975BE5BC29D92CA5.pub.gpg
-#+end_src
-
-#+RESULTS:
-|         |       |          |                                       |             |      |         |                                                                   |           |
-| sh-5.1$ | gpg:  | WARNING: | unsafe                                | permissions | on   | homedir | '/Users/ross.baker/src/cromulent/tmp/hugo/static/../../tmp/gnupg' |           |
-| gpg:    | can't | open     | '../keys/0x975BE5BC29D92CA5.pub.gpg': | No          | such | file    | or                                                                | directory |
-| gpg:    | Total | number   | processed:                            | 0           |      |         |                                                                   |           |
-
-*** Files
-
-Most of the work is serving two static files.
-
-This tutorial assumes the root directory of your static files is =$PUBLIC_HTML=
-
-#+begin_src sh :var PUBLIC_HTML="../../tmp/hugo/static/" :session wkd
-  cd $PUBLIC_HTML
-#+end_src
-
-#+RESULTS:
-|                                                           |
-| sh: cd: ../../tmp/hugo/static/: No such file or directory |
-
-**** ~/.well-known/openpgpkey/policy~
-
-There are [[https://www.ietf.org/archive/id/draft-koch-openpgp-webkey-service-14.html#name-policy-flags][options]], but in basic usage, all we need to do is serve a
-blank file.
-
-#+begin_src sh :session wkd
-  mkdir -p .well-known/openpgpkey
-  touch .well-known/openpgpkey/policy
-#+end_src
-
-#+RESULTS:
-| mkdir: | cannot | create | directory                        | ‘.well-known’: | No   | such | file | or        | directory |
-| touch: | cannot | touch  | '.well-known/openpgpkey/policy': | No             | such | file | or   | directory |           |
-
-**** ~/.well-known/openpgpkey/hu/:hash~
-
-The key is stored at hash of the local part of the username.
-Calculate with ~gpg-wks-client~.  Alternatively, KeyOxide has a [[https://keyoxide.org/util/wkd][web
-implementation]].
-
-#+begin_src sh :session wkd
-  WKDHASH=$(gpg-wks-client --print-wkd-hash ross@rossabaker.com | awk '{print $1}')
-#+end_src
-
-#+RESULTS:
-
-Export your key, unarmored, to be served in that file.
-
-#+begin_src sh :session wkd
-  mkdir -p .well-known/openpgpkey/hu/
-  gpg --export ross@rossabaker.com > .well-known/openpgpkey/hu/$WKDHASH
-#+end_src
-
-#+RESULTS:
-| mkdir: | cannot                                                      | create | directory | ‘.well-known’: | No | such      | file | or | directory |
-| sh:    | .well-known/openpgpkey/hu/eimhw3om3jynrs7fo7r7rrssmt1o4yxp: | No     | such      | file           | or | directory |      |    |           |
-
-*** Headers
-
-These resources should allow cross-origin requests from any domain.
-We deploy to Netlify, and can [[https://docs.netlify.com/configure-builds/file-based-configuration/#headers][configure this in netlify.toml]].
-
-#+begin_src conf-toml :tangle ../../tmp/hugo/content/netlify.toml :eval no :mkdirp yes
-  [[headers]]
-    for = "/.well-known/openpgpkey/*"
-    [headers.values]
-      Access-Control-Allow-Origin = "*"
-#+end_src
-
-*** Testing
-
-Test your work with ~gks-web-client~:
-
-#+begin_src sh :eval no
-  gpg-wks-client -v --check ross@rossabaker.com
-#+end_src
-
-You should see something like this:
-
-#+begin_example
-gpg-wks-client: public key for 'ross@rossabaker.com' found via WKD
-gpg-wks-client: gpg: Total number processed: 1
-gpg-wks-client: fingerprint: 904C153733DBB0106915C0BD975BE5BC29D92CA5
-gpg-wks-client:     user-id: Ross A. Baker <ross@rossabaker.com>
-gpg-wks-client:     created: Tue Jan 30 22:24:27 2018 EST
-gpg-wks-client:   addr-spec: ross@rossabaker.com
-#+end_example
-
-Alternatively, there is an [[https://metacode.biz/openpgp/web-key-directory][online checker]].
 ** DONE Personal Weather Station             :@personal:weather:indianapolis:
 CLOSED: [2022-08-28 Sun 21:03]
 :PROPERTIES:
@@ -2302,7 +2201,7 @@ are two static files:
 
 The well-known files need CORS headers.  If deploying to Netlify, add this to ~netlify.toml~:
 
-#+begin_src conf-toml :tangle ../../tmp/hugo/content/netlify.toml :eval no :mkdirp yes
+#+begin_src conf-toml :tangle ../../tmp/netlify.toml.d/matrix.toml :eval no :mkdirp yes
   [[headers]]
     for = "/.well-known/matrix/*"
     [headers.values]
@@ -3283,7 +3182,7 @@ But, eh, it's mostly fine.
 defines an [[https://orgmode.org/worg/dev/org-syntax.html][Org syntax]], which is yet another markdown language[fn:13].
 The killer feature is [[https://orgmode.org/manual/Working-with-Source-Code.html][Org-Babel]], where we can embed, export, and
 execute code snippets in multiple languages, interspersed with prose
-in the practice of [[https://en.wikipedia.org/wiki/Literate_programming][literate programming]].  For example, [[*Web Key Directory][Web Key
+in the practice of [[https://en.wikipedia.org/wiki/Literate_programming][literate programming]].  For example, [[../../configs/web-key-directory/][Web Key
 Directory]] page is not only a tutorial on WKD, but is an executable
 document that generates my WKD entry.
 
@@ -3361,6 +3260,10 @@ platform where a commodity suffices.
 I wouldn't want to impose this on the volunteer parent who eventually
 takes my spot on the youth soccer board.  But for a personal website
 of an Emacs nerd, I highly recommend checking out ox-hugo!
+
+*** TODO                                                           :noexport:
+
+- [ ] Relative link for WKD
 
 ** DONE Build your vocabulary with Scala affixes                :@tech:scala:
 CLOSED: [2023-04-26 Wed 09:28]
