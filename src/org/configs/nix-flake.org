@@ -1,7 +1,7 @@
 #+TITLE: Nix flake
 #+CREATED: [2022-12-25 Sun 22:14]
 #+PROPERTY: header-args :mkdirp yes
-#+LAST_MODIFIED: [2023-06-20 Tue 23:46 EDT]
+#+LAST_MODIFIED: [2023-06-23 Fri 00:02 EDT]
 
 At the root of my [[https://github.com/rossabaker/cromulent][cromulent repository]] is a [[https://nixos.wiki/wiki/Flakes][Nix flake]].  It contains
 all my system configurations, home environment configurations,
@@ -346,6 +346,17 @@ more "literate".
 	      inputs.emacs-overlay.overlays.default
 	      (final: prev: {
 		hyperlink = config.packages.hyperlink;
+	      })
+	      # https://github.com/NixOS/nix/issues/8485#issuecomment-1596220009
+	      (final: prev: {
+		nix = prev.nix.overrideAttrs (old: {
+		  patches = (old.patches or []) ++ [
+		    (final.fetchpatch {
+		      url = "https://patch-diff.githubusercontent.com/raw/NixOS/nix/pull/8535.patch";
+		      hash = "sha256-CTbwtlB/veZWP+xqYSSZeUJiAUhIn3r6QJgZwRx4QRM=";
+		    })
+		  ];
+		});
 	      })
 	    ];
 	  };
