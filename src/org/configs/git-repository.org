@@ -106,4 +106,5 @@ We set all these gitattributes for all tangled sources.  The
   .gitattributes  -diff -merge linguist-generated=true
   flake.nix       -diff -merge linguist-generated=true
   flake.lock      -diff -merge linguist-generated=true
+  garnix.yaml     -diff -merge linguist-generated=true
 #+end_src

@@ -3,3 +3,4 @@ gen/**          -diff -merge linguist-generated=true
 .gitattributes  -diff -merge linguist-generated=true
 flake.nix       -diff -merge linguist-generated=true
 flake.lock      -diff -merge linguist-generated=true
+garnix.yaml     -diff -merge linguist-generated=true

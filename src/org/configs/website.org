@@ -2,7 +2,7 @@
 #+PROPERTY: header-args      :results silent
 #+PROPERTY: header-args:nix  :eval no :mkdirp yes
 #+PROPERTY: header-args:css  :eval no :tangle `,(rab/site-root "tmp/hugo/static/css/cromulent.css") :mkdirp yes
-#+LAST_MODIFIED: [2023-06-22 Thu 23:44 EDT]
+#+LAST_MODIFIED: [2023-06-23 Fri 00:27 EDT]
 
 * Setup
 :PROPERTIES:
@@ -27,6 +27,7 @@ We need to load a few deferred modules for syntax highlighting htmlize.
   (require 'conf-mode)
   (require 'nix-mode)
   (require 'scala-mode)
+  (require 'yaml-mode)
 #+end_src
 
 It's also helpful to know the root, whether we're in Nix or an
