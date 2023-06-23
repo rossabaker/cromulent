@@ -2,7 +2,7 @@
 #+PROPERTY: header-args      :results silent
 #+PROPERTY: header-args:nix  :eval no :mkdirp yes
 #+PROPERTY: header-args:css  :eval no :tangle `,(rab/site-root "tmp/hugo/static/css/cromulent.css") :mkdirp yes
-#+LAST_MODIFIED: [2023-06-23 Fri 00:27 EDT]
+#+LAST_MODIFIED: [2023-06-23 Fri 00:55 EDT]
 
 * Setup
 :PROPERTIES:
@@ -284,15 +284,16 @@ We use the [[https://github.com/tali713/esxml][esxml]] library.
 This is hardcoded to GitHub, but, alas, aren't we all?
 
 #+begin_src emacs-lisp
-    (defun rab/site-github-edit-link ()
-      "Return a link to edit this file on GitHub."
-      (let ((filename (git-link--relative-filename))
-	    (branch (git-link--branch)))
-	(format "https://github.com/rossabaker/cromulent/edit/%s/%s"
-		branch
-		(url-hexify-string
-		 filename
-		 (url--allowed-chars (cons ?/ url-unreserved-chars))))))
+  (defun rab/site-github-edit-link ()
+    "Return a link to edit this file on GitHub."
+    (let ((filename (file-relative-name (buffer-file-name)
+					rab/site--root))
+	  (branch (or (git-link--branch) "main")))
+      (format "https://github.com/rossabaker/cromulent/edit/%s/%s"
+	      branch
+	      (url-hexify-string
+	       filename
+	       (url--allowed-chars (cons ?/ url-unreserved-chars))))))
 #+end_src
 
 #+begin_src emacs-lisp
