@@ -392,6 +392,10 @@ with EXPORT_FILE_NAME."
   :ensure t
   :defer t)
 
+(use-package yaml-mode
+  :ensure t
+  :defer t)
+
 (use-package dumb-jump
   :ensure t
   :config
