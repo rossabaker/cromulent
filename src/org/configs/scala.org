@@ -1,6 +1,6 @@
 #+title: Scala home-manager module
 #+created: [2023-05-09 Tue 09:27]
-#+last_modified: [2023-06-22 Thu 22:46 EDT]
+#+last_modified: [2023-06-22 Thu 23:44 EDT]
 #+property: header-args :tangle-mode (identity #o444) :mkdirp yes
 #+property: header-args:nix :tangle ../../../gen/scala/default.nix
 
@@ -21,7 +21,7 @@ This tells sbt where to look for our [[https://central.sonatype.org/publish/publ
 This will not work until a ~~/.sbt/sonatype-credentials.properties~
 file is added.  Add the password yourself:
 
-#+begin_src properties
+#+begin_src conf-javaprop
   realm=Sonatype Nexus Repository Manager
   host=oss.sonatype.org
   user=rossabaker
