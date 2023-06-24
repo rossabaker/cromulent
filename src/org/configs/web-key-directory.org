@@ -1,35 +1,60 @@
 #+title: Web Key Directory
 #+created: [2022-11-02 Wed 23:39 EDT]
-#+last_modified: [2022-11-15 Tue 16:22 EDT]
+#+last_modified: [2023-06-23 Fri 22:37 EDT]
 #+property: header-args :eval yes
 
-[[https://datatracker.ietf.org/doc/draft-koch-openpgp-webkey-service/][Web Key Directory (WKD)]] is a standard to look up the PGP keys by email
-address over HTTPS.
+[[https://datatracker.ietf.org/doc/draft-koch-openpgp-webkey-service/][Web Key Directory (WKD)]] is a standard to map email addresses to PGP public
+keys over HTTPS.  In this guide, we'll configure WKD for our domain.
 
-It also fits nicely with Indieweb principles: we remove the dependency
-on a third-party key server and are discoverable through
-self-publishing.  My self-hosted WKD drives my [[https://keyoxide.org/wkd/ross%40rossabaker.com][Keyoxide profile]] for
-verification.
+* Motivation
 
-*** Setup                                                          :noexport:
+** Independence
+
+Public keys are traditionally submitted to one or more public key
+servers.  Some, like [[https://pgp.mit.edu][~pgp.mit.edu~]], are federated[fn:1].  Others, like
+[[https://keys.openpgp.org/][~keys.openpgp.org~]], are not[fn:2].  In neither case can I control
+whether they're here tomorrow.
+
+Consistent with Indieweb principles, WKD lets us self-host our
+identity.  Where better to go for ~ross@rossabaker.com~'s public key
+than ~rossabaker.com~?
+
+** Ecosystem
+
+Once we opt into WKD, we get many [[https://wiki.gnupg.org/WKD#Implementations][integrations]] for free.  My favorite
+is verification of my online identities through [[https://keyoxide.org/ross%40rossabaker.com][Keyoxide]].
+
+* Setup                                                            :noexport:
 
 #+begin_src sh :session wkd
   export GNUPGHOME=$PWD/../../../tmp/gnupg
-  mkdir -p $GNUPGHOME
+  export KEY_ID=904C153733DBB0106915C0BD975BE5BC29D92CA5
+  export EMAIL=ross@rossabaker.com
+  mkdir -m 700 -p $GNUPGHOME
   gpg --import ../../keys/0x975BE5BC29D92CA5.pub.gpg
 #+end_src
 
-*** Files
+* Prerequisites
 
-Most of the work is serving two static files.
+- This document assumes you have already [[https://gnupg.org/gph/en/manual.html#AEN26][generated a keypair]].
+- Environment variable =$PUBLIC_HTML= is set to your web root.
+- Environment variable =$EMAIL= is the e-mail address associated with your key.
+- Environment variable =$KEY_ID= is your key ID.  In the example
+  below, it's src_sh[:session wkd]{echo $KEY_ID}.
 
-This tutorial assumes the root directory of your static files is =$PUBLIC_HTML=
+  #+begin_src sh :session wkd :exports both :results verbatim
+    gpg --list-keys $EMAIL
+  #+end_src
+
+* Files
+
+Most of the work is serving two static files.  Go into your web root:
 
 #+begin_src sh :var PUBLIC_HTML="../../../tmp/hugo/static/" :session wkd
   cd $PUBLIC_HTML
 #+end_src
 
-**** ~/.well-known/openpgpkey/policy~
+** ~/.well-known/openpgpkey/policy~
 
 There are [[https://www.ietf.org/archive/id/draft-koch-openpgp-webkey-service-14.html#name-policy-flags][options]], but in basic usage, all we need to do is serve a
 blank file.
@@ -39,27 +64,27 @@ blank file.
   touch .well-known/openpgpkey/policy
 #+end_src
 
-**** ~/.well-known/openpgpkey/hu/:hash~
+** ~/.well-known/openpgpkey/hu/:hash~
 
 The key is stored at hash of the local part of the username.
-Calculate with ~gpg-wks-client~.  Alternatively, KeyOxide has a [[https://keyoxide.org/util/wkd][web
+Calculate with =gpg-wks-client=.  Alternatively, Keyoxide has a [[https://keyoxide.org/util/wkd][web
 implementation]].
 
 #+begin_src sh :session wkd
-  WKDHASH=$(gpg-wks-client --print-wkd-hash ross@rossabaker.com | awk '{print $1}')
+  WKDHASH=$(gpg-wks-client --print-wkd-hash $EMAIL | awk '{print $1}')
 #+end_src
 
 Export your key, unarmored, to be served in that file.
 
 #+begin_src sh :session wkd
   mkdir -p .well-known/openpgpkey/hu/
-  gpg --export ross@rossabaker.com > .well-known/openpgpkey/hu/$WKDHASH
+  gpg --export $KEY_ID > .well-known/openpgpkey/hu/$WKDHASH
 #+end_src
 
-*** Headers
+* Headers
 
 These resources should allow cross-origin requests from any domain.
-We deploy to Netlify, and can [[https://docs.netlify.com/configure-builds/file-based-configuration/#headers][configure this in netlify.toml]].
+We deploy to Netlify, and can [[https://docs.netlify.com/configure-builds/file-based-configuration/#headers][configure this in ~netlify.toml~]].
 
 #+begin_src conf-toml :tangle ../../../tmp/netlify.toml.d/wkd.toml :eval no :mkdirp yes
   [[headers]]
@@ -68,12 +93,12 @@ We deploy to Netlify, and can [[https://docs.netlify.com/configure-builds/file-b
       Access-Control-Allow-Origin = "*"
 #+end_src
 
-*** Testing
+* Testing
 
-Test your work with ~gks-web-client~:
+Test your work with =gpg-wks-client=:
 
-#+begin_src sh :eval no
-  gpg-wks-client -v --check ross@rossabaker.com
+#+begin_src sh :eval query
+  gpg-wks-client -v --check $EMAIL
 #+end_src
 
 You should see something like this:
@@ -87,4 +112,8 @@ gpg-wks-client:     created: Tue Jan 30 22:24:27 2018 EST
 gpg-wks-client:   addr-spec: ross@rossabaker.com
 #+end_example
 
-Alternatively, there is an [[https://metacode.biz/openpgp/web-key-directory][online checker]].
+* Footnotes
+
+[fn:1] [[http://pgp.mit.edu/faq.html][MIT PGP Public Key Server: Frequently Asked Questions]]
+
+[fn:2] [[https://keys.openpgp.org/about/faq#federation][Is keys.openpgp.org federated?]]
