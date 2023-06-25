@@ -196,7 +196,7 @@ and jogs when it's not.
 
 @@hugo:</div>@@
 
-* DONE Public keys              :@tech:keys:pgp:wkd:
+* DONE Public keys              :@tech:keys:pgp:wkd:noexport:
 CLOSED: [2022-09-14 Wed 13:30]
 :PROPERTIES:
 :EXPORT_HUGO_BUNDLE: public-keys
@@ -204,31 +204,8 @@ CLOSED: [2022-09-14 Wed 13:30]
 :EXPORT_DESCRIPTION: Ross A. Baker's public keys
 :EXPORT_HUGO_LASTMOD: <2022-11-03 Thu 12:09>
 :END:
-** PGP
 
-# Create an armored version
-#+begin_src sh :tangle ../../tmp/hugo/content/public-keys/0x975BE5BC29D92CA5.pub.asc :exports none
-  gpg --enarmor <../keys/0x975BE5BC29D92CA5.pub.gpg
-#+end_src
-
-#+name: gpg-fingerprint
-#+begin_src sh :results verbatim :exports none
-  export GNUPGHOME=../../tmp/gnupg
-  mkdir -p $GNUPGHOME
-  gpg --show-keys ../keys/0x975BE5BC29D92CA5.pub.gpg
-#+end_src
-
-My public key is published to this domain via [[/configs/web-key-directory/][WKD]], and can also be
-downloaded in [[/.well-known/openpgpkey/hu/eimhw3om3jynrs7fo7r7rrssmt1o4yxp][binary]] and [[./0x975BE5BC29D92CA5.pub.asc][ASCII armored]] formats.  Its fingerprint is:
-
-#+call: gpg-fingerprint()
-
-I use this key for [[*Verification][verification]].
-
-** TODO                                                            :noexport:
-- [ ] Relative link for WKD
-
-* DONE Contact                                            :@personal:contact:verification:keyoxide:
+* DONE Contact             :@personal:contact:verification:keyoxide:noexport:
 CLOSED: [2022-10-16 Sun 15:37]
 :PROPERTIES:
 :EXPORT_HUGO_SECTION: /
@@ -236,46 +213,6 @@ CLOSED: [2022-10-16 Sun 15:37]
 :EXPORT_DESCRIPTION: Supported ways to contact Ross, and deprecated ways to no longer contact Ross.
 :EXPORT_HUGO_LASTMOD: <2022-12-10 Sat 23:32>
 :END:
-
-** Verification
-
-Many of these identities can be verified via a [[https://keyoxide.org/wkd/ross%40rossabaker.com][Keyoxide profile]] based
-on my [[*PGP][PGP key]].
-
-** Supported
-
-I will attempt to respond in a timely fashion to inquiries on any of these
-channels.
-
-#+begin_contacts
-# Uses the [[*~contact-info-dl~ shortcode][~contact-info-dl~ shortcode]].  That's not great, if we ever export
-# to non-Hugo targets.
-@@hugo:{{< contact-info-dl support="supported" >}}@@
-#+end_contacts
-
-See my [[*Public keys][public keys]] for encryption options.
-
-** Experimental
-
-I'm not committed to any of these, but a critical mass of friends could make
-these compelling.  Connect and say "hi" if you're so inclined.
-
-#+begin_contacts
-# Uses the [[*~contact-info-dl~ shortcode][~contact-info-dl~ shortcode]].  That's not great, if we ever export
-# to non-Hugo targets.
-@@hugo:{{< contact-info-dl support="experimental" >}}@@
-#+end_contacts
-
-** Deprecated
-
-You might find me here, but my presence is special purpose or
-vestigial, and I am unlikely to see or respond.
-
-#+begin_contacts
-# Uses the [[*~contact-info-dl~ shortcode][~contact-info-dl~ shortcode]].  That's not great, if we ever export
-# to non-Hugo targets.
-@@hugo:{{< contact-info-dl support="deprecated" >}}@@
-#+end_contacts
 
 * DONE License
 CLOSED: <2022-11-06 Sun 10:40>

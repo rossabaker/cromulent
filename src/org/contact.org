@@ -1,0 +1,58 @@
+#+title: Contact
+#+created: [2022-10-16 Sun 15:37 EDT]
+#+last_modified: [2023-06-25 Sun 01:41 EDT]
+
+* General methods
+:PROPERTIES:
+:CUSTOM_ID: general-methods
+:END:
+
+- Email :: [[mailto:ross@rossabaker.com][~ross@rossabaker.com~]]; optionally with [[file:public-keys.org::#pgp][PGP]]
+- Matrix ::  [[https://matrix.to/#/@ross:rossabaker.com][~@ross:rossabaker.com~]]
+- ActivityPub[fn:1] :: [[https://social.rossabaker.com/@ross][~@ross@rossabaker.com~]]
+
+* Open source
+:PROPERTIES:
+:CUSTOM_ID: open-source
+:END:
+
+If it's about my open source, let's discuss in public.  Most of my
+projects are hosted at one of:
+
+- GitHub :: [[https://github.com/rossabaker][~@rossabaker~]]
+- Codeberg :: [[https://codeberg.org/rossabaker][~@rossabaker~]]
+
+I avoid walled gardens such as Discord or Slack for open source.  If
+it can't be said on the open web, please fall back to one of the
+[[#general-methods][general methods]].
+
+* Employment
+:PROPERTIES:
+:CUSTOM_ID: employment
+:END:
+
+** Relocation
+:PROPERTIES:
+:CUSTOM_ID: relocation
+:END:
+
+I am willing to relocate if you are the Chicago Cubs.
+
+#+begin_src warning
+Disclosure: I am in on the wrong side of forty, haven't played
+organized ball since junior high, and wasn't very good then.
+#+end_src
+
+** Crypto
+:PROPERTIES:
+:CUSTOM_ID: crypto
+:END:
+
+No.
+
+* Footnotes
+:PROPERTIES:
+:CUSTOM_ID: footnotes
+:END:
+
+[fn:1] Currently implemented with Mastodon
