@@ -237,8 +237,8 @@ We use the [[https://github.com/tali713/esxml][esxml]] library.
 		    (let ((href (car entry))
 			  (body (cdr entry)))
 		     `(li () (a ((href . ,href)) ,body))))
-	   '(("/blog" . "Blog")
-	     ("/configs" . "Configs")
+	   '(("/blog/" . "Blog")
+	     ("/configs/" . "Configs")
 	     ("/contact/" . "Contact")))))))
 #+end_src
 
