@@ -1,6 +1,6 @@
 #+title: Public Keys
 #+created: [2022-09-14 Wed 13:30 EDT]
-#+last_modified: [2022-11-03 Thu 12:09 EDT]
+#+last_modified: [2023-06-27 Tue 01:24 EDT]
 
 * PGP
 :PROPERTIES:
@@ -25,3 +25,14 @@ downloaded in [[/.well-known/openpgpkey/hu/eimhw3om3jynrs7fo7r7rrssmt1o4yxp][bin
 #+call: gpg-fingerprint()
 
 I use this key for [[https://keyoxide.org/ross@rossabaker.com][verification]].
+
+* SSH
+:PROPERTIES:
+:CUSTOM_ID: ssh
+:END:
+
+Friendship used to mean exchanging shell accounts on each other's
+Linux boxen.  Or even FreeBSD.  We didn't judge on anything but
+=$EDITOR=.
+
+#+include: "../keys/id_ed25519.pub" example
