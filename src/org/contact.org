@@ -1,49 +1,71 @@
 #+title: Contact
 #+created: [2022-10-16 Sun 15:37 EDT]
-#+last_modified: [2023-06-25 Sun 01:41 EDT]
+#+last_modified: [2023-06-27 Tue 00:41 EDT]
+#+macro: abbr @@html:<abbr title="$1">$2</abbr>@@
 
-* General methods
+* Direct communication
 :PROPERTIES:
-:CUSTOM_ID: general-methods
+:CUSTOM_ID: direct-communication
 :END:
+
+I can't offer an {{{abbr(service-level agreement,SLA)}}} on response
+times, but I try to carry my Midwestern Nice online.
 
 - Email :: [[mailto:ross@rossabaker.com][~ross@rossabaker.com~]]; optionally with [[file:public-keys.org::#pgp][PGP]]
 - Matrix ::  [[https://matrix.to/#/@ross:rossabaker.com][~@ross:rossabaker.com~]]
 - ActivityPub[fn:1] :: [[https://social.rossabaker.com/@ross][~@ross@rossabaker.com~]]
 
-* Open source
+** Pronouns
 :PROPERTIES:
-:CUSTOM_ID: open-source
+:CUSTOM_ID: pronouns
 :END:
 
-If it's about my open source, let's discuss in public.  Most of my
-projects are hosted at one of:
+My pronouns are *he* / *him* / *his*, and I will respect yours.
+
+* Special topics
+:PROPERTIES:
+:CUSTOM_ID: special-topics
+:END:
+
+** Open source inquiries
+:PROPERTIES:
+:CUSTOM_ID: open-source-inquiries
+:END:
+
+I would rather connect in public, where everyone can benefit from the
+discussion.  Most of my open source is hosted on one of the following
+forges:
 
 - GitHub :: [[https://github.com/rossabaker][~@rossabaker~]]
 - Codeberg :: [[https://codeberg.org/rossabaker][~@rossabaker~]]
 
-I avoid walled gardens such as Discord or Slack for open source.  If
-it can't be said on the open web, please fall back to one of the
-[[#general-methods][general methods]].
-
-* Employment
+*** Vulnerability disclosures
 :PROPERTIES:
-:CUSTOM_ID: employment
+:CUSTOM_ID: vulnerability-disclosures
 :END:
 
-** Relocation
+I participate in [[https://en.wikipedia.org/wiki/Coordinated_vulnerability_disclosure][coordinated vulnerability disclosure]].  I try to cover
+each project with an organization policy or a ~SECURITY.md~ in the
+root directory.  If in doubt, contact me [[#direct-communication][directly]].
+
+** Employment inquiries
+:PROPERTIES:
+:CUSTOM_ID: employment-inquiries
+:END:
+
+*** Relocation
 :PROPERTIES:
 :CUSTOM_ID: relocation
 :END:
 
 I am willing to relocate if you are the Chicago Cubs.
 
-#+begin_src warning
-Disclosure: I am in on the wrong side of forty, haven't played
-organized ball since junior high, and wasn't very good then.
-#+end_src
+#+begin_warning
+I am over the hill, haven't played organized ball since junior high,
+and wasn't good back then.
+#+end_warning
 
-** Crypto
+*** Crypto
 :PROPERTIES:
 :CUSTOM_ID: crypto
 :END:
