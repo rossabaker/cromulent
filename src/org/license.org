@@ -1,0 +1,45 @@
+#+title: License
+#+description: Default license for all content on rossabaker.com
+#+created: [2022-11-06 Sun 10:40 EST]
+#+last_modified: [2023-06-29 Thu 00:06 EDT]
+
+These licenses apply to all content on rossabaker.com, except where
+otherwise specified.  The intent is to share and be respectful of how
+others shared.  Please [[file:contact.org][contact me]] if you require an alternative.
+
+* Code snippets
+
+Code snippets (rendered in the ~<code>~ element) are licensed under
+the MIT License:
+
+#+begin_details
+#+begin_summary
+MIT license text
+#+end_summary
+Copyright 2022 Ross A. Baker
+
+Permission is hereby granted, free of charge, to any person
+obtaining a copy of this software and associated documentation files
+(the "Software"), to deal in the Software without restriction,
+including without limitation the rights to use, copy, modify, merge,
+publish, distribute, sublicense, and/or sell copies of the Software,
+and to permit persons to whom the Software is furnished to do so,
+subject to the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
+BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+#+end_details
+
+* Other content
+
+All other content on rossabaker.com is licensed under a [[https://creativecommons.org/licenses/by/4.0/][Creative
+Commons Attribution 4.0 International (CC BY 4.0) License]].
