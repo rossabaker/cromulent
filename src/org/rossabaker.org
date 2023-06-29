@@ -210,12 +210,6 @@ and jogs when it's not.
 :END:
 
 ** DONE Managing generated sources in Git :git:gitattributes:gitignore:babel:noexport:
-CLOSED: [2022-08-24 Wed 15:04]
-:PROPERTIES:
-:EXPORT_FILE_NAME: managing-generated-sources-in-git
-:EXPORT_HUGO_LASTMOD: <2023-03-01 Wed 00:49>
-:EXPORT_OPTIONS: H:6
-:END:
 
 #+begin_src text :tangle ../../tmp/hugo/static/_redirects :exports none
   /configs/managing-generated-sources-in-git /configs/git-repository
