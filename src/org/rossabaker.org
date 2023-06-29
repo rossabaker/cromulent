@@ -197,21 +197,7 @@ and jogs when it's not.
 @@hugo:</div>@@
 
 * DONE Public keys              :@tech:keys:pgp:wkd:noexport:
-CLOSED: [2022-09-14 Wed 13:30]
-:PROPERTIES:
-:EXPORT_HUGO_BUNDLE: public-keys
-:EXPORT_FILE_NAME: index
-:EXPORT_HUGO_LASTMOD: <2022-11-03 Thu 12:09>
-:END:
-
 * DONE Contact             :@personal:contact:verification:keyoxide:noexport:
-CLOSED: [2022-10-16 Sun 15:37]
-:PROPERTIES:
-:EXPORT_HUGO_SECTION: /
-:EXPORT_FILE_NAME: contact
-:EXPORT_HUGO_LASTMOD: <2022-12-10 Sat 23:32>
-:END:
-
 * DONE License
 CLOSED: <2022-11-06 Sun 10:40>
 :PROPERTIES:
@@ -287,11 +273,10 @@ CLOSED: [2022-08-24 Wed 15:04]
   /configs/managing-generated-sources-in-git /configs/git-repository
 #+end_src
 
-** DONE Website bundle                                              :website:
+** DONE Website bundle                                     :website:noexport:
 CLOSED: [2022-08-24 Wed 15:04]
 :PROPERTIES:
 :EXPORT_HUGO_BUNDLE: website
-:EXPORT_DESCRIPTION:
 :END:
 
 *** Website :noexport:
