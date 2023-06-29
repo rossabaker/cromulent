@@ -3,6 +3,7 @@
 #+PROPERTY: header-args:nix  :eval no :mkdirp yes
 #+PROPERTY: header-args:css  :eval no :tangle `,(rab/site-root "tmp/hugo/static/css/cromulent.css") :mkdirp yes
 #+LAST_MODIFIED: [2023-06-27 Tue 00:45 EDT]
+#+description: A colophon for rossabaker.com.  Defines our custom Org Export backend, stylesheet, and Nix build.
 
 * Setup
 :PROPERTIES:

@@ -2,6 +2,7 @@
 #+created: [2022-10-16 Sun 15:37 EDT]
 #+last_modified: [2023-06-27 Tue 00:41 EDT]
 #+macro: abbr @@html:<abbr title="$1">$2</abbr>@@
+#+description: How to contact Ross A. Baker about various subjects via various protocols.
 
 * Direct communication
 :PROPERTIES:

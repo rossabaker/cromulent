@@ -201,7 +201,6 @@ CLOSED: [2022-09-14 Wed 13:30]
 :PROPERTIES:
 :EXPORT_HUGO_BUNDLE: public-keys
 :EXPORT_FILE_NAME: index
-:EXPORT_DESCRIPTION: Ross A. Baker's public keys
 :EXPORT_HUGO_LASTMOD: <2022-11-03 Thu 12:09>
 :END:
 
@@ -210,7 +209,6 @@ CLOSED: [2022-10-16 Sun 15:37]
 :PROPERTIES:
 :EXPORT_HUGO_SECTION: /
 :EXPORT_FILE_NAME: contact
-:EXPORT_DESCRIPTION: Supported ways to contact Ross, and deprecated ways to no longer contact Ross.
 :EXPORT_HUGO_LASTMOD: <2022-12-10 Sat 23:32>
 :END:
 
@@ -293,7 +291,7 @@ CLOSED: [2022-08-24 Wed 15:04]
 CLOSED: [2022-08-24 Wed 15:04]
 :PROPERTIES:
 :EXPORT_HUGO_BUNDLE: website
-:EXPORT_DESCRIPTION: A colophon for rossabaker.com.  Describes the way we convert an Org-Mode file into a website with ox-hugo and Nix.
+:EXPORT_DESCRIPTION:
 :END:
 
 *** Website :noexport:
