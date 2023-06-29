@@ -146,7 +146,7 @@ and jogs when it's not.
 
 ** See also
 
-- [[*Contact][Contact info]]
+- [[file:contact.org][Contact info]]
 
 #+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css :exports none
   .contacts dl {
@@ -3494,7 +3494,7 @@ the caller is just going to ~void~ it out anyway.
 *** Did we forget any?
 
 Surely this list isn't complete.  Did I overlook your favorite?
-[[*Contact][Contact me]], and we'll make this a living post.
+[[file:contact.org][Contact me]], and we'll make this a living post.
 
 * Notes section
 :PROPERTIES:
