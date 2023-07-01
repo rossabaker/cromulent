@@ -203,7 +203,7 @@ and jogs when it's not.
 :EXPORT_HUGO_BUNDLE: configs
 :END:
 
-** Configurations :noexport:
+** Configurations
 :PROPERTIES:
 :EXPORT_FILE_NAME: _index
 :EXPORT_HUGO_LASTMOD: <2022-09-05 Mon 23:48>
