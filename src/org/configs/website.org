@@ -2,7 +2,7 @@
 #+PROPERTY: header-args      :results silent
 #+PROPERTY: header-args:nix  :eval no :mkdirp yes
 #+PROPERTY: header-args:css  :eval no :tangle `,(rab/site-root "tmp/hugo/static/css/cromulent.css") :mkdirp yes
-#+LAST_MODIFIED: [2023-06-27 Tue 00:45 EDT]
+#+LAST_MODIFIED: [2023-07-01 Sat 00:04 EDT]
 #+description: A colophon for rossabaker.com.  Defines our custom Org Export backend, stylesheet, and Nix build.
 
 * Setup
@@ -213,7 +213,7 @@ We use the [[https://github.com/tali713/esxml][esxml]] library.
 		       `(link ((rel . "stylesheet")
 			       (type . "text/css")
 			       (href . ,(format "/css/%s.css" css)))))
-	      '("baseline" "htmlize" "cromulent"))
+	      '("baseline" "htmlize" "fork-awesome" "cromulent"))
 	   ;; The default meta tags rendering is ... fine
 	   (raw-string ,(org-html--build-meta-info info)))
 	  (body ()
@@ -314,20 +314,30 @@ This is hardcoded to GitHub, but, alas, aren't we all?
 	(span ((class . "p-family-name")) "Baker"))
        " "
        (small () (span ((class . "u-pronoun")) "(he/him)"))
-       (ul ()
-	(li () (a ((href . "mailto:ross@rossabaker.com"))
-		(span ((class . "fa fa-envelope-o")) "Email")))
-	(li () (a ((href . "https://github.com/rossabaker")
-		   (rel . "me"))
-		(span ((class . "fa fa-github")) "GitHub")))
-	(li () (a ((href . "https://matrix.to/#/@ross:rossabaker.com")
-		   (rel . "me"))
-		(span ((class . "fa fa-matrix-org")) "Matrix")))
+       (ul ((id . "elsewhere"))
+	(li () (a ((href . "mailto:ross@rossabaker.com")
+		   (class . "fa fa-envelope-o")
+		   (aria-label . "Email"))
+		""))
 	(li () (a ((href . "https://social.rossabaker.com")
+		   (class . "fa fa-mastodon")
+		   (aria-label . "Mastodon")
 		   (rel . "me"))
-		(span ((class . "fa fa-mastodon")) "Fediverse"))))
-       (a ((href . ,(rab/site-github-edit-link)))
-	"Edit on GitHub"))))
+		""))
+	(li () (a ((href . "https://matrix.to/#/@ross:rossabaker.com")
+		   (class . "fa fa-matrix-org")
+		   (aria-label . "Matrix")
+		   (rel . "me"))
+		""))
+	(li () (a ((href . "https://github.com/rossabaker")
+		   (class . "fa fa-github")
+		   (aria-label . "GitHub")
+		   (rel . "me"))
+		""))))
+       (br ())
+       (ul ((id . "meta"))
+	(li () (a ((href . ,(rab/site-github-edit-link))) "Edit"))
+	(li () (a ((href . "/license")) "License")))))
 #+end_src
 
 ** Summary blocks
@@ -464,6 +474,67 @@ we grudgingly check it in.
       nav {
 	  font-size: 80%;
       }
+  }
+#+end_src
+
+** Footer
+:PROPERTIES:
+:CUSTOM_ID: footer
+:END:
+
+*** Social links
+:PROPERTIES:
+:CUSTOM_ID: social-links
+:END:
+
+Inline the social links in the footer.
+
+#+begin_src css
+  address #elsewhere {
+      display: inline-flex;
+      list-style-type: none;
+      margin: 0;
+      padding-left: 0;
+  }
+
+  address #elsewhere li {
+      display: inline;
+      margin-left: 1ch;
+  }
+#+end_src
+
+These links are just icons.  Don't underline them.
+
+#+begin_src css
+  address li a {
+      text-decoration: none;
+  }
+#+end_src
+
+*** Meta links
+:PROPERTIES:
+:CUSTOM_ID: meta-links
+:END:
+
+#+begin_src css
+  #meta {
+      display: inline-flex;
+      list-style-type: none;
+      margin: 0;
+      padding-left: 0;
+  }
+
+  #meta li {
+      display: inline;
+  }
+
+  #meta li:first-child:before {
+      content: "";
+  }
+
+  #meta li:before {
+      content: " | ";
+      white-space: pre;
   }
 #+end_src
 
