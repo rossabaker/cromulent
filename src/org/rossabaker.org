@@ -232,16 +232,12 @@ CLOSED: [2022-08-24 Wed 15:04]
 configuration, export the content to Markdown with with [[https://ox-hugo.scripter.co][ox-hugo]], and
 convert the Markdown to HTML with [[https://gohugo.io/][Hugo]].
 
-*** DONE Site configuration                       :hugo:org_mode:ox_hugo:nix:noexport:
+*** DONE Site configuration                   :hugo:org_mode:ox_hugo:nix:aol:
 CLOSED: [2022-09-01 Thu 16:48]
 :PROPERTIES:
 :EXPORT_FILE_NAME: hugo
 :EXPORT_HUGO_LASTMOD: <2022-11-22 Tue 22:14 EST>
 :END:
-
-#+begin_src text :tangle ../../tmp/hugo/static/_redirects :exports none
-  /configs/website/hugo /configs/website
-#+end_src
 
 A Hugo site can be configured with either TOML or YAML.  I spent my
 weirdness budget on a literate config, so let's stick to the default.
@@ -352,18 +348,11 @@ Generate the ~chroma.css~ file.
   <<chroma-css()>>
 #+end_src
 
-*** DONE Templates                                   :hugo:html:noexport:
+*** DONE Templates                                            :hugo:html:aol:
 CLOSED: [2022-09-01 Thu 16:53]
 :PROPERTIES:
 :EXPORT_HUGO_BUNDLE: templates
 :END:
-
-#+begin_src text :tangle ../../tmp/hugo/static/_redirects :exports none
-  /configs/website/templates/base-template /configs/website/#base-template
-  /configs/website/templates/header /configs/website/#site-header
-  /configs/website/templates/footer /configs/website/#site-footer
-  /configs/website/templates/* /configs/website/#templates
-#+end_src
 
 **** DONE Index
 CLOSED: [2022-09-02 Fri 11:28]
