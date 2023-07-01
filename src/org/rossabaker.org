@@ -215,7 +215,7 @@ and jogs when it's not.
   /configs/managing-generated-sources-in-git /configs/git-repository
 #+end_src
 
-** DONE Website bundle                                     :website:noexport:
+** DONE Website bundle                                     :website:
 CLOSED: [2022-08-24 Wed 15:04]
 :PROPERTIES:
 :EXPORT_HUGO_BUNDLE: website
@@ -266,7 +266,7 @@ it into ~src/hugo/themes~.
   themesDir = 'src/hugo/themes'
 #+end_src
 
-Further design comes from the [[*CSS foundation][CSS foundation]].
+Further design comes from the [[*CSS baseline][CSS baseline]].
 
 **** Mounts
 
@@ -1494,11 +1494,12 @@ Our build creates some detritus that we don't want checked into Git.
   /.hugo_build.lock
 #+end_src
 
-*** DONE CSS foundation                               :css:google_fonts:noto:noexport:
+*** DONE CSS baseline                                 :css:google_fonts:noto:
 CLOSED: [2022-08-30 Tue 14:26]
 :PROPERTIES:
 :EXPORT_FILE_NAME: style
 :EXPORT_HUGO_LASTMOD: <2022-11-22 Tue 20:25 EST>
+:CUSTOM_ID: css-baseline
 :END:
 
 We strive for [[https://en.wikipedia.org/wiki/Semantic_HTML][semantic HTML]].  The styles presented here provide a
@@ -1510,7 +1511,7 @@ but could conceivably be used in future projects.
 **** Box sizing
 
 [[https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing][~border-box~]] includes the widths of the border and padding in the
-width of an element.  This cuts out a lot of ~<div class="container">~
+width of an element.  This cuts out a lot of =<div class="container">=
 nonsense.
 
 #+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
@@ -1656,6 +1657,12 @@ Render the links in the complementary color.
   a {
       color: var(--link-color);
   }
+#+end_src
+
+**** Redirects                                                     :noexport:
+
+#+begin_src text :tangle ../../tmp/hugo/static/_redirects :exports none
+  /configs/css /configs/website/style
 #+end_src
 
 *** Code rendering

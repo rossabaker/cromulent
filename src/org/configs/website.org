@@ -213,7 +213,7 @@ We use the [[https://github.com/tali713/esxml][esxml]] library.
 		       `(link ((rel . "stylesheet")
 			       (type . "text/css")
 			       (href . ,(format "/css/%s.css" css)))))
-	      '("baseline" "htmlize" "fork-awesome" "cromulent"))
+	      '("htmlize" "fork-awesome" "cromulent"))
 	   ;; The default meta tags rendering is ... fine
 	   (raw-string ,(org-html--build-meta-info info)))
 	  (body ()
@@ -375,8 +375,12 @@ out how to get that to respect =:body-only= yet.
 :CUSTOM_ID: style
 :END:
 
-Much of our styling comes from the [[file:css.org][CSS baseline]].  Some specific
+Much of our styling comes from the [[/configs/style][CSS baseline]].  Some specific
 branding and tweaks specific to this site follow.
+
+** TODO Broken links                                               :noexport:
+
+- CSS baseline
 
 ** Code highlighting
 :PROPERTIES:
