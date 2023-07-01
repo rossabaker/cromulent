@@ -1676,6 +1676,37 @@ Give the code samples a little more room to breathe.
   }
 #+end_src
 
+** DONE Garnix GitHub Action
+CLOSED: [2023-06-23 Fri 00:26 EDT]
+:PROPERTIES:
+:EXPORT_FILE_NAME: garnix
+:END:
+
+I have an Apple M1 for work, which is [[https://github.com/github/roadmap/issues/528][not yet supported by GitHub
+Actions]].  That's okay, because [[https://garnix.io/][Garnix]] is a great alternative.
+
+*** Build definition
+
+I use it to build the default dev shell, my nix-darwin configuration,
+and my home-manager configuration.
+
+#+begin_src yaml :tangle ../../../garnix.yaml
+  builds:
+  include:
+    - 'devShells.aarch64-darwin.default'
+    - 'packages.aarch64-darwin.aarch64-darwin-config-base'
+    - 'packages.aarch64-darwin.RABaker@L2LYQM57XY'
+#+end_src
+
+*** Caching
+
+Everything Garnix builds goes into the [[https://garnix.io/docs/caching][Garnix cache]].  My [[/nix-flake][flake]] updates
+while I'm asleep on Sunday nights, which means if all goes well, I
+have a primed cache Monday morning.
+
+*** TODO Broken links                                              :noexport:
+
+- Fix flake link
 
 * Projects section
 :PROPERTIES:
