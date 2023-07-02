@@ -5,19 +5,19 @@
 #+property: header-args :eval never :mkdirp yes
 #+macro: abbr @@html:<abbr title="$1">$2</abbr>@@
 
-* DONE Home page                                                   :noexport:
-CLOSED: [2022-09-05 Mon 00:30]
+* DONE Home page
+CLOSED: [2022-09-05 Mon 00:30 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: _index
-:EXPORT_HUGO_LASTMOD: <2022-11-01 Tue 22:51>
+:EXPORT_HUGO_LASTMOD: [2022-11-01 Tue 22:51 EST]
 :END:
 
 * DONE Ross A. Baker                                    :@personal:biography:contact:
-CLOSED: [2022-08-31 Wed 00:23]
+CLOSED: [2022-08-31 Wed 00:23 EDT]
 :PROPERTIES:
 :EXPORT_HUGO_SECTION: /
 :EXPORT_FILE_NAME: about
-:EXPORT_HUGO_LASTMOD: <2022-09-14 Wed 13:28>
+:EXPORT_HUGO_LASTMOD: [2022-09-14 Wed 13:28 EDT]
 :END:
 
 #+begin_description
