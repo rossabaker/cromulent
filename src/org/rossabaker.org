@@ -4047,7 +4047,7 @@ Actions]].  That's okay, because [[https://garnix.io/][Garnix]] is a great alter
 I use it to build the default dev shell, my nix-darwin configuration,
 and my home-manager configuration.
 
-#+begin_src yaml :tangle ../../../garnix.yaml
+#+begin_src yaml :tangle ../../garnix.yaml
   builds:
   include:
     - 'devShells.aarch64-darwin.default'
