@@ -9,8 +9,20 @@
 CLOSED: [2022-09-05 Mon 00:30 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: _index
-:EXPORT_HUGO_LASTMOD: [2022-11-01 Tue 22:51 EST]
+:EXPORT_HUGO_LASTMOD: [2023-07-02 Sun 01:36 EDT]
 :END:
+
+#+attr_html: :class under-construction :alt Pixelated animated gif with cartoon man shoveling, in the style of a retro \"Under Construction\" image.
+[[./img/under-construction.gif]]
+
+** Extra style                                                     :noexport:
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css :exports none
+  .under-construction {
+      width: 5em;
+      height: 5rem;
+      margin: 0 auto;
+  }
+#+end_src
 
 * DONE Ross A. Baker                                    :@personal:biography:contact:
 CLOSED: [2022-08-31 Wed 00:23 EDT]
