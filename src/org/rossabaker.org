@@ -393,7 +393,7 @@ derived.  As much as possible, we keep them in ~src/~.
 Ephemeral files can be tangled on demand and disposed of at will.
 Development processes may need them, but they can be comfortably
 recreated from the original sources.  An example of these are the Hugo
-outputs when [[../website/#try-it-locally][locally building the site]].
+outputs when [[*Development][locally building the site]].
 
 We put as many of them as we can in ~tmp/~ for organization.  The best
 way to handle them is with a [[https://git-scm.com/docs/gitignore][gitignore]].
@@ -423,7 +423,7 @@ be loaded by other tools.  For example, Git looks for ~.gitignore~ and
 in the project root.
 
 Other files need to be tangled for non-Org tooling, but are imported
-by something else, like the [[/website/#nix-build][Nix package for our website]], which is
+by something else, like the [[*Build website with Nix][Nix package for our website]], which is
 imported into ~flake.nix~.  We stow all such files we can in the
 ~gen/~ directory.
 
@@ -1833,7 +1833,6 @@ supported contacts from the experimental ones.
 CLOSED: [2022-09-01 Thu 16:54]
 :PROPERTIES:
 :EXPORT_FILE_NAME: build
-
 :END:
 
 The website is just another package within our flake.
