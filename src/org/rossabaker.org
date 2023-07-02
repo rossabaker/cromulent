@@ -1952,6 +1952,7 @@ CLOSED: [2023-02-23 Thu 23:59 EST]
 :EXPORT_HUGO_LASTMOD: [2023-06-21 Wed 00:12 EDT]
 :header-args: :tangle-mode `,#o444 :mkdirp yes
 :header-args:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444 :mkdirp yes
+:EXPORT_OPTIONS: h:6
 :END:
 
 *** Introduction
@@ -1960,10 +1961,6 @@ CLOSED: [2023-02-23 Thu 23:59 EST]
 :END:
 
 **** The flavor of the day is vanilla
-:PROPERTIES:
-:CUSTOM_ID: the-flavor-of-the-day-is-vanilla
-:END:
-
 
 This is a "vanilla" configuration, or an "Emacs from scratch," built
 on a prerelease of Emacs 29 from Git.
@@ -3148,7 +3145,7 @@ might still be compelling as an ~:annotation-function~.
   }
 #+end_src
 
-The sort order is customized in [[*Vertico multiform][vertico-multiform]].
+The sort order is customized in [[#vertico-multiform][Vertico multiform]].
 
 ****** Treesitter
 :PROPERTIES:
@@ -4043,6 +4040,9 @@ all my system configurations, home environment configurations,
 packages, development shells, and more.
 
 *** What's in the flake
+:PROPERTIES:
+:CUSTOM_ID: whats-in-the-flake
+:END:
 
 My flake currently performs [[https://nixos.wiki/wiki/Import_From_Derivation][Import From Deriviation]], but I'm trying to
 remove it.  For now, we need to explicitly allow it to see the
