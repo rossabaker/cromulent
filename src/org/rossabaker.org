@@ -1798,7 +1798,7 @@ and my home-manager configuration.
 
 *** Caching
 
-Everything Garnix builds goes into the [[https://garnix.io/docs/caching][Garnix cache]].  My [[/nix-flake][flake]] updates
+Everything Garnix builds goes into the [[https://garnix.io/docs/caching][Garnix cache]].  My [[/configs/nix-flake][flake]] updates
 while I'm asleep on Sunday nights, which means if all goes well, I
 have a primed cache Monday morning.
 
