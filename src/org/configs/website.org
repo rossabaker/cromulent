@@ -718,7 +718,7 @@ derivation output.
 #+end_src
 
 To avoid [[https://nixos.wiki/wiki/Import_From_Derivation][Import From Derivation]], this Nix expression is [[https://orgmode.org/manual/Extracting-Source-Code.html][tangled]] and
-[[file:git-repository.org::#committed-generated-sources][committed as generated source]].
+[[/configs/git-repository/#committed-generated-sources][committed as generated source]].
 
 ** Try it locally
 :PROPERTIES:
@@ -747,6 +747,10 @@ This process is heavily inspired by the [[https://systemcrafters.net/live-stream
 - [ ] Minimize HTML
 - [ ] Cache busting
 - [ ] Proper =<datetime>= elements
+
+* TODO broken links                                                :noexport:
+
+- git-repository#committed-generated-sources
 
 # Local Variables:
 # org-confirm-babel-evaluate: nil
