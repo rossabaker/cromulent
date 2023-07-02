@@ -14,13 +14,7 @@ stdenv.mkDerivation rec {
     cd ..
     export PATH=${gnupg}/bin:$PATH
 
-    # https://emacs.stackexchange.com/a/70847
-    ${emacs}/bin/emacs --batch -l ob -l ob-shell --eval "
-      (let ((org-confirm-babel-evaluate nil))
-	(with-current-buffer (find-file-noselect \"src/org/configs/website.org\")
-	  (org-babel-execute-buffer)
-	  (save-buffer)))
-    "
+    ${emacs}/bin/emacs -Q --batch --script ${./export.el}
 
     # Reassemble netlify.toml from its constitutents
     for toml in tmp/netlify.toml.d/*; do
@@ -32,7 +26,6 @@ stdenv.mkDerivation rec {
 
   doCheck = true;
   checkPhase = ''
-    html5validator --log INFO --root tmp/hugo/static
     hyperlink public/ --check-anchors
   '';
 

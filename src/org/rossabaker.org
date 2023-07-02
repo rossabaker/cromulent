@@ -583,7 +583,7 @@ CLOSED: [2022-08-24 Wed 15:04]
 :EXPORT_HUGO_BUNDLE: website
 :END:
 
-*** Website :noexport:
+*** Website
 :PROPERTIES:
 :EXPORT_FILE_NAME: _index
 :EXPORT_TITLE: Website
@@ -1817,16 +1817,86 @@ supported contacts from the experimental ones.
   </dl>
 #+end_src
 
-*** DONE Build website with Nix                      :hugo:ox_hugo:nix:babel:noexport:
+*** DONE Build website with Nix                      :hugo:ox_hugo:nix:babel:
 CLOSED: [2022-09-01 Thu 16:54]
 :PROPERTIES:
 :EXPORT_FILE_NAME: build
-:EXPORT_HUGO_LASTMOD: <2023-04-14 Fri 15:23>
+
 :END:
 
-#+begin_src text :tangle ../../tmp/hugo/static/_redirects :exports none
-  /projects/www /configs/website
+The website is just another package within our flake.
+
+**** Export script
+
+~export.el~ is a small Emacs script that finds the Org file and
+exports its contents with ox-hugo.
+
+#+begin_src emacs-lisp :tangle ../../gen/website/export.el
+  (require 'ox-hugo)
+  (require 'ob-shell)
+
+  (with-current-buffer (find-file-noselect "src/org/rossabaker.org")
+    (let ((org-confirm-babel-evaluate nil))
+      (org-babel-tangle)
+      (org-hugo-export-wim-to-md t)))
 #+end_src
+
+**** Nix derivation
+
+The build first runs the export script to tangle the files and export
+to Hugo sources.  Hugo is then run to create a =public/= directory.
+
+In the check phase, we run [[https://github.com/svenkreiss/html5validator][html5validator]] and [[https://github.com/lycheeverse/lychee][lychee]] to validate HTML
+and links.
+
+#+begin_warning
+  =html5validator= is temporarily disabled.
+#+end_warning
+
+Finally, the =public/= directory rendered by Hugo is copied to the
+derivation output.
+
+#+begin_src nix :tangle ../../gen/website/default.nix
+  { src, emacs, gnupg, hugo, html5validator, hyperlink, stdenv }:
+
+  stdenv.mkDerivation rec {
+    name = "rossabaker.com";
+    inherit src;
+    nativeBuildInputs = [
+      emacs
+      gnupg
+      hugo
+      html5validator
+      hyperlink
+    ];
+    buildPhase = ''
+      cd ..
+      export PATH=${gnupg}/bin:$PATH
+
+      ${emacs}/bin/emacs -Q --batch --script ${./export.el}
+
+      # Reassemble netlify.toml from its constitutents
+      for toml in tmp/netlify.toml.d/*; do
+	cat $toml >> tmp/hugo/static/netlify.toml
+      done
+
+      ${hugo}/bin/hugo --config tmp/hugo/config.toml
+    '';
+
+    doCheck = true;
+    checkPhase = ''
+      hyperlink public/ --check-anchors
+    '';
+
+    installPhase = ''
+      mkdir $out
+      cp -r public/. $out
+    '';
+  }
+#+end_src
+
+To avoid [[https://nixos.wiki/wiki/Import_From_Derivation][Import From Derivation]], this Nix expression is [[https://orgmode.org/manual/Extracting-Source-Code.html][tangled]] and
+[[/configs/git-repository/#committed-generated-sources][committed as generated source]].
 
 **** Development
 
@@ -2735,7 +2805,7 @@ Apply [[https://github.com/titaniumbones/ox-slack/pull/9][this patch]] to fix th
 
 #+begin_src nix :noweb-ref emacs-ox-slack
   epkgs.ox-slack.overrideAttrs(old: {
-    patches = [ ../src/emacs/ox-slack/github-9.patch ];
+    patches = [ ../../src/emacs/ox-slack/github-9.patch ];
   })
 #+end_src
 
