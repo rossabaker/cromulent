@@ -361,8 +361,8 @@ CLOSED: [2022-08-24 Wed 15:04 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: git-repository
 :EXPORT_HUGO_LASTMOD: [2023-05-25 Thu 23:54 EDT]
-:header-args:gitignore :tangle ../../.gitignore
-:header-args:gitattributes :tangle ../../.gitattributes
+:header-args:gitignore: :tangle ../../.gitignore
+:header-args:gitattributes: :tangle ../../.gitattributes
 :END:
 
 My [[https://github.com/rossabaker/cromulent][personal Git repository]] hosts my configurations and this web site.
