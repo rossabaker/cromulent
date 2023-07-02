@@ -3,6 +3,7 @@
 #+hugo_section: /
 #+startup: logdone
 #+property: header-args :eval never :mkdirp yes
+#+macro: abbr @@html:<abbr title="$1">$2</abbr>@@
 
 * DONE Home page                                                   :noexport:
 CLOSED: [2022-09-05 Mon 00:30]
@@ -197,7 +198,61 @@ and jogs when it's not.
 @@hugo:</div>@@
 
 * DONE Public keys              :@tech:keys:pgp:wkd:noexport:
-* DONE Contact             :@personal:contact:verification:keyoxide:noexport:
+* DONE Contact             :@personal:contact:verification:keyoxide:
+CLOSED: [2022-10-16 Sun 15:37 EDT]
+:PROPERTIES:
+:DESCRIPTION: How to contact Ross A. Baker about various subjects via various protocols.
+:EXPORT_FILE_NAME: contact
+:EXPORT_HUGO_LASTMOD: [2023-06-27 Tue 00:41 EDT]
+:END:
+** Direct communication
+
+I can't offer an {{{abbr(service-level agreement,SLA)}}} on response
+times, but I try to carry my Midwestern Nice online.
+
+- Email :: [[mailto:ross@rossabaker.com][~ross@rossabaker.com~]]; optionally with [[/public-keys/#pgp][PGP]]
+- Matrix ::  [[https://matrix.to/#/@ross:rossabaker.com][~@ross:rossabaker.com~]]
+- ActivityPub[fn:16] :: [[https://social.rossabaker.com/@ross][~@ross@rossabaker.com~]]
+
+*** Pronouns
+
+My pronouns are *he* / *him* / *his*, and I will respect yours.
+** Special topics
+
+*** Open source inquiries
+
+I would rather connect in public, where everyone can benefit from the
+discussion.  Most of my open source is hosted on one of the following
+forges:
+
+- GitHub :: [[https://github.com/rossabaker][~@rossabaker~]]
+- Codeberg :: [[https://codeberg.org/rossabaker][~@rossabaker~]]
+
+**** Vulnerability disclosures
+
+I participate in [[https://en.wikipedia.org/wiki/Coordinated_vulnerability_disclosure][coordinated vulnerability disclosure]].  I try to cover
+each project with an organization policy or a ~SECURITY.md~ in the
+root directory.  If in doubt, contact me [[*Direct communication][directly]].
+
+*** Employment inquiries
+
+**** Relocation
+
+I am willing to relocate if you are the Chicago Cubs.
+
+#+begin_warning
+I am over the hill, haven't played organized ball since junior high,
+and wasn't good back then.
+#+end_warning
+
+**** Crypto
+
+No.
+
+** Footnotes
+** TODO Broken links                                               :noexport:
+- pgp
+
 * Configurations section                                              :@tech:
 :PROPERTIES:
 :EXPORT_HUGO_BUNDLE: configs
@@ -6304,3 +6359,5 @@ Language, but YAML Ain't Markup Language.
 [fn:14] [[http://pgp.mit.edu/faq.html][MIT PGP Public Key Server: Frequently Asked Questions]]
 
 [fn:15] [[https://keys.openpgp.org/about/faq#federation][Is keys.openpgp.org federated?]]
+
+[fn:16] Currently implemented with Mastodon
