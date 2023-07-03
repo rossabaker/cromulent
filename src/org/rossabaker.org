@@ -822,9 +822,10 @@ this template so less gets repeated in the section overrides.  I'm
 still missing something.
 
 **** DONE Home page template
-CLOSED: [2022-10-12 Wed 00:05]
+CLOSED: [2022-10-12 Wed 00:05 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: home
+:EXPORT_HUGO_LASTMOD: [2023-07-02 Sun 23:52 EDT]
 :END:
 
 The home page is rendered as a paginated list.  We want branch bundles,
@@ -851,8 +852,8 @@ pages.
                           {{ partial "article-summary" . }}
                       </li>
                   {{ end}}
-                  {{ template "_internal/pagination.html" . }}
               </ul>
+              {{ template "_internal/pagination.html" . }}
           </section>
       </article>
   {{ end }}
@@ -1087,10 +1088,10 @@ Mute the color and count, because it's all about the terms:
 #+end_src
 
 **** DONE Taxonomy term template
-CLOSED: [2022-09-02 Fri 13:10]
+CLOSED: [2022-09-02 Fri 13:10 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: term
-:EXPORT_HUGO_LASTMOD: <2022-10-12 Wed 22:40>
+:EXPORT_HUGO_LASTMOD: [2023-07-02 Sun 23:51 EDT]
 :END:
 
 Taxonomy terms (e.g., ~/categories/tech~) are rendered in a simple
@@ -1101,18 +1102,18 @@ template that lists the article summaries in reverse order of modification.
       <h1>{{ .Name }}</h1>
 
       {{ with .Content }}
-          {{ . }}
+	  {{ . }}
       {{ end }}
 
       <ul class="article-summaries">
-          {{ $paginator := .Paginate .Pages.ByLastmod.Reverse 10 }}
-          {{ range $paginator.Pages }}
-              <li>
-                  {{ partial "article-summary" . }}
-              </li>
-          {{ end }}
-          {{ template "_internal/pagination.html" . }}
+	  {{ $paginator := .Paginate .Pages.ByLastmod.Reverse 10 }}
+	  {{ range $paginator.Pages }}
+	      <li>
+		  {{ partial "article-summary" . }}
+	      </li>
+	  {{ end }}
       </ul>
+      {{ template "_internal/pagination.html" . }}
   {{ end }}
 #+end_src
 
@@ -1860,10 +1861,6 @@ to Hugo sources.  Hugo is then run to create a =public/= directory.
 In the check phase, we run [[https://github.com/svenkreiss/html5validator][html5validator]] and [[https://github.com/lycheeverse/lychee][lychee]] to validate HTML
 and links.
 
-#+begin_warning
-  =html5validator= is temporarily disabled.
-#+end_warning
-
 Finally, the =public/= directory rendered by Hugo is copied to the
 derivation output.
 
@@ -1896,6 +1893,7 @@ derivation output.
 
     doCheck = true;
     checkPhase = ''
+      html5validator --log INFO --root public
       hyperlink public/ --check-anchors
     '';
 

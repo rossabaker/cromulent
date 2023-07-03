@@ -26,6 +26,7 @@ stdenv.mkDerivation rec {
 
   doCheck = true;
   checkPhase = ''
+    html5validator --log INFO --root public
     hyperlink public/ --check-anchors
   '';
 
