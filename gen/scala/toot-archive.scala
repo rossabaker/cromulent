@@ -1,5 +1,5 @@
-//> using lib "co.fs2::fs2-io:3.3.0"
-//> using lib "io.circe::circe-parser:0.14.3"
+//> using lib "co.fs2::fs2-io:3.7.0"
+//> using lib "io.circe::circe-parser:0.14.5"
 
 import cats._
 import cats.effect._
@@ -59,10 +59,10 @@ def getId[F[_]: ApplicativeThrow](json: Json): F[Long] =
 def getHashtags(json: Json): Decoder.Result[Vector[String]] =
   json.hcursor
     .downField("object")
-    .get[Vector[Map[String, String]]]("tag")
+    .get[Vector[Map[String, Json]]]("tag")
     .map(_.collect {
-      case m if m.get("type") === Some("Hashtag") =>
-        "\"" + (m("name") match {
+      case m if m.get("type") === Some(Json.fromString("Hashtag")) =>
+        "\"" + (m("name").as[String].getOrElse("") match {
           case "#AllSaintsSunday" => "all-saints-sunday"
           case "#GoIU" => "hoosiers"
           case "#GoingViral" => "going-viral"

@@ -5022,10 +5022,9 @@ The well-known files need CORS headers.  If deploying to Netlify, add this to ~n
 
 
 ** DONE Archive your toots to Hugo :@tech:scala:scala_cli:indieweb:hugo:pesos:mastodon:activity_streams:own_your_data:fs2:circe:
-CLOSED: [2022-11-21 Mon 21:04 EST]
 :PROPERTIES:
-:EXPORT_DATE: <2022-11-07 Mon 22:37>
-:EXPORT_HUGO_LASTMOD: <2022-11-15 Tue 12:37>
+:EXPORT_DATE: [2022-11-07 Mon 22:37 EST]
+:EXPORT_HUGO_LASTMOD: [2023-07-03 Mon 01:10 EDT]
 :EXPORT_DESCRIPTION: How to batch archive an exported stream of Mastodon toots to a Hugo website using Scala CLI
 :EXPORT_OPTIONS: h:6
 :EXPORT_FILE_NAME: toot-archive
@@ -5158,8 +5157,8 @@ it yourself]].
 This script uses [[https://fs2.io/#/][fs2]] and [[https://circe.github.io/circe/][circe]].  These lines fetch those dependencies:
 
 #+begin_src scala :tangle ../../gen/scala/toot-archive.scala
-  //> using lib "co.fs2::fs2-io:3.3.0"
-  //> using lib "io.circe::circe-parser:0.14.3"
+  //> using lib "co.fs2::fs2-io:3.7.0"
+  //> using lib "io.circe::circe-parser:0.14.5"
 #+end_src
 
 **** Imports
@@ -5295,10 +5294,10 @@ In the long run, this mapping should be parameterized.
   def getHashtags(json: Json): Decoder.Result[Vector[String]] =
     json.hcursor
       .downField("object")
-      .get[Vector[Map[String, String]]]("tag")
+      .get[Vector[Map[String, Json]]]("tag")
       .map(_.collect {
-        case m if m.get("type") === Some("Hashtag") =>
-          "\"" + (m("name") match {
+        case m if m.get("type") === Some(Json.fromString("Hashtag")) =>
+          "\"" + (m("name").as[String].getOrElse("") match {
             case "#AllSaintsSunday" => "all-saints-sunday"
             case "#GoIU" => "hoosiers"
             case "#GoingViral" => "going-viral"
@@ -6445,11 +6444,11 @@ Surely this list isn't complete.  Did I overlook your favorite?
 :EXPORT_HUGO_BUNDLE: notes
 :END:
 ** DONE Notes :@personal:indieweb:microblog:own_your_data:
-CLOSED: [2022-11-07 Mon 09:53]
+CLOSED: [2022-11-07 Mon 09:53 EST]
 :PROPERTIES:
 :EXPORT_HUGO_TITLE: Notes
 :EXPORT_FILE_NAME: _index
-:EXPORT_HUGO_LASTMOD: <2022-11-22 Tue 22:28 EST>
+:EXPORT_HUGO_LASTMOD: [2023-07-03 Mon 00:50 EDT]
 :END:
 
 #+begin_description
@@ -6463,7 +6462,8 @@ Content is archived here in the Indieweb spirit of [[https://indieweb.org/own_yo
 
 Includes:
 - [[https://mastodon.social/web/@rossabaker][@rossabaker@mastodon.social]] account (April 2017 — November 2022)
-- [[https://indieweb.social/web/@rossabaker][@rossabaker@indieweb.social]] account (November 2022 — present, periodically synced)
+- [[https://indieweb.social/web/@rossabaker][@rossabaker@indieweb.social]] account (November 2022)
+- [[https://social.rossabaker.com/@ross][@ross@rossabaker.com]] account (November 2022 — present, periodically synchronized)
 
 * Stashed
 
