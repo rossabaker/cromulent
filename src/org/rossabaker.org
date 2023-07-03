@@ -4046,6 +4046,7 @@ Finally, a convenience function to reload it:
 CLOSED: [2023-06-23 Fri 00:26 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: garnix
+:EXPORT_HUGO_LASTMOD: [2023-07-03 Mon 16:07 EDT]
 :END:
 
 I have an Apple M1 for work, which is [[https://github.com/github/roadmap/issues/528][not yet supported by GitHub
@@ -4058,10 +4059,10 @@ and my home-manager configuration.
 
 #+begin_src yaml :tangle ../../garnix.yaml
   builds:
-  include:
-    - 'devShells.aarch64-darwin.default'
-    - 'packages.aarch64-darwin.aarch64-darwin-config-base'
-    - 'packages.aarch64-darwin.RABaker@L2LYQM57XY'
+    include:
+      - 'devShells.aarch64-darwin.default'
+      - 'packages.aarch64-darwin.aarch64-'darwin-config-base'
+      - 'packages.aarch64-darwin.RABaker@L2LYQM57XY'
 #+end_src
 
 *** Caching
