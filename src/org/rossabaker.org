@@ -1928,7 +1928,7 @@ Our build creates some detritus that we don't want checked into Git.
 CLOSED: [2022-08-30 Tue 14:26]
 :PROPERTIES:
 :EXPORT_FILE_NAME: style
-:EXPORT_HUGO_LASTMOD: <2022-11-22 Tue 20:25 EST>
+:EXPORT_HUGO_LASTMOD: <2023-07-04 Tue 19:03 EDT>
 :CUSTOM_ID: css-baseline
 :END:
 
@@ -2018,7 +2018,7 @@ crimson.
       --color-brand: #9d2235;
       --color-brand-darker: #731927;
       --color-stripe: #ffffff;
-      --link-color: #229d8a;
+      --link-color: #146357;
   }
 #+end_src
 
