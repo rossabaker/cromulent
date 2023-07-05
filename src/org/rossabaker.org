@@ -1685,7 +1685,7 @@ Mute the header anchors until hover:
 CLOSED: [2022-09-12 Mon 22:11 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: contact-info
-:EXPORT_HUGO_LASTMOD: [2023-07-04 Tue 23:53 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-07-05 Wed 11:30 EDT]
 :END:
 
 Contact info is rendered in two places: in the [[*Footer template][footer template]] and on the
@@ -1800,18 +1800,19 @@ Keys are:
 #+begin_src html :tangle ../../tmp/hugo/layouts/partials/contact-info-icons.html
   <ul class="contacts">
       {{ range where .Site.Params.contacts "support" "eq" "supported" }}
-          <li><a href="{{ .url }}" {{ with (findRE "^https?://" .url 1) }}rel="me"{{ end }}><img src="/img/icons/{{ .icon | default (.network | urlize) }}.svg" role="img" alt="{{.network}}" /></a></li>
+	<li><a href="{{ .url }}" {{ with (findRE "^https?://" .url 1) }}rel="me"{{ end }}>
+	    {{ $src := printf "%s/%s.svg" "/src/hugo/static/img/icons" (.icon | default (.network | urlize)) }}
+	    {{ readFile $src | safeHTML }}
+	</a></li>
       {{ end }}
   </ul>
 #+end_src
 
-I calculated the filter from the link color with [[https://codepen.io/sosuke/pen/Pjoqqp][this tool]].  Seems, uh, hard to maintain.
-
 #+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
-  ul.contacts img {
+  ul.contacts svg {
       width: 1.5em;
       height: 1.5em;
-      filter: invert(30%) sepia(28%) saturate(1151%) hue-rotate(121deg) brightness(92%) contrast(88%);
+      fill: var(--link-color);
   }
 #+end_src
 
