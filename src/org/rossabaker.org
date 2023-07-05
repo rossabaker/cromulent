@@ -607,10 +607,10 @@ configuration, export the content to Markdown with with [[https://ox-hugo.script
 convert the Markdown to HTML with [[https://gohugo.io/][Hugo]].
 
 *** DONE Site configuration                   :hugo:org_mode:ox_hugo:nix:aol:
-CLOSED: [2022-09-01 Thu 16:48]
+CLOSED: [2022-09-01 Thu 16:48 EDTt]
 :PROPERTIES:
 :EXPORT_FILE_NAME: hugo
-:EXPORT_HUGO_LASTMOD: <2022-11-22 Tue 22:14 EST>
+:EXPORT_HUGO_LASTMOD: [2023-07-04 Tue 23:32 EDT]
 :END:
 
 A Hugo site can be configured with either TOML or YAML.  I spent my
@@ -680,7 +680,7 @@ pipeline.
 
 #+begin_src conf-toml :tangle ../../tmp/hugo/config.toml
   [Params]
-    css = [ 'sanitize.css', 'assets.css', 'cromulent.css', 'chroma.css', 'noto-fonts.css', 'fork-awesome.css', 'ox-hugo.css' ]
+    css = [ 'sanitize.css', 'assets.css', 'cromulent.css', 'chroma.css', 'noto-fonts.css', 'ox-hugo.css' ]
     description = "A perfectly cromulent developer."
     username = 'rossabaker'
 
@@ -1682,10 +1682,10 @@ Mute the header anchors until hover:
 #+end_src
 
 **** DONE Contact info templates
-CLOSED: [2022-09-12 Mon 22:11]
+CLOSED: [2022-09-12 Mon 22:11 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: contact-info
-:EXPORT_HUGO_LASTMOD: <2022-10-28 Fri 11:37>
+:EXPORT_HUGO_LASTMOD: [2023-07-04 Tue 23:53 EDT]
 :END:
 
 Contact info is rendered in two places: in the [[*Footer template][footer template]] and on the
@@ -1708,7 +1708,6 @@ Keys are:
 #+begin_src conf-toml :tangle ../../tmp/hugo/config.toml
   [[Params.contacts]]
   network = 'Email'
-  icon = 'envelope-o'
   handle = 'ross@rossabaker.com'
   url = 'mailto:ross@rossabaker.com'
   support = 'supported'
@@ -1721,7 +1720,6 @@ Keys are:
 
   [[Params.contacts]]
   network = 'Matrix'
-  icon = 'matrix-org'
   handle = '@ross:rossabaker.com'
   url = 'https://matrix.to/#/@ross:rossabaker.com'
   support = 'supported'
@@ -1800,11 +1798,21 @@ Keys are:
 ***** ~contact-info-icons~ partial template
 
 #+begin_src html :tangle ../../tmp/hugo/layouts/partials/contact-info-icons.html
-  <ul>
+  <ul class="contacts">
       {{ range where .Site.Params.contacts "support" "eq" "supported" }}
-          <li><a href="{{ .url }}" {{ with (findRE "^https?://" .url 1) }}rel="me"{{ end }}><span class="fa fa-{{ .icon | default (.network | urlize) }}"></span></a></li>
+          <li><a href="{{ .url }}" {{ with (findRE "^https?://" .url 1) }}rel="me"{{ end }}><img src="/img/icons/{{ .icon | default (.network | urlize) }}.svg" role="img" alt="{{.network}}" /></a></li>
       {{ end }}
   </ul>
+#+end_src
+
+I calculated the filter from the link color with [[https://codepen.io/sosuke/pen/Pjoqqp][this tool]].  Seems, uh, hard to maintain.
+
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
+  ul.contacts img {
+      width: 1.5em;
+      height: 1.5em;
+      filter: invert(30%) sepia(28%) saturate(1151%) hue-rotate(121deg) brightness(92%) contrast(88%);
+  }
 #+end_src
 
 ***** ~contact-info-dl~ shortcode
