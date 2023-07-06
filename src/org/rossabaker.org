@@ -2129,7 +2129,7 @@ Give the code samples a little more room to breathe.
 CLOSED: [2023-02-23 Thu 23:59 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: emacs
-:EXPORT_HUGO_LASTMOD: [2023-06-21 Wed 00:12 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-07-05 Wed 22:22 EDT]
 :header-args: :tangle-mode `,#o444 :mkdirp yes
 :header-args:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444 :mkdirp yes
 :EXPORT_OPTIONS: h:6
@@ -2375,6 +2375,16 @@ minibuffer completion.
 #+begin_src emacs-lisp
   (setopt read-quoted-char-radix 16)
 #+end_src
+****** Delete Selection Mode
+
+Typing over an active section should delete the section.
+
+#+begin_src emacs-lisp
+  (use-package delsel
+    :defer t
+    :custom
+    (delete-selection-mode))
+#+end_src
 
 ****** Mark ring
 :PROPERTIES:
@@ -2421,6 +2431,16 @@ values.
     :custom
     (save-interprogram-paste-before-kill t)
     (kill-do-not-save-duplicates t))
+#+end_src
+***** Matching
+****** Bookmark
+
+Persist bookmarks each time we set one, not when Emacs exits.
+
+#+begin_src emacs-lisp
+  (use-package bookmark
+    :custom
+    (bookmark-save-flag 1))
 #+end_src
 
 **** Convenience
@@ -3271,13 +3291,14 @@ that something tailor-made carries its weight here.
     :custom
     (magit-clone-default-directory "~/src/")
     (magit-no-message (list "Turning on magit-auto-revert-mode..."))
+    (magit-save-repository-buffers 'dontask)
     :config
     (defun ross/magit-clone-read-args-a (orig-fun &rest args)
       "Sets `vertico-preselect' to `prompt' when cloning repos, so we
   clone to the default prompted directory, and not some random
   existing directory under `magit-clone-default-directory'."
       (let ((vertico-preselect 'prompt))
-        (apply orig-fun args)))
+	(apply orig-fun args)))
     (advice-add 'magit-clone-read-args :around #'ross/magit-clone-read-args-a))
 #+end_src
 
@@ -3433,6 +3454,18 @@ exported to HTML.
 :PROPERTIES:
 :CUSTOM_ID: environment
 :END:
+
+***** Dired
+
+Dired should refresh the listing on each revisit.
+
+#+begin_src emacs-lisp
+  (use-package dired
+    :defer
+    :custom
+    (dired-auto-revert-buffer t))
+#+end_src
+
 ***** Frames
 :PROPERTIES:
 :CUSTOM_ID: frames

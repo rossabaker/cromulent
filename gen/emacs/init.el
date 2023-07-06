@@ -54,12 +54,21 @@
 
 (setopt read-quoted-char-radix 16)
 
+(use-package delsel
+  :defer t
+  :custom
+  (delete-selection-mode))
+
 (setopt set-mark-command-repeat-pop t)
 
 (use-package simple
   :custom
   (save-interprogram-paste-before-kill t)
   (kill-do-not-save-duplicates t))
+
+(use-package bookmark
+  :custom
+  (bookmark-save-flag 1))
 
 (use-package copilot
   :ensure t
@@ -415,6 +424,7 @@ with EXPORT_FILE_NAME."
   :custom
   (magit-clone-default-directory "~/src/")
   (magit-no-message (list "Turning on magit-auto-revert-mode..."))
+  (magit-save-repository-buffers 'dontask)
   :config
   (defun ross/magit-clone-read-args-a (orig-fun &rest args)
     "Sets `vertico-preselect' to `prompt' when cloning repos, so we
@@ -465,6 +475,11 @@ existing directory under `magit-clone-default-directory'."
 (use-package htmlize
   :ensure t
   :after ox-html)
+
+(use-package dired
+  :defer
+  :custom
+  (dired-auto-revert-buffer t))
 
 (setopt frame-inhibit-implied-resize t)
 
