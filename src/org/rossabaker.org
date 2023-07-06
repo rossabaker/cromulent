@@ -8,18 +8,23 @@
 CLOSED: [2022-09-05 Mon 00:30 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: _index
-:EXPORT_HUGO_LASTMOD: [2023-07-02 Sun 01:36 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-07-05 Wed 23:29 EDT]
 :END:
 
-#+attr_html: :class under-construction :alt Pixelated animated gif with cartoon man shoveling, in the style of a retro \"Under Construction\" image.
+#+attr_html: :class under-construction :alt Pixelated construction sign of a stick figure shoveling on a bezeled gray background, in the style of a late 1990s \"Under Construction\" GIF.
 [[./img/under-construction.gif]]
 
 ** Extra style                                                     :noexport:
 #+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css :exports none
   .under-construction {
-      width: 5em;
-      height: 5rem;
+      width: 6rem;
+      height: 6rem;
       margin: 0 auto;
+  }
+
+  .under-construction img {
+      width: 100%;
+      height: 100%;
   }
 #+end_src
 
