@@ -1,9 +1,8 @@
-#+PROPERTY: header-args :mkdirp yes
-#+hugo_base_dir: ../../tmp/hugo
-#+hugo_section: /
-#+startup: logdone
-#+property: header-args :eval never :mkdirp yes
-#+macro: abbr @@html:<abbr title="$1">$2</abbr>@@
+#+HUGO_BASE_DIR: ../../tmp/hugo
+#+HUGO_SECTION: /
+#+MACRO: abbr @@html:<abbr title="$1">$2</abbr>@@
+#+PROPERTY: header-args :eval never :mkdirp yes
+#+STARTUP: logdone
 
 * DONE Home page
 CLOSED: [2022-09-05 Mon 00:30 EDT]
