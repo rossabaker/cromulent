@@ -1,3 +1,4 @@
+#+EXPORT_EXCLUDE_TAGS: noexport
 #+HUGO_BASE_DIR: ../../tmp/hugo
 #+HUGO_SECTION: /
 #+MACRO: abbr @@html:<abbr title="$1">$2</abbr>@@
