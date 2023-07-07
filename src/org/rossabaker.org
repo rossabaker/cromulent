@@ -1214,7 +1214,7 @@ an error logging into the Indiewebring without it.
 
 #+begin_src html :tangle ../../tmp/hugo/layouts/partials/head.html
   {{ if .IsHome }}
-  <link rel="pgpkey authn" href="/.well-known/openpgpkey/hu/eimhw3om3jynrs7fo7r7rrssmt1o4yxp">
+  <link rel="pgpkey" href="/.well-known/openpgpkey/hu/eimhw3om3jynrs7fo7r7rrssmt1o4yxp">
   <link rel="authorization_endpoint" href="https://indieauth.com/auth">
   {{ end }}
 #+end_src
