@@ -8,7 +8,7 @@
 CLOSED: [2022-09-05 Mon 00:30 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: _index
-:EXPORT_HUGO_LASTMOD: [2023-07-07 Fri 00:06 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-07-07 Fri 14:40 EDT]
 :END:
 
 #+begin_quote
@@ -16,9 +16,9 @@ CLOSED: [2022-09-05 Mon 00:30 EDT]
   With Emacs!  And Nix! \\
   In fact, forget the site.
 #+end_quote
-
+#+hugo:more
 #+attr_html: :class under-construction :alt Pixelated construction sign of a stick figure shoveling on a bezeled gray background, in the style of a late 1990s \"Under Construction\" GIF.
-[[./img/under-construction.gif]]
+[[file:under-construction.gif]]
 
 ** Extra style                                                     :noexport:
 #+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css :exports none
@@ -38,7 +38,7 @@ CLOSED: [2022-09-05 Mon 00:30 EDT]
       margin: 0 auto;
   }
 
-  .under-construction img {
+  img[src$="under-construction.gif"] {
       width: 100%;
       height: 100%;
   }
@@ -5888,9 +5888,9 @@ Ross is buried in the rubble.
 
 *** Under Construction
 
-#+attr_html: :alt A pixelated, animated GIF from the 1990s of a construction worker shoveling. :class blog-image
+#+attr_html: :class blog-image :alt Pixelated construction sign of a stick figure shoveling on a bezeled gray background, in the style of a late 1990s \"Under Construction\" GIF. :style "height: 100%; width: 100%;"
 #+caption: Under construction
-[[file:img/under-construction.gif]]
+[[file:under-construction.gif]]
 
 I'm embracing imperfection and reconstructing myself on the [[https://indieweb.org/][Indieweb]].
 I've been in fiddling with the [[/configs/website][site tooling]] for weeks before
