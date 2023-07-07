@@ -1141,6 +1141,7 @@ template that lists the article summaries in reverse order of modification.
 CLOSED: [2022-09-02 Fri 10:29]
 :PROPERTIES:
 :EXPORT_FILE_NAME: head
+:EXPORT_HUGO_LASTMOD: [2023-07-07 Fri 18:03 EDT]
 :END:
 
 This template defines our default ~<head>~ element, and is not often
@@ -1208,9 +1209,13 @@ Render our RSS feed.  Putting it in a ~<link>~ integrates with various
 
 Set up [[https://indieauth.com/pgp][IndieAuth with PGP]].
 
+I can't tell whether I need =authorization_endpoint=, but I'm getting
+an error logging into the Indiewebring without it.
+
 #+begin_src html :tangle ../../tmp/hugo/layouts/partials/head.html
   {{ if .IsHome }}
-  <link rel="pgpkey" href="/.well-known/openpgpkey/hu/eimhw3om3jynrs7fo7r7rrssmt1o4yxp">
+  <link rel="pgpkey authn" href="/.well-known/openpgpkey/hu/eimhw3om3jynrs7fo7r7rrssmt1o4yxp">
+  <link rel="authorization_endpoint" href="https://indieauth.com/auth">
   {{ end }}
 #+end_src
 
