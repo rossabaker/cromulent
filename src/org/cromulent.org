@@ -1,4 +1,3 @@
-#+EXPORT_EXCLUDE_TAGS: noexport
 #+HUGO_BASE_DIR: ../../tmp/hugo
 #+HUGO_SECTION: /
 #+MACRO: abbr @@html:<abbr title="$1">$2</abbr>@@
@@ -497,6 +496,8 @@ We set all these gitattributes for all tangled sources.  The
 :END:
 
 #+begin_src org :tangle ../../README.org
+  ,#+EXPORT_EXCLUDE_TAGS: noexport
+
   ,* Cromulent
 
   This repository hosts my configuration and [[https://rossabaker.com/][personal website]].  The most
