@@ -1606,10 +1606,10 @@ Render the HTML list as a Lispy, inline list.
 #+end_src
 
 **** DONE Footer template
-CLOSED: [2022-09-02 Fri 10:35]
+CLOSED: [2022-09-02 Fri 10:35 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: footer
-:EXPORT_HUGO_LASTMOD: <2022-11-22 Tue 23:43 EST>
+:EXPORT_HUGO_LASTMOD: [2023-07-07 Fri 18:19 EDT]
 :END:
 
 The footer is a simple ~<address>~ [[http://microformats.org/wiki/hcard][hCard]] with our name, pronouns, and
@@ -1621,9 +1621,9 @@ verification.
   <address class="h-card vcard">
       <img class="u-photo" alt="Profile photo of Ross A. Baker" src="/img/profile.jpg" />
       <a class="u-url u-uid p-name" href="https://rossabaker.com/">
-          <span class="p-given-name">Ross</span>
-          <span class="p-additional-name"><abbr>A.</abbr></span>
-          <span class="p-family-name">Baker</span>
+	  <span class="p-given-name">Ross</span>
+	  <span class="p-additional-name"><abbr>A.</abbr></span>
+	  <span class="p-family-name">Baker</span>
       </a>
       <small><span class="u-pronoun">(he/him)</span></small><br />
       {{ partial "contact-info-icons" . }}
@@ -1631,10 +1631,10 @@ verification.
 
   <p><a href="/license">License</a></p>
 
-  <small>
-  <a href="https://xn--sr8hvo.ws/%E2%AC%9B%EF%B8%8F%E2%9A%93%EF%B8%8F%E2%97%BC%EF%B8%8F/previous">←</a>
-  An <a href="https://xn--sr8hvo.ws/">IndieWeb Webring</a> 🕸💍
-  <a href="https://xn--sr8hvo.ws/%E2%AC%9B%EF%B8%8F%E2%9A%93%EF%B8%8F%E2%97%BC%EF%B8%8F/next">→</a>
+  <small class="indiewebring">
+    <a href="https://xn--sr8hvo.ws/previous">←</a>
+    An <a href="https://xn--sr8hvo.ws">IndieWeb Webring</a> 🕸💍
+    <a href="https://xn--sr8hvo.ws/next">→</a>
   </small>
 #+end_src
 
@@ -1666,6 +1666,12 @@ verification.
       height: 3.2rem;
       border-radius: 50%;
       margin: 0 1rem;
+  }
+
+  .indiewebring {
+      width: 100%;
+      display: inline-block;
+      text-align: center;
   }
 #+end_src
 
