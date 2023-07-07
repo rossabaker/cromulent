@@ -8,15 +8,31 @@
 CLOSED: [2022-09-05 Mon 00:30 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: _index
-:EXPORT_HUGO_LASTMOD: [2023-07-05 Wed 23:29 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-07-07 Fri 00:06 EDT]
 :END:
+
+#+begin_quote
+  Yeah, well, I'm going to go build my own site. \\
+  With Emacs!  And Nix! \\
+  In fact, forget the site.
+#+end_quote
 
 #+attr_html: :class under-construction :alt Pixelated construction sign of a stick figure shoveling on a bezeled gray background, in the style of a late 1990s \"Under Construction\" GIF.
 [[./img/under-construction.gif]]
 
 ** Extra style                                                     :noexport:
 #+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css :exports none
+  article.home-page blockquote {
+      font-size: 2em;
+      margin: 0 0 0 1.5rem;
+  }
+
+  article.home-page blockquote p {
+      margin: 0;
+  }
+
   .under-construction {
+      clear: both;
       width: 6rem;
       height: 6rem;
       margin: 0 auto;
@@ -840,25 +856,25 @@ pages.
 
 #+begin_src html :tangle ../../tmp/hugo/layouts/index.html
   {{ define "main" }}
-      <h1 class="site-title">{{ .Site.Title }}</h1>
-      {{ with .Content }}
-          {{ . }}
-      {{ end }}
+      <article class="home-page">
+	  <h1 class="site-title">{{ .Site.Title }}</h1>
+	  {{ with .Content }}
+	      {{ . }}
+	  {{ end }}
 
-      <article>
-          <section class="recently-updated">
-              <h2>Recently updated</h2>
+	  <section class="recently-updated">
+	      <h2>Recently updated</h2>
 
-              <ul class="article-summaries">
-                  {{ $paginator := .Paginate (where site.Pages.ByLastmod.Reverse "Kind" "not in" (slice "home" "term" "taxonomy")) }}
-                  {{ range $paginator.Pages }}
-                      <li>
-                          {{ partial "article-summary" . }}
-                      </li>
-                  {{ end}}
-              </ul>
-              {{ template "_internal/pagination.html" . }}
-          </section>
+	      <ul class="article-summaries">
+		  {{ $paginator := .Paginate (where site.Pages.ByLastmod.Reverse "Kind" "not in" (slice "home" "term" "taxonomy")) }}
+		  {{ range $paginator.Pages }}
+		      <li>
+			  {{ partial "article-summary" . }}
+		      </li>
+		  {{ end}}
+	      </ul>
+	      {{ template "_internal/pagination.html" . }}
+	  </section>
       </article>
   {{ end }}
 #+end_src
