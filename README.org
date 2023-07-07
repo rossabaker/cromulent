@@ -1,5 +1,9 @@
 * Cromulent
 
 This repository hosts my configuration and [[https://rossabaker.com/][personal website]].  The most
-interesting source file is [[file:src/org/rossabaker.org][rossabaker.org,]] and the most interesting
-view is the published site.
+interesting source file is [[file:src/org/cromulent.org][cromulent.org]], and the most interesting
+view is the [[https://rossabaker.com/][published site]].
+
+** Generated source :noexport:
+
+This readme is [[file:src/org/cromulent.org::#repository-readme][tangled from cromulent.org]].

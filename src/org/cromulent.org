@@ -487,6 +487,24 @@ We set all these gitattributes for all tangled sources.  The
   flake.nix       -diff -merge linguist-generated=true
   flake.lock      -diff -merge linguist-generated=true
   garnix.yaml     -diff -merge linguist-generated=true
+  README.org      -diff -merge linguist-generated=true
+#+end_src
+
+*** Readme                                                         :noexport:
+:PROPERTIES:
+:CUSTOM_ID: repository-readme
+:END:
+
+#+begin_src org :tangle ../../README.org
+  ,* Cromulent
+
+  This repository hosts my configuration and [[https://rossabaker.com/][personal website]].  The most
+  interesting source file is [[file:src/org/cromulent.org][cromulent.org]], and the most interesting
+  view is the [[https://rossabaker.com/][published site]].
+
+  ,** Generated source :noexport:
+
+  This readme is [[file:src/org/cromulent.org::#repository-readme][tangled from cromulent.org]].
 #+end_src
 
 *** Redirect                                                       :noexport:
@@ -822,7 +840,7 @@ CLOSED: [2022-09-02 Fri 12:53]
 :END:
 
 Most pages on the site are "single pages".  These are generally the
-subtrees in the [[https://github.com/rossabaker/cromulent/blob/main/src/org/rossabaker.org][source]] with ~EXPORT_FILE_NAME~ not equal to ~_index~.
+subtrees in the [[https://github.com/rossabaker/cromulent/blob/main/src/org/cromulent.org][source]] with ~EXPORT_FILE_NAME~ not equal to ~_index~.
 Think of them as the articles.  Indeed, we mark them up in an
 ~<article>~ tag.
 #+hugo:more
@@ -1894,7 +1912,7 @@ exports its contents with ox-hugo.
   (require 'ox-hugo)
   (require 'ob-shell)
 
-  (with-current-buffer (find-file-noselect "src/org/rossabaker.org")
+  (with-current-buffer (find-file-noselect "src/org/cromulent.org")
     (let ((org-confirm-babel-evaluate nil))
       (org-babel-tangle)
       (org-hugo-export-wim-to-md t)))

@@ -4,3 +4,4 @@ gen/**          -diff -merge linguist-generated=true
 flake.nix       -diff -merge linguist-generated=true
 flake.lock      -diff -merge linguist-generated=true
 garnix.yaml     -diff -merge linguist-generated=true
+README.org      -diff -merge linguist-generated=true
