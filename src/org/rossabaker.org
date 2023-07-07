@@ -8,7 +8,7 @@
 CLOSED: [2022-09-05 Mon 00:30 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: _index
-:EXPORT_HUGO_LASTMOD: [2023-07-07 Fri 14:40 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-07-07 Fri 19:15 EDT]
 :END:
 
 #+begin_quote
@@ -17,22 +17,29 @@ CLOSED: [2022-09-05 Mon 00:30 EDT]
   In fact, forget the site.
 #+end_quote
 #+hugo:more
+
+This is +my personal brand+, +my love letter to the Indieweb+, +my
+finely manicured digital garden+, me faffing about as I rediscover the
+joy of computing.  All that is published here should be considered
+@@html:<dfn>@@faff byproduct@@html:</dfn>@@.  Perpetually under
+construction.
+
 #+attr_html: :class under-construction :alt Pixelated construction sign of a stick figure shoveling on a bezeled gray background, in the style of a late 1990s \"Under Construction\" GIF.
 [[file:under-construction.gif]]
 
 ** Extra style                                                     :noexport:
 #+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css :exports none
-  article.home-page blockquote {
-      font-size: 2em;
-      margin: 0 0 0 1.5rem;
+  blockquote {
+      margin: 1.5rem 0;
+      padding: 0 2rem;
+      border-left: #ccc 0.25rem solid;
   }
 
-  article.home-page blockquote p {
-      margin: 0;
+  article.home-page blockquote {
+      font-size: 2em;
   }
 
   .under-construction {
-      clear: both;
       width: 6rem;
       height: 6rem;
       margin: 0 auto;
