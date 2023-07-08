@@ -897,28 +897,34 @@ pages.
 #+hugo:more
 
 #+begin_src html :tangle ../../tmp/hugo/layouts/index.html
-  {{ define "main" }}
-      <article class="home-page">
-	  <h1 class="site-title">{{ .Site.Title }}</h1>
-	  {{ with .Content }}
-	      {{ . }}
-	  {{ end }}
+    {{ define "main" }}
+	<article class="home-page">
+	    <h1 class="site-title">{{ .Site.Title }}</h1>
+	    {{ with .Content }}
+		{{ . }}
+	    {{ end }}
 
-	  <section class="recently-updated">
-	      <h2>Recently updated</h2>
+	    {{ range .Site.Sections }}
+	    <ul>
+	      <li><a href="#">{{ . }}</a></li>
+	    </ul>
+	    {{ end }}
 
-	      <ul class="article-summaries">
-		  {{ $paginator := .Paginate (where site.Pages.ByLastmod.Reverse "Kind" "not in" (slice "home" "term" "taxonomy")) }}
-		  {{ range $paginator.Pages }}
-		      <li>
-			  {{ partial "article-summary" . }}
-		      </li>
-		  {{ end}}
-	      </ul>
-	      {{ template "_internal/pagination.html" . }}
-	  </section>
-      </article>
-  {{ end }}
+	    <section class="recently-updated">
+		<h2>Recently updated</h2>
+
+		<ul class="article-summaries">
+		    {{ $paginator := .Paginate (where site.Pages.ByLastmod.Reverse "Kind" "not in" (slice "home" "term" "taxonomy")) }}
+		    {{ range $paginator.Pages }}
+			<li>
+			    {{ partial "article-summary" . }}
+			</li>
+		    {{ end}}
+		</ul>
+		{{ template "_internal/pagination.html" . }}
+	    </section>
+	</article>
+    {{ end }}
 #+end_src
 
 #+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
@@ -1758,7 +1764,7 @@ Mute the header anchors until hover:
 CLOSED: [2022-09-12 Mon 22:11 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: contact-info
-:EXPORT_HUGO_LASTMOD: [2023-07-05 Wed 11:30 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-07-08 Sat 00:42 EDT]
 :END:
 
 Contact info is rendered in two places: in the [[*Footer template][footer template]] and on the
@@ -1784,6 +1790,7 @@ Keys are:
   handle = 'ross@rossabaker.com'
   url = 'mailto:ross@rossabaker.com'
   support = 'supported'
+  relMe = false
 
   [[Params.contacts]]
   network = 'GitHub'
@@ -1796,6 +1803,7 @@ Keys are:
   handle = '@ross:rossabaker.com'
   url = 'https://matrix.to/#/@ross:rossabaker.com'
   support = 'supported'
+  relMe = false
 
   [[Params.contacts]]
   network = 'Mastodon'
@@ -1873,7 +1881,7 @@ Keys are:
 #+begin_src html :tangle ../../tmp/hugo/layouts/partials/contact-info-icons.html
   <ul class="contacts">
       {{ range where .Site.Params.contacts "support" "eq" "supported" }}
-	<li><a href="{{ .url }}" {{ with (findRE "^https?://" .url 1) }}rel="me"{{ end }}>
+	<li><a href="{{ .url }}" {{ with (not (eq .relMe false)) }}rel="me"{{ end }}>
 	    {{ $src := printf "%s/%s.svg" "/src/hugo/static/img/icons" (.icon | default (.network | urlize)) }}
 	    {{ readFile $src | safeHTML }}
 	</a></li>
