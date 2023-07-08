@@ -240,7 +240,7 @@ and jogs when it's not.
 CLOSED: [2022-09-14 Wed 13:30 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: public-keys
-:EXPORT_HUGO_LASTMOD: [2023-06-27 Tue 01:24 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-07-07 Fri 23:46 EDT]
 :DESCRIPTION: Ross A. Baker's public keys
 :END:
 
@@ -266,7 +266,23 @@ CLOSED: [2022-09-14 Wed 13:30 EDT]
 My PGP public key is published to this domain via [[file:configs/web-key-directory.org][WKD]], and can also be
 downloaded in [[/.well-known/openpgpkey/hu/eimhw3om3jynrs7fo7r7rrssmt1o4yxp][binary]] and [[./0x975BE5BC29D92CA5.pub.asc][ASCII armored]] formats.  Its fingerprint is:
 
-#+call: gpg-fingerprint()
+#+call: gpg-fingerprint() :eval yes
+
+#+RESULTS:
+#+begin_example
+pub   rsa4096 2018-01-31 [SC]
+      904C153733DBB0106915C0BD975BE5BC29D92CA5
+uid                      Ross A. Baker <ross@rossabaker.com>
+sub   rsa4096 2018-01-31 [E]
+sub   rsa4096 2022-11-21 [E] [expires: 2023-11-21]
+sub   rsa4096 2022-11-21 [S]
+
+pub   rsa2048 2017-09-27 [SC] [revoked: 2022-12-31]
+      54765FFB405B3A3E3146372142FAD8A85B13261D
+uid                      Ross A. Baker (http4s Travis CI deploys) <ross@rossabaker.com>
+sub   rsa2048 2017-09-27 [E] [revoked: 2022-12-31]
+
+#+end_example
 
 I use this key for [[https://keyoxide.org/ross@rossabaker.com][verification]].
 ** SSH
