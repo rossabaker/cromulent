@@ -32,13 +32,13 @@
 (use-package bind-key
   :demand t
   :bind
-  (:prefix-map ross/files-map
+  (:prefix-map rab/files-map
    :prefix "C-c f")
   :bind
-  (:prefix-map ross/toggles-map
+  (:prefix-map rab/toggles-map
    :prefix "C-c t")
   :config
-  (defun ross/unbind-all (fn)
+  (defun rab/unbind-all (fn)
     "Unbinds a function everywhere."
     (dolist (key (where-is-internal fn nil))
       (unbind-key key))))
@@ -79,7 +79,7 @@
   :bind
   ("M-`" . copilot-complete)
   :bind
-  (:map ross/toggles-map
+  (:map rab/toggles-map
    ("`" . copilot-mode))
   :bind
   (:map copilot-completion-map
@@ -129,7 +129,7 @@
 (use-package recentf
   :hook (on-first-file-hook . recentf-mode)
   :bind
-  (:map ross/files-map
+  (:map rab/files-map
    ("r" . recentf-open)))
 
 (use-package emacs
@@ -148,7 +148,7 @@
   :bind
   ([remap ispell-word] . jinx-correct)
   :bind
-  (:map ross/toggles-map
+  (:map rab/toggles-map
    ("$" . jinx-mode)))
 
 (use-package org
@@ -159,7 +159,7 @@
   :ensure t
   :after org
   :config
-  (defun ross/ox-hugo-update-lastmod ()
+  (defun rab/ox-hugo-update-lastmod ()
     "Updates the EXPORT_HUGO_LAST_MOD property of the nearest element
 with EXPORT_FILE_NAME."
     (interactive)
@@ -174,7 +174,7 @@ with EXPORT_FILE_NAME."
   :after org
   :bind
   (:map org-mode-map
-   :prefix-map ross/org-mode-map
+   :prefix-map rab/org-mode-map
    :prefix "C-c m"
    ("w" . org-slack-export-to-clipboard-as-slack)))
 
@@ -202,7 +202,7 @@ with EXPORT_FILE_NAME."
 (use-package lisp-mode
   :defer
   :config
-  (defun ross/calculate-lisp-indent (&optional parse-start)
+  (defun rab/calculate-lisp-indent (&optional parse-start)
     "Add better indentation for quoted and backquoted lists."
     ;; This line because `calculate-lisp-indent-last-sexp` was defined with `defvar`
     ;; with it's value ommited, marking it special and only defining it locally. So
@@ -376,7 +376,7 @@ with EXPORT_FILE_NAME."
                 (desired-indent)
                 (t
                  normal-indent))))))
-  (advice-add #'calculate-lisp-indent :override #'ross/calculate-lisp-indent))
+  (advice-add #'calculate-lisp-indent :override #'rab/calculate-lisp-indent))
 
 (use-package comp
   :custom
@@ -415,9 +415,9 @@ with EXPORT_FILE_NAME."
 (use-package magit
   :ensure t
   :defer 1
-  :functions ross/magit-clone-read-args-a
+  :functions rab/magit-clone-read-args-a
   :bind
-  (:prefix-map ross/git-map
+  (:prefix-map rab/git-map
    :prefix "C-c g"
    ("g" . magit-status)
    ("c" . magit-clone))
@@ -426,13 +426,13 @@ with EXPORT_FILE_NAME."
   (magit-no-message (list "Turning on magit-auto-revert-mode..."))
   (magit-save-repository-buffers 'dontask)
   :config
-  (defun ross/magit-clone-read-args-a (orig-fun &rest args)
+  (defun rab/magit-clone-read-args-a (orig-fun &rest args)
     "Sets `vertico-preselect' to `prompt' when cloning repos, so we
 clone to the default prompted directory, and not some random
 existing directory under `magit-clone-default-directory'."
     (let ((vertico-preselect 'prompt))
       (apply orig-fun args)))
-  (advice-add 'magit-clone-read-args :around #'ross/magit-clone-read-args-a))
+  (advice-add 'magit-clone-read-args :around #'rab/magit-clone-read-args-a))
 
 (use-package git-link
   :ensure t
@@ -443,7 +443,7 @@ existing directory under `magit-clone-default-directory'."
 
 (use-package git-related
   :bind
-  (:map ross/files-map
+  (:map rab/files-map
    ("g" . git-related-find-file)))
 
 (use-package treesit-auto
@@ -492,7 +492,7 @@ existing directory under `magit-clone-default-directory'."
   :hook
   (on-first-buffer . column-number-mode))
 
-(defun ross/mode-line-binary-size-indication ()
+(defun rab/mode-line-binary-size-indication ()
   "Replaces the size indication in the mode line with base 1024 units."
   (require 'cl-seq)
   (setopt mode-line-position
@@ -501,7 +501,7 @@ existing directory under `magit-clone-default-directory'."
 	     (8 " of " (:eval (file-size-human-readable (buffer-size) 'iec "" "B"))))
 	   (lambda (x) (and (listp x) (eq 'size-indication-mode (car x))))
 	   mode-line-position)))
-(add-hook 'on-first-buffer-hook #'ross/mode-line-binary-size-indication)
+(add-hook 'on-first-buffer-hook #'rab/mode-line-binary-size-indication)
 (add-hook 'on-first-buffer-hook #'size-indication-mode)
 
 (use-package scroll-bar
@@ -524,8 +524,8 @@ existing directory under `magit-clone-default-directory'."
   :ensure t
   :demand t
   :bind
-  (:map ross/toggles-map
-   ("p" . ross/presentation-mode))
+  (:map rab/toggles-map
+   ("p" . rab/presentation-mode))
   :custom
   (fontaine-presets
    `((regular
@@ -542,11 +542,11 @@ existing directory under `magit-clone-default-directory'."
         ("Monospace")))))
   :config
   (fontaine-set-preset (or fontaine-current-preset 'regular))
-  (define-minor-mode ross/presentation-mode
-    "Toggles global ross/presentation-mode."
+  (define-minor-mode rab/presentation-mode
+    "Toggles global rab/presentation-mode."
     nil
     :global t
-    (if ross/presentation-mode
+    (if rab/presentation-mode
         (fontaine-set-preset 'presentation)
       (fontaine-set-preset 'regular))))
 
@@ -642,22 +642,22 @@ existing directory under `magit-clone-default-directory'."
 
 (use-package window
   :config
-  (defun ross/nav-split-and-follow-below ()
+  (defun rab/nav-split-and-follow-below ()
     "Split the selected window in two with the new window is bellow.
 This uses `split-window-below' but follows with the cursor."
     (interactive)
     (split-window-below)
     (other-window 1))
 
-  (defun ross/nav-split-and-follow-right ()
+  (defun rab/nav-split-and-follow-right ()
     "Split the selected window in two with the new window is to the right.
 This uses `split-window-right' but follows with the cursor."
     (interactive)
     (split-window-right)
     (other-window 1))
   :bind
-  ([remap split-window-below] . ross/nav-split-and-follow-below)
-  ([remap split-window-right] . ross/nav-split-and-follow-right))'
+  ([remap split-window-below] . rab/nav-split-and-follow-below)
+  ([remap split-window-right] . rab/nav-split-and-follow-right))'
 
 (use-package zoom
   :ensure t
@@ -674,17 +674,17 @@ This uses `split-window-right' but follows with the cursor."
   (which-key-idle-delay most-positive-fixnum)
   (which-key-idle-secondary-delay 1e-9)
   :config
-  (push `((nil . ,(rx bos "ross/" (group (1+ any)) "-map" eos)) .
+  (push `((nil . ,(rx bos "rab/" (group (1+ any)) "-map" eos)) .
           (nil . ,(rx (backref 1))))
         which-key-replacement-alist))
 
 (use-package help
   :config
-  (ross/unbind-all 'help-for-help))
+  (rab/unbind-all 'help-for-help))
 
 (put 'narrow-to-region 'disabled nil)
 
-(defun ross/refresh-load-path ()
+(defun rab/refresh-load-path ()
   "Refresh the load path written by home-manager to pick up new
  packages without restarting Emacs."
   (interactive)
