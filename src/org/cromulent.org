@@ -904,12 +904,6 @@ pages.
 	      {{ . }}
 	  {{ end }}
 
-	  {{ range .Site.Sections }}
-	  <ul>
-	    <li><a href="#">{{ . }}</a></li>
-	  </ul>
-	  {{ end }}
-
 	  <section class="recently-updated">
 	      <h2>Recently updated</h2>
 
