@@ -897,34 +897,34 @@ pages.
 #+hugo:more
 
 #+begin_src html :tangle ../../tmp/hugo/layouts/index.html
-    {{ define "main" }}
-	<article class="home-page">
-	    <h1 class="site-title">{{ .Site.Title }}</h1>
-	    {{ with .Content }}
-		{{ . }}
-	    {{ end }}
+  {{ define "main" }}
+      <article class="home-page">
+	  <h1 class="site-title">{{ .Site.Title }}</h1>
+	  {{ with .Content }}
+	      {{ . }}
+	  {{ end }}
 
-	    {{ range .Site.Sections }}
-	    <ul>
-	      <li><a href="#">{{ . }}</a></li>
-	    </ul>
-	    {{ end }}
+	  {{ range .Site.Sections }}
+	  <ul>
+	    <li><a href="#">{{ . }}</a></li>
+	  </ul>
+	  {{ end }}
 
-	    <section class="recently-updated">
-		<h2>Recently updated</h2>
+	  <section class="recently-updated">
+	      <h2>Recently updated</h2>
 
-		<ul class="article-summaries">
-		    {{ $paginator := .Paginate (where site.Pages.ByLastmod.Reverse "Kind" "not in" (slice "home" "term" "taxonomy")) }}
-		    {{ range $paginator.Pages }}
-			<li>
-			    {{ partial "article-summary" . }}
-			</li>
-		    {{ end}}
-		</ul>
-		{{ template "_internal/pagination.html" . }}
-	    </section>
-	</article>
-    {{ end }}
+	      <ul class="article-summaries">
+		  {{ $paginator := .Paginate (where site.Pages.ByLastmod.Reverse "Kind" "not in" (slice "home" "term" "taxonomy")) }}
+		  {{ range $paginator.Pages }}
+		      <li>
+			  {{ partial "article-summary" . }}
+		      </li>
+		  {{ end}}
+	      </ul>
+	      {{ template "_internal/pagination.html" . }}
+	  </section>
+      </article>
+  {{ end }}
 #+end_src
 
 #+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
