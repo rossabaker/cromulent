@@ -672,7 +672,7 @@ convert the Markdown to HTML with [[https://gohugo.io/][Hugo]].
 CLOSED: [2022-09-01 Thu 16:48 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: hugo
-:EXPORT_HUGO_LASTMOD: <2023-07-14 Fri 21:46 EDT>
+:EXPORT_HUGO_LASTMOD: [2023-07-14 Fri 22:27 EDT]
 :END:
 
 Hugo can be configured with either TOML or YAML.  I spent my weirdness
@@ -758,16 +758,23 @@ The classless style is classless.
     noClasses = false
 #+end_src
 
-Generate the ~chroma.css~ file.
+We can use [[https://gohugo.io/commands/hugo_gen_chromastyles/][=hugo gen chromastyles=]] to create our ~chroma.css~ file.
+It even supports our favorite Emacs theme, [[/configs/emacs/#modus-themes][Modus]]!
 
 #+name: chroma-css
 #+begin_src sh :results verbatim :eval yes
-  hugo gen chromastyles --style=github
+  hugo gen chromastyles --style=modus-operandi
 #+end_src
 
 #+begin_src css :tangle ../../tmp/hugo/assets/css/chroma.css :noweb yes :exports none
   <<chroma-css()>>
 #+end_src
+
+***** TODO Bad link                                                :noexport:
+
+The Emacs link above collides with a tag and results in an ambiguous
+relref.  Can we figure out a solution that works in both the exported
+HTML and Org?
 
 *** DONE Templates                                            :hugo:html:
 CLOSED: [2022-09-01 Thu 16:53]
