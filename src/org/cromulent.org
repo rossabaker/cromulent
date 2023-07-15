@@ -777,7 +777,7 @@ The classless style is classless.
 Generate the ~chroma.css~ file.
 
 #+name: chroma-css
-#+begin_src sh :results verbatim
+#+begin_src sh :results verbatim :eval yes
   hugo gen chromastyles --style=github
 #+end_src
 
