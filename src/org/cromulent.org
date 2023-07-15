@@ -672,7 +672,7 @@ convert the Markdown to HTML with [[https://gohugo.io/][Hugo]].
 CLOSED: [2022-09-01 Thu 16:48 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: hugo
-:EXPORT_HUGO_LASTMOD: [2023-07-14 Fri 21:25 EDT]
+:EXPORT_HUGO_LASTMOD: <2023-07-14 Fri 21:46 EDT>
 :END:
 
 Hugo can be configured with either TOML or YAML.  I spent my weirdness
@@ -683,22 +683,6 @@ budget on a literate config, so let's stick to the default.
   languageCode = 'en-us'
   title = 'Ross A. Baker'
 #+end_src
-
-**** hugo-mwe
-
-This site is bootstrapped with [[https://gitlab.com/hugo-mwe/hugo-mwe][Hugo MWE]].  A [[https://scripter.co/hugo-modules-importing-a-theme/][hugo module]] would be
-easier, but I have not figured out a way to integrate Hugo modules
-with [[https://github.com/tweag/gomod2nix][gomod2nix]].  Instead, we'll do it the old-fashioned way and clone
-it into ~src/hugo/themes~.
-
-=themesDir= cannot be a module mount.
-
-#+begin_src conf-toml :tangle ../../tmp/hugo/config.toml
-  theme = 'hugo-mwe'
-  themesDir = 'src/hugo/themes'
-#+end_src
-
-Further design comes from the [[*CSS baseline][CSS baseline]].
 
 **** Mounts
 
@@ -742,7 +726,7 @@ pipeline.
 
 #+begin_src conf-toml :tangle ../../tmp/hugo/config.toml
   [Params]
-    css = [ 'sanitize.css', 'assets.css', 'cromulent.css', 'chroma.css', 'noto-fonts.css', 'ox-hugo.css' ]
+    css = [ 'sanitize.css', 'assets.css', 'cromulent.css', 'chroma.css', 'noto-fonts.css' ]
     description = "A perfectly cromulent developer."
     username = 'rossabaker'
 
@@ -1224,7 +1208,7 @@ Set the description, either at the site or page level.
 Load our own CSS and JavaScript through the [[https://gohugo.io/hugo-pipes/introduction/][Hugo asset pipeline]].
 
 #+begin_src html :tangle ../../tmp/hugo/layouts/partials/head.html
-  {{ range $css_file := site.Params.css | default (slice "bmfw.css" "ox-hugo.css") }}
+  {{ range $css_file := site.Params.css }}
       {{ $css_asset_path := printf "css/%s" $css_file }}
       {{ $css := resources.Get $css_asset_path | minify | fingerprint }}
       <link rel="stylesheet" href="{{ $css.RelPermalink }}">
