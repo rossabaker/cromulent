@@ -668,15 +668,15 @@ CLOSED: [2022-08-24 Wed 15:04]
 configuration, export the content to Markdown with with [[https://ox-hugo.scripter.co][ox-hugo]], and
 convert the Markdown to HTML with [[https://gohugo.io/][Hugo]].
 
-*** DONE Site configuration                   :hugo:org_mode:ox_hugo:nix:
-CLOSED: [2022-09-01 Thu 16:48 EDTt]
+*** DONE Hugo configuration                                :hugo:ox_hugo:
+CLOSED: [2022-09-01 Thu 16:48 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: hugo
-:EXPORT_HUGO_LASTMOD: [2023-07-04 Tue 23:32 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-07-14 Fri 21:25 EDT]
 :END:
 
-A Hugo site can be configured with either TOML or YAML.  I spent my
-weirdness budget on a literate config, so let's stick to the default.
+Hugo can be configured with either TOML or YAML.  I spent my weirdness
+budget on a literate config, so let's stick to the default.
 #+hugo:more
 #+begin_src conf-toml :tangle ../../tmp/hugo/config.toml
   baseURL = 'https://rossabaker.com'
@@ -686,12 +686,12 @@ weirdness budget on a literate config, so let's stick to the default.
 
 **** hugo-mwe
 
-This site is bootstrapped from [[https://gitlab.com/hugo-mwe/hugo-mwe][Hugo MWE]].  A [[https://scripter.co/hugo-modules-importing-a-theme/][hugo module]] would be
+This site is bootstrapped with [[https://gitlab.com/hugo-mwe/hugo-mwe][Hugo MWE]].  A [[https://scripter.co/hugo-modules-importing-a-theme/][hugo module]] would be
 easier, but I have not figured out a way to integrate Hugo modules
 with [[https://github.com/tweag/gomod2nix][gomod2nix]].  Instead, we'll do it the old-fashioned way and clone
 it into ~src/hugo/themes~.
 
-~themesDir~ cannot be a module mount.
+=themesDir= cannot be a module mount.
 
 #+begin_src conf-toml :tangle ../../tmp/hugo/config.toml
   theme = 'hugo-mwe'
@@ -702,8 +702,8 @@ Further design comes from the [[*CSS baseline][CSS baseline]].
 
 **** Mounts
 
-Because all this org stuff mucks with the [[https://gohugo.io/getting-started/directory-structure/#readout][normal directory structure]],
-we have to give Hugo a few extra hints.  [[https://github.com/gohugoio/hugo/issues/6457#issuecomment-546580193][~assetDir~ is "legacy"]], so
+Because all this org stuff mucks with the [[https://gohugo.io/getting-started/directory-structure/#readout][standard directory structure]],
+we have to give Hugo a few extra hints.  [[https://github.com/gohugoio/hugo/issues/6457#issuecomment-546580193][=assetDir= is "legacy"]], so
 we'll use [[https://gohugo.io/hugo-modules/configuration/#module-config-mounts][module mounts]].
 
 #+begin_src conf-toml :tangle ../../tmp/hugo/config.toml
@@ -732,12 +732,12 @@ we'll use [[https://gohugo.io/hugo-modules/configuration/#module-config-mounts][
 
 **** General site parameters
 
-The ~css~ parameter lets us add custom style sheets to the asset
+The =css= parameter lets us add custom style sheets to the asset
 pipeline.
 
 - [[https://csstools.github.io/sanitize.css/][sanitize.css]] is a CSS library, licensed [[https://creativecommons.org/publicdomain/zero/1.0/][CC0 1.0]].  It provides:
   - ~sanitize.css~ is a basic reset
-  - ~assets.css~ is constraints some widths to 100%
+  - ~assets.css~ constrains some widths to 100%
 - ~chroma.css~ is [[*Syntax highlighting][generated below]].
 
 #+begin_src conf-toml :tangle ../../tmp/hugo/config.toml
@@ -752,7 +752,8 @@ pipeline.
 
 **** ox-hugo
 
-ox-hugo [[https://ox-hugo.scripter.co/doc/goldmark/#enable-unsafe-html][recommends Goldmark]].  The ~unsafe~ is not as bad as it sounds:
+ox-hugo [[https://ox-hugo.scripter.co/doc/goldmark/#enable-unsafe-html][recommends Goldmark]].  The =unsafe= flag is not as bad as it
+sounds:
 
 #+begin_quote
 While that setting sounds scary, all that does is allow have inline
