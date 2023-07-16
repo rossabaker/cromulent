@@ -1675,6 +1675,7 @@ verification.
 #+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
   address {
       display: inline-block;
+      width: 100%;
   }
 
   address ul {
@@ -1750,7 +1751,7 @@ Mute the header anchors until hover:
 CLOSED: [2022-09-12 Mon 22:11 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: contact-info
-:EXPORT_HUGO_LASTMOD: [2023-07-08 Sat 00:42 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-07-16 Sun 18:11 EDT]
 :END:
 
 Contact info is rendered in two places: in the [[*Footer template][footer template]] and on the
@@ -1860,6 +1861,13 @@ Keys are:
   [[Params.contacts]]
   network = 'YouTube'
   support = 'deprecated'
+
+  [[Params.contacts]]
+  network = 'Finger'
+  handle = 'rossabaker@happynetbox.com'
+  url = 'finger://happynetbox.com/rossabaker'
+  support = 'supported'
+  relMe = false
 #+end_src
 
 ***** ~contact-info-icons~ partial template
@@ -1867,7 +1875,7 @@ Keys are:
 #+begin_src html :tangle ../../tmp/hugo/layouts/partials/contact-info-icons.html
   <ul class="contacts">
       {{ range where .Site.Params.contacts "support" "eq" "supported" }}
-	<li><a href="{{ .url }}" {{ with (not (eq .relMe false)) }}rel="me"{{ end }}>
+	<li><a href="{{ .url | safeURL }}" {{ with (not (eq .relMe false)) }}rel="me"{{ end }}>
 	    {{ $src := printf "%s/%s.svg" "/src/hugo/static/img/icons" (.icon | default (.network | urlize)) }}
 	    {{ readFile $src | safeHTML }}
 	</a></li>
@@ -2174,9 +2182,7 @@ Give the code samples a little more room to breathe.
 
 #+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
   pre {
-      background: #f8f8f8;
-      border: 1px dotted #ccc;
-      border-radius: 1em;
+      border-left: #9f9f9f 0.25em solid;
       padding: 1em;
   }
 #+end_src
