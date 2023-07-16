@@ -2001,10 +2001,10 @@ Our build creates some detritus that we don't want checked into Git.
 #+end_src
 
 *** DONE CSS baseline                                 :css:google_fonts:noto:
-CLOSED: [2022-08-30 Tue 14:26]
+CLOSED: [2022-08-30 Tue 14:26 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: style
-:EXPORT_HUGO_LASTMOD: <2023-07-04 Tue 19:03 EDT>
+:EXPORT_HUGO_LASTMOD: [2023-07-15 Sat 22:45 EDT]
 :CUSTOM_ID: css-baseline
 :END:
 
@@ -2027,6 +2027,14 @@ nonsense.
 #+end_src
 
 **** Let the body breathe
+
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
+  body > * {
+      padding: 1.5rem;
+  }
+#+end_src
+
+**** Let the text breathe
 
 The [[https://www.w3.org/TR/WCAG22/#visual-presentation][Web Content Accessibility Guidelines]] call for a line height of at
 least 1.5.
@@ -2101,39 +2109,19 @@ crimson.
 ***** Headers
 
 Modern CSS lets us draw stripes without a repeating background GIF.
-Neat.  This draws candy stripes next to the ~h1~.  The negative margin
-and corresponding padding hang the stripes off to the left.
+Neat.  This draws candy stripes beneath the main ~h1~.
 
 #+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
-    h1 {
-        background: linear-gradient(
-            to right,
-            var(--color-brand) 0,
-            var(--color-brand) 2px,
-            var(--color-stripe) 2px,
-            var(--color-stripe) 4px,
-            var(--color-brand) 4px,
-            var(--color-brand) 6px,
-            var(--color-stripe) 6px,
-            var(--color-stripe) 8px,
-            var(--color-brand) 8px,
-            var(--color-brand) 10px,
-            var(--color-stripe) 10px,
-            var(--color-stripe) 12px,
-            var(--color-brand) 12px,
-            var(--color-brand) 14px,
-            var(--color-stripe) 14px
-        );
-        margin-left: -24px;
-        padding-left: 24px;
-    }
-#+end_src
-
-We need to leave space for the negative margin.
-
-#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
-  body > * {
-      padding: 1.5rem 24px;
+  main h1::after {
+      content: "";
+      background-image: linear-gradient(to right, var(--color-brand) 50%, var(--color-stripe) 0%);
+      background-size: 1rem 0.8rem;
+      background-repeat: repeat-x;
+      background-position: bottom;
+      display: block;
+      width: 100%;
+      height: 0.8rem;
+      margin-bottom: 2.4rem;
   }
 #+end_src
 
