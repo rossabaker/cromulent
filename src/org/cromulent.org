@@ -1865,7 +1865,7 @@ Keys are:
   [[Params.contacts]]
   network = 'Finger'
   handle = 'rossabaker@happynetbox.com'
-  url = 'finger://happynetbox.com/rossabaker'
+  url = '/projects/finger'
   support = 'supported'
   relMe = false
 #+end_src
@@ -5124,7 +5124,6 @@ The well-known files need CORS headers.  If deploying to Netlify, add this to ~n
       Access-Control-Allow-Origin = "*"
 #+end_src
 
-
 ** DONE Archive your toots to Hugo :@tech:scala:scala_cli:indieweb:hugo:pesos:mastodon:activity_streams:own_your_data:fs2:circe:
 :PROPERTIES:
 :EXPORT_DATE: [2022-11-07 Mon 22:37 EST]
@@ -5540,6 +5539,10 @@ CLOSED: [2022-11-22 Tue 00:14 EST]
   leaving these instructions for others.
 #+end_warning
 
+#+begin_warning
+Not to be confused with [[*Finger][Finger]].
+#+end_warning
+
 *** How it works on your Mastodon server
 
 [[https://docs.joinmastodon.org/spec/webfinger/][Mastodon uses WebFinger]] to look up the inbox and outbox from a
@@ -5621,6 +5624,29 @@ But that's a problem for another day.
   /.well-known/webfinger* https://social.rossabaker.com/.well-known/webfinger:splat 301
 #+end_src
 
+** DONE Finger                                             :finger:nostalgia:
+CLOSED: [2023-07-16 Sun 22:51 EDT]
+:PROPERTIES:
+:EXPORT_TITLE: Finger me
+:EXPORT_FILE_NAME: finger
+:END:
+
+#+begin_description
+A bit of nostalgia about ~finger~, and how to finger me.
+#+end_description
+
+Long ago, I stumbled across [[https://www.hilgraeve.com/hyperterminal/][HyperTerminal]] on the family Windows 95
+machine.  I figured out how to dial into my mom-and-pop ISP with that,
+and had my first shell access on a multi-user machine.  Magical.  A
+friendly admin taught me a lot, including how to make a ~.plan~ on one
+of the great social networks of the day, [[https://datatracker.ietf.org/doc/html/rfc1288][Finger]].
+
+I can be fingered once again on [[https://happynetbox.com/][Happy Net Box]].  Run this from your own
+shell:
+
+#+begin_src sh :eval no-export :results verbatim
+  finger rossabaker@happynetbox.com
+#+end_src
 
 * Talks section
 :PROPERTIES:
