@@ -236,15 +236,16 @@ and jogs when it's not.
 
 @@hugo:</div>@@
 
-* DONE Public keys              :@tech:keys:pgp:ssh:
+* DONE Public keys              :@tech:keys:pgp:
 CLOSED: [2022-09-14 Wed 13:30 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: public-keys
-:EXPORT_HUGO_LASTMOD: [2023-07-07 Fri 23:46 EDT]
-:DESCRIPTION: Ross A. Baker's public keys
+:EXPORT_HUGO_LASTMOD: [2023-07-17 Mon 21:50 EDT]
 :END:
 
-#+hugo:more
+#+begin_description
+Download Ross A. Baker's PGP public key.
+#+end_description
 
 ** PGP
 :PROPERTIES:
@@ -285,16 +286,6 @@ sub   rsa2048 2017-09-27 [E] [revoked: 2022-12-31]
 #+end_example
 
 I use this key for [[https://keyoxide.org/ross@rossabaker.com][verification]].
-** SSH
-:PROPERTIES:
-:CUSTOM_ID: ssh
-:END:
-
-Friendship used to mean exchanging shell accounts on each other's
-Linux boxen.  Or even FreeBSD.  We didn't judge on anything but
-=$EDITOR=.
-
-#+include: "../keys/id_ed25519.pub" example
 
 * DONE Contact             :@personal:contact:verification:keyoxide:
 CLOSED: [2022-10-16 Sun 15:37 EDT]
