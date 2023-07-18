@@ -240,50 +240,44 @@ and jogs when it's not.
 CLOSED: [2022-09-14 Wed 13:30 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: public-keys
-:EXPORT_HUGO_LASTMOD: [2023-07-17 Mon 21:50 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-07-18 Tue 14:45 EDT]
 :END:
 
 #+begin_description
 Download Ross A. Baker's PGP public key.
 #+end_description
 
+** Setup                                                           :noexport:
+
+#+begin_src sh :session public-keys :eval yes :exports results :results silent
+  export GNUPGHOME=../../tmp/gnupg
+  mkdir -m 700 -p $GNUPGHOME
+  gpg --import ../keys/0x975BE5BC29D92CA5.pub.gpg
+  export KEY_ID=904C153733DBB0106915C0BD975BE5BC29D92CA5
+#+end_src
+
+Create the armored version for download.
+
+#+begin_src sh :session public-keys :eval yes :exports results :results silent
+  mkdir -p ../../tmp/hugo/static/public-keys
+  rm -f ../../tmp/hugo/static/public-keys/0x975BE5BC29D92CA5.pub.asc
+  gpg --armor --export \
+      --comment "Ross A. Baker <ross@rossabaker.com>" \
+      --output ../../tmp/hugo/static/public-keys/0x975BE5BC29D92CA5.pub.asc \
+      $KEY_ID
+#+end_src
+
 ** PGP
 :PROPERTIES:
 :CUSTOM_ID: pgp
 :END:
 
-# Create an armored version
-#+begin_src sh :tangle ../../tmp/hugo/static/public-keys/0x975BE5BC29D92CA5.pub.asc :exports none :mkdir yes
-  gpg --enarmor < ../keys/0x975BE5BC29D92CA5.pub.gpg
-#+end_src
-
-#+name: gpg-fingerprint
-#+begin_src sh :results verbatim :exports none
-  export GNUPGHOME=../../tmp/gnupg
-  mkdir -m 700 -p $GNUPGHOME
-  gpg --show-keys ../keys/0x975BE5BC29D92CA5.pub.gpg
-#+end_src
-
 My PGP public key is published to this domain via [[file:configs/web-key-directory.org][WKD]], and can also be
 downloaded in [[/.well-known/openpgpkey/hu/eimhw3om3jynrs7fo7r7rrssmt1o4yxp][binary]] and [[./0x975BE5BC29D92CA5.pub.asc][ASCII armored]] formats.  Its fingerprint is:
 
-#+call: gpg-fingerprint() :eval yes
-
-#+RESULTS:
-#+begin_example
-pub   rsa4096 2018-01-31 [SC]
-      904C153733DBB0106915C0BD975BE5BC29D92CA5
-uid                      Ross A. Baker <ross@rossabaker.com>
-sub   rsa4096 2018-01-31 [E]
-sub   rsa4096 2022-11-21 [E] [expires: 2023-11-21]
-sub   rsa4096 2022-11-21 [S]
-
-pub   rsa2048 2017-09-27 [SC] [revoked: 2022-12-31]
-      54765FFB405B3A3E3146372142FAD8A85B13261D
-uid                      Ross A. Baker (http4s Travis CI deploys) <ross@rossabaker.com>
-sub   rsa2048 2017-09-27 [E] [revoked: 2022-12-31]
-
-#+end_example
+#+begin_src sh :session public-keys :eval yes :exports results :results verbatim
+  gpg --list-keys $KEY_ID
+#+end_src
 
 I use this key for [[https://keyoxide.org/ross@rossabaker.com][verification]].
 
