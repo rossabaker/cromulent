@@ -554,6 +554,7 @@ is verification of my online identities through [[https://keyoxide.org/ross%40ro
 #+begin_src sh :session wkd :var GNUPGHOME=`,(expand-file-name "../../tmp/gnupg" default-directory)
   export KEY_ID=904C153733DBB0106915C0BD975BE5BC29D92CA5
   export EMAIL=ross@rossabaker.com
+  export GNUPGHOME
   mkdir -m 700 -p $GNUPGHOME
   gpg --import ../keys/0x975BE5BC29D92CA5.pub.gpg
 #+end_src
