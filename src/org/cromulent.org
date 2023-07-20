@@ -236,11 +236,11 @@ and jogs when it's not.
 
 @@hugo:</div>@@
 
-* DONE Public keys              :@tech:keys:pgp:
+* DONE Public keys                     :@tech:keys:pgp:verification:keyoxide:
 CLOSED: [2022-09-14 Wed 13:30 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: public-keys
-:EXPORT_HUGO_LASTMOD: [2023-07-18 Tue 14:45 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-07-20 Thu 18:12 EDT]
 :END:
 
 #+begin_description
@@ -279,7 +279,10 @@ downloaded in [[/.well-known/openpgpkey/hu/eimhw3om3jynrs7fo7r7rrssmt1o4yxp][bin
   gpg --list-keys $KEY_ID
 #+end_src
 
-I use this key for [[https://keyoxide.org/ross@rossabaker.com][verification]].
+*** Verification
+
+This key is notated with [[https://ariadne.id/][Ariadne Identity]] claims, which can be
+[[https://keyoxide.org/ross%40rossabaker.com][verified on Keyoxide]].
 
 * DONE Contact             :@personal:contact:verification:keyoxide:
 CLOSED: [2022-10-16 Sun 15:37 EDT]
