@@ -340,7 +340,7 @@ No.
 CLOSED: [2022-11-06 Sun 10:40 EST]
 :PROPERTIES:
 :DESCRIPTION: Default license for all content on rossabaker.com
-:EXPORT_HUGO_LASTMOD: [2023-06-29 Thu 00:06 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-07-20 Thu 16:21 EDT]
 :EXPORT_FILE_NAME: license
 :END:
 
@@ -382,8 +382,16 @@ SOFTWARE.
 
 ** Other content
 
-All other content on rossabaker.com is licensed under a [[https://creativecommons.org/licenses/by/4.0/][Creative
-Commons Attribution 4.0 International (CC BY 4.0) License]].
+All other content on rossabaker.com is licensed under a [[https://creativecommons.org/licenses/by-sa/4.0/][Creative
+Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)
+License]].
+
+** Attributions
+
+*** [[/img/icons/keyoxide.svg][Keyoxide icon]]
+
+Based on [[https://codeberg.org/keyoxide/keyoxide-artwork/src/commit/accccbd5ff03ca0ad87f0a8589038bdde617a902/keyoxide.svg][original work]] by [[https://codeberg.org/yarmo][Yarmo Mackenbach]].  Modified to make it
+monochrome, make the "K" logo transparent, and reduce its size.
 
 * Configurations section                                              :@tech:
 :PROPERTIES:
@@ -1737,7 +1745,7 @@ Mute the header anchors until hover:
 CLOSED: [2022-09-12 Mon 22:11 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: contact-info
-:EXPORT_HUGO_LASTMOD: [2023-07-16 Sun 18:11 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-07-20 Thu 16:12 EDT]
 :END:
 
 Contact info is rendered in two places: in the [[*Footer template][footer template]] and on the
@@ -1852,6 +1860,13 @@ Keys are:
   network = 'Finger'
   handle = 'rossabaker@happynetbox.com'
   url = '/projects/finger'
+  support = 'supported'
+  relMe = false
+
+  [[Params.contacts]]
+  network = 'Keyoxide'
+  handle = 'ross@rossabaker.com'
+  url = 'https://keyoxide.org/ross%40rossabaker.com'
   support = 'supported'
   relMe = false
 #+end_src
