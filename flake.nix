@@ -106,28 +106,21 @@
           inputs.home-manager.lib.homeManagerConfiguration {
     	inherit pkgs;
     	modules = [
-    	  {
-    	    home = {
-    	      inherit homeDirectory username;
-    	      stateVersion = "21.11";
-    	    };
-    	    nixpkgs.overlays = [ inputs.emacs-overlay.overlay ];
-    	  }
-    	  homeModule
-    	  inputs.self.homeManagerModules.emacs
-    	  inputs.self.homeManagerModules.scala
-    	  ./modules/work
+        {
+          home = {
+    	inherit homeDirectory username;
+    	stateVersion = "21.11";
+          };
+          nixpkgs.overlays = [ inputs.emacs-overlay.overlay ];
+        }
+        homeModule
+        inputs.self.homeManagerModules.emacs
+        inputs.self.homeManagerModules.scala
+        ./modules/work
     	];
     	# Pass our flake inputs into the config
     	extraSpecialArgs = { inherit inputs; };
           };
-    
-      RABaker-at-L2LYQM57XY = pkgs: mkHomeConfig {
-        inherit pkgs;
-        system = "aarch64-darwin";
-        username = "RABaker";
-        homeDirectory = "/Users/RABaker";
-      };
     
       aarch64-darwin-config-base = pkgs: mkDarwinConfigModule {
         inherit pkgs;
@@ -164,7 +157,12 @@
         inherit overlays darwinConfigurationModules;
     
         homeConfigurations = {
-          "RABaker@L2LYQM57XY" = RABaker-at-L2LYQM57XY (pkgsFor "aarch64-darwin");
+          "RABaker@L2LYQM57XY" = mkHomeConfig {
+    	pkgs = (pkgsFor "aarch64-darwin");
+    	system = "aarch64-darwin";
+    	username = "RABaker";
+    	homeDirectory = "/Users/RABaker";
+          };
         };
     
         inherit flakeModules;
@@ -185,7 +183,6 @@
     	    system = "aarch64-darwin";
     	    modules = [ darwinConfigurationModules.aarch64-base ];
     	  }).system;
-    	  "RABaker@L2LYQM57XY" = (RABaker-at-L2LYQM57XY pkgs).activationPackage;
     	} else { };
         in
           {

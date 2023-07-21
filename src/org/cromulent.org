@@ -4281,7 +4281,7 @@ Finally, a convenience function to reload it:
 CLOSED: [2023-06-23 Fri 00:26 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: garnix
-:EXPORT_HUGO_LASTMOD: [2023-07-03 Mon 16:07 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-07-21 Fri 15:11 EDT]
 :END:
 
 I have an Apple M1 for work, which is [[https://github.com/github/roadmap/issues/528][not yet supported by GitHub
@@ -4296,8 +4296,8 @@ and my home-manager configuration.
   builds:
     include:
       - 'devShells.aarch64-darwin.default'
+      - 'homeConfigurations.*'
       - 'packages.aarch64-darwin.aarch64-darwin-config-base'
-      - 'packages.aarch64-darwin.RABaker@L2LYQM57XY'
 #+end_src
 
 *** Caching
@@ -4439,7 +4439,7 @@ The Home Manager module is published to my flake as output
 CLOSED: [2022-12-25 Sun 22:14 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: nix-flake
-:EXPORT_HUGO_LASTMOD: [2023-06-23 Fri 00:02 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-07-21 Fri 15:11 EDT]
 :END:
 
 At the root of my [[https://github.com/rossabaker/cromulent][cromulent repository]] is a [[https://nixos.wiki/wiki/Flakes][Nix flake]].  It contains
@@ -4686,28 +4686,21 @@ more "literate".
 	inputs.home-manager.lib.homeManagerConfiguration {
 	  inherit pkgs;
 	  modules = [
-	    {
-	      home = {
-		inherit homeDirectory username;
-		stateVersion = "21.11";
-	      };
-	      nixpkgs.overlays = [ inputs.emacs-overlay.overlay ];
-	    }
-	    homeModule
-	    inputs.self.homeManagerModules.emacs
-	    inputs.self.homeManagerModules.scala
-	    ./modules/work
+      {
+	home = {
+	  inherit homeDirectory username;
+	  stateVersion = "21.11";
+	};
+	nixpkgs.overlays = [ inputs.emacs-overlay.overlay ];
+      }
+      homeModule
+      inputs.self.homeManagerModules.emacs
+      inputs.self.homeManagerModules.scala
+      ./modules/work
 	  ];
 	  # Pass our flake inputs into the config
 	  extraSpecialArgs = { inherit inputs; };
 	};
-
-    RABaker-at-L2LYQM57XY = pkgs: mkHomeConfig {
-      inherit pkgs;
-      system = "aarch64-darwin";
-      username = "RABaker";
-      homeDirectory = "/Users/RABaker";
-    };
 
     aarch64-darwin-config-base = pkgs: mkDarwinConfigModule {
       inherit pkgs;
@@ -4744,7 +4737,12 @@ more "literate".
       inherit overlays darwinConfigurationModules;
 
       homeConfigurations = {
-	"RABaker@L2LYQM57XY" = RABaker-at-L2LYQM57XY (pkgsFor "aarch64-darwin");
+	"RABaker@L2LYQM57XY" = mkHomeConfig {
+	  pkgs = (pkgsFor "aarch64-darwin");
+	  system = "aarch64-darwin";
+	  username = "RABaker";
+	  homeDirectory = "/Users/RABaker";
+	};
       };
 
       inherit flakeModules;
@@ -4765,7 +4763,6 @@ more "literate".
 	      system = "aarch64-darwin";
 	      modules = [ darwinConfigurationModules.aarch64-base ];
 	    }).system;
-	    "RABaker@L2LYQM57XY" = (RABaker-at-L2LYQM57XY pkgs).activationPackage;
 	  } else { };
       in
 	{
