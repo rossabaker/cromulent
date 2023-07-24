@@ -532,7 +532,7 @@ upstream works, or to [[https://creativecommons.org/faq/#may-i-apply-a-creative-
 ** Configurations
 :PROPERTIES:
 :EXPORT_FILE_NAME: _index
-:EXPORT_HUGO_LASTMOD: <2022-09-05 Mon 23:48>
+:EXPORT_HUGO_LASTMOD: [2022-09-05 Mon 23:48 EDT]
 :END:
 
 ** DONE Managing generated sources in Git           :git:gitattributes:gitignore:babel:
@@ -777,7 +777,7 @@ gpg-wks-client:   addr-spec: ross@rossabaker.com
 #+end_example
 
 ** DONE Website bundle                                     :website:
-CLOSED: [2022-08-24 Wed 15:04]
+CLOSED: [2022-08-24 Wed 15:04 EDT]
 :PROPERTIES:
 :EXPORT_HUGO_BUNDLE: website
 :END:
@@ -786,7 +786,7 @@ CLOSED: [2022-08-24 Wed 15:04]
 :PROPERTIES:
 :EXPORT_FILE_NAME: _index
 :EXPORT_TITLE: Website
-:EXPORT_HUGO_LASTMOD: <2022-08-24 Wed 15:04>
+:EXPORT_HUGO_LASTMOD: [2022-08-24 Wed 15:04 EDT]
 :END:
 
 [[https://rossabaker.com/][rossabaker.com]] is sourced from an Org file.  We [[https://orgmode.org/manual/Extracting-Source-Code.html][tangle]] the
@@ -902,13 +902,13 @@ relref.  Can we figure out a solution that works in both the exported
 HTML and Org?
 
 *** DONE Templates                                            :hugo:html:
-CLOSED: [2022-09-01 Thu 16:53]
+CLOSED: [2022-09-01 Thu 16:53 EDT]
 :PROPERTIES:
 :EXPORT_HUGO_BUNDLE: templates
 :END:
 
 **** DONE Index
-CLOSED: [2022-09-02 Fri 11:28]
+CLOSED: [2022-09-02 Fri 11:28 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: _index
 :EXPORT_TITLE: Templates
@@ -920,7 +920,7 @@ I've missed.  If you have no such need, don't follow my footsteps.
 There is a lot to unpack here.
 
 **** DONE Base template
-CLOSED: [2022-09-02 Fri 09:17]
+CLOSED: [2022-09-02 Fri 09:17 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: base-template
 :END:
@@ -968,7 +968,7 @@ template provide a ~main~, but this is the expectation.
 #+end_src
 
 **** DONE Single-page template
-CLOSED: [2022-09-02 Fri 12:53]
+CLOSED: [2022-09-02 Fri 12:53 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: single
 :END:
@@ -1052,7 +1052,7 @@ pages.
 #+end_src
 
 **** DONE Talks template                                                :css:
-CLOSED: [2022-09-02 Fri 12:48]
+CLOSED: [2022-09-02 Fri 12:48 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: talks
 :END:
@@ -1129,7 +1129,7 @@ sophisticated eventually.
 #+end_src
 
 **** DONE List template
-CLOSED: [2022-09-02 Fri 12:55]
+CLOSED: [2022-09-02 Fri 12:55 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: list
 :END:
@@ -1169,7 +1169,7 @@ In case anything is floated in the content, clear it here.
 #+end_src
 
 **** DONE Taxonomy tag cloud              :taxonomy:tag_cloud:css:emacs_lisp:
-CLOSED: [2022-09-02 Fri 13:07]
+CLOSED: [2022-09-02 Fri 13:07 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: terms
 :END:
@@ -1297,7 +1297,7 @@ template that lists the article summaries in reverse order of modification.
 #+end_src
 
 **** DONE Head template
-CLOSED: [2022-09-02 Fri 10:29]
+CLOSED: [2022-09-02 Fri 10:29 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: head
 :EXPORT_HUGO_LASTMOD: [2023-07-07 Fri 18:03 EDT]
@@ -1379,10 +1379,10 @@ an error logging into the Indiewebring without it.
 #+end_src
 
 **** DONE Article summary                                               :css:
-CLOSED: [2022-09-02 Fri 13:12]
+CLOSED: [2022-09-02 Fri 13:12 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: article-summary
-:EXPORT_HUGO_LASTMOD: <2022-09-04 Sun 21:12>
+:EXPORT_HUGO_LASTMOD: [2022-09-04 Sun 21:12 EDT]
 :END:
 
 Provide a standard article summary for our various list templates.  It
@@ -1426,7 +1426,7 @@ A list of summaries should be unbulleted and separated by a thin line:
 #+end_src
 
 **** DONE Article info                                                  :css:
-CLOSED: [2022-09-02 Fri 13:16]
+CLOSED: [2022-09-02 Fri 13:16 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: article-info
 :END:
@@ -1581,10 +1581,10 @@ CSS.  Lunch hour is almost over, so I'll describe it another day.
 #+end_src
 
 **** DONE Header template                                    :css:emacs_lisp:
-CLOSED: [2022-09-02 Fri 11:41]
+CLOSED: [2022-09-02 Fri 11:41 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: header
-:EXPORT_HUGO_LASTMOD: <2022-09-13 Tue 22:13>
+:EXPORT_HUGO_LASTMOD: [2022-09-13 Tue 22:13 EDT]
 :END:
 
 Our header is straightforward semantic HTML, with a ~<h1>~, ~<p>~,
@@ -1836,10 +1836,10 @@ verification.
 #+end_src
 
 **** DONE Heading rendering
-CLOSED: [2022-09-04 Sun 17:50]
+CLOSED: [2022-09-04 Sun 17:50 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: heading-renderer
-:EXPORT_HUGO_LASTMOD: <2022-09-21 Wed 11:45>
+:EXPORT_HUGO_LASTMOD: [2022-09-21 Wed 11:45 EDT]
 :END:
 
 We [[https://gohugo.io/templates/render-hooks][hook]] into the heading renderer to generate anchor targets for subheadings.
@@ -2047,7 +2047,7 @@ supported contacts from the experimental ones.
 #+end_src
 
 *** DONE Build website with Nix                      :hugo:ox_hugo:nix:babel:
-CLOSED: [2022-09-01 Thu 16:54]
+CLOSED: [2022-09-01 Thu 16:54 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: build
 :END:
@@ -4869,15 +4869,15 @@ with a copy and paste:
 :EXPORT_HUGO_BUNDLE: projects
 :END:
 ** DONE Projects
-CLOSED: [2022-11-07 Mon 22:35]
+CLOSED: [2022-11-07 Mon 22:35 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: _index
 :END:
 ** DONE Web Key Directory                                  :pgp:wkd:indieweb:noexport:
 CLOSED:
 :PROPERTIES:
-:EXPORT_DATE: <2022-11-02 Wed 23:39>
-:EXPORT_HUGO_LASTMOD: <2022-11-15 Tue 16:22>
+:EXPORT_DATE: [2022-11-02 Wed 23:39 EDT]
+:EXPORT_HUGO_LASTMOD: [2022-11-15 Tue 16:22 EST]
 :EXPORT_FILE_NAME: web-key-directory
 :HEADER-ARGS: :eval yes
 :END:
@@ -4892,11 +4892,11 @@ CLOSED:
 #+end_src
 
 ** DONE Personal Weather Station             :@personal:weather:indianapolis:
-CLOSED: [2022-08-28 Sun 21:03]
+CLOSED: [2022-08-28 Sun 21:03 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: personal-weather-station
 :EXPORT_DESCRIPTION: Data from my personal weather station in Indianapolis, Indiana.
-:EXPORT_HUGO_LASTMOD: <2022-09-07 Wed 00:00>
+:EXPORT_HUGO_LASTMOD: [2022-09-07 Wed 00:00 EDT]
 :END:
 
 I run an [[https://ambientweather.net/][Ambient Weather]] WS-1400-IP weather station in the Castleton
@@ -4931,8 +4931,8 @@ CLOSED: [2022-11-21 Mon 21:03 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: scalatra-in-action
 :EXPORT_DATE: <2016-05-23 Mon>
-:EXPORT_HUGO_PUBLISHDATE: <2022-08-30 Tue 22:44>
-:EXPORT_HUGO_LASTMOD: <2022-08-30 Tue 22:44>
+:EXPORT_HUGO_PUBLISHDATE: [2022-08-30 Tue 22:44 EDT]
+:EXPORT_HUGO_LASTMOD: [2022-08-30 Tue 22:44 EDT]
 :END:
 
 [[https://www.manning.com/books/scalatra-in-action][Scalatra in Action]] was written by [[https://constructiveproof.com/][Dave Hrycyszyn,]] Stefan Ollinger, and
@@ -4976,8 +4976,8 @@ RESTful APIs, and real-time web programming.
 CLOSED: [2022-11-21 Mon 21:03 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: matrix-home-server
-:EXPORT_DATE: <2022-05-05 Thu 17:27>
-:EXPORT_HUGO_LASTMOD: <2023-01-16 Mon 09:49>
+:EXPORT_DATE: [2022-05-05 Thu 17:27 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-01-16 Mon 09:49 EST]
 :END:
 
 I run my [[https://matrix.to/#/@ross:rossabaker.com][Matrix presence]] on a personal Synapse server in Google Cloud.
@@ -4989,7 +4989,7 @@ responsible if you run this and get a bill.
 #+end_warning
 
 #+begin_info
-  <2022-11-15 Tue 19:15>: I plan to move this to Hetzner Cloud.
+  [2022-11-15 Tue 19:15 EST]: I plan to move this to Hetzner Cloud.
 #+end_info
 
 *** Terraform
@@ -5653,8 +5653,8 @@ be seen in [[/notes][~/notes~]].
 CLOSED: [2022-11-22 Tue 00:14 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: webfinger
-:EXPORT_DATE: <2022-11-22 Tue 00:15>
-:EXPORT_HUGO_LASTMOD: <2022-12-01 Thu 20:50>
+:EXPORT_DATE: [2022-11-22 Tue 00:15 EST]
+:EXPORT_HUGO_LASTMOD: [2022-12-01 Thu 20:50 EST]
 :END:
 
 #+begin_description
@@ -5791,7 +5791,7 @@ shell:
 :PROPERTIES:
 :EXPORT_FILE_NAME: akka-io-and-netty
 :EXPORT_DATE: <2013-11-04 Mon>
-:EXPORT_PUBLISH_DATE: <2022-08-29 Mon 13:20>
+:EXPORT_PUBLISH_DATE: [2022-08-29 Mon 13:20 EDT]
 :EXPORT_HUGO_CUSTOM_FRONT_MATTER+: :venue "[IndyScala](http://indyscala.org/) at [E-gineering](https://e-gineering.com), November 2013"
 :EXPORT_HUGO_CUSTOM_FRONT_MATTER+: :source https://github.com/indyscala/akka-io-demo
 :EXPORT_HUGO_CUSTOM_FRONT_MATTER+: :slides /pdf/akka-io-and-netty.pdf
@@ -5800,7 +5800,7 @@ shell:
 :PROPERTIES:
 :EXPORT_FILE_NAME: algebras-in-scala
 :EXPORT_DATE: <2019-12-02 Mon>
-:EXPORT_PUBLISH_DATE: <2022-08-30 Tue 14:51>
+:EXPORT_PUBLISH_DATE: [2022-08-30 Tue 14:51 EDT]
 :EXPORT_HUGO_CUSTOM_FRONT_MATTER+: :venue "[IndyScala](http://indyscala.org/) at [E-gineering](https://e-gineering.com), December 2019"
 :EXPORT_HUGO_CUSTOM_FRONT_MATTER+: :source https://github.com/indyscala/algebras
 :EXPORT_HUGO_CUSTOM_FRONT_MATTER+: :slides https://indyscala.org/algebras
@@ -5814,7 +5814,7 @@ ninth grade report card.
 :PROPERTIES:
 :EXPORT_FILE_NAME: anorm
 :EXPORT_DATE: <2012-08-13 Mon>
-:EXPORT_PUBLISH_DATE: <202d2-08-30 Tue 21:56>
+:EXPORT_PUBLISH_DATE: [2022-08-30 Tue 21:56 EDT]
 :EXPORT_HUGO_CUSTOM_FRONT_MATTER+: :venue "[IndyScala](http://indyscala.org/), August 2012"
 :EXPORT_HUGO_CUSTOM_FRONT_MATTER+: :source https://github.com/indyscala-anorm/
 :EXPORT_HUGO_CUSTOM_FRONT_MATTER+: :slides pdf/anorm.pdf
@@ -5832,7 +5832,7 @@ ninth grade report card.
 :PROPERTIES:
 :EXPORT_FILE_NAME: corecursive-17
 :EXPORT_DATE: <2018-07-27 Fri>
-:EXPORT_HUGO_PUBLISHDATE: <2022-08-29 Mon 00:10>
+:EXPORT_HUGO_PUBLISHDATE: [2022-08-29 Mon 00:10 EDT]
 :END:
 
 I was interviewed by Adam Gordon Bell on the [[https://corecursive.com/017-http4s-with-ross-baker/][CoRecursive podcast]].
@@ -5857,7 +5857,7 @@ and I have both been doing it for some time.
 :PROPERTIES:
 :EXPORT_FILE_NAME: scala-logs
 :EXPORT_DATE: <2020-02-08 Sat>
-:EXPORT_HUGO_PUBLISHDATE: <2022-08-29 Mon 00:09>
+:EXPORT_HUGO_PUBLISHDATE: [2022-08-29 Mon 00:09 EDT]
 :END:
 
 It was my honor to join Zach McCoy on the [[https://open.spotify.com/episode/57RHzk5M7gJjLnV5nfehJo][first full episode of The
@@ -5952,7 +5952,7 @@ following.  I want my efforts to reverberate.
   Discord migration mistake]].
 
 ** DONE Running up the score in Scrabble           :@personal:grandma:eulogy:
-CLOSED: [2022-09-12 Mon 00:32]
+CLOSED: [2022-09-12 Mon 00:32 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: running-up-the-score-in-scrabble
 :END:
@@ -6012,11 +6012,11 @@ stickler for the rules.  But not to worry, Grandma: you /always/ did
 your best.
 
 ** DONE Imperfectly Indieweb :@personal:indieweb:juvenilia:facebook:twitter:perfectionism:ageing:
-CLOSED: <2022-11-01 Tue 23:17>
+CLOSED: [2022-11-01 Tue 23:17 EDT]
 :PROPERTIES:
 :EXPORT_HUGO_BUNDLE: imperfectly-indieweb
 :EXPORT_FILE_NAME: index
-:EXPORT_HUGO_LASTMOD: <2022-11-02 Wed 00:00>
+:EXPORT_HUGO_LASTMOD: [2022-11-02 Wed 00:00 EDT]
 :END:
 
 #+begin_description
@@ -6336,10 +6336,10 @@ of an Emacs nerd, I highly recommend checking out ox-hugo!
 - [ ] Relative link for WKD
 
 ** DONE Build your vocabulary with Scala affixes                :@tech:scala:
-CLOSED: [2023-04-26 Wed 09:28]
+CLOSED: [2023-04-26 Wed 09:28 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: scala-affixes
-:EXPORT_HUGO_LASTMOD: <2023-04-26 Wed 11:33>
+:EXPORT_HUGO_LASTMOD: [2023-04-26 Wed 11:33 EDT]
 :END:
 
 #+begin_description
