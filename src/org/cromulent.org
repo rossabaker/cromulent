@@ -797,8 +797,14 @@ convert the Markdown to HTML with [[https://gohugo.io/][Hugo]].
 CLOSED: [2022-09-01 Thu 16:48 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: hugo
-:EXPORT_HUGO_LASTMOD: [2023-07-14 Fri 22:27 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-07-23 Sun 23:00 EDT]
 :END:
+
+#+begin_description
+rossabaker.com is built with Hugo.  This walks through how we
+configure it to handle generated sources and syntax highlighting,
+among other problems.
+#+end_description
 
 Hugo can be configured with either TOML or YAML.  I spent my weirdness
 budget on a literate config, so let's stick to the default.
