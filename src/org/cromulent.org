@@ -2328,7 +2328,7 @@ Give the code samples a little more room to breathe.
 CLOSED: [2023-02-23 Thu 23:59 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: emacs
-:EXPORT_HUGO_LASTMOD: [2023-07-07 Fri 23:37 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-07-23 Sun 23:02 EDT]
 :header-args: :tangle-mode `,#o444 :mkdirp yes
 :header-args:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444 :mkdirp yes
 :EXPORT_OPTIONS: h:6
@@ -3015,7 +3015,7 @@ the exported tree at the current point.
         (save-excursion
           (when-let* ((elem (car (org-hugo--get-elem-with-prop :EXPORT_FILE_NAME)))
                       (begin (org-element-property :begin elem))
-                      (time (format-time-string (org-time-stamp-format t) (current-time))))
+                      (time (format-time-string (org-time-stamp-format t t) (current-time))))
             (org-entry-put begin "EXPORT_HUGO_LASTMOD" time)))))
 #+end_src
 
