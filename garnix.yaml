@@ -1,5 +1,5 @@
 builds:
   include:
     - 'devShells.aarch64-darwin.default'
-    - 'homeConfigurations.*'
+    - 'homeConfigurations."RABaker@L2LYQM57XY".activationPackage'
     - 'packages.aarch64-darwin.aarch64-darwin-config-base'
