@@ -143,6 +143,7 @@
       flakeModules = {
         emacs = ./gen/emacs;
         scala = ./gen/scala;
+        modernTs = ./gen/modern_ts;
       };
     in
     inputs.flake-parts.lib.mkFlake { inherit inputs; } {
@@ -150,6 +151,7 @@
         ./gen/flake/modules/homeManagerModules.nix
         flakeModules.emacs
         flakeModules.scala
+        flakeModules.modernTs
         inputs.flake-parts.flakeModules.easyOverlay
       ];
     

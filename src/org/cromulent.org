@@ -4729,6 +4729,7 @@ more "literate".
     flakeModules = {
       emacs = ./gen/emacs;
       scala = ./gen/scala;
+      modernTs = ./gen/modern_ts;
     };
   in
   inputs.flake-parts.lib.mkFlake { inherit inputs; } {
@@ -4736,6 +4737,7 @@ more "literate".
       ./gen/flake/modules/homeManagerModules.nix
       flakeModules.emacs
       flakeModules.scala
+      flakeModules.modernTs
       inputs.flake-parts.flakeModules.easyOverlay
     ];
 
@@ -4869,6 +4871,132 @@ with a copy and paste:
 
 #+end_src
 
+** DONE Devshells bundle
+CLOSED: [2023-07-25 Tue 12:06 EDT]
+:PROPERTIES:
+:EXPORT_HUGO_BUNDLE: devshells
+:END:
+
+*** DONE Devshells
+CLOSED: [2023-07-25 Tue 12:27 EDT]
+:PROPERTIES:
+:EXPORT_FILE_NAME: _index
+:END:
+
+#+begin_description
+An overview on why I use Nix devshells
+#+end_description
+
+I use [[https://github.com/numtide/devshell][Nix devshells]] extensively.  I am a strong believer that projects
+should declare their development environment in code, so getting
+started on a project is as simple as cloning from Git and pulling down
+some (hopefully cached) dependencies.  This effort has two paydays:
+
+- Whenever you onboard a teammate
+- Whenever you set up a new workstation
+
+*** DONE Devshell for Modern Time Series Forecasting with Python
+CLOSED: [2023-07-25 Tue 12:06 EDT]
+:PROPERTIES:
+:EXPORT_FILE_NAME: modern-time-series-forecasting-with-python
+:END:
+
+#+begin_description
+Defines a Nix devshell for the book Modern Time Series Forecasting with Python.
+#+end_description
+
+I'm reading [[https://www.packtpub.com/product/modern-time-series-forecasting-with-python/9781803246802?utm_source=github&utm_medium=repository&utm_campaign=9781803246802][Modern Time Series Forecasting with Python]].  The first
+thing it asks me to do is install Conda, but package managers other
+than Nix give me a rash.  I've attempted to replicate its [[https://github.com/PacktPublishing/Modern-Time-Series-Forecasting-with-Python/blob/595fc7313e47834a1d303a5c52cad5fcddfde557/anaconda_env.yml][anaconda env]]
+to a devshell.  Try it out like this:
+
+#+begin_src sh :eval no
+  nix develop github:rossabaker/cromulent#modernTs
+#+end_src
+
+This should be more or less equivalent to the =conda activate
+modern_ts= instruction.  If you don't like it, ~^D~ and your money
+back.
+
+***** Missing packages
+
+There are four packages not yet bundled in this devshell.  I'll try
+harder once they bite me.
+
+- ~kaleido~ :: nix-template can't find ="Homepage"= field
+- ~optuna~ :: Broken in nixpkgs, nix-template can't find ="Homepage"= field
+- ~torchaudio-bin~ :: is non-free
+- ~lightning~ :: nix-template is full of syntax errors
+
+***** How it works
+
+The official definition uses Python 3.9, but I ran into problems with
+~importlib-metadata~, so we're going to just use =pkgs.python3= and
+hope for the best.  Several of the dependencies don't exist.  Many of
+them can be templated from PyPi:
+
+#+begin_src sh :eval no-export
+  for i in catboost category-encoders pmdarima pytorch-forecasting \
+	   statsforecast u8darts
+  do
+      rm -f $i.nix
+      nix-template python -u https://pypi.org/project/$i/ $i.nix
+  done
+#+end_src
+
+Finally, we put it together into a [[https://flake.parts/index.html][flake module]].
+
+#+begin_src nix :tangle ../../gen/modern_ts/default.nix
+  { inputs, lib, moduleWithSystem, ... }:
+
+  let
+    pythonPackages = ps: with ps; [
+      plotly
+      xgboost
+      scikit-learn
+      pandas
+      (import ./catboost.nix)
+      lightgbm
+      (import ./category-encoders.nix)
+      (import ./pmdarima.nix)
+      ipywidgets
+      jupyterlab
+      black
+      isort
+      xlrd
+      lxml
+      openpyxl
+      # kaleido
+      pyarrow
+      numpy
+      scipy
+      tqdm
+      matplotlib
+      humanize
+      # optuna
+      (import ./pytorch-forecasting.nix)
+      numba
+      holidays
+      seaborn
+      statsmodels
+      (import ./statsforecast.nix)
+      (import ./u8darts.nix)
+      pytorch
+      torchvision
+      # torchaudio-bin
+      # lightning
+    ];
+  in {
+    perSystem = { config, self', inputs', pkgs, system, ... }: {
+      devShells.modernTs = pkgs.devshell.mkShell {
+	name = "modern-ts";
+	packages = [
+	  (pkgs.python3.withPackages pythonPackages)
+	];
+      };
+    };
+  }
+#+end_src
 
 * Projects section
 :PROPERTIES:
