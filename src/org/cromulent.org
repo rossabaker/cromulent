@@ -4899,6 +4899,7 @@ some (hopefully cached) dependencies.  This effort has two paydays:
 CLOSED: [2023-07-25 Tue 12:06 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: modern-time-series-forecasting-with-python
+:EXPORT_HUGO_LASTMOD: [2023-07-25 Tue 14:33 EDT]
 :END:
 
 #+begin_description
@@ -4920,13 +4921,14 @@ back.
 
 ***** Missing packages
 
-There are four packages not yet bundled in this devshell.  I'll try
+There are five packages not yet bundled in this devshell.  I'll try
 harder once they bite me.
 
 - ~kaleido~ :: nix-template can't find ="Homepage"= field
 - ~optuna~ :: Broken in nixpkgs, nix-template can't find ="Homepage"= field
 - ~torchaudio-bin~ :: is non-free
 - ~lightning~ :: nix-template is full of syntax errors
+- ~jupyterlab-code-formatter~ :: nix-template is full of syntax errors
 
 ***** How it works
 
@@ -4937,7 +4939,9 @@ them can be templated from PyPi:
 
 #+begin_src sh :eval no-export
   for i in catboost category-encoders pmdarima pytorch-forecasting \
-	   statsforecast u8darts
+	   statsforecast u8darts \
+	   missingno window-ops pymannkendall tsfel pytorch_tabular \
+	   tensor-sensor aquirdturtle-collapsible-headings
   do
       rm -f $i.nix
       nix-template python -u https://pypi.org/project/$i/ $i.nix
@@ -4985,6 +4989,17 @@ Finally, we put it together into a [[https://flake.parts/index.html][flake modul
       torchvision
       # torchaudio-bin
       # lightning
+      kaggle
+      (import ./missingno.nix)
+      (import ./window-ops.nix)
+      (import ./pymannkendall.nix)
+      (import ./tsfel.nix)
+      rich
+      (import ./pytorch_tabular.nix)
+      omegaconf
+      (import ./tensor-sensor.nix)
+      # (import ./jupyterlab-code-formatter.nix)
+      (import ./aquirdturtle-collapsible-headings.nix)
     ];
   in {
     perSystem = { config, self', inputs', pkgs, system, ... }: {

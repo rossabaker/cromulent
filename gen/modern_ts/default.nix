@@ -36,6 +36,17 @@ let
     torchvision
     # torchaudio-bin
     # lightning
+    kaggle
+    (import ./missingno.nix)
+    (import ./window-ops.nix)
+    (import ./pymannkendall.nix)
+    (import ./tsfel.nix)
+    rich
+    (import ./pytorch_tabular.nix)
+    omegaconf
+    (import ./tensor-sensor.nix)
+    # (import ./jupyterlab-code-formatter.nix)
+    (import ./aquirdturtle-collapsible-headings.nix)
   ];
 in {
   perSystem = { config, self', inputs', pkgs, system, ... }: {
