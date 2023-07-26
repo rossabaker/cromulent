@@ -32,8 +32,8 @@ let
     statsmodels
     (import ./statsforecast.nix)
     (import ./u8darts.nix)
-    pytorch
-    torchvision
+    torch-bin
+    # torchvision-bin
     # torchaudio-bin
     # lightning
     kaggle
@@ -53,7 +53,7 @@ in {
     devShells.modernTs = pkgs.devshell.mkShell {
       name = "modern-ts";
       packages = [
-	(pkgs.python3.withPackages pythonPackages)
+	      (pkgs.python3.withPackages pythonPackages)
       ];
     };
   };

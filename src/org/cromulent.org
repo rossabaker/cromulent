@@ -4899,7 +4899,7 @@ some (hopefully cached) dependencies.  This effort has two paydays:
 CLOSED: [2023-07-25 Tue 12:06 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: modern-time-series-forecasting-with-python
-:EXPORT_HUGO_LASTMOD: [2023-07-25 Tue 14:33 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-07-25 Tue 22:48 EDT]
 :END:
 
 #+begin_description
@@ -4915,20 +4915,54 @@ to a devshell.  Try it out like this:
   nix develop github:rossabaker/cromulent#modernTs
 #+end_src
 
+#+begin_warning
+This shell will only work with =nixpkgs.config.allowUnfree= set to
+true.
+#+end_warning
+
 This should be more or less equivalent to the =conda activate
 modern_ts= instruction.  If you don't like it, ~^D~ and your money
 back.
 
-***** Missing packages
+***** Caveats
 
-There are five packages not yet bundled in this devshell.  I'll try
+****** Missing packages
+
+There are several packages not yet bundled in this devshell.  I'll try
 harder once they bite me.
 
-- ~kaleido~ :: nix-template can't find ="Homepage"= field
-- ~optuna~ :: Broken in nixpkgs, nix-template can't find ="Homepage"= field
-- ~torchaudio-bin~ :: is non-free
-- ~lightning~ :: nix-template is full of syntax errors
 - ~jupyterlab-code-formatter~ :: nix-template is full of syntax errors
+- ~kaleido~ :: nix-template can't find ="Homepage"= field
+- ~lightning~ :: nix-template is full of syntax errors
+- ~optuna~ :: Broken in nixpkgs, nix-template can't find ="Homepage"= field
+- ~torchaudio-bin~ :: unsupported on ~aarch64-apple-darwin~
+- ~torchvision-bin~ :: unsupported on ~aarch64-apple-darwin~
+
+****** Unimportable packages
+
+We generated a Nix expression for these packages, but the results
+aren't importable in the bundled Python environment, which kind of
+defeats the point.
+
+- ~aquirdturtle-collapsible-headings~
+- ~catboost~
+- ~category-encoders~
+- ~missingno~
+- ~pmdarima~
+- ~pymannkendall~
+- ~pytorch-forecasting~
+- ~pytorch-tabular~
+- ~statsforecast~
+- ~tensor-sensor~
+- ~tsfel~
+- ~u8darts~
+- ~window-ops~
+
+****** CUDA support outside Linux
+
+This devshell fails on [[https://github.com/PacktPublishing/Modern-Time-Series-Forecasting-with-Python/blob/595fc7313e47834a1d303a5c52cad5fcddfde557/test_installation.py#L8][~test_installation.py~]] on at least
+~aarch64-darwin~.  =python3Packages.torch-bin= does not include CUDA
+support outside Linux.
 
 ***** How it works
 
@@ -4948,7 +4982,7 @@ them can be templated from PyPi:
   done
 #+end_src
 
-Finally, we put it together into a [[https://flake.parts/index.html][flake module]].
+It all comes together in this [[https://flake.parts/index.html][flake module]].
 
 #+begin_src nix :tangle ../../gen/modern_ts/default.nix
   { inputs, lib, moduleWithSystem, ... }:
@@ -4985,8 +5019,8 @@ Finally, we put it together into a [[https://flake.parts/index.html][flake modul
       statsmodels
       (import ./statsforecast.nix)
       (import ./u8darts.nix)
-      pytorch
-      torchvision
+      torch-bin
+      # torchvision-bin
       # torchaudio-bin
       # lightning
       kaggle
@@ -5006,7 +5040,7 @@ Finally, we put it together into a [[https://flake.parts/index.html][flake modul
       devShells.modernTs = pkgs.devshell.mkShell {
 	name = "modern-ts";
 	packages = [
-	  (pkgs.python3.withPackages pythonPackages)
+		(pkgs.python3.withPackages pythonPackages)
 	];
       };
     };
