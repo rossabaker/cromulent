@@ -4441,11 +4441,92 @@ The Home Manager module is published to my flake as output
   }
 #+end_src
 
+** Python home-manager module                                     :python:
+:PROPERTIES:
+:EXPORT_FILE_NAME: python
+:EXPORT_HUGO_LASTMOD: [2023-07-28 Fri 21:51 EDT]
+:header-args: :tangle-mode (identity #o444) :mkdirp yes
+:header-args:nix: :tangle ../../gen/python/default.nix
+:END:
+
+#+begin_description
+This configuration provides a Home Manager module for general Python
+development.
+#+end_description
+
+I have dabbled with Python for years, but have little production
+experience.  I am used to not knowing what I'm doing, but the feeling
+is stronger in this module.
+
+*** Package management
+
+I am fighting hard to use Nix to manage my Python packages, but I
+don't have time for a side quest while I'm getting comfortable with
+the language.
+
+**** Micromamba
+
+[[https://mamba.readthedocs.io/en/latest/user_guide/micromamba.html][Micromamba]] is an alternative to Anaconda and Miniconda, neither of
+which installs cleanly on my Mac.  Unfortunately, the Micromamba nix
+package is also marked broken on Darwin due to an RPM dependency.
+
+#+begin_warning
+New workstations will need to install Micromamba themselves.
+#+end_src
+
+The curlbash fails with ~TypeError: memoryview: a bytes-like object is
+required, not 'str'".~ while rudely trying to append to my shell
+configurations.  It also hardcodes ~$HOME~.  We'll install this cleaned
+up version via home-manager.  New laptops are
+version.
+
+#+begin_src sh :tangle ../../gen/python/conda-setup
+  # >>> conda initialize >>>
+  # !! Contents within this block are managed by 'conda init' !!
+  __conda_setup="$($HOME'mambaforge/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+  if [ $? -eq 0 ]; then
+      eval "$__conda_setup"
+  else
+      if [ -f "$HOME/mambaforge/etc/profile.d/conda.sh" ]; then
+	  . "$HOME/mambaforge/etc/profile.d/conda.sh"
+      else
+	  export PATH="$HOME/mambaforge/bin:$PATH"
+      fi
+  fi
+  unset __conda_setup
+
+  if [ -f "$HOME/mambaforge/etc/profile.d/mamba.sh" ]; then
+      . "$HOME/mambaforge/etc/profile.d/mamba.sh"
+  fi
+  # <<< conda initialize <<<
+#+end_src
+
+*** Flake module
+
+The Home Manager module is published to my flake as output
+~homeManagerModules.python~.
+
+#+begin_src nix
+  { moduleWithSystem, ... }: {
+    flake.homeManagerModules.python = moduleWithSystem(
+      perSystem@{ pkgs }: {
+	home.file = {
+	  ".config/zsh/conda-setup".source = ./conda-setup;
+	};
+
+	programs.zsh.initExtra = ''
+	. ~/.config/zsh/conda-setup
+	'';
+      }
+    );
+  }
+#+end_src
+
 ** DONE Nix flake                                                 :nix:flake:
 CLOSED: [2022-12-25 Sun 22:14 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: nix-flake
-:EXPORT_HUGO_LASTMOD: [2023-07-21 Fri 15:11 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-07-28 Fri 21:52 EDT]
 :END:
 
 At the root of my [[https://github.com/rossabaker/cromulent][cromulent repository]] is a [[https://nixos.wiki/wiki/Flakes][Nix flake]].  It contains
@@ -4702,6 +4783,7 @@ more "literate".
       homeModule
       inputs.self.homeManagerModules.emacs
       inputs.self.homeManagerModules.scala
+      inputs.self.homeManagerModules.python
       ./modules/work
 	  ];
 	  # Pass our flake inputs into the config
@@ -4729,6 +4811,7 @@ more "literate".
     flakeModules = {
       emacs = ./gen/emacs;
       scala = ./gen/scala;
+      python = ./gen/python;
       modernTs = ./gen/modern_ts;
     };
   in
@@ -4737,6 +4820,7 @@ more "literate".
       ./gen/flake/modules/homeManagerModules.nix
       flakeModules.emacs
       flakeModules.scala
+      flakeModules.python
       flakeModules.modernTs
       inputs.flake-parts.flakeModules.easyOverlay
     ];

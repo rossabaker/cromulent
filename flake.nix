@@ -116,6 +116,7 @@
         homeModule
         inputs.self.homeManagerModules.emacs
         inputs.self.homeManagerModules.scala
+        inputs.self.homeManagerModules.python
         ./modules/work
     	];
     	# Pass our flake inputs into the config
@@ -143,6 +144,7 @@
       flakeModules = {
         emacs = ./gen/emacs;
         scala = ./gen/scala;
+        python = ./gen/python;
         modernTs = ./gen/modern_ts;
       };
     in
@@ -151,6 +153,7 @@
         ./gen/flake/modules/homeManagerModules.nix
         flakeModules.emacs
         flakeModules.scala
+        flakeModules.python
         flakeModules.modernTs
         inputs.flake-parts.flakeModules.easyOverlay
       ];
