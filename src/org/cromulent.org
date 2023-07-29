@@ -4996,7 +4996,7 @@ Series Forecasting with Python.
 
 #+begin_warning
 This doesn't work at all.  I have tabled this effort for now in
-grudging favor of [[#micromamba][Micromamba]].
+grudging favor of [[/configs/python/#micromamba][Micromamba]].
 #+end_warning
 
 I'm reading [[https://www.packtpub.com/product/modern-time-series-forecasting-with-python/9781803246802?utm_source=github&utm_medium=repository&utm_campaign=9781803246802][Modern Time Series Forecasting with Python]].  The first
@@ -5139,6 +5139,10 @@ It all comes together in this [[https://flake.parts/index.html][flake module]].
     };
   }
 #+end_src
+
+**** TODO Broken links
+
+- Micromamba link was ambiguous
 
 * Projects section
 :PROPERTIES:
