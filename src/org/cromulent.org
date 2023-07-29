@@ -4465,6 +4465,9 @@ don't have time for a side quest while I'm getting comfortable with
 the language.
 
 **** Micromamba
+:PROPERTIES:
+:CUSTOM_ID: micromamba
+:END:
 
 [[https://mamba.readthedocs.io/en/latest/user_guide/micromamba.html][Micromamba]] is an alternative to Anaconda and Miniconda, neither of
 which installs cleanly on my Mac.  Unfortunately, the Micromamba nix
@@ -4983,12 +4986,18 @@ some (hopefully cached) dependencies.  This effort has two paydays:
 CLOSED: [2023-07-25 Tue 12:06 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: modern-time-series-forecasting-with-python
-:EXPORT_HUGO_LASTMOD: [2023-07-25 Tue 22:48 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-07-28 Fri 21:57 EDT]
 :END:
 
 #+begin_description
-Defines a Nix devshell for the book Modern Time Series Forecasting with Python.
+Paused attempt to defines a Nix devshell for the book Modern Time
+Series Forecasting with Python.
 #+end_description
+
+#+begin_warning
+This doesn't work at all.  I have tabled this effort for now in
+grudging favor of [[#micromamba][Micromamba]].
+#+end_warning
 
 I'm reading [[https://www.packtpub.com/product/modern-time-series-forecasting-with-python/9781803246802?utm_source=github&utm_medium=repository&utm_campaign=9781803246802][Modern Time Series Forecasting with Python]].  The first
 thing it asks me to do is install Conda, but package managers other
