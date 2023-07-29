@@ -1882,7 +1882,7 @@ Mute the header anchors until hover:
 CLOSED: [2022-09-12 Mon 22:11 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: contact-info
-:EXPORT_HUGO_LASTMOD: [2023-07-20 Thu 16:12 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-07-28 Fri 22:25 EDT]
 :END:
 
 Contact info is rendered in two places: in the [[*Footer template][footer template]] and on the
@@ -1911,9 +1911,9 @@ Keys are:
   relMe = false
 
   [[Params.contacts]]
-  network = 'GitHub'
-  handle = '@rossabaker'
-  url = 'https://github.com/rossabaker'
+  network = 'Mastodon'
+  handle = '@ross@rossabaker.com'
+  url = 'https://social.rossabaker.com/@ross'
   support = 'supported'
 
   [[Params.contacts]]
@@ -1924,16 +1924,16 @@ Keys are:
   relMe = false
 
   [[Params.contacts]]
-  network = 'Mastodon'
-  handle = '@ross@rossabaker.com'
-  url = 'https://social.rossabaker.com/@ross'
+  network = 'GitHub'
+  handle = '@rossabaker'
+  url = 'https://github.com/rossabaker'
   support = 'supported'
 
   [[Params.contacts]]
   network = 'Codeberg'
   handle = '@rossabaker'
   url = 'https://codeberg.org/rossabaker'
-  support = 'experimental'
+  support = 'supported'
 
   [[Params.contacts]]
   network = 'Cohost'
