@@ -2,6 +2,8 @@
 #+HUGO_SECTION: /
 #+MACRO: abbr @@html:<abbr title="$1">$2</abbr>@@
 #+PROPERTY: header-args :eval never :mkdirp yes
+
+# Automatically set the Hugo date: https://ox-hugo.scripter.co/doc/dates/#date
 #+STARTUP: logdone
 
 * DONE Home page
