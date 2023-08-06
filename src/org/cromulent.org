@@ -945,6 +945,10 @@ CLOSED: [2022-09-02 Fri 11:28 EDT]
 :EXPORT_TITLE: Templates
 :END:
 
+#+begin_description
+Defines the Hugo templates employed by ~rossabaker.com~.
+#+end_description
+
 I've eschewed the [[https://themes.gohugo.io/][many community themes]] to lay everything out from
 scratch.  I took over a decade off front ends and wanted to see what
 I've missed.  If you have no such need, don't follow my footsteps.
