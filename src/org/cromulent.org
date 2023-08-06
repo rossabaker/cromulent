@@ -1340,7 +1340,7 @@ template that lists the article summaries in reverse order of modification.
 CLOSED: [2022-09-02 Fri 10:29 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: head
-:EXPORT_HUGO_LASTMOD: [2023-07-07 Fri 18:03 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-08-06 Sun 00:34 EDT]
 :END:
 
 This template defines our default ~<head>~ element, and is not often
@@ -1395,6 +1395,13 @@ Load our own CSS and JavaScript through the [[https://gohugo.io/hugo-pipes/intro
       <!-- Enable HTTP/2 Push -->
       <link rel="preload" href="{{ $js.RelPermalink }}" as="script">
   {{ end }}
+#+end_src
+
+Add our avatar as our shortcut icon.  Some people go crazy with
+different sizes and proprietary Apple links.  Not today.
+
+#+begin_src html :tangle ../../tmp/hugo/layouts/partials/head.html
+  <link rel="icon" href="/img/profile.ico">
 #+end_src
 
 Render our RSS feed.  Putting it in a ~<link>~ integrates with various
