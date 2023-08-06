@@ -446,6 +446,10 @@ existing directory under `magit-clone-default-directory'."
   (:map rab/files-map
    ("g" . git-related-find-file)))
 
+(use-package restclient
+  :ensure t
+  :defer t)
+
 (use-package treesit-auto
   :ensure t
   :demand t

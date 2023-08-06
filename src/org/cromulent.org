@@ -2330,7 +2330,7 @@ Give the code samples a little more room to breathe.
 CLOSED: [2023-02-23 Thu 23:59 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: emacs
-:EXPORT_HUGO_LASTMOD: [2023-07-23 Sun 23:02 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-08-05 Sat 22:46 EDT]
 :header-args: :tangle-mode `,#o444 :mkdirp yes
 :header-args:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444 :mkdirp yes
 :EXPORT_OPTIONS: h:6
@@ -3548,6 +3548,18 @@ might still be compelling as an ~:annotation-function~.
 #+end_src
 
 The sort order is customized in [[#vertico-multiform][Vertico multiform]].
+
+****** Restclient
+
+[[https://github.com/pashky/restclient.el][restclient.el]] is essentially an HTTP worksheet.
+
+#+begin_src emacs-lisp
+  (use-package restclient
+    :ensure t
+    :defer t)
+#+end_src
+
+I'd like to look into [[https://github.com/alf/ob-restclient.el][ob-restclient.el]] for org-babel integration.
 
 ****** Treesitter
 :PROPERTIES:
