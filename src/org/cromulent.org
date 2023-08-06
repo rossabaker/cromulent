@@ -1167,6 +1167,7 @@ sophisticated eventually.
 CLOSED: [2022-09-02 Fri 12:55 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: list
+:EXPORT_HUGO_LASTMOD: [2023-08-05 Sat 23:33 EDT]
 :END:
 
 The list template renders for the home page, section listings,
@@ -1176,21 +1177,25 @@ in reverse order of modification.
 #+begin_src html :tangle ../../tmp/hugo/layouts/_default/list.html
   {{ define "main" }}
       <article>
-          {{ with .Content }}
-              {{ . }}
-          {{ end }}
+	  <header>
+	      <h1>{{ .Title }}</h1>
+	  </header>
 
-          <section class="recently-updated">
-              <h2>Recently updated</h2>
+	  {{ with .Content }}
+	      {{ . }}
+	  {{ end }}
 
-              <ul class="article-summaries">
-                  {{ range .Pages.ByLastmod.Reverse }}
-                      <li>
-                          {{ partial "article-summary" . }}
-                      </li>
-                  {{ end}}
-              </ul>
-          </section>
+	  <section class="recently-updated">
+	      <h2>Recently updated</h2>
+
+	      <ul class="article-summaries">
+		  {{ range .Pages.ByLastmod.Reverse }}
+		      <li>
+			  {{ partial "article-summary" . }}
+		      </li>
+		  {{ end}}
+	      </ul>
+	  </section>
       </article>
   {{ end }}
 #+end_src
@@ -6795,7 +6800,7 @@ Do you see the difference between ~contramap~ and ~comap~?
 **** ~di-~
 
 Whereas ~bimap~ maps both sides, ~dimap~ contramaps one side and maps
-another.  Single-argument functions are a simple example of an [[https://typelevel.org/cats/typeclasses/arrow.html][Arrow]].
+another.  -argument functions are a simple example of an [[https://typelevel.org/cats/typeclasses/arrow.html][Arrow]].
 
 #+begin_src scala
   trait Arrow[F[_, _]] {
