@@ -2040,6 +2040,12 @@ Keys are:
   url = 'https://keyoxide.org/ross%40rossabaker.com'
   support = 'supported'
   relMe = false
+
+  [[Params.contacts]]
+  network = 'Indieweb'
+  handle = 'Rossabaker.com'
+  url = 'https://indieweb.org/User:Rossabaker.com'
+  support = 'supported'
 #+end_src
 
 ***** ~contact-info-icons~ partial template
