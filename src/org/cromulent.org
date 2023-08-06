@@ -338,6 +338,7 @@ and wasn't good back then.
 No.
 
 ** Footnotes
+
 ** TODO Broken links                                               :noexport:
 - pgp
 
@@ -531,11 +532,33 @@ upstream works, or to [[https://creativecommons.org/faq/#may-i-apply-a-creative-
 :EXPORT_HUGO_BUNDLE: configs
 :END:
 
-** Configurations
+** DONE Configurations
+CLOSED: [2022-09-05 Mon 23:48 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: _index
-:EXPORT_HUGO_LASTMOD: [2022-09-05 Mon 23:48 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-08-05 Sat 23:27 EDT]
 :END:
+
+#+begin_description
+Configurations are living documentation of Ross A. Baker's systems,
+both local and remote.
+#+end_description
+
+My /Configurations/ are an expansive take on the traditional dotfiles
+repository.
+
+- Most of it is [[https://en.wikipedia.org/wiki/Literate_programming][literate programming]].  It intersperses prose and
+  source code and in [[https://orgmode.org/][Org Mode]], with the source is extracted with [[https://orgmode.org/worg/org-contrib/babel/][Babel]].
+- These are living documents.  I am [[https://en.wikipedia.org/wiki/Eating_your_own_dog_food][dogfooding]] this.
+- These configurations are intended to be declarative and
+  reproducible.  We use [[https://nixos.org/][Nix]] to manage not only the dotfiles, but the
+  software packages that they configure.  Infrastructure is defined
+  with [[https://www.terraform.io/][Terraform]].
+
+This is not a complete description of my environment.  Some things
+can't be automated [fn:17].  Some things are be redacted for security.
+But we inveterate tweakers learn from one another, so I will share all
+that I can.
 
 ** DONE Managing generated sources in Git           :git:gitattributes:gitignore:babel:
 CLOSED: [2022-08-24 Wed 15:04 EDT]
@@ -7085,3 +7108,5 @@ Language, but YAML Ain't Markup Language.
 [fn:15] [[https://keys.openpgp.org/about/faq#federation][Is keys.openpgp.org federated?]]
 
 [fn:16] Currently implemented with Mastodon
+
+[fn:17] Though NixOS asymptotically approaches it.
