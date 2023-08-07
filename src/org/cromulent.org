@@ -5025,7 +5025,7 @@ with a copy and paste:
 ** DONE Darwin                                         :nix:macos:nix_darwin:
 CLOSED: [2023-08-07 Mon 09:48 EDT]
 :PROPERTIES:
-:EXPORT_HUGO_TITLE: darwin
+:EXPORT_FILE_NAME: darwin
 :END:
 
 #+begin_description
