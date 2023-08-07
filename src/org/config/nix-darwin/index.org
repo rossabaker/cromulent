@@ -83,9 +83,7 @@ an effective substitute thus far.
         pkgs.xz
       ];
 
-    environment.shellAliases = {
-      docker = "podman";
-    };
+    environment.pathsToLink = [ "/share/qemu" ];
 
     programs.zsh.interactiveShellInit = config.system.build.setAliases.text;
 
