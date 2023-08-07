@@ -85,10 +85,7 @@
     let
       mkDarwinConfigModule = { pkgs }: {
         imports = [
-          (import (pkgs.callPackage ./tangle.nix {
-    	inherit pkgs;
-    	src = ./src/org/config/nix-darwin;
-          }))
+          ./gen/nix-darwin
           {
     	system.keyboard.enableKeyMapping = true;
     	system.keyboard.remapCapsLockToControl = true;
