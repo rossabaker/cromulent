@@ -5022,10 +5022,11 @@ with a copy and paste:
 
 #+end_src
 
-** DONE Darwin                                         :nix:macos:nix_darwin:
+** DONE Darwin                :nix:macos:nix_darwin:postgresql:podman:docker:
 CLOSED: [2023-08-07 Mon 09:48 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: darwin
+:EXPORT_HUGO_LASTMOD: [2023-08-07 Mon 14:07 EDT]
 :END:
 
 #+begin_description
@@ -5047,6 +5048,7 @@ further.
   {
     imports = [
       ./podman.nix
+      ./postgresql.nix
     ];
 
     # List packages installed in system profile. To search by name, run:
@@ -5065,20 +5067,20 @@ further.
     # services.nix-daemon.enable = true;
     nix = {
       settings.substituters = [
-        "https://nix-community.cachix.org/"
-        "https://rossabaker.cachix.org/"
-        "https://typelevel.cachix.org/"
-        "https://cache.garnix.io/"
+	"https://nix-community.cachix.org/"
+	"https://rossabaker.cachix.org/"
+	"https://typelevel.cachix.org/"
+	"https://cache.garnix.io/"
       ];
       settings.trusted-public-keys = [
-        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-        "rossabaker.cachix.org-1:KK/CQTeAGEurCUBy3nDl9PdR+xX+xtWQ0C/GpNN6kuw="
-        "typelevel.cachix.org-1:UnD9fMAIpeWfeil1V/xWUZa2g758ZHk8DvGCd/keAkg="
-        "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
+	"nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+	"rossabaker.cachix.org-1:KK/CQTeAGEurCUBy3nDl9PdR+xX+xtWQ0C/GpNN6kuw="
+	"typelevel.cachix.org-1:UnD9fMAIpeWfeil1V/xWUZa2g758ZHk8DvGCd/keAkg="
+	"cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
       ];
       package = pkgs.nixFlakes;
       extraOptions = ''
-        experimental-features = nix-command flakes
+	experimental-features = nix-command flakes
       '';
     };
 
@@ -5130,6 +5132,97 @@ an effective substitute thus far.
       helper_binaries_dir = ["${pkgs.gvproxy}/bin"]
     '';
   }
+#+end_src
+
+*** PostgreSQL
+
+This is not as smooth an experience as the NixOS module.
+
+- The nix-darwin module doesn't create a dedicated ~postgres~ system
+  user.  Everything runs as the local user.
+- It doesn't create the data directory.
+- It doesn't set up the logs.
+- It creates a ~postgres~ superuser, but because it's peer
+  authenticated and there's no ~postgres~ system user, we can't use it
+  to change the password or create any other users.
+
+#+begin_src nix :tangle ../../gen/nix-darwin/postgresql.nix
+  { config, pkgs, ... }:
+
+  let
+    dataDir = "/var/lib/postgresql/14";
+    logDir = "/var/log/postgresql";
+    user = "RABaker";
+  in
+  {
+    services = {
+      postgresql = {
+	inherit dataDir;
+	enable = true;
+	package = pkgs.postgresql_14;
+	initdbArgs = [ "-D" dataDir ];
+	authentication =
+	  ''
+          # On first run, use "trust" instead of "scram-sha-256"
+	  local all postgres scram-sha-256
+	  '';
+      };
+    }
+  ;
+    # Create the PostgreSQL data directory, if it does not exist.
+    system.activationScripts.preActivation = {
+      enable = true;
+      text = ''
+	if [ ! -d "${dataDir}" ]; then
+	  echo "creating PostgreSQL data directory..."
+	  sudo mkdir -m 700 -p "${dataDir}/"
+	  chown -R ${user}:staff "${dataDir}/"
+	fi
+
+	if [ ! -d "/var/log/postgresql" ]; then
+	  echo "creating PostgreSQL log directory..."
+	  sudo mkdir -m 700 -p "${logDir}/"
+	  chown -R ${user}:staff "${logDir}/"
+	fi
+      '';
+    };
+
+    launchd.user.agents.postgresql.serviceConfig = {
+      StandardErrorPath = "${logDir}/postgres.error.log";
+      StandardOutPath = "${logDir}/postgres.out.log";
+    };
+  }
+#+end_src
+
+*** Unlocking the ~postgres~ user and creating new ones
+
+The nix-darwin module doesn't currently support the =initialScript=,
+=ensureDatabases=, or =ensureUsers= settings.  This leaves us some
+work to do so we can connect at all.
+
+On the first run, in =services.postgresql.authentication=, change
+~scram-sha-256~ to ~trust~ and do a =darwin-rebuild switch=.  That's
+an insecure setting, but it lets us connect:
+
+#+begin_src sh
+  psql -U postgres
+#+end_src
+
+We can then can then set a password:
+
+#+begin_src sql
+  ALTER USER postgres WITH PASSWORD 'lol_lmao';
+#+end_src
+
+Revert to ~scram-sha-256~ and do a =darwin-rebuild switch= again.  Subsequent
+attempts to login as =postgres= will require the password.
+
+It's generally convenient to have a database user that matches your
+system username.  This user can connect locally, without password,
+using the ~peer~ method:
+
+#+begin_src sh
+  createuser -U postgres $USER
 #+end_src
 
 ** DONE Devshells bundle
