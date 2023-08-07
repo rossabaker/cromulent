@@ -26,6 +26,7 @@ further.
       pkgs.element-desktop
       pkgs.jq
       pkgs.nixpkgs-fmt
+      pkgs.postgresql_14
     ];
 
     programs.direnv = {
