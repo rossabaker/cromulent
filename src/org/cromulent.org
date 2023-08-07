@@ -2375,7 +2375,7 @@ Give the code samples a little more room to breathe.
 CLOSED: [2023-02-23 Thu 23:59 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: emacs
-:EXPORT_HUGO_LASTMOD: [2023-08-05 Sat 22:46 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-08-06 Sun 23:57 EDT]
 :header-args: :tangle-mode `,#o444 :mkdirp yes
 :header-args:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444 :mkdirp yes
 :EXPORT_OPTIONS: h:6
@@ -2779,6 +2779,14 @@ Autocompletion of method names in code is a classic use case.
   (use-package corfu
     :ensure t
     :hook (on-first-buffer . global-corfu-mode))
+#+end_src
+
+***** Docker
+
+#+begin_src emacs-lisp
+  (use-package docker
+    :ensure t
+    :defer t)
 #+end_src
 
 ***** Exiting

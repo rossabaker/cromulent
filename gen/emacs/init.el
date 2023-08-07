@@ -94,6 +94,10 @@
   :ensure t
   :hook (on-first-buffer . global-corfu-mode))
 
+(use-package docker
+  :ensure t
+  :defer t)
+
 (setopt confirm-kill-emacs 'yes-or-no-p)
 
 (use-package display-line-numbers
