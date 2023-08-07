@@ -87,6 +87,8 @@ an effective substitute thus far.
       docker = "podman";
     };
 
+    programs.zsh.interactiveShellInit = config.system.build.setAliases.text;
+
     # https://github.com/LnL7/nix-darwin/issues/432#issuecomment-1024951660
     environment.etc."containers/containers.conf.d/99-gvproxy-path.conf".text = ''
       [engine]
