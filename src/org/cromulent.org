@@ -7085,6 +7085,33 @@ zoom in on shared interests.
 I hope you find something here to enjoy, and I hope it inspires you to
 contribute to the open web, too.
 
+* DONE Todo                                                 :indieweb:itches:
+CLOSED: [2023-08-06 Sun 21:30 EDT]
+:PROPERTIES:
+:EXPORT_FILE_NAME: todo
+:END:
+
+#+begin_description
+Documents the "itches" that I'd like to fix on the site.
+#+end_description
+
+On the IndieWeb, we are taught to focus on our own [[https://indieweb.org/itches][itches]].  In Org
+Mode, we have [[https://orgmode.org/manual/TODO-Items.html][TODO items]].  They're two sides of the same coin, and
+either seems more fun than struggling with JIRA.
+
+These are not yet prioritized.
+
+** TODO Improve typography.
+I foolishly started from scratch.
+
+** TODO Finish descriptions on all my pages.
+** TODO Post my Twitter and Facebook archives.
+** TODO Automate synchronization of notes.
+** TODO Clean up tags
+Particularly coming out of the social media archives.
+** TODO The rendering of TODO headers is ugly
+** TODO Integrate the scattered, unexported TODO sections into this list
+
 * Footnotes
 
 [fn:1]
