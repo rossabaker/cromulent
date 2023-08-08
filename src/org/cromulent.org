@@ -5027,7 +5027,7 @@ CLOSED: [2023-08-07 Mon 09:48 EDT]
 :PROPERTIES:
 :EXPORT_HUGO_BUNDLE: darwin
 :EXPORT_FILE_NAME: _index
-:EXPORT_HUGO_LASTMOD: [2023-08-08 Tue 00:11 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-08-08 Tue 10:28 EDT]
 :END:
 
 #+begin_description
@@ -5147,9 +5147,11 @@ This is not as smooth an experience as the NixOS module.
   user.  Everything runs as the local user.
 - It doesn't create the data directory.
 - It doesn't set up the logs.
+- The =initdb= call doesn't work out of the box.
 - It creates a ~postgres~ superuser, but because it's peer
-  authenticated and there's no ~postgres~ system user, we can't use it
-  to change the password or create any other users.
+  authenticated and there's no ~postgres~ system user.
+
+We fix all of those here.
 
 A bunch of docker-compose files in my world claim port ~5432~, so we
 trudge off to the non-standard ~5433~.
@@ -5170,14 +5172,19 @@ trudge off to the non-standard ~5433~.
 	enable = true;
 	package = pkgs.postgresql_14;
 	initdbArgs = [ "-D" dataDir ];
-	authentication =
-	  ''
-	  # On first run, use "trust" instead of "scram-sha-256"
-	  local all postgres scram-sha-256
-	  '';
       };
-    }
-  ;
+    };
+
+    users = {
+      knownUsers = [ "postgres" ];
+      users = {
+	postgres = {
+	  uid = 2000;
+	  shell = "/bin/bash";
+	};
+      };
+    };
+
     # Create the PostgreSQL data directory, if it does not exist.
     system.activationScripts.preActivation = {
       enable = true;
@@ -5203,36 +5210,16 @@ trudge off to the non-standard ~5433~.
   }
 #+end_src
 
-*** Unlocking the ~postgres~ user and creating new ones
+*** Connecting
 
-The nix-darwin module doesn't currently support the =initialScript=,
-=ensureDatabases=, or =ensureUsers= settings.  This leaves us some
-work to do so we can connect at all.
+By default, the ~postgres~ PostgreSQL user is supported via ~peer~
+authentication over local sockets, which means we can authenticate
+when logged in as the ~postgres~ system user.  Don't forget the
+nonstandard port:
 
-On the first run, in =services.postgresql.authentication=, change
-~scram-sha-256~ to ~trust~ and do a =darwin-rebuild switch=.  That's
-an insecure setting, but it lets us connect:
-
-#+begin_src sh
-  psql -U postgres
-#+end_src
-
-We can then can then set a password:
-
-#+begin_src sql
-  ALTER USER postgres WITH PASSWORD 'lol_lmao';
-#+end_src
-
-Revert to ~scram-sha-256~ and do a =darwin-rebuild switch= again.  Subsequent
-attempts to login as =postgres= will require the password.
-
-It's generally convenient to have a database user that matches your
-system username.  This user can connect locally, without password,
-using the ~peer~ method:
-
-#+begin_src sh
-  createuser -U postgres $USER
-#+end_src
+#+begin_example sh
+sudo -u postgres -i psql -p 5433
+#+end_example
 
 ** DONE Devshells bundle
 CLOSED: [2023-07-25 Tue 12:06 EDT]

@@ -13,14 +13,19 @@ in
       enable = true;
       package = pkgs.postgresql_14;
       initdbArgs = [ "-D" dataDir ];
-      authentication =
-	''
-	# On first run, use "trust" instead of "scram-sha-256"
-	local all postgres scram-sha-256
-	'';
     };
-  }
-;
+  };
+
+  users = {
+    knownUsers = [ "postgres" ];
+    users = {
+      postgres = {
+	uid = 2000;
+	shell = "/bin/bash";
+      };
+    };
+  };
+
   # Create the PostgreSQL data directory, if it does not exist.
   system.activationScripts.preActivation = {
     enable = true;
