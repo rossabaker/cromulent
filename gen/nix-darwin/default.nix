@@ -3,7 +3,7 @@
 {
   imports = [
     ./podman.nix
-    # ./postgresql.nix
+    ./postgresql.nix
   ];
 
   # List packages installed in system profile. To search by name, run:

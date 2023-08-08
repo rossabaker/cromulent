@@ -4,17 +4,18 @@ let
   dataDir = "/var/lib/postgresql/14";
   logDir = "/var/log/postgresql";
   user = "RABaker";
+  port = 5433;
 in
 {
   services = {
     postgresql = {
-      inherit dataDir;
+      inherit dataDir port;
       enable = true;
       package = pkgs.postgresql_14;
       initdbArgs = [ "-D" dataDir ];
       authentication =
 	''
-        # On first run, use "trust" instead of "scram-sha-256"
+	# On first run, use "trust" instead of "scram-sha-256"
 	local all postgres scram-sha-256
 	'';
     };

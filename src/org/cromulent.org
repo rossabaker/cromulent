@@ -5025,22 +5025,27 @@ with a copy and paste:
 ** DONE Darwin                :nix:macos:nix_darwin:postgresql:podman:docker:
 CLOSED: [2023-08-07 Mon 09:48 EDT]
 :PROPERTIES:
-:EXPORT_FILE_NAME: darwin
-:EXPORT_HUGO_LASTMOD: [2023-08-07 Mon 14:07 EDT]
+:EXPORT_HUGO_BUNDLE: darwin
+:EXPORT_FILE_NAME: _index
+:EXPORT_HUGO_LASTMOD: [2023-08-08 Tue 00:11 EDT]
 :END:
 
 #+begin_description
-Defines a base module for nix-darwin configurations for
-semi-declarative MacOS systems.
+Defines set of nix-darwin modules in support of mostly declarative
+MacOS systems.
 #+end_description
 
-This is a [[https://github.com/LnL7/nix-darwin][nix-darwin configuration]].  I'm only on MacOS for work, but we
-had might as well make the best of it!
+[[https://github.com/LnL7/nix-darwin][nix-darwin]] is a set of Nix modules for a declarative MacOS system.  It
+is similar in purpose, but less thorough, than NixOS is for Linux.
 
-*** Base configuration
+I only own a MacBook because work chose it for me, and I hope to never
+own two.  In practice, all of these modules will likely be mixed into
+a single machine config, but it's still nice to separate them.
 
-This is imported from preliterate times and could be broken up
+#+begin_info
+This is imported from preliterate times, and could be broken up
 further.
+#+end_info
 
 #+begin_src nix :tangle ../../gen/nix-darwin/default.nix
   { config, pkgs, ... }:
@@ -5048,7 +5053,7 @@ further.
   {
     imports = [
       ./podman.nix
-      # ./postgresql.nix
+      ./postgresql.nix
     ];
 
     # List packages installed in system profile. To search by name, run:
@@ -5146,6 +5151,9 @@ This is not as smooth an experience as the NixOS module.
   authenticated and there's no ~postgres~ system user, we can't use it
   to change the password or create any other users.
 
+A bunch of docker-compose files in my world claim port ~5432~, so we
+trudge off to the non-standard ~5433~.
+
 #+begin_src nix :tangle ../../gen/nix-darwin/postgresql.nix
   { config, pkgs, ... }:
 
@@ -5153,17 +5161,18 @@ This is not as smooth an experience as the NixOS module.
     dataDir = "/var/lib/postgresql/14";
     logDir = "/var/log/postgresql";
     user = "RABaker";
+    port = 5433;
   in
   {
     services = {
       postgresql = {
-	inherit dataDir;
+	inherit dataDir port;
 	enable = true;
 	package = pkgs.postgresql_14;
 	initdbArgs = [ "-D" dataDir ];
 	authentication =
 	  ''
-          # On first run, use "trust" instead of "scram-sha-256"
+	  # On first run, use "trust" instead of "scram-sha-256"
 	  local all postgres scram-sha-256
 	  '';
       };
