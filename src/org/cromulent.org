@@ -293,6 +293,11 @@ CLOSED: [2022-10-16 Sun 15:37 EDT]
 :EXPORT_FILE_NAME: contact
 :EXPORT_HUGO_LASTMOD: [2023-08-09 Wed 22:12 EDT]
 :END:
+
+#+begin_description
+Enumerates the best ways to contact Ross A. Baker
+#+end_description
+
 ** Direct communication
 
 I can't offer an {{{abbr(service-level agreement,SLA)}}} on response
@@ -332,8 +337,6 @@ and wasn't good back then.
 **** Crypto
 
 No.
-
-** Footnotes
 
 ** TODO Broken links                                               :noexport:
 - pgp
