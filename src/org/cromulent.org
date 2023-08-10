@@ -2372,10 +2372,11 @@ Give the code samples a little more room to breathe.
       padding: 1em;
   }
 #+end_src
-*** DONE Webcrawler configuration         :webcrawlers:rfc9309:generative_ai:
+*** DONE Webcrawler configuration         :webcrawlers:rfc9309:generative_ai:twitter:
 CLOSED: [2023-08-09 Wed 20:31 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: /webcrawlers
+:EXPORT_HUGO_LASTMOD: [2023-08-09 Wed 20:59 EDT]
 :END:
 
 #+begin_description
@@ -2386,6 +2387,10 @@ webcrawlers according to the Robots Exclusion Protocol.
 [[https://www.rfc-editor.org/rfc/rfc9309.txt][RFC9309]] defines the Robots Exclusion Protocol, wherein a file is
 served at [[/robots.txt][~/robots.txt~]] to configure the behavior of automated
 clients, or webcrawlers.
+
+The most malicious actors will ignore this file.  It's more petulant
+than effective, but I'm not one to pass up a chance to express my
+contempt in conformance with an RFC.
 
 **** Search engines
 
@@ -2398,15 +2403,24 @@ I do /not/ appreciate my content being used to train machine
 learning models that regurgitate my content without attribution, in
 violation of the spirit, if not the letter, of the [[*License][license]].
 
-This is more petulant than effective, but I'm not one to pass up a
-chance to express my contempt in conformance with an RFC.
-
 ***** OpenAI
 
 [[https://platform.openai.com/docs/gptbot/disallowing-gptbot][Scram]].
 
 #+begin_src txt :tangle ../../tmp/hugo/static/robots.txt
   User-agent: GPTBot
+  Disallow: /
+
+#+end_src
+
+**** General cesspits
+
+***** X
+
+This will block +Twitter+ X cards.
+
+#+begin_src txt :tangle ../../tmp/hugo/static/robots.txt
+  User-agent: Twitterbot
   Disallow: /
 
 #+end_src
