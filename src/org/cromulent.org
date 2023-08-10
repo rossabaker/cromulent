@@ -347,6 +347,7 @@ CLOSED: [2022-11-06 Sun 10:40 EST]
 :PROPERTIES:
 :EXPORT_HUGO_LASTMOD: [2023-07-21 Fri 14:34 EDT]
 :EXPORT_FILE_NAME: license
+:CUSTOM_ID: license
 :END:
 
 #+begin_description
@@ -2371,6 +2372,45 @@ Give the code samples a little more room to breathe.
       padding: 1em;
   }
 #+end_src
+*** DONE Webcrawler configuration         :webcrawlers:rfc9309:generative_ai:
+CLOSED: [2023-08-09 Wed 20:31 EDT]
+:PROPERTIES:
+:EXPORT_FILE_NAME: /webcrawlers
+:END:
+
+#+begin_description
+Defines a robots.txt file to define access policies for complaint
+webcrawlers according to the Robots Exclusion Protocol.
+#+end_description
+
+[[https://www.rfc-editor.org/rfc/rfc9309.txt][RFC9309]] defines the Robots Exclusion Protocol, wherein a file is
+served at [[/robots.txt][~/robots.txt~]] to configure the behavior of automated
+clients, or webcrawlers.
+
+**** Search engines
+
+Generally, I like my content to be indexed and discoverable via search
+engines, and I welcome most crawlers.
+
+**** Generative AI
+
+I do /not/ appreciate my content being used to train machine
+learning models that regurgitate my content without attribution, in
+violation of the spirit, if not the letter, of the [[*License][license]].
+
+This is more petulant than effective, but I'm not one to pass up a
+chance to express my contempt in conformance with an RFC.
+
+***** OpenAI
+
+[[https://platform.openai.com/docs/gptbot/disallowing-gptbot][Scram]].
+
+#+begin_src txt :tangle ../../tmp/hugo/static/robots.txt
+  User-agent: GPTBot
+  Disallow: /
+
+#+end_src
+
 ** DONE Emacs config                                                  :emacs:
 CLOSED: [2023-02-23 Thu 23:59 EST]
 :PROPERTIES:
