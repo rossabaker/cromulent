@@ -2132,7 +2132,7 @@ Our build creates some detritus that we don't want checked into Git.
 CLOSED: [2022-08-30 Tue 14:26 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: style
-:EXPORT_HUGO_LASTMOD: [2023-08-11 Fri 00:13 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-08-11 Fri 08:27 EDT]
 :CUSTOM_ID: css-baseline
 :END:
 
@@ -2258,8 +2258,8 @@ Neat.  This draws candy stripes beneath the main ~h1~.
 #+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
   main h1::after {
       content: "";
-      background-image: linear-gradient(to right, var(--color-brand) 50%, var(--color-stripe) 0%);
-      background-size: 1rem 0.8rem;
+      background-image: linear-gradient(to right, var(--color-stripe) 50%, var(--color-brand) 0%);
+      background-size: 8px 0.5rem;
       background-repeat: repeat-x;
       background-position: bottom;
       display: block;
