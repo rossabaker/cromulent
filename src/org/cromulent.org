@@ -2132,7 +2132,7 @@ Our build creates some detritus that we don't want checked into Git.
 CLOSED: [2022-08-30 Tue 14:26 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: style
-:EXPORT_HUGO_LASTMOD: [2023-08-11 Fri 11:06 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-08-11 Fri 11:10 EDT]
 :CUSTOM_ID: css-baseline
 :END:
 
@@ -2202,15 +2202,22 @@ support the various and sundry alphabets I may use.  I'm adapting
 	  "Segoe UI Emoji",
 	  "Segoe UI Symbol",
 	  "Noto Color Emoji";
+  }
+#+end_src
 
+GitHub's are likely a more thoughtful version for code.  They're
+substantially similar to Bootstrap's anyway.
+
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
+  :root {
       --cromulent-monospace-font:
+	  ui-monospace,
 	  SFMono-Regular,
+	  "SF Mono",
 	  Menlo,
-	  Monaco,
 	  Consolas,
 	  "Liberation Mono",
-	  "Courier New",
-	  monospace;
+	  monospace
   }
 #+end_src
 
