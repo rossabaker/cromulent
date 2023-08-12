@@ -2180,7 +2180,7 @@ There are more criteria there that are probably worth revisiting.
 These used to be the [[https://en.wikipedia.org/wiki/Noto_fonts][Noto fonts]], chosen because they have good IPA
 support, which floats my boat as someone who minored in linguistics.
 Because Google Fonts [[https://cookie-script.com/blog/google-fonts-and-gdpr][violates the GDPR]], I self hosted them.  This
-complicated the [[license][license]] with an SIL exception.
+complicated the [[#license][license]] with an SIL exception.
 
 You know what?  I'm not a typographer, and the system fonts should
 support the various and sundry alphabets I may use.  I'm adapting
