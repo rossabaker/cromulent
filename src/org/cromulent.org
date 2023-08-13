@@ -2132,7 +2132,7 @@ Our build creates some detritus that we don't want checked into Git.
 CLOSED: [2022-08-30 Tue 14:26 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: style
-:EXPORT_HUGO_LASTMOD: [2023-08-11 Fri 11:10 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-08-12 Sat 22:18 EDT]
 :CUSTOM_ID: css-baseline
 :END:
 
@@ -2324,7 +2324,7 @@ Render the links in the complementary color.
   /configs/css /configs/website/style
 #+end_src
 
-*** Code rendering
+**** Code rendering
 
 Put a scroll bar on code samples, but only where necessary.
 
