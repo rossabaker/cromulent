@@ -117,6 +117,9 @@
   :hook
   (on-first-input . persist-state-mode))
 
+(use-package suggest
+  :ensure t)
+
 (use-package ws-butler
   :ensure t
   :hook (on-first-buffer . ws-butler-global-mode)

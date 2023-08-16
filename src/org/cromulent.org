@@ -2903,6 +2903,17 @@ Xcode.  That brings up a dreaded dialog box.
     (on-first-input . persist-state-mode))
 #+end_src
 
+***** Suggest
+
+I keep lamenting the lack of a [[https://hoogle.haskell.org/][Hoogle]] for Emacs Lisp.  [[https://github.com/Wilfred/suggest.el/][suggest.el]] is
+an interesting alternative: instead of types, it finds functions from
+example inputs and outputs.
+
+#+begin_src emacs-lisp
+  (use-package suggest
+    :ensure t)
+#+end_src
+
 ***** Whitespace butler
 :PROPERTIES:
 :CUSTOM_ID: whitespace-butler
