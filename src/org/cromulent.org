@@ -2417,7 +2417,7 @@ This will block +Twitter+ X cards.
 CLOSED: [2023-02-23 Thu 23:59 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: emacs
-:EXPORT_HUGO_LASTMOD: [2023-08-06 Sun 23:57 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-08-15 Tue 23:34 EDT]
 :header-args: :tangle-mode `,#o444 :mkdirp yes
 :header-args:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444 :mkdirp yes
 :EXPORT_OPTIONS: h:6
@@ -3642,6 +3642,9 @@ might still be compelling as an ~:annotation-function~.
 The sort order is customized in [[#vertico-multiform][Vertico multiform]].
 
 ****** Restclient
+:PROPERTIES:
+:CUSTOM_ID: restclient
+:END:
 
 [[https://github.com/pashky/restclient.el][restclient.el]] is essentially an HTTP worksheet.
 
@@ -3693,6 +3696,20 @@ multiple definitions are found.
     :custom
     (xref-show-definitions-function #'xref-show-definitions-completing-read))
 #+end_src
+
+****** Verb
+
+[[https://github.com/federicotdn/verb][Verb]] is an alternative to [[#restclient][restclient.el]] that many of my colleagues
+use.  The feature sets look roughly equivalent, so I'll give it a shot
+in the spirit of comity.
+
+#+begin_src emacs-lisp
+  (use-package verb
+    :after org
+    :ensure t
+    :config (define-key org-mode-map (kbd "C-c C-r") verb-command-map))
+#+end_src
+
 **** Applications
 :PROPERTIES:
 :CUSTOM_ID: applications

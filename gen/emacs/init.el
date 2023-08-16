@@ -469,6 +469,11 @@ existing directory under `magit-clone-default-directory'."
   :custom
   (xref-show-definitions-function #'xref-show-definitions-completing-read))
 
+(use-package verb
+  :after org
+  :ensure t
+  :config (define-key org-mode-map (kbd "C-c C-r") verb-command-map))
+
 (use-package dictionary
   :bind
   ("M-#" . dictionary-lookup-definition))
