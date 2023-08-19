@@ -383,84 +383,30 @@ compliance with [[https://www.rfc-editor.org/rfc/rfc9116][RFC9116]].  Learn more
 * DONE License
 CLOSED: [2022-11-06 Sun 10:40 EST]
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: [2023-08-11 Fri 00:12 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-08-18 Fri 23:41 EDT]
 :EXPORT_FILE_NAME: license
 :CUSTOM_ID: license
 :END:
 
 #+begin_description
-Licenses and attributions for all content on rossabaker.com
+Licenses and attributions for the content on rossabaker.com
 #+end_description
 
-** General content
-
 All content on ~rossabaker.com~, unless otherwise specified, is
-licensed under a [[https://creativecommons.org/licenses/by/4.0/][Creative Commons Attribution 4.0 International]] (~CC-BY-4.0~).
+licensed under a [[https://creativecommons.org/licenses/by/4.0/][Creative Commons Attribution-ShareAlike 4.0
+International]] (~CC-BY-SA-4.0~).
 
-** Exceptions
+This license is [[https://creativecommons.org/share-your-work/licensing-considerations/compatible-licenses][one-way compatible]] with the [[https://www.gnu.org/licenses/gpl-3.0.html][GNU General Public
+License, version 3]] (~GPL-3.0-only~).  This may be [[https://creativecommons.org/faq/#can-i-apply-a-creative-commons-license-to-software][more appropriate
+for source code]].
 
-*** Source code
+** Attributions
 
-All source code published on ~rossabaker.com~, unless otherwise
-specified, is also licensed under the MIT License (~MIT~).  This
-includes all HTML rendered in a ~<code>~ element.
-
-#+begin_aside
-The rationale for this exception is discussed in the Creative Commons
-FAQ, [[https://creativecommons.org/faq/#can-i-apply-a-creative-commons-license-to-software]["Can I apply a Creative Commons license to software?"]].
-#+end_aside
-
-#+begin_details
-#+begin_summary
-MIT License text
-#+end_summary
-
-#+begin_quote
-Copyright 2022 Ross A. Baker
-
-Permission is hereby granted, free of charge, to any person
-obtaining a copy of this software and associated documentation files
-(the "Software"), to deal in the Software without restriction,
-including without limitation the rights to use, copy, modify, merge,
-publish, distribute, sublicense, and/or sell copies of the Software,
-and to permit persons to whom the Software is furnished to do so,
-subject to the following conditions:
-
-The above copyright notice and this permission notice shall be
-included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
-BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
-ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
-CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-#+end_quote
-#+end_details
-
-*** Derived works
-
-These license exceptions exist to honor the copyright obligations of
-upstream works, or to [[https://creativecommons.org/faq/#may-i-apply-a-creative-commons-license-to-a-work-in-the-public-domain][preserve the public domain]].
-
-- ~/css/sanitize.*.css~ ::
-  Republished under a [[https://creativecommons.org/publicdomain/zero/1.0/][Creative Commons Zero v1.0 Universal]] (~CC0-1.0~)
-  license.
-
-  Minified from the [[https://github.com/csstools/sanitize.css/blob/092d0d85922bfa72d28e9e8d25d80a5437c8df44/sanitize.css][original source]] by the Hugo asset pipeline.
 - [[file:../hugo/static/img/icons/keyoxide.svg][~/img/icons/keyoxide.svg~]] ::
-  Modified and republished under a
-  [[https://creativecommons.org/licenses/by-sa/4.0/][Creative Commons
-  Attribution-ShareAlike 4.0 International]] (~CC-BY-SA-4.0~) license.
 
   Derived from [[https://codeberg.org/keyoxide/keyoxide-artwork/src/commit/accccbd5ff03ca0ad87f0a8589038bdde617a902/keyoxide.svg][original work]] by [[https://codeberg.org/yarmo][Yarmo Mackenbach]].  Modified to be
   monochrome, with masked "K" logo, added a title, and minified for
   size.
-- ~/img/icons/*~ not specified above ::
-  Republished under a [[https://creativecommons.org/publicdomain/zero/1.0/][Creative Commons Zero v1.0 Universal]] (~CC0-1.0~)
-  license.
 
 * Configurations section                                              :@tech:
 :PROPERTIES:
