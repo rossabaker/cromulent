@@ -1804,7 +1804,7 @@ Mute the header anchors until hover:
 CLOSED: [2022-09-12 Mon 22:11 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: contact-info
-:EXPORT_HUGO_LASTMOD: [2023-07-28 Fri 22:25 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-08-20 Sun 23:45 EDT]
 :END:
 
 Contact info is rendered in two places: in the [[*Footer template][footer template]] and on the
@@ -1938,12 +1938,22 @@ Keys are:
 
 ***** ~contact-info-icons~ partial template
 
+By rendering brand icons with the Hugo pipe, we can more ethically
+source them with attributions in their headers without blowing out our
+page size.
+
+- =$icon= is the icon name, relative to ~src/hugo/assets~.
+- =$svg= minifies it through [[https://gohugo.io/hugo-pipes/minification/][Hugo pipes]].
+- =.Content= reads the minified SVG
+- =safeHTML= unescapes it, because we want them inlined into the page.
+
 #+begin_src html :tangle ../../tmp/hugo/layouts/partials/contact-info-icons.html
   <ul class="contacts">
       {{ range where .Site.Params.contacts "support" "eq" "supported" }}
 	<li><a href="{{ .url | safeURL }}" {{ with (not (eq .relMe false)) }}rel="me"{{ end }}>
-	    {{ $src := printf "%s/%s.svg" "/src/hugo/static/img/icons" (.icon | default (.network | urlize)) }}
-	    {{ readFile $src | safeHTML }}
+	    {{ $icon := printf "%s/%s.svg" "img/icons" (.icon | default (.network | urlize)) }}
+	    {{ $svg := resources.Get $icon | resources.Minify }}
+	    {{ $svg.Content | safeHTML }}
 	</a></li>
       {{ end }}
   </ul>
