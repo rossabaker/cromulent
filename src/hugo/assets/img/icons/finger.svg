@@ -1,1 +1,42 @@
-<svg fill="#000" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 203.1 203.1" xml:space="preserve"><title>Finger</title><path d="M192.2 104v-2a22.5 22.5 0 0 0-30.4-21 22.5 22.5 0 0 0-30.4-16.4A23.3 23.3 0 0 0 109.2 48a22 22 0 0 0-8 1.5v-27a22.5 22.5 0 0 0-45 0v66.3c-4-5-8.6-9.5-14.1-11.7a23 23 0 0 0-29 31.4l28 56.6c.8 1.5 19.7 38 54 38h40a57.4 57.4 0 0 0 57.2-57.5V104zm-57.1 84H95c-24.7 0-40.1-28.7-40.7-29.7l-27.8-56.4c-2-4-.4-8.6 3.6-10.6 2.2-1 4-1.2 6.2-.3 8.2 3.4 16.4 19.7 19.5 29.2l2.4 7.3 13-4.6V22.5a7.5 7.5 0 0 1 15 0V109h15V71c0-4.2 3.8-8 8-8s8 3.5 8 7.5v41h15v-26a7.5 7.5 0 0 1 15 0v33h15V102a7.5 7.5 0 0 1 15 0V145.6c0 23.4-19 42.5-42.2 42.5z"/></svg>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+SPDX-License-Identifier: CC-BY-SA-4.0
+
+Original: https://github.com/bytedance/IconPark/blob/8dc132da4c85671ba6a5962c87aa2bdafbf158e9/source/Hands/index-finger.svg
+by Bytedance, licensed Apache-2.0
+-->
+<svg
+   width="24"
+   height="24"
+   viewBox="0 0 48 48"
+   version="1.1"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <title>Finger</title>
+  <path
+     d="M 12.5658,26.1824 C 10.8553,27.3542 10,29.2935 10,32.0002 c 0,4.0601 4.9753,11 9.4618,11 4.4865,0 7.0884,0 11.4797,0 4.3913,0 7.0585,-3.8506 7.0585,-6.9399 0,-4.3504 0,-8.7007 0,-13.051 0,-1.6569 -1.3431,-3 -3,-3 H 34.9909 C 33.3391,20.0093 32,21.3484 32,23.0002"
+     stroke="currentColor"
+     stroke-width="4"
+     stroke-linecap="round"
+     style="fill:none" />
+  <path
+     d="M 13.981,28.4452 V 8.00587 c 0,-1.65551 1.342,-2.99757 2.9975,-2.99757 0.0028,0 0.0056,0 0.0083,10e-6 1.6614,0.0046 3.0059,1.35275 3.0059,3.01419 V 23.592"
+     stroke="currentColor"
+     stroke-width="4"
+     stroke-linecap="round"
+     style="fill:none" />
+  <path
+     d="m 19.9927,23.0083 v -3.9928 c 0,-1.6654 1.3501,-3.0155 3.0155,-3.0155 1.6654,0 3.0154,1.3501 3.0154,3.0155 v 3.9928"
+     stroke="currentColor"
+     stroke-width="4"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     style="fill:none" />
+  <path
+     d="m 26,22.7158 v -2.7124 c 0,-1.6568 1.3431,-3 3,-3 1.6569,0 3,1.3432 3,3 v 3"
+     stroke="currentColor"
+     stroke-width="4"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     style="fill:none" />
+</svg>
