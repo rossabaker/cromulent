@@ -23,38 +23,16 @@ CLOSED: [2022-09-05 Mon 00:30 EDT]
 #+end_quote
 #+hugo:more
 
+#+begin_clearfix
+#+attr_html: :class float :alt Pixelated construction sign of a stick figure shoveling on a bezeled gray background, in the style of a late 1990s \"Under Construction\" GIF.
+[[file:under-construction.gif]]
+
 This is +my personal brand+, +my love letter to the Indieweb+, +my
 finely manicured digital garden+, me faffing about as I rediscover the
 joy of computing.  All that is published here should be considered
 @@html:<dfn>@@faff byproduct@@html:</dfn>@@.  Perpetually under
 construction.
-
-#+attr_html: :class under-construction :alt Pixelated construction sign of a stick figure shoveling on a bezeled gray background, in the style of a late 1990s \"Under Construction\" GIF.
-[[file:under-construction.gif]]
-
-** Extra style                                                     :noexport:
-#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css :exports none
-  blockquote {
-      margin: 1.5rem 0;
-      padding: 0 2rem;
-      border-left: #ccc 0.25rem solid;
-  }
-
-  article.home-page blockquote {
-      font-size: 2em;
-  }
-
-  .under-construction {
-      width: 6rem;
-      height: 6rem;
-      margin: 0 auto;
-  }
-
-  img[src$="under-construction.gif"] {
-      width: 100%;
-      height: 100%;
-  }
-#+end_src
+#+end_clearfix
 
 * DONE Ross A. Baker                                    :@personal:biography:contact:
 CLOSED: [2022-08-31 Wed 00:23 EDT]
@@ -2079,7 +2057,7 @@ Our build creates some detritus that we don't want checked into Git.
 CLOSED: [2022-08-30 Tue 14:26 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: style
-:EXPORT_HUGO_LASTMOD: [2023-08-12 Sat 22:18 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-08-22 Tue 23:11 EDT]
 :CUSTOM_ID: css-baseline
 :END:
 
@@ -2290,6 +2268,41 @@ Give the code samples a little more room to breathe.
       padding: 1em;
   }
 #+end_src
+
+**** Quotes
+
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
+  blockquote {
+      margin: 1.5rem 0;
+      padding: 0 2rem;
+      border-left: #ccc 0.25rem solid;
+  }
+#+end_src
+
+**** Floats and clears
+
+A general way to float figures.
+
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
+  figure.float {
+      float: right;
+      margin: 0.5rem 1.5rem;
+      padding: 0;
+  }
+#+end_src
+
+Wherever we float, we probably want a "clearfix" wrapper.  [[https://www.cssmojo.com/the-very-latest-clearfix-reloaded/][The very
+latest clearfix reloaded]], which is seven years old at the time of
+writing, seems to work.
+
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
+  .clearfix:after {
+      content: "";
+      clear: both;
+      display: block;
+  }
+#+end_src
+
 *** DONE Webcrawler configuration         :webcrawlers:rfc9309:generative_ai:twitter:
 CLOSED: [2023-08-09 Wed 20:31 EDT]
 :PROPERTIES:
