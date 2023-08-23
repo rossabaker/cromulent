@@ -1,3 +1,6 @@
+# Copyright 2022-2023, Ross A. Baker <ross@rossabaker.com>
+# SPDX-License-Identifier: CC-BY-SA-4.0
+
 #+HUGO_BASE_DIR: ../../tmp/hugo
 #+HUGO_SECTION: /
 #+MACRO: abbr @@html:<abbr title="$1">$2</abbr>@@
