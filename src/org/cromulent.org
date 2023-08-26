@@ -421,8 +421,8 @@ CLOSED: [2022-08-24 Wed 15:04 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: git-repository
 :EXPORT_HUGO_LASTMOD: [2023-05-25 Thu 23:54 EDT]
-:header-args:gitignore: :tangle ../../.gitignore
-:header-args:gitattributes: :tangle ../../.gitattributes
+:header-args:gitignore+: :tangle ../../.gitignore
+:header-args:gitattributes+: :tangle ../../.gitattributes
 :END:
 
 My [[https://github.com/rossabaker/cromulent][personal Git repository]] hosts my configurations and this web site.
@@ -545,7 +545,7 @@ CLOSED: [2022-11-02 Wed 23:39 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: web-key-directory
 :EXPORT_HUGO_LASTMOD: [2023-06-23 Fri 22:37 EDT]
-:header-args: :eval yes
+:header-args+: :eval yes
 :END:
 
 [[https://datatracker.ietf.org/doc/draft-koch-openpgp-webkey-service/][Web Key Directory (WKD)]] is a standard to map email addresses to PGP public
@@ -2392,8 +2392,8 @@ CLOSED: [2023-02-23 Thu 23:59 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: emacs
 :EXPORT_HUGO_LASTMOD: [2023-08-26 Sat 00:08 EDT]
-:header-args: :tangle-mode `,#o444 :mkdirp yes
-:header-args:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444 :mkdirp yes
+:header-args+: :tangle-mode `,#o444 :mkdirp yes
+:header-args:emacs-lisp+: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444 :mkdirp yes
 :EXPORT_OPTIONS: h:6
 :END:
 
@@ -4460,8 +4460,8 @@ CLOSED: [2023-05-09 Tue 09:27 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: scala
 :EXPORT_HUGO_LASTMOD: [2023-06-22 Thu 23:44 EDT]
-:header-args: :tangle-mode (identity #o444) :mkdirp yes
-:header-args:nix: :tangle ../../gen/scala/default.nix
+:header-args+: :tangle-mode (identity #o444) :mkdirp yes
+:header-args:nix+: :tangle ../../gen/scala/default.nix
 :END:
 
 This configuration provides a module to [[https://nix-community.github.io/home-manager/][Home Manager]].  It sets up a
@@ -4584,8 +4584,8 @@ The Home Manager module is published to my flake as output
 :PROPERTIES:
 :EXPORT_FILE_NAME: python
 :EXPORT_HUGO_LASTMOD: [2023-07-28 Fri 21:51 EDT]
-:header-args: :tangle-mode (identity #o444) :mkdirp yes
-:header-args:nix: :tangle ../../gen/python/default.nix
+:header-args+: :tangle-mode (identity #o444) :mkdirp yes
+:header-args:nix+: :tangle ../../gen/python/default.nix
 :END:
 
 #+begin_description
@@ -5494,7 +5494,7 @@ CLOSED:
 :EXPORT_DATE: [2022-11-02 Wed 23:39 EDT]
 :EXPORT_HUGO_LASTMOD: [2022-11-15 Tue 16:22 EST]
 :EXPORT_FILE_NAME: web-key-directory
-:HEADER-ARGS: :eval yes
+:HEADER-ARGS+: :eval yes
 :END:
 
 #+begin_description
