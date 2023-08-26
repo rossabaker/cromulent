@@ -439,6 +439,7 @@ CLOSED: [2022-08-24 Wed 15:04 EDT]
 :EXPORT_HUGO_LASTMOD: [2023-05-25 Thu 23:54 EDT]
 :header-args:gitignore+: :tangle ../../.gitignore
 :header-args:gitattributes+: :tangle ../../.gitattributes
+:header-args+: :code-license CC0-1.0
 :END:
 
 My [[https://github.com/rossabaker/cromulent][personal Git repository]] hosts my configurations and this web site.
@@ -561,7 +562,7 @@ CLOSED: [2022-11-02 Wed 23:39 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: web-key-directory
 :EXPORT_HUGO_LASTMOD: [2023-06-23 Fri 22:37 EDT]
-:header-args+: :eval yes
+:header-args+: :eval yes :code-license CC0-1.0
 :END:
 
 [[https://datatracker.ietf.org/doc/draft-koch-openpgp-webkey-service/][Web Key Directory (WKD)]] is a standard to map email addresses to PGP public
@@ -695,6 +696,7 @@ CLOSED: [2022-09-01 Thu 16:48 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: hugo
 :EXPORT_HUGO_LASTMOD: [2023-08-26 Sat 14:43 EDT]
+:header-args+: :code-license CC0-1.0
 :END:
 
 #+begin_description
@@ -809,6 +811,7 @@ HTML and Org?
 CLOSED: [2022-09-01 Thu 16:53 EDT]
 :PROPERTIES:
 :EXPORT_HUGO_BUNDLE: templates
+:header-args+: :code-license CC0-1.0
 :END:
 
 **** DONE Index
@@ -1980,6 +1983,7 @@ supported contacts from the experimental ones.
 CLOSED: [2022-09-01 Thu 16:54 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: build
+:header-args+: :code-license MIT
 :END:
 
 The website is just another package within our flake.
@@ -2057,7 +2061,7 @@ To avoid [[https://nixos.wiki/wiki/Import_From_Derivation][Import From Derivatio
 
 For a more iterative experience with live reload in the browser, try:
 
-#+begin_src sh :tangle no
+#+begin_src sh :tangle no :code-license CC0-1.0
   hugo serve --disableFastRender --config tmp/hugo/config.toml
 #+end_src
 
@@ -2065,7 +2069,7 @@ For a more iterative experience with live reload in the browser, try:
 
 Our build creates some detritus that we don't want checked into Git.
 
-#+begin_src gitignore :tangle ../../.gitignore
+#+begin_src gitignore :tangle ../../.gitignore :code-license CC0-1.0
   /tmp/hugo/
   /.hugo_build.lock
 #+end_src
@@ -2076,6 +2080,7 @@ CLOSED: [2022-08-30 Tue 14:26 EDT]
 :EXPORT_FILE_NAME: style
 :EXPORT_HUGO_LASTMOD: [2023-08-26 Sat 13:54 EDT]
 :CUSTOM_ID: css-baseline
+:header-args+: :code-license MIT
 :END:
 
 We strive for [[https://en.wikipedia.org/wiki/Semantic_HTML][semantic HTML]].  The styles presented here provide a
@@ -2357,6 +2362,7 @@ CLOSED: [2023-08-09 Wed 20:31 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: /webcrawlers
 :EXPORT_HUGO_LASTMOD: [2023-08-10 Thu 14:15 EDT]
+:header-args+: :code-license CC0-1.0
 :END:
 
 #+begin_description
@@ -2429,6 +2435,8 @@ CLOSED: [2023-02-23 Thu 23:59 EST]
 :EXPORT_HUGO_LASTMOD: [2023-08-26 Sat 00:08 EDT]
 :header-args+: :tangle-mode `,#o444 :mkdirp yes
 :header-args:emacs-lisp+: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444 :mkdirp yes
+:header-args:emacs-lisp+: :code-license GPL-3.0-only
+:header-args:nix+: :code-license MIT
 :EXPORT_OPTIONS: h:6
 :END:
 
@@ -2703,7 +2711,7 @@ once before subsequent ~C-SPC~, which makes it much nicer to navigate.
 
 Tabs are the devil's whitespace.
 
-#+begin_src
+#+begin_src emacs-lisp
   (use-package simple
     :config
     (setq-default indent-tabs-mode nil))
@@ -3099,13 +3107,15 @@ Let's not forget a dictionary.
 :END:
 
 Org Mode's timestamps are sadly not aware of time zones, but we can
-[[https://emacs.stackexchange.com/a/60590][crudely approximate support]] by setting ~org-time-stamp-formats~.
+crudely approximate support by setting ~org-time-stamp-formats~.
 
+#+caption: [[https://emacs.stackexchange.com/a/60590][Original]] by vaab on Emacs Stack Exchange, ~CC-BY-SA-4.0~.
 #+begin_src emacs-lisp
   (use-package org
     :config
     (setq org-time-stamp-formats '("<%Y-%m-%d %a>" . "<%Y-%m-%d %a %H:%M %Z>")))
 #+end_src
+
 
 ******* ox-hugo
 :PROPERTIES:
@@ -3147,6 +3157,7 @@ support, and don't offer an obvious way to inject a new backend.
 Unfortunately, we resort to mutating the ox-hugo code.  This is fine,
 as long as we don't have other ox-hugo sites.
 
+#+caption: [[https://sachachua.com/dotemacs/index.html#org7814eb7][Original]] by Sacha Chua
 #+begin_src emacs-lisp
   (defun rab/org-hugo-src-block (src-block _contents info)
     (let* ((result (org-hugo-src-block src-block _contents info))
@@ -3315,10 +3326,11 @@ but like this:
    :prefix "C-c g")
 #+end_src
 
-The answer is almost verbatim from [[https://emacs.stackexchange.com/a/52789][Stack Overflow]], but put in a
+The answer is almost verbatim from Stack Overflow, but put in a
 ~use-package~ and changed to my namespace.  I also applied the
 "bonus," because my primary itch is =use-package= bindings.
 
+#+caption: [[https://emacs.stackexchange.com/a/52789][Original]] by Aquaactress on Emacs Stack Exchange, ~CC-BY-SA-4.0~.
 #+begin_src emacs-lisp
   (use-package lisp-mode
     :defer
@@ -4410,7 +4422,7 @@ Emacs app as a one-liner.  There's little reason for you to choose it
 over a starter kit or your own configuration, but there's also nothing
 stopping you!
 
-#+begin_src sh :eval no
+#+begin_src sh :eval no :code-license cc0-1.0
   nix run github:rossabaker/cromulent#emacs
 #+end_src
 
@@ -4462,6 +4474,7 @@ CLOSED: [2023-06-23 Fri 00:26 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: garnix
 :EXPORT_HUGO_LASTMOD: [2023-07-21 Fri 15:11 EDT]
+:header-args+: :code-license CC0-1.0
 :END:
 
 I have an Apple M1 for work, which is [[https://github.com/github/roadmap/issues/528][not yet supported by GitHub
@@ -4495,7 +4508,7 @@ CLOSED: [2023-05-09 Tue 09:27 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: scala
 :EXPORT_HUGO_LASTMOD: [2023-06-22 Thu 23:44 EDT]
-:header-args+: :tangle-mode (identity #o444) :mkdirp yes
+:header-args+: :tangle-mode (identity #o444) :mkdirp yes :code-license CC0-1.0
 :header-args:nix+: :tangle ../../gen/scala/default.nix
 :END:
 
@@ -4619,7 +4632,7 @@ The Home Manager module is published to my flake as output
 :PROPERTIES:
 :EXPORT_FILE_NAME: python
 :EXPORT_HUGO_LASTMOD: [2023-07-28 Fri 21:51 EDT]
-:header-args+: :tangle-mode (identity #o444) :mkdirp yes
+:header-args+: :tangle-mode (identity #o444) :mkdirp yes :code-license CC0-1.0
 :header-args:nix+: :tangle ../../gen/python/default.nix
 :END:
 
@@ -4704,6 +4717,7 @@ CLOSED: [2022-12-25 Sun 22:14 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: nix-flake
 :EXPORT_HUGO_LASTMOD: [2023-07-28 Fri 21:52 EDT]
+:header-args+: :code-license MIT
 :END:
 
 At the root of my [[https://github.com/rossabaker/cromulent][cromulent repository]] is a [[https://nixos.wiki/wiki/Flakes][Nix flake]].  It contains
@@ -4720,7 +4734,7 @@ remove it.  For now, we need to explicitly allow it to see the
 contents of my flake.
 
 #+name: flake-show-outputs
-#+begin_src sh :eval yes :exports code :results output verbatim
+#+begin_src sh :eval yes :exports code :results output verbatim :code-license CC0-1.0
   nix --option allow-import-from-derivation true flake show github:rossabaker/cromulent
 #+end_src
 
@@ -5357,6 +5371,7 @@ CLOSED: [2023-07-25 Tue 12:06 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: modern-time-series-forecasting-with-python
 :EXPORT_HUGO_LASTMOD: [2023-07-28 Fri 21:57 EDT]
+:header-args+: :code-license MIT
 :END:
 
 #+begin_description
@@ -5374,7 +5389,7 @@ thing it asks me to do is install Conda, but package managers other
 than Nix give me a rash.  I've attempted to replicate its [[https://github.com/PacktPublishing/Modern-Time-Series-Forecasting-with-Python/blob/595fc7313e47834a1d303a5c52cad5fcddfde557/anaconda_env.yml][anaconda env]]
 to a devshell.  Try it out like this:
 
-#+begin_src sh :eval no
+#+begin_src sh :eval no :code-license CC0-1.0
   nix develop github:rossabaker/cromulent#modernTs
 #+end_src
 
@@ -5434,7 +5449,7 @@ The official definition uses Python 3.9, but I ran into problems with
 hope for the best.  Several of the dependencies don't exist.  Many of
 them can be templated from PyPi:
 
-#+begin_src sh :eval no-export
+#+begin_src sh :eval no-export :code-license CC0-1.0
   for i in catboost category-encoders pmdarima pytorch-forecasting \
 	   statsforecast u8darts \
 	   missingno window-ops pymannkendall tsfel pytorch_tabular \
@@ -5628,6 +5643,8 @@ CLOSED: [2022-11-21 Mon 21:03 EST]
 :EXPORT_FILE_NAME: matrix-home-server
 :EXPORT_DATE: [2022-05-05 Thu 17:27 EDT]
 :EXPORT_HUGO_LASTMOD: [2023-01-16 Mon 09:49 EST]
+:header-args+: :code-license CC0-1.0
+:header-args:nix+: :code-license MIT
 :END:
 
 I run my [[https://matrix.to/#/@ross:rossabaker.com][Matrix presence]] on a personal Synapse server in Google Cloud.
@@ -5717,7 +5734,7 @@ configuration, since we don't have a custom image to bake it into.
 
 To refresh the configuration on the instance, we can run:
 
-#+begin_src sh
+#+begin_src sh :code-license CC0-1.0
   curl "http://metadata.google.internal/computeMetadata/v1/instance/attributes/nix-configuration" -H "Metadata-Flavor: Google" | sudo tee /etc/nixos/configuration.nix && sudo nixos-rebuild --upgrade switch
 #+end_src
 
@@ -5755,7 +5772,7 @@ Make ourselves an admin:
 
 Finally, lock our dependencies:
 
-#+begin_src hcl /*:tangle .terraform.lock.hcl*/
+#+begin_src hcl /*:tangle .terraform.lock.hcl*/ :code-license CC0-1.0
   provider "registry.terraform.io/hashicorp/google" {
     version = "4.19.0"
     hashes = [
@@ -5910,6 +5927,8 @@ The well-known files need CORS headers.  If deploying to Netlify, add this to ~n
 :EXPORT_DESCRIPTION: How to batch archive an exported stream of Mastodon toots to a Hugo website using Scala CLI
 :EXPORT_OPTIONS: h:6
 :EXPORT_FILE_NAME: toot-archive
+:header-args:scala+: :code-license GPL-3.0-only
+:header-args:sh+: :code-license CC0-1.0
 :END:
 a
 An important Indieweb principle is to [[https://indieweb.org/own_your_data][own your data]].  I tooted on
@@ -5936,7 +5955,7 @@ array.
 An example toot in JSON
 #+end_summary
 
-#+begin_src json
+#+begin_example json
   {
     "id": "https://mastodon.social/users/rossabaker/statuses/1426597/activity",
     "type": "Create",
@@ -5990,7 +6009,7 @@ An example toot in JSON
       "signatureValue": "XcbN0gZXgXPky8TNsxpLT81SGHkTWBu89CBUs0pKJPtmAJzr3CTNyXg9CS9mq1+Ca7NIo6uqs0r39og0WT+dtRzTCJscJKCU3YZAOnVPvBk39j6iVVMGYh/PNw+qBpbJc/SXdFyBtKWOI0M8id+yMQHUzuiIx5XVEBv2L9SFXp+btCHpJXWXr33z+RLwCozwwUXbCpiN0mNln9AB481KBOJLXddHRaad/KQLvwcRDy1c2LktqVqzZCv/aH8N5tb78Jmn84cTOqMwsp4j10wrSNGR1tj9Lca8lEIfGi+sYCCR3NSzkiTOGSmP+PKpTFKX3LWhmMqarQSBSnvKUGs9iQ=="
     }
   }
-#+end_src
+#+end_example
 #+end_details
 
 *** The end goal
@@ -6009,7 +6028,7 @@ Hugo content begins with [[https://gohugo.io/content-management/front-matter/][f
   Example Hugo content for a toot
 #+end_summary
 
-#+begin_src markdown
+#+begin_example markdown
   +++
   date = 2017-04-02T03:08:25Z
   canonical = "https://mastodon.social/users/rossabaker/statuses/1426597"
@@ -6017,7 +6036,7 @@ Hugo content begins with [[https://gohugo.io/content-management/front-matter/][f
   +++
 
   <p>brb, importing all my Google+ circles</p>
-#+end_src
+#+end_example
 #+end_details
 
 We also don't want all our toots.  We will omit:
@@ -6376,7 +6395,7 @@ The resource can also be referenced via HTTP redirect.  Our site
 deploys to Netlify, which has [[https://docs.netlify.com/routing/redirects/][redirect support]], including matching
 query strings!  A one-liner served up at ~/_redirects~ is sufficient:
 
-#+begin_src text
+#+begin_src text :code-license CC0-1.0
   /.well-known/webfinger resource=acct:ross@rossabaker.com https://indieweb.social/.well-known/webfinger?resource=acct%3Arossabaker%40indieweb.social 301
 #+end_src
 
@@ -6408,6 +6427,7 @@ CLOSED: [2023-07-16 Sun 22:51 EDT]
 :PROPERTIES:
 :EXPORT_TITLE: Finger me
 :EXPORT_FILE_NAME: finger
+:header-args+: :code-license CC0-1.0
 :END:
 
 #+begin_description
@@ -7028,6 +7048,7 @@ CLOSED: [2023-04-26 Wed 09:28 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: scala-affixes
 :EXPORT_HUGO_LASTMOD: [2023-04-26 Wed 11:33 EDT]
+:header-args:scala+: :code-license CC0-1.0
 :END:
 
 #+begin_description
@@ -7460,6 +7481,8 @@ I foolishly started from scratch.
 Particularly coming out of the social media archives.
 ** TODO The rendering of TODO headers is ugly
 ** TODO Integrate the scattered, unexported TODO sections into this list
+** TODO Add gitignore and gitattributes modes so code copying works
+** TODO web-key-directory has a stray copy button
 
 * Footnotes
 [fn:18]
