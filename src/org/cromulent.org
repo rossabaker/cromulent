@@ -2057,7 +2057,7 @@ Our build creates some detritus that we don't want checked into Git.
 CLOSED: [2022-08-30 Tue 14:26 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: style
-:EXPORT_HUGO_LASTMOD: [2023-08-22 Tue 23:11 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-08-26 Sat 00:00 EDT]
 :CUSTOM_ID: css-baseline
 :END:
 
@@ -2269,6 +2269,20 @@ Give the code samples a little more room to breathe.
   }
 #+end_src
 
+Align the license to the right.
+
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
+  .license {
+      float: right;
+      background: #333;
+      color: #eee;
+      border-radius: 0.25em;
+      padding: 0 0.5ch;
+      font-size: 0.625em;
+  }
+#+end_src
+
+
 **** Quotes
 
 #+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
@@ -2377,7 +2391,7 @@ This will block +Twitter+ X cards.
 CLOSED: [2023-02-23 Thu 23:59 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: emacs
-:EXPORT_HUGO_LASTMOD: [2023-08-15 Tue 23:34 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-08-26 Sat 00:08 EDT]
 :header-args: :tangle-mode `,#o444 :mkdirp yes
 :header-args:emacs-lisp: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444 :mkdirp yes
 :EXPORT_OPTIONS: h:6
@@ -3082,6 +3096,37 @@ the exported tree at the current point.
                       (begin (org-element-property :begin elem))
                       (time (format-time-string (org-time-stamp-format t t) (current-time))))
             (org-entry-put begin "EXPORT_HUGO_LASTMOD" time)))))
+#+end_src
+
+We lightly customize ox-hugo by adding support for a =:code-license=
+header.  This idea comes from [[https://sachachua.com/blog/2023/01/adding-a-custom-header-argument-to-org-mode-source-blocks-and-using-that-argument-during-export/][Sacha Chua]].  First, we need to add it
+to =org-babel-exp-code-template=:
+
+#+begin_src emacs-lisp :exports results :results value pp :wrap src emacs-lisp :var template=`,org-babel-exp-code-template
+  `(setq org-babel-exp-code-template ,org-babel-exp-code-template)
+#+end_src
+
+This part is grody.  We'd like to define a [[https://orgmode.org/worg/dev/org-export-reference.html][derived backend]], but
+ox-hugo's export commands are fairly intricate with the subtree
+support, and don't offer an obvious way to inject a new backend.
+Unfortunately, we resort to mutating the ox-hugo code.  This is fine,
+as long as we don't have other ox-hugo sites.
+
+#+begin_src emacs-lisp
+  (defun rab/org-hugo-src-block (src-block _contents info)
+    (let* ((result (org-hugo-src-block src-block _contents info))
+	   (block-info
+	    (org-with-point-at (org-element-property :begin src-block)
+	      (org-babel-get-src-block-info)))
+	   (license (assoc-default :code-license (elt block-info 2))))
+      (if (member license '("%code-license" ""))
+	  result
+	(format "<p class=\"license\">%s</p>\n%s\n" license result))))
+
+  (with-eval-after-load 'ox-hugo
+    (map-put!
+     (org-export-backend-transcoders (org-export-get-backend 'hugo))
+     'src-block 'rab/org-hugo-src-block))
 #+end_src
 
 ******* ox-slack
@@ -7428,3 +7473,7 @@ Language, but YAML Ain't Markup Language.
 [fn:16] Currently implemented with Mastodon
 
 [fn:17] Though NixOS asymptotically approaches it.
+
+# Local Variables:
+# org-babel-exp-code-template: "#+begin_src %lang%switches%flags :code-license %code-license\n%body\n#+end_src"
+# End:

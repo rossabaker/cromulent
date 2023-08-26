@@ -176,6 +176,27 @@ with EXPORT_FILE_NAME."
                     (time (format-time-string (org-time-stamp-format t t) (current-time))))
           (org-entry-put begin "EXPORT_HUGO_LASTMOD" time)))))
 
+(let ((template '"#+begin_src %lang%switches%flags :code-license %code-license
+%body
+#+end_src"))
+`(setq org-babel-exp-code-template ,org-babel-exp-code-template)
+)
+
+(defun rab/org-hugo-src-block (src-block _contents info)
+  (let* ((result (org-hugo-src-block src-block _contents info))
+	 (block-info
+	  (org-with-point-at (org-element-property :begin src-block)
+	    (org-babel-get-src-block-info)))
+	 (license (assoc-default :code-license (elt block-info 2))))
+    (if (member license '("%code-license" ""))
+	result
+      (format "<p class=\"license\">%s</p>\n%s\n" license result))))
+
+(with-eval-after-load 'ox-hugo
+  (map-put!
+   (org-export-backend-transcoders (org-export-get-backend 'hugo))
+   'src-block 'rab/org-hugo-src-block))
+
 (use-package ox-slack
   :ensure t
   :after org
