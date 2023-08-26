@@ -364,7 +364,7 @@ compliance with [[https://www.rfc-editor.org/rfc/rfc9116][RFC9116]].  Learn more
 * DONE License
 CLOSED: [2022-11-06 Sun 10:40 EST]
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: [2023-08-26 Sat 13:50 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-08-26 Sat 14:43 EDT]
 :EXPORT_FILE_NAME: license
 :CUSTOM_ID: license
 :END:
@@ -397,6 +397,7 @@ Zero v1.0 Universal]] license.
 | ~CC-BY-SA-4.0~ | [[https://creativecommons.org/licenses/by/4.0/][Creative Commons Attribution-ShareAlike 4.0]] [fn:18] |
 | ~CC0-1.0~      | [[https://spdx.org/licenses/CC0-1.0.html][Creative Commons Zero v1.0 Universal]]                |
 | ~GPL-3.0-only~ | [[https://www.gnu.org/licenses/gpl-3.0-standalone.html][GNU General Public License, version 3]] only          |
+| ~MIT~          | [[https://opensource.org/license/mit/][The MIT License]]                                     |
 
 * Configurations section                                              :@tech:
 :PROPERTIES:
@@ -693,7 +694,7 @@ convert the Markdown to HTML with [[https://gohugo.io/][Hugo]].
 CLOSED: [2022-09-01 Thu 16:48 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: hugo
-:EXPORT_HUGO_LASTMOD: [2023-07-23 Sun 23:00 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-08-26 Sat 14:43 EDT]
 :END:
 
 #+begin_description
@@ -754,6 +755,7 @@ pipeline.
 #+begin_src conf-toml :tangle ../../tmp/hugo/config.toml
   [Params]
     css = [ 'sanitize.css', 'assets.css', 'cromulent.css', 'chroma.css' ]
+    js = [ 'copy-button.js' ]
     description = "A perfectly cromulent developer."
     username = 'rossabaker'
 
