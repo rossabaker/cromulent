@@ -1998,6 +1998,7 @@ CLOSED: [2022-09-01 Thu 16:54 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: build
 :header-args+: :code-license MIT
+:EXPORT_HUGO_LASTMOD: [2023-08-26 Sat 18:50 EDT]
 :END:
 
 The website is just another package within our flake.
@@ -2045,7 +2046,7 @@ derivation output.
       cd ..
       export PATH=${gnupg}/bin:$PATH
 
-      ${emacs}/bin/emacs -Q --batch --script ${./export.el}
+      ${emacs}/bin/emacs -Q --batch -l ${./code-license-header.el} -l ${./export.el}
 
       # Reassemble netlify.toml from its constitutents
       for toml in tmp/netlify.toml.d/*; do
@@ -3203,7 +3204,7 @@ Unfortunately, we resort to mutating the ox-hugo code.  This is fine,
 as long as we don't have other ox-hugo sites.
 
 #+caption: [[https://sachachua.com/dotemacs/index.html#org7814eb7][Original]] by Sacha Chua
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle ../../gen/website/code-license-header.el
   (defun rab/org-hugo-src-block (src-block _contents info)
     (let* ((result (org-hugo-src-block src-block _contents info))
 	   (block-info
