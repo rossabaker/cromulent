@@ -2401,7 +2401,7 @@ engines, and I welcome most crawlers.
 
 I do /not/ appreciate my content being used to train machine
 learning models that regurgitate my content without attribution, in
-violation of the spirit, if not the letter, of the [[*License][license]].
+violation of the spirit, if not the letter, of the [[#license][license]].
 
 ***** Facebook
 
