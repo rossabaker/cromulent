@@ -1,3 +1,5 @@
+;; SPDX-License-Identifier: GPL-3.0-only
+
 (use-package benchmark-init
   :ensure t
   :demand t
@@ -60,6 +62,10 @@
   (delete-selection-mode))
 
 (setopt set-mark-command-repeat-pop t)
+
+(use-package simple
+  :config
+  (setq-default indent-tabs-mode nil))
 
 (use-package simple
   :custom

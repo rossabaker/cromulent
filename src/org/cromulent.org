@@ -2446,7 +2446,7 @@ This will block +Twitter+ X cards.
 CLOSED: [2023-02-23 Thu 23:59 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: emacs
-:EXPORT_HUGO_LASTMOD: [2023-08-26 Sat 00:08 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-08-26 Sat 18:18 EDT]
 :header-args+: :tangle-mode `,#o444 :mkdirp yes
 :header-args:emacs-lisp+: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444 :mkdirp yes
 :header-args:emacs-lisp+: :code-license GPL-3.0-only
@@ -2484,6 +2484,37 @@ I choose to start from the wretched defaults.
 The default is to try built-in packages first, but be unafraid to
 augment with [[https://elpa.gnu.org/][ELPA]], [[https://melpa.org/][MELPA]], or even Git.  These extra moving parts are
 managed by rigorously pinning all dependencies with Nix.
+
+**** License
+
+Most of my configurations are permissively licensed for their
+triviality and your convenience.  This is generally impractical for
+Emacs.
+
+- Did you copy from one of the great configurers, like [[https://gitlab.com/protesilaos/dotfiles][Prot]]?  Lots of
+  those are GPL.
+
+- How about [[https://github.com/syl20bnr/spacemacs][Spacemacs]] or [[https://github.com/bbatsov/prelude][Prelude]]?  GPL and GPL.
+
+- Did you copy a configuration from the README of one of the myriad
+  GPL libraries?  When does fair use become a derivative work?
+
+- What about the venerable [[https://www.emacswiki.org/][Emacs Wiki]]?  Behold all the GPL in that
+  footer.
+
+- Did you copy from Stack Overflow?  That's a [[https://stackoverflow.com/help/licensing][share-alike license]],
+  compatible with… the GPL.
+
+Didn't do any of those things?  Unless you have a clean room
+~init.el~, I'd wager you're unintentionally laundering GPL code.
+
+Use all you like in a private config.  If you're republishing under
+another license, be it not on my soul.
+
+#+begin_src emacs-lisp
+  ;; SPDX-License-Identifier: GPL-3.0-only
+#+end_src
+
 *** Early tasks
 :PROPERTIES:
 :CUSTOM_ID: early-tasks
