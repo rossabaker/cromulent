@@ -364,7 +364,7 @@ compliance with [[https://www.rfc-editor.org/rfc/rfc9116][RFC9116]].  Learn more
 * DONE License
 CLOSED: [2022-11-06 Sun 10:40 EST]
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: [2023-08-26 Sat 14:43 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-08-26 Sat 17:34 EDT]
 :EXPORT_FILE_NAME: license
 :CUSTOM_ID: license
 :END:
@@ -373,24 +373,38 @@ CLOSED: [2022-11-06 Sun 10:40 EST]
 Licenses and attributions for the content on rossabaker.com
 #+end_description
 
-All content on ~rossabaker.com~, unless otherwise specified, is shared
-under a [[https://creativecommons.org/licenses/by/4.0/][Creative Commons Attribution-ShareAlike 4.0 International]]
-(~CC-BY-SA-4.0~) license.  Attributions and exceptions are provided
-inline, where applicable.
+** The gist
 
-** Code snippets
+I'm sorry you're reading this instead of building something neat.
+
+- Sharing is cool.  Pay it forward.
+- Remixing is fun.  Acknowledge your sources.
+- Mundanities are mostly public domain.
+- Thinky bits are mostly share-alike.
+
+** The nitty gritty
+
+*** General content
+
+All content on ~rossabaker.com~ is shared under a [[https://creativecommons.org/licenses/by/4.0/][Creative Commons
+Attribution-ShareAlike 4.0 International]] (~CC-BY-SA-4.0~) license.
+
+*** Code snippets
 
 Creative Commons licenses are [[https://creativecommons.org/faq/#can-i-apply-a-creative-commons-license-to-software][not ideal for software]].  Code snippets
-on this site are tagged with a [[https://spdx.org/licenses/][SPDX identifier]] of an alternate license
-that may be applied to the code.  For example, the following snippet
-is tagged ~CC0-1.0~ and thus is available under the [[https://spdx.org/licenses/CC0-1.0.html][Creative Commons
-Zero v1.0 Universal]] license.
+on this site may be tagged with a [[https://spdx.org/licenses/][SPDX identifier]] indicating a
+disjunctive dual license with a secondary option more appropriate for
+code.  For example, the following snippet, tagged ~CC0-1.0~, may be
+used under either the [[https://spdx.org/licenses/CC0-1.0.html][Creative Commons Zero v1.0 Universal]] license or
+the default ~CC-BY-SA-4.0~, at your discretion.
 
 #+begin_src emacs-lisp :code-license CC0-1.0
   (message "Hello.")
 #+end_src
 
 *** SPDX quick reference
+
+The following licenses are applied to portions of this site:
 
 | SPDX ID        | License                                             |
 |----------------+-----------------------------------------------------|
