@@ -817,7 +817,7 @@ pipeline.
 
 #+begin_src conf-toml :tangle ../../tmp/hugo/config.toml
   [Params]
-    css = [ 'sanitize.css', 'assets.css', 'cromulent.css', 'chroma.css', 'noto-fonts.css' ]
+    css = [ 'sanitize.css', 'assets.css', 'cromulent.css', 'chroma.css' ]
     description = "A perfectly cromulent developer."
     username = 'rossabaker'
 
