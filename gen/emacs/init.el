@@ -190,7 +190,7 @@ with EXPORT_FILE_NAME."
 	 (license (assoc-default :code-license (elt block-info 2))))
     (if (member license '("%code-license" ""))
 	result
-      (format "<p class=\"license\">%s</p>\n%s\n" license result))))
+      (format "<div class=\"code-snippet\"><p class=\"license\">%s</p>\n\n%s\n\n</div>" license result))))
 
 (with-eval-after-load 'ox-hugo
   (map-put!
