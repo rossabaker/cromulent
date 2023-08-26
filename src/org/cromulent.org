@@ -2057,7 +2057,7 @@ Our build creates some detritus that we don't want checked into Git.
 CLOSED: [2022-08-30 Tue 14:26 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: style
-:EXPORT_HUGO_LASTMOD: [2023-08-26 Sat 00:00 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-08-26 Sat 00:56 EDT]
 :CUSTOM_ID: css-baseline
 :END:
 
@@ -2273,10 +2273,13 @@ Align the license to the right.
 
 #+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
   .license {
-      float: right;
-      background: #333;
-      color: #eee;
+      display: inline-flex;
+      position: absolute;
+      right: 1.5rem;
+      background: #d8d8d8;
+      color: #333;
       border-radius: 0.25em;
+      margin: 0;
       padding: 0 0.5ch;
       font-size: 0.625em;
   }
