@@ -2295,8 +2295,7 @@ Align the license to the right.
 
   .license {
       display: inline-flex;
-      position: absolute;
-      right: 1.5rem;
+      float: right;
       background: #d8d8d8;
       color: #333;
       border-radius: 0.25em;
@@ -2306,6 +2305,18 @@ Align the license to the right.
   }
 #+end_src
 
+Move the copy code button, too.
+
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
+  .copy-code-button {
+      display: inline-flex;
+      float: right;
+      font-size: 0.625em;
+      margin: 0;
+      padding: 0 0.5ch;
+      font-size: 0.625em;
+  }
+#+end_src
 
 **** Quotes
 

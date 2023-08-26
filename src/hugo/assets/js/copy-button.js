@@ -60,11 +60,7 @@ function codeWasCopied(button) {
 }
 
 function addCopyButtonToDom(button, highlightDiv) {
-  highlightDiv.insertBefore(button, highlightDiv.firstChild);
-  const wrapper = document.createElement("div");
-  wrapper.className = "highlight-wrapper";
-  highlightDiv.parentNode.insertBefore(wrapper, highlightDiv);
-  wrapper.appendChild(highlightDiv);
+  highlightDiv.parentNode.insertBefore(button, highlightDiv.parentNode.firstChild);
 }
 
 document
