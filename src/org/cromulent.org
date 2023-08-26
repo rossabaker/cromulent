@@ -4,7 +4,7 @@
 #+HUGO_BASE_DIR: ../../tmp/hugo
 #+HUGO_SECTION: /
 #+MACRO: abbr @@html:<abbr title="$1">$2</abbr>@@
-#+PROPERTY: header-args :eval never :mkdirp yes
+#+PROPERTY: header-args :eval never :mkdirp yes :code-license CC-BY-SA-4.0
 
 # Automatically set the Hugo date: https://ox-hugo.scripter.co/doc/dates/#date
 #+STARTUP: logdone
@@ -364,7 +364,7 @@ compliance with [[https://www.rfc-editor.org/rfc/rfc9116][RFC9116]].  Learn more
 * DONE License
 CLOSED: [2022-11-06 Sun 10:40 EST]
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: [2023-08-22 Tue 00:47 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-08-26 Sat 13:50 EDT]
 :EXPORT_FILE_NAME: license
 :CUSTOM_ID: license
 :END:
@@ -373,15 +373,30 @@ CLOSED: [2022-11-06 Sun 10:40 EST]
 Licenses and attributions for the content on rossabaker.com
 #+end_description
 
-All content on ~rossabaker.com~, unless otherwise specified, is
-licensed under a [[https://creativecommons.org/licenses/by/4.0/][Creative Commons Attribution-ShareAlike 4.0
-International]] (~CC-BY-SA-4.0~).
+All content on ~rossabaker.com~, unless otherwise specified, is shared
+under a [[https://creativecommons.org/licenses/by/4.0/][Creative Commons Attribution-ShareAlike 4.0 International]]
+(~CC-BY-SA-4.0~) license.  Attributions and exceptions are provided
+inline, where applicable.
 
-This license is [[https://creativecommons.org/share-your-work/licensing-considerations/compatible-licenses][one-way compatible]] with the [[https://www.gnu.org/licenses/gpl-3.0.html][GNU General Public
-License, version 3]] (~GPL-3.0-only~).  This may be [[https://creativecommons.org/faq/#can-i-apply-a-creative-commons-license-to-software][more appropriate
-for source code]].
+** Code snippets
 
-Attributions and exceptions provided inline, where applicable.
+Creative Commons licenses are [[https://creativecommons.org/faq/#can-i-apply-a-creative-commons-license-to-software][not ideal for software]].  Code snippets
+on this site are tagged with a [[https://spdx.org/licenses/][SPDX identifier]] of an alternate license
+that may be applied to the code.  For example, the following snippet
+is tagged ~CC0-1.0~ and thus is available under the [[https://spdx.org/licenses/CC0-1.0.html][Creative Commons
+Zero v1.0 Universal]] license.
+
+#+begin_src emacs-lisp :code-license CC0-1.0
+  (message "Hello.")
+#+end_src
+
+*** SPDX quick reference
+
+| SPDX ID        | License                                             |
+|----------------+-----------------------------------------------------|
+| ~CC-BY-SA-4.0~ | [[https://creativecommons.org/licenses/by/4.0/][Creative Commons Attribution-ShareAlike 4.0]] [fn:18] |
+| ~CC0-1.0~      | [[https://spdx.org/licenses/CC0-1.0.html][Creative Commons Zero v1.0 Universal]]                |
+| ~GPL-3.0-only~ | [[https://www.gnu.org/licenses/gpl-3.0-standalone.html][GNU General Public License, version 3]] only          |
 
 * Configurations section                                              :@tech:
 :PROPERTIES:
@@ -7430,6 +7445,10 @@ Particularly coming out of the social media archives.
 ** TODO Integrate the scattered, unexported TODO sections into this list
 
 * Footnotes
+[fn:18]
+Note that this license is [[https://creativecommons.org/share-your-work/licensing-considerations/compatible-licenses][one-way compatible]] with the [[https://www.gnu.org/licenses/gpl-3.0-standalone.html][GNU General
+Public License, version 3]] (~GPL-3.0-only~), which may be more
+convenient for source code.
 
 [fn:1]
 #+begin_quote
