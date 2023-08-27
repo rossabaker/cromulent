@@ -431,6 +431,10 @@ with EXPORT_FILE_NAME."
   :custom
   (dumb-jump-force-searcher 'rg))
 
+(use-package git-modes
+  :defer t
+  :ensure t)
+
 (use-package magit
   :ensure t
   :defer 1

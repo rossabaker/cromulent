@@ -2447,7 +2447,7 @@ This will block +Twitter+ X cards.
 CLOSED: [2023-02-23 Thu 23:59 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: emacs
-:EXPORT_HUGO_LASTMOD: [2023-08-26 Sat 18:18 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-08-26 Sat 23:43 EDT]
 :header-args+: :tangle-mode `,#o444 :mkdirp yes
 :header-args:emacs-lisp+: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444 :mkdirp yes
 :header-args:emacs-lisp+: :code-license GPL-3.0-only
@@ -3668,6 +3668,23 @@ Make sure ripgrep is available.
 :PROPERTIES:
 :CUSTOM_ID: git
 :END:
+
+******* Git Modes
+
+[[https://github.com/magit/git-modes][Git modes]] provides three modes:
+
+- =.gitattributes= and similar
+- =.gitconfig= and similar
+- =.gitignore= and similar
+
+We want them all.
+
+#+begin_src emacs-lisp
+  (use-package git-modes
+    :defer t
+    :ensure t)
+#+end_src
+
 ******* Magit
 :PROPERTIES:
 :CUSTOM_ID: magit
@@ -7527,7 +7544,6 @@ I foolishly started from scratch.
 Particularly coming out of the social media archives.
 ** TODO The rendering of TODO headers is ugly
 ** TODO Integrate the scattered, unexported TODO sections into this list
-** TODO Add gitignore and gitattributes modes so code copying works
 ** TODO web-key-directory has a stray copy button
 
 * Footnotes
