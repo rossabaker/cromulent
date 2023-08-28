@@ -3163,15 +3163,13 @@ Let's not forget a dictionary.
 :END:
 
 Org Mode's timestamps are sadly not aware of time zones, but we can
-crudely approximate support by setting ~org-time-stamp-formats~.
+crudely approximate support by [[https://emacs.stackexchange.com/a/60590][setting ~org-time-stamp-formats~]].
 
-#+caption: [[https://emacs.stackexchange.com/a/60590][Original]] by vaab on Emacs Stack Exchange, ~CC-BY-SA-4.0~.
 #+begin_src emacs-lisp
   (use-package org
-    :config
-    (setq org-time-stamp-formats '("<%Y-%m-%d %a>" . "<%Y-%m-%d %a %H:%M %Z>")))
+    :custom
+    (org-time-stamp-formats '("%Y-%m-%d %a" . "%Y-%m-%d %a %H:%M %Z")))
 #+end_src
-
 
 ******* ox-hugo
 :PROPERTIES:
