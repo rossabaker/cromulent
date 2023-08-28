@@ -2447,7 +2447,7 @@ This will block +Twitter+ X cards.
 CLOSED: [2023-02-23 Thu 23:59 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: emacs
-:EXPORT_HUGO_LASTMOD: [2023-08-27 Sun 23:21 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-08-27 Sun 23:25 EDT]
 :header-args+: :tangle-mode `,#o444 :mkdirp yes
 :header-args:emacs-lisp+: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444 :mkdirp yes
 :header-args:emacs-lisp+: :code-license GPL-3.0-only
@@ -2891,6 +2891,9 @@ Autocompletion of method names in code is a classic use case.
 #+end_src
 
 ***** Docker
+
+[[https://github.com/Silex/docker.el][~docker.el~]] "manages Docker from Emacs."  Note that while a [[https://podman.io/][Podman
+daemon]] works great, the Podman client [[https://github.com/Silex/docker.el/issues/110][is incompatible]].
 
 #+begin_src emacs-lisp
   (use-package docker
