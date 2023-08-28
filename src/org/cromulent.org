@@ -2447,7 +2447,7 @@ This will block +Twitter+ X cards.
 CLOSED: [2023-02-23 Thu 23:59 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: emacs
-:EXPORT_HUGO_LASTMOD: [2023-08-26 Sat 23:43 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-08-27 Sun 23:21 EDT]
 :header-args+: :tangle-mode `,#o444 :mkdirp yes
 :header-args:emacs-lisp+: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444 :mkdirp yes
 :header-args:emacs-lisp+: :code-license GPL-3.0-only
@@ -2799,10 +2799,16 @@ Persist bookmarks each time we set one, not when Emacs exits.
 :PROPERTIES:
 :CUSTOM_ID: completion
 :END:
+
 ****** Copilot
 :PROPERTIES:
 :CUSTOM_ID: copilot
 :END:
+
+#+begin_info
+This package is currently disabled due to absence of a license.  See
+[[https://github.com/zerolfx/copilot.el/issues/80][issue #80]] for a discussion of what it would take.
+#+end_info
 
 I think Copilot's training was unethical, and I'm skeptical of its
 utility, but I need to get some experience with it.
@@ -2813,6 +2819,7 @@ close to ~M-TAB~ and bound to a menubar command I don't ever use.
 
 #+begin_src emacs-lisp
   (use-package copilot
+    :disabled t
     :ensure t
     :custom
     (copilot-disable-predicates '(always))
@@ -2841,23 +2848,23 @@ It's not in MELPA, but it's a trivial build:
       pname = "copilot-lisp";
       src = inputs.copilot-el;
       packageRequires = [
-	epkgs.dash
-	epkgs.editorconfig
-	epkgs.s
+        epkgs.dash
+        epkgs.editorconfig
+        epkgs.s
       ];
     };
     copilot-dist = pkgs.stdenv.mkDerivation {
       name = "copilot-dist";
       src = inputs.copilot-el;
       installPhase = ''
-	LISPDIR=$out/share/emacs/site-lisp
-	mkdir -p $LISPDIR
-	cp -R dist $LISPDIR
+        LISPDIR=$out/share/emacs/site-lisp
+        mkdir -p $LISPDIR
+        cp -R dist $LISPDIR
       '';
     };
   in
   pkgs.symlinkJoin {
-    name = "jinx";
+    name = "copilot.el";
     paths = [ copilot-lisp copilot-dist ];
   }
 #+end_src
@@ -4779,7 +4786,7 @@ The Home Manager module is published to my flake as output
 CLOSED: [2022-12-25 Sun 22:14 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: nix-flake
-:EXPORT_HUGO_LASTMOD: [2023-07-28 Fri 21:52 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-08-27 Sun 23:21 EDT]
 :header-args+: :code-license MIT
 :END:
 
@@ -4992,10 +4999,11 @@ more "literate".
       flake = false;
     };
 
-    copilot-el = {
-      url = "github:zerolfx/copilot.el";
-      flake = false;
-    };
+  # Disabled pending license
+  #   copilot-el = {
+  #     url = "github:zerolfx/copilot.el";
+  #     flake = false;
+  #   };
   };
 #+end_src
 

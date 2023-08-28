@@ -75,10 +75,11 @@
         flake = false;
       };
     
-      copilot-el = {
-        url = "github:zerolfx/copilot.el";
-        flake = false;
-      };
+    # Disabled pending license
+    #   copilot-el = {
+    #     url = "github:zerolfx/copilot.el";
+    #     flake = false;
+    #   };
     };
   outputs =
     inputs:

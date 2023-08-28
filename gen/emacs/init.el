@@ -77,6 +77,7 @@
   (bookmark-save-flag 1))
 
 (use-package copilot
+  :disabled t
   :ensure t
   :custom
   (copilot-disable-predicates '(always))

@@ -71,7 +71,7 @@
 	    };
 	  in
 	  pkgs.symlinkJoin {
-	    name = "jinx";
+	    name = "copilot.el";
 	    paths = [ copilot-lisp copilot-dist ];
 	  };
 	ox-slack =
