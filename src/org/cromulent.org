@@ -2447,10 +2447,10 @@ This will block +Twitter+ X cards.
 CLOSED: [2023-02-23 Thu 23:59 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: emacs
-:EXPORT_HUGO_LASTMOD: [2023-08-28 Mon 21:40 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-08-29 Tue 00:35 EDT]
 :header-args+: :tangle-mode `,#o444 :mkdirp yes
 :header-args:emacs-lisp+: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444 :mkdirp yes
-:header-args:emacs-lisp+: :code-license GPL-3.0-only
+:header-args:emacs-lisp+: :code-license CC0-1.0
 :header-args:nix+: :code-license MIT
 :EXPORT_OPTIONS: h:6
 :END:
@@ -2486,35 +2486,48 @@ The default is to try built-in packages first, but be unafraid to
 augment with [[https://elpa.gnu.org/][ELPA]], [[https://melpa.org/][MELPA]], or even Git.  These extra moving parts are
 managed by rigorously pinning all dependencies with Nix.
 
-**** License
+**** On licensing
 
-Most of my configurations are permissively licensed for their
-triviality and your convenience.  This is generally impractical for
-Emacs.
+Most of my configurations are permissively licensed, for both your
+convenience and their triviality.  Emacs is challenging:
 
-- Did you copy from one of the great configurers, like [[https://gitlab.com/protesilaos/dotfiles][Prot]]?  Lots of
-  those are GPL.
+- Most configurations are markup and duct tape.  Emacs configurations
+  are written in a whole-ass language.
 
-- How about [[https://github.com/syl20bnr/spacemacs][Spacemacs]] or [[https://github.com/bbatsov/prelude][Prelude]]?  GPL and GPL.
+- Emacs Lisp has a stronger copyleft culture than most languages.
+  Many of the =use-package= blocks that follow are copied straight out
+  of of GPL-licensed documentation.  The entire Emacs core, many
+  third-party libraries, and several of its inspirational
+  configurations are under the GPL, beckoning us to quote them in all
+  their virality.
 
-- Did you copy a configuration from the README of one of the myriad
-  GPL libraries?  When does fair use become a derivative work?
+So let's just publish under the GPL and call it a day, right?
 
-- What about the venerable [[https://www.emacswiki.org/][Emacs Wiki]]?  Behold all the GPL in that
-  footer.
+This is a literate configuration.  Prose and code.  Creative Commons
+licenses are great for prose, but [[https://creativecommons.org/faq/#can-i-apply-a-creative-commons-license-to-software][not for code]].  ~CC-BY-SA-4.0~ is
+[[https://creativecommons.org/faq/#can-i-apply-a-creative-commons-license-to-software][one-way compatible]] with the ~GPL-3.0~.  We can license this entire work
+under the ~CC-BY-SA-4.0~.  Unified license, dual purpose.
 
-- Did you copy from Stack Overflow?  That's a [[https://stackoverflow.com/help/licensing][share-alike license]],
-  compatible with… the GPL.
+That's swell, until we redistribute code licensed to us under the GPL.
+The compatibility is only one way.  We can't republish that code under
+~CC-BY-SA-4.0~.  Either the prose gets subsumed into the GPL, or else
+there's no license to unify the entire document.
 
-Didn't do any of those things?  Unless you have a clean room
-~init.el~, I'd wager you're unintentionally laundering GPL code.
+Some =use-package= statements that follow are little more than
+"installation" recipes taken from the documentation of GPL projects.
+I assert that these falls under [[https://www.gnu.org/licenses/gpl-faq.en.html#GPLFairUse]["fair use" of GPL-covered programs]].
+Any configuration that triggers the GPL will be published in a
+separate repository and stitched in here like any other GPL library.
 
-Use all you like in a private config.  If you're republishing under
-another license, be it not on my soul.
+With that effort, the license of this configuration (and repository)
+as a whole is ~CC-BY-SA-4.0~.  I encourage you to try the same with
+your own literate configs.
 
 #+begin_src emacs-lisp
-  ;; SPDX-License-Identifier: GPL-3.0-only
+  ;; SPDX-License-Identifier: CC-BY-SA-4.0
 #+end_src
+
+Trivial stanzas are tagged into the public domain (~CC0-1.0~).
 
 *** Early tasks
 :PROPERTIES:
