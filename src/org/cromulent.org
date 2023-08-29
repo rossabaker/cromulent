@@ -4479,7 +4479,7 @@ Emacs app as a one-liner.  There's little reason for you to choose it
 over a starter kit or your own configuration, but there's also nothing
 stopping you!
 
-#+begin_src sh :eval no :code-license cc0-1.0
+#+begin_src sh :eval no :code-license CC0-1.0
   nix run github:rossabaker/cromulent#emacs
 #+end_src
 
