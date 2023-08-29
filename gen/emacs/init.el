@@ -698,11 +698,5 @@ existing directory under `magit-clone-default-directory'."
 
 (put 'narrow-to-region 'disabled nil)
 
-(defun rab/refresh-load-path ()
-  "Refresh the load path written by home-manager to pick up new
- packages without restarting Emacs."
-  (interactive)
-  (load-file "~/.config/emacs/load-path.el"))
-
 (use-package markdown-mode
   :ensure t)

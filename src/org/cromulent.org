@@ -2447,7 +2447,7 @@ This will block +Twitter+ X cards.
 CLOSED: [2023-02-23 Thu 23:59 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: emacs
-:EXPORT_HUGO_LASTMOD: [2023-08-27 Sun 23:25 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-08-28 Mon 21:40 EDT]
 :header-args+: :tangle-mode `,#o444 :mkdirp yes
 :header-args:emacs-lisp+: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444 :mkdirp yes
 :header-args:emacs-lisp+: :code-license GPL-3.0-only
@@ -4494,30 +4494,20 @@ forums lets us update the =load-path= after a home-manager switch.
 From the original posting, we change ~finalPackage~ to ~package~:
 ~finalPackage~ refers to a wrapper with an empty site-lisp.
 
-#+begin_src nix :tangle ../../gen/emacs/load-path.nix
-  { pkgs, home, config, ... }:
-  let
-    cfg = config.programs.emacs;
-  in
-  {
-    xdg.configFile."emacs/load-path.el".source = pkgs.writeText "load-path.el" ''
-      (let ((default-directory (file-name-as-directory
-				"${cfg.package.deps}/share/emacs/site-lisp/"))
-	    (normal-top-level-add-subdirs-inode-list nil))
-      (normal-top-level-add-subdirs-to-load-path))
-    '';
-  }
-#+end_src
+#+begin_info
+The solution is [[https://discourse.nixos.org/tos#3][licensed CC-BY-NC-SA-3.0]], which is incompatible.
+#+end_info
 
-Finally, a convenience function to reload it:
+Finally, a convenience function to reload it.  This won't work until
+we find a licensed solution for ~load-path.el~.
 
-#+begin_src emacs-lisp
+#+begin_example emacs-lisp
   (defun rab/refresh-load-path ()
     "Refresh the load path written by home-manager to pick up new
    packages without restarting Emacs."
     (interactive)
     (load-file "~/.config/emacs/load-path.el"))
-#+end_src
+#+end_example
 
 #+begin_src emacs-lisp
   (use-package markdown-mode
