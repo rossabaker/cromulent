@@ -3400,7 +3400,7 @@ The answer is almost verbatim from Stack Overflow, but put in a
 "bonus," because my primary itch is =use-package= bindings.
 
 #+caption: [[https://emacs.stackexchange.com/a/52789][Original]] by Aquaactress on Emacs Stack Exchange, ~CC-BY-SA-4.0~.
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :code-license CC-BY-SA-4.0
   (use-package lisp-mode
     :defer
     :config
