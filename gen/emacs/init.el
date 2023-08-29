@@ -1,4 +1,4 @@
-;; SPDX-License-Identifier: GPL-3.0-only
+;; SPDX-License-Identifier: CC-BY-SA-4.0
 
 (use-package benchmark-init
   :ensure t

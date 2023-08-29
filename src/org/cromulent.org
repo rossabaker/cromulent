@@ -2011,6 +2011,7 @@ exports its contents with ox-hugo.
 #+begin_src emacs-lisp :tangle ../../gen/website/export.el
   (require 'ox-hugo)
   (require 'ob-shell)
+  (require 's)
 
   (with-current-buffer (find-file-noselect "src/org/cromulent.org")
     (let ((org-confirm-babel-evaluate nil))
