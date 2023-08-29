@@ -673,25 +673,6 @@ existing directory under `magit-clone-default-directory'."
   :config
   (vertico-multiform-mode))
 
-(use-package window
-  :config
-  (defun rab/nav-split-and-follow-below ()
-    "Split the selected window in two with the new window is bellow.
-This uses `split-window-below' but follows with the cursor."
-    (interactive)
-    (split-window-below)
-    (other-window 1))
-
-  (defun rab/nav-split-and-follow-right ()
-    "Split the selected window in two with the new window is to the right.
-This uses `split-window-right' but follows with the cursor."
-    (interactive)
-    (split-window-right)
-    (other-window 1))
-  :bind
-  ([remap split-window-below] . rab/nav-split-and-follow-below)
-  ([remap split-window-right] . rab/nav-split-and-follow-right))'
-
 (use-package zoom
   :ensure t
   :custom
