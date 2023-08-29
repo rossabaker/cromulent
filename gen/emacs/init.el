@@ -165,6 +165,9 @@
   (:map rab/toggles-map
    ("$" . jinx-mode)))
 
+(use-package markdown-mode
+  :ensure t)
+
 (use-package org
   :custom
   (org-time-stamp-formats '("%Y-%m-%d %a" . "%Y-%m-%d %a %H:%M %Z")))
@@ -697,6 +700,3 @@ existing directory under `magit-clone-default-directory'."
   (rab/unbind-all 'help-for-help))
 
 (put 'narrow-to-region 'disabled nil)
-
-(use-package markdown-mode
-  :ensure t)

@@ -3153,6 +3153,13 @@ Let's not forget a dictionary.
   })
 #+end_src
 
+***** Markdown
+
+#+begin_src emacs-lisp
+  (use-package markdown-mode
+    :ensure t)
+#+end_src
+
 ***** Outlines
 :PROPERTIES:
 :CUSTOM_ID: outlines
@@ -4509,10 +4516,6 @@ we find a licensed solution for ~load-path.el~.
     (load-file "~/.config/emacs/load-path.el"))
 #+end_example
 
-#+begin_src emacs-lisp
-  (use-package markdown-mode
-    :ensure t)
-#+end_src
 *** TODO Broken links                                              :noexport:
 - whats-in-the-flake
 
