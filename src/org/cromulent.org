@@ -5995,7 +5995,7 @@ The well-known files need CORS headers.  If deploying to Netlify, add this to ~n
 :header-args:scala+: :code-license GPL-3.0-only
 :header-args:sh+: :code-license CC0-1.0
 :END:
-a
+
 An important Indieweb principle is to [[https://indieweb.org/own_your_data][own your data]].  I tooted on
 [[https://mastodon.social/web/@rossabaker][mastodon.social]] sporadically for five years.  The service is public,
 the protocol open, and the implementation open source.  Still, it
