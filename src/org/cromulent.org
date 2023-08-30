@@ -285,7 +285,7 @@ times, but I try to carry my Midwestern Nice online.
 
 - Email :: [[mailto:ross@rossabaker.com][~ross@rossabaker.com~]]; optionally with [[/public-keys/#pgp][PGP]]
 - Matrix ::  [[https://matrix.to/#/@ross:rossabaker.com][~@ross:rossabaker.com~]]
-- ActivityPub[fn:16] :: [[https://social.rossabaker.com/@ross][~@ross@rossabaker.com~]]
+- ActivityPub[fn:1] :: [[https://social.rossabaker.com/@ross][~@ross@rossabaker.com~]]
 
 *** Pronouns
 
@@ -408,7 +408,7 @@ The following licenses are applied to portions of this site:
 
 | SPDX ID        | License                                             |
 |----------------+-----------------------------------------------------|
-| ~CC-BY-SA-4.0~ | [[https://creativecommons.org/licenses/by/4.0/][Creative Commons Attribution-ShareAlike 4.0]] [fn:18] |
+| ~CC-BY-SA-4.0~ | [[https://creativecommons.org/licenses/by/4.0/][Creative Commons Attribution-ShareAlike 4.0]] [fn:2] |
 | ~CC0-1.0~      | [[https://spdx.org/licenses/CC0-1.0.html][Creative Commons Zero v1.0 Universal]]                |
 | ~GPL-3.0-only~ | [[https://www.gnu.org/licenses/gpl-3.0-standalone.html][GNU General Public License, version 3]] only          |
 | ~MIT~          | [[https://opensource.org/license/mit/][The MIT License]]                                     |
@@ -442,7 +442,7 @@ repository.
   with [[https://www.terraform.io/][Terraform]].
 
 This is not a complete description of my environment.  Some things
-can't be automated [fn:17].  Some things are be redacted for security.
+can't be automated [fn:3].  Some things are be redacted for security.
 But we inveterate tweakers learn from one another, so I will share all
 that I can.
 
@@ -587,8 +587,8 @@ keys over HTTPS.  In this guide, we'll configure WKD for our domain.
 **** Independence
 
 Public keys are traditionally submitted to one or more public key
-servers.  Some, like [[https://pgp.mit.edu][~pgp.mit.edu~]], are federated[fn:14].  Others, like
-[[https://keys.openpgp.org/][~keys.openpgp.org~]], are not[fn:15].  In neither case can I control
+servers.  Some, like [[https://pgp.mit.edu][~pgp.mit.edu~]], are federated[fn:4].  Others, like
+[[https://keys.openpgp.org/][~keys.openpgp.org~]], are not[fn:5].  In neither case can I control
 whether they're here tomorrow.
 
 Consistent with Indieweb principles, WKD lets us self-host our
@@ -6009,7 +6009,7 @@ to Own Site.
 
 The first step is to [[https://docs.joinmastodon.org/user/moving/#export][request your archive]].  This can be done once
 every seven days.  PESOS is typically done more often, but it's async.
-Ours just took years.[fn:12]
+Ours just took years.[fn:6]
 
 Download the archive.  Inside the archive is an ~outbox.json~ file in
 [[https://www.w3.org/TR/activitystreams-core/][Activity Streams]] format.  The interesting part is the ~orderedItems~
@@ -6662,7 +6662,7 @@ from Middle America!
 #+hugo:more
 I was not yet a serious person.  With a naughty phrasebook and
 sophomoric wit, my friend and I carefully transcribed, "/Hat dir Jemand ins
-Gehirn geschissen und vergessen umzurühren?/"[fn:3].  We were abruptly
+Gehirn geschissen und vergessen umzurühren?/"[fn:7].  We were abruptly
 disconnected and banned.
 
 *** First frolics on the open web
@@ -6717,7 +6717,7 @@ following.  I want my efforts to reverberate.
   arcane, but it's documented and I've recaptured some Joy of
   Computing in building it.  Find yours.
 
-- /Ich werde nicht vergessen umzurühren.[fn:5]/
+- /Ich werde nicht vergessen umzurühren.[fn:8]/
 
 *** See also
 
@@ -6768,7 +6768,7 @@ was my best.
 
 Another time, she asked me about a poor grade.  "To whom much is
 given, much is expected," she said.  I didn't recognize the scriptural
-reference[fn:1] at the time, but those words from her faith still hit
+reference[fn:9] at the time, but those words from her faith still hit
 me like a truck.  It wasn't my best.  I had disappointed her.
 
 She gave me more tips than I ever got from that Scrabble book.
@@ -6815,7 +6815,7 @@ gone, but here is the skeleton of a twentieth-century personal web
 page, the author not yet twenty.  There was a Perl CGI script to show
 football schedules.  Navigation was a Java applet, for crude
 animations that JavaScript could not yet render.  There was a boast
-about my girlfriend[fn:4].  Ugh, the justified margins!
+about my girlfriend[fn:10].  Ugh, the justified margins!
 
 Unfortunately, it was all hosted at the internet service provider in
 the back of the video cassette rental store.  It's incredible we found
@@ -6824,7 +6824,7 @@ any remains of Teenage Ross.
 *** A gap in the fossil record
 
 As the 21st Century dawned, the Web and I each got serious.  It was
-time to put the applets away and drop the handle "Spanky"[fn:6].  I
+time to put the applets away and drop the handle "Spanky"[fn:11].  I
 had swirling thoughts about:
 - aspect-oriented programming
 - pairwise comparison algorithms to rank intercollegiate athletic teams
@@ -6870,11 +6870,11 @@ but preserve nothing.
 So, I am finally [[*Blog][blogging]] here, in my own domain.  I'm assembling an
 archive of old [[*Talks][talks]].  I'll have more literate [[/configs/][configurations]] to
 share.  I'm thinking about how integrate the old tweets and the new
-toots[fn:9].
+toots[fn:12].
 
 I cringed while revisiting my old self, but I quickly appreciated the
 ways I've grown.  If I get it right, this project will preserve
-Quadragenarian Ross as an embarrassment for decades to come.[fn:8]
+Quadragenarian Ross as an embarrassment for decades to come.[fn:13]
 
 #+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css :exports none
   figure.blog-image {
@@ -6943,13 +6943,13 @@ corporation.
 
 *** Choosing an instance
 
-I had been off and on Mastodon since April 2017[fn:10], but never with
+I had been off and on Mastodon since April 2017[fn:14], but never with
 this seriousness.  It was time for a move from "the default instance."
 
 The obvious choice is [[https://fosstodon.org/about/more][Fosstodon]], where I have many friends and subject
 matter expertise.  Its [[https://hub.fosstodon.org/why-fosstodon-is-english-only/][English-only policy]], while understandable, gave
 me pause.  Un dia me gustaria in meiner zweiten und dritten Sprache
-tuten.[fn:11] I'm glad it's there, but it's not right for me.
+tuten.[fn:15] I'm glad it's there, but it's not right for me.
 
 Then I found [[https://indieweb.social/web/home][indieweb.social]].  It's a little less aligned with my
 established interests, but it has the nutrients that Scala currently
@@ -7022,7 +7022,7 @@ But, eh, it's mostly fine.
 **** Org-Mode
 
 [[https://orgmode.org/][Org-Mode]] is a package built into [[https://www.gnu.org/software/emacs/][Emacs]], my editor of choice.  It
-defines an [[https://orgmode.org/worg/dev/org-syntax.html][Org syntax]], which is yet another markdown language[fn:13].
+defines an [[https://orgmode.org/worg/dev/org-syntax.html][Org syntax]], which is yet another markdown language[fn:16].
 The killer feature is [[https://orgmode.org/manual/Working-with-Source-Code.html][Org-Babel]], where we can embed, export, and
 execute code snippets in multiple languages, interspersed with prose
 in the practice of [[https://en.wikipedia.org/wiki/Literate_programming][literate programming]].  For example, [[../../configs/web-key-directory/][Web Key
@@ -7503,7 +7503,7 @@ Includes:
 ** Old home page copy
 I came online a little after [[https://en.wikipedia.org/wiki/Eternal_September][The September That Never Ended]], but long
 before [[https://en.wikipedia.org/wiki/Web_2.0][Web 2.0]].  I don't feel that old, but my internet age is in the
-99th percentile[fn:2].  Analysts rate my curmudgeonhood even
+99th percentile[fn:17].  Analysts rate my curmudgeonhood even
 higher.
 
 I still love the ideals of the Open Web, but we are goaded by siloed
@@ -7549,12 +7549,29 @@ Particularly coming out of the social media archives.
 ** TODO web-key-directory has a stray copy button
 
 * Footnotes
-[fn:18]
+
+[fn:1] Currently implemented with Mastodon
+
+[fn:2]
 Note that this license is [[https://creativecommons.org/share-your-work/licensing-considerations/compatible-licenses][one-way compatible]] with the [[https://www.gnu.org/licenses/gpl-3.0-standalone.html][GNU General
 Public License, version 3]] (~GPL-3.0-only~), which may be more
 convenient for source code.
 
-[fn:1]
+[fn:3] Though NixOS asymptotically approaches it.
+
+[fn:4] [[http://pgp.mit.edu/faq.html][MIT PGP Public Key Server: Frequently Asked Questions]]
+
+[fn:5] [[https://keys.openpgp.org/about/faq#federation][Is keys.openpgp.org federated?]]
+
+[fn:6] Since I was moving instances, this limitation was fine.  To
+update more often from a live Mastodon, it's worth considering the RSS
+feed or a [[https://indieweb.org/POSSE][POSSE]] approach.
+
+[fn:7] Did someone shit in your brain and forget to stir?
+
+[fn:8] I won't forget to stir.
+
+[fn:9]
 #+begin_quote
 From everyone to whom much has been given, much will be required, and from the one to whom much has been entrusted, even more will be demanded.
 
@@ -7563,43 +7580,26 @@ Luke 12:48, NRSV-UE
 #+end_cite
 #+end_quote
 
-[fn:2] 36 million users online in December 1996, vs. 5,473 million in July 2022, per [[https://www.internetworldstats.com/emarketing.htm][Internet World Stats]].
+[fn:10] Good news: she's now my wife.
 
-[fn:3] Did someone shit in your brain and forget to stir?
-
-[fn:4] Good news: she's now my wife.
-
-[fn:5] I won't forget to stir.
-
-[fn:6] I can't remember where I got that appellation.  I am old, but
+[fn:11] I can't remember where I got that appellation.  I am old, but
 I'm not Little Rascals old.
 
-[fn:7] Most of my Scala friends joined in April 2017, and I can't
-remember what we fled from.  Can anybody else?
+[fn:12] And what we'll think "toots" were in 2050
 
-[fn:8] Also I hope anyone still understands "cringe" is also a verb.
+[fn:13] Also I hope anyone still understands "cringe" is also a verb.
 
-[fn:9] And what we'll think "toots" were in 2050
+[fn:14] Most of my Scala follows joined that month, and I can't remember why.  Does anyone else?
 
-[fn:10] Most of my Scala follows joined that month, and I can't remember why.  Does anyone else?
+[fn:15] "One day I'd like to toot in my second and third languages," in Spanish and German.
 
-[fn:11] "One day I'd like to toot in my second and third languages," in Spanish and German.
-
-[fn:12] Since I was moving instances, this limitation was fine.  To
-update more often from a live Mastodon, it's worth considering the RSS
-feed or a [[https://indieweb.org/POSSE][POSSE]] approach.
-
-[fn:13] Today I learned [[https://yaml.org/][YAML]] doesn't stand for Yet Another Markdown
+[fn:16] Today I learned [[https://yaml.org/][YAML]] doesn't stand for Yet Another Markdown
 Language, but YAML Ain't Markup Language.
 
-[fn:14] [[http://pgp.mit.edu/faq.html][MIT PGP Public Key Server: Frequently Asked Questions]]
+[fn:17] 36 million users online in December 1996, vs. 5,473 million in July 2022, per [[https://www.internetworldstats.com/emarketing.htm][Internet World Stats]].
 
-[fn:15] [[https://keys.openpgp.org/about/faq#federation][Is keys.openpgp.org federated?]]
-
-[fn:16] Currently implemented with Mastodon
-
-[fn:17] Though NixOS asymptotically approaches it.
-
+[fn:18] Most of my Scala friends joined in April 2017, and I can't
+remember what we fled from.  Can anybody else?
 # Local Variables:
 # org-babel-exp-code-template: "#+begin_src %lang%switches%flags :code-license %code-license\n%body\n#+end_src"
 # End:
