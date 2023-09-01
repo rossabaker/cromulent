@@ -2448,7 +2448,7 @@ This will block +Twitter+ X cards.
 CLOSED: [2023-02-23 Thu 23:59 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: emacs
-:EXPORT_HUGO_LASTMOD: [2023-08-29 Tue 00:35 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-08-31 Thu 22:13 EDT]
 :header-args+: :tangle-mode `,#o444 :mkdirp yes
 :header-args:emacs-lisp+: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444 :mkdirp yes
 :header-args:emacs-lisp+: :code-license CC0-1.0
@@ -2737,16 +2737,6 @@ minibuffer completion.
 #+begin_src emacs-lisp
   (setopt read-quoted-char-radix 16)
 #+end_src
-****** Delete Selection Mode
-
-Typing over an active section should delete the section.
-
-#+begin_src emacs-lisp
-  (use-package delsel
-    :defer t
-    :custom
-    (delete-selection-mode))
-#+end_src
 
 ****** Mark ring
 :PROPERTIES:
@@ -2803,6 +2793,24 @@ Persist bookmarks each time we set one, not when Emacs exits.
   (use-package bookmark
     :custom
     (bookmark-save-flag 1))
+#+end_src
+
+***** selected.el
+
+[[https://github.com/Kungsgeten/selected.el][~selected.el~]] activates a keymap when there is an active region.  I'm
+using it to replace the more traditional =delete-selection-mode=.
+
+#+begin_src emacs-lisp
+  (use-package selected
+    :ensure t
+    :diminish
+    :config (selected-global-mode)
+    :bind (:map selected-keymap
+           ("q" . selected-off)
+           ("u" . upcase-region)
+           ("d" . downcase-region)
+           ("w" . count-words-region)
+           ("m" . apply-macro-to-region-lines)))
 #+end_src
 
 **** Convenience

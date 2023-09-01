@@ -56,11 +56,6 @@
 
 (setopt read-quoted-char-radix 16)
 
-(use-package delsel
-  :defer t
-  :custom
-  (delete-selection-mode))
-
 (setopt set-mark-command-repeat-pop t)
 
 (use-package simple
@@ -75,6 +70,17 @@
 (use-package bookmark
   :custom
   (bookmark-save-flag 1))
+
+(use-package selected
+  :ensure t
+  :diminish
+  :config (selected-global-mode)
+  :bind (:map selected-keymap
+         ("q" . selected-off)
+         ("u" . upcase-region)
+         ("d" . downcase-region)
+         ("w" . count-words-region)
+         ("m" . apply-macro-to-region-lines)))
 
 (use-package copilot
   :disabled t
