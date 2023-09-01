@@ -197,17 +197,6 @@
     	    (final: prev: {
     	      hyperlink = config.packages.hyperlink;
     	    })
-    	    # https://github.com/NixOS/nix/issues/8485#issuecomment-1596220009
-    	    (final: prev: {
-    	      nix = prev.nix.overrideAttrs (old: {
-    		patches = (old.patches or []) ++ [
-    		  (final.fetchpatch {
-    		    url = "https://patch-diff.githubusercontent.com/raw/NixOS/nix/pull/8535.patch";
-    		    hash = "sha256-CTbwtlB/veZWP+xqYSSZeUJiAUhIn3r6QJgZwRx4QRM=";
-    		  })
-    		];
-    	      });
-    	    })
     	  ];
     	};
     
