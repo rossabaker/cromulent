@@ -679,8 +679,8 @@ existing directory under `magit-clone-default-directory'."
 (use-package zoom
   :ensure t
   :custom
-  (zoom-size ,(let ((phi (- (/ (+ 1 (sqrt 5)) 2) 1)))
-		(cons phi phi))))
+  `(zoom-size ,(let ((phi (- (/ (+ 1 (sqrt 5)) 2) 1)))
+                (cons phi phi))))
 
 (use-package which-key
   :ensure t

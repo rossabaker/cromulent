@@ -4357,8 +4357,8 @@ start with ~/~ or ~~/~, it cleans up the leading default prompt that's
   (use-package zoom
     :ensure t
     :custom
-    (zoom-size ,(let ((phi (- (/ (+ 1 (sqrt 5)) 2) 1)))
-		  (cons phi phi))))
+    `(zoom-size ,(let ((phi (- (/ (+ 1 (sqrt 5)) 2) 1)))
+                  (cons phi phi))))
 #+end_src
 
 **** Help
