@@ -1,0 +1,74 @@
+# Created 2023-09-03 Sun 21:59
+#+title: License
+#+author: Ross Baker
+#+begin_description
+Licenses and attributions for the content on rossabaker.com
+#+end_description
+
+* Simple and strict
+
+The work /as a whole/ is distributed under the [[https://www.gnu.org/licenses/gpl-3.0-standalone.html][GNU General Public
+License v3.0 only]] (~GPL-3.0-only~).  These license terms apply to
+[[https://rossabaker.com/][~rossabaker.com~]] and its [[https://github.com/rossabaker/cromulent][source repository]].
+
+#+begin_quote
+Copyright (C) 2022-2023, Ross A. Baker <ross@rossabaker.com>
+
+This file is part of the Cromulent project.
+
+Cromulent is free software: you can redistribute it and/or modify it
+under the terms of the GNU General Public License as published by the
+Free Software Foundation, version 3.
+
+This program is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program. If not, see <https://www.gnu.org/licenses/>.
+#+end_quote
+
+* Nuanced and more permissive
+
+- Creative Commons is great for prose and images, but but [[https://creativecommons.org/faq/#can-i-apply-a-creative-commons-license-to-software][not for
+  code]].
+- Many configurations are trivial, and best suited to the pubic domain.
+- Some works are more substantial, and you may be asked to share alike.
+- Some works are derived, and I am bound by the original terms.
+
+#+caption: An arrow from A to B means content licensed A and B can be combined under license B.
+#+results: license-compatibility
+[[file:../../gen/hugo/static/img/license-compatibility.svg]]
+
+Though everything combines to ~GPL-3.0-only~, most content is
+available under more permissive terms, as follows.
+
+** ~CC-BY-SA-4.0~ by default
+
+Unless otherwise specified, all content is published under a [[https://creativecommons.org/licenses/by/4.0/][Creative
+Commons Attribution-ShareAlike 4.0 International]] (~CC-BY-SA-4.0~)
+license.
+
+** Code blocks
+
+Code blocks may be tagged with a [[https://spdx.org/licenses/][SPDX identifier]].  The indicated
+license applies to that code block.  For example, the following block,
+tagged ~CC0-1.0~, is distributed under the [[https://spdx.org/licenses/CC0-1.0.html][Creative Commons Zero v1.0
+Universal]] license.
+
+#+begin_src emacs-lisp :code-license "CC0-1.0"
+  (message "Hello.")
+#+end_src
+
+*** SPDX quick reference
+
+The following SPDX identifiers may be applied to various code blocks
+on this site:
+
+| SPDX ID        | License                                                                                              |
+|----------------+------------------------------------------------------------------------------------------------------|
+| ~CC-BY-SA-4.0~ | [[https://creativecommons.org/licenses/by/4.0/][Creative Commons Attribution-ShareAlike 4.0]]        |
+| ~CC0-1.0~      | [[https://spdx.org/licenses/CC0-1.0.html][Creative Commons Zero v1.0 Universal]]                     |
+| ~GPL-3.0-only~ | [[https://www.gnu.org/licenses/gpl-3.0-standalone.html][GNU General Public License, version 3]] only |
+| ~MIT~          | [[https://opensource.org/license/mit/][The MIT License]]                                             |

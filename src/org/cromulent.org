@@ -1,6 +1,3 @@
-# Copyright 2022-2023, Ross A. Baker <ross@rossabaker.com>
-# SPDX-License-Identifier: CC-BY-SA-4.0
-
 #+HUGO_BASE_DIR: ../../tmp/hugo
 #+HUGO_SECTION: /
 #+MACRO: abbr @@html:<abbr title="$1">$2</abbr>@@
@@ -8,6 +5,103 @@
 
 # Automatically set the Hugo date: https://ox-hugo.scripter.co/doc/dates/#date
 #+STARTUP: logdone
+
+* DONE License
+CLOSED: [2022-11-06 Sun 10:40 EST]
+:PROPERTIES:
+:EXPORT_HUGO_LASTMOD: [2023-09-03 Sun 21:47 EDT]
+:EXPORT_FILE_NAME: license
+:CUSTOM_ID: license
+:END:
+
+#+begin_description
+Licenses and attributions for the content on rossabaker.com
+#+end_description
+
+** Simple and strict
+
+The work /as a whole/ is distributed under the [[https://www.gnu.org/licenses/gpl-3.0-standalone.html][GNU General Public
+License v3.0 only]] (~GPL-3.0-only~).  These license terms apply to
+[[https://rossabaker.com/][~rossabaker.com~]] and its [[https://github.com/rossabaker/cromulent][source repository]].
+
+#+begin_quote
+Copyright (C) 2022-2023, Ross A. Baker <ross@rossabaker.com>
+
+This file is part of the Cromulent project.
+
+Cromulent is free software: you can redistribute it and/or modify it
+under the terms of the GNU General Public License as published by the
+Free Software Foundation, version 3.
+
+This program is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program. If not, see <https://www.gnu.org/licenses/>.
+#+end_quote
+
+** Nuanced and more permissive
+
+- Creative Commons is great for prose and images, but but [[https://creativecommons.org/faq/#can-i-apply-a-creative-commons-license-to-software][not for
+  code]].
+- Many configurations are trivial, and best suited to the pubic domain.
+- Some works are more substantial, and you may be asked to share alike.
+- Some works are derived, and I am bound by the original terms.
+
+#+name: license-compatibility
+#+begin_src dot :eval yes :results value file :exports results :dir ../../gen/hugo/static/img :file license-compatibility.svg :mkdirp yes
+  strict digraph {
+      cc0_1_0 [ label="CC0-1.0" ]
+      mit [ label="MIT" ]
+      apache_2_0 [ label="Apache-2.0" ]
+      gpl_3_0_only [ label="GPL-3.0-only" ]
+      cc_by_sa_4_0 [ label="CC-BY-SA-4.0" ]
+
+      cc0_1_0 -> mit
+      mit -> apache_2_0
+      apache_2_0 -> gpl_3_0_only
+      cc0_1_0 -> cc_by_sa_4_0
+      cc_by_sa_4_0 -> gpl_3_0_only
+  }
+#+end_src
+
+#+caption: An arrow from A to B means content licensed A and B can be combined under license B.
+#+results: license-compatibility
+[[file:../../gen/hugo/static/img/license-compatibility.svg]]
+
+Though everything combines to ~GPL-3.0-only~, most content is
+available under more permissive terms, as follows.
+
+*** ~CC-BY-SA-4.0~ by default
+
+Unless otherwise specified, all content is published under a [[https://creativecommons.org/licenses/by/4.0/][Creative
+Commons Attribution-ShareAlike 4.0 International]] (~CC-BY-SA-4.0~)
+license.
+
+*** Code blocks
+
+Code blocks may be tagged with a [[https://spdx.org/licenses/][SPDX identifier]].  The indicated
+license applies to that code block.  For example, the following block,
+tagged ~CC0-1.0~, is distributed under the [[https://spdx.org/licenses/CC0-1.0.html][Creative Commons Zero v1.0
+Universal]] license.
+
+#+begin_src emacs-lisp :code-license CC0-1.0
+  (message "Hello.")
+#+end_src
+
+**** SPDX quick reference
+
+The following SPDX identifiers may be applied to various code blocks
+on this site:
+
+| SPDX ID        | License                                             |
+|----------------+-----------------------------------------------------|
+| ~CC-BY-SA-4.0~ | [[https://creativecommons.org/licenses/by/4.0/][Creative Commons Attribution-ShareAlike 4.0]]         |
+| ~CC0-1.0~      | [[https://spdx.org/licenses/CC0-1.0.html][Creative Commons Zero v1.0 Universal]]                |
+| ~GPL-3.0-only~ | [[https://www.gnu.org/licenses/gpl-3.0-standalone.html][GNU General Public License, version 3]] only          |
+| ~MIT~          | [[https://opensource.org/license/mit/][The MIT License]]                                     |
 
 * DONE Home page
 CLOSED: [2022-09-05 Mon 00:30 EDT]
@@ -360,58 +454,6 @@ method is email with PGP.
 
 This policy is referenced from [[/.well-known/security.txt][~/.well-known/security.txt~]], in
 compliance with [[https://www.rfc-editor.org/rfc/rfc9116][RFC9116]].  Learn more at [[https://securitytxt.org/][securitytxt.org]].
-
-* DONE License
-CLOSED: [2022-11-06 Sun 10:40 EST]
-:PROPERTIES:
-:EXPORT_HUGO_LASTMOD: [2023-08-26 Sat 17:34 EDT]
-:EXPORT_FILE_NAME: license
-:CUSTOM_ID: license
-:END:
-
-#+begin_description
-Licenses and attributions for the content on rossabaker.com
-#+end_description
-
-** The gist
-
-I'm sorry you're reading this instead of building something neat.
-
-- Sharing is cool.  Pay it forward.
-- Remixing is fun.  Acknowledge your sources.
-- Mundanities are mostly public domain.
-- Thinky bits are mostly share-alike.
-
-** The nitty gritty
-
-*** General content
-
-All content on ~rossabaker.com~ is shared under a [[https://creativecommons.org/licenses/by/4.0/][Creative Commons
-Attribution-ShareAlike 4.0 International]] (~CC-BY-SA-4.0~) license.
-
-*** Code snippets
-
-Creative Commons licenses are [[https://creativecommons.org/faq/#can-i-apply-a-creative-commons-license-to-software][not ideal for software]].  Code snippets
-on this site may be tagged with a [[https://spdx.org/licenses/][SPDX identifier]] indicating a
-disjunctive dual license with a secondary option more appropriate for
-code.  For example, the following snippet, tagged ~CC0-1.0~, may be
-used under either the [[https://spdx.org/licenses/CC0-1.0.html][Creative Commons Zero v1.0 Universal]] license or
-the default ~CC-BY-SA-4.0~, at your discretion.
-
-#+begin_src emacs-lisp :code-license CC0-1.0
-  (message "Hello.")
-#+end_src
-
-*** SPDX quick reference
-
-The following licenses are applied to portions of this site:
-
-| SPDX ID        | License                                             |
-|----------------+-----------------------------------------------------|
-| ~CC-BY-SA-4.0~ | [[https://creativecommons.org/licenses/by/4.0/][Creative Commons Attribution-ShareAlike 4.0]] [fn:2] |
-| ~CC0-1.0~      | [[https://spdx.org/licenses/CC0-1.0.html][Creative Commons Zero v1.0 Universal]]                |
-| ~GPL-3.0-only~ | [[https://www.gnu.org/licenses/gpl-3.0-standalone.html][GNU General Public License, version 3]] only          |
-| ~MIT~          | [[https://opensource.org/license/mit/][The MIT License]]                                     |
 
 * Configurations section                                              :@tech:
 :PROPERTIES:
@@ -2520,9 +2562,9 @@ I assert that these falls under [[https://www.gnu.org/licenses/gpl-faq.en.html#G
 Any configuration that triggers the GPL will be published in a
 separate repository and stitched in here like any other GPL library.
 
-With that effort, the license of this configuration (and repository)
-as a whole is ~CC-BY-SA-4.0~.  I encourage you to try the same with
-your own literate configs.
+With that effort, the license of this configuration as a whole is
+~CC-BY-SA-4.0~.  I encourage you to try the same with your own
+literate configs.
 
 #+begin_src emacs-lisp
   ;; SPDX-License-Identifier: CC-BY-SA-4.0
