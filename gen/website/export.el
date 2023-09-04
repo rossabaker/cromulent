@@ -1,4 +1,5 @@
 (require 'ox-hugo)
+(require 'ob-dot)
 (require 'ob-shell)
 (require 's)
 

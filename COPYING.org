@@ -39,7 +39,7 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 #+caption: An arrow from A to B means content licensed A and B can be combined under license B.
 #+results: license-compatibility
-[[file:../../gen/hugo/static/img/license-compatibility.svg]]
+[[file:gen/hugo/static/img/license-compatibility.svg]]
 
 Though everything combines to ~GPL-3.0-only~, most content is
 available under more permissive terms, as follows.

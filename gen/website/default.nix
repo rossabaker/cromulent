@@ -1,4 +1,4 @@
-{ src, emacs, gnupg, hugo, html5validator, hyperlink, stdenv }:
+{ src, emacs, gnupg, graphviz, hugo, html5validator, hyperlink, stdenv }:
 
 stdenv.mkDerivation rec {
   name = "rossabaker.com";
@@ -6,6 +6,7 @@ stdenv.mkDerivation rec {
   nativeBuildInputs = [
     emacs
     gnupg
+    graphviz
     hugo
     html5validator
     hyperlink
@@ -26,6 +27,8 @@ stdenv.mkDerivation rec {
 
   doCheck = true;
   checkPhase = ''
+    echo YO WTF
+    cat tmp/hugo/content/license.md
     html5validator --log INFO --root public
     hyperlink public/ --check-anchors
   '';
