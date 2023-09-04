@@ -6,7 +6,7 @@
 # Automatically set the Hugo date: https://ox-hugo.scripter.co/doc/dates/#date
 #+STARTUP: logdone
 
-* DONE License
+* DONE License                               :licensing:gpl:creative_commons:
 CLOSED: [2022-11-06 Sun 10:40 EST]
 :PROPERTIES:
 :EXPORT_HUGO_LASTMOD: [2023-09-03 Sun 21:47 EDT]
