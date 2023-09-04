@@ -128,7 +128,7 @@ joy of computing.  All that is published here should be considered
 construction.
 #+end_clearfix
 
-* DONE Ross A. Baker                                    :@personal:biography:contact:
+* DONE Ross A. Baker                            :@personal:biography:contact:
 CLOSED: [2022-08-31 Wed 00:23 EDT]
 :PROPERTIES:
 :EXPORT_HUGO_SECTION: /
@@ -360,7 +360,7 @@ downloaded in [[/.well-known/openpgpkey/hu/eimhw3om3jynrs7fo7r7rrssmt1o4yxp][bin
 This key is notated with [[https://ariadne.id/][Ariadne Identity]] claims, which can be
 [[https://keyoxide.org/ross%40rossabaker.com][verified on Keyoxide]].
 
-* DONE Contact             :@personal:contact:verification:keyoxide:
+* DONE Contact                      :@personal:contact:verification:keyoxide:
 CLOSED: [2022-10-16 Sun 15:37 EDT]
 :PROPERTIES:
 :DESCRIPTION: How to contact Ross A. Baker about various subjects via various protocols.
@@ -488,7 +488,7 @@ can't be automated [fn:3].  Some things are be redacted for security.
 But we inveterate tweakers learn from one another, so I will share all
 that I can.
 
-** DONE Managing generated sources in Git           :git:gitattributes:gitignore:babel:
+** DONE Managing generated sources in Git :git:gitattributes:gitignore:babel:
 CLOSED: [2022-08-24 Wed 15:04 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: git-repository
@@ -730,7 +730,7 @@ gpg-wks-client:     created: Tue Jan 30 22:24:27 2018 EST
 gpg-wks-client:   addr-spec: ross@rossabaker.com
 #+end_example
 
-** DONE Website bundle                                     :website:
+** DONE Website bundle                                              :website:
 CLOSED: [2022-08-24 Wed 15:04 EDT]
 :PROPERTIES:
 :EXPORT_HUGO_BUNDLE: website
@@ -747,7 +747,7 @@ CLOSED: [2022-08-24 Wed 15:04 EDT]
 configuration, export the content to Markdown with with [[https://ox-hugo.scripter.co][ox-hugo]], and
 convert the Markdown to HTML with [[https://gohugo.io/][Hugo]].
 
-*** DONE Hugo configuration                                :hugo:ox_hugo:
+*** DONE Hugo configuration                                    :hugo:ox_hugo:
 CLOSED: [2022-09-01 Thu 16:48 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: hugo
@@ -863,7 +863,7 @@ The Emacs link above collides with a tag and results in an ambiguous
 relref.  Can we figure out a solution that works in both the exported
 HTML and Org?
 
-*** DONE Templates                                            :hugo:html:
+*** DONE Templates                                                :hugo:html:
 CLOSED: [2022-09-01 Thu 16:53 EDT]
 :PROPERTIES:
 :EXPORT_HUGO_BUNDLE: templates
@@ -2417,7 +2417,7 @@ writing, seems to work.
   }
 #+end_src
 
-*** DONE Webcrawler configuration         :webcrawlers:rfc9309:generative_ai:twitter:
+*** DONE Webcrawler configuration :webcrawlers:rfc9309:generative_ai:twitter:
 CLOSED: [2023-08-09 Wed 20:31 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: /webcrawlers
@@ -4744,7 +4744,7 @@ The Home Manager module is published to my flake as output
   }
 #+end_src
 
-** Python home-manager module                                     :python:
+** Python home-manager module                                        :python:
 :PROPERTIES:
 :EXPORT_FILE_NAME: python
 :EXPORT_HUGO_LASTMOD: [2023-07-28 Fri 21:51 EDT]
@@ -5644,7 +5644,7 @@ CLOSED: [2022-11-07 Mon 22:35 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: _index
 :END:
-** DONE Web Key Directory                                  :pgp:wkd:indieweb:noexport:
+** DONE Web Key Directory                        :pgp:wkd:indieweb:noexport:
 CLOSED:
 :PROPERTIES:
 :EXPORT_DATE: [2022-11-02 Wed 23:39 EDT]
@@ -5662,7 +5662,7 @@ CLOSED:
   /projects/web-key-directory /configs/web-key-directory
 #+end_src
 
-** DONE Personal Weather Station             :@personal:weather:indianapolis:
+** DONE Personal Weather Station            :@personal:weather:indianapolis:
 CLOSED: [2022-08-28 Sun 21:03 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: personal-weather-station
@@ -5696,8 +5696,8 @@ to mine.
   }
 #+end_src
 
-** Books                                                               :book:
-*** DONE Scalatra in Action           :@tech:scala:scalatra:http:sbt:scalate:
+** Books                                                              :book:
+*** DONE Scalatra in Action          :@tech:scala:scalatra:http:sbt:scalate:
 CLOSED: [2022-11-21 Mon 21:03 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: scalatra-in-action
@@ -5743,7 +5743,7 @@ RESTful APIs, and real-time web programming.
   }
 #+end_src
 
-** DONE Matrix home server                             :@tech:matrix:synapse:
+** DONE Matrix home server                            :@tech:matrix:synapse:
 CLOSED: [2022-11-21 Mon 21:03 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: matrix-home-server
@@ -6424,7 +6424,7 @@ be seen in [[/notes][~/notes~]].
 4. Drop toots that link back to own domain
 5. Trim trailing hashtags
 
-** DONE WebFinger                                  :@tech:webfinger:mastodon:netlify:redirect:
+** DONE WebFinger                :@tech:webfinger:mastodon:netlify:redirect:
 CLOSED: [2022-11-22 Tue 00:14 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: webfinger
@@ -6522,13 +6522,13 @@ called to return an HTTP 400 when the ~resource~ parameter is missing.
 But that's a problem for another day.
 #+end_aside
 
-*** Self-hosting :noexport:
+*** Self-hosting                                                  :noexport:
 
 #+begin_src text :tangle ../../tmp/hugo/static/_redirects
   /.well-known/webfinger* https://social.rossabaker.com/.well-known/webfinger:splat 301
 #+end_src
 
-** DONE Finger                                             :finger:nostalgia:
+** DONE Finger                                            :finger:nostalgia:
 CLOSED: [2023-07-16 Sun 22:51 EDT]
 :PROPERTIES:
 :EXPORT_TITLE: Finger me
@@ -6553,7 +6553,7 @@ shell:
   finger rossabaker@happynetbox.com
 #+end_src
 
-** DONE Playlists section                                          :playlist:
+** DONE Playlists section                                         :playlist:
 CLOSED: [2023-08-10 Thu 13:04 EDT]
 :PROPERTIES:
 :EXPORT_HUGO_BUNDLE: playlists
@@ -6569,7 +6569,7 @@ CLOSED: [2023-08-10 Thu 13:16 EDT]
   A nascent collection of playlists.
 #+end_description
 
-*** DONE Big Ten Fight Songs    :@sports:big_ten:spotify:fight_songs:midwest:
+*** DONE Big Ten Fight Songs   :@sports:big_ten:spotify:fight_songs:midwest:
 CLOSED: [2023-08-10 Thu 13:11 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: big-ten-fight-songs
@@ -7517,7 +7517,7 @@ Surely this list isn't complete.  Did I overlook your favorite?
 :PROPERTIES:
 :EXPORT_HUGO_BUNDLE: notes
 :END:
-** DONE Notes :@personal:indieweb:microblog:own_your_data:
+** DONE Notes                    :@personal:indieweb:microblog:own_your_data:
 CLOSED: [2022-11-07 Mon 09:53 EST]
 :PROPERTIES:
 :EXPORT_HUGO_TITLE: Notes
