@@ -4,6 +4,13 @@
 #+begin_description
 Licenses and attributions for the content on rossabaker.com
 #+end_description
+#+EXPORT_EXCLUDE_TAGS: noexport
+
+* TODO Manually synchronized                                       :noexport:
+
+This document is manually exported from the [[file:src/org/cromulent.org::#license][license subtree of
+cromulent.org]] with ~ob-org~, and then the link to the graphviz file
+is manually patched.  This will fall out of sync if not addressed.
 
 * Simple and strict
 
