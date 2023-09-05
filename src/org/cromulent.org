@@ -5644,7 +5644,7 @@ CLOSED: [2022-11-07 Mon 22:35 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: _index
 :END:
-** DONE Web Key Directory                        :pgp:wkd:indieweb:noexport:
+** DONE Web Key Directory                         :pgp:wkd:indieweb:noexport:
 CLOSED:
 :PROPERTIES:
 :EXPORT_DATE: [2022-11-02 Wed 23:39 EDT]
@@ -5662,7 +5662,7 @@ CLOSED:
   /projects/web-key-directory /configs/web-key-directory
 #+end_src
 
-** DONE Personal Weather Station            :@personal:weather:indianapolis:
+** DONE Personal Weather Station             :@personal:weather:indianapolis:
 CLOSED: [2022-08-28 Sun 21:03 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: personal-weather-station
@@ -5696,8 +5696,8 @@ to mine.
   }
 #+end_src
 
-** Books                                                              :book:
-*** DONE Scalatra in Action          :@tech:scala:scalatra:http:sbt:scalate:
+** Books                                                               :book:
+*** DONE Scalatra in Action           :@tech:scala:scalatra:http:sbt:scalate:
 CLOSED: [2022-11-21 Mon 21:03 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: scalatra-in-action
@@ -5743,7 +5743,7 @@ RESTful APIs, and real-time web programming.
   }
 #+end_src
 
-** DONE Matrix home server                            :@tech:matrix:synapse:
+** DONE Matrix home server                             :@tech:matrix:synapse:
 CLOSED: [2022-11-21 Mon 21:03 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: matrix-home-server
@@ -6424,7 +6424,7 @@ be seen in [[/notes][~/notes~]].
 4. Drop toots that link back to own domain
 5. Trim trailing hashtags
 
-** DONE WebFinger                :@tech:webfinger:mastodon:netlify:redirect:
+** DONE WebFinger                 :@tech:webfinger:mastodon:netlify:redirect:
 CLOSED: [2022-11-22 Tue 00:14 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: webfinger
@@ -6522,13 +6522,13 @@ called to return an HTTP 400 when the ~resource~ parameter is missing.
 But that's a problem for another day.
 #+end_aside
 
-*** Self-hosting                                                  :noexport:
+*** Self-hosting                                                   :noexport:
 
 #+begin_src text :tangle ../../tmp/hugo/static/_redirects
   /.well-known/webfinger* https://social.rossabaker.com/.well-known/webfinger:splat 301
 #+end_src
 
-** DONE Finger                                            :finger:nostalgia:
+** DONE Finger                                             :finger:nostalgia:
 CLOSED: [2023-07-16 Sun 22:51 EDT]
 :PROPERTIES:
 :EXPORT_TITLE: Finger me
@@ -6553,7 +6553,7 @@ shell:
   finger rossabaker@happynetbox.com
 #+end_src
 
-** DONE Playlists section                                         :playlist:
+** DONE Playlists section                                          :playlist:
 CLOSED: [2023-08-10 Thu 13:04 EDT]
 :PROPERTIES:
 :EXPORT_HUGO_BUNDLE: playlists
@@ -6569,7 +6569,7 @@ CLOSED: [2023-08-10 Thu 13:16 EDT]
   A nascent collection of playlists.
 #+end_description
 
-*** DONE Big Ten Fight Songs   :@sports:big_ten:spotify:fight_songs:midwest:
+*** DONE Big Ten Fight Songs    :@sports:big_ten:spotify:fight_songs:midwest:
 CLOSED: [2023-08-10 Thu 13:11 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: big-ten-fight-songs
