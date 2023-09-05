@@ -2500,6 +2500,11 @@ CLOSED: [2023-02-23 Thu 23:59 EST]
 :EXPORT_OPTIONS: h:6
 :END:
 
+#+begin_description
+Ross A. Baker's Emacs configuration.  Defines the packages,
+configurations, and Nix build.
+#+end_description
+
 *** Introduction
 :PROPERTIES:
 :CUSTOM_ID: introduction
