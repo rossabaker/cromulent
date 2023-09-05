@@ -4841,6 +4841,11 @@ CLOSED: [2022-12-25 Sun 22:14 EST]
 :header-args+: :code-license MIT
 :END:
 
+#+begin_description
+The Cromulent repository has a Nix flake for packages, shells, OS
+configurations, and home configurations.  It begins here.
+#+end_description
+
 At the root of my [[https://github.com/rossabaker/cromulent][cromulent repository]] is a [[https://nixos.wiki/wiki/Flakes][Nix flake]].  It contains
 all my system configurations, home environment configurations,
 packages, development shells, and more.
