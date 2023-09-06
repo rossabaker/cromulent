@@ -2492,7 +2492,7 @@ This will block +Twitter+ X cards.
 CLOSED: [2023-02-23 Thu 23:59 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: emacs
-:EXPORT_HUGO_LASTMOD: [2023-08-31 Thu 22:13 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-09-06 Wed 11:24 CDT]
 :header-args+: :tangle-mode `,#o444 :mkdirp yes
 :header-args:emacs-lisp+: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444 :mkdirp yes
 :header-args:emacs-lisp+: :code-license CC0-1.0
@@ -3820,6 +3820,22 @@ that something tailor-made carries its weight here.
       (let ((vertico-preselect 'prompt))
 	(apply orig-fun args)))
     (advice-add 'magit-clone-read-args :around #'rab/magit-clone-read-args-a))
+#+end_src
+
+Some commits are mostly reformats, and it's irritating when browsing
+history.  This makes it easy to give Git a hint to ignore them:
+
+#+begin_src emacs-lisp :code-license CC-BY-SA-4.0
+  (defun rab/git-add-to-blame-ignore-revs (revision)
+    "Adds COMMIT to .git-blame-ignore-revs.  Runs `git rev parse' on COMMIT to resolve it first."
+    (interactive (list (magit-read-other-branch-or-commit "Blame-ignored revision")))
+    (when-let ((file (expand-file-name ".git-blame-ignore-revs" (project-root (project-current))))
+               (parsed (magit-rev-parse revision)))
+      (with-current-buffer (find-file-noselect file)
+        (save-excursion
+          (end-of-buffer)
+          (insert parsed "\n")
+          (save-buffer)))))
 #+end_src
 
 ******* Git-Link

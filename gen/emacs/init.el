@@ -467,6 +467,17 @@ existing directory under `magit-clone-default-directory'."
       (apply orig-fun args)))
   (advice-add 'magit-clone-read-args :around #'rab/magit-clone-read-args-a))
 
+(defun rab/git-add-to-blame-ignore-revs (revision)
+  "Adds COMMIT to .git-blame-ignore-revs.  Runs `git rev parse' on COMMIT to resolve it first."
+  (interactive (list (magit-read-other-branch-or-commit "Blame-ignored revision")))
+  (when-let ((file (expand-file-name ".git-blame-ignore-revs" (project-root (project-current))))
+             (parsed (magit-rev-parse revision)))
+    (with-current-buffer (find-file-noselect file)
+      (save-excursion
+        (end-of-buffer)
+        (insert parsed "\n")
+        (save-buffer)))))
+
 (use-package git-link
   :ensure t
   :custom
