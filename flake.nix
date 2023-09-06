@@ -75,11 +75,11 @@
         flake = false;
       };
     
-    # Disabled pending license
-    #   copilot-el = {
-    #     url = "github:zerolfx/copilot.el";
-    #     flake = false;
-    #   };
+      # Disabled pending license
+      #   copilot-el = {
+      #     url = "github:zerolfx/copilot.el";
+      #     flake = false;
+      #   };
     };
   outputs =
     inputs:
@@ -88,8 +88,8 @@
         imports = [
           ./gen/nix-darwin
           {
-    	system.keyboard.enableKeyMapping = true;
-    	system.keyboard.remapCapsLockToControl = true;
+            system.keyboard.enableKeyMapping = true;
+            system.keyboard.remapCapsLockToControl = true;
           }
         ];
       };
@@ -97,17 +97,17 @@
       mkHomeConfig = { pkgs, system, username, homeDirectory }:
         let
           homeModule = import (pkgs.callPackage ./tangle.nix {
-    	inherit pkgs;
-    	src = ./src/org/config/home-manager;
+            inherit pkgs;
+            src = ./src/org/config/home-manager;
           });
         in
           inputs.home-manager.lib.homeManagerConfiguration {
-    	inherit pkgs;
-    	modules = [
+            inherit pkgs;
+            modules = [
         {
           home = {
-    	inherit homeDirectory username;
-    	stateVersion = "21.11";
+            inherit homeDirectory username;
+            stateVersion = "21.11";
           };
           nixpkgs.overlays = [ inputs.emacs-overlay.overlay ];
         }
@@ -116,9 +116,9 @@
         inputs.self.homeManagerModules.scala
         inputs.self.homeManagerModules.python
         ./modules/work
-    	];
-    	# Pass our flake inputs into the config
-    	extraSpecialArgs = { inherit inputs; };
+            ];
+            # Pass our flake inputs into the config
+            extraSpecialArgs = { inherit inputs; };
           };
     
       aarch64-darwin-config-base = pkgs: mkDarwinConfigModule {
@@ -161,10 +161,10 @@
     
         homeConfigurations = {
           "RABaker@L2LYQM57XY" = mkHomeConfig {
-    	pkgs = (pkgsFor "aarch64-darwin");
-    	system = "aarch64-darwin";
-    	username = "RABaker";
-    	homeDirectory = "/Users/RABaker";
+            pkgs = (pkgsFor "aarch64-darwin");
+            system = "aarch64-darwin";
+            username = "RABaker";
+            homeDirectory = "/Users/RABaker";
           };
         };
     
@@ -181,36 +181,36 @@
           hm = inputs.home-manager.defaultPackage."${system}";
     
           darwinPackages =
-    	if (system == "aarch64-darwin") then {
-    	  aarch64-darwin-config-base = (inputs.darwin.lib.darwinSystem {
-    	    system = "aarch64-darwin";
-    	    modules = [ darwinConfigurationModules.aarch64-base ];
-    	  }).system;
-    	} else { };
+            if (system == "aarch64-darwin") then {
+              aarch64-darwin-config-base = (inputs.darwin.lib.darwinSystem {
+                system = "aarch64-darwin";
+                modules = [ darwinConfigurationModules.aarch64-base ];
+              }).system;
+            } else { };
         in
           {
-    	_module.args.pkgs = import inputs.nixpkgs {
-    	  inherit system;
-    	  overlays = [
-    	    inputs.devshell.overlays.default
-    	    inputs.emacs-overlay.overlays.default
-    	    (final: prev: {
-    	      hyperlink = config.packages.hyperlink;
-    	    })
-    	  ];
-    	};
+            _module.args.pkgs = import inputs.nixpkgs {
+              inherit system;
+              overlays = [
+                inputs.devshell.overlays.default
+                inputs.emacs-overlay.overlays.default
+                (final: prev: {
+                  hyperlink = config.packages.hyperlink;
+                })
+              ];
+            };
     
-    	packages = {
-    	  website = pkgs.callPackage ./gen/website {
-    	    emacs = self'.packages.emacs-ross;
-    	    src = ./src;
-    	  };
+            packages = {
+              website = pkgs.callPackage ./gen/website {
+                emacs = self'.packages.emacs-ross;
+                src = ./src;
+              };
     
-    	  hyperlink = pkgs.callPackage ./src/nix/pkgs/hyperlink {};
-    	} // darwinPackages;
+              hyperlink = pkgs.callPackage ./src/nix/pkgs/hyperlink {};
+            } // darwinPackages;
     
-    	devShells.default = pkgs.devshell.mkShell {
-    	  name = "cromulent";
+            devShells.default = pkgs.devshell.mkShell {
+              name = "cromulent";
     
               commands = [
                 {
@@ -225,18 +225,18 @@
                 }
               ];
     
-    	  packages = [
-    	    hm
-    	    pkgs.google-cloud-sdk
-    	    pkgs.hugo
-    	    pkgs.nix
-    	    pkgs.terraform
-    	  ];
-    	};
+              packages = [
+                hm
+                pkgs.google-cloud-sdk
+                pkgs.hugo
+                pkgs.nix
+                pkgs.terraform
+              ];
+            };
     
-    	overlayAttrs = {
-    	  hyperlink = config.packages.hyperlink;
-    	};
+            overlayAttrs = {
+              hyperlink = config.packages.hyperlink;
+            };
           };
     };
 }

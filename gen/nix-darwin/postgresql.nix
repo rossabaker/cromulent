@@ -20,8 +20,8 @@ in
     knownUsers = [ "postgres" ];
     users = {
       postgres = {
-	uid = 2000;
-	shell = "/bin/bash";
+              uid = 2000;
+              shell = "/bin/bash";
       };
     };
   };
@@ -31,15 +31,15 @@ in
     enable = true;
     text = ''
       if [ ! -d "${dataDir}" ]; then
-	echo "creating PostgreSQL data directory..."
-	sudo mkdir -m 700 -p "${dataDir}/"
-	chown -R ${user}:staff "${dataDir}/"
+        echo "creating PostgreSQL data directory..."
+        sudo mkdir -m 700 -p "${dataDir}/"
+        chown -R ${user}:staff "${dataDir}/"
       fi
 
       if [ ! -d "/var/log/postgresql" ]; then
-	echo "creating PostgreSQL log directory..."
-	sudo mkdir -m 700 -p "${logDir}/"
-	chown -R ${user}:staff "${logDir}/"
+        echo "creating PostgreSQL log directory..."
+        sudo mkdir -m 700 -p "${logDir}/"
+        chown -R ${user}:staff "${logDir}/"
       fi
     '';
   };

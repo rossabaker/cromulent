@@ -10,18 +10,18 @@ let
     mkOption
     optionalAttrs
     types
-    ;
+  ;
   inherit (flake-parts-lib)
     mkSubmoduleOptions
-    ;
+  ;
 in
 {
   options = {
     flake = mkSubmoduleOptions {
       homeManagerModules = mkOption {
-	type = types.lazyAttrsOf types.unspecified;
-	default = { };
-	apply = mapAttrs (k: v: { _file = "${toString self.outPath}/flake.nix#homeManagerModules.${k}"; imports = [ v ]; });
+              type = types.lazyAttrsOf types.unspecified;
+              default = { };
+              apply = mapAttrs (k: v: { _file = "${toString self.outPath}/flake.nix#homeManagerModules.${k}"; imports = [ v ]; });
       };
     };
   };

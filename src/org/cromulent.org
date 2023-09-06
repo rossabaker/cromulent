@@ -2095,7 +2095,7 @@ derivation output.
 
       # Reassemble netlify.toml from its constitutents
       for toml in tmp/netlify.toml.d/*; do
-	cat $toml >> tmp/hugo/static/netlify.toml
+        cat $toml >> tmp/hugo/static/netlify.toml
       done
 
       ${hugo}/bin/hugo --config tmp/hugo/config.toml
@@ -3197,20 +3197,20 @@ This one requires a Nix build, [[https://github.com/GTrunSec/hive/blob/ce7c0087a
       src = inputs.jinx;
       buildInputs = [ pkgs.enchant2 ];
       buildPhase = ''
-	cc -I. -O2 -Wall -Wextra -fPIC -shared -o jinx-mod.dylib jinx-mod.c \
-	  -I${pkgs.enchant2.dev}/include/enchant-2 -lenchant-2
+        cc -I. -O2 -Wall -Wextra -fPIC -shared -o jinx-mod.dylib jinx-mod.c \
+          -I${pkgs.enchant2.dev}/include/enchant-2 -lenchant-2
       '';
       installPhase = ''
-	LISPDIR=$out/share/emacs/site-lisp
-	install -d $LISPDIR
-	install *.dylib $LISPDIR
+        LISPDIR=$out/share/emacs/site-lisp
+        install -d $LISPDIR
+        install *.dylib $LISPDIR
       '';
     };
   in
-    pkgs.symlinkJoin {
-      name = "jinx";
-      paths = [ jinx-lisp jinx-mod ];
-    }
+  pkgs.symlinkJoin {
+    name = "jinx";
+    paths = [ jinx-lisp jinx-mod ];
+  }
 #+end_src
 
 Let's not forget a dictionary.
@@ -4498,55 +4498,55 @@ Finally, we add a Home Manager module based on the configured app.
     ];
     perSystem = { config, self', inputs', pkgs, system, ... }: {
       overlayAttrs = {
-	inherit (config.packages) emacs29;
+        inherit (config.packages) emacs29;
       };
       packages.emacs29 = pkgs.emacs-git.overrideAttrs (old: {
-	name = "emacs29";
-	# It's important this starts with the major number for Nix's
-	# Emacs infra.  For example, it's used to blank out archaic
-	# versions of the Seq package in MELPA.
-	version = "29.0-${inputs.emacs-src.shortRev}";
-	src = inputs.emacs-src;
-	# This doesn't apply to Emacs29.
-	patches = builtins.filter (p: baseNameOf p != "bytecomp-revert.patch") old.patches;
+        name = "emacs29";
+        # It's important this starts with the major number for Nix's
+        # Emacs infra.  For example, it's used to blank out archaic
+        # versions of the Seq package in MELPA.
+        version = "29.0-${inputs.emacs-src.shortRev}";
+        src = inputs.emacs-src;
+        # This doesn't apply to Emacs29.
+        patches = builtins.filter (p: baseNameOf p != "bytecomp-revert.patch") old.patches;
       });
       packages.emacs-ross = pkgs.emacsWithPackagesFromUsePackage {
-	package = config.packages.emacs29;
-	override = epkgs: epkgs // {
-	  on = epkgs.trivialBuild {
-	    pname = "on.el";
-	    src = inputs.on-el;
-	  };
-	  jinx =
-	    <<emacs-jinx>>;
-	  copilot =
-	    <<emacs-copilot>>;
-	  ox-slack =
-	    <<emacs-ox-slack>>;
-	  git-related =
-	    <<emacs-git-related>>;
-	};
-	config = ./init.el;
-	defaultInitFile = true;
-	alwaysEnsure = false;
+        package = config.packages.emacs29;
+        override = epkgs: epkgs // {
+                on = epkgs.trivialBuild {
+                  pname = "on.el";
+                  src = inputs.on-el;
+                };
+                jinx =
+                  <<emacs-jinx>>;
+                copilot =
+                  <<emacs-copilot>>;
+                ox-slack =
+                  <<emacs-ox-slack>>;
+                git-related =
+                  <<emacs-git-related>>;
+        };
+        config = ./init.el;
+        defaultInitFile = true;
+        alwaysEnsure = false;
       };
       apps.emacs = {
-	type = "app";
-	program = "${config.packages.emacs-ross}/bin/emacs";
+        type = "app";
+        program = "${config.packages.emacs-ross}/bin/emacs";
       };
     };
     flake = {
       homeManagerModules.emacs = moduleWithSystem (
-	perSystem@{ config, pkgs }: {
-	  imports = [
-	    <<emacs-home-packages>>
-	    ./load-path.nix
-	  ];
-	  programs.emacs = {
-	    enable = true;
-	    package = config.packages.emacs-ross;
-	  };
-	}
+        perSystem@{ config, pkgs }: {
+                imports = [
+                  <<emacs-home-packages>>
+                  ./load-path.nix
+                ];
+                programs.emacs = {
+                  enable = true;
+                  package = config.packages.emacs-ross;
+                };
+        }
       );
     };
   }
@@ -4723,27 +4723,27 @@ The Home Manager module is published to my flake as output
   { moduleWithSystem, ... }: {
     flake.homeManagerModules.scala = moduleWithSystem(
       perSystem@{ pkgs }: {
-	home.file = {
-	  ".sbt/1.0/sonatype.sbt".source = ./sonatype.sbt;
+        home.file = {
+                ".sbt/1.0/sonatype.sbt".source = ./sonatype.sbt;
           ".sbt/1.0/plugins/sbt-dependency-submission.sbt".source = ./sbt-dependency-submission.sbt;
-	  ".sbt/1.0/plugins/sbt-rewarn.sbt".source = ./sbt-rewarn.sbt;
-	  ".sbt/1.0/plugins/sbt-updates.sbt".source = ./sbt-updates.sbt;
-	  ".sbt/1.0/plugins/dependency-tree.sbt".source = ./dependency-tree.sbt;
-	};
+                ".sbt/1.0/plugins/sbt-rewarn.sbt".source = ./sbt-rewarn.sbt;
+                ".sbt/1.0/plugins/sbt-updates.sbt".source = ./sbt-updates.sbt;
+                ".sbt/1.0/plugins/dependency-tree.sbt".source = ./dependency-tree.sbt;
+        };
 
-	home.packages = [
-	  (pkgs.sbt.override { jre = pkgs.jdk17; })
-	  (pkgs.scala-cli.override { jre = pkgs.jdk17; })
-	];
+        home.packages = [
+                (pkgs.sbt.override { jre = pkgs.jdk17; })
+                (pkgs.scala-cli.override { jre = pkgs.jdk17; })
+        ];
 
-	programs.git = {
-	  ignores = [
-	    ".bloop/"
-	    ".bsp/"
-	    ".metals/"
-	    "metals.sbt"
-	  ];
-	};
+        programs.git = {
+                ignores = [
+                  ".bloop/"
+                  ".bsp/"
+                  ".metals/"
+                  "metals.sbt"
+                ];
+        };
       }
     );
   }
@@ -4821,13 +4821,13 @@ The Home Manager module is published to my flake as output
   { moduleWithSystem, ... }: {
     flake.homeManagerModules.python = moduleWithSystem(
       perSystem@{ pkgs }: {
-	home.file = {
-	  ".config/zsh/conda-setup".source = ./conda-setup;
-	};
+        home.file = {
+                ".config/zsh/conda-setup".source = ./conda-setup;
+        };
 
-	programs.zsh.initExtra = ''
-	. ~/.config/zsh/conda-setup
-	'';
+        programs.zsh.initExtra = ''
+        . ~/.config/zsh/conda-setup
+        '';
       }
     );
   }
@@ -5055,11 +5055,11 @@ more "literate".
       flake = false;
     };
 
-  # Disabled pending license
-  #   copilot-el = {
-  #     url = "github:zerolfx/copilot.el";
-  #     flake = false;
-  #   };
+    # Disabled pending license
+    #   copilot-el = {
+    #     url = "github:zerolfx/copilot.el";
+    #     flake = false;
+    #   };
   };
 #+end_src
 
@@ -5070,40 +5070,40 @@ more "literate".
   let
     mkDarwinConfigModule = { pkgs }: {
       imports = [
-	./gen/nix-darwin
-	{
-	  system.keyboard.enableKeyMapping = true;
-	  system.keyboard.remapCapsLockToControl = true;
-	}
+        ./gen/nix-darwin
+        {
+          system.keyboard.enableKeyMapping = true;
+          system.keyboard.remapCapsLockToControl = true;
+        }
       ];
     };
 
     mkHomeConfig = { pkgs, system, username, homeDirectory }:
       let
-	homeModule = import (pkgs.callPackage ./tangle.nix {
-	  inherit pkgs;
-	  src = ./src/org/config/home-manager;
-	});
+        homeModule = import (pkgs.callPackage ./tangle.nix {
+          inherit pkgs;
+          src = ./src/org/config/home-manager;
+        });
       in
-	inputs.home-manager.lib.homeManagerConfiguration {
-	  inherit pkgs;
-	  modules = [
+        inputs.home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = [
       {
-	home = {
-	  inherit homeDirectory username;
-	  stateVersion = "21.11";
-	};
-	nixpkgs.overlays = [ inputs.emacs-overlay.overlay ];
+        home = {
+          inherit homeDirectory username;
+          stateVersion = "21.11";
+        };
+        nixpkgs.overlays = [ inputs.emacs-overlay.overlay ];
       }
       homeModule
       inputs.self.homeManagerModules.emacs
       inputs.self.homeManagerModules.scala
       inputs.self.homeManagerModules.python
       ./modules/work
-	  ];
-	  # Pass our flake inputs into the config
-	  extraSpecialArgs = { inherit inputs; };
-	};
+          ];
+          # Pass our flake inputs into the config
+          extraSpecialArgs = { inherit inputs; };
+        };
 
     aarch64-darwin-config-base = pkgs: mkDarwinConfigModule {
       inherit pkgs;
@@ -5144,12 +5144,12 @@ more "literate".
       inherit overlays darwinConfigurationModules;
 
       homeConfigurations = {
-	"RABaker@L2LYQM57XY" = mkHomeConfig {
-	  pkgs = (pkgsFor "aarch64-darwin");
-	  system = "aarch64-darwin";
-	  username = "RABaker";
-	  homeDirectory = "/Users/RABaker";
-	};
+        "RABaker@L2LYQM57XY" = mkHomeConfig {
+          pkgs = (pkgsFor "aarch64-darwin");
+          system = "aarch64-darwin";
+          username = "RABaker";
+          homeDirectory = "/Users/RABaker";
+        };
       };
 
       inherit flakeModules;
@@ -5162,39 +5162,39 @@ more "literate".
 
     perSystem = { config, self', inputs', system, pkgs, ... }:
       let
-	hm = inputs.home-manager.defaultPackage."${system}";
+        hm = inputs.home-manager.defaultPackage."${system}";
 
-	darwinPackages =
-	  if (system == "aarch64-darwin") then {
-	    aarch64-darwin-config-base = (inputs.darwin.lib.darwinSystem {
-	      system = "aarch64-darwin";
-	      modules = [ darwinConfigurationModules.aarch64-base ];
-	    }).system;
-	  } else { };
+        darwinPackages =
+          if (system == "aarch64-darwin") then {
+            aarch64-darwin-config-base = (inputs.darwin.lib.darwinSystem {
+              system = "aarch64-darwin";
+              modules = [ darwinConfigurationModules.aarch64-base ];
+            }).system;
+          } else { };
       in
-	{
-	  _module.args.pkgs = import inputs.nixpkgs {
-	    inherit system;
-	    overlays = [
-	      inputs.devshell.overlays.default
-	      inputs.emacs-overlay.overlays.default
-	      (final: prev: {
-		hyperlink = config.packages.hyperlink;
-	      })
-	    ];
-	  };
+        {
+          _module.args.pkgs = import inputs.nixpkgs {
+            inherit system;
+            overlays = [
+              inputs.devshell.overlays.default
+              inputs.emacs-overlay.overlays.default
+              (final: prev: {
+                hyperlink = config.packages.hyperlink;
+              })
+            ];
+          };
 
-	  packages = {
-	    website = pkgs.callPackage ./gen/website {
-	      emacs = self'.packages.emacs-ross;
-	      src = ./src;
-	    };
+          packages = {
+            website = pkgs.callPackage ./gen/website {
+              emacs = self'.packages.emacs-ross;
+              src = ./src;
+            };
 
-	    hyperlink = pkgs.callPackage ./src/nix/pkgs/hyperlink {};
-	  } // darwinPackages;
+            hyperlink = pkgs.callPackage ./src/nix/pkgs/hyperlink {};
+          } // darwinPackages;
 
-	  devShells.default = pkgs.devshell.mkShell {
-	    name = "cromulent";
+          devShells.default = pkgs.devshell.mkShell {
+            name = "cromulent";
 
             commands = [
               {
@@ -5209,19 +5209,19 @@ more "literate".
               }
             ];
 
-	    packages = [
-	      hm
-	      pkgs.google-cloud-sdk
-	      pkgs.hugo
-	      pkgs.nix
-	      pkgs.terraform
-	    ];
-	  };
+            packages = [
+              hm
+              pkgs.google-cloud-sdk
+              pkgs.hugo
+              pkgs.nix
+              pkgs.terraform
+            ];
+          };
 
-	  overlayAttrs = {
-	    hyperlink = config.packages.hyperlink;
-	  };
-	};
+          overlayAttrs = {
+            hyperlink = config.packages.hyperlink;
+          };
+        };
   };
 #+end_src
 
@@ -5247,19 +5247,19 @@ with a copy and paste:
       mkOption
       optionalAttrs
       types
-      ;
+    ;
     inherit (flake-parts-lib)
       mkSubmoduleOptions
-      ;
+    ;
   in
   {
     options = {
       flake = mkSubmoduleOptions {
-	homeManagerModules = mkOption {
-	  type = types.lazyAttrsOf types.unspecified;
-	  default = { };
-	  apply = mapAttrs (k: v: { _file = "${toString self.outPath}/flake.nix#homeManagerModules.${k}"; imports = [ v ]; });
-	};
+        homeManagerModules = mkOption {
+                type = types.lazyAttrsOf types.unspecified;
+                default = { };
+                apply = mapAttrs (k: v: { _file = "${toString self.outPath}/flake.nix#homeManagerModules.${k}"; imports = [ v ]; });
+        };
       };
     };
   }
@@ -5304,8 +5304,8 @@ further.
     # $ nix-env -qaP | grep wget
     environment.systemPackages =
       [
-	pkgs.cachix
-	pkgs.docker
+        pkgs.cachix
+        pkgs.docker
       ];
 
     # Use a custom configuration.nix location.
@@ -5316,20 +5316,20 @@ further.
     # services.nix-daemon.enable = true;
     nix = {
       settings.substituters = [
-	"https://nix-community.cachix.org/"
-	"https://rossabaker.cachix.org/"
-	"https://typelevel.cachix.org/"
-	"https://cache.garnix.io/"
+        "https://nix-community.cachix.org/"
+        "https://rossabaker.cachix.org/"
+        "https://typelevel.cachix.org/"
+        "https://cache.garnix.io/"
       ];
       settings.trusted-public-keys = [
-	"nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-	"rossabaker.cachix.org-1:KK/CQTeAGEurCUBy3nDl9PdR+xX+xtWQ0C/GpNN6kuw="
-	"typelevel.cachix.org-1:UnD9fMAIpeWfeil1V/xWUZa2g758ZHk8DvGCd/keAkg="
-	"cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+        "rossabaker.cachix.org-1:KK/CQTeAGEurCUBy3nDl9PdR+xX+xtWQ0C/GpNN6kuw="
+        "typelevel.cachix.org-1:UnD9fMAIpeWfeil1V/xWUZa2g758ZHk8DvGCd/keAkg="
+        "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
       ];
       package = pkgs.nixFlakes;
       extraOptions = ''
-	experimental-features = nix-command flakes
+        experimental-features = nix-command flakes
       '';
     };
 
@@ -5412,20 +5412,20 @@ trudge off to the non-standard ~5433~.
   {
     services = {
       postgresql = {
-	inherit dataDir port;
-	enable = true;
-	package = pkgs.postgresql_14;
-	initdbArgs = [ "-D" dataDir ];
+        inherit dataDir port;
+        enable = true;
+        package = pkgs.postgresql_14;
+        initdbArgs = [ "-D" dataDir ];
       };
     };
 
     users = {
       knownUsers = [ "postgres" ];
       users = {
-	postgres = {
-	  uid = 2000;
-	  shell = "/bin/bash";
-	};
+        postgres = {
+                uid = 2000;
+                shell = "/bin/bash";
+        };
       };
     };
 
@@ -5433,17 +5433,17 @@ trudge off to the non-standard ~5433~.
     system.activationScripts.preActivation = {
       enable = true;
       text = ''
-	if [ ! -d "${dataDir}" ]; then
-	  echo "creating PostgreSQL data directory..."
-	  sudo mkdir -m 700 -p "${dataDir}/"
-	  chown -R ${user}:staff "${dataDir}/"
-	fi
+        if [ ! -d "${dataDir}" ]; then
+          echo "creating PostgreSQL data directory..."
+          sudo mkdir -m 700 -p "${dataDir}/"
+          chown -R ${user}:staff "${dataDir}/"
+        fi
 
-	if [ ! -d "/var/log/postgresql" ]; then
-	  echo "creating PostgreSQL log directory..."
-	  sudo mkdir -m 700 -p "${logDir}/"
-	  chown -R ${user}:staff "${logDir}/"
-	fi
+        if [ ! -d "/var/log/postgresql" ]; then
+          echo "creating PostgreSQL log directory..."
+          sudo mkdir -m 700 -p "${logDir}/"
+          chown -R ${user}:staff "${logDir}/"
+        fi
       '';
     };
 
@@ -5639,10 +5639,10 @@ It all comes together in this [[https://flake.parts/index.html][flake module]].
   in {
     perSystem = { config, self', inputs', pkgs, system, ... }: {
       devShells.modernTs = pkgs.devshell.mkShell {
-	name = "modern-ts";
-	packages = [
-		(pkgs.python3.withPackages pythonPackages)
-	];
+        name = "modern-ts";
+        packages = [
+                (pkgs.python3.withPackages pythonPackages)
+        ];
       };
     };
   }
@@ -5922,6 +5922,7 @@ of the NixOS manual.
 
 #+begin_src nix /*:tangle default.nix*/
   { pkgs, lib, modulesPath, ... }:
+
   {
     imports = [
       "${toString modulesPath}/virtualisation/google-compute-image.nix"
@@ -5938,12 +5939,12 @@ of the NixOS manual.
 
     services.postgresql.enable = true;
     services.postgresql.initialScript = pkgs.writeText "synapse-init.sql" ''
-      CREATE ROLE "matrix-synapse" WITH LOGIN PASSWORD 'synapse';
-      CREATE DATABASE "matrix-synapse" WITH OWNER "matrix-synapse"
-        TEMPLATE template0
-        LC_COLLATE = "C"
-        LC_CTYPE = "C";
-    '';
+        CREATE ROLE "matrix-synapse" WITH LOGIN PASSWORD 'synapse';
+        CREATE DATABASE "matrix-synapse" WITH OWNER "matrix-synapse"
+          TEMPLATE template0
+          LC_COLLATE = "C"
+          LC_CTYPE = "C";
+      '';
 
     services.nginx = {
       enable = true;
@@ -5963,8 +5964,8 @@ of the NixOS manual.
           # Or do a redirect instead of the 404, or whatever is appropriate for you.
           # But do not put a Matrix Web client here! See the Element web section below.
           locations."/".extraConfig = ''
-            return 404;
-          '';
+              return 404;
+            '';
 
           # forward all Matrix API calls to the synapse Matrix homeserver
           locations."/_matrix" = {
