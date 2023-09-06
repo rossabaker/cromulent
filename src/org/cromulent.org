@@ -4837,7 +4837,7 @@ The Home Manager module is published to my flake as output
 CLOSED: [2022-12-25 Sun 22:14 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: nix-flake
-:EXPORT_HUGO_LASTMOD: [2023-08-27 Sun 23:21 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-09-05 Tue 21:46 EDT]
 :header-args+: :code-license MIT
 :END:
 
@@ -5194,7 +5194,7 @@ more "literate".
 	  } // darwinPackages;
 
 	  devShells.default = pkgs.devshell.mkShell {
-	    name = "nix-config";
+	    name = "cromulent";
 
 	    commands = [{
 	      name = "hm-switch";
