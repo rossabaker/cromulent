@@ -210,13 +210,20 @@
     	} // darwinPackages;
     
     	devShells.default = pkgs.devshell.mkShell {
-    	  name = "nix-config";
+    	  name = "cromulent";
     
-    	  commands = [{
-    	    name = "hm-switch";
-    	    help = "switch the home-manager config";
-    	    command = "${hm}/bin/home-manager switch --flake $PRJ_ROOT";
-    	  }];
+              commands = [
+                {
+                  name = "hm-switch";
+                  help = "switch the home-manager config";
+                  command = "${hm}/bin/home-manager switch --flake $PRJ_ROOT";
+                }
+                {
+                  name = "serve";
+                  help = "run 'hugo serve' on the local project";
+                  command = "${pkgs.hugo}/bin/hugo serve --disableFastRender --config tmp/hugo/config.toml";
+                }
+              ];
     
     	  packages = [
     	    hm

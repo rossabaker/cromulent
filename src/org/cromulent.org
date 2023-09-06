@@ -2040,7 +2040,7 @@ CLOSED: [2022-09-01 Thu 16:54 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: build
 :header-args+: :code-license MIT
-:EXPORT_HUGO_LASTMOD: [2023-09-03 Sun 23:07 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-09-05 Tue 21:56 EDT]
 :END:
 
 The website is just another package within our flake.
@@ -2122,7 +2122,7 @@ To avoid [[https://nixos.wiki/wiki/Import_From_Derivation][Import From Derivatio
 For a more iterative experience with live reload in the browser, try:
 
 #+begin_src sh :tangle no :code-license CC0-1.0
-  hugo serve --disableFastRender --config tmp/hugo/config.toml
+  serve
 #+end_src
 
 **** Git ignores
@@ -5196,11 +5196,18 @@ more "literate".
 	  devShells.default = pkgs.devshell.mkShell {
 	    name = "cromulent";
 
-	    commands = [{
-	      name = "hm-switch";
-	      help = "switch the home-manager config";
-	      command = "${hm}/bin/home-manager switch --flake $PRJ_ROOT";
-	    }];
+            commands = [
+              {
+                name = "hm-switch";
+                help = "switch the home-manager config";
+                command = "${hm}/bin/home-manager switch --flake $PRJ_ROOT";
+              }
+              {
+                name = "serve";
+                help = "run 'hugo serve' on the local project";
+                command = "${pkgs.hugo}/bin/hugo serve --disableFastRender --config tmp/hugo/config.toml";
+              }
+            ];
 
 	    packages = [
 	      hm
