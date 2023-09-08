@@ -2134,7 +2134,7 @@ Our build creates some detritus that we don't want checked into Git.
   /.hugo_build.lock
 #+end_src
 
-*** DONE CSS baseline                                 :css:google_fonts:noto:
+*** DONE CSS baseline                                                   :css:
 CLOSED: [2022-08-30 Tue 14:26 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: style
