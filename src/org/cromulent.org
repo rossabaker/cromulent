@@ -4868,7 +4868,7 @@ The Home Manager module is published to my flake as output
 CLOSED: [2022-12-25 Sun 22:14 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: nix-flake
-:EXPORT_HUGO_LASTMOD: [2023-09-05 Tue 21:46 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-09-08 Fri 17:00 CDT]
 :header-args+: :code-license MIT
 :END:
 
@@ -4886,13 +4886,9 @@ packages, development shells, and more.
 :CUSTOM_ID: whats-in-the-flake
 :END:
 
-My flake currently performs [[https://nixos.wiki/wiki/Import_From_Derivation][Import From Deriviation]], but I'm trying to
-remove it.  For now, we need to explicitly allow it to see the
-contents of my flake.
-
 #+name: flake-show-outputs
 #+begin_src sh :eval yes :exports code :results output verbatim :code-license CC0-1.0
-  nix --option allow-import-from-derivation true flake show github:rossabaker/cromulent
+  nix flake show github:rossabaker/cromulent
 #+end_src
 
 #+RESULTS: flake-show-outputs
@@ -5110,31 +5106,25 @@ more "literate".
     };
 
     mkHomeConfig = { pkgs, system, username, homeDirectory }:
-      let
-        homeModule = import (pkgs.callPackage ./tangle.nix {
-          inherit pkgs;
-          src = ./src/org/config/home-manager;
-        });
-      in
-        inputs.home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          modules = [
-            {
-              home = {
-                inherit homeDirectory username;
-                stateVersion = "21.11";
-              };
-              nixpkgs.overlays = [ inputs.emacs-overlay.overlay ];
-            }
-            homeModule
-            inputs.self.homeManagerModules.emacs
-            inputs.self.homeManagerModules.scala
-            inputs.self.homeManagerModules.python
-            ./modules/work
-          ];
-          # Pass our flake inputs into the config
-          extraSpecialArgs = { inherit inputs; };
-        };
+      inputs.home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        modules = [
+          {
+            home = {
+              inherit homeDirectory username;
+              stateVersion = "21.11";
+            };
+            nixpkgs.overlays = [ inputs.emacs-overlay.overlay ];
+          }
+          inputs.self.homeManagerModules.base
+          inputs.self.homeManagerModules.emacs
+          inputs.self.homeManagerModules.scala
+          inputs.self.homeManagerModules.python
+          ./modules/work
+        ];
+        # Pass our flake inputs into the config
+        extraSpecialArgs = { inherit inputs; };
+      };
 
     aarch64-darwin-config-base = pkgs: mkDarwinConfigModule {
       inherit pkgs;
@@ -5159,6 +5149,7 @@ more "literate".
       scala = ./gen/scala;
       python = ./gen/python;
       modernTs = ./gen/modern_ts;
+      homeManager = ./gen/home-manager;
     };
   in
   inputs.flake-parts.lib.mkFlake { inherit inputs; } {
@@ -5168,6 +5159,7 @@ more "literate".
       flakeModules.scala
       flakeModules.python
       flakeModules.modernTs
+      flakeModules.homeManager
       inputs.flake-parts.flakeModules.easyOverlay
     ];
 
@@ -5295,6 +5287,76 @@ with a copy and paste:
     };
   }
 
+#+end_src
+
+** DONE Home Manager                                       :nix:home_manager:
+CLOSED: [2023-09-08 Fri 16:59 CDT]
+:PROPERTIES:
+:EXPORT_FILE_NAME: home-manager
+:header-args+: :tangle-mode (identity #o444) :mkdirp yes :code-license MIT
+:header-args:nix+: :tangle ../../gen/home-manager/default.nix
+:END:
+
+#+begin_description
+Defines a base home-manager module.
+#+end_description
+
+We prefer to keep a robust user environment along with a lean
+configurations for NixOS and nix-darwin.  This keeps our environment
+maximally portable between those operating systems, as well as any
+other hosts that support the Nix package manager (e.g., Debian).
+
+*** Base configuration
+
+This is imported from preliterate times and should be broken up
+further.
+
+#+begin_src nix :tangle ../../gen/home-manager/default.nix
+  { moduleWithSystem, ... }: {
+    flake.homeManagerModules.base = moduleWithSystem(
+      perSystem@{ pkgs }: {
+        # Comment out if you wish to disable unfree packages for your system
+        nixpkgs.config.allowUnfree = true;
+
+        # Add stuff for your user as you see fit:
+        # programs.neovim.enable = true;
+        home.packages = [
+          pkgs.coreutils
+          pkgs.element-desktop
+          pkgs.jq
+          pkgs.nixpkgs-fmt
+          pkgs.postgresql_14
+        ];
+
+        programs.direnv = {
+          enable = true;
+          enableBashIntegration = true;
+          enableZshIntegration = true;
+        };
+
+        programs.home-manager.enable = true;
+
+        programs.git = {
+          enable = true;
+          ignores = [
+            ".DS_Store"
+            ".direnv/"
+          ];
+          userName = "Ross A. Baker";
+          userEmail = "ross@rossabaker.com";
+        };
+
+        programs.gpg = {
+          enable = true;
+        };
+
+        programs.zsh.enable = true;
+
+        # Nicely reload system units when changing cnofigs
+        systemd.user.startServices = "sd-switch";
+      }
+    );
+  }
 #+end_src
 
 ** DONE Darwin                :nix:macos:nix_darwin:postgresql:podman:docker:

@@ -95,31 +95,25 @@
         };
       
         mkHomeConfig = { pkgs, system, username, homeDirectory }:
-          let
-            homeModule = import (pkgs.callPackage ./tangle.nix {
-              inherit pkgs;
-              src = ./src/org/config/home-manager;
-            });
-          in
-            inputs.home-manager.lib.homeManagerConfiguration {
-              inherit pkgs;
-              modules = [
-                {
-                  home = {
-                    inherit homeDirectory username;
-                    stateVersion = "21.11";
-                  };
-                  nixpkgs.overlays = [ inputs.emacs-overlay.overlay ];
-                }
-                homeModule
-                inputs.self.homeManagerModules.emacs
-                inputs.self.homeManagerModules.scala
-                inputs.self.homeManagerModules.python
-                ./modules/work
-              ];
-              # Pass our flake inputs into the config
-              extraSpecialArgs = { inherit inputs; };
-            };
+          inputs.home-manager.lib.homeManagerConfiguration {
+            inherit pkgs;
+            modules = [
+              {
+                home = {
+                  inherit homeDirectory username;
+                  stateVersion = "21.11";
+                };
+                nixpkgs.overlays = [ inputs.emacs-overlay.overlay ];
+              }
+              inputs.self.homeManagerModules.base
+              inputs.self.homeManagerModules.emacs
+              inputs.self.homeManagerModules.scala
+              inputs.self.homeManagerModules.python
+              ./modules/work
+            ];
+            # Pass our flake inputs into the config
+            extraSpecialArgs = { inherit inputs; };
+          };
       
         aarch64-darwin-config-base = pkgs: mkDarwinConfigModule {
           inherit pkgs;
@@ -144,6 +138,7 @@
           scala = ./gen/scala;
           python = ./gen/python;
           modernTs = ./gen/modern_ts;
+          homeManager = ./gen/home-manager;
         };
       in
       inputs.flake-parts.lib.mkFlake { inherit inputs; } {
@@ -153,6 +148,7 @@
           flakeModules.scala
           flakeModules.python
           flakeModules.modernTs
+          flakeModules.homeManager
           inputs.flake-parts.flakeModules.easyOverlay
         ];
       
