@@ -2138,7 +2138,7 @@ Our build creates some detritus that we don't want checked into Git.
 CLOSED: [2022-08-30 Tue 14:26 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: style
-:EXPORT_HUGO_LASTMOD: [2023-08-26 Sat 13:54 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-09-08 Fri 14:10 CDT]
 :CUSTOM_ID: css-baseline
 :header-args+: :code-license MIT
 :END:
@@ -2380,6 +2380,23 @@ Move the copy code button, too.
       margin: 0;
       padding: 0 0.5ch;
       font-size: 0.625em;
+  }
+#+end_src
+
+***** Source block captions
+
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
+  .src-block-caption {
+      font-size: 0.8em;
+      font-style: italic;
+  }
+#+end_src
+
+I'd probably rather these weren't in the HTML, but this works for now.
+
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
+  .src-block-number {
+      display: none;
   }
 #+end_src
 
