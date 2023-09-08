@@ -4657,7 +4657,7 @@ have a primed cache Monday morning.
 
 - Fix flake link
 
-** DONE Scala home-manager module                                 :scala:sbt:
+** DONE Scala configuration  :scala:scala_cli:sbt:gitignore:nix:home_manager:
 CLOSED: [2023-05-09 Tue 09:27 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: scala
@@ -4665,6 +4665,11 @@ CLOSED: [2023-05-09 Tue 09:27 EDT]
 :header-args+: :tangle-mode (identity #o444) :mkdirp yes :code-license CC0-1.0
 :header-args:nix+: :tangle ../../gen/scala/default.nix
 :END:
+
+#+begin_description
+Defines a Home Manager module with global SBT plugins, some relevant
+commands, and adds Scala-specific rules to ~.gitignore~.
+#+end_description
 
 This configuration provides a module to [[https://nix-community.github.io/home-manager/][Home Manager]].  It sets up a
 global SBT, a few plugins, and some gitignores relevant to Scala.
