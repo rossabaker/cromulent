@@ -4661,7 +4661,7 @@ have a primed cache Monday morning.
 CLOSED: [2023-05-09 Tue 09:27 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: scala
-:EXPORT_HUGO_LASTMOD: [2023-09-08 Fri 13:52 CDT]
+:EXPORT_HUGO_LASTMOD: [2023-09-08 Fri 15:58 CDT]
 :header-args+: :tangle-mode (identity #o444) :mkdirp yes :code-license CC0-1.0
 :header-args:nix+: :tangle ../../gen/scala/default.nix
 :END:
@@ -4741,21 +4741,6 @@ madness up until 1.8.0.
   )
 #+end_src
 
-**** Dependency submission
-
-[[https://github.com/scalacenter/sbt-dependency-submission][sbt-dependency-submission]] integrates with GitHub's [[https://docs.github.com/en/code-security/supply-chain-security/understanding-your-software-supply-chain/using-the-dependency-submission-api][Dependency
-Submission API]] to enable reporting and vulnerability scanning.  It
-is typically run as a GitHub Action, but it is not always apparent why
-a dependency is submitted.  By installing the SBT plugin globally, we
-can call ~show githubDependencyManifest~ and get a dump of the case
-class model and find out which SBT configuration it exists in and what
-depended on it.  It sees things that ~whatDependsOn~ does not.
-
-#+caption: ~~/.sbt/1.0/plugins/sbt-dependency-submission.sbt~
-#+begin_src scala :tangle ../../gen/scala/sbt-dependency-submission.sbt
-  addSbtPlugin("ch.epfl.scala" % "sbt-github-dependency-submission" % "2.1.2")
-#+end_src
-
 *** Flake module
 
 The Home Manager module is published to my flake as output
@@ -4767,7 +4752,6 @@ The Home Manager module is published to my flake as output
       perSystem@{ pkgs }: {
         home.file = {
           ".sbt/1.0/sonatype.sbt".source = ./sonatype.sbt;
-          ".sbt/1.0/plugins/sbt-dependency-submission.sbt".source = ./sbt-dependency-submission.sbt;
           ".sbt/1.0/plugins/sbt-rewarn.sbt".source = ./sbt-rewarn.sbt;
           ".sbt/1.0/plugins/sbt-updates.sbt".source = ./sbt-updates.sbt;
           ".sbt/1.0/plugins/sbt-dependency-tree.sbt".source = ./sbt-dependency-tree.sbt;
