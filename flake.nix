@@ -221,7 +221,7 @@
                 {
                   name = "serve";
                   help = "run 'hugo serve' on the local project";
-                  command = "${pkgs.hugo}/bin/hugo serve --disableFastRender --config tmp/hugo/config.toml";
+                  command = "(cd $PRJ_ROOT && ${pkgs.hugo}/bin/hugo serve --disableFastRender --config tmp/hugo/config.toml)";
                 }
               ];
     
