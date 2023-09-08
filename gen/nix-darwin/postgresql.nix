@@ -20,8 +20,8 @@ in
     knownUsers = [ "postgres" ];
     users = {
       postgres = {
-              uid = 2000;
-              shell = "/bin/bash";
+        uid = 2000;
+        shell = "/bin/bash";
       };
     };
   };

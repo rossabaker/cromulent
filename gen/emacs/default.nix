@@ -19,70 +19,70 @@
     packages.emacs-ross = pkgs.emacsWithPackagesFromUsePackage {
       package = config.packages.emacs29;
       override = epkgs: epkgs // {
-              on = epkgs.trivialBuild {
-                pname = "on.el";
-                src = inputs.on-el;
-              };
-              jinx =
-                let
-                  jinx-lisp = epkgs.trivialBuild {
-                    pname = "jinx-lisp";
-                    src = inputs.jinx;
-                    packageRequires = [ epkgs.compat ];
-                  };
-                  jinx-mod = pkgs.stdenv.mkDerivation {
-                    name = "jinx-mod";
-                    src = inputs.jinx;
-                    buildInputs = [ pkgs.enchant2 ];
-                    buildPhase = ''
-                      cc -I. -O2 -Wall -Wextra -fPIC -shared -o jinx-mod.dylib jinx-mod.c \
-                        -I${pkgs.enchant2.dev}/include/enchant-2 -lenchant-2
-                    '';
-                    installPhase = ''
-                      LISPDIR=$out/share/emacs/site-lisp
-                      install -d $LISPDIR
-                      install *.dylib $LISPDIR
-                    '';
-                  };
-                in
-                pkgs.symlinkJoin {
-                  name = "jinx";
-                  paths = [ jinx-lisp jinx-mod ];
-                };
-              copilot =
-                let
-                  copilot-lisp = epkgs.trivialBuild {
-                    pname = "copilot-lisp";
-                    src = inputs.copilot-el;
-                    packageRequires = [
-                      epkgs.dash
-                      epkgs.editorconfig
-                      epkgs.s
-                    ];
-                  };
-                  copilot-dist = pkgs.stdenv.mkDerivation {
-                    name = "copilot-dist";
-                    src = inputs.copilot-el;
-                    installPhase = ''
-                      LISPDIR=$out/share/emacs/site-lisp
-                      mkdir -p $LISPDIR
-                      cp -R dist $LISPDIR
-                    '';
-                  };
-                in
-                pkgs.symlinkJoin {
-                  name = "copilot.el";
-                  paths = [ copilot-lisp copilot-dist ];
-                };
-              ox-slack =
-                epkgs.ox-slack.overrideAttrs(old: {
-                  patches = [ ../../src/emacs/ox-slack/github-9.patch ];
-                });
-              git-related =
-                epkgs.trivialBuild {
-                  pname = "git-related";
-                  src = inputs.git-related;
-                };
+        on = epkgs.trivialBuild {
+          pname = "on.el";
+          src = inputs.on-el;
+        };
+        jinx =
+          let
+            jinx-lisp = epkgs.trivialBuild {
+              pname = "jinx-lisp";
+              src = inputs.jinx;
+              packageRequires = [ epkgs.compat ];
+            };
+            jinx-mod = pkgs.stdenv.mkDerivation {
+              name = "jinx-mod";
+              src = inputs.jinx;
+              buildInputs = [ pkgs.enchant2 ];
+              buildPhase = ''
+                cc -I. -O2 -Wall -Wextra -fPIC -shared -o jinx-mod.dylib jinx-mod.c \
+                  -I${pkgs.enchant2.dev}/include/enchant-2 -lenchant-2
+              '';
+              installPhase = ''
+                LISPDIR=$out/share/emacs/site-lisp
+                install -d $LISPDIR
+                install *.dylib $LISPDIR
+              '';
+            };
+          in
+          pkgs.symlinkJoin {
+            name = "jinx";
+            paths = [ jinx-lisp jinx-mod ];
+          };
+        copilot =
+          let
+            copilot-lisp = epkgs.trivialBuild {
+              pname = "copilot-lisp";
+              src = inputs.copilot-el;
+              packageRequires = [
+                epkgs.dash
+                epkgs.editorconfig
+                epkgs.s
+              ];
+            };
+            copilot-dist = pkgs.stdenv.mkDerivation {
+              name = "copilot-dist";
+              src = inputs.copilot-el;
+              installPhase = ''
+                LISPDIR=$out/share/emacs/site-lisp
+                mkdir -p $LISPDIR
+                cp -R dist $LISPDIR
+              '';
+            };
+          in
+          pkgs.symlinkJoin {
+            name = "copilot.el";
+            paths = [ copilot-lisp copilot-dist ];
+          };
+        ox-slack =
+          epkgs.ox-slack.overrideAttrs(old: {
+            patches = [ ../../src/emacs/ox-slack/github-9.patch ];
+          });
+        git-related =
+          epkgs.trivialBuild {
+            pname = "git-related";
+            src = inputs.git-related;
+          };
       };
       config = ./init.el;
       defaultInitFile = true;
@@ -96,24 +96,24 @@
   flake = {
     homeManagerModules.emacs = moduleWithSystem (
       perSystem@{ config, pkgs }: {
-              imports = [
-                ({ pkgs, ...}: {
-                  home.packages = [ pkgs.nodejs ];
-                })
-                ({ pkgs, ...}: { home.packages = [ pkgs.gcc ]; })
-                ({ pkgs, ...}: {
-                  home.packages = [
-                    pkgs.nuspell
-                    pkgs.hunspellDicts.en_US
-                  ];
-                })
-                ({ pkgs, ...}: { home.packages = [ pkgs.ripgrep ]; })
-                ./load-path.nix
-              ];
-              programs.emacs = {
-                enable = true;
-                package = config.packages.emacs-ross;
-              };
+        imports = [
+          ({ pkgs, ...}: {
+            home.packages = [ pkgs.nodejs ];
+          })
+          ({ pkgs, ...}: { home.packages = [ pkgs.gcc ]; })
+          ({ pkgs, ...}: {
+            home.packages = [
+              pkgs.nuspell
+              pkgs.hunspellDicts.en_US
+            ];
+          })
+          ({ pkgs, ...}: { home.packages = [ pkgs.ripgrep ]; })
+          ./load-path.nix
+        ];
+        programs.emacs = {
+          enable = true;
+          package = config.packages.emacs-ross;
+        };
       }
     );
   };

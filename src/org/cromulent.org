@@ -4546,18 +4546,18 @@ Finally, we add a Home Manager module based on the configured app.
       packages.emacs-ross = pkgs.emacsWithPackagesFromUsePackage {
         package = config.packages.emacs29;
         override = epkgs: epkgs // {
-                on = epkgs.trivialBuild {
-                  pname = "on.el";
-                  src = inputs.on-el;
-                };
-                jinx =
-                  <<emacs-jinx>>;
-                copilot =
-                  <<emacs-copilot>>;
-                ox-slack =
-                  <<emacs-ox-slack>>;
-                git-related =
-                  <<emacs-git-related>>;
+          on = epkgs.trivialBuild {
+            pname = "on.el";
+            src = inputs.on-el;
+          };
+          jinx =
+            <<emacs-jinx>>;
+          copilot =
+            <<emacs-copilot>>;
+          ox-slack =
+            <<emacs-ox-slack>>;
+          git-related =
+            <<emacs-git-related>>;
         };
         config = ./init.el;
         defaultInitFile = true;
@@ -4571,14 +4571,14 @@ Finally, we add a Home Manager module based on the configured app.
     flake = {
       homeManagerModules.emacs = moduleWithSystem (
         perSystem@{ config, pkgs }: {
-                imports = [
-                  <<emacs-home-packages>>
-                  ./load-path.nix
-                ];
-                programs.emacs = {
-                  enable = true;
-                  package = config.packages.emacs-ross;
-                };
+          imports = [
+            <<emacs-home-packages>>
+            ./load-path.nix
+          ];
+          programs.emacs = {
+            enable = true;
+            package = config.packages.emacs-ross;
+          };
         }
       );
     };
@@ -4853,7 +4853,7 @@ The Home Manager module is published to my flake as output
     flake.homeManagerModules.python = moduleWithSystem(
       perSystem@{ pkgs }: {
         home.file = {
-                ".config/zsh/conda-setup".source = ./conda-setup;
+          ".config/zsh/conda-setup".source = ./conda-setup;
         };
 
         programs.zsh.initExtra = ''
@@ -5004,8 +5004,8 @@ more "literate".
     description = "Ross A. Baker's perfectly cromulent Nix flake";
     inputs =
       <<flake-inputs>>
-    outputs =
-      <<flake-outputs>>
+      outputs =
+        <<flake-outputs>>
   }
 #+end_src
 
@@ -5287,9 +5287,9 @@ with a copy and paste:
     options = {
       flake = mkSubmoduleOptions {
         homeManagerModules = mkOption {
-                type = types.lazyAttrsOf types.unspecified;
-                default = { };
-                apply = mapAttrs (k: v: { _file = "${toString self.outPath}/flake.nix#homeManagerModules.${k}"; imports = [ v ]; });
+          type = types.lazyAttrsOf types.unspecified;
+          default = { };
+          apply = mapAttrs (k: v: { _file = "${toString self.outPath}/flake.nix#homeManagerModules.${k}"; imports = [ v ]; });
         };
       };
     };
@@ -5454,8 +5454,8 @@ trudge off to the non-standard ~5433~.
       knownUsers = [ "postgres" ];
       users = {
         postgres = {
-                uid = 2000;
-                shell = "/bin/bash";
+          uid = 2000;
+          shell = "/bin/bash";
         };
       };
     };
@@ -5672,7 +5672,7 @@ It all comes together in this [[https://flake.parts/index.html][flake module]].
       devShells.modernTs = pkgs.devshell.mkShell {
         name = "modern-ts";
         packages = [
-                (pkgs.python3.withPackages pythonPackages)
+          (pkgs.python3.withPackages pythonPackages)
         ];
       };
     };
