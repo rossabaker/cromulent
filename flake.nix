@@ -104,18 +104,18 @@
           inputs.home-manager.lib.homeManagerConfiguration {
             inherit pkgs;
             modules = [
-        {
-          home = {
-            inherit homeDirectory username;
-            stateVersion = "21.11";
-          };
-          nixpkgs.overlays = [ inputs.emacs-overlay.overlay ];
-        }
-        homeModule
-        inputs.self.homeManagerModules.emacs
-        inputs.self.homeManagerModules.scala
-        inputs.self.homeManagerModules.python
-        ./modules/work
+              {
+                home = {
+                  inherit homeDirectory username;
+                  stateVersion = "21.11";
+                };
+                nixpkgs.overlays = [ inputs.emacs-overlay.overlay ];
+              }
+              homeModule
+              inputs.self.homeManagerModules.emacs
+              inputs.self.homeManagerModules.scala
+              inputs.self.homeManagerModules.python
+              ./modules/work
             ];
             # Pass our flake inputs into the config
             extraSpecialArgs = { inherit inputs; };
