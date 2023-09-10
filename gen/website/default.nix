@@ -15,7 +15,7 @@ stdenv.mkDerivation rec {
     cd ..
     export PATH=${gnupg}/bin:$PATH
 
-    ${emacs}/bin/emacs -Q --batch -l ${./code-license-header.el} -l ${./export.el}
+    ${emacs}/bin/emacs -Q --batch -l ${./export.el}
 
     # Reassemble netlify.toml from its constitutents
     for toml in tmp/netlify.toml.d/*; do

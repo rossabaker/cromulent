@@ -2040,7 +2040,7 @@ CLOSED: [2022-09-01 Thu 16:54 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: build
 :header-args+: :code-license MIT
-:EXPORT_HUGO_LASTMOD: [2023-09-05 Tue 21:56 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-09-10 Sun 01:00 EDT]
 :END:
 
 The website is just another package within our flake.
@@ -2051,10 +2051,11 @@ The website is just another package within our flake.
 exports its contents with ox-hugo.
 
 #+begin_src emacs-lisp :tangle ../../gen/website/export.el
-  (require 'ox-hugo)
   (require 'ob-dot)
   (require 'ob-shell)
-  (require 's)
+  (require 'rab-ox-hugo)
+
+  (rab/ox-hugo-mode)
 
   (with-current-buffer (find-file-noselect "src/org/cromulent.org")
     (let ((org-confirm-babel-evaluate nil))
@@ -2091,7 +2092,7 @@ derivation output.
       cd ..
       export PATH=${gnupg}/bin:$PATH
 
-      ${emacs}/bin/emacs -Q --batch -l ${./code-license-header.el} -l ${./export.el}
+      ${emacs}/bin/emacs -Q --batch -l ${./export.el}
 
       # Reassemble netlify.toml from its constitutents
       for toml in tmp/netlify.toml.d/*; do
@@ -2505,11 +2506,16 @@ This will block +Twitter+ X cards.
 
 #+end_src
 
-** DONE Emacs config                                                  :emacs:
+** Emacs bundle                                                       :emacs:
+:PROPERTIES:
+:EXPORT_HUGO_BUNDLE: emacs
+:END:
+
+*** DONE Emacs config
 CLOSED: [2023-02-23 Thu 23:59 EST]
 :PROPERTIES:
-:EXPORT_FILE_NAME: emacs
-:EXPORT_HUGO_LASTMOD: [2023-09-06 Wed 11:24 CDT]
+:EXPORT_FILE_NAME: _index
+:EXPORT_HUGO_LASTMOD: [2023-09-10 Sun 01:14 EDT]
 :header-args+: :tangle-mode `,#o444 :mkdirp yes
 :header-args:emacs-lisp+: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444 :mkdirp yes
 :header-args:emacs-lisp+: :code-license CC0-1.0
@@ -2522,12 +2528,12 @@ Ross A. Baker's Emacs configuration.  Defines the packages,
 configurations, and Nix build.
 #+end_description
 
-*** Introduction
+**** Introduction
 :PROPERTIES:
 :CUSTOM_ID: introduction
 :END:
 
-**** The flavor of the day is vanilla
+***** The flavor of the day is vanilla
 
 This is a "vanilla" configuration, or an "Emacs from scratch," built
 on a prerelease of Emacs 29 from Git.
@@ -2544,7 +2550,7 @@ I choose to start from the wretched defaults.
 - I am less likely to be surprised on upgrades.
 - It's relaxing.  Editor bonsai, if you will.
 
-**** Guiding principles
+***** Guiding principles
 :PROPERTIES:
 :CUSTOM_ID: guiding-principles
 :END:
@@ -2553,7 +2559,7 @@ The default is to try built-in packages first, but be unafraid to
 augment with [[https://elpa.gnu.org/][ELPA]], [[https://melpa.org/][MELPA]], or even Git.  These extra moving parts are
 managed by rigorously pinning all dependencies with Nix.
 
-**** On licensing
+***** On licensing
 
 Most of my configurations are permissively licensed, for both your
 convenience and their triviality.  Emacs is challenging:
@@ -2596,7 +2602,7 @@ literate configs.
 
 Trivial stanzas are tagged into the public domain (~CC0-1.0~).
 
-*** Early tasks
+**** Early tasks
 :PROPERTIES:
 :CUSTOM_ID: early-tasks
 :END:
@@ -2605,7 +2611,7 @@ An Emacs configuration can mostly be declared in any order,
 particularly with intelligent use of ~use-package~'s ~:after~ keyword.
 But there are a few things that benefit from going first.
 
-**** Startup time
+***** Startup time
 :PROPERTIES:
 :CUSTOM_ID: startup-time
 :END:
@@ -2615,7 +2621,7 @@ there are usually a few heavy hitters, and [[https://github.com/dholm/benchmark-
 find them.  And with my Nix setup, I'm restarting Emacs a lot whenever
 I'm trying new packages, so it's worth a modest effort.
 
-***** Benchmark
+****** Benchmark
 :PROPERTIES:
 :CUSTOM_ID: benchmark
 :END:
@@ -2636,7 +2642,7 @@ weight versus ~usepackage-compute-statistics~.  Run
 #+RESULTS:
 | org-persist-load-all | benchmark-init/deactivate | tramp-register-archive-autoload-file-name-handler | magit-maybe-define-global-key-bindings | table--make-cell-map |
 
-***** Garbage collection
+****** Garbage collection
 :PROPERTIES:
 :CUSTOM_ID: garbage-collection
 :END:
@@ -2655,7 +2661,7 @@ After startup, we revert on the [[https://gitlab.com/koral/gcmh][Garbage Collect
 #+RESULTS:
 | gcmh-mode |
 
-***** Doom-like hooks
+****** Doom-like hooks
 :PROPERTIES:
 :CUSTOM_ID: doom-like-hooks
 :END:
@@ -2668,7 +2674,7 @@ uses.
     :ensure)
 #+end_src
 
-***** Security
+****** Security
 
 For the love of all that is holy, do not continue with untrusted
 connections!
@@ -2680,7 +2686,7 @@ connections!
     (gnutls-verify-error t))
 #+end_src
 
-***** No littering
+****** No littering
 :PROPERTIES:
 :CUSTOM_ID: no-littering
 :END:
@@ -2711,12 +2717,12 @@ seems early enough to avoid crapping in =~/.config/emacs=.
         (expand-file-name  "eln-cache/" no-littering-var-directory)))))
 #+end_src
 
-**** use-package keywords
+***** use-package keywords
 :PROPERTIES:
 :CUSTOM_ID: use-package-keywords
 :END:
 
-***** bind-key
+****** bind-key
 :PROPERTIES:
 :CUSTOM_ID: bind-key
 :END:
@@ -2741,7 +2747,7 @@ value as variable is void: personal-keybindings~.
         (unbind-key key))))
 #+end_src
 
-***** Diminish
+****** Diminish
 :PROPERTIES:
 :CUSTOM_ID: diminish
 :END:
@@ -2753,7 +2759,7 @@ line.  They're only interesting if they're in an unexpected state.
   (use-package diminish :ensure t)
 #+end_src
 
-**** Path setup
+***** Path setup
 :PROPERTIES:
 :CUSTOM_ID: path-setup
 :END:
@@ -2770,7 +2776,7 @@ errors, or worse, trying to install the execrable Xcode.
     :config
     (exec-path-from-shell-initialize))
 #+end_src
-*** General customization
+**** General customization
 :PROPERTIES:
 :CUSTOM_ID: general-customization
 :END:
@@ -2782,15 +2788,15 @@ literate config.  However, its tree of ~defgroups~ is pretty
 reasonable, and more importantly, stops me from agonizing over them.
 This structure is modeled after that.
 
-**** Editing
+***** Editing
 :PROPERTIES:
 :CUSTOM_ID: editing
 :END:
-***** Editing basics
+****** Editing basics
 :PROPERTIES:
 :CUSTOM_ID: editing-basics
 :END:
-****** Character radix
+******* Character radix
 :PROPERTIES:
 :CUSTOM_ID: character-radix
 :END:
@@ -2804,7 +2810,7 @@ minibuffer completion.
   (setopt read-quoted-char-radix 16)
 #+end_src
 
-****** Mark ring
+******* Mark ring
 :PROPERTIES:
 :CUSTOM_ID: mark-ring
 :END:
@@ -2820,7 +2826,7 @@ once before subsequent ~C-SPC~, which makes it much nicer to navigate.
   (setopt set-mark-command-repeat-pop t)
 #+end_src
 
-***** Indent
+****** Indent
 :PROPERTIES:
 :CUSTOM_ID: indent
 :END:
@@ -2833,7 +2839,7 @@ Tabs are the devil's whitespace.
     (setq-default indent-tabs-mode nil))
 #+end_src
 
-***** Killing
+****** Killing
 :PROPERTIES:
 :CUSTOM_ID: killing
 :END:
@@ -2850,8 +2856,8 @@ values.
     (save-interprogram-paste-before-kill t)
     (kill-do-not-save-duplicates t))
 #+end_src
-***** Matching
-****** Bookmark
+****** Matching
+******* Bookmark
 
 Persist bookmarks each time we set one, not when Emacs exits.
 
@@ -2861,7 +2867,7 @@ Persist bookmarks each time we set one, not when Emacs exits.
     (bookmark-save-flag 1))
 #+end_src
 
-***** selected.el
+****** selected.el
 
 [[https://github.com/Kungsgeten/selected.el][~selected.el~]] activates a keymap when there is an active region.  I'm
 using it to replace the more traditional =delete-selection-mode=.
@@ -2879,16 +2885,16 @@ using it to replace the more traditional =delete-selection-mode=.
            ("m" . apply-macro-to-region-lines)))
 #+end_src
 
-**** Convenience
+***** Convenience
 :PROPERTIES:
 :CUSTOM_ID: convenience
 :END:
-***** Completion
+****** Completion
 :PROPERTIES:
 :CUSTOM_ID: completion
 :END:
 
-****** Copilot
+******* Copilot
 :PROPERTIES:
 :CUSTOM_ID: copilot
 :END:
@@ -2965,7 +2971,7 @@ It also depends on Node.
   })
 #+end_src
 
-***** Corfu
+****** Corfu
 :PROPERTIES:
 :CUSTOM_ID: corfu
 :END:
@@ -2978,7 +2984,7 @@ Autocompletion of method names in code is a classic use case.
     :hook (on-first-buffer . global-corfu-mode))
 #+end_src
 
-***** Docker
+****** Docker
 
 [[https://github.com/Silex/docker.el][~docker.el~]] "manages Docker from Emacs."  Note that while a [[https://podman.io/][Podman
 daemon]] works great, the Podman client [[https://github.com/Silex/docker.el/issues/110][is incompatible]].
@@ -2989,7 +2995,7 @@ daemon]] works great, the Podman client [[https://github.com/Silex/docker.el/iss
     :defer t)
 #+end_src
 
-***** Exiting
+****** Exiting
 :PROPERTIES:
 :CUSTOM_ID: exiting
 :END:
@@ -3000,7 +3006,7 @@ I'd usually rather exit Slack, to be quite honest.
   (setopt confirm-kill-emacs 'yes-or-no-p)
 #+end_src
 
-***** Display line numbers
+****** Display line numbers
 :PROPERTIES:
 :CUSTOM_ID: display-line-numbers
 :END:
@@ -3017,7 +3023,7 @@ modes.
     ((prog-mode conf-mode) . display-line-numbers-mode))
 #+end_src
 
-***** Highlight line
+****** Highlight line
 :PROPERTIES:
 :CUSTOM_ID: highlight-line
 :END:
@@ -3029,7 +3035,7 @@ Highlight the current line, only in the current buffer.
     :hook (on-first-buffer . global-hl-line-mode))
 #+end_src
 
-***** ffap
+****** ffap
 :PROPERTIES:
 :CUSTOM_ID: ffap
 :END:
@@ -3049,7 +3055,7 @@ Xcode.  That brings up a dreaded dialog box.
   ({ pkgs, ...}: { home.packages = [ pkgs.gcc ]; })
 #+end_src
 
-***** Persist state
+****** Persist state
 :PROPERTIES:
 :CUSTOM_ID: persist-state
 :END:
@@ -3064,7 +3070,7 @@ Xcode.  That brings up a dreaded dialog box.
     (on-first-input . persist-state-mode))
 #+end_src
 
-***** Suggest
+****** Suggest
 
 I keep lamenting the lack of a [[https://hoogle.haskell.org/][Hoogle]] for Emacs Lisp.  [[https://github.com/Wilfred/suggest.el/][suggest.el]] is
 an interesting alternative: instead of types, it finds functions from
@@ -3075,7 +3081,7 @@ example inputs and outputs.
     :ensure t)
 #+end_src
 
-***** Whitespace butler
+****** Whitespace butler
 :PROPERTIES:
 :CUSTOM_ID: whitespace-butler
 :END:
@@ -3097,12 +3103,12 @@ I like builtin packages, but I like minimal diffs more.  [[https://github.com/le
     :diminish)
 #+end_src
 
-**** Files
+***** Files
 :PROPERTIES:
 :CUSTOM_ID: files
 :END:
 
-***** Lock files
+****** Lock files
 :PROPERTIES:
 :CUSTOM_ID: lock-files
 :END:
@@ -3115,7 +3121,7 @@ to protect us from conflicting edits.
   (setopt create-lockfiles nil)
 #+end_src
 
-***** Auto-revert
+****** Auto-revert
 :PROPERTIES:
 :CUSTOM_ID: auto-revert
 :END:
@@ -3128,7 +3134,7 @@ to protect us from conflicting edits.
     (global-auto-revert-non-file-buffers t))
 #+end_src
 
-***** Recent files
+****** Recent files
 :PROPERTIES:
 :CUSTOM_ID: recent-files
 :END:
@@ -3144,16 +3150,16 @@ list of recent files?
     (:map rab/files-map
      ("r" . recentf-open)))
 #+end_src
-**** Text
+***** Text
 :PROPERTIES:
 :CUSTOM_ID: text
 :END:
 
-***** Case
+****** Case
 :PROPERTIES:
 :CUSTOM_ID: case
 :END:
-****** DWIM case
+******* DWIM case
 :PROPERTIES:
 :CUSTOM_ID: dwim-case
 :END:
@@ -3169,7 +3175,7 @@ but a better default.
     ([remap upcase-word] . upcase-dwim))
 #+end_src
 
-****** Title case
+******* Title case
 :PROPERTIES:
 :CUSTOM_ID: title-case
 :END:
@@ -3182,7 +3188,7 @@ Gosh, I wish I'd had this when I was so active on [[https://musicbrainz.org/][Mu
     :defer t)
 #+end_src
 
-***** Jinx
+****** Jinx
 :PROPERTIES:
 :CUSTOM_ID: jinx
 :END:
@@ -3241,18 +3247,18 @@ Let's not forget a dictionary.
   })
 #+end_src
 
-***** Markdown
+****** Markdown
 
 #+begin_src emacs-lisp
   (use-package markdown-mode
     :ensure t)
 #+end_src
 
-***** Outlines
+****** Outlines
 :PROPERTIES:
 :CUSTOM_ID: outlines
 :END:
-****** Org
+******* Org
 :PROPERTIES:
 :CUSTOM_ID: org
 :END:
@@ -3266,80 +3272,25 @@ crudely approximate support by [[https://emacs.stackexchange.com/a/60590][settin
     (org-time-stamp-formats '("%Y-%m-%d %a" . "%Y-%m-%d %a %H:%M %Z")))
 #+end_src
 
-******* ox-hugo
+******** ox-hugo
 :PROPERTIES:
 :CUSTOM_ID: ox-hugo
 :END:
 
-We use [[https://github.com/kaushalmodi/ox-hugo][ox-hugo]] for publishing.
-
-=rab/ox-hugo-update-lastmod= can be used to update the timestamp of
-the exported tree at the current point.
+We use [[https://github.com/kaushalmodi/ox-hugo][ox-hugo]] for publishing, with [[#rab-ox-hugo][custom extensions]].
 
 #+begin_src emacs-lisp
   (use-package ox-hugo
     :ensure t
-    :after org
+    :after org)
+
+  (use-package rab-ox-hugo
+    :after ox-hugo
     :config
-    (defun rab/ox-hugo-update-lastmod ()
-      "Updates the EXPORT_HUGO_LAST_MOD property of the nearest element
-  with EXPORT_FILE_NAME."
-      (interactive)
-        (save-excursion
-          (when-let* ((elem (car (org-hugo--get-elem-with-prop :EXPORT_FILE_NAME)))
-                      (begin (org-element-property :begin elem))
-                      (time (format-time-string (org-time-stamp-format t t) (current-time))))
-            (org-entry-put begin "EXPORT_HUGO_LASTMOD" time)))))
+    (rab/ox-hugo-mode))
 #+end_src
 
-We lightly customize ox-hugo by adding support for a =:code-license=
-header.  This idea comes from [[https://sachachua.com/blog/2023/01/adding-a-custom-header-argument-to-org-mode-source-blocks-and-using-that-argument-during-export/][Sacha Chua]].  First, we need to add it
-to =org-babel-exp-code-template=:
-
-#+begin_src emacs-lisp :exports results :results value pp :wrap src emacs-lisp :var template=`,org-babel-exp-code-template
-  `(setq org-babel-exp-code-template ,org-babel-exp-code-template)
-#+end_src
-
-This part is grody.  We'd like to define a [[https://orgmode.org/worg/dev/org-export-reference.html][derived backend]], but
-ox-hugo's export commands are fairly intricate with the subtree
-support, and don't offer an obvious way to inject a new backend.
-Unfortunately, we resort to mutating the ox-hugo code.  This is fine,
-as long as we don't have other ox-hugo sites.
-
-#+caption: [[https://sachachua.com/dotemacs/index.html#org7814eb7][Original]] by Sacha Chua
-#+begin_src emacs-lisp :tangle ../../gen/website/code-license-header.el :code-license CC-BY-SA-4.0
-  (defun rab/org-get-filled-template-argument (key alist)
-    "Looks up KEY in ALIST, which is assumed to be from a template
-  filled by `org-fill-template'.
-
-    If the result is \"%key\", we assume the value was not present
-   and return nil."
-    (let* ((val (alist-get key alist))
-           (fallthrough (concat "%" (s-chop-left 1 (symbol-name key)))))
-      (unless (string= fallthrough val) val)))
-
-  (defun rab/org-hugo-src-block (src-block _contents info)
-    "Invokes `org-hugo-src-block' on its arguments, and then wraps the
-  result in a license div if `:code-license' is found in the block
-  arguments of SRC-BLOCK."
-    (if-let* ((result (org-hugo-src-block src-block _contents info))
-              (block-info
-               (org-with-point-at (org-element-property :begin src-block)
-                 (org-babel-get-src-block-info)))
-              (block-arguments (elt block-info 2))
-              (license (rab/org-get-filled-template-argument
-                        :code-license block-arguments)))
-        (format "<div class=\"code-snippet\"><p class=\"license\">%s</p>\n\n%s\n\n</div>"
-                license result)
-      result))
-
-  (with-eval-after-load 'ox-hugo
-    (map-put!
-     (org-export-backend-transcoders (org-export-get-backend 'hugo))
-     'src-block 'rab/org-hugo-src-block))
-#+end_src
-
-******* ox-slack
+******** ox-slack
 :PROPERTIES:
 :CUSTOM_ID: ox-slack
 :END:
@@ -3366,7 +3317,7 @@ Apply [[https://github.com/titaniumbones/ox-slack/pull/9][this patch]] to fix th
   })
 #+end_src
 
-***** Subword mode
+****** Subword mode
 :PROPERTIES:
 :CUSTOM_ID: subword-mode
 :END:
@@ -3380,7 +3331,7 @@ customize about it is not wanting it cluttering the mode line.
     :defer t
     :diminish)
 #+end_src
-***** Counting words
+****** Counting words
 :PROPERTIES:
 :CUSTOM_ID: counting-words
 :END:
@@ -3392,12 +3343,12 @@ The default binding of =M-== is ~count-words-region~.  The newer
   (bind-key [remap count-words-region] 'count-words)
 #+end_src
 
-**** Data
+***** Data
 :PROPERTIES:
 :CUSTOM_ID: data
 :END:
 
-***** Save place
+****** Save place
 :PROPERTIES:
 :CUSTOM_ID: save-place
 :END:
@@ -3409,15 +3360,15 @@ This mode saves our place for when we revisit a file.
     :hook (on-first-buffer . save-place-mode))
 #+end_src
 
-**** External
+***** External
 :PROPERTIES:
 :CUSTOM_ID: external
 :END:
-***** Processes
+****** Processes
 :PROPERTIES:
 :CUSTOM_ID: processes
 :END:
-***** RFC mode
+****** RFC mode
 :PROPERTIES:
 :CUSTOM_ID: rfc-mode
 :END:
@@ -3430,7 +3381,7 @@ As an http4s author, I refer to RFCs constantly.
     :defer t)
 #+end_src
 
-****** Envrc
+******* Envrc
 :PROPERTIES:
 :CUSTOM_ID: envrc
 :END:
@@ -3448,17 +3399,17 @@ the flake.
     :hook (on-first-file . envrc-global-mode))
 #+end_src
 
-**** Programming
+***** Programming
 :PROPERTIES:
 :CUSTOM_ID: programming
 :END:
-***** Languages
+****** Languages
 :PROPERTIES:
 :CUSTOM_ID: languages
 :END:
 
 
-****** C#
+******* C#
 :PROPERTIES:
 :CUSTOM_ID: c
 :END:
@@ -3471,7 +3422,7 @@ I am not a C# developer, but I've been known to interview them.
     :hook (csharp-ts-mode . subword-mode))
 #+end_src
 
-****** Lisp
+******* Lisp
 :PROPERTIES:
 :CUSTOM_ID: lisp
 :END:
@@ -3676,7 +3627,7 @@ The answer is almost verbatim from Stack Overflow, but put in a
     (advice-add #'calculate-lisp-indent :override #'rab/calculate-lisp-indent))
 #+end_src
 
-******* Compilation
+******** Compilation
 :PROPERTIES:
 :CUSTOM_ID: compilation
 :END:
@@ -3692,7 +3643,7 @@ an error, I don't need them all up in my business.
 #+end_src
 
 
-****** Nix
+******* Nix
 :PROPERTIES:
 :CUSTOM_ID: nix
 :END:
@@ -3702,7 +3653,7 @@ an error, I don't need them all up in my business.
     :ensure t
     :defer t)
 #+end_src
-****** Scala
+******* Scala
 :PROPERTIES:
 :CUSTOM_ID: scala
 :END:
@@ -3728,7 +3679,7 @@ Traveshamockery.  Once we're ready for that, we'll take a look at
     :commands sbt-start sbt-command)
 #+end_src
 
-****** XML
+******* XML
 :PROPERTIES:
 :CUSTOM_ID: xml
 :END:
@@ -3741,7 +3692,7 @@ Traveshamockery.  Once we're ready for that, we'll take a look at
     :defer t)
 #+end_src
 
-****** YAML
+******* YAML
 :PROPERTIES:
 :CUSTOM_ID: yaml
 :END:
@@ -3752,12 +3703,12 @@ Traveshamockery.  Once we're ready for that, we'll take a look at
     :defer t)
 #+end_src
 
-***** Tools
+****** Tools
 :PROPERTIES:
 :CUSTOM_ID: tools
 :END:
 
-****** Dumb jump
+******* Dumb jump
 :PROPERTIES:
 :CUSTOM_ID: dumb-jump
 :END:
@@ -3782,12 +3733,12 @@ Make sure ripgrep is available.
   ({ pkgs, ...}: { home.packages = [ pkgs.ripgrep ]; })
 #+end_src
 
-****** Git
+******* Git
 :PROPERTIES:
 :CUSTOM_ID: git
 :END:
 
-******* Git Modes
+******** Git Modes
 
 [[https://github.com/magit/git-modes][Git modes]] provides three modes:
 
@@ -3803,7 +3754,7 @@ We want them all.
     :ensure t)
 #+end_src
 
-******* Magit
+******** Magit
 :PROPERTIES:
 :CUSTOM_ID: magit
 :END:
@@ -3855,7 +3806,7 @@ history.  This makes it easy to give Git a hint to ignore them:
           (save-buffer)))))
 #+end_src
 
-******* Git-Link
+******** Git-Link
 :PROPERTIES:
 :CUSTOM_ID: git-link
 :END:
@@ -3871,7 +3822,7 @@ history.  This makes it easy to give Git a hint to ignore them:
     :commands (git-link git-link-commit git-link-homepage))
 #+end_src
 
-******* Git-Related
+******** Git-Related
 :PROPERTIES:
 :CUSTOM_ID: git-related
 :END:
@@ -3901,7 +3852,7 @@ might still be compelling as an ~:annotation-function~.
 
 The sort order is customized in [[#vertico-multiform][Vertico multiform]].
 
-****** Restclient
+******* Restclient
 :PROPERTIES:
 :CUSTOM_ID: restclient
 :END:
@@ -3916,7 +3867,7 @@ The sort order is customized in [[#vertico-multiform][Vertico multiform]].
 
 I'd like to look into [[https://github.com/alf/ob-restclient.el][ob-restclient.el]] for org-babel integration.
 
-****** Treesitter
+******* Treesitter
 :PROPERTIES:
 :CUSTOM_ID: treesitter
 :END:
@@ -3931,7 +3882,7 @@ I'd like to look into [[https://github.com/alf/ob-restclient.el][ob-restclient.e
     (global-treesit-auto-mode))
 #+end_src
 
-****** UUID Generation
+******* UUID Generation
 :PROPERTIES:
 :CUSTOM_ID: uuid-generation
 :END:
@@ -3942,7 +3893,7 @@ I'd like to look into [[https://github.com/alf/ob-restclient.el][ob-restclient.e
     :defer t)
 #+end_src
 
-****** Xref
+******* Xref
 :PROPERTIES:
 :CUSTOM_ID: xref
 :END:
@@ -3957,7 +3908,7 @@ multiple definitions are found.
     (xref-show-definitions-function #'xref-show-definitions-completing-read))
 #+end_src
 
-****** Verb
+******* Verb
 
 [[https://github.com/federicotdn/verb][Verb]] is an alternative to [[#restclient][restclient.el]] that many of my colleagues
 use.  The feature sets look roughly equivalent, so I'll give it a shot
@@ -3970,11 +3921,11 @@ in the spirit of comity.
     :config (define-key org-mode-map (kbd "C-c C-r") verb-command-map))
 #+end_src
 
-**** Applications
+***** Applications
 :PROPERTIES:
 :CUSTOM_ID: applications
 :END:
-***** Dictionary
+****** Dictionary
 :PROPERTIES:
 :CUSTOM_ID: dictionary
 :END:
@@ -3998,7 +3949,7 @@ use dict.org.
     (dictionary-server "dict.org"))
 #+end_src
 
-***** Language server protocol
+****** Language server protocol
 :PROPERTIES:
 :CUSTOM_ID: language-server-protocol
 :END:
@@ -4010,15 +3961,15 @@ a bit more minimalist than the excellent [[https://emacs-lsp.github.io/lsp-mode/
   (use-package eglot :defer t)
 #+end_src
 
-**** Development
+***** Development
 :PROPERTIES:
 :CUSTOM_ID: development
 :END:
-***** Extensions
+****** Extensions
 :PROPERTIES:
 :CUSTOM_ID: extensions
 :END:
-****** htmlize
+******* htmlize
 :PROPERTIES:
 :CUSTOM_ID: htmlize
 :END:
@@ -4032,12 +3983,12 @@ exported to HTML.
     :after ox-html)
 #+end_src
 
-**** Environment
+***** Environment
 :PROPERTIES:
 :CUSTOM_ID: environment
 :END:
 
-***** Dired
+****** Dired
 
 Dired should refresh the listing on each revisit.
 
@@ -4048,7 +3999,7 @@ Dired should refresh the listing on each revisit.
     (dired-auto-revert-buffer t))
 #+end_src
 
-***** Frames
+****** Frames
 :PROPERTIES:
 :CUSTOM_ID: frames
 :END:
@@ -4060,7 +4011,7 @@ number of columns and rows.
   (setopt frame-inhibit-implied-resize t)
 #+end_src
 
-****** Cursor
+******* Cursor
 :PROPERTIES:
 :CUSTOM_ID: cursor
 :END:
@@ -4074,11 +4025,11 @@ I like a non-blinking bar cursor.
     (blink-cursor-mode -1))
 #+end_src
 
-****** Mode line
+******* Mode line
 :PROPERTIES:
 :CUSTOM_ID: mode-line
 :END:
-******* Column number
+******** Column number
 :PROPERTIES:
 :CUSTOM_ID: column-number
 :END:
@@ -4089,7 +4040,7 @@ I like a non-blinking bar cursor.
     (on-first-buffer . column-number-mode))
 #+end_src
 
-******* Size indication
+******** Size indication
 :PROPERTIES:
 :CUSTOM_ID: size-indication
 :END:
@@ -4111,7 +4062,7 @@ Of course I could.  This is Emacs.
   (add-hook 'on-first-buffer-hook #'size-indication-mode)
 #+end_src
 
-****** Scroll bars
+******* Scroll bars
 :PROPERTIES:
 :CUSTOM_ID: scroll-bars
 :END:
@@ -4124,7 +4075,7 @@ The mode line tells us where we're at, and we mostly eschew the mouse.
     (scroll-bar-mode -1))
 #+end_src
 
-****** Tool bars
+******* Tool bars
 :PROPERTIES:
 :CUSTOM_ID: tool-bars
 :END:
@@ -4138,7 +4089,7 @@ neophyte, but I'm old and grizzled.
     (tool-bar-mode -1))
 #+end_src
 
-****** Minimization: let's not
+******* Minimization: let's not
 :PROPERTIES:
 :CUSTOM_ID: minimization-let's-not
 :END:
@@ -4152,7 +4103,7 @@ particularly not my favorite window with a keybinding that's too easy to hit.
     ("C-z" . nil))
 #+end_src
 
-****** Beep beep, your ass
+******* Beep beep, your ass
 :PROPERTIES:
 :CUSTOM_ID: beep-beep-your-ass
 :END:
@@ -4168,12 +4119,12 @@ bell.
     :hook (on-first-input . mode-line-bell-mode))
 #+end_src
 
-***** Faces
+****** Faces
 :PROPERTIES:
 :CUSTOM_ID: faces
 :END:
 
-****** Fontaine
+******* Fontaine
 :PROPERTIES:
 :CUSTOM_ID: fontaine
 :END:
@@ -4224,7 +4175,7 @@ the rest of the world's points.
         (fontaine-set-preset 'regular))))
 #+end_src
 
-****** Modus themes
+******* Modus themes
 :PROPERTIES:
 :CUSTOM_ID: modus-themes
 :END:
@@ -4240,7 +4191,7 @@ author continues to work on them, so we grab them from ELPA with
     (load-theme 'modus-operandi :no-confirm))
 #+end_src
 
-***** Initialization
+****** Initialization
 :PROPERTIES:
 :CUSTOM_ID: initialization
 :END:
@@ -4256,7 +4207,7 @@ quiet startup.
     (initial-scratch-message nil))
 #+end_src
 
-***** Marginalia
+****** Marginalia
 :PROPERTIES:
 :CUSTOM_ID: marginalia
 :END:
@@ -4274,11 +4225,11 @@ quiet startup.
     (marginalia-mode))
 #+end_src
 
-***** Minibuffer
+****** Minibuffer
 :PROPERTIES:
 :CUSTOM_ID: minibuffer
 :END:
-****** Consult
+******* Consult
 :PROPERTIES:
 :CUSTOM_ID: consult
 :END:
@@ -4327,7 +4278,7 @@ too disorienting.
     (xref-show-definitions-function 'consult-xref))
 #+end_src
 
-***** Menu
+****** Menu
 :PROPERTIES:
 :CUSTOM_ID: menu
 :END:
@@ -4338,7 +4289,7 @@ Dialog boxes are an unemacsian abomination.
   (setopt use-dialog-box nil)
 #+end_src
 
-***** Mouse
+****** Mouse
 :PROPERTIES:
 :CUSTOM_ID: mouse
 :END:
@@ -4353,7 +4304,7 @@ scroll wheels.
     (on-first-buffer . pixel-scroll-precision-mode))
 #+end_src
 
-***** Vertico
+****** Vertico
 :PROPERTIES:
 :CUSTOM_ID: vertico
 :END:
@@ -4367,7 +4318,7 @@ scroll wheels.
     :hook (on-first-input . vertico-mode))
 #+end_src
 
-****** Vertico indexed
+******* Vertico indexed
 :PROPERTIES:
 :CUSTOM_ID: vertico-indexed
 :END:
@@ -4381,7 +4332,7 @@ It's an alternative to ~vertico-quick~.
     :config (vertico-indexed-mode))
 #+end_src
 
-****** Vertico repeat
+******* Vertico repeat
 :PROPERTIES:
 :CUSTOM_ID: vertico-repeat
 :END:
@@ -4395,7 +4346,7 @@ It's an alternative to ~vertico-quick~.
     :bind ("M-R" . vertico-repeat))
 #+end_src
 
-****** Vertico directory
+******* Vertico directory
 :PROPERTIES:
 :CUSTOM_ID: vertico-directory
 :END:
@@ -4421,7 +4372,7 @@ start with ~/~ or ~~/~, it cleans up the leading default prompt that's
     :hook (rfn-eshadow-update-overlay . vertico-directory-tidy))
 #+end_src
 
-****** Vertico multiform
+******* Vertico multiform
 :PROPERTIES:
 :CUSTOM_ID: vertico-multiform
 :END:
@@ -4435,7 +4386,7 @@ start with ~/~ or ~~/~, it cleans up the leading default prompt that's
     (vertico-multiform-mode))
 #+end_src
 
-****** Zoom
+******* Zoom
 :PROPERTIES:
 :CUSTOM_ID: zoom
 :END:
@@ -4451,11 +4402,11 @@ start with ~/~ or ~~/~, it cleans up the leading default prompt that's
                   (cons phi phi))))
 #+end_src
 
-**** Help
+***** Help
 :PROPERTIES:
 :CUSTOM_ID: help
 :END:
-***** Which Key
+****** Which Key
 :PROPERTIES:
 :CUSTOM_ID: which-key
 :END:
@@ -4490,14 +4441,14 @@ the trick.
     (rab/unbind-all 'help-for-help))
 #+end_src
 
-**** Junk drawer
+***** Junk drawer
 :PROPERTIES:
 :CUSTOM_ID: junk-drawer
 :END:
 
 These customizations don't fit anywhere else.
 
-***** Remove the training wheels
+****** Remove the training wheels
 :PROPERTIES:
 :CUSTOM_ID: remove-the-training-wheels
 :END:
@@ -4505,7 +4456,7 @@ These customizations don't fit anywhere else.
 #+begin_src emacs-lisp
   (put 'narrow-to-region 'disabled nil)
 #+end_src
-*** Nix module
+**** Nix module
 :PROPERTIES:
 :CUSTOM_ID: nix-module
 :END:
@@ -4562,6 +4513,13 @@ Finally, we add a Home Manager module based on the configured app.
         config = ./init.el;
         defaultInitFile = true;
         alwaysEnsure = false;
+        extraEmacsPackages = epkgs: [
+          (epkgs.trivialBuild {
+            pname = "rab-ox-hugo";
+            src = ./lisp/rab-ox-hugo.el;
+            packageRequires = [ epkgs.ox-hugo epkgs.s ];
+          })
+        ];
       };
       apps.emacs = {
         type = "app";
@@ -4594,7 +4552,7 @@ stopping you!
   nix run github:rossabaker/cromulent#emacs
 #+end_src
 
-**** On-the-fly load-paths
+***** On-the-fly load-paths
 :PROPERTIES:
 :CUSTOM_ID: on-the-fly-load-paths
 :END:
@@ -4619,9 +4577,148 @@ we find a licensed solution for ~load-path.el~.
     (interactive)
     (load-file "~/.config/emacs/load-path.el"))
 #+end_example
-
-*** TODO Broken links                                              :noexport:
+**** TODO Broken links                                             :noexport:
 - whats-in-the-flake
+
+*** DONE Ox-Hugo extensions                               :ox_hugo:licensing:
+CLOSED: [2023-09-10 Sun 01:23 EDT]
+:PROPERTIES:
+:CUSTOM_ID: rab-ox-hugo
+:EXPORT_FILE_NAME: rab-ox-hugo
+:header-args:emacs-lisp+: :tangle ../../gen/emacs/lisp/rab-ox-hugo.el :code-license GPL-3.0-only
+:END:
+
+#+begin_description
+Extensions to the Ox-Hugo backend for Org Export.
+#+end_description
+
+#+begin_src emacs-lisp :exports none
+  ;;; rab-ox-hugo.el --- Extensions to Ox-Hugo for Ross A. Baker's Emacs configuration.
+
+  ;;; Commentary:
+  ;;
+  ;; Extensions to Ox-Hugo for Ross A. Baker's Emacs configuration.
+
+  ;;; Code:
+#+end_src
+
+**** Dependencies
+
+#+begin_src emacs-lisp
+  (require 'cl-macs)
+  (require 'ox-hugo)
+  (require 's)
+#+end_src
+
+**** Customization group
+
+Needed because of our minor mode.
+
+#+begin_src emacs-lisp
+  (defgroup rab/ox-hugo nil
+    "Ross A. Baker's Ox-Hugo extensions."
+    :group 'org-export-hugo)
+#+end_src
+
+**** Code licensing
+
+We lightly customize Ox-Hugo by adding support for a =:code-license=
+header.  The technique is inspired by [[https://sachachua.com/blog/2023/01/adding-a-custom-header-argument-to-org-mode-source-blocks-and-using-that-argument-during-export/][Sacha Chua's custom summary
+header]].
+
+When exporting, a source block is replaced with
+=org-babel-exp-code-template=, which is filled by =org-fill-template=.
+This enhancement will only work when the template propagates this
+header argument.  For example:
+
+#+begin_src emacs-lisp :tangle no
+  (setq org-babel-exp-code-template "#+begin_src %lang%switches%flags :code-license %code-license\n%body\n#+end_src")
+#+end_src
+
+When a ~%key~ is not defined in =org-fill-template=, it passes through
+to the result as ~%key~.  We should detect this case and treat it as
+=nil=.
+
+#+begin_src emacs-lisp
+  (defun rab/ox-hugo--get-filled-template-argument (key alist)
+    "Helper for `org-fill-template` to handle missing properties.
+
+  Looks up KEY in ALIST.  If the result is If the result is \"%key\",
+  we assume the value was not present and return nil."
+    (let* ((val (alist-get key alist))
+           (fallthrough (concat "%" (s-chop-left 1 (symbol-name key)))))
+      (unless (string= fallthrough val) val)))
+#+end_src
+
+We provide an enhanced =org-hugo-src-block= that reads and outputs the
+=:code-license= header argument from the filled template:
+
+#+begin_src emacs-lisp
+  (defun rab/ox-hugo-src-block (src-block contents info)
+    "Wraps `org-hugo-src-block' with a code license, if found.
+
+  Invokes `org-hugo-src-block` on SRC_BLOCK, CONTENTS, and INFO.
+  If a `:code-license' header is found in the block arguments of
+  SRC-BLOCK, the result is wrapped in a div that includes the
+  license."
+    (if-let* ((result (org-hugo-src-block src-block contents info))
+              (block-info
+               (org-with-point-at (org-element-property :begin src-block)
+                 (org-babel-get-src-block-info)))
+              (block-arguments (elt block-info 2))
+              (license (rab/ox-hugo--get-filled-template-argument
+                        :code-license block-arguments)))
+        (format "<div class=\"code-snippet\"><p class=\"license\">%s</p>\n\n%s\n\n</div>"
+                license result)
+      result))
+#+end_src
+
+This part is grody.  Ideally, we'd define a [[https://orgmode.org/worg/dev/org-export-reference.html][derived backend]], but
+Ox-Hugo's export commands are fairly intricate with the subtree
+support and don't offer an obvious way to inject a new backend.
+We have to mutate the global settings for Ox-Hugo.  This is
+fine as long as we don't have Ox-Hugo sites incompatible with this
+extension.  We do the mutation via a minor mode:
+
+#+begin_src emacs-lisp
+  (defun rab/ox-hugo--put-backend-transcoders (transcoders)
+    "Puts TRANSCODERS alist to the ox-hugo backend as `src-block'."
+    (cl-loop for (key . value) in transcoders
+             do (map-put! (org-export-backend-transcoders
+                           (org-export-get-backend 'hugo))
+                          key value)))
+
+  (define-minor-mode rab/ox-hugo-mode
+    "Minor mode to override Ox-Hugo's transcoders."
+    :global t
+    (if rab/ox-hugo-mode
+        (rab/ox-hugo--put-backend-transcoders '((src-block . rab/ox-hugo-src-block)))
+      (rab/ox-hugo--put-backend-transcoders '((src-block . org-hugo-src-block)))))
+#+end_src
+
+**** =rab/ox-hugo-update-lastmod=
+
+This convenience function updates the =EXPORT_HUGO_LAST_MOD= property
+of the current Hugo subtree.
+
+#+begin_src emacs-lisp
+  (defun rab/ox-hugo-update-lastmod ()
+    "Put the last modified time to the current Hugo subtree.
+
+  Finds the nearest `EXPORT_FILE_NAME' property, and puts the
+  current time to the `EXPORT_HUGO_LAST_MOD' property."
+    (interactive)
+    (save-excursion
+      (when-let* ((elem (car (org-hugo--get-elem-with-prop :EXPORT_FILE_NAME)))
+                  (begin (org-element-property :begin elem))
+                  (time (format-time-string (org-time-stamp-format t t) (current-time))))
+        (org-entry-put begin "EXPORT_HUGO_LASTMOD" time))))
+#+end_src
+
+#+begin_src emacs-lisp
+  (provide 'rab-ox-hugo)
+  ;;; rab-ox-hugo.el ends here
+#+end_src
 
 ** DONE Garnix GitHub Action
 CLOSED: [2023-06-23 Fri 00:26 EDT]

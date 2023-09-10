@@ -1,7 +1,8 @@
-(require 'ox-hugo)
 (require 'ob-dot)
 (require 'ob-shell)
-(require 's)
+(require 'rab-ox-hugo)
+
+(rab/ox-hugo-mode)
 
 (with-current-buffer (find-file-noselect "src/org/cromulent.org")
   (let ((org-confirm-babel-evaluate nil))

@@ -87,6 +87,13 @@
       config = ./init.el;
       defaultInitFile = true;
       alwaysEnsure = false;
+      extraEmacsPackages = epkgs: [
+        (epkgs.trivialBuild {
+          pname = "rab-ox-hugo";
+          src = ./lisp/rab-ox-hugo.el;
+          packageRequires = [ epkgs.ox-hugo epkgs.s ];
+        })
+      ];
     };
     apps.emacs = {
       type = "app";

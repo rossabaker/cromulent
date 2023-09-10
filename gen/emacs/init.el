@@ -180,23 +180,12 @@
 
 (use-package ox-hugo
   :ensure t
-  :after org
-  :config
-  (defun rab/ox-hugo-update-lastmod ()
-    "Updates the EXPORT_HUGO_LAST_MOD property of the nearest element
-with EXPORT_FILE_NAME."
-    (interactive)
-      (save-excursion
-        (when-let* ((elem (car (org-hugo--get-elem-with-prop :EXPORT_FILE_NAME)))
-                    (begin (org-element-property :begin elem))
-                    (time (format-time-string (org-time-stamp-format t t) (current-time))))
-          (org-entry-put begin "EXPORT_HUGO_LASTMOD" time)))))
+  :after org)
 
-(let ((template '"#+begin_src %lang%switches%flags :code-license %code-license
-%body
-#+end_src"))
-`(setq org-babel-exp-code-template ,org-babel-exp-code-template)
-)
+(use-package rab-ox-hugo
+  :after ox-hugo
+  :config
+  (rab/ox-hugo-mode))
 
 (use-package ox-slack
   :ensure t
