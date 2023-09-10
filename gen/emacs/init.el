@@ -610,7 +610,7 @@ existing directory under `magit-clone-default-directory'."
 
 (use-package "startup"
   :custom
-  (inhibit-splash-screen t)
+  (inhibit-startup-screen t)
   (initial-major-mode 'fundamental-mode)
   (initial-scratch-message nil))
 
