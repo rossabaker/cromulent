@@ -20,7 +20,7 @@ jobs:
           git config user.email "97855512+rossabaker-flake-steward[bot]@users.noreply.github.com"
           git config user.name "rossabaker-flake-steward[bot]"
           nix flake update --commit-lock-file
-      - uses: tibdex/github-app-token@v1
+      - uses: tibdex/github-app-token@v2
         id: generate-token
         with:
           app_id: ${{ secrets.FLAKE_STEWARD_APP_ID }}
