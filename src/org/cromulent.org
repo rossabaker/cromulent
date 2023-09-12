@@ -2515,7 +2515,7 @@ This will block +Twitter+ X cards.
 CLOSED: [2023-02-23 Thu 23:59 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: _index
-:EXPORT_HUGO_LASTMOD: [2023-09-10 Sun 01:14 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-09-12 Tue 00:13 EDT]
 :header-args+: :tangle-mode `,#o444 :mkdirp yes
 :header-args:emacs-lisp+: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444 :mkdirp yes
 :header-args:emacs-lisp+: :code-license CC0-1.0
@@ -2946,6 +2946,7 @@ It's not in MELPA, but it's a trivial build:
         epkgs.editorconfig
         epkgs.s
       ];
+      version = "0.0.0";
     };
     copilot-dist = pkgs.stdenv.mkDerivation {
       name = "copilot-dist";
@@ -3214,6 +3215,7 @@ This one requires a Nix build, [[https://github.com/GTrunSec/hive/blob/ce7c0087a
       pname = "jinx-lisp";
       src = inputs.jinx;
       packageRequires = [ epkgs.compat ];
+      version = "0.9";
     };
     jinx-mod = pkgs.stdenv.mkDerivation {
       name = "jinx-mod";
@@ -3847,6 +3849,7 @@ might still be compelling as an ~:annotation-function~.
   epkgs.trivialBuild {
     pname = "git-related";
     src = inputs.git-related;
+    version = "1.1";
   }
 #+end_src
 
@@ -4500,6 +4503,7 @@ Finally, we add a Home Manager module based on the configured app.
           on = epkgs.trivialBuild {
             pname = "on.el";
             src = inputs.on-el;
+            version = "0.1.0";
           };
           jinx =
             <<emacs-jinx>>;
@@ -4518,6 +4522,7 @@ Finally, we add a Home Manager module based on the configured app.
             pname = "rab-ox-hugo";
             src = ./lisp/rab-ox-hugo.el;
             packageRequires = [ epkgs.ox-hugo epkgs.s ];
+            version = "0.1.0";
           })
         ];
       };
