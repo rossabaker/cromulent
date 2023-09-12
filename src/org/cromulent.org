@@ -4586,6 +4586,7 @@ CLOSED: [2023-09-10 Sun 01:23 EDT]
 :CUSTOM_ID: rab-ox-hugo
 :EXPORT_FILE_NAME: rab-ox-hugo
 :header-args:emacs-lisp+: :tangle ../../gen/emacs/lisp/rab-ox-hugo.el :code-license GPL-3.0-only
+:EXPORT_HUGO_LASTMOD: [2023-09-12 Tue 00:02 EDT]
 :END:
 
 #+begin_description
@@ -4673,12 +4674,12 @@ We provide an enhanced =org-hugo-src-block= that reads and outputs the
       result))
 #+end_src
 
-This part is grody.  Ideally, we'd define a [[https://orgmode.org/worg/dev/org-export-reference.html][derived backend]], but
-Ox-Hugo's export commands are fairly intricate with the subtree
-support and don't offer an obvious way to inject a new backend.
-We have to mutate the global settings for Ox-Hugo.  This is
-fine as long as we don't have Ox-Hugo sites incompatible with this
-extension.  We do the mutation via a minor mode:
+This part is grody, and I've [[https://github.com/kaushalmodi/ox-hugo/discussions/728][solicted a better solution]].  Ideally,
+we'd define a [[https://orgmode.org/worg/dev/org-export-reference.html][derived backend]], but Ox-Hugo's export commands are
+fairly intricate with the subtree support and don't offer an obvious
+way to inject a new backend.  We have to mutate the global settings
+for Ox-Hugo.  This is fine as long as we don't have Ox-Hugo sites
+incompatible with this extension.  We do the mutation via a minor mode:
 
 #+begin_src emacs-lisp
   (defun rab/ox-hugo--put-backend-transcoders (transcoders)
