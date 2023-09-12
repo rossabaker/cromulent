@@ -22,6 +22,7 @@
         on = epkgs.trivialBuild {
           pname = "on.el";
           src = inputs.on-el;
+          version = "0.1.0";
         };
         jinx =
           let
@@ -29,6 +30,7 @@
               pname = "jinx-lisp";
               src = inputs.jinx;
               packageRequires = [ epkgs.compat ];
+              version = "0.9";
             };
             jinx-mod = pkgs.stdenv.mkDerivation {
               name = "jinx-mod";
@@ -59,6 +61,7 @@
                 epkgs.editorconfig
                 epkgs.s
               ];
+              version = "0.0.0";
             };
             copilot-dist = pkgs.stdenv.mkDerivation {
               name = "copilot-dist";
@@ -82,6 +85,7 @@
           epkgs.trivialBuild {
             pname = "git-related";
             src = inputs.git-related;
+            version = "1.1";
           };
       };
       config = ./init.el;
@@ -92,6 +96,7 @@
           pname = "rab-ox-hugo";
           src = ./lisp/rab-ox-hugo.el;
           packageRequires = [ epkgs.ox-hugo epkgs.s ];
+          version = "0.1.0";
         })
       ];
     };
