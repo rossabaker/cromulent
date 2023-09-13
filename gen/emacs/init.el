@@ -38,12 +38,7 @@
    :prefix "C-c f")
   :bind
   (:prefix-map rab/toggles-map
-   :prefix "C-c t")
-  :config
-  (defun rab/unbind-all (fn)
-    "Unbinds a function everywhere."
-    (dolist (key (where-is-internal fn nil))
-      (unbind-key key))))
+   :prefix "C-c t"))
 
 (use-package diminish :ensure t)
 
@@ -703,6 +698,7 @@ existing directory under `magit-clone-default-directory'."
 
 (use-package help
   :config
-  (rab/unbind-all 'help-for-help))
+  (dolist (key (where-is-internal 'help-for-help))
+    (unbind-key key)))
 
 (put 'narrow-to-region 'disabled nil)

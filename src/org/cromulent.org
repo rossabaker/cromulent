@@ -2515,7 +2515,7 @@ This will block +Twitter+ X cards.
 CLOSED: [2023-02-23 Thu 23:59 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: _index
-:EXPORT_HUGO_LASTMOD: [2023-09-12 Tue 00:13 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-09-12 Tue 23:22 EDT]
 :header-args+: :tangle-mode `,#o444 :mkdirp yes
 :header-args:emacs-lisp+: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444 :mkdirp yes
 :header-args:emacs-lisp+: :code-license CC0-1.0
@@ -2739,12 +2739,7 @@ value as variable is void: personal-keybindings~.
      :prefix "C-c f")
     :bind
     (:prefix-map rab/toggles-map
-     :prefix "C-c t")
-    :config
-    (defun rab/unbind-all (fn)
-      "Unbinds a function everywhere."
-      (dolist (key (where-is-internal fn nil))
-        (unbind-key key))))
+     :prefix "C-c t"))
 #+end_src
 
 ****** Diminish
@@ -4441,7 +4436,8 @@ the trick.
 #+begin_src emacs-lisp
   (use-package help
     :config
-    (rab/unbind-all 'help-for-help))
+    (dolist (key (where-is-internal 'help-for-help))
+      (unbind-key key)))
 #+end_src
 
 ***** Junk drawer
