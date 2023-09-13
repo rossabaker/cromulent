@@ -93,6 +93,11 @@
       alwaysEnsure = false;
       extraEmacsPackages = epkgs: [
         (epkgs.trivialBuild {
+          pname = "rab-lisp";
+          src = ./lisp/rab-lisp.el;
+          version = "0.1.0";
+        })
+        (epkgs.trivialBuild {
           pname = "rab-ox-hugo";
           src = ./lisp/rab-ox-hugo.el;
           packageRequires = [ epkgs.ox-hugo epkgs.s ];

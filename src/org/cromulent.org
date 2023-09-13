@@ -2515,7 +2515,7 @@ This will block +Twitter+ X cards.
 CLOSED: [2023-02-23 Thu 23:59 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: _index
-:EXPORT_HUGO_LASTMOD: [2023-09-12 Tue 23:22 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-09-12 Tue 23:42 EDT]
 :header-args+: :tangle-mode `,#o444 :mkdirp yes
 :header-args:emacs-lisp+: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444 :mkdirp yes
 :header-args:emacs-lisp+: :code-license CC0-1.0
@@ -3424,204 +3424,14 @@ I am not a C# developer, but I've been known to interview them.
 :CUSTOM_ID: lisp
 :END:
 
-I would like my property lists to align not like this
+Load my [[#rab-lisp][Lisp extensions]] to fix the indentation of =use-package=
+blocks.
 
-#+begin_src emacs-lisp :tangle no
-  (:prefix-map rab/git-map
-               :prefix "C-c g")
-#+end_src
-
-but like this:
-
-#+begin_src emacs-lisp :tangle no
-  (:prefix-map rab/git-map
-   :prefix "C-c g")
-#+end_src
-
-The answer is almost verbatim from Stack Overflow, but put in a
-~use-package~ and changed to my namespace.  I also applied the
-"bonus," because my primary itch is =use-package= bindings.
-
-#+caption: [[https://emacs.stackexchange.com/a/52789][Original]] by Aquaactress on Emacs Stack Exchange, ~CC-BY-SA-4.0~.
-#+begin_src emacs-lisp :code-license CC-BY-SA-4.0
-  (use-package lisp-mode
-    :defer
+#+begin_src emacs-lisp
+  (use-package rab-lisp-mode
+    :after lisp-mode
     :config
-    (defun rab/calculate-lisp-indent (&optional parse-start)
-      "Add better indentation for quoted and backquoted lists."
-      ;; This line because `calculate-lisp-indent-last-sexp` was defined with `defvar`
-      ;; with it's value ommited, marking it special and only defining it locally. So
-      ;; if you don't have this, you'll get a void variable error.
-      (defvar calculate-lisp-indent-last-sexp)
-      (save-excursion
-        (beginning-of-line)
-        (let ((indent-point (point))
-              state
-              ;; setting this to a number inhibits calling hook
-              (desired-indent nil)
-              (retry t)
-              calculate-lisp-indent-last-sexp containing-sexp)
-          (cond ((or (markerp parse-start) (integerp parse-start))
-                 (goto-char parse-start))
-                ((null parse-start) (beginning-of-defun))
-                (t (setq state parse-start)))
-          (unless state
-            ;; Find outermost containing sexp
-            (while (< (point) indent-point)
-              (setq state (parse-partial-sexp (point) indent-point 0))))
-          ;; Find innermost containing sexp
-          (while (and retry
-                      state
-                      (> (elt state 0) 0))
-            (setq retry nil)
-            (setq calculate-lisp-indent-last-sexp (elt state 2))
-            (setq containing-sexp (elt state 1))
-            ;; Position following last unclosed open.
-            (goto-char (1+ containing-sexp))
-            ;; Is there a complete sexp since then?
-            (if (and calculate-lisp-indent-last-sexp
-                     (> calculate-lisp-indent-last-sexp (point)))
-                ;; Yes, but is there a containing sexp after that?
-                (let ((peek (parse-partial-sexp calculate-lisp-indent-last-sexp
-                                                indent-point 0)))
-                  (if (setq retry (car (cdr peek))) (setq state peek)))))
-          (if retry
-              nil
-            ;; Innermost containing sexp found
-            (goto-char (1+ containing-sexp))
-            (if (not calculate-lisp-indent-last-sexp)
-                ;; indent-point immediately follows open paren.
-                ;; Don't call hook.
-                (setq desired-indent (current-column))
-              ;; Find the start of first element of containing sexp.
-              (parse-partial-sexp (point) calculate-lisp-indent-last-sexp 0 t)
-              (cond ((looking-at "\\s(")
-                     ;; First element of containing sexp is a list.
-                     ;; Indent under that list.
-                     )
-                    ((> (save-excursion (forward-line 1) (point))
-                        calculate-lisp-indent-last-sexp)
-                     ;; This is the first line to start within the containing sexp.
-                     ;; It's almost certainly a function call.
-                     (if (or
-                          ;; Containing sexp has nothing before this line
-                          ;; except the first element. Indent under that element.
-                          (= (point) calculate-lisp-indent-last-sexp)
-
-                          ;; First sexp after `containing-sexp' is a keyword. This
-                          ;; condition is more debatable. It's so that I can have
-                          ;; unquoted plists in macros. It assumes that you won't
-                          ;; make a function whose name is a keyword.
-                          (when-let (char-after (char-after (1+ containing-sexp)))
-                            (char-equal char-after ?:))
-
-                          ;; Check for quotes or backquotes around.
-                          (let* ((positions (elt state 9))
-                                 (last (car (last positions)))
-                                 (rest (reverse (butlast positions)))
-                                 (any-quoted-p nil)
-                                 (point nil))
-                            (or
-                             (when-let (char (char-before last))
-                               (or (char-equal char ?')
-                                   (char-equal char ?`)))
-                             (progn
-                               (while (and rest (not any-quoted-p))
-                                 (setq point (pop rest))
-                                 (setq any-quoted-p
-                                       (or
-                                        (when-let (char (char-before point))
-                                          (or (char-equal char ?')
-                                              (char-equal char ?`)))
-                                        (save-excursion
-                                          (goto-char (1+ point))
-                                          (looking-at-p
-                                           "\\(?:back\\)?quote[\t\n\f\s]+(")))))
-                               any-quoted-p))))
-                         ;; Containing sexp has nothing before this line
-                         ;; except the first element.  Indent under that element.
-                         nil
-                       ;; Skip the first element, find start of second (the first
-                       ;; argument of the function call) and indent under.
-                       (progn (forward-sexp 1)
-                              (parse-partial-sexp (point)
-                                                  calculate-lisp-indent-last-sexp
-                                                  0 t)))
-                     (backward-prefix-chars))
-                    (t
-                     ;; Indent beneath first sexp on same line as
-                     ;; `calculate-lisp-indent-last-sexp'.  Again, it's
-                     ;; almost certainly a function call.
-                     (goto-char calculate-lisp-indent-last-sexp)
-                     (beginning-of-line)
-                     (parse-partial-sexp (point) calculate-lisp-indent-last-sexp
-                                         0 t)
-                     (backward-prefix-chars)))))
-          ;; Point is at the point to indent under unless we are inside a string.
-          ;; Call indentation hook except when overridden by lisp-indent-offset
-          ;; or if the desired indentation has already been computed.
-          (let ((normal-indent (current-column)))
-            (cond ((elt state 3)
-                   ;; Inside a string, don't change indentation.
-                   nil)
-                  ((and (integerp lisp-indent-offset) containing-sexp)
-                   ;; Indent by constant offset
-                   (goto-char containing-sexp)
-                   (+ (current-column) lisp-indent-offset))
-                  ;; in this case calculate-lisp-indent-last-sexp is not nil
-                  (calculate-lisp-indent-last-sexp
-                   (or
-                    ;; try to align the parameters of a known function
-                    (and lisp-indent-function
-                         (not retry)
-                         (funcall lisp-indent-function indent-point state))
-                    ;; If the function has no special alignment
-                    ;; or it does not apply to this argument,
-                    ;; try to align a constant-symbol under the last
-                    ;; preceding constant symbol, if there is such one of
-                    ;; the last 2 preceding symbols, in the previous
-                    ;; uncommented line.
-                    (and (save-excursion
-                           (goto-char indent-point)
-                           (skip-chars-forward " \t")
-                           (looking-at ":"))
-                         ;; The last sexp may not be at the indentation
-                         ;; where it begins, so find that one, instead.
-                         (save-excursion
-                           (goto-char calculate-lisp-indent-last-sexp)
-                           ;; Handle prefix characters and whitespace
-                           ;; following an open paren.  (Bug#1012)
-                           (backward-prefix-chars)
-                           (while (not (or (looking-back "^[ \t]*\\|([ \t]+"
-                                                         (line-beginning-position))
-                                           (and containing-sexp
-                                                (>= (1+ containing-sexp) (point)))))
-                             (forward-sexp -1)
-                             (backward-prefix-chars))
-                           (setq calculate-lisp-indent-last-sexp (point)))
-                         (> calculate-lisp-indent-last-sexp
-                            (save-excursion
-                              (goto-char (1+ containing-sexp))
-                              (parse-partial-sexp (point) calculate-lisp-indent-last-sexp 0 t)
-                              (point)))
-                         (let ((parse-sexp-ignore-comments t)
-                               indent)
-                           (goto-char calculate-lisp-indent-last-sexp)
-                           (or (and (looking-at ":")
-                                    (setq indent (current-column)))
-                               (and (< (line-beginning-position)
-                                       (prog2 (backward-sexp) (point)))
-                                    (looking-at ":")
-                                    (setq indent (current-column))))
-                           indent))
-                    ;; another symbols or constants not preceded by a constant
-                    ;; as defined above.
-                    normal-indent))
-                  ;; in this case calculate-lisp-indent-last-sexp is nil
-                  (desired-indent)
-                  (t
-                   normal-indent))))))
-    (advice-add #'calculate-lisp-indent :override #'rab/calculate-lisp-indent))
+    (advice-add #'calculate-lisp-indent :override #'rab/lisp-calculate-indent))
 #+end_src
 
 ******** Compilation
@@ -4515,6 +4325,11 @@ Finally, we add a Home Manager module based on the configured app.
         alwaysEnsure = false;
         extraEmacsPackages = epkgs: [
           (epkgs.trivialBuild {
+            pname = "rab-lisp";
+            src = ./lisp/rab-lisp.el;
+            version = "0.1.0";
+          })
+          (epkgs.trivialBuild {
             pname = "rab-ox-hugo";
             src = ./lisp/rab-ox-hugo.el;
             packageRequires = [ epkgs.ox-hugo epkgs.s ];
@@ -4720,6 +4535,236 @@ of the current Hugo subtree.
 #+begin_src emacs-lisp
   (provide 'rab-ox-hugo)
   ;;; rab-ox-hugo.el ends here
+#+end_src
+
+*** DONE Lisp extensions                                         :emacs_lisp:
+CLOSED: [2023-09-12 Tue 23:42 EDT]
+:PROPERTIES:
+:CUSTOM_ID: rab-lisp
+:EXPORT_FILE_NAME: rab-lisp
+:header-args:emacs-lisp+: :tangle ../../gen/emacs/lisp/rab-lisp.el :code-license GPL-3.0-only
+:EXPORT_HUGO_LASTMOD: [2023-09-12 Tue 23:45 EDT]
+:END:
+
+#+begin_description
+Extensions to the Ox-Hugo backend for Org Export.
+#+end_description
+
+**** Header                                                        :noexport:
+
+#+begin_src emacs-lisp :exports none
+  ;;; rab-lisp.el --- Extensions to Lisp Mode for Ross A. Baker's Emacs configuration.
+
+  ;;; Commentary:
+  ;;
+  ;; Extensions to Lisp Mode for Ross A. Baker's Emacs configuration.
+
+  ;;; Code:
+#+end_src
+
+**** Indentation
+
+I would like my property lists to align not like this
+
+#+begin_src emacs-lisp :tangle no
+  (:prefix-map rab/git-map
+               :prefix "C-c g")
+#+end_src
+
+but like this:
+
+#+begin_src emacs-lisp :tangle no
+  (:prefix-map rab/git-map
+   :prefix "C-c g")
+#+end_src
+
+The answer is almost [[https://emacs.stackexchange.com/a/52789][verbatim from Emacs Stack Exchange]], but changed
+to my namespace.  I also applied the "bonus," because my primary itch
+is =use-package= bindings.
+
+#+caption: [[https://emacs.stackexchange.com/a/52789][Original]] by Aquaactress on Emacs Stack Exchange, ~CC-BY-SA-4.0~.
+#+begin_src emacs-lisp
+  (defun rab/lisp-calculate-indent (&optional parse-start)
+    "Add better indentation for quoted and backquoted lists."
+    ;; This line because `calculate-lisp-indent-last-sexp` was defined with `defvar`
+    ;; with it's value ommited, marking it special and only defining it locally. So
+    ;; if you don't have this, you'll get a void variable error.
+    (defvar calculate-lisp-indent-last-sexp)
+    (save-excursion
+      (beginning-of-line)
+      (let ((indent-point (point))
+            state
+            ;; setting this to a number inhibits calling hook
+            (desired-indent nil)
+            (retry t)
+            calculate-lisp-indent-last-sexp containing-sexp)
+        (cond ((or (markerp parse-start) (integerp parse-start))
+               (goto-char parse-start))
+              ((null parse-start) (beginning-of-defun))
+              (t (setq state parse-start)))
+        (unless state
+          ;; Find outermost containing sexp
+          (while (< (point) indent-point)
+            (setq state (parse-partial-sexp (point) indent-point 0))))
+        ;; Find innermost containing sexp
+        (while (and retry
+                    state
+                    (> (elt state 0) 0))
+          (setq retry nil)
+          (setq calculate-lisp-indent-last-sexp (elt state 2))
+          (setq containing-sexp (elt state 1))
+          ;; Position following last unclosed open.
+          (goto-char (1+ containing-sexp))
+          ;; Is there a complete sexp since then?
+          (if (and calculate-lisp-indent-last-sexp
+                   (> calculate-lisp-indent-last-sexp (point)))
+              ;; Yes, but is there a containing sexp after that?
+              (let ((peek (parse-partial-sexp calculate-lisp-indent-last-sexp
+                                              indent-point 0)))
+                (if (setq retry (car (cdr peek))) (setq state peek)))))
+        (if retry
+            nil
+          ;; Innermost containing sexp found
+          (goto-char (1+ containing-sexp))
+          (if (not calculate-lisp-indent-last-sexp)
+              ;; indent-point immediately follows open paren.
+              ;; Don't call hook.
+              (setq desired-indent (current-column))
+            ;; Find the start of first element of containing sexp.
+            (parse-partial-sexp (point) calculate-lisp-indent-last-sexp 0 t)
+            (cond ((looking-at "\\s(")
+                   ;; First element of containing sexp is a list.
+                   ;; Indent under that list.
+                   )
+                  ((> (save-excursion (forward-line 1) (point))
+                      calculate-lisp-indent-last-sexp)
+                   ;; This is the first line to start within the containing sexp.
+                   ;; It's almost certainly a function call.
+                   (if (or
+                        ;; Containing sexp has nothing before this line
+                        ;; except the first element. Indent under that element.
+                        (= (point) calculate-lisp-indent-last-sexp)
+
+                        ;; First sexp after `containing-sexp' is a keyword. This
+                        ;; condition is more debatable. It's so that I can have
+                        ;; unquoted plists in macros. It assumes that you won't
+                        ;; make a function whose name is a keyword.
+                        (when-let (char-after (char-after (1+ containing-sexp)))
+                          (char-equal char-after ?:))
+
+                        ;; Check for quotes or backquotes around.
+                        (let* ((positions (elt state 9))
+                               (last (car (last positions)))
+                               (rest (reverse (butlast positions)))
+                               (any-quoted-p nil)
+                               (point nil))
+                          (or
+                           (when-let (char (char-before last))
+                             (or (char-equal char ?')
+                                 (char-equal char ?`)))
+                           (progn
+                             (while (and rest (not any-quoted-p))
+                               (setq point (pop rest))
+                               (setq any-quoted-p
+                                     (or
+                                      (when-let (char (char-before point))
+                                        (or (char-equal char ?')
+                                            (char-equal char ?`)))
+                                      (save-excursion
+                                        (goto-char (1+ point))
+                                        (looking-at-p
+                                         "\\(?:back\\)?quote[\t\n\f\s]+(")))))
+                             any-quoted-p))))
+                       ;; Containing sexp has nothing before this line
+                       ;; except the first element.  Indent under that element.
+                       nil
+                     ;; Skip the first element, find start of second (the first
+                     ;; argument of the function call) and indent under.
+                     (progn (forward-sexp 1)
+                            (parse-partial-sexp (point)
+                                                calculate-lisp-indent-last-sexp
+                                                0 t)))
+                   (backward-prefix-chars))
+                  (t
+                   ;; Indent beneath first sexp on same line as
+                   ;; `calculate-lisp-indent-last-sexp'.  Again, it's
+                   ;; almost certainly a function call.
+                   (goto-char calculate-lisp-indent-last-sexp)
+                   (beginning-of-line)
+                   (parse-partial-sexp (point) calculate-lisp-indent-last-sexp
+                                       0 t)
+                   (backward-prefix-chars)))))
+        ;; Point is at the point to indent under unless we are inside a string.
+        ;; Call indentation hook except when overridden by lisp-indent-offset
+        ;; or if the desired indentation has already been computed.
+        (let ((normal-indent (current-column)))
+          (cond ((elt state 3)
+                 ;; Inside a string, don't change indentation.
+                 nil)
+                ((and (integerp lisp-indent-offset) containing-sexp)
+                 ;; Indent by constant offset
+                 (goto-char containing-sexp)
+                 (+ (current-column) lisp-indent-offset))
+                ;; in this case calculate-lisp-indent-last-sexp is not nil
+                (calculate-lisp-indent-last-sexp
+                 (or
+                  ;; try to align the parameters of a known function
+                  (and lisp-indent-function
+                       (not retry)
+                       (funcall lisp-indent-function indent-point state))
+                  ;; If the function has no special alignment
+                  ;; or it does not apply to this argument,
+                  ;; try to align a constant-symbol under the last
+                  ;; preceding constant symbol, if there is such one of
+                  ;; the last 2 preceding symbols, in the previous
+                  ;; uncommented line.
+                  (and (save-excursion
+                         (goto-char indent-point)
+                         (skip-chars-forward " \t")
+                         (looking-at ":"))
+                       ;; The last sexp may not be at the indentation
+                       ;; where it begins, so find that one, instead.
+                       (save-excursion
+                         (goto-char calculate-lisp-indent-last-sexp)
+                         ;; Handle prefix characters and whitespace
+                         ;; following an open paren.  (Bug#1012)
+                         (backward-prefix-chars)
+                         (while (not (or (looking-back "^[ \t]*\\|([ \t]+"
+                                                       (line-beginning-position))
+                                         (and containing-sexp
+                                              (>= (1+ containing-sexp) (point)))))
+                           (forward-sexp -1)
+                           (backward-prefix-chars))
+                         (setq calculate-lisp-indent-last-sexp (point)))
+                       (> calculate-lisp-indent-last-sexp
+                          (save-excursion
+                            (goto-char (1+ containing-sexp))
+                            (parse-partial-sexp (point) calculate-lisp-indent-last-sexp 0 t)
+                            (point)))
+                       (let ((parse-sexp-ignore-comments t)
+                             indent)
+                         (goto-char calculate-lisp-indent-last-sexp)
+                         (or (and (looking-at ":")
+                                  (setq indent (current-column)))
+                             (and (< (line-beginning-position)
+                                     (prog2 (backward-sexp) (point)))
+                                  (looking-at ":")
+                                  (setq indent (current-column))))
+                         indent))
+                  ;; another symbols or constants not preceded by a constant
+                  ;; as defined above.
+                  normal-indent))
+                ;; in this case calculate-lisp-indent-last-sexp is nil
+                (desired-indent)
+                (t
+                 normal-indent))))))
+#+end_src
+
+**** Foooter                                                       :noexport:
+
+#+begin_src emacs-lisp
+  (provide 'rab-lisp)
+  ;;; rab-ox-lisp ends here
 #+end_src
 
 ** DONE Garnix GitHub Action
