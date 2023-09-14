@@ -4271,7 +4271,7 @@ These customizations don't fit anywhere else.
 :END:
 
 This Emacs configuration is built with Nix using [[https://github.com/nix-community/emacs-overlay][emacs-overlay]] and
-published to my [[/configs/nix-flake/#whats-in-the-flake][Nix flake]].
+published to my [[/configs/nix#whats-in-the-flake][Nix flake]].
 
 Even though Emacs 29 is not released at the time of writing, git is on
 Emacs 30!  We publish an =emacs29= flake package with the desired
@@ -4793,7 +4793,7 @@ and my home-manager configuration.
 
 *** Caching
 
-Everything Garnix builds goes into the [[https://garnix.io/docs/caching][Garnix cache]].  My [[/configs/nix-flake][flake]] updates
+Everything Garnix builds goes into the [[https://garnix.io/docs/caching][Garnix cache]].  My [[/configs/nix/][flake]] updates
 while I'm asleep on Sunday nights, which means if all goes well, I
 have a primed cache Monday morning.
 
@@ -5008,24 +5008,38 @@ The Home Manager module is published to my flake as output
   }
 #+end_src
 
-** DONE Nix flake                                                 :nix:flake:
+** Nix bundle                                                           :nix:
+:PROPERTIES:
+:EXPORT_HUGO_BUNDLE: nix
+:END:
+
+*** Redirects                                                      :noexport:
+
+#+begin_src text :tangle ../../tmp/hugo/static/_redirects :exports none
+  /configs/nix-flake /configs/nix
+  /configs/home-manager /configs/nix/home-manager
+  /configs/darwin /configs/nix/darwin
+  /configs/devshells /configs/nix/devshells
+#+end_src
+
+*** DONE Nix
 CLOSED: [2022-12-25 Sun 22:14 EST]
 :PROPERTIES:
-:EXPORT_FILE_NAME: nix-flake
-:EXPORT_HUGO_LASTMOD: [2023-09-08 Fri 17:00 CDT]
+:EXPORT_FILE_NAME: _index
+:EXPORT_HUGO_LASTMOD: [2023-09-13 Wed 22:16 EDT]
 :header-args+: :code-license MIT
 :END:
 
 #+begin_description
-The Cromulent repository has a Nix flake for packages, shells, OS
-configurations, and home configurations.  It begins here.
+The Cromulent repository hosts a Nix flake for packages, shells, OS
+configurations, and home configurations.
 #+end_description
 
-At the root of my [[https://github.com/rossabaker/cromulent][cromulent repository]] is a [[https://nixos.wiki/wiki/Flakes][Nix flake]].  It contains
+At the root of the [[https://github.com/rossabaker/cromulent][Cromulent repository]] is a [[https://nixos.wiki/wiki/Flakes][Nix flake]].  It contains
 all my system configurations, home environment configurations,
 packages, development shells, and more.
 
-*** What's in the flake
+**** What's in the flake
 :PROPERTIES:
 :CUSTOM_ID: whats-in-the-flake
 :END:
@@ -5035,104 +5049,39 @@ packages, development shells, and more.
   nix flake show github:rossabaker/cromulent
 #+end_src
 
-#+RESULTS: flake-show-outputs
-#+begin_example
-[1mgithub:rossabaker/cromulent/a979838336d80960216b73fff7165378157fbc7c[0m
-[32;1m├───[0m[1mapps[0m
-[32;1m│   ├───[0m[1maarch64-darwin[0m
-[32;1m│   │   └───[0m[1memacs[0m: app
-[32;1m│   └───[0m[1mx86_64-linux[0m
-[32;1m│       └───[0m[1memacs[0m: app
-[32;1m├───[0m[1mchecks[0m
-[32;1m│   ├───[0m[1maarch64-darwin[0m
-[32;1m│   └───[0m[1mx86_64-linux[0m
-[32;1m├───[0m[1mdarwinConfigurationModules[0m: [35;1munknown[0m
-[32;1m├───[0m[1mdevShells[0m
-[32;1m│   ├───[0m[1maarch64-darwin[0m
-[32;1m│   │   └───[0m[1mdefault[0m: development environment 'nix-config'
-[32;1m│   └───[0m[1mx86_64-linux[0m
-[32;1m│       └───[0m[1mdefault[0m: development environment 'nix-config'
-[32;1m├───[0m[1mflakeModules[0m: [35;1munknown[0m
-[32;1m├───[0m[1mformatter[0m
-[32;1m├───[0m[1mhomeConfigurations[0m: [35;1munknown[0m
-[32;1m├───[0m[1mhomeManagerModules[0m: [35;1munknown[0m
-[32;1m├───[0m[1mlegacyPackages[0m
-[32;1m│   ├───[0m[1maarch64-darwin[0m [35;1momitted[0m (use '--legacy' to show)
-[32;1m│   └───[0m[1mx86_64-linux[0m [35;1momitted[0m (use '--legacy' to show)
-[32;1m├───[0m[1mnixosConfigurations[0m
-[32;1m├───[0m[1mnixosModules[0m
-[32;1m├───[0m[1moverlays[0m
-[32;1m│   ├───[0m[1mdefault[0m: [35;1mNixpkgs overlay[0m
-[32;1m│   ├───[0m[1mdevshell[0m: [35;1mNixpkgs overlay[0m
-[32;1m│   └───[0m[1memacs[0m: [35;1mNixpkgs overlay[0m
-[32;1m└───[0m[1mpackages[0m
-[32;1m    ├───[0m[1maarch64-darwin[0m
-[32;1m    │   ├───[0m[1m"RABaker@L2LYQM57XY"[0m: package 'home-manager-generation'
-[32;1m    │   ├───[0m[1maarch64-darwin-config-base[0m: package 'darwin-system-22.11.20230528.c8a17ce+darwin4.b8c286c'
-[32;1m    │   ├───[0m[1memacs-ross[0m: package 'emacs29-with-packages-'
-[32;1m    │   ├───[0m[1memacs29[0m: package 'emacs29'
-[32;1m    │   └───[0m[1mwebsite[0m: package 'rossabaker.com'
-[32;1m    └───[0m[1mx86_64-linux[0m
-[32;1m        ├───[0m[1memacs-ross[0m: package 'emacs29-with-packages-'
-[32;1m        ├───[0m[1memacs29[0m: package 'emacs29'
-[32;1m        └───[0m[1mwebsite[0m: package 'rossabaker.com'
-#+end_example
-
 #+begin_details
 #+begin_summary
-  Results
+  Flake outputs
 #+end_summary
 
 #+begin_src emacs-lisp :eval yes :var in=flake-show-outputs() :exports results
   (ansi-color-filter-apply in)
 #+end_src
-
-#+RESULTS:
-#+begin_example
-github:rossabaker/cromulent/a979838336d80960216b73fff7165378157fbc7c
-├───apps
-│   ├───aarch64-darwin
-│   │   └───emacs: app
-│   └───x86_64-linux
-│       └───emacs: app
-├───checks
-│   ├───aarch64-darwin
-│   └───x86_64-linux
-├───darwinConfigurationModules: unknown
-├───devShells
-│   ├───aarch64-darwin
-│   │   └───default: development environment 'nix-config'
-│   └───x86_64-linux
-│       └───default: development environment 'nix-config'
-├───flakeModules: unknown
-├───formatter
-├───homeConfigurations: unknown
-├───homeManagerModules: unknown
-├───legacyPackages
-│   ├───aarch64-darwin omitted (use '--legacy' to show)
-│   └───x86_64-linux omitted (use '--legacy' to show)
-├───nixosConfigurations
-├───nixosModules
-├───overlays
-│   ├───default: Nixpkgs overlay
-│   ├───devshell: Nixpkgs overlay
-│   └───emacs: Nixpkgs overlay
-└───packages
-    ├───aarch64-darwin
-    │   ├───"RABaker@L2LYQM57XY": package 'home-manager-generation'
-    │   ├───aarch64-darwin-config-base: package 'darwin-system-22.11.20230528.c8a17ce+darwin4.b8c286c'
-    │   ├───emacs-ross: package 'emacs29-with-packages-'
-    │   ├───emacs29: package 'emacs29'
-    │   └───website: package 'rossabaker.com'
-    └───x86_64-linux
-        ├───emacs-ross: package 'emacs29-with-packages-'
-        ├───emacs29: package 'emacs29'
-        └───website: package 'rossabaker.com'
-#+end_example
-
 #+end_details
 
-*** Flake source
+**** How to use the Cromulent flake
+
+***** Running apps from the command line
+
+#+begin_src sh :eval yes :exports both :results verbatim
+nix run github.com:rossabaker#hello
+#+end_src
+
+***** Composing Cromulent into your own flake
+
+#+begin_example nix
+{
+  inputs = {
+    cromulent.url = "github:rossabaker/cromulent";
+  };
+
+  outputs = { self, nixpkgs, cromulent }: {
+    # Your outputs here
+  };
+}
+#+end_example
+
+**** Flake source
 
 #+begin_warning
 This isn't particularly compelling reading yet.  It needs to be made
@@ -5144,12 +5093,12 @@ more "literate".
     description = "Ross A. Baker's perfectly cromulent Nix flake";
     inputs =
       <<flake-inputs>>
-      outputs =
-        <<flake-outputs>>
+    outputs =
+      <<flake-outputs>>
   }
 #+end_src
 
-**** Flake inputs
+****** Flake inputs
 
 #+begin_src nix :noweb-ref flake-inputs
   {
@@ -5234,7 +5183,7 @@ more "literate".
   };
 #+end_src
 
-**** Flake outputs
+****** Flake outputs
 
 #+begin_src nix :noweb-ref flake-outputs
   inputs:
@@ -5358,6 +5307,8 @@ more "literate".
             };
 
             hyperlink = pkgs.callPackage ./src/nix/pkgs/hyperlink {};
+
+            hello = pkgs.hello;
           } // darwinPackages;
 
           devShells.default = pkgs.devshell.mkShell {
@@ -5392,7 +5343,7 @@ more "literate".
   };
 #+end_src
 
-*** Home Manager modules
+**** Home Manager modules
 
 Our flake is split into multiple modules, via the ~flake.flakeModules~
 configuration.  These flake modules may themselves provide Home
@@ -5433,7 +5384,8 @@ with a copy and paste:
 
 #+end_src
 
-** DONE Home Manager                                       :nix:home_manager:
+
+*** DONE Home Manager                                      :nix:home_manager:
 CLOSED: [2023-09-08 Fri 16:59 CDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: home-manager
@@ -5450,7 +5402,7 @@ configurations for NixOS and nix-darwin.  This keeps our environment
 maximally portable between those operating systems, as well as any
 other hosts that support the Nix package manager (e.g., Debian).
 
-*** Base configuration
+**** Base configuration
 
 This is imported from preliterate times and should be broken up
 further.
@@ -5503,7 +5455,7 @@ further.
   }
 #+end_src
 
-** DONE Darwin                :nix:macos:nix_darwin:postgresql:podman:docker:
+*** DONE Darwin               :nix:macos:nix_darwin:postgresql:podman:docker:
 CLOSED: [2023-08-07 Mon 09:48 EDT]
 :PROPERTIES:
 :EXPORT_HUGO_BUNDLE: darwin
@@ -5587,7 +5539,7 @@ further.
   }
 #+end_src
 
-*** Docker
+**** Docker
 
 There's no Docker service built into nix-darwin, but [[https://podman.io/][Podman]] has been
 an effective substitute thus far.
@@ -5620,7 +5572,7 @@ an effective substitute thus far.
   }
 #+end_src
 
-*** PostgreSQL
+**** PostgreSQL
 
 This is not as smooth an experience as the NixOS module.
 
@@ -5691,7 +5643,7 @@ trudge off to the non-standard ~5433~.
   }
 #+end_src
 
-*** Connecting
+**** Connecting
 
 By default, the ~postgres~ PostgreSQL user is supported via ~peer~
 authentication over local sockets, which means we can authenticate
@@ -5701,14 +5653,13 @@ nonstandard port:
 #+begin_example sh
 sudo -u postgres -i psql -p 5433
 #+end_example
-
-** DONE Devshells bundle
+*** DONE Devshells bundle
 CLOSED: [2023-07-25 Tue 12:06 EDT]
 :PROPERTIES:
 :EXPORT_HUGO_BUNDLE: devshells
 :END:
 
-*** DONE Devshells
+**** DONE Devshells
 CLOSED: [2023-07-25 Tue 12:27 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: _index
@@ -5726,7 +5677,7 @@ some (hopefully cached) dependencies.  This effort has two paydays:
 - Whenever you onboard a teammate
 - Whenever you set up a new workstation
 
-*** DONE Devshell for Modern Time Series Forecasting with Python
+**** DONE Devshell for Modern Time Series Forecasting with Python
 CLOSED: [2023-07-25 Tue 12:06 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: modern-time-series-forecasting-with-python
@@ -5762,9 +5713,9 @@ This should be more or less equivalent to the =conda activate
 modern_ts= instruction.  If you don't like it, ~^D~ and your money
 back.
 
-***** Caveats
+****** Caveats
 
-****** Missing packages
+******* Missing packages
 
 There are several packages not yet bundled in this devshell.  I'll try
 harder once they bite me.
@@ -5776,7 +5727,7 @@ harder once they bite me.
 - ~torchaudio-bin~ :: unsupported on ~aarch64-apple-darwin~
 - ~torchvision-bin~ :: unsupported on ~aarch64-apple-darwin~
 
-****** Unimportable packages
+******* Unimportable packages
 
 We generated a Nix expression for these packages, but the results
 aren't importable in the bundled Python environment, which kind of
@@ -5796,13 +5747,13 @@ defeats the point.
 - ~u8darts~
 - ~window-ops~
 
-****** CUDA support outside Linux
+******* CUDA support outside Linux
 
 This devshell fails on [[https://github.com/PacktPublishing/Modern-Time-Series-Forecasting-with-Python/blob/595fc7313e47834a1d303a5c52cad5fcddfde557/test_installation.py#L8][~test_installation.py~]] on at least
 ~aarch64-darwin~.  =python3Packages.torch-bin= does not include CUDA
 support outside Linux.
 
-***** How it works
+****** How it works
 
 The official definition uses Python 3.9, but I ran into problems with
 ~importlib-metadata~, so we're going to just use =pkgs.python3= and
@@ -5885,7 +5836,7 @@ It all comes together in this [[https://flake.parts/index.html][flake module]].
   }
 #+end_src
 
-**** TODO Broken links
+***** TODO Broken links
 
 - Micromamba link was ambiguous
 
