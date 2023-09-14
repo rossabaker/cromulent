@@ -139,6 +139,7 @@
         python = ./gen/python;
         modernTs = ./gen/modern_ts;
         homeManager = ./gen/home-manager;
+        hyperlink = ./gen/flake/hyperlink;
       };
     in
     inputs.flake-parts.lib.mkFlake { inherit inputs; } {
@@ -149,6 +150,7 @@
         flakeModules.python
         flakeModules.modernTs
         flakeModules.homeManager
+        flakeModules.hyperlink
         inputs.flake-parts.flakeModules.easyOverlay
       ];
     
@@ -208,8 +210,6 @@
                 emacs = self'.packages.emacs-ross;
                 src = ./src;
               };
-    
-              hyperlink = pkgs.callPackage ./src/nix/pkgs/hyperlink {};
             } // darwinPackages;
     
             devShells.default = pkgs.devshell.mkShell {

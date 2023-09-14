@@ -2040,7 +2040,7 @@ CLOSED: [2022-09-01 Thu 16:54 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: build
 :header-args+: :code-license MIT
-:EXPORT_HUGO_LASTMOD: [2023-09-10 Sun 01:00 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-09-13 Wed 23:49 EDT]
 :END:
 
 The website is just another package within our flake.
@@ -2068,8 +2068,8 @@ exports its contents with ox-hugo.
 The build first runs the export script to tangle the files and export
 to Hugo sources.  Hugo is then run to create a =public/= directory.
 
-In the check phase, we run [[https://github.com/svenkreiss/html5validator][html5validator]] and [[https://github.com/lycheeverse/lychee][lychee]] to validate HTML
-and links.
+In the check phase, we run [[https://github.com/svenkreiss/html5validator][html5validator]] and [[/configs/nix/hyperlink][Hyperlink]] to validate
+HTML and links.
 
 Finally, the =public/= directory rendered by Hugo is copied to the
 derivation output.
@@ -5026,7 +5026,7 @@ The Home Manager module is published to my flake as output
 CLOSED: [2022-12-25 Sun 22:14 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: _index
-:EXPORT_HUGO_LASTMOD: [2023-09-13 Wed 22:34 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-09-13 Wed 23:36 EDT]
 :header-args+: :code-license MIT
 :END:
 
@@ -5243,6 +5243,7 @@ more "literate".
       python = ./gen/python;
       modernTs = ./gen/modern_ts;
       homeManager = ./gen/home-manager;
+      hyperlink = ./gen/flake/hyperlink;
     };
   in
   inputs.flake-parts.lib.mkFlake { inherit inputs; } {
@@ -5253,6 +5254,7 @@ more "literate".
       flakeModules.python
       flakeModules.modernTs
       flakeModules.homeManager
+      flakeModules.hyperlink
       inputs.flake-parts.flakeModules.easyOverlay
     ];
 
@@ -5312,8 +5314,6 @@ more "literate".
               emacs = self'.packages.emacs-ross;
               src = ./src;
             };
-
-            hyperlink = pkgs.callPackage ./src/nix/pkgs/hyperlink {};
           } // darwinPackages;
 
           devShells.default = pkgs.devshell.mkShell {
@@ -5844,6 +5844,55 @@ It all comes together in this [[https://flake.parts/index.html][flake module]].
 ***** TODO Broken links
 
 - Micromamba link was ambiguous
+
+*** DONE Hyperlink                                     :hyperlink:validation:
+CLOSED: [2023-09-13 Wed 23:36 EDT]
+:PROPERTIES:
+:EXPORT_FILE_NAME: hyperlink
+:header-args:nix+: :code-license MIT
+:EXPORT_HUGO_LASTMOD: [2023-09-13 Wed 23:49 EDT]
+:CUSTOM_ID: hyperlink
+:END:
+
+[[https://github.com/untitaker/hyperlink][Hyperlink]] is a command-line link checker.  It is quite fast, and is
+used to test the generation of this web site.
+
+It's a paint-by-numbers [[https://nixos.org/manual/nixpkgs/stable/#compiling-rust-applications-with-cargo][Rust derivation from the manual]].  We expose it
+as [[https://flake.parts/define-module-in-separate-file][flake module]] with an app and a package.
+
+#+begin_src nix :tangle ../../gen/flake/hyperlink/default.nix
+  { moduleWithSystem, ... }:
+
+  {
+    perSystem = { config, self', inputs', pkgs, system, ... }: {
+      apps.hyperlink = {
+        type = "app";
+        program = "${self'.packages.hyperlink}/bin/hyperlink";
+      };
+
+      packages.hyperlink = with pkgs; rustPlatform.buildRustPackage rec {
+        pname = "hyperlink";
+        version = "0.1.29";
+
+        src = fetchFromGitHub {
+          owner = "untitaker";
+          repo = pname;
+          rev = version;
+          hash = "sha256-XwMEKS+xU0/NLNhVi3DNuop4Z67UVQ1a1qMTv5cn57M=";
+        };
+
+        cargoHash = "sha256-a6+s+0A1+dWjxgHfJFYfJ+/hDjsghxrSZNNqhsP4UKw=";
+
+        meta = with lib; {
+          description = "Very fast link checker for CI.";
+          homepage = "https://github.com/untitaker/hyperlink";
+          license = licenses.mit;
+          maintainers = [ maintainers.rossabaker ];
+        };
+      };
+    };
+  }
+#+end_src
 
 * Projects section
 :PROPERTIES:
