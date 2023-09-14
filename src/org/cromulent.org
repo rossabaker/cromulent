@@ -5026,7 +5026,7 @@ The Home Manager module is published to my flake as output
 CLOSED: [2022-12-25 Sun 22:14 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: _index
-:EXPORT_HUGO_LASTMOD: [2023-09-13 Wed 22:16 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-09-13 Wed 22:34 EDT]
 :header-args+: :code-license MIT
 :END:
 
@@ -5300,6 +5300,13 @@ more "literate".
             ];
           };
 
+          apps = {
+            hello = {
+              type = "app";
+              program = "${pkgs.hello}/bin/hello";
+            };
+          };
+
           packages = {
             website = pkgs.callPackage ./gen/website {
               emacs = self'.packages.emacs-ross;
@@ -5307,8 +5314,6 @@ more "literate".
             };
 
             hyperlink = pkgs.callPackage ./src/nix/pkgs/hyperlink {};
-
-            hello = pkgs.hello;
           } // darwinPackages;
 
           devShells.default = pkgs.devshell.mkShell {

@@ -196,6 +196,13 @@
               ];
             };
     
+            apps = {
+              hello = {
+                type = "app";
+                program = "${pkgs.hello}/bin/hello";
+              };
+            };
+    
             packages = {
               website = pkgs.callPackage ./gen/website {
                 emacs = self'.packages.emacs-ross;
@@ -203,8 +210,6 @@
               };
     
               hyperlink = pkgs.callPackage ./src/nix/pkgs/hyperlink {};
-    
-              hello = pkgs.hello;
             } // darwinPackages;
     
             devShells.default = pkgs.devshell.mkShell {
