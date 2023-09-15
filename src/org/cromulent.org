@@ -7854,6 +7854,9 @@ unaware teammate or automation run amok risk an unintended and costly
 upgrade.  This [[https://github.com/scala-steward-org/scala-steward/blob/main/docs/faq.md#how-can-version-updates-be-controlled][pins]] the versions of modules in the Akka, Akka-HTTP,
 and Alpakka repositories to the final Apache-licensed version.
 
+Add the following to your repository's ~.scala-steward.conf~.  If you
+use [[https://github.com/armanbilge/diy-steward][diy-steward]], put it in ~.github/.scala-steward.conf~.
+
 #+begin_src conf
   updates.pin = [
     { groupId = "com.typesafe.akka", artifactId="akka-actor", version="2.6.20" },
