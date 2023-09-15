@@ -7864,7 +7864,7 @@ use [[https://github.com/armanbilge/diy-steward][diy-steward]], put it in ~.gith
     { groupId = "com.lightbend.akka", artifactId="akka-stream-alpakka-avroparquet", version="4.0.0" },
     { groupId = "com.lightbend.akka", artifactId="akka-stream-alpakka-aws-event-bridge", version="4.0.0" },
     { groupId = "com.lightbend.akka", artifactId="akka-stream-alpakka-awslambda", version="4.0.0" },
-    { groupId = "com.lightbend.akka", artifactId="akka-stream-alpakka-azure-storage-queue", version="4.0.0" },
+    { groupId = "com.lightbend.akka", artifactId="akka-stream-alpakka-azureakk-storage-queue", version="4.0.0" },
     { groupId = "com.lightbend.akka", artifactId="akka-stream-alpakka-cassandra", version="4.0.0" },
     { groupId = "com.lightbend.akka", artifactId="akka-stream-alpakka-couchbase", version="4.0.0" },
     { groupId = "com.lightbend.akka", artifactId="akka-stream-alpakka-csv", version="4.0.0" },
@@ -7936,7 +7936,7 @@ use [[https://github.com/armanbilge/diy-steward][diy-steward]], put it in ~.gith
     { groupId = "com.typesafe.akka", artifactId="akka-http2-support", version="10.2.10" },
     { groupId = "com.typesafe.akka", artifactId="akka-multi-node-testkit", version="2.6.21" },
     { groupId = "com.typesafe.akka", artifactId="akka-osgi", version="2.6.21" },
-    { groupId = "com.typesafe.akka", artifactId="akka-parsing", version="10.2.10" }
+    { groupId = "com.typesafe.akka", artifactId="akka-parsing", version="10.2.10" },
     { groupId = "com.typesafe.akka", artifactId="akka-persistence", version="2.6.21" },
     { groupId = "com.typesafe.akka", artifactId="akka-persistence-query", version="2.6.21" },
     { groupId = "com.typesafe.akka", artifactId="akka-persistence-shared", version="2.6.21" },
@@ -7951,7 +7951,7 @@ use [[https://github.com/armanbilge/diy-steward][diy-steward]], put it in ~.gith
     { groupId = "com.typesafe.akka", artifactId="akka-stream", version="2.6.21" },
     { groupId = "com.typesafe.akka", artifactId="akka-stream-testkit", version="2.6.21" },
     { groupId = "com.typesafe.akka", artifactId="akka-stream-typed", version="2.6.21" },
-    { groupId = "com.typesafe.akka", artifactId="akka-testkit", version="2.6.21" },
+    { groupId = "com.typesafe.akka", artifactId="akka-testkit", version="2.6.21" }
   ]
 #+end_src
 
