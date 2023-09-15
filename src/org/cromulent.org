@@ -5013,7 +5013,7 @@ The Home Manager module is published to my flake as output
 CLOSED: [2022-12-25 Sun 22:14 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: /nix-flake
-:EXPORT_HUGO_LASTMOD: [2023-09-13 Wed 23:36 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-09-14 Thu 23:37 EDT]
 :header-args+: :code-license MIT
 :END:
 
@@ -5086,6 +5086,11 @@ more "literate".
 #+end_src
 
 ***** Flake inputs
+
+#+begin_details
+#+begin_summary
+Not scintillating to read, but necessary to run
+#+end_summary
 
 #+begin_src nix :noweb-ref flake-inputs
   {
@@ -5169,6 +5174,7 @@ more "literate".
     #   };
   };
 #+end_src
+#+end_details
 
 ***** Flake outputs
 
