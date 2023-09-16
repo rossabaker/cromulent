@@ -4771,8 +4771,9 @@ is =use-package= bindings.
 CLOSED: [2023-06-23 Fri 00:26 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: garnix
-:EXPORT_HUGO_LASTMOD: [2023-07-21 Fri 15:11 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-09-16 Sat 00:20 EDT]
 :header-args+: :code-license CC0-1.0
+:header-args:nix+: :code-license MIT
 :END:
 
 I have an Apple M1 for work, which is [[https://github.com/github/roadmap/issues/528][not yet supported by GitHub
@@ -4793,9 +4794,26 @@ and my home-manager configuration.
 
 *** Caching
 
-Everything Garnix builds goes into the [[https://garnix.io/docs/caching][Garnix cache]].  My [[/configs/nix-flake/][flake]] updates
-while I'm asleep on Sunday nights, which means if all goes well, I
-have a primed cache Monday morning.
+Everything Garnix builds goes into the [[https://garnix.io/docs/caching][Garnix cache]].  You probably
+want the substituter and public key if you're consuming my flake.
+
+#+begin_src nix :tangle ../../gen/flake/garnix/default.nix
+  { config, lib, pkgs, ... }:
+
+  {
+    nix = {
+      settings.substituters = [
+        "https://cache.garnix.io/"
+      ];
+      settings.trusted-public-keys = [
+        "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
+      ];
+    };
+  }
+#+end_src
+
+My [[/configs/nix-flake/][flake]] updates while I'm asleep on Sunday nights.  If all
+goes well, I have a primed cache Monday morning.
 
 *** TODO Broken links                                              :noexport:
 
@@ -5491,6 +5509,7 @@ further.
     imports = [
       ./podman.nix
       ./postgresql.nix
+      ../flake/garnix
     ];
 
     # List packages installed in system profile. To search by name, run:
@@ -5512,13 +5531,11 @@ further.
         "https://nix-community.cachix.org/"
         "https://rossabaker.cachix.org/"
         "https://typelevel.cachix.org/"
-        "https://cache.garnix.io/"
       ];
       settings.trusted-public-keys = [
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
         "rossabaker.cachix.org-1:KK/CQTeAGEurCUBy3nDl9PdR+xX+xtWQ0C/GpNN6kuw="
         "typelevel.cachix.org-1:UnD9fMAIpeWfeil1V/xWUZa2g758ZHk8DvGCd/keAkg="
-        "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
       ];
       package = pkgs.nixFlakes;
       extraOptions = ''
