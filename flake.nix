@@ -88,6 +88,15 @@
       { withSystem, flake-parts-lib, ... }:
     
       let
+        flakeModules = {
+          emacs = ./gen/emacs;
+          scala = ./gen/scala;
+          python = ./gen/python;
+          modernTs = ./gen/modern_ts;
+          homeManager = ./gen/home-manager;
+          hyperlink = ./gen/flake/hyperlink;
+        };
+    
         mkDarwinConfigModule = { pkgs }: {
           imports = [
             ./gen/nix-darwin
@@ -131,15 +140,6 @@
     
         darwinModules = {
           aarch64-base = aarch64-darwin-config-base (pkgsFor "aarch64-darwin");
-        };
-    
-        flakeModules = {
-          emacs = ./gen/emacs;
-          scala = ./gen/scala;
-          python = ./gen/python;
-          modernTs = ./gen/modern_ts;
-          homeManager = ./gen/home-manager;
-          hyperlink = ./gen/flake/hyperlink;
         };
       in {
         imports = [
