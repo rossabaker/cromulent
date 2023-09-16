@@ -91,10 +91,6 @@
         mkDarwinConfigModule = { pkgs }: {
           imports = [
             ./gen/nix-darwin
-            {
-              system.keyboard.enableKeyMapping = true;
-              system.keyboard.remapCapsLockToControl = true;
-            }
           ];
         };
     
