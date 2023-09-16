@@ -5211,166 +5211,168 @@ Not scintillating to read, but necessary to run
 #+begin_src nix :noweb-ref flake-outputs
   inputs:
 
-  inputs.flake-parts.lib.mkFlake { inherit inputs; } ({ withSystem, flake-parts-lib, ... }:
+  inputs.flake-parts.lib.mkFlake { inherit inputs; } (
+    { withSystem, flake-parts-lib, ... }:
 
-  let
-    mkDarwinConfigModule = { pkgs }: {
-      imports = [
-        ./gen/nix-darwin
-        {
-          system.keyboard.enableKeyMapping = true;
-          system.keyboard.remapCapsLockToControl = true;
-        }
-      ];
-    };
-
-    mkHomeConfig = { pkgs, system, username, homeDirectory }:
-      inputs.home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = [
+    let
+      mkDarwinConfigModule = { pkgs }: {
+        imports = [
+          ./gen/nix-darwin
           {
-            home = {
-              inherit homeDirectory username;
-              stateVersion = "21.11";
-            };
-            nixpkgs.overlays = [ inputs.emacs-overlay.overlay ];
+            system.keyboard.enableKeyMapping = true;
+            system.keyboard.remapCapsLockToControl = true;
           }
-          inputs.self.homeManagerModules.base
-          inputs.self.homeManagerModules.emacs
-          inputs.self.homeManagerModules.scala
-          inputs.self.homeManagerModules.python
-          ./modules/work
         ];
-        # Pass our flake inputs into the config
-        extraSpecialArgs = { inherit inputs; };
       };
 
-    aarch64-darwin-config-base = pkgs: mkDarwinConfigModule {
-      inherit pkgs;
-    };
-
-    overlays = {
-      emacs = inputs.emacs-overlay.overlay;
-      devshell = inputs.devshell.overlays.default;
-    };
-
-    pkgsFor = system: import inputs.nixpkgs {
-      inherit system;
-      overlays = builtins.attrValues inputs.self.overlays;
-    };
-
-    darwinModules = {
-      aarch64-base = aarch64-darwin-config-base (pkgsFor "aarch64-darwin");
-    };
-
-    flakeModules = {
-      emacs = ./gen/emacs;
-      scala = ./gen/scala;
-      python = ./gen/python;
-      modernTs = ./gen/modern_ts;
-      homeManager = ./gen/home-manager;
-      hyperlink = ./gen/flake/hyperlink;
-    };
-  in {
-    imports = [
-      ./gen/flake/modules/homeManagerModules.nix
-      flakeModules.emacs
-      flakeModules.scala
-      flakeModules.python
-      flakeModules.modernTs
-      flakeModules.homeManager
-      flakeModules.hyperlink
-      inputs.flake-parts.flakeModules.easyOverlay
-    ];
-
-    flake = {
-      inherit overlays darwinModules;
-
-      homeConfigurations = {
-        "RABaker@L2LYQM57XY" = mkHomeConfig {
-          pkgs = (pkgsFor "aarch64-darwin");
-          system = "aarch64-darwin";
-          username = "RABaker";
-          homeDirectory = "/Users/RABaker";
+      mkHomeConfig = { pkgs, system, username, homeDirectory }:
+        inputs.home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = [
+            {
+              home = {
+                inherit homeDirectory username;
+                stateVersion = "21.11";
+              };
+              nixpkgs.overlays = [ inputs.emacs-overlay.overlay ];
+            }
+            inputs.self.homeManagerModules.base
+            inputs.self.homeManagerModules.emacs
+            inputs.self.homeManagerModules.scala
+            inputs.self.homeManagerModules.python
+            ./modules/work
+          ];
+          # Pass our flake inputs into the config
+          extraSpecialArgs = { inherit inputs; };
         };
+
+      aarch64-darwin-config-base = pkgs: mkDarwinConfigModule {
+        inherit pkgs;
       };
 
-      inherit flakeModules;
-    };
+      overlays = {
+        emacs = inputs.emacs-overlay.overlay;
+        devshell = inputs.devshell.overlays.default;
+      };
 
-    systems = [
-      "x86_64-linux"
-      "aarch64-darwin"
-    ];
+      pkgsFor = system: import inputs.nixpkgs {
+        inherit system;
+        overlays = builtins.attrValues inputs.self.overlays;
+      };
 
-    perSystem = { config, self', inputs', system, pkgs, ... }:
-      let
-        hm = inputs.home-manager.defaultPackage."${system}";
+      darwinModules = {
+        aarch64-base = aarch64-darwin-config-base (pkgsFor "aarch64-darwin");
+      };
 
-        darwinPackages =
-          if (system == "aarch64-darwin") then {
-            aarch64-darwin-config-base = (inputs.darwin.lib.darwinSystem {
-              system = "aarch64-darwin";
-              modules = [ darwinModules.aarch64-base ];
-            }).system;
-          } else { };
-      in
-        {
-          _module.args.pkgs = import inputs.nixpkgs {
-            inherit system;
-            overlays = [
-              inputs.devshell.overlays.default
-              inputs.emacs-overlay.overlays.default
-              (final: prev: {
-                hyperlink = config.packages.hyperlink;
-              })
-            ];
-          };
+      flakeModules = {
+        emacs = ./gen/emacs;
+        scala = ./gen/scala;
+        python = ./gen/python;
+        modernTs = ./gen/modern_ts;
+        homeManager = ./gen/home-manager;
+        hyperlink = ./gen/flake/hyperlink;
+      };
+    in {
+      imports = [
+        ./gen/flake/modules/homeManagerModules.nix
+        flakeModules.emacs
+        flakeModules.scala
+        flakeModules.python
+        flakeModules.modernTs
+        flakeModules.homeManager
+        flakeModules.hyperlink
+        inputs.flake-parts.flakeModules.easyOverlay
+      ];
 
-          apps = {
-            hello = {
-              type = "app";
-              program = "${pkgs.hello}/bin/hello";
-            };
-          };
+      flake = {
+        inherit overlays darwinModules;
 
-          packages = {
-            website = pkgs.callPackage ./gen/website {
-              emacs = self'.packages.emacs-ross;
-              src = ./src;
-            };
-          } // darwinPackages;
-
-          devShells.default = pkgs.devshell.mkShell {
-            name = "cromulent";
-
-            commands = [
-              {
-                name = "hm-switch";
-                help = "switch the home-manager config";
-                command = "${hm}/bin/home-manager switch --flake $PRJ_ROOT";
-              }
-              {
-                name = "serve";
-                help = "run 'hugo serve' on the local project";
-                command = "(cd $PRJ_ROOT && ${pkgs.hugo}/bin/hugo serve --disableFastRender --config tmp/hugo/config.toml)";
-              }
-            ];
-
-            packages = [
-              hm
-              pkgs.google-cloud-sdk
-              pkgs.hugo
-              pkgs.nix
-              pkgs.terraform
-            ];
-          };
-
-          overlayAttrs = {
-            hyperlink = config.packages.hyperlink;
+        homeConfigurations = {
+          "RABaker@L2LYQM57XY" = mkHomeConfig {
+            pkgs = (pkgsFor "aarch64-darwin");
+            system = "aarch64-darwin";
+            username = "RABaker";
+            homeDirectory = "/Users/RABaker";
           };
         };
-  });
+
+        inherit flakeModules;
+      };
+
+      systems = [
+        "x86_64-linux"
+        "aarch64-darwin"
+      ];
+
+      perSystem = { config, self', inputs', system, pkgs, ... }:
+        let
+          hm = inputs.home-manager.defaultPackage."${system}";
+
+          darwinPackages =
+            if (system == "aarch64-darwin") then {
+              aarch64-darwin-config-base = (inputs.darwin.lib.darwinSystem {
+                system = "aarch64-darwin";
+                modules = [ darwinModules.aarch64-base ];
+              }).system;
+            } else { };
+        in
+          {
+            _module.args.pkgs = import inputs.nixpkgs {
+              inherit system;
+              overlays = [
+                inputs.devshell.overlays.default
+                inputs.emacs-overlay.overlays.default
+                (final: prev: {
+                  hyperlink = config.packages.hyperlink;
+                })
+              ];
+            };
+
+            apps = {
+              hello = {
+                type = "app";
+                program = "${pkgs.hello}/bin/hello";
+              };
+            };
+
+            packages = {
+              website = pkgs.callPackage ./gen/website {
+                emacs = self'.packages.emacs-ross;
+                src = ./src;
+              };
+            } // darwinPackages;
+
+            devShells.default = pkgs.devshell.mkShell {
+              name = "cromulent";
+
+              commands = [
+                {
+                  name = "hm-switch";
+                  help = "switch the home-manager config";
+                  command = "${hm}/bin/home-manager switch --flake $PRJ_ROOT";
+                }
+                {
+                  name = "serve";
+                  help = "run 'hugo serve' on the local project";
+                  command = "(cd $PRJ_ROOT && ${pkgs.hugo}/bin/hugo serve --disableFastRender --config tmp/hugo/config.toml)";
+                }
+              ];
+
+              packages = [
+                hm
+                pkgs.google-cloud-sdk
+                pkgs.hugo
+                pkgs.nix
+                pkgs.terraform
+              ];
+            };
+
+            overlayAttrs = {
+              hyperlink = config.packages.hyperlink;
+            };
+          };
+    }
+  );
 #+end_src
 
 *** Home Manager modules
