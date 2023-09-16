@@ -129,7 +129,7 @@
         overlays = builtins.attrValues inputs.self.overlays;
       };
     
-      darwinConfigurationModules = {
+      darwinModules = {
         aarch64-base = aarch64-darwin-config-base (pkgsFor "aarch64-darwin");
       };
     
@@ -155,7 +155,7 @@
       ];
     
       flake = {
-        inherit overlays darwinConfigurationModules;
+        inherit overlays darwinModules;
     
         homeConfigurations = {
           "RABaker@L2LYQM57XY" = mkHomeConfig {
@@ -182,7 +182,7 @@
             if (system == "aarch64-darwin") then {
               aarch64-darwin-config-base = (inputs.darwin.lib.darwinSystem {
                 system = "aarch64-darwin";
-                modules = [ darwinConfigurationModules.aarch64-base ];
+                modules = [ darwinModules.aarch64-base ];
               }).system;
             } else { };
         in
