@@ -2515,7 +2515,7 @@ This will block +Twitter+ X cards.
 CLOSED: [2023-02-23 Thu 23:59 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: _index
-:EXPORT_HUGO_LASTMOD: [2023-09-12 Tue 23:42 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-09-16 Sat 13:10 EDT]
 :header-args+: :tangle-mode `,#o444 :mkdirp yes
 :header-args:emacs-lisp+: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444 :mkdirp yes
 :header-args:emacs-lisp+: :code-license CC0-1.0
@@ -2989,6 +2989,18 @@ daemon]] works great, the Podman client [[https://github.com/Silex/docker.el/iss
   (use-package docker
     :ensure t
     :defer t)
+#+end_src
+
+****** Emacs lock
+
+Emacs Lock is a built-in minor mode to protect buffers.  This prevents
+killing the scratch buffer, which I usually regret.
+
+#+begin_src emacs-lisp
+  (use-package emacs-lock
+    :config
+    (with-current-buffer "*scratch*"
+      (emacs-lock-mode 'kill)))
 #+end_src
 
 ****** Exiting

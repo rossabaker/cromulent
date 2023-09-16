@@ -106,6 +106,11 @@
   :ensure t
   :defer t)
 
+(use-package emacs-lock
+  :config
+  (with-current-buffer "*scratch*"
+    (emacs-lock-mode 'kill)))
+
 (setopt confirm-kill-emacs 'yes-or-no-p)
 
 (use-package display-line-numbers
