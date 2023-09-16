@@ -83,6 +83,9 @@
     };
   outputs =
     inputs:
+    
+    inputs.flake-parts.lib.mkFlake { inherit inputs; } ({ withSystem, flake-parts-lib, ... }:
+    
     let
       mkDarwinConfigModule = { pkgs }: {
         imports = [
@@ -141,8 +144,7 @@
         homeManager = ./gen/home-manager;
         hyperlink = ./gen/flake/hyperlink;
       };
-    in
-    inputs.flake-parts.lib.mkFlake { inherit inputs; } {
+    in {
       imports = [
         ./gen/flake/modules/homeManagerModules.nix
         flakeModules.emacs
@@ -241,5 +243,5 @@
               hyperlink = config.packages.hyperlink;
             };
           };
-    };
+    });
 }

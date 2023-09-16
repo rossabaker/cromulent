@@ -5210,6 +5210,9 @@ Not scintillating to read, but necessary to run
 
 #+begin_src nix :noweb-ref flake-outputs
   inputs:
+
+  inputs.flake-parts.lib.mkFlake { inherit inputs; } ({ withSystem, flake-parts-lib, ... }:
+
   let
     mkDarwinConfigModule = { pkgs }: {
       imports = [
@@ -5268,8 +5271,7 @@ Not scintillating to read, but necessary to run
       homeManager = ./gen/home-manager;
       hyperlink = ./gen/flake/hyperlink;
     };
-  in
-  inputs.flake-parts.lib.mkFlake { inherit inputs; } {
+  in {
     imports = [
       ./gen/flake/modules/homeManagerModules.nix
       flakeModules.emacs
@@ -5368,7 +5370,7 @@ Not scintillating to read, but necessary to run
             hyperlink = config.packages.hyperlink;
           };
         };
-  };
+  });
 #+end_src
 
 *** Home Manager modules
