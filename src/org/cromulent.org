@@ -5392,6 +5392,10 @@ There's no standard for Home Manager yet, but [[https://github.com/nix-community
 consistent with NixOS and has a lot of thumbs up at the bottom of the
 issue.  We'll roll with that.
 
+#+begin_details
+#+begin_summary
+=homeModules/default.nix=
+#+end_summary
 #+begin_src nix :tangle ../../gen/flake/homeModules/default.nix
   # Adapted from https://github.com/hercules-ci/flake-parts/blob/7f53fdb7bdc5bb237da7fefef12d099e4fd611ca/modules/nixosModules.nix
   # MIT License
@@ -5426,6 +5430,7 @@ issue.  We'll roll with that.
     };
   }
 #+end_src
+#+end_details
 
 ******* =darwinModules=
 
@@ -5433,6 +5438,10 @@ Like Home Manager, [[https://github.com/LnL7/nix-darwin][Nix-Darwin]] doesn't of
 modules.  The flake does provide =darwinModules= outputs, which is
 consistent.  We'll roll with it.
 
+#+begin_details
+#+begin_summary
+=darwinModules/default.nix=
+#+end_summary
 #+begin_src nix :tangle ../../gen/flake/darwinModules/default.nix
   # Adapted from https://github.com/hercules-ci/flake-parts/blob/7f53fdb7bdc5bb237da7fefef12d099e4fd611ca/modules/nixosModules.nix
   # MIT License
@@ -5467,6 +5476,7 @@ consistent.  We'll roll with it.
     };
   }
 #+end_src
+#+end_details
 
 
 *** Redirects                                                      :noexport:
