@@ -5049,7 +5049,7 @@ The Home Manager module is published to my flake as output
 CLOSED: [2022-12-25 Sun 22:14 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: /nix-flake
-:EXPORT_HUGO_LASTMOD: [2023-09-16 Sat 22:38 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-09-17 Sun 01:04 EDT]
 :header-args+: :code-license MIT
 :EXPORT_OPTIONS: h:6
 :END:
@@ -5105,23 +5105,6 @@ nix run github.com:rossabaker#hello
 }
 #+end_example
 
-*** Flake source
-
-#+begin_warning
-This isn't particularly compelling reading yet.  It needs to be made
-more "literate".
-#+end_warning
-
-#+begin_src nix :tangle ../../flake.nix :tangle-mode `,#o444 :noweb tangle
-  {
-    description = "Ross A. Baker's perfectly cromulent Nix flake";
-    inputs =
-      <<flake-inputs>>
-    outputs =
-      <<flake-outputs>>
-  }
-#+end_src
-
 ***** Flake inputs
 
 #+begin_details
@@ -5130,92 +5113,21 @@ Not scintillating to read, but necessary to run
 #+end_summary
 
 #+begin_src nix :noweb-ref flake-inputs
-  {
-    flake-parts.url = "github:hercules-ci/flake-parts";
 
-    # Core nix flakes
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-
-    # Home manager flake
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
-
-    # nix-darwin flake
-    nixpkgs-darwin.url = "github:nixos/nixpkgs/nixpkgs-22.11-darwin";
-    darwin.url = "github:LnL7/nix-darwin/master";
-    darwin.inputs.nixpkgs.follows = "nixpkgs-darwin";
-
-    # Extra community flakes
-    devshell.url = "github:numtide/devshell";
-    devshell.inputs.nixpkgs.follows = "nixpkgs";
-
-    emacs-overlay.url = "github:nix-community/emacs-overlay";
-    emacs-overlay.inputs.nixpkgs.follows = "nixpkgs";
-
-    firefox-darwin.url = "github:bandithedoge/nixpkgs-firefox-darwin";
-    firefox-darwin.inputs.nixpkgs.follows = "nixpkgs-darwin";
-
-    # Emacs packages
-    ammonite-term-repl = {
-      url = "github:zwild/ammonite-term-repl";
-      flake = false;
-    };
-
-    fill-sentences-correctly = {
-      url = "github:duckwork/fill-sentences-correctly.el";
-      flake = false;
-    };
-
-    git-related = {
-      url = "git+https://codeberg.org/rossabaker/git-related";
-      flake = false;
-    };
-
-    hocon-mode = {
-      url = "github:jxq0/hocon-mode";
-      flake = false;
-    };
-
-    ob-ammonite = {
-      url = "github:zwild/ob-ammonite";
-      flake = false;
-    };
-
-    on-el = {
-      url = "gitlab:ajgrf/on.el";
-      flake = false;
-    };
-
-    scala-mode = {
-      url = "github:Kazark/emacs-scala-mode?ref=scala3";
-      flake = false;
-    };
-
-    unmodified-buffer = {
-      url = "github:arthurcgusmao/unmodified-buffer";
-      flake = false;
-    };
-
-    emacs-src.url = "github:emacs-mirror/emacs/emacs-29";
-    emacs-src.flake = false;
-
-    jinx = {
-      url = "github:minad/jinx";
-      flake = false;
-    };
-
-    # Disabled pending license
-    #   copilot-el = {
-    #     url = "github:zerolfx/copilot.el";
-    #     flake = false;
-    #   };
-  };
 #+end_src
 #+end_details
 
-***** Flake outputs
+*** Flake outputs
 
-#+begin_src nix :noweb-ref flake-outputs
+#+begin_warning
+This isn't particularly compelling reading yet.  It needs to be made
+more "literate".
+#+end_warning
+
+Fellow functional programmers rejoice: a flake's outputs are a
+function of its inputs!
+
+#+begin_src nix :tangle ../../gen/flake/outputs/default.nix
   inputs:
 
   inputs.flake-parts.lib.mkFlake { inherit inputs; } (
@@ -5225,18 +5137,18 @@ Not scintillating to read, but necessary to run
       inherit (flake-parts-lib) importApply;
 
       flakeModules = {
-        homeModules = ./gen/flake/homeModules;
-        darwinModules = ./gen/flake/darwinModules;
-        garnix = ./gen/flake/garnix;
-        podman = ./gen/flake/podman;
-        postgresql = ./gen/flake/postgresql;
-        nixDarwin = importApply ./gen/nix-darwin { inherit (inputs) self; };
-        emacs = ./gen/emacs;
-        scala = ./gen/scala;
-        python = ./gen/python;
-        modernTs = ./gen/modern_ts;
-        homeManager = ./gen/home-manager;
-        hyperlink = ./gen/flake/hyperlink;
+        homeModules = ../homeModules;
+        darwinModules = ../darwinModules;
+        garnix = ../garnix;
+        podman = ../podman;
+        postgresql = ../postgresql;
+        nixDarwin = importApply ../../nix-darwin { inherit (inputs) self; };
+        emacs = ../../emacs;
+        scala = ../../scala;
+        python = ../../python;
+        modernTs = ../../modern_ts;
+        homeManager = ../../home-manager;
+        hyperlink = ../hyperlink;
       };
 
       mkHomeConfig = { pkgs, system, username, homeDirectory }:
@@ -5338,7 +5250,7 @@ Not scintillating to read, but necessary to run
             };
 
             packages = {
-              website = pkgs.callPackage ./gen/website {
+              website = pkgs.callPackage ../../website {
                 emacs = self'.packages.emacs-ross;
                 src = ./src;
               };
@@ -5374,10 +5286,10 @@ Not scintillating to read, but necessary to run
             };
           };
     }
-  );
+  )
 #+end_src
 
-****** Non-standard outputs
+**** Non-standard outputs
 
 NixOS modules are standardized by the [[https://nixos.wiki/wiki/Flakes#Output_schema][flake output schema]] under
 =nixosModules=.  Standard outputs receive corresponding [[https://flake.parts/options/flake-parts.html?highlight=nixosModules#opt-flake.nixosModules][Flake-Parts
@@ -5388,7 +5300,7 @@ merge Home and Darwin modules across multiple files.
 Flake-Parts isn't magic.  It imports a [[https://github.com/hercules-ci/flake-parts/blob/7f53fdb7bdc5bb237da7fefef12d099e4fd611ca/modules/nixosModules.nix][=nixosModules= module]].  We can
 do the same, adapting that code to other systems!
 
-******* =homeModules=
+***** =homeModules=
 
 There's no standard for Home Manager yet, but [[https://github.com/nix-community/home-manager/issues/1783][=homeModules=]] is
 consistent with NixOS and has a lot of thumbs up at the bottom of the
@@ -5434,7 +5346,7 @@ issue.  We'll roll with that.
 #+end_src
 #+end_details
 
-******* =darwinModules=
+***** =darwinModules=
 
 Like Home Manager, [[https://github.com/LnL7/nix-darwin][Nix-Darwin]] doesn't offer a standard output for
 modules.  The flake does provide =darwinModules= outputs, which is
@@ -5480,6 +5392,106 @@ consistent.  We'll roll with it.
 #+end_src
 #+end_details
 
+*** Flake skeleton
+
+A flake is just a =description=, =inputs=, and =outputs=.  The
+outputs, covered above, are the exciting part.  But this makes it a
+flake.
+
+#+begin_description
+#+begin_summary
+Humdrum Nix flake exoskeleton and inputs
+#+end_summary
+
+#+begin_src nix :tangle ../../flake.nix :tangle-mode `,#o444 :noweb tangle
+  {
+    description = "Ross A. Baker's perfectly cromulent Nix flake";
+
+    outputs = inputs: import ./gen/flake/outputs inputs;
+
+    inputs = {
+      flake-parts.url = "github:hercules-ci/flake-parts";
+
+      # Core nix flakes
+      nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+
+      # Home manager flake
+      home-manager.url = "github:nix-community/home-manager";
+      home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+      # nix-darwin flake
+      nixpkgs-darwin.url = "github:nixos/nixpkgs/nixpkgs-22.11-darwin";
+      darwin.url = "github:LnL7/nix-darwin/master";
+      darwin.inputs.nixpkgs.follows = "nixpkgs-darwin";
+
+      # Extra community flakes
+      devshell.url = "github:numtide/devshell";
+      devshell.inputs.nixpkgs.follows = "nixpkgs";
+
+      emacs-overlay.url = "github:nix-community/emacs-overlay";
+      emacs-overlay.inputs.nixpkgs.follows = "nixpkgs";
+
+      firefox-darwin.url = "github:bandithedoge/nixpkgs-firefox-darwin";
+      firefox-darwin.inputs.nixpkgs.follows = "nixpkgs-darwin";
+
+      # Emacs packages
+      ammonite-term-repl = {
+        url = "github:zwild/ammonite-term-repl";
+        flake = false;
+      };
+
+      fill-sentences-correctly = {
+        url = "github:duckwork/fill-sentences-correctly.el";
+        flake = false;
+      };
+
+      git-related = {
+        url = "git+https://codeberg.org/rossabaker/git-related";
+        flake = false;
+      };
+
+      hocon-mode = {
+        url = "github:jxq0/hocon-mode";
+        flake = false;
+      };
+
+      ob-ammonite = {
+        url = "github:zwild/ob-ammonite";
+        flake = false;
+      };
+
+      on-el = {
+        url = "gitlab:ajgrf/on.el";
+        flake = false;
+      };
+
+      scala-mode = {
+        url = "github:Kazark/emacs-scala-mode?ref=scala3";
+        flake = false;
+      };
+
+      unmodified-buffer = {
+        url = "github:arthurcgusmao/unmodified-buffer";
+        flake = false;
+      };
+
+      emacs-src.url = "github:emacs-mirror/emacs/emacs-29";
+      emacs-src.flake = false;
+
+      jinx = {
+        url = "github:minad/jinx";
+        flake = false;
+      };
+
+      # Disabled pending license
+      #   copilot-el = {
+      #     url = "github:zerolfx/copilot.el";
+      #     flake = false;
+      #   };
+    };
+  }
+#+end_src
+#+end_description
 
 *** Redirects                                                      :noexport:
 
