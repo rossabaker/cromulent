@@ -4779,11 +4779,11 @@ is =use-package= bindings.
   ;;; rab-ox-lisp ends here
 #+end_src
 
-** DONE Garnix GitHub Action
+** DONE Garnix
 CLOSED: [2023-06-23 Fri 00:26 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: garnix
-:EXPORT_HUGO_LASTMOD: [2023-09-16 Sat 00:20 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-09-16 Sat 22:37 EDT]
 :header-args+: :code-license CC0-1.0
 :header-args:nix+: :code-license MIT
 :END:
@@ -4808,19 +4808,25 @@ and my home-manager configuration.
 
 Everything Garnix builds goes into the [[https://garnix.io/docs/caching][Garnix cache]].  You probably
 want the substituter and public key if you're consuming my flake.
+This config is trivial, but can also be imported from my flake into
+your Darwin configuration as =darwinModules.garnix=.
 
 #+begin_src nix :tangle ../../gen/flake/garnix/default.nix
-  { config, lib, pkgs, ... }:
-
+  { ... }:
   {
-    nix = {
-      settings.substituters = [
-        "https://cache.garnix.io/"
-      ];
-      settings.trusted-public-keys = [
-        "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
-      ];
-    };
+    flake.darwinModules.garnix = (
+      { ... }:
+      {
+        nix = {
+          settings.substituters = [
+            "https://cache.garnix.io/"
+          ];
+          settings.trusted-public-keys = [
+            "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
+          ];
+        };
+      }
+    );
   }
 #+end_src
 
@@ -5043,7 +5049,7 @@ The Home Manager module is published to my flake as output
 CLOSED: [2022-12-25 Sun 22:14 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: /nix-flake
-:EXPORT_HUGO_LASTMOD: [2023-09-16 Sat 20:44 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-09-16 Sat 22:38 EDT]
 :header-args+: :code-license MIT
 :EXPORT_OPTIONS: h:6
 :END:
@@ -5216,21 +5222,19 @@ Not scintillating to read, but necessary to run
     { withSystem, flake-parts-lib, ... }:
 
     let
+      inherit (flake-parts-lib) importApply;
+
       flakeModules = {
         homeModules = ./gen/flake/homeModules;
         darwinModules = ./gen/flake/darwinModules;
+        garnix = ./gen/flake/garnix;
+        nixDarwin = importApply ./gen/nix-darwin { inherit (inputs) self; };
         emacs = ./gen/emacs;
         scala = ./gen/scala;
         python = ./gen/python;
         modernTs = ./gen/modern_ts;
         homeManager = ./gen/home-manager;
         hyperlink = ./gen/flake/hyperlink;
-      };
-
-      mkDarwinConfigModule = { pkgs }: {
-        imports = [
-          ./gen/nix-darwin
-        ];
       };
 
       mkHomeConfig = { pkgs, system, username, homeDirectory }:
@@ -5254,10 +5258,6 @@ Not scintillating to read, but necessary to run
           extraSpecialArgs = { inherit inputs; };
         };
 
-      aarch64-darwin-config-base = pkgs: mkDarwinConfigModule {
-        inherit pkgs;
-      };
-
       overlays = {
         emacs = inputs.emacs-overlay.overlay;
         devshell = inputs.devshell.overlays.default;
@@ -5267,14 +5267,12 @@ Not scintillating to read, but necessary to run
         inherit system;
         overlays = builtins.attrValues inputs.self.overlays;
       };
-
-      darwinModules = {
-        aarch64-base = aarch64-darwin-config-base (pkgsFor "aarch64-darwin");
-      };
     in {
       imports = [
         flakeModules.homeModules
         flakeModules.darwinModules
+        flakeModules.garnix
+        flakeModules.nixDarwin
         flakeModules.emacs
         flakeModules.scala
         flakeModules.python
@@ -5285,7 +5283,7 @@ Not scintillating to read, but necessary to run
       ];
 
       flake = {
-        inherit overlays darwinModules;
+        inherit overlays;
 
         homeConfigurations = {
           "RABaker@L2LYQM57XY" = mkHomeConfig {
@@ -5312,7 +5310,7 @@ Not scintillating to read, but necessary to run
             if (system == "aarch64-darwin") then {
               aarch64-darwin-config-base = (inputs.darwin.lib.darwinSystem {
                 system = "aarch64-darwin";
-                modules = [ darwinModules.aarch64-base ];
+                modules = [ inputs.self.darwinModules.default ];
               }).system;
             } else { };
         in
@@ -5560,7 +5558,7 @@ CLOSED: [2023-08-07 Mon 09:48 EDT]
 :PROPERTIES:
 :EXPORT_HUGO_BUNDLE: nix-darwin
 :EXPORT_FILE_NAME: _index
-:EXPORT_HUGO_LASTMOD: [2023-09-16 Sat 15:14 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-09-16 Sat 22:38 EDT]
 :END:
 
 #+begin_description
@@ -5581,65 +5579,70 @@ further.
 #+end_info
 
 #+begin_src nix :tangle ../../gen/nix-darwin/default.nix
-  { config, pkgs, ... }:
-
+  localFlake:
+  { ... }:
   {
-    imports = [
-      ./podman.nix
-      ./postgresql.nix
-      ../flake/garnix
-    ];
+    flake.darwinModules.default = (
+      { config, pkgs, self, ... }:
+      {
+        imports = [
+          ./podman.nix
+          ./postgresql.nix
+          localFlake.self.darwinModules.garnix
+        ];
 
-    # List packages installed in system profile. To search by name, run:
-    # $ nix-env -qaP | grep wget
-    environment.systemPackages =
-      [
-        pkgs.cachix
-        pkgs.docker
-      ];
+        # List packages installed in system profile. To search by name, run:
+        # $ nix-env -qaP | grep wget
+        environment.systemPackages =
+          [
+            pkgs.cachix
+            pkgs.docker
+          ];
 
-    # Use a custom configuration.nix location.
-    # $ darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin/configuration.nix
-    # environment.darwinConfig = "$HOME/.config/nixpkgs/darwin/configuration.nix";
+        # Use a custom configuration.nix location.
+        # $ darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin/configuration.nix
+        # environment.darwinConfig = "$HOME/.config/nixpkgs/darwin/configuration.nix";
 
-    # Auto upgrade nix package and the daemon service.
-    # services.nix-daemon.enable = true;
-    nix = {
-      settings.substituters = [
-        "https://nix-community.cachix.org/"
-        "https://rossabaker.cachix.org/"
-        "https://typelevel.cachix.org/"
-      ];
-      settings.trusted-public-keys = [
-        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-        "rossabaker.cachix.org-1:KK/CQTeAGEurCUBy3nDl9PdR+xX+xtWQ0C/GpNN6kuw="
-        "typelevel.cachix.org-1:UnD9fMAIpeWfeil1V/xWUZa2g758ZHk8DvGCd/keAkg="
-      ];
-      package = pkgs.nixFlakes;
-      extraOptions = ''
+        # Auto upgrade nix package and the daemon service.
+        # services.nix-daemon.enable = true;
+        nix = {
+          settings.substituters = [
+            "https://nix-community.cachix.org/"
+            "https://rossabaker.cachix.org/"
+            "https://typelevel.cachix.org/"
+          ];
+          settings.trusted-public-keys = [
+            "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+            "rossabaker.cachix.org-1:KK/CQTeAGEurCUBy3nDl9PdR+xX+xtWQ0C/GpNN6kuw="
+            "typelevel.cachix.org-1:UnD9fMAIpeWfeil1V/xWUZa2g758ZHk8DvGCd/keAkg="
+          ];
+          package = pkgs.nixFlakes;
+          extraOptions = ''
         experimental-features = nix-command flakes
       '';
-    };
+        };
 
-    # Create /etc/bashrc that loads the nix-darwin environment.
-    programs.zsh.enable = true; # default shell on catalina
-    # programs.fish.enable = true;
+        # Create /etc/bashrc that loads the nix-darwin environment.
+        programs.zsh.enable = true; # default shell on catalina
+        # programs.fish.enable = true;
 
-    services.nix-daemon.enable = true;
+        services.nix-daemon.enable = true;
 
-    system.keyboard = {
-      enableKeyMapping = true;
-      remapCapsLockToControl = true;
-    };
+        system.keyboard = {
+          enableKeyMapping = true;
+          remapCapsLockToControl = true;
+        };
 
-    # Used for backwards compatibility, please read the changelog before changing.
-    # $ darwin-rebuild changelog
-    system.stateVersion = 4;
+        # Used for backwards compatibility, please read the changelog before changing.
+        # $ darwin-rebuild changelog
+        system.stateVersion = 4;
 
-    fonts = {
-      fontDir.enable = true;
-      fonts = [ pkgs.ibm-plex ];
-    };
+        fonts = {
+          fontDir.enable = true;
+          fonts = [ pkgs.ibm-plex ];
+        };
+      }
+    );
   }
 #+end_src
 

@@ -88,21 +88,19 @@
       { withSystem, flake-parts-lib, ... }:
     
       let
+        inherit (flake-parts-lib) importApply;
+    
         flakeModules = {
           homeModules = ./gen/flake/homeModules;
           darwinModules = ./gen/flake/darwinModules;
+          garnix = ./gen/flake/garnix;
+          nixDarwin = importApply ./gen/nix-darwin { inherit (inputs) self; };
           emacs = ./gen/emacs;
           scala = ./gen/scala;
           python = ./gen/python;
           modernTs = ./gen/modern_ts;
           homeManager = ./gen/home-manager;
           hyperlink = ./gen/flake/hyperlink;
-        };
-    
-        mkDarwinConfigModule = { pkgs }: {
-          imports = [
-            ./gen/nix-darwin
-          ];
         };
     
         mkHomeConfig = { pkgs, system, username, homeDirectory }:
@@ -126,10 +124,6 @@
             extraSpecialArgs = { inherit inputs; };
           };
     
-        aarch64-darwin-config-base = pkgs: mkDarwinConfigModule {
-          inherit pkgs;
-        };
-    
         overlays = {
           emacs = inputs.emacs-overlay.overlay;
           devshell = inputs.devshell.overlays.default;
@@ -139,14 +133,12 @@
           inherit system;
           overlays = builtins.attrValues inputs.self.overlays;
         };
-    
-        darwinModules = {
-          aarch64-base = aarch64-darwin-config-base (pkgsFor "aarch64-darwin");
-        };
       in {
         imports = [
           flakeModules.homeModules
           flakeModules.darwinModules
+          flakeModules.garnix
+          flakeModules.nixDarwin
           flakeModules.emacs
           flakeModules.scala
           flakeModules.python
@@ -157,7 +149,7 @@
         ];
     
         flake = {
-          inherit overlays darwinModules;
+          inherit overlays;
     
           homeConfigurations = {
             "RABaker@L2LYQM57XY" = mkHomeConfig {
@@ -184,7 +176,7 @@
               if (system == "aarch64-darwin") then {
                 aarch64-darwin-config-base = (inputs.darwin.lib.darwinSystem {
                   system = "aarch64-darwin";
-                  modules = [ darwinModules.aarch64-base ];
+                  modules = [ inputs.self.darwinModules.default ];
                 }).system;
               } else { };
           in
