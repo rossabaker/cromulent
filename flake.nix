@@ -90,6 +90,7 @@
       let
         flakeModules = {
           homeModules = ./gen/flake/homeModules;
+          darwinModules = ./gen/flake/darwinModules;
           emacs = ./gen/emacs;
           scala = ./gen/scala;
           python = ./gen/python;
@@ -145,6 +146,7 @@
       in {
         imports = [
           flakeModules.homeModules
+          flakeModules.darwinModules
           flakeModules.emacs
           flakeModules.scala
           flakeModules.python

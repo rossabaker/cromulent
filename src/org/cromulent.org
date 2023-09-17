@@ -5217,6 +5217,7 @@ Not scintillating to read, but necessary to run
     let
       flakeModules = {
         homeModules = ./gen/flake/homeModules;
+        darwinModules = ./gen/flake/darwinModules;
         emacs = ./gen/emacs;
         scala = ./gen/scala;
         python = ./gen/python;
@@ -5272,6 +5273,7 @@ Not scintillating to read, but necessary to run
     in {
       imports = [
         flakeModules.homeModules
+        flakeModules.darwinModules
         flakeModules.emacs
         flakeModules.scala
         flakeModules.python
@@ -5415,6 +5417,47 @@ issue.  We'll roll with that.
           apply = mapAttrs (k: v: { _file = "${toString self.outPath}/flake.nix#homeModules.${k}"; imports = [ v ]; });
           description = ''
             Home Manager modules.
+
+            You may use this for reusable pieces of configuration, service modules, etc.
+          '';
+        };
+      };
+    };
+  }
+#+end_src
+
+******* =darwinModules=
+
+Like Home Manager, [[https://github.com/LnL7/nix-darwin][Nix-Darwin]] doesn't offer a standard output for
+modules.  The flake does provide =darwinModules= outputs, which is
+consistent.  We'll roll with it.
+
+#+begin_src nix :tangle ../../gen/flake/darwinModules/default.nix
+  # Adapted from https://github.com/hercules-ci/flake-parts/blob/7f53fdb7bdc5bb237da7fefef12d099e4fd611ca/modules/nixosModules.nix
+  # MIT License
+  # Copyright (c) 2021 Hercules CI
+
+  { self, lib, flake-parts-lib, ... }:
+
+  let
+    inherit (lib)
+      mapAttrs
+      mkOption
+      types
+    ;
+    inherit (flake-parts-lib)
+      mkSubmoduleOptions
+    ;
+  in
+  {
+    options = {
+      flake = mkSubmoduleOptions {
+        darwinModules = mkOption {
+          type = types.lazyAttrsOf types.unspecified;
+          default = { };
+          apply = mapAttrs (k: v: { _file = "${toString self.outPath}/flake.nix#darwinModules.${k}"; imports = [ v ]; });
+          description = ''
+            Nix-Darwin modules.
 
             You may use this for reusable pieces of configuration, service modules, etc.
           '';
