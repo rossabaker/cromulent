@@ -5045,6 +5045,7 @@ CLOSED: [2022-12-25 Sun 22:14 EST]
 :EXPORT_FILE_NAME: /nix-flake
 :EXPORT_HUGO_LASTMOD: [2023-09-16 Sat 20:44 EDT]
 :header-args+: :code-license MIT
+:EXPORT_OPTIONS: h:6
 :END:
 
 #+begin_description
