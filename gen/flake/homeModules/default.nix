@@ -18,10 +18,10 @@ in
 {
   options = {
     flake = mkSubmoduleOptions {
-      homeManagerModules = mkOption {
+      homeModules = mkOption {
         type = types.lazyAttrsOf types.unspecified;
         default = { };
-        apply = mapAttrs (k: v: { _file = "${toString self.outPath}/flake.nix#homeManagerModules.${k}"; imports = [ v ]; });
+        apply = mapAttrs (k: v: { _file = "${toString self.outPath}/flake.nix#homeModules.${k}"; imports = [ v ]; });
       };
     };
   };

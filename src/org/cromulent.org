@@ -4355,7 +4355,7 @@ Finally, we add a Home Manager module based on the configured app.
       };
     };
     flake = {
-      homeManagerModules.emacs = moduleWithSystem (
+      homeModules.emacs = moduleWithSystem (
         perSystem@{ config, pkgs }: {
           imports = [
             <<emacs-home-packages>>
@@ -4923,11 +4923,11 @@ madness up until 1.8.0.
 *** Flake module
 
 The Home Manager module is published to my flake as output
-~homeManagerModules.scala~.
+~homeModules.scala~.
 
 #+begin_src nix
   { moduleWithSystem, ... }: {
-    flake.homeManagerModules.scala = moduleWithSystem(
+    flake.homeModules.scala = moduleWithSystem(
       perSystem@{ pkgs }: {
         home.file = {
           ".sbt/1.0/sonatype.sbt".source = ./sonatype.sbt;
@@ -5020,11 +5020,11 @@ version.
 *** Flake module
 
 The Home Manager module is published to my flake as output
-~homeManagerModules.python~.
+~homeModules.python~.
 
 #+begin_src nix
   { moduleWithSystem, ... }: {
-    flake.homeManagerModules.python = moduleWithSystem(
+    flake.homeModules.python = moduleWithSystem(
       perSystem@{ pkgs }: {
         home.file = {
           ".config/zsh/conda-setup".source = ./conda-setup;
@@ -5043,7 +5043,7 @@ The Home Manager module is published to my flake as output
 CLOSED: [2022-12-25 Sun 22:14 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: /nix-flake
-:EXPORT_HUGO_LASTMOD: [2023-09-16 Sat 15:13 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-09-16 Sat 20:14 EDT]
 :header-args+: :code-license MIT
 :END:
 
@@ -5241,10 +5241,10 @@ Not scintillating to read, but necessary to run
               };
               nixpkgs.overlays = [ inputs.emacs-overlay.overlay ];
             }
-            inputs.self.homeManagerModules.base
-            inputs.self.homeManagerModules.emacs
-            inputs.self.homeManagerModules.scala
-            inputs.self.homeManagerModules.python
+            inputs.self.homeModules.base
+            inputs.self.homeModules.emacs
+            inputs.self.homeModules.scala
+            inputs.self.homeModules.python
             ./modules/work
           ];
           # Pass our flake inputs into the config
@@ -5270,7 +5270,7 @@ Not scintillating to read, but necessary to run
       };
     in {
       imports = [
-        ./gen/flake/modules/homeManagerModules.nix
+        ./gen/flake/homeModules
         flakeModules.emacs
         flakeModules.scala
         flakeModules.python
@@ -5376,11 +5376,11 @@ Not scintillating to read, but necessary to run
 Our flake is split into multiple modules, via the ~flake.flakeModules~
 configuration.  These flake modules may themselves provide Home
 Manager modules.  The ~flake~ schema supports other types of modules,
-like ~nixosModules~, but ~homeManagerModules~ is unofficial.  As such,
+like ~nixosModules~, but ~homeModules~ is unofficial.  As such,
 it's not handled by Flake Parts like [[https://github.com/hercules-ci/flake-parts/blob/006c75898cf814ef9497252b022e91c946ba8e17/modules/nixosModules.nix][~nixosModules~]] is.  We fix that
 with a copy and paste:
 
-#+begin_src nix :tangle ../../gen/flake/modules/homeManagerModules.nix
+#+begin_src nix :tangle ../../gen/flake/homeModules/default.nix
   # Adapted from https://github.com/hercules-ci/flake-parts/blob/006c75898cf814ef9497252b022e91c946ba8e17/modules/nixosModules.nix
   # MIT License
   # Copyright (c) 2021 Hercules CI
@@ -5401,10 +5401,10 @@ with a copy and paste:
   {
     options = {
       flake = mkSubmoduleOptions {
-        homeManagerModules = mkOption {
+        homeModules = mkOption {
           type = types.lazyAttrsOf types.unspecified;
           default = { };
-          apply = mapAttrs (k: v: { _file = "${toString self.outPath}/flake.nix#homeManagerModules.${k}"; imports = [ v ]; });
+          apply = mapAttrs (k: v: { _file = "${toString self.outPath}/flake.nix#homeModules.${k}"; imports = [ v ]; });
         };
       };
     };
@@ -5443,7 +5443,7 @@ further.
 
 #+begin_src nix :tangle ../../gen/home-manager/default.nix
   { moduleWithSystem, ... }: {
-    flake.homeManagerModules.base = moduleWithSystem(
+    flake.homeModules.base = moduleWithSystem(
       perSystem@{ pkgs }: {
         # Comment out if you wish to disable unfree packages for your system
         nixpkgs.config.allowUnfree = true;

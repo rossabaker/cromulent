@@ -1,5 +1,5 @@
 { moduleWithSystem, ... }: {
-  flake.homeManagerModules.base = moduleWithSystem(
+  flake.homeModules.base = moduleWithSystem(
     perSystem@{ pkgs }: {
       # Comment out if you wish to disable unfree packages for your system
       nixpkgs.config.allowUnfree = true;

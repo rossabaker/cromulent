@@ -114,10 +114,10 @@
                 };
                 nixpkgs.overlays = [ inputs.emacs-overlay.overlay ];
               }
-              inputs.self.homeManagerModules.base
-              inputs.self.homeManagerModules.emacs
-              inputs.self.homeManagerModules.scala
-              inputs.self.homeManagerModules.python
+              inputs.self.homeModules.base
+              inputs.self.homeModules.emacs
+              inputs.self.homeModules.scala
+              inputs.self.homeModules.python
               ./modules/work
             ];
             # Pass our flake inputs into the config
@@ -143,7 +143,7 @@
         };
       in {
         imports = [
-          ./gen/flake/modules/homeManagerModules.nix
+          ./gen/flake/homeModules
           flakeModules.emacs
           flakeModules.scala
           flakeModules.python

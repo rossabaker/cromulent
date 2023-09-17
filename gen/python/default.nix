@@ -1,5 +1,5 @@
 { moduleWithSystem, ... }: {
-  flake.homeManagerModules.python = moduleWithSystem(
+  flake.homeModules.python = moduleWithSystem(
     perSystem@{ pkgs }: {
       home.file = {
         ".config/zsh/conda-setup".source = ./conda-setup;

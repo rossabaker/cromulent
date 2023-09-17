@@ -111,7 +111,7 @@
     };
   };
   flake = {
-    homeManagerModules.emacs = moduleWithSystem (
+    homeModules.emacs = moduleWithSystem (
       perSystem@{ config, pkgs }: {
         imports = [
           ({ pkgs, ...}: {
