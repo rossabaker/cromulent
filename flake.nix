@@ -89,6 +89,7 @@
     
       let
         flakeModules = {
+          homeModules = ./gen/flake/homeModules;
           emacs = ./gen/emacs;
           scala = ./gen/scala;
           python = ./gen/python;
@@ -143,7 +144,7 @@
         };
       in {
         imports = [
-          ./gen/flake/homeModules
+          flakeModules.homeModules
           flakeModules.emacs
           flakeModules.scala
           flakeModules.python

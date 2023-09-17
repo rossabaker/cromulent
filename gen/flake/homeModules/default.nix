@@ -1,14 +1,13 @@
-# Adapted from https://github.com/hercules-ci/flake-parts/blob/006c75898cf814ef9497252b022e91c946ba8e17/modules/nixosModules.nix
+# Adapted from https://github.com/hercules-ci/flake-parts/blob/7f53fdb7bdc5bb237da7fefef12d099e4fd611ca/modules/nixosModules.nix
 # MIT License
 # Copyright (c) 2021 Hercules CI
 
-{ config, self, lib, flake-parts-lib, ... }:
+{ self, lib, flake-parts-lib, ... }:
+
 let
   inherit (lib)
-    filterAttrs
     mapAttrs
     mkOption
-    optionalAttrs
     types
   ;
   inherit (flake-parts-lib)
@@ -22,6 +21,11 @@ in
         type = types.lazyAttrsOf types.unspecified;
         default = { };
         apply = mapAttrs (k: v: { _file = "${toString self.outPath}/flake.nix#homeModules.${k}"; imports = [ v ]; });
+        description = ''
+          Home Manager modules.
+
+          You may use this for reusable pieces of configuration, service modules, etc.
+        '';
       };
     };
   };

@@ -5043,7 +5043,7 @@ The Home Manager module is published to my flake as output
 CLOSED: [2022-12-25 Sun 22:14 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: /nix-flake
-:EXPORT_HUGO_LASTMOD: [2023-09-16 Sat 20:14 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-09-16 Sat 20:44 EDT]
 :header-args+: :code-license MIT
 :END:
 
@@ -5216,6 +5216,7 @@ Not scintillating to read, but necessary to run
 
     let
       flakeModules = {
+        homeModules = ./gen/flake/homeModules;
         emacs = ./gen/emacs;
         scala = ./gen/scala;
         python = ./gen/python;
@@ -5270,7 +5271,7 @@ Not scintillating to read, but necessary to run
       };
     in {
       imports = [
-        ./gen/flake/homeModules
+        flakeModules.homeModules
         flakeModules.emacs
         flakeModules.scala
         flakeModules.python
@@ -5371,27 +5372,34 @@ Not scintillating to read, but necessary to run
   );
 #+end_src
 
-*** Home Manager modules
+****** Non-standard outputs
 
-Our flake is split into multiple modules, via the ~flake.flakeModules~
-configuration.  These flake modules may themselves provide Home
-Manager modules.  The ~flake~ schema supports other types of modules,
-like ~nixosModules~, but ~homeModules~ is unofficial.  As such,
-it's not handled by Flake Parts like [[https://github.com/hercules-ci/flake-parts/blob/006c75898cf814ef9497252b022e91c946ba8e17/modules/nixosModules.nix][~nixosModules~]] is.  We fix that
-with a copy and paste:
+NixOS modules are standardized by the [[https://nixos.wiki/wiki/Flakes#Output_schema][flake output schema]] under
+=nixosModules=.  Standard outputs receive corresponding [[https://flake.parts/options/flake-parts.html?highlight=nixosModules#opt-flake.nixosModules][Flake-Parts
+options]].  Alas, there is not yet a standard answer for Home Manager
+or Nix-Darwin.  Without Flake-Parts support, Nix doesn't know how to
+merge Home and Darwin modules across multiple files.
+
+Flake-Parts isn't magic.  It imports a [[https://github.com/hercules-ci/flake-parts/blob/7f53fdb7bdc5bb237da7fefef12d099e4fd611ca/modules/nixosModules.nix][=nixosModules= module]].  We can
+do the same, adapting that code to other systems!
+
+******* =homeModules=
+
+There's no standard for Home Manager yet, but [[https://github.com/nix-community/home-manager/issues/1783][=homeModules=]] is
+consistent with NixOS and has a lot of thumbs up at the bottom of the
+issue.  We'll roll with that.
 
 #+begin_src nix :tangle ../../gen/flake/homeModules/default.nix
-  # Adapted from https://github.com/hercules-ci/flake-parts/blob/006c75898cf814ef9497252b022e91c946ba8e17/modules/nixosModules.nix
+  # Adapted from https://github.com/hercules-ci/flake-parts/blob/7f53fdb7bdc5bb237da7fefef12d099e4fd611ca/modules/nixosModules.nix
   # MIT License
   # Copyright (c) 2021 Hercules CI
 
-  { config, self, lib, flake-parts-lib, ... }:
+  { self, lib, flake-parts-lib, ... }:
+
   let
     inherit (lib)
-      filterAttrs
       mapAttrs
       mkOption
-      optionalAttrs
       types
     ;
     inherit (flake-parts-lib)
@@ -5405,11 +5413,15 @@ with a copy and paste:
           type = types.lazyAttrsOf types.unspecified;
           default = { };
           apply = mapAttrs (k: v: { _file = "${toString self.outPath}/flake.nix#homeModules.${k}"; imports = [ v ]; });
+          description = ''
+            Home Manager modules.
+
+            You may use this for reusable pieces of configuration, service modules, etc.
+          '';
         };
       };
     };
   }
-
 #+end_src
 
 
