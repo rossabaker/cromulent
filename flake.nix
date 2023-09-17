@@ -95,6 +95,7 @@
           darwinModules = ./gen/flake/darwinModules;
           garnix = ./gen/flake/garnix;
           podman = ./gen/flake/podman;
+          postgresql = ./gen/flake/postgresql;
           nixDarwin = importApply ./gen/nix-darwin { inherit (inputs) self; };
           emacs = ./gen/emacs;
           scala = ./gen/scala;
@@ -140,6 +141,7 @@
           flakeModules.darwinModules
           flakeModules.garnix
           flakeModules.podman
+          flakeModules.postgresql
           flakeModules.nixDarwin
           flakeModules.emacs
           flakeModules.scala
