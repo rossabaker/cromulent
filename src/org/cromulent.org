@@ -5228,6 +5228,7 @@ Not scintillating to read, but necessary to run
         homeModules = ./gen/flake/homeModules;
         darwinModules = ./gen/flake/darwinModules;
         garnix = ./gen/flake/garnix;
+        podman = ./gen/flake/podman;
         nixDarwin = importApply ./gen/nix-darwin { inherit (inputs) self; };
         emacs = ./gen/emacs;
         scala = ./gen/scala;
@@ -5272,6 +5273,7 @@ Not scintillating to read, but necessary to run
         flakeModules.homeModules
         flakeModules.darwinModules
         flakeModules.garnix
+        flakeModules.podman
         flakeModules.nixDarwin
         flakeModules.emacs
         flakeModules.scala
@@ -5553,12 +5555,12 @@ further.
   }
 #+end_src
 
-** DONE Nix-Darwin            :nix:macos:nix_darwin:postgresql:podman:docker:
+** DONE Nix-Darwin            :nix:macos:nix_darwin:postgresql:
 CLOSED: [2023-08-07 Mon 09:48 EDT]
 :PROPERTIES:
 :EXPORT_HUGO_BUNDLE: nix-darwin
 :EXPORT_FILE_NAME: _index
-:EXPORT_HUGO_LASTMOD: [2023-09-16 Sat 22:38 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-09-16 Sat 22:52 EDT]
 :END:
 
 #+begin_description
@@ -5586,9 +5588,9 @@ further.
       { config, pkgs, self, ... }:
       {
         imports = [
-          ./podman.nix
           ./postgresql.nix
           localFlake.self.darwinModules.garnix
+          localFlake.self.darwinModules.podman
         ];
 
         # List packages installed in system profile. To search by name, run:
@@ -5643,39 +5645,6 @@ further.
         };
       }
     );
-  }
-#+end_src
-
-*** Docker
-
-There's no Docker service built into nix-darwin, but [[https://podman.io/][Podman]] has been
-an effective substitute thus far.
-
-#+begin_src nix :tangle ../../gen/nix-darwin/podman.nix
-  { config, lib, pkgs, ... }:
-
-  {
-    # List packages installed in system profile. To search by name, run:
-    # $ nix-env -qaP | grep wget
-    environment.systemPackages =
-      [
-        pkgs.podman
-        pkgs.qemu
-        pkgs.xz
-      ];
-
-    environment.pathsToLink = [ "/share/qemu" ];
-
-    programs.zsh.interactiveShellInit = lib.strings.concatStringsSep "\n" [
-      config.system.build.setAliases.text
-      "export DOCKER_HOST=unix://$(podman machine inspect --format '{{.ConnectionInfo.PodmanSocket.Path}}')"
-    ];
-
-    # https://github.com/LnL7/nix-darwin/issues/432#issuecomment-1024951660
-    environment.etc."containers/containers.conf.d/99-gvproxy-path.conf".text = ''
-      [engine]
-      helper_binaries_dir = ["${pkgs.gvproxy}/bin"]
-    '';
   }
 #+end_src
 
@@ -5765,6 +5734,52 @@ sudo -u postgres -i psql -p 5433
 #+begin_src text :tangle ../../tmp/hugo/static/_redirects :exports none
   /configs/darwin /configs/nix-darwin
   /configs/nix/darwin /configs/nix-darwin
+#+end_src
+
+** DONE Podman                                     :nix_darwin:docker:podman:
+CLOSED: [2023-09-16 Sat 22:51 EDT]
+:PROPERTIES:
+:EXPORT_FILE_NAME: podman
+:EXPORT_HUGO_LASTMOD: [2023-09-16 Sat 22:55 EDT]
+:END:
+
+#+begin_description
+Defines =darwinModules.podman= to set up Podman as an alternative to
+Docker.
+#+end_description
+
+There's no Docker service built into nix-darwin, but [[https://podman.io/][Podman]] has been
+an effective substitute thus far.  This defines a Darwin module and
+exports it to the flake as =darwinModules.podman=.
+
+#+begin_src nix :tangle ../../gen/flake/podman/default.nix
+  { ... }:
+  {
+    flake.darwinModules.podman = (
+      { config, lib, pkgs, ... }:
+      {
+        environment.systemPackages =
+          [
+            pkgs.podman
+            pkgs.qemu
+            pkgs.xz
+          ];
+
+        environment.pathsToLink = [ "/share/qemu" ];
+
+        programs.zsh.interactiveShellInit = lib.strings.concatStringsSep "\n" [
+          config.system.build.setAliases.text
+          "export DOCKER_HOST=unix://$(podman machine inspect --format '{{.ConnectionInfo.PodmanSocket.Path}}')"
+        ];
+
+        # https://github.com/LnL7/nix-darwin/issues/432#issuecomment-1024951660
+        environment.etc."containers/containers.conf.d/99-gvproxy-path.conf".text = ''
+          [engine]
+          helper_binaries_dir = ["${pkgs.gvproxy}/bin"]
+        '';
+      }
+    );
+  }
 #+end_src
 
 ** DONE Devshells bundle

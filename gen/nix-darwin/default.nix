@@ -5,9 +5,9 @@ localFlake:
     { config, pkgs, self, ... }:
     {
       imports = [
-        ./podman.nix
         ./postgresql.nix
         localFlake.self.darwinModules.garnix
+        localFlake.self.darwinModules.podman
       ];
 
       # List packages installed in system profile. To search by name, run:
