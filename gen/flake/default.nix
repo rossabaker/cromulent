@@ -1,6 +1,6 @@
-inputs:
+inputs @ { self, nixpkgs, darwin, devshell, emacs-overlay, flake-parts, home-manager, ... }:
 
-inputs.flake-parts.lib.mkFlake { inherit inputs; } (
+flake-parts.lib.mkFlake { inherit inputs; } (
   { withSystem, flake-parts-lib, ... }:
 
   let
@@ -12,7 +12,7 @@ inputs.flake-parts.lib.mkFlake { inherit inputs; } (
     };
 
     mkHomeConfig = { pkgs, system, username, homeDirectory }:
-      inputs.home-manager.lib.homeManagerConfiguration {
+      home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [
           {
@@ -20,12 +20,12 @@ inputs.flake-parts.lib.mkFlake { inherit inputs; } (
               inherit homeDirectory username;
               stateVersion = "21.11";
             };
-            nixpkgs.overlays = [ inputs.emacs-overlay.overlay ];
+            nixpkgs.overlays = [ emacs-overlay.overlay ];
           }
-          inputs.self.homeModules.base
-          inputs.self.homeModules.emacs
-          inputs.self.homeModules.scala
-          inputs.self.homeModules.python
+          self.homeModules.base
+          self.homeModules.emacs
+          self.homeModules.scala
+          self.homeModules.python
           ./modules/work
         ];
         # Pass our flake inputs into the config
@@ -33,13 +33,13 @@ inputs.flake-parts.lib.mkFlake { inherit inputs; } (
       };
 
     overlays = {
-      emacs = inputs.emacs-overlay.overlay;
-      devshell = inputs.devshell.overlays.default;
+      emacs = emacs-overlay.overlay;
+      devshell = devshell.overlays.default;
     };
 
-    pkgsFor = system: import inputs.nixpkgs {
+    pkgsFor = system: import nixpkgs {
       inherit system;
-      overlays = builtins.attrValues inputs.self.overlays;
+      overlays = builtins.attrValues self.overlays;
     };
   in {
     imports = [
@@ -55,7 +55,7 @@ inputs.flake-parts.lib.mkFlake { inherit inputs; } (
       ../modern_ts
       ../home-manager
       ./hyperlink
-      inputs.flake-parts.flakeModules.easyOverlay
+      flake-parts.flakeModules.easyOverlay
     ];
 
     flake = {
@@ -78,22 +78,22 @@ inputs.flake-parts.lib.mkFlake { inherit inputs; } (
 
     perSystem = { config, self', inputs', system, pkgs, ... }:
       let
-        hm = inputs.home-manager.defaultPackage."${system}";
+        hm = home-manager.defaultPackage."${system}";
 
         darwinPackages =
           if (system == "aarch64-darwin") then {
-            aarch64-darwin-config-base = (inputs.darwin.lib.darwinSystem {
+            aarch64-darwin-config-base = (darwin.lib.darwinSystem {
               system = "aarch64-darwin";
-              modules = [ inputs.self.darwinModules.default ];
+              modules = [ self.darwinModules.default ];
             }).system;
           } else { };
       in
         {
-          _module.args.pkgs = import inputs.nixpkgs {
+          _module.args.pkgs = import nixpkgs {
             inherit system;
             overlays = [
-              inputs.devshell.overlays.default
-              inputs.emacs-overlay.overlays.default
+              devshell.overlays.default
+              emacs-overlay.overlays.default
               (final: prev: {
                 hyperlink = config.packages.hyperlink;
               })
