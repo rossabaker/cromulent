@@ -122,7 +122,7 @@ inputs.flake-parts.lib.mkFlake { inherit inputs; } (
           packages = {
             website = pkgs.callPackage ../website {
               emacs = self'.packages.emacs-ross;
-              src = ./src;
+              src = ../../src;
             };
           } // darwinPackages;
 

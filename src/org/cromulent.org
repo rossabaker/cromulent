@@ -5252,7 +5252,7 @@ function of its inputs!
             packages = {
               website = pkgs.callPackage ../website {
                 emacs = self'.packages.emacs-ross;
-                src = ./src;
+                src = ../../src;
               };
             } // darwinPackages;
 
@@ -5398,7 +5398,7 @@ A flake is just a =description=, =inputs=, and =outputs=.  The
 outputs, covered above, are the exciting part.  But this makes it a
 flake.
 
-#+begin_description
+#+begin_details
 #+begin_summary
 Humdrum Nix flake exoskeleton and inputs
 #+end_summary
@@ -5491,7 +5491,7 @@ Humdrum Nix flake exoskeleton and inputs
     };
   }
 #+end_src
-#+end_description
+#+end_details
 
 *** Redirects                                                      :noexport:
 
