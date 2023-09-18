@@ -6017,7 +6017,7 @@ CLOSED: [2023-09-13 Wed 23:36 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: hyperlink
 :header-args:nix+: :code-license MIT
-:EXPORT_HUGO_LASTMOD: [2023-09-16 Sat 00:30 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-09-17 Sun 21:10 EDT]
 :CUSTOM_ID: hyperlink
 :END:
 
@@ -6033,7 +6033,8 @@ It's a paint-by-numbers [[https://nixos.org/manual/nixpkgs/stable/#compiling-rus
 as [[https://flake.parts/define-module-in-separate-file][flake module]] with an app and a package.
 
 #+begin_info
-This package is a [[https://github.com/NixOS/nixpkgs/pull/255416][pending pull request to nixpkgs]].
+This package has been a [[https://github.com/NixOS/nixpkgs/pull/255416][merged to nixpkgs]].  This derivation will be
+removed once it propagates to ~nixos-unstable~.
 #+end_info
 
 #+begin_src nix :tangle ../../gen/flake/hyperlink/default.nix
