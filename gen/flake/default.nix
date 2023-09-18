@@ -9,16 +9,6 @@ inputs.flake-parts.lib.mkFlake { inherit inputs; } (
     flakeModules = {
       homeModules = ./homeModules;
       darwinModules = ./darwinModules;
-      garnix = ./garnix;
-      podman = ./podman;
-      postgresql = ./postgresql;
-      nixDarwin = importApply ../nix-darwin { inherit (inputs) self; };
-      emacs = ../emacs;
-      scala = ../scala;
-      python = ../python;
-      modernTs = ../modern_ts;
-      homeManager = ../home-manager;
-      hyperlink = ./hyperlink;
     };
 
     mkHomeConfig = { pkgs, system, username, homeDirectory }:
@@ -55,21 +45,21 @@ inputs.flake-parts.lib.mkFlake { inherit inputs; } (
     imports = [
       flakeModules.homeModules
       flakeModules.darwinModules
-      flakeModules.garnix
-      flakeModules.podman
-      flakeModules.postgresql
-      flakeModules.nixDarwin
-      flakeModules.emacs
-      flakeModules.scala
-      flakeModules.python
-      flakeModules.modernTs
-      flakeModules.homeManager
-      flakeModules.hyperlink
+      ./garnix
+      ./podman
+      ./postgresql
+      (importApply ../nix-darwin { inherit (inputs) self; })
+      ../emacs
+      ../scala
+      ../python
+      ../modern_ts
+      ../home-manager
+      ./hyperlink
       inputs.flake-parts.flakeModules.easyOverlay
     ];
 
     flake = {
-      inherit overlays;
+      inherit flakeModules overlays;
 
       homeConfigurations = {
         "RABaker@L2LYQM57XY" = mkHomeConfig {
@@ -79,8 +69,6 @@ inputs.flake-parts.lib.mkFlake { inherit inputs; } (
           homeDirectory = "/Users/RABaker";
         };
       };
-
-      inherit flakeModules;
     };
 
     systems = [
