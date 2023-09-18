@@ -5049,7 +5049,7 @@ The Home Manager module is published to my flake as output
 CLOSED: [2022-12-25 Sun 22:14 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: /nix-flake
-:EXPORT_HUGO_LASTMOD: [2023-09-17 Sun 01:04 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-09-17 Sun 20:05 EDT]
 :header-args+: :code-license MIT
 :EXPORT_OPTIONS: h:6
 :END:
@@ -5127,7 +5127,7 @@ more "literate".
 Fellow functional programmers rejoice: a flake's outputs are a
 function of its inputs!
 
-#+begin_src nix :tangle ../../gen/flake/outputs/default.nix
+#+begin_src nix :tangle ../../gen/flake/default.nix
   inputs:
 
   inputs.flake-parts.lib.mkFlake { inherit inputs; } (
@@ -5137,18 +5137,18 @@ function of its inputs!
       inherit (flake-parts-lib) importApply;
 
       flakeModules = {
-        homeModules = ../homeModules;
-        darwinModules = ../darwinModules;
-        garnix = ../garnix;
-        podman = ../podman;
-        postgresql = ../postgresql;
-        nixDarwin = importApply ../../nix-darwin { inherit (inputs) self; };
-        emacs = ../../emacs;
-        scala = ../../scala;
-        python = ../../python;
-        modernTs = ../../modern_ts;
-        homeManager = ../../home-manager;
-        hyperlink = ../hyperlink;
+        homeModules = ./homeModules;
+        darwinModules = ./darwinModules;
+        garnix = ./garnix;
+        podman = ./podman;
+        postgresql = ./postgresql;
+        nixDarwin = importApply ../nix-darwin { inherit (inputs) self; };
+        emacs = ../emacs;
+        scala = ../scala;
+        python = ../python;
+        modernTs = ../modern_ts;
+        homeManager = ../home-manager;
+        hyperlink = ./hyperlink;
       };
 
       mkHomeConfig = { pkgs, system, username, homeDirectory }:
@@ -5250,7 +5250,7 @@ function of its inputs!
             };
 
             packages = {
-              website = pkgs.callPackage ../../website {
+              website = pkgs.callPackage ../website {
                 emacs = self'.packages.emacs-ross;
                 src = ./src;
               };
@@ -5407,7 +5407,7 @@ Humdrum Nix flake exoskeleton and inputs
   {
     description = "Ross A. Baker's perfectly cromulent Nix flake";
 
-    outputs = inputs: import ./gen/flake/outputs inputs;
+    outputs = inputs: import ./gen/flake inputs;
 
     inputs = {
       flake-parts.url = "github:hercules-ci/flake-parts";

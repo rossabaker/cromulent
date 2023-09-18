@@ -7,18 +7,18 @@ inputs.flake-parts.lib.mkFlake { inherit inputs; } (
     inherit (flake-parts-lib) importApply;
 
     flakeModules = {
-      homeModules = ../homeModules;
-      darwinModules = ../darwinModules;
-      garnix = ../garnix;
-      podman = ../podman;
-      postgresql = ../postgresql;
-      nixDarwin = importApply ../../nix-darwin { inherit (inputs) self; };
-      emacs = ../../emacs;
-      scala = ../../scala;
-      python = ../../python;
-      modernTs = ../../modern_ts;
-      homeManager = ../../home-manager;
-      hyperlink = ../hyperlink;
+      homeModules = ./homeModules;
+      darwinModules = ./darwinModules;
+      garnix = ./garnix;
+      podman = ./podman;
+      postgresql = ./postgresql;
+      nixDarwin = importApply ../nix-darwin { inherit (inputs) self; };
+      emacs = ../emacs;
+      scala = ../scala;
+      python = ../python;
+      modernTs = ../modern_ts;
+      homeManager = ../home-manager;
+      hyperlink = ./hyperlink;
     };
 
     mkHomeConfig = { pkgs, system, username, homeDirectory }:
@@ -120,7 +120,7 @@ inputs.flake-parts.lib.mkFlake { inherit inputs; } (
           };
 
           packages = {
-            website = pkgs.callPackage ../../website {
+            website = pkgs.callPackage ../website {
               emacs = self'.packages.emacs-ross;
               src = ./src;
             };
