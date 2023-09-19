@@ -4833,6 +4833,50 @@ your Darwin configuration as =darwinModules.garnix=.
 My [[/configs/nix-flake/][flake]] updates while I'm asleep on Sunday nights.  If all
 goes well, I have a primed cache Monday morning.
 
+** DONE Cachix                                            :cachix:nix_darwin:
+CLOSED: [2023-09-19 Tue 00:21 EDT]
+:PROPERTIES:
+:EXPORT_FILE_NAME: cachix
+:header-args+: :code-license CC0-1.0
+:EXPORT_HUGO_LASTMOD: [2023-09-19 Tue 00:22 EDT]
+:END:
+
+[[https://www.cachix.org/][Cachix]] is a cache for Nix binaries.  They are declared in
+=settings.substituters=, with a corresponding entry in
+=settings.trusted-public-keys=.
+
+Three instances are of particular interest:
+- Cromulent's GitHub Actions publish to [[https://rossabaker.cachix.org/][=rossabaker.cachix.org=]].
+- I help maintain [[https://github.com/typelevel/typelevel-nix][Typelevel Nix]], which publishes to [[https://typelevel.cachix.org/][=typelevel.cachix.org=]].
+- A handful of our flake dependencies publish to
+  [[https://nix-community.cachix.org/][=nix-community.cachix.org=]].
+
+Adding all three is recommended for Cromulent users.
+
+*** Darwin module
+
+#+begin_src nix :tangle ../../gen/flake/cachix/default.nix
+  { ... }:
+  {
+    flake.darwinModules.cachix =
+      { ... }:
+      {
+        nix.settings = {
+          substituters = [
+            "https://nix-community.cachix.org/"
+            "https://rossabaker.cachix.org/"
+            "https://typelevel.cachix.org/"
+          ];
+          trusted-public-keys = [
+            "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+            "rossabaker.cachix.org-1:KK/CQTeAGEurCUBy3nDl9PdR+xX+xtWQ0C/GpNN6kuw="
+            "typelevel.cachix.org-1:UnD9fMAIpeWfeil1V/xWUZa2g758ZHk8DvGCd/keAkg="
+          ];
+        };
+      };
+  }
+#+end_src
+
 *** TODO Broken links                                              :noexport:
 
 - Fix flake link
@@ -5173,6 +5217,7 @@ function of its inputs!
       imports = [
         flakeModules.homeModules
         flakeModules.darwinModules
+        ./cachix
         ./garnix
         ./keyboard
         ./podman
@@ -5557,7 +5602,7 @@ CLOSED: [2023-08-07 Mon 09:48 EDT]
 :PROPERTIES:
 :EXPORT_HUGO_BUNDLE: nix-darwin
 :EXPORT_FILE_NAME: _index
-:EXPORT_HUGO_LASTMOD: [2023-09-18 Mon 23:29 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-09-19 Tue 00:09 EDT]
 :END:
 
 #+begin_description
@@ -5594,16 +5639,6 @@ further.
         # Auto upgrade nix package and the daemon service.
         # services.nix-daemon.enable = true;
         nix = {
-          settings.substituters = [
-            "https://nix-community.cachix.org/"
-            "https://rossabaker.cachix.org/"
-            "https://typelevel.cachix.org/"
-          ];
-          settings.trusted-public-keys = [
-            "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-            "rossabaker.cachix.org-1:KK/CQTeAGEurCUBy3nDl9PdR+xX+xtWQ0C/GpNN6kuw="
-            "typelevel.cachix.org-1:UnD9fMAIpeWfeil1V/xWUZa2g758ZHk8DvGCd/keAkg="
-          ];
           extraOptions = ''
             experimental-features = nix-command flakes
           '';
@@ -5628,6 +5663,7 @@ further.
     flake.darwinModules.default = {
       imports = with inputs.self.darwinModules; [
         base
+        cachix
         garnix
         keyboard
         podman

@@ -43,6 +43,7 @@ flake-parts.lib.mkFlake { inherit inputs; } (
     imports = [
       flakeModules.homeModules
       flakeModules.darwinModules
+      ./cachix
       ./garnix
       ./keyboard
       ./podman
