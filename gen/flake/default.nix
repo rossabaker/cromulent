@@ -24,7 +24,7 @@ flake-parts.lib.mkFlake { inherit inputs; } (
           self.homeModules.emacs
           self.homeModules.scala
           self.homeModules.python
-          ./modules/work
+          ../../modules/work
         ];
         # Pass our flake inputs into the config
         extraSpecialArgs = { inherit inputs; };
