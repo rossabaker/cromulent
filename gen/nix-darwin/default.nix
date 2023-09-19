@@ -28,10 +28,9 @@
           "rossabaker.cachix.org-1:KK/CQTeAGEurCUBy3nDl9PdR+xX+xtWQ0C/GpNN6kuw="
           "typelevel.cachix.org-1:UnD9fMAIpeWfeil1V/xWUZa2g758ZHk8DvGCd/keAkg="
         ];
-        package = pkgs.nixFlakes;
         extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
+          experimental-features = nix-command flakes
+        '';
       };
 
       # Create /etc/bashrc that loads the nix-darwin environment.

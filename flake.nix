@@ -14,9 +14,10 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # nix-darwin flake
-    nixpkgs-darwin.url = "github:nixos/nixpkgs/nixpkgs-22.11-darwin";
-    darwin.url = "github:LnL7/nix-darwin/master";
-    darwin.inputs.nixpkgs.follows = "nixpkgs-darwin";
+    nix-darwin = {
+      url = "github:LnL7/nix-darwin/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Extra community flakes
     devshell.url = "github:numtide/devshell";
@@ -26,7 +27,7 @@
     emacs-overlay.inputs.nixpkgs.follows = "nixpkgs";
 
     firefox-darwin.url = "github:bandithedoge/nixpkgs-firefox-darwin";
-    firefox-darwin.inputs.nixpkgs.follows = "nixpkgs-darwin";
+    firefox-darwin.inputs.nixpkgs.follows = "nixpkgs";
 
     # Emacs packages
     ammonite-term-repl = {

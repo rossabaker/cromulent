@@ -1,4 +1,4 @@
-inputs @ { self, nixpkgs, darwin, devshell, emacs-overlay, flake-parts, home-manager, ... }:
+inputs @ { self, nixpkgs, nix-darwin, devshell, emacs-overlay, flake-parts, home-manager, ... }:
 
 flake-parts.lib.mkFlake { inherit inputs; } (
   { withSystem, flake-parts-lib, ... }:
@@ -79,7 +79,7 @@ flake-parts.lib.mkFlake { inherit inputs; } (
 
         darwinPackages =
           if (system == "aarch64-darwin") then {
-            aarch64-darwin-config-base = (darwin.lib.darwinSystem {
+            aarch64-darwin-config-base = (nix-darwin.lib.darwinSystem {
               system = "aarch64-darwin";
               modules = [ self.darwinModules.default ];
             }).system;
