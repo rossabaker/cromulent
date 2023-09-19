@@ -52,7 +52,6 @@ flake-parts.lib.mkFlake { inherit inputs; } (
       ../python
       ../modern_ts
       ../home-manager
-      ./hyperlink
       flake-parts.flakeModules.easyOverlay
     ];
 
@@ -92,9 +91,6 @@ flake-parts.lib.mkFlake { inherit inputs; } (
             overlays = [
               devshell.overlays.default
               emacs-overlay.overlays.default
-              (final: prev: {
-                hyperlink = config.packages.hyperlink;
-              })
             ];
           };
 
@@ -138,7 +134,6 @@ flake-parts.lib.mkFlake { inherit inputs; } (
           };
 
           overlayAttrs = {
-            hyperlink = config.packages.hyperlink;
           };
         };
   }

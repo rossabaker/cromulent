@@ -5049,7 +5049,7 @@ The Home Manager module is published to my flake as output
 CLOSED: [2022-12-25 Sun 22:14 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: /nix-flake
-:EXPORT_HUGO_LASTMOD: [2023-09-18 Mon 22:31 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-09-18 Mon 23:11 EDT]
 :header-args+: :code-license MIT
 :EXPORT_OPTIONS: h:6
 :END:
@@ -5182,7 +5182,6 @@ function of its inputs!
         ../python
         ../modern_ts
         ../home-manager
-        ./hyperlink
         flake-parts.flakeModules.easyOverlay
       ];
 
@@ -5222,9 +5221,6 @@ function of its inputs!
               overlays = [
                 devshell.overlays.default
                 emacs-overlay.overlays.default
-                (final: prev: {
-                  hyperlink = config.packages.hyperlink;
-                })
               ];
             };
 
@@ -5268,7 +5264,6 @@ function of its inputs!
             };
 
             overlayAttrs = {
-              hyperlink = config.packages.hyperlink;
             };
           };
     }
@@ -6005,7 +6000,7 @@ CLOSED: [2023-09-13 Wed 23:36 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: hyperlink
 :header-args:nix+: :code-license MIT
-:EXPORT_HUGO_LASTMOD: [2023-09-17 Sun 21:10 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-09-18 Mon 23:16 EDT]
 :CUSTOM_ID: hyperlink
 :END:
 
@@ -6017,47 +6012,10 @@ checker.
 [[https://github.com/untitaker/hyperlink][Hyperlink]] is a command-line link checker.  It is quite fast, and is
 used to test the generation of this web site.
 
-It's a paint-by-numbers [[https://nixos.org/manual/nixpkgs/stable/#compiling-rust-applications-with-cargo][Rust derivation from the manual]].  We expose it
-as [[https://flake.parts/define-module-in-separate-file][flake module]] with an app and a package.
-
-#+begin_info
-This package has been a [[https://github.com/NixOS/nixpkgs/pull/255416][merged to nixpkgs]].  This derivation will be
-removed once it propagates to ~nixos-unstable~.
-#+end_info
-
-#+begin_src nix :tangle ../../gen/flake/hyperlink/default.nix
-  { moduleWithSystem, ... }:
-
-  {
-    perSystem = { config, self', inputs', pkgs, system, ... }: {
-      apps.hyperlink = {
-        type = "app";
-        program = "${self'.packages.hyperlink}/bin/hyperlink";
-      };
-
-      packages.hyperlink = with pkgs; rustPlatform.buildRustPackage rec {
-        pname = "hyperlink";
-        version = "0.1.31";
-
-        src = fetchFromGitHub {
-          owner = "untitaker";
-          repo = pname;
-          rev = version;
-          hash = "sha256-ZmNw4NmDD0VWwnmNjxsA4y5gzVbTzshZLRYzaNJ4iGw=";
-        };
-
-        cargoHash = "sha256-5j1Ziwk5uQNIKCRMZpJP4qR0tcyUUvT8i/KZbXq3WzI=";
-
-        meta = with lib; {
-          description = "Very fast link checker for CI.";
-          homepage = "https://github.com/untitaker/hyperlink";
-          license = licenses.mit;
-          maintainers = [ maintainers.rossabaker ];
-        };
-      };
-    };
-  }
-#+end_src
+#+begin_warning
+This package has been a [[https://github.com/NixOS/nixpkgs/pull/255416][merged to nixpkgs]] and is no longer maintained
+in Cromulent.
+#+end_warning
 
 **** Redirects                                                     :noexport:
 
