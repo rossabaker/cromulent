@@ -4,8 +4,6 @@ flake-parts.lib.mkFlake { inherit inputs; } (
   { withSystem, flake-parts-lib, ... }:
 
   let
-    inherit (flake-parts-lib) importApply;
-
     flakeModules = {
       homeModules = ./homeModules;
       darwinModules = ./darwinModules;
@@ -48,7 +46,7 @@ flake-parts.lib.mkFlake { inherit inputs; } (
       ./garnix
       ./podman
       ./postgresql
-      (importApply ../nix-darwin { inherit (inputs) self; })
+      ../nix-darwin
       ../emacs
       ../scala
       ../python

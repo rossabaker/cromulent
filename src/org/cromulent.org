@@ -5049,7 +5049,7 @@ The Home Manager module is published to my flake as output
 CLOSED: [2022-12-25 Sun 22:14 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: /nix-flake
-:EXPORT_HUGO_LASTMOD: [2023-09-17 Sun 21:53 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-09-18 Mon 22:31 EDT]
 :header-args+: :code-license MIT
 :EXPORT_OPTIONS: h:6
 :END:
@@ -5134,8 +5134,6 @@ function of its inputs!
     { withSystem, flake-parts-lib, ... }:
 
     let
-      inherit (flake-parts-lib) importApply;
-
       flakeModules = {
         homeModules = ./homeModules;
         darwinModules = ./darwinModules;
@@ -5178,7 +5176,7 @@ function of its inputs!
         ./garnix
         ./podman
         ./postgresql
-        (importApply ../nix-darwin { inherit (inputs) self; })
+        ../nix-darwin
         ../emacs
         ../scala
         ../python
@@ -5562,7 +5560,7 @@ CLOSED: [2023-08-07 Mon 09:48 EDT]
 :PROPERTIES:
 :EXPORT_HUGO_BUNDLE: nix-darwin
 :EXPORT_FILE_NAME: _index
-:EXPORT_HUGO_LASTMOD: [2023-09-16 Sat 22:52 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-09-18 Mon 22:31 EDT]
 :END:
 
 #+begin_description
@@ -5583,16 +5581,15 @@ further.
 #+end_info
 
 #+begin_src nix :tangle ../../gen/nix-darwin/default.nix
-  localFlake:
-  { ... }:
+  { inputs, ... }:
   {
     flake.darwinModules.default = (
-      { config, pkgs, self, ... }:
+      { config, pkgs, ... }:
       {
         imports = [
-          localFlake.self.darwinModules.garnix
-          localFlake.self.darwinModules.podman
-          localFlake.self.darwinModules.postgresql
+          inputs.self.darwinModules.garnix
+          inputs.self.darwinModules.podman
+          inputs.self.darwinModules.postgresql
         ];
 
         # List packages installed in system profile. To search by name, run:

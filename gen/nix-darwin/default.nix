@@ -1,13 +1,12 @@
-localFlake:
-{ ... }:
+{ inputs, ... }:
 {
   flake.darwinModules.default = (
-    { config, pkgs, self, ... }:
+    { config, pkgs, ... }:
     {
       imports = [
-        localFlake.self.darwinModules.garnix
-        localFlake.self.darwinModules.podman
-        localFlake.self.darwinModules.postgresql
+        inputs.self.darwinModules.garnix
+        inputs.self.darwinModules.podman
+        inputs.self.darwinModules.postgresql
       ];
 
       # List packages installed in system profile. To search by name, run:
