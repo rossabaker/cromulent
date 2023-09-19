@@ -39,11 +39,6 @@
 
       services.nix-daemon.enable = true;
 
-      system.keyboard = {
-        enableKeyMapping = true;
-        remapCapsLockToControl = true;
-      };
-
       # Used for backwards compatibility, please read the changelog before changing.
       # $ darwin-rebuild changelog
       system.stateVersion = 4;
@@ -59,6 +54,7 @@
     imports = with inputs.self.darwinModules; [
       base
       garnix
+      keyboard
       podman
       postgresql
     ];

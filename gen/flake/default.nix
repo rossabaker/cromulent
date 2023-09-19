@@ -44,6 +44,7 @@ flake-parts.lib.mkFlake { inherit inputs; } (
       flakeModules.homeModules
       flakeModules.darwinModules
       ./garnix
+      ./keyboard
       ./podman
       ./postgresql
       ../nix-darwin

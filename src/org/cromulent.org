@@ -5174,6 +5174,7 @@ function of its inputs!
         flakeModules.homeModules
         flakeModules.darwinModules
         ./garnix
+        ./keyboard
         ./podman
         ./postgresql
         ../nix-darwin
@@ -5556,7 +5557,7 @@ CLOSED: [2023-08-07 Mon 09:48 EDT]
 :PROPERTIES:
 :EXPORT_HUGO_BUNDLE: nix-darwin
 :EXPORT_FILE_NAME: _index
-:EXPORT_HUGO_LASTMOD: [2023-09-18 Mon 23:27 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-09-18 Mon 23:29 EDT]
 :END:
 
 #+begin_description
@@ -5618,11 +5619,6 @@ further.
 
         services.nix-daemon.enable = true;
 
-        system.keyboard = {
-          enableKeyMapping = true;
-          remapCapsLockToControl = true;
-        };
-
         # Used for backwards compatibility, please read the changelog before changing.
         # $ darwin-rebuild changelog
         system.stateVersion = 4;
@@ -5638,6 +5634,7 @@ further.
       imports = with inputs.self.darwinModules; [
         base
         garnix
+        keyboard
         podman
         postgresql
       ];
@@ -5650,6 +5647,39 @@ further.
 #+begin_src text :tangle ../../tmp/hugo/static/_redirects :exports none
   /configs/darwin /configs/nix-darwin
   /configs/nix/darwin /configs/nix-darwin
+#+end_src
+
+** DONE Keyboard                                        :nix_darwin:keyboard:
+CLOSED: [2023-09-18 Mon 23:53 EDT]
+:PROPERTIES:
+:EXPORT_FILE_NAME: keyboard
+:header-args:nix+: :code-license CC0-1.0
+:END:
+
+#+begin_description
+Defines a flake module for keyboard settings
+#+end_description
+
+The [[https://cs.indiana.edu/][Indiana University Computer Science Department]] used to be housed
+in Lindley Hall.  In the basement was a cluster of machines called
+"The Burrow".  There were SparcStations, if memory serves with [[https://deskthority.net/wiki/Sun_Type_5][Sun
+Type 5]] keyboards.  In any case, they taught me that the good Lord
+intended ~Control~ to be to the immediate left of ~A~.
+
+*** MacOS
+
+#+begin_src nix :tangle ../../gen/flake/keyboard/default.nix
+  { ... }:
+  {
+    flake.darwinModules.keyboard =
+      { ... }:
+      {
+        system.keyboard = {
+          enableKeyMapping = true;
+          remapCapsLockToControl = true;
+        };
+      };
+  }
 #+end_src
 
 ** DONE Podman                                     :nix_darwin:docker:podman:
