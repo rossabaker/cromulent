@@ -1,14 +1,8 @@
 { inputs, ... }:
 {
-  flake.darwinModules.default = (
+  flake.darwinModules.base = (
     { config, pkgs, ... }:
     {
-      imports = [
-        inputs.self.darwinModules.garnix
-        inputs.self.darwinModules.podman
-        inputs.self.darwinModules.postgresql
-      ];
-
       # List packages installed in system profile. To search by name, run:
       # $ nix-env -qaP | grep wget
       environment.systemPackages =
@@ -61,4 +55,13 @@
       };
     }
   );
+
+  flake.darwinModules.default = {
+    imports = with inputs.self.darwinModules; [
+      base
+      garnix
+      podman
+      postgresql
+    ];
+  };
 }

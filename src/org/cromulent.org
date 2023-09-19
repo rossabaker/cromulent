@@ -5560,7 +5560,7 @@ CLOSED: [2023-08-07 Mon 09:48 EDT]
 :PROPERTIES:
 :EXPORT_HUGO_BUNDLE: nix-darwin
 :EXPORT_FILE_NAME: _index
-:EXPORT_HUGO_LASTMOD: [2023-09-18 Mon 22:31 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-09-18 Mon 22:37 EDT]
 :END:
 
 #+begin_description
@@ -5583,15 +5583,9 @@ further.
 #+begin_src nix :tangle ../../gen/nix-darwin/default.nix
   { inputs, ... }:
   {
-    flake.darwinModules.default = (
+    flake.darwinModules.base = (
       { config, pkgs, ... }:
       {
-        imports = [
-          inputs.self.darwinModules.garnix
-          inputs.self.darwinModules.podman
-          inputs.self.darwinModules.postgresql
-        ];
-
         # List packages installed in system profile. To search by name, run:
         # $ nix-env -qaP | grep wget
         environment.systemPackages =
@@ -5644,6 +5638,15 @@ further.
         };
       }
     );
+
+    flake.darwinModules.default = {
+      imports = with inputs.self.darwinModules; [
+        base
+        garnix
+        podman
+        postgresql
+      ];
+    };
   }
 #+end_src
 
