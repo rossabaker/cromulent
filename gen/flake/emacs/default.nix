@@ -79,7 +79,7 @@
           };
         ox-slack =
           epkgs.ox-slack.overrideAttrs(old: {
-            patches = [ ../../src/emacs/ox-slack/github-9.patch ];
+            patches = [ ../../../src/emacs/ox-slack/github-9.patch ];
           });
         git-related =
           epkgs.trivialBuild {
@@ -125,7 +125,6 @@
             ];
           })
           ({ pkgs, ...}: { home.packages = [ pkgs.ripgrep ]; })
-          ./load-path.nix
         ];
         programs.emacs = {
           enable = true;

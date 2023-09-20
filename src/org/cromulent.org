@@ -2517,7 +2517,7 @@ CLOSED: [2023-02-23 Thu 23:59 EST]
 :EXPORT_FILE_NAME: _index
 :EXPORT_HUGO_LASTMOD: [2023-09-16 Sat 13:10 EDT]
 :header-args+: :tangle-mode `,#o444 :mkdirp yes
-:header-args:emacs-lisp+: :tangle ../../gen/emacs/init.el :tangle-mode `,#o444 :mkdirp yes
+:header-args:emacs-lisp+: :tangle ../../gen/flake/emacs/init.el :tangle-mode `,#o444 :mkdirp yes
 :header-args:emacs-lisp+: :code-license CC0-1.0
 :header-args:nix+: :code-license MIT
 :EXPORT_OPTIONS: h:6
@@ -3322,7 +3322,7 @@ Apply [[https://github.com/titaniumbones/ox-slack/pull/9][this patch]] to fix th
 
 #+begin_src nix :noweb-ref emacs-ox-slack
   epkgs.ox-slack.overrideAttrs(old: {
-    patches = [ ../../src/emacs/ox-slack/github-9.patch ];
+    patches = [ ../../../src/emacs/ox-slack/github-9.patch ];
   })
 #+end_src
 
@@ -4296,7 +4296,11 @@ Additionally, an =emacs= flake app is created.  This builds on the
 
 Finally, we add a Home Manager module based on the configured app.
 
-#+begin_src nix :tangle ../../gen/emacs/default.nix :noweb tangle :mkdirp yes
+#+begin_src nix :exports no :noweb-ref flake-modules
+  ./emacs
+#+end_src
+
+#+begin_src nix :tangle ../../gen/flake/emacs/default.nix :noweb tangle
   { inputs, lib, moduleWithSystem, ... }: {
     imports = [
       inputs.flake-parts.flakeModules.easyOverlay
@@ -4359,7 +4363,6 @@ Finally, we add a Home Manager module based on the configured app.
         perSystem@{ config, pkgs }: {
           imports = [
             <<emacs-home-packages>>
-            ./load-path.nix
           ];
           programs.emacs = {
             enable = true;
@@ -4413,7 +4416,7 @@ CLOSED: [2023-09-10 Sun 01:23 EDT]
 :PROPERTIES:
 :CUSTOM_ID: rab-ox-hugo
 :EXPORT_FILE_NAME: rab-ox-hugo
-:header-args:emacs-lisp+: :tangle ../../gen/emacs/lisp/rab-ox-hugo.el :code-license GPL-3.0-only
+:header-args:emacs-lisp+: :tangle ../../gen/flake/emacs/lisp/rab-ox-hugo.el :code-license GPL-3.0-only
 :EXPORT_HUGO_LASTMOD: [2023-09-12 Tue 00:02 EDT]
 :END:
 
@@ -4554,7 +4557,7 @@ CLOSED: [2023-09-12 Tue 23:42 EDT]
 :PROPERTIES:
 :CUSTOM_ID: rab-lisp
 :EXPORT_FILE_NAME: rab-lisp
-:header-args:emacs-lisp+: :tangle ../../gen/emacs/lisp/rab-lisp.el :code-license GPL-3.0-only
+:header-args:emacs-lisp+: :tangle ../../gen/flake/emacs/lisp/rab-lisp.el :code-license GPL-3.0-only
 :EXPORT_HUGO_LASTMOD: [2023-09-12 Tue 23:45 EDT]
 :END:
 
@@ -4811,6 +4814,10 @@ want the substituter and public key if you're consuming my flake.
 This config is trivial, but can also be imported from my flake into
 your Darwin configuration as =darwinModules.garnix=.
 
+#+begin_src nix :exports none :noweb-ref flake-modules
+  ./garnix
+#+end_src
+
 #+begin_src nix :tangle ../../gen/flake/garnix/default.nix
   { ... }:
   {
@@ -4855,6 +4862,10 @@ Adding all three is recommended for Cromulent users.
 
 *** Darwin module
 
+#+begin_src nix :exports none :noweb-ref flake-modules
+  ./cachix
+#+end_src
+
 #+begin_src nix :tangle ../../gen/flake/cachix/default.nix
   { ... }:
   {
@@ -4887,7 +4898,6 @@ CLOSED: [2023-05-09 Tue 09:27 EDT]
 :EXPORT_FILE_NAME: scala
 :EXPORT_HUGO_LASTMOD: [2023-09-08 Fri 15:58 CDT]
 :header-args+: :tangle-mode (identity #o444) :mkdirp yes :code-license CC0-1.0
-:header-args:nix+: :tangle ../../gen/scala/default.nix
 :END:
 
 #+begin_description
@@ -4906,7 +4916,7 @@ global SBT, a few plugins, and some gitignores relevant to Scala.
 This tells sbt where to look for our [[https://central.sonatype.org/publish/publish-guide/][Sonatype]] credentials.
 
 #+caption: ~~/.sbt/1.0/sonatype.sbt~
-#+begin_src scala :tangle ../../gen/scala/sonatype.sbt
+#+begin_src scala :tangle ../../gen/flake/scala/sonatype.sbt
   credentials += Credentials(Path.userHome / ".sbt" / "sonatype-credentials.properties")
 #+end_src
 
@@ -4931,7 +4941,7 @@ This file contains a secret, and is not installed by our Nix derivation!
 [[https://github.com/rtimush/sbt-rewarn][sbt-rewarn]] preserves warnings across incremental compilations.
 
 #+caption: ~~/.sbt/1.0/plugins/sbt-rewarn.sbt~
-#+begin_src scala :tangle ../../gen/scala/sbt-rewarn.sbt
+#+begin_src scala :tangle ../../gen/flake/scala/sbt-rewarn.sbt
   addSbtPlugin("com.timushev.sbt" % "sbt-rewarn" % "0.1.3")
 #+end_src
 
@@ -4942,7 +4952,7 @@ dependencies.  [[https://github.com/scala-steward-org/scala-steward][Scala Stewa
 projects, but it's still handy for local checking.
 
 #+caption: ~~/.sbt/1.0/plugins/sbt-updates.sbt~
-#+begin_src scala :tangle ../../gen/scala/sbt-updates.sbt
+#+begin_src scala :tangle ../../gen/flake/scala/sbt-updates.sbt
   addSbtPlugin("com.timushev.sbt" % "sbt-updates" % "0.6.1")
 #+end_src
 
@@ -4956,7 +4966,7 @@ This is available starting in 1.4.0, but it causes scala-xml eviction
 madness up until 1.8.0.
 
 #+caption: ~~/.sbt/1.0/plugins/sbt-dependency-tree.sbt~
-#+begin_src scala :tangle ../../gen/scala/sbt-dependency-tree.sbt
+#+begin_src scala :tangle ../../gen/flake/scala/sbt-dependency-tree.sbt
   libraryDependencies ++= (
     if (VersionNumber(sbtVersion.value).matchesSemVer(SemanticSelector(">=1.8"))) {
       Seq(
@@ -4975,7 +4985,11 @@ madness up until 1.8.0.
 The Home Manager module is published to my flake as output
 ~homeModules.scala~.
 
-#+begin_src nix
+#+begin_src nix :exports no :noweb-ref flake-modules
+  ./scala
+#+end_src
+
+#+begin_src nix :tangle ../../gen/flake/scala/default.nix
   { moduleWithSystem, ... }: {
     flake.homeModules.scala = moduleWithSystem(
       perSystem@{ pkgs }: {
@@ -5009,7 +5023,6 @@ The Home Manager module is published to my flake as output
 :EXPORT_FILE_NAME: python
 :EXPORT_HUGO_LASTMOD: [2023-07-28 Fri 21:51 EDT]
 :header-args+: :tangle-mode (identity #o444) :mkdirp yes :code-license CC0-1.0
-:header-args:nix+: :tangle ../../gen/python/default.nix
 :END:
 
 #+begin_description
@@ -5046,7 +5059,7 @@ configurations.  It also hardcodes ~$HOME~.  We'll install this cleaned
 up version via home-manager.  New laptops are
 version.
 
-#+begin_src sh :tangle ../../gen/python/conda-setup
+#+begin_src sh :tangle ../../gen/flake/python/conda-setup
   # >>> conda initialize >>>
   # !! Contents within this block are managed by 'conda init' !!
   __conda_setup="$($HOME'mambaforge/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
@@ -5072,7 +5085,11 @@ version.
 The Home Manager module is published to my flake as output
 ~homeModules.python~.
 
-#+begin_src nix
+#+begin_src nix :exports no :noweb-ref flake-modules
+  ./python
+#+end_src
+
+#+begin_src nix :tangle ../../gen/flake/python/default.nix
   { moduleWithSystem, ... }: {
     flake.homeModules.python = moduleWithSystem(
       perSystem@{ pkgs }: {
@@ -5093,7 +5110,7 @@ The Home Manager module is published to my flake as output
 CLOSED: [2022-12-25 Sun 22:14 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: /nix-flake
-:EXPORT_HUGO_LASTMOD: [2023-09-18 Mon 23:25 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-09-19 Tue 23:10 EDT]
 :header-args+: :code-license MIT
 :EXPORT_OPTIONS: h:6
 :END:
@@ -5171,7 +5188,7 @@ more "literate".
 Fellow functional programmers rejoice: a flake's outputs are a
 function of its inputs!
 
-#+begin_src nix :tangle ../../gen/flake/default.nix
+#+begin_src nix :tangle ../../gen/flake/default.nix :noweb yes
   inputs @ { self, nixpkgs, nix-darwin, devshell, emacs-overlay, flake-parts, home-manager, ... }:
 
   flake-parts.lib.mkFlake { inherit inputs; } (
@@ -5217,17 +5234,7 @@ function of its inputs!
       imports = [
         flakeModules.homeModules
         flakeModules.darwinModules
-        ./cachix
-        ./garnix
-        ./keyboard
-        ./podman
-        ./postgresql
-        ../nix-darwin
-        ../emacs
-        ../scala
-        ../python
-        ../modern_ts
-        ../home-manager
+        <<flake-modules>>
         flake-parts.flakeModules.easyOverlay
       ];
 
@@ -5419,6 +5426,7 @@ consistent.  We'll roll with it.
 #+end_src
 #+end_details
 
+***
 *** Flake skeleton
 
 A flake is just a =description=, =inputs=, and =outputs=.  The
@@ -5532,7 +5540,6 @@ CLOSED: [2023-09-08 Fri 16:59 CDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: home-manager
 :header-args+: :tangle-mode (identity #o444) :mkdirp yes :code-license MIT
-:header-args:nix+: :tangle ../../gen/home-manager/default.nix
 :END:
 
 #+begin_description
@@ -5549,7 +5556,11 @@ other hosts that support the Nix package manager (e.g., Debian).
 This is imported from preliterate times and should be broken up
 further.
 
-#+begin_src nix :tangle ../../gen/home-manager/default.nix
+#+begin_src nix :exports no :noweb-ref flake-modules
+  ./home-manager
+#+end_src
+
+#+begin_src nix :tangle ../../gen/flake/home-manager/default.nix
   { moduleWithSystem, ... }: {
     flake.homeModules.base = moduleWithSystem(
       perSystem@{ pkgs }: {
@@ -5602,7 +5613,7 @@ CLOSED: [2023-08-07 Mon 09:48 EDT]
 :PROPERTIES:
 :EXPORT_HUGO_BUNDLE: nix-darwin
 :EXPORT_FILE_NAME: _index
-:EXPORT_HUGO_LASTMOD: [2023-09-19 Tue 00:09 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-09-19 Tue 22:37 EDT]
 :END:
 
 #+begin_description
@@ -5622,7 +5633,11 @@ This is imported from preliterate times, and could be broken up
 further.
 #+end_info
 
-#+begin_src nix :tangle ../../gen/nix-darwin/default.nix
+#+begin_src nix :exports none :noweb-ref flake-modules
+  ./nix-darwin
+#+end_src
+
+#+begin_src nix :tangle ../../gen/flake/nix-darwin/default.nix
   { inputs, ... }:
   {
     flake.darwinModules.base = (
@@ -5673,6 +5688,8 @@ further.
   }
 #+end_src
 
+
+
 *** Redirects                                                      :noexport:
 
 #+begin_src text :tangle ../../tmp/hugo/static/_redirects :exports none
@@ -5696,6 +5713,10 @@ in Lindley Hall.  In the basement was a cluster of machines called
 "The Burrow".  There were SparcStations, if memory serves with [[https://deskthority.net/wiki/Sun_Type_5][Sun
 Type 5]] keyboards.  In any case, they taught me that the good Lord
 intended ~Control~ to be to the immediate left of ~A~.
+
+#+begin_src nix :exports none :noweb-ref flake-modules
+  ./keyboard
+#+end_src
 
 *** MacOS
 
@@ -5728,6 +5749,10 @@ Docker.
 There's no Docker service built into nix-darwin, but [[https://podman.io/][Podman]] has been
 an effective substitute thus far.  This defines a Darwin module and
 exports it to the flake as =darwinModules.podman=.
+
+#+begin_src nix :exports none :noweb-ref flake-modules
+  ./podman
+#+end_src
 
 #+begin_src nix :tangle ../../gen/flake/podman/default.nix
   { ... }:
@@ -5785,6 +5810,10 @@ We fix all of those here.
 
 A bunch of docker-compose files in my world claim port ~5432~, so we
 trudge off to the non-standard ~5433~.
+
+#+begin_src nix :exports none :noweb-ref flake-modules
+  ./postgresql
+#+end_src
 
 #+begin_src nix :tangle ../../gen/flake/postgresql/default.nix
   { ... }:
@@ -5983,7 +6012,11 @@ them can be templated from PyPi:
 
 It all comes together in this [[https://flake.parts/index.html][flake module]].
 
-#+begin_src nix :tangle ../../gen/modern_ts/default.nix
+#+begin_src nix :exports no :noweb-ref flake-modules
+  ./modern_ts
+#+end_src
+
+#+begin_src nix :tangle ../../gen/flake/modern_ts/default.nix
   { inputs, lib, moduleWithSystem, ... }:
 
   let

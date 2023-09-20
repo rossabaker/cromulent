@@ -43,17 +43,17 @@ flake-parts.lib.mkFlake { inherit inputs; } (
     imports = [
       flakeModules.homeModules
       flakeModules.darwinModules
-      ./cachix
+      ./emacs
       ./garnix
+      ./cachix
+      ./scala
+      ./python
+      ./home-manager
+      ./nix-darwin
       ./keyboard
       ./podman
       ./postgresql
-      ../nix-darwin
-      ../emacs
-      ../scala
-      ../python
-      ../modern_ts
-      ../home-manager
+      ./modern_ts
       flake-parts.flakeModules.easyOverlay
     ];
 
