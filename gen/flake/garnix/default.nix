@@ -1,7 +1,5 @@
-{ ... }:
 {
   flake.darwinModules.garnix = (
-    { ... }:
     {
       nix = {
         settings.substituters = [

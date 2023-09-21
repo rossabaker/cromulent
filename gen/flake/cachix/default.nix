@@ -1,7 +1,5 @@
-{ ... }:
 {
   flake.darwinModules.cachix =
-    { ... }:
     {
       nix.settings = {
         substituters = [

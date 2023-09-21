@@ -1,4 +1,3 @@
-{ ... }:
 {
   flake.darwinModules.podman = (
     { config, lib, pkgs, ... }:

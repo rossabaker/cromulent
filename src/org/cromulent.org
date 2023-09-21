@@ -4819,10 +4819,8 @@ your Darwin configuration as =darwinModules.garnix=.
 #+end_src
 
 #+begin_src nix :tangle ../../gen/flake/garnix/default.nix
-  { ... }:
   {
     flake.darwinModules.garnix = (
-      { ... }:
       {
         nix = {
           settings.substituters = [
@@ -4867,10 +4865,8 @@ Adding all three is recommended for Cromulent users.
 #+end_src
 
 #+begin_src nix :tangle ../../gen/flake/cachix/default.nix
-  { ... }:
   {
     flake.darwinModules.cachix =
-      { ... }:
       {
         nix.settings = {
           substituters = [
@@ -5721,10 +5717,8 @@ intended ~Control~ to be to the immediate left of ~A~.
 *** MacOS
 
 #+begin_src nix :tangle ../../gen/flake/keyboard/default.nix
-  { ... }:
   {
     flake.darwinModules.keyboard =
-      { ... }:
       {
         system.keyboard = {
           enableKeyMapping = true;
@@ -5755,7 +5749,6 @@ exports it to the flake as =darwinModules.podman=.
 #+end_src
 
 #+begin_src nix :tangle ../../gen/flake/podman/default.nix
-  { ... }:
   {
     flake.darwinModules.podman = (
       { config, lib, pkgs, ... }:
@@ -5816,8 +5809,6 @@ trudge off to the non-standard ~5433~.
 #+end_src
 
 #+begin_src nix :tangle ../../gen/flake/postgresql/default.nix
-  { ... }:
-
   let
     dataDir = "/var/lib/postgresql/14";
     logDir = "/var/log/postgresql";

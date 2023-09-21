@@ -1,5 +1,3 @@
-{ ... }:
-
 let
   dataDir = "/var/lib/postgresql/14";
   logDir = "/var/log/postgresql";
