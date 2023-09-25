@@ -2515,7 +2515,7 @@ This will block +Twitter+ X cards.
 CLOSED: [2023-02-23 Thu 23:59 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: _index
-:EXPORT_HUGO_LASTMOD: [2023-09-16 Sat 13:10 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-09-24 Sun 20:51 EDT]
 :header-args+: :tangle-mode `,#o444 :mkdirp yes
 :header-args:emacs-lisp+: :tangle ../../gen/flake/emacs/init.el :tangle-mode `,#o444 :mkdirp yes
 :header-args:emacs-lisp+: :code-license CC0-1.0
@@ -3440,7 +3440,7 @@ Load my [[#rab-lisp][Lisp extensions]] to fix the indentation of =use-package=
 blocks.
 
 #+begin_src emacs-lisp
-  (use-package rab-lisp-mode
+  (use-package rab-lisp
     :after lisp-mode
     :config
     (advice-add #'calculate-lisp-indent :override #'rab/lisp-calculate-indent))

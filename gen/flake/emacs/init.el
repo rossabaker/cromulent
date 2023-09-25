@@ -217,7 +217,7 @@
   :mode ((rx ".cs" eos) . 'csharp-ts-mode)
   :hook (csharp-ts-mode . subword-mode))
 
-(use-package rab-lisp-mode
+(use-package rab-lisp
   :after lisp-mode
   :config
   (advice-add #'calculate-lisp-indent :override #'rab/lisp-calculate-indent))
