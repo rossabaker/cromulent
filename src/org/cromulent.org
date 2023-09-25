@@ -7065,6 +7065,28 @@ whenever someone scores on Purdue.
 
 [[https://open.spotify.com/playlist/3dA65422KTllJjTFLBdaII?si=77bb31ac91274603][Big Ten Fight Songs on Spotify]]
 
+*** DONE Indianapolis Symphony Orchestra :classical_music:indianapolis:indy_symphony:spotify:
+CLOSED: [2023-09-24 Sun 21:32 EDT]
+:PROPERTIES:
+:EXPORT_FILE_NAME: indianapolis-symphony-orchestra
+:END:
+
+I'm a season ticket holder to the [[https://www.indianapolissymphony.org/][Indianapolis Symphony Orchestra]].  As
+much as I enjoy the genre, I'm far from an expert.  Starting with the
+2023-24 season, I'm going to make playlists in advance and try to be a
+bit more familiar with the pieces.
+
+**** 2023-2024 Classical Series
+
+***** September 29, 2023
+
+[[https://www.indianapolissymphony.org/event/beethoven-prokofiev-t-for-3/][Event]], [[https://open.spotify.com/playlist/3Qva4fojTP3zrcZRkdzWll?si=679e2f4031c042da][Spotify playlist]]
+
+1. Beethoven: Egmont Overture, Op.84
+2. Puts: Contact
+3. Prokofiev: Symphony No. 5 in B-flat Major, Op.100
+
+
 * Talks section
 :PROPERTIES:
 :EXPORT_HUGO_BUNDLE: talks
