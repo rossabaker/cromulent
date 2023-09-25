@@ -9,27 +9,6 @@ flake-parts.lib.mkFlake { inherit inputs; } (
       darwinModules = ./darwinModules;
     };
 
-    mkHomeConfig = { pkgs, system, username, homeDirectory }:
-      home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = [
-          {
-            home = {
-              inherit homeDirectory username;
-              stateVersion = "21.11";
-            };
-            nixpkgs.overlays = [ emacs-overlay.overlay ];
-          }
-          self.homeModules.base
-          self.homeModules.emacs
-          self.homeModules.scala
-          self.homeModules.python
-          ../../modules/work
-        ];
-        # Pass our flake inputs into the config
-        extraSpecialArgs = { inherit inputs; };
-      };
-
     overlays = {
       emacs = emacs-overlay.overlay;
       devshell = devshell.overlays.default;
@@ -60,13 +39,32 @@ flake-parts.lib.mkFlake { inherit inputs; } (
     flake = {
       inherit flakeModules overlays;
 
-      homeConfigurations = {
-        "RABaker@L2LYQM57XY" = mkHomeConfig {
-          pkgs = (pkgsFor "aarch64-darwin");
+      homeModules.default = {
+        imports = [
+          self.homeModules.base
+          self.homeModules.emacs
+          self.homeModules.scala
+          self.homeModules.python
+          ../../modules/work
+        ];
+        home.stateVersion = "21.11";
+        nixpkgs.overlays = [ emacs-overlay.overlay ];
+      };
+
+      homeConfigurations.aarch64-darwin-example = {
+        extraSpecialArgs = { inherit inputs; };
+        pkgs = import nixpkgs {
           system = "aarch64-darwin";
-          username = "RABaker";
-          homeDirectory = "/Users/RABaker";
         };
+        modules = [
+          self.homeModules.default
+          {
+            home = rec {
+              username = "Example";
+              homeDirectory = "/Users/${username}";
+            };
+          }
+        ];
       };
     };
 

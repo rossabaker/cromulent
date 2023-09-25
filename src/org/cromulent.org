@@ -5101,12 +5101,11 @@ The Home Manager module is published to my flake as output
   }
 #+end_src
 
-
 ** DONE Nix Flake
 CLOSED: [2022-12-25 Sun 22:14 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: /nix-flake
-:EXPORT_HUGO_LASTMOD: [2023-09-19 Tue 23:10 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-09-24 Sun 22:33 EDT]
 :header-args+: :code-license MIT
 :EXPORT_OPTIONS: h:6
 :END:
@@ -5196,27 +5195,6 @@ function of its inputs!
         darwinModules = ./darwinModules;
       };
 
-      mkHomeConfig = { pkgs, system, username, homeDirectory }:
-        home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          modules = [
-            {
-              home = {
-                inherit homeDirectory username;
-                stateVersion = "21.11";
-              };
-              nixpkgs.overlays = [ emacs-overlay.overlay ];
-            }
-            self.homeModules.base
-            self.homeModules.emacs
-            self.homeModules.scala
-            self.homeModules.python
-            ../../modules/work
-          ];
-          # Pass our flake inputs into the config
-          extraSpecialArgs = { inherit inputs; };
-        };
-
       overlays = {
         emacs = emacs-overlay.overlay;
         devshell = devshell.overlays.default;
@@ -5237,13 +5215,32 @@ function of its inputs!
       flake = {
         inherit flakeModules overlays;
 
-        homeConfigurations = {
-          "RABaker@L2LYQM57XY" = mkHomeConfig {
-            pkgs = (pkgsFor "aarch64-darwin");
+        homeModules.default = {
+          imports = [
+            self.homeModules.base
+            self.homeModules.emacs
+            self.homeModules.scala
+            self.homeModules.python
+            ../../modules/work
+          ];
+          home.stateVersion = "21.11";
+          nixpkgs.overlays = [ emacs-overlay.overlay ];
+        };
+
+        homeConfigurations.aarch64-darwin-example = {
+          extraSpecialArgs = { inherit inputs; };
+          pkgs = import nixpkgs {
             system = "aarch64-darwin";
-            username = "RABaker";
-            homeDirectory = "/Users/RABaker";
           };
+          modules = [
+            homeModules.default
+            {
+              home = rec {
+                username = "Example";
+                homeDirectory = "/Users/${username}";
+              };
+            };
+          ];
         };
       };
 
