@@ -7071,6 +7071,11 @@ CLOSED: [2023-09-24 Sun 21:32 EDT]
 :EXPORT_FILE_NAME: indianapolis-symphony-orchestra
 :END:
 
+#+begin_description
+Spotify playlists for advance study of Indianapolis Symphony Orchestra
+performances.
+#+end_description
+
 I'm a season ticket holder to the [[https://www.indianapolissymphony.org/][Indianapolis Symphony Orchestra]].  As
 much as I enjoy the genre, I'm far from an expert.  Starting with the
 2023-24 season, I'm going to make playlists in advance and try to be a
