@@ -28,6 +28,7 @@ flake-parts.lib.mkFlake { inherit inputs; } (
       ./scala
       ./python
       ./home-manager
+      ./home-manager/darwin.nix
       ./nix-darwin
       ./keyboard
       ./podman
@@ -42,10 +43,10 @@ flake-parts.lib.mkFlake { inherit inputs; } (
       homeModules.default = {
         imports = [
           self.homeModules.base
+          self.homeModules.darwin
           self.homeModules.emacs
           self.homeModules.scala
           self.homeModules.python
-          ../../modules/work
         ];
         home.stateVersion = "21.11";
         nixpkgs.overlays = [ emacs-overlay.overlay ];

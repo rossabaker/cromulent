@@ -26,7 +26,6 @@
       programs.git = {
         enable = true;
         ignores = [
-          ".DS_Store"
           ".direnv/"
         ];
         userName = "Ross A. Baker";
