@@ -1,12 +1,10 @@
-{ config, lib, moduleWithSystem, ... }: {
-  flake.homeModules.darwin = moduleWithSystem(
-    perSystem@{ pkgs }: lib.mkIf pkgs.stdenv.isDarwin {
-      nixpkgs.overlays = [
-        config.flake.inputs.firefox-darwin.overlay
-      ];
-
+{ inputs, lib, moduleWithSystem, ... }: {
+  flake.homeModules.darwin = moduleWithSystem (
+    perSystem@{ pkgs }:
+    let pkgs' = pkgs.extend inputs.firefox-darwin.overlay;
+    in {
       home.packages = [
-        pkgs.firefox-bin
+        pkgs'.firefox-bin
         pkgs.rectangle
       ];
 
