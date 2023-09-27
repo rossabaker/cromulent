@@ -5534,6 +5534,7 @@ CLOSED: [2023-09-08 Fri 16:59 CDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: home-manager
 :header-args+: :tangle-mode (identity #o444) :mkdirp yes :code-license MIT
+:EXPORT_HUGO_LASTMOD: [2023-09-26 Tue 21:10 EDT]
 :END:
 
 #+begin_description
@@ -5566,6 +5567,7 @@ further.
         home.packages = [
           pkgs.coreutils
           pkgs.element-desktop
+          pkgs.gh
           pkgs.jq
           pkgs.nixpkgs-fmt
           pkgs.postgresql_14

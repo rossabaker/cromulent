@@ -9,6 +9,7 @@
       home.packages = [
         pkgs.coreutils
         pkgs.element-desktop
+        pkgs.gh
         pkgs.jq
         pkgs.nixpkgs-fmt
         pkgs.postgresql_14
