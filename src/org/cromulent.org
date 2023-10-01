@@ -2439,7 +2439,7 @@ writing, seems to work.
 CLOSED: [2023-08-09 Wed 20:31 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: /webcrawlers
-:EXPORT_HUGO_LASTMOD: [2023-08-10 Thu 14:15 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-10-01 Sun 00:33 EDT]
 :header-args+: :code-license CC0-1.0
 :END:
 
@@ -2483,6 +2483,38 @@ Not here, it doesn't.
 
 #+end_src
 
+***** Google
+
+[[https://developers.google.com/search/docs/crawling-indexing/overview-google-crawlers#google-extended][~Google-Extended~]] is "a standalone product token that web publishers can
+use to manage whether their sites help improve Bard and Vertex AI
+generative APIs, including future generations of models that power
+those products."
+
+#+begin_src txt :tangle ../../tmp/hugo/static/robots.txt
+  User-agent: Google-Extended
+  Disallow: /
+
+#+end_src
+
+[[https://developers.google.com/search/docs/crawling-indexing/overview-google-crawlers#googleother][~GoogleOther~]] "may be used for one-off crawls for internal research
+and development."  I am now suspicious of Google by default.
+
+#+begin_src txt :tangle ../../tmp/hugo/static/robots.txt
+  User-agent: GoogleOther
+  Disallow: /
+
+#+end_src
+
+***** Omgili
+
+[[https://en.wikipedia.org/wiki/Omgili][Omgili]] is a defunct search engine, but its [[https://webz.io/blog/web-data/what-is-the-omgili-bot-and-why-is-it-crawling-your-website/][bot lives on at ~webz.io~]],
+which is [[https://webz.io/blog/machine-learning/][a player in the LLM space]].
+
+#+begin_src txt :tangle ../../tmp/hugo/static/robots.txt
+  User-agent: Omgilibot
+  Disallow: /
+
+#+end_src
 
 ***** OpenAI
 
@@ -2492,6 +2524,14 @@ Not here, it doesn't.
   User-agent: GPTBot
   Disallow: /
 
+#+end_src
+
+[[https://platform.openai.com/docs/plugins/bot][~ChatGPT-User~]] "will only be used to take direct actions on behalf of
+ChatGPT users."  I don't want to be any part of their product.
+
+#+begin_src text :tangle ../../tmp/hugo/static/robots.txt
+  User-agent: ChatGPT-User
+  Disallow: /
 #+end_src
 
 **** General cesspits
@@ -2505,6 +2545,19 @@ This will block +Twitter+ X cards.
   Disallow: /
 
 #+end_src
+
+**** Also considered for blocking
+
+***** Common Crawl
+
+[[https://commoncrawl.org/][Common Crawl]] has been used to train large language models, but is
+itself an open data source.  I'm erring on the side of openness and
+permitting its [[https://commoncrawl.org/ccbot][~CCBot~]] for now.
+
+**** See also
+
+- [[https://neil-clarke.com/block-the-bots-that-feed-ai-models-by-scraping-your-website][Block the Bots that Feed “AI” Models by Scraping Your Website]] by
+  Neil Clarke
 
 ** Emacs bundle                                                       :emacs:
 :PROPERTIES:
