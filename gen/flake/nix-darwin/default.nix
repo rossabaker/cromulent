@@ -39,6 +39,7 @@
     imports = with inputs.self.darwinModules; [
       base
       cachix
+      garnix
       keyboard
       podman
       postgresql
