@@ -4935,7 +4935,7 @@ CLOSED: [2023-09-19 Tue 00:21 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: cachix
 :header-args+: :code-license CC0-1.0
-:EXPORT_HUGO_LASTMOD: [2023-09-19 Tue 00:22 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-10-02 Mon 23:32 EDT]
 :END:
 
 [[https://www.cachix.org/][Cachix]] is a cache for Nix binaries.  They are declared in
@@ -4950,29 +4950,52 @@ Three instances are of particular interest:
 
 Adding all three is recommended for Cromulent users.
 
-*** Darwin module
+*** Flake part
 
 #+begin_src nix :exports none :noweb-ref flake-modules
   ./cachix
 #+end_src
 
 #+begin_src nix :tangle ../../gen/flake/cachix/default.nix
-  {
-    flake.darwinModules.cachix =
-      {
-        nix.settings = {
-          substituters = [
-            "https://nix-community.cachix.org/"
-            "https://rossabaker.cachix.org/"
-            "https://typelevel.cachix.org/"
-          ];
-          trusted-public-keys = [
-            "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-            "rossabaker.cachix.org-1:KK/CQTeAGEurCUBy3nDl9PdR+xX+xtWQ0C/GpNN6kuw="
-            "typelevel.cachix.org-1:UnD9fMAIpeWfeil1V/xWUZa2g758ZHk8DvGCd/keAkg="
-          ];
+  let
+    module =
+      { config, lib, ... }:
+      let
+        cfg = config.cromulent.cache.cachix;
+      in
+        {
+          options.cromulent.cache.cachix = {
+            enabled =
+              lib.mkEnableOption "Configures Nix to use various Cachix instances as a substituter" // {
+                default = true;
+              };
+
+            cachices =
+              lib.mkOption {
+                type = lib.types.attrsOf lib.types.str;
+                default = {
+                  "https://nix-community.cachix.org/" = "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=";
+                  "https://rossabaker.cachix.org/" = "rossabaker.cachix.org-1:KK/CQTeAGEurCUBy3nDl9PdR+xX+xtWQ0C/GpNN6kuw=";
+                  "https://typelevel.cachix.org/" = "typelevel.cachix.org-1:UnD9fMAIpeWfeil1V/xWUZa2g758ZHk8DvGCd/keAkg=";
+                };
+              };
+          };
+
+          config =
+            lib.mkIf cfg.enabled {
+              nix.settings = {
+                substituters = builtins.attrNames cfg.cachices;
+                trusted-public-keys = builtins.attrValues cfg.cachices;
+              };
+            };
         };
-      };
+  in
+  {
+    flake = {
+      nixosModules.cachix = module;
+      darwinModules.cachix = module;
+      homeModules.cachix = module;
+    };
   }
 #+end_src
 
