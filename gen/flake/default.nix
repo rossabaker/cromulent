@@ -44,6 +44,7 @@ flake-parts.lib.mkFlake { inherit inputs; } (
         imports = [
           self.homeModules.base
           self.homeModules.darwin
+          self.homeModules.garnix
           self.homeModules.emacs
           self.homeModules.scala
           self.homeModules.python

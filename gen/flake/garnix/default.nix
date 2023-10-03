@@ -1,14 +1,7 @@
-let
-  module = ./module.nix;
-  modules = {
-    garnix = module;
-    default.imports = module;
-  };
-in
 {
   flake = {
-    darwinModules = modules;
-    nixosModules = modules;
-    homeModules = modules;
+    darwinModules.garnix = ./module.nix;
+    nixosModules.garnix = ./module.nix;
+    homeModules.garnix = ./module.nix;
   };
 }

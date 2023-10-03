@@ -1,6 +1,10 @@
 { moduleWithSystem, ... }: {
   flake.homeModules.base = moduleWithSystem(
     perSystem@{ pkgs }: {
+      # Curiously not a default of home-manager, but required once we
+      # start configuring Nix otherwise.
+      nix.package = pkgs.nix;
+
       # Comment out if you wish to disable unfree packages for your system
       nixpkgs.config.allowUnfree = true;
 
