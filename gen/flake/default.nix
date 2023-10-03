@@ -41,14 +41,7 @@ flake-parts.lib.mkFlake { inherit inputs; } (
       inherit flakeModules overlays;
 
       homeModules.default = {
-        imports = [
-          self.homeModules.base
-          self.homeModules.darwin
-          self.homeModules.garnix
-          self.homeModules.emacs
-          self.homeModules.scala
-          self.homeModules.python
-        ];
+        imports = builtins.attrValues (builtins.removeAttrs self.homeModules [ "default" ]);
         home.stateVersion = "21.11";
         nixpkgs.overlays = [ emacs-overlay.overlay ];
       };

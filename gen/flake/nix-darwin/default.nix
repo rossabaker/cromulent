@@ -36,13 +36,6 @@
   );
 
   flake.darwinModules.default = {
-    imports = with inputs.self.darwinModules; [
-      base
-      cachix
-      garnix
-      keyboard
-      podman
-      postgresql
-    ];
+    imports = builtins.attrValues (builtins.removeAttrs inputs.self.darwinModules [ "default" ]);
   };
 }

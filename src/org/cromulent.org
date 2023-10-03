@@ -5197,7 +5197,7 @@ The Home Manager module is published to my flake as output
 CLOSED: [2022-12-25 Sun 22:14 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: /nix-flake
-:EXPORT_HUGO_LASTMOD: [2023-09-24 Sun 22:44 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-10-02 Mon 23:14 EDT]
 :header-args+: :code-license MIT
 :EXPORT_OPTIONS: h:6
 :END:
@@ -5308,14 +5308,7 @@ function of its inputs!
         inherit flakeModules overlays;
 
         homeModules.default = {
-          imports = [
-            self.homeModules.base
-            self.homeModules.darwin
-            self.homeModules.garnix
-            self.homeModules.emacs
-            self.homeModules.scala
-            self.homeModules.python
-          ];
+          imports = builtins.attrValues (builtins.removeAttrs self.homeModules [ "default" ]);
           home.stateVersion = "21.11";
           nixpkgs.overlays = [ emacs-overlay.overlay ];
         };
@@ -5733,7 +5726,7 @@ CLOSED: [2023-08-07 Mon 09:48 EDT]
 :PROPERTIES:
 :EXPORT_HUGO_BUNDLE: nix-darwin
 :EXPORT_FILE_NAME: _index
-:EXPORT_HUGO_LASTMOD: [2023-10-02 Mon 22:50 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-10-02 Mon 23:14 EDT]
 :END:
 
 #+begin_description
@@ -5796,14 +5789,7 @@ further.
     );
 
     flake.darwinModules.default = {
-      imports = with inputs.self.darwinModules; [
-        base
-        cachix
-        garnix
-        keyboard
-        podman
-        postgresql
-      ];
+      imports = builtins.attrValues (builtins.removeAttrs inputs.self.darwinModules [ "default" ]);
     };
   }
 #+end_src
