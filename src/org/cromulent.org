@@ -2050,7 +2050,7 @@ The website is just another package within our flake.
 ~export.el~ is a small Emacs script that finds the Org file and
 exports its contents with ox-hugo.
 
-#+begin_src emacs-lisp :tangle ../../gen/website/export.el
+#+begin_src emacs-lisp :tangle ../../gen/pkgs/website/export.el
   (require 'ob-dot)
   (require 'ob-shell)
   (require 'rab-ox-hugo)
@@ -2074,7 +2074,7 @@ HTML and links.
 Finally, the =public/= directory rendered by Hugo is copied to the
 derivation output.
 
-#+begin_src nix :tangle ../../gen/website/default.nix
+#+begin_src nix :tangle ../../gen/pkgs/website/default.nix
   { src, emacs, gnupg, graphviz, hugo, html5validator, hyperlink, stdenv }:
 
   stdenv.mkDerivation rec {
@@ -4835,14 +4835,110 @@ is =use-package= bindings.
   ;;; rab-ox-lisp ends here
 #+end_src
 
+** DONE Nix binary caches
+CLOSED: [2023-10-03 Tue 21:51 EDT]
+:PROPERTIES:
+:EXPORT_FILE_NAME: nix-binary-caches
+:EXPORT_HUGO_LASTMOD: [2023-10-03 Tue 22:37 EDT]
+:END:
+
+#+begin_description
+Provides a module to configure Nix's binary caches, with suitable
+defaults for Garnix and Ross' Cachix instances.
+#+end_description
+
+Nix sits in a sweet spot between source and binary distribution.  For
+esoterica, like personal projects or a patched versions of more
+popular application, source builds give us full control of our system.
+But most builds are not novel the world over, and we'd rather quickly
+fetch a binary than reminisce over our [[https://www.gentoo.org/][Gentoo]] days while glibc
+recompiles.
+
+To realize a derivation, which is roughly Nixian for "build a
+package," we:
+
+1. Check `/nix/store` for the hash.
+2. Failing that, try a [[https://nixos.wiki/wiki/Binary_Cache][binary cache]].
+3. Failing that, build it.
+
+The binary cache is like a distributed Nix store.  As such, we need to
+point only at caches we trust, with public keys to check the
+signatures of their contents.  These are =nix.settings.substituters=
+and =nix.settings.trusted-public-keys=, respectively.
+
+*** Nix module
+
+This module may be mixed into a NixOS, Nix-Darwin, or Home Manager
+configuration.
+
+#+begin_src nix :tangle ../../gen/modules/binaryCaches/default.nix
+  { config, lib, ... }:
+  let
+    cfg = config.cromulent.binaryCaches;
+  in
+    {
+      options.cromulent.binaryCaches = {
+        enabled =
+          lib.mkEnableOption "Configure Nix to use various binary caches" // {
+            default = true;
+          };
+
+        caches =
+          lib.mkOption {
+            type = lib.types.attrsOf lib.types.str;
+            default = {};
+          };
+      };
+
+      config =
+        lib.mkIf cfg.enabled {
+          nix.settings = {
+            substituters = builtins.attrNames cfg.caches;
+            trusted-public-keys = builtins.attrValues cfg.caches;
+          };
+        };
+    }
+#+end_src
+
+*** Flake integration
+
+#+begin_src nix :exports none :noweb-ref flake-modules
+  ./binaryCaches
+#+end_src
+
+The module is exported to ~github:rossabaker/cromulent~ as three flake outputs:
+
+- ~nixosModules.binaryCaches~
+- ~darwinModules.binaryCaches~
+- ~homeModules.binaryCaches~[fn:20]
+
+This module does not specify any caches by itself.  Cromulent
+consumers should consider importing the [[#cachix-flake-modules][Cachix]] and [[#garnix-flake-modules][Garnix]] flake
+modules.
+
+#+begin_src nix :tangle ../../gen/flake/binaryCaches/default.nix
+  {
+    flake = {
+      nixosModules.binaryCaches = ../../modules/binaryCaches;
+      darwinModules.binaryCaches = ../../modules/binaryCaches;
+      homeModules.binaryCaches = ../../modules/binaryCaches;
+    };
+  }
+#+end_src
+
 ** DONE Garnix :caching:garnix:continuous_integration:nix:nixos:nix_darwin:home_manager:
 CLOSED: [2023-06-23 Fri 00:26 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: garnix
-:EXPORT_HUGO_LASTMOD: [2023-10-02 Mon 22:46 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-10-03 Tue 23:08 EDT]
 :header-args+: :code-license CC0-1.0
 :header-args:nix+: :code-license MIT
 :END:
+
+#+begin_description
+Describes our use of Garnix for continuous integration and defines a Nix
+module to configure it as a binary cache.
+#+end_description
 
 I have an Apple M1 for work, which is [[https://github.com/github/roadmap/issues/528][not yet supported by GitHub
 Actions]].  That's okay, because [[https://garnix.io/][Garnix]] is a great alternative.
@@ -4866,63 +4962,61 @@ At this time, we only build for ~aarch64-darwin~ with Garnix.
 
 *** Nix binary cache
 
-Everything Garnix builds goes into the [[https://garnix.io/docs/caching][Garnix cache]].  If you're
-consuming my flake, you probably want to configure Nix with the Garnix
-substituter and trusted public key.
+Everything Garnix builds goes into the [[https://garnix.io/docs/caching][Garnix cache]].  Enabling this as
+a binary cache is highly recommended if you're consuming Cromulent or
+any other project that publishes to Garnix.
 
-#+begin_info
-These settings are applicable to _all_ Garnix builds, not just my own
-flake.
-#+end_info
+**** Nix module
 
-**** Module
+This module may be mixed into a NixOS, Nix-Darwin, or Home Manager
+configuration.
 
-#+begin_src nix :exports none :noweb-ref flake-modules
-  ./garnix
-#+end_src
-
-#+begin_src nix :tangle ../../gen/flake/garnix/module.nix
+#+begin_src nix :tangle ../../gen/modules/garnix/default.nix
   { config, lib, ... }:
 
   let
-    cfg = config.cromulent.cache.garnix;
+    cfg = config.cromulent.binaryCaches.garnix;
   in
   {
+    imports = [ ../binaryCaches ];
+
     options = {
-      cromulent.cache.garnix.enable =
+      cromulent.binaryCaches.garnix.enable =
         lib.mkEnableOption "Configures Nix to use the Garnix cache as a substituter" // {
           default = true;
         };
     };
 
-    config = lib.mkMerge [
-      (lib.mkIf cfg.enable {
-        nix = {
-          settings.substituters = [
-            "https://cache.garnix.io/"
-          ];
-          settings.trusted-public-keys = [
-            "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
-          ];
-        };
-      })
-    ];
+    config = lib.mkIf cfg.enable {
+      cromulent.binaryCaches.caches = {
+        "https://cache.garnix.io/" = "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g=";
+      };
+    };
   }
 #+end_src
 
-The module is applicable to NixOS, Nix-Darwin, or Home Manager.
+**** Flake integration
+:PROPERTIES:
+:CUSTOM_ID: garnix-flake-modules
+:END:
 
-#+begin_warning
-If you use this as a Home Manager module, you must also specify
-a =nix.package=.
-#+end_warning
+
+#+begin_src nix :exports none :noweb-ref flake-modules
+  ./garnix
+#+end_src
+
+The module is exported to ~github:rossabaker/cromulent~ as three flake outputs:
+
+- ~nixosModules.garnix~
+- ~darwinModules.garnix~
+- ~homeModules.garnix~[fn:20]
 
 #+begin_src nix :tangle ../../gen/flake/garnix/default.nix
   {
     flake = {
-      darwinModules.garnix = ./module.nix;
-      nixosModules.garnix = ./module.nix;
-      homeModules.garnix = ./module.nix;
+      darwinModules.garnix = ../../modules/garnix;
+      homeModules.garnix = ../../modules/garnix;
+      nixosModules.garnix = ../../modules/garnix;
     };
   }
 #+end_src
@@ -4935,66 +5029,92 @@ CLOSED: [2023-09-19 Tue 00:21 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: cachix
 :header-args+: :code-license CC0-1.0
-:EXPORT_HUGO_LASTMOD: [2023-10-02 Mon 23:32 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-10-03 Tue 22:38 EDT]
 :END:
 
-[[https://www.cachix.org/][Cachix]] is a cache for Nix binaries.  They are declared in
-=settings.substituters=, with a corresponding entry in
-=settings.trusted-public-keys=.
+#+begin_description
+Defines a Nix module to configure Cachix instances that are important
+to Cromulent as binary caches.
+#+end_description
 
-Three instances are of particular interest:
-- Cromulent's GitHub Actions publish to [[https://rossabaker.cachix.org/][=rossabaker.cachix.org=]].
+[[https://www.cachix.org/][Cachix]] is a binary cache for Nix.  Three Cachix instances are of
+particular interest to Cromulent users[fn:21].
+
+- Cromulent's GitHub Actions publish Linux binaries to
+  [[https://rossabaker.cachix.org/][=rossabaker.cachix.org=]].
 - I help maintain [[https://github.com/typelevel/typelevel-nix][Typelevel Nix]], which publishes to [[https://typelevel.cachix.org/][=typelevel.cachix.org=]].
 - A handful of our flake dependencies publish to
   [[https://nix-community.cachix.org/][=nix-community.cachix.org=]].
 
-Adding all three is recommended for Cromulent users.
+*** Nix module
 
-*** Flake part
+This module may be mixed into a NixOS, Nix-Darwin, or Home Manager
+configuration.
+
+#+begin_src nix :tangle ../../gen/modules/cachix/default.nix
+{ config, lib, ... }:
+let
+  cfg = config.cromulent.cache.cachix;
+in
+  {
+    imports = [ ../binaryCaches ];
+
+    options.cromulent.cache.cachix = {
+      rossabaker.enabled =
+        lib.mkEnableOption "Configures Nix to use `rossabaker.cachix.org` as a binary cache." // {
+          default = true;
+        };
+      typelevel.enabled =
+        lib.mkEnableOption "Configures Nix to use `typelevel.cachix.org` as a binary cache." // {
+          default = true;
+        };
+      nix-community.enabled =
+        lib.mkEnableOption "Configures Nix to use `nix-community.cachix.org` as a binary cache." // {
+          default = true;
+        };
+    };
+
+    config = lib.mkMerge [
+      (lib.mkIf cfg.rossabaker.enabled {
+        cromulent.binaryCaches.caches = {
+          "https://rossabaker.cachix.org/" = "rossabaker.cachix.org-1:KK/CQTeAGEurCUBy3nDl9PdR+xX+xtWQ0C/GpNN6kuw=";
+        };
+      })
+      (lib.mkIf cfg.typelevel.enabled {
+        cromulent.binaryCaches.caches = {
+          "https://typelevel.cachix.org/" = "typelevel.cachix.org-1:UnD9fMAIpeWfeil1V/xWUZa2g758ZHk8DvGCd/keAkg=";
+        };
+      })
+      (lib.mkIf cfg.nix-community.enabled {
+        cromulent.binaryCaches.caches = {
+          "https://nix-community.cachix.org/" = "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=";
+        };
+      })
+    ];
+  }
+#+end_src
+
+*** Flake modules
+:PROPERTIES:
+:CUSTOM_ID: cachix-flake-modules
+:END:
 
 #+begin_src nix :exports none :noweb-ref flake-modules
   ./cachix
 #+end_src
 
+The module is exported to ~github:rossabaker/cromulent~ as three flake outputs:
+
+- ~nixosModules.cachix~
+- ~darwinModules.cachix~
+- ~homeModules.cachix~[fn:20]
+
 #+begin_src nix :tangle ../../gen/flake/cachix/default.nix
-  let
-    module =
-      { config, lib, ... }:
-      let
-        cfg = config.cromulent.cache.cachix;
-      in
-        {
-          options.cromulent.cache.cachix = {
-            enabled =
-              lib.mkEnableOption "Configures Nix to use various Cachix instances as a substituter" // {
-                default = true;
-              };
-
-            cachices =
-              lib.mkOption {
-                type = lib.types.attrsOf lib.types.str;
-                default = {
-                  "https://nix-community.cachix.org/" = "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=";
-                  "https://rossabaker.cachix.org/" = "rossabaker.cachix.org-1:KK/CQTeAGEurCUBy3nDl9PdR+xX+xtWQ0C/GpNN6kuw=";
-                  "https://typelevel.cachix.org/" = "typelevel.cachix.org-1:UnD9fMAIpeWfeil1V/xWUZa2g758ZHk8DvGCd/keAkg=";
-                };
-              };
-          };
-
-          config =
-            lib.mkIf cfg.enabled {
-              nix.settings = {
-                substituters = builtins.attrNames cfg.cachices;
-                trusted-public-keys = builtins.attrValues cfg.cachices;
-              };
-            };
-        };
-  in
   {
     flake = {
-      nixosModules.cachix = module;
-      darwinModules.cachix = module;
-      homeModules.cachix = module;
+      nixosModules.cachix = ../../modules/cachix;
+      darwinModules.cachix = ../../modules/cachix;
+      homeModules.cachix = ../../modules/cachix;
     };
   }
 #+end_src
@@ -5388,7 +5508,7 @@ function of its inputs!
             };
 
             packages = {
-              website = pkgs.callPackage ../website {
+              website = pkgs.callPackage ../pkgs/website {
                 emacs = self'.packages.emacs-ross;
                 src = ../../src;
               };
@@ -5422,7 +5542,7 @@ function of its inputs!
             overlayAttrs = {
             };
           };
-    }
+   }
   )
 #+end_src
 
@@ -8360,6 +8480,20 @@ Particularly coming out of the social media archives.
 ** TODO web-key-directory has a stray copy button
 
 * Footnotes
+[fn:21] A universe that includes, and is probably limited to, me
+
+[fn:20]
+#+begin_warning
+Home Manager does not define =nix.package= by default, but requires it
+in the presence of =nix.settings=.  You probably want the following in
+your Home Manager configuration:
+
+#+begin_example nix
+{ nix.package = pkgs.nix; }
+#+end_example
+#+end_warning
+
+
 [fn:19] I recommend [[https://pekko.apache.org/][Apache Pekko]] over any BUSL-licensed Akka.
 
 [fn:1] Currently implemented with Mastodon

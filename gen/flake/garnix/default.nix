@@ -1,7 +1,7 @@
 {
   flake = {
-    darwinModules.garnix = ./module.nix;
-    nixosModules.garnix = ./module.nix;
-    homeModules.garnix = ./module.nix;
+    darwinModules.garnix = ../../modules/garnix;
+    homeModules.garnix = ../../modules/garnix;
+    nixosModules.garnix = ../../modules/garnix;
   };
 }

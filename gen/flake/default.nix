@@ -23,6 +23,7 @@ flake-parts.lib.mkFlake { inherit inputs; } (
       flakeModules.homeModules
       flakeModules.darwinModules
       ./emacs
+      ./binaryCaches
       ./garnix
       ./cachix
       ./scala
@@ -98,7 +99,7 @@ flake-parts.lib.mkFlake { inherit inputs; } (
           };
 
           packages = {
-            website = pkgs.callPackage ../website {
+            website = pkgs.callPackage ../pkgs/website {
               emacs = self'.packages.emacs-ross;
               src = ../../src;
             };
@@ -132,5 +133,5 @@ flake-parts.lib.mkFlake { inherit inputs; } (
           overlayAttrs = {
           };
         };
-  }
+ }
 )
