@@ -1,6 +1,7 @@
 #+HUGO_BASE_DIR: ../../tmp/hugo
 #+HUGO_SECTION: /
 #+MACRO: abbr @@html:<abbr title="$1">$2</abbr>@@
+#+MACRO: dfn @@html:<dfn>$1</dfn>@@
 #+PROPERTY: header-args :eval never :mkdirp yes :code-license CC-BY-SA-4.0
 
 # Automatically set the Hugo date: https://ox-hugo.scripter.co/doc/dates/#date
@@ -488,92 +489,110 @@ can't be automated [fn:3].  Some things are be redacted for security.
 But we inveterate tweakers learn from one another, so I will share all
 that I can.
 
-** DONE Managing generated sources in Git :git:gitattributes:gitignore:babel:
+** DONE Configuring Git for literate programming :git:gitattributes:gitignore:babel:
 CLOSED: [2022-08-24 Wed 15:04 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: git-repository
-:EXPORT_HUGO_LASTMOD: [2023-05-25 Thu 23:54 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-10-06 Fri 00:18 EDT]
 :header-args:gitignore+: :tangle ../../.gitignore
 :header-args:gitattributes+: :tangle ../../.gitattributes
 :header-args+: :code-license CC0-1.0
+:EXPORT_OPTIONS: h:6
 :END:
 
-My [[https://github.com/rossabaker/cromulent][personal Git repository]] hosts my configurations and this web site.
-Most of it is sourced from Org Mode, but most tools don't read Org
-directly.  We therefore need to commit some [[https://orgmode.org/manual/Extracting-Source-Code.html][tangled]] sources to
-interoperate with various tools.  We must deal with three sorts of
-files.
+#+begin_description
+Configuration of Ross A. Baker's personal Git repository, Cromulent.
+Discusses the challenges brought on by literate programming, and how
+to manage them with Git attributes.
+#+end_description
 
-*** Original sources
+My personal Git repository, [[https://github.com/rossabaker/cromulent][Cromulent]], contains the source for various
+projects, such as configurations and the contents of this website.
 
-This is the minimal set of files from which all other files can be
-derived.  As much as possible, we keep them in ~src/~.
+Due to [[https://en.wikipedia.org/wiki/Literate_programming][literate programming]], much of the source code "weaves" code and
+documentation in [[https://orgmode.org/][Org]].  Most tools aren't Org interpreters, so the Org
+must be [[https://orgmode.org/manual/Extracting-Source-Code.html]["tangled"]] [fn:22] back into separate files for general
+consumption.  This process requires a bit of extra care around Git.
 
-*** Ephemeral files
+*** Three types of files
 
-Ephemeral files can be tangled on demand and disposed of at will.
-Development processes may need them, but they can be comfortably
-recreated from the original sources.  An example of these are the Hugo
-outputs when [[*Development][locally building the site]].
+**** Original sources
 
-We put as many of them as we can in ~tmp/~ for organization.  The best
-way to handle them is with a [[https://git-scm.com/docs/gitignore][gitignore]].
+{{{dfn(Original sources)}}} are the minimal set of files that can't be
+derived from other sources as part of the build process.  As much as
+possible, original sources are confined to the [[https://github.com/rossabaker/cromulent/tree/main/src][~src/~]] directory.  So
+far, so good.
+
+**** Transient outputs
+
+{{{dfn(Transient outputs)}}} are produced on demand from original
+sources, and can be disposed at will.  For example, the Hugo
+configuration is tangled and used when [[*Development][locally previewing the site]].
+External processes must not refer to transient outputs.
+
+Transient outputs are handled well by [[https://git-scm.com/docs/gitignore][gitignore]].  In the tradition of
+[[https://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html][Maven]] and [[https://www.scala-sbt.org/1.x/docs/Directories.html#Build+products][SBT]], they are kept in ~target/~.  Originally, they were kept
+in ~tmp/~.
 
 #+begin_src gitignore
+  /target/
   /tmp/
 #+end_src
 
-Nix builds create a ~result~ symlink by default that should also be
-ignored.
+[[https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-build][~nix build~]] creates symlinks by default that should also be ignored.
+These all start with ~result~ and optional suffixes delimited by ~-~.
 
 #+begin_src gitignore
   /result
+  /result-*
 #+end_src
 
-*** Committed, generated sources
+**** Persistent tangles
+:PROPERTIES:
+:CUSTOM_ID: persistent-tangles
+:END:
 
-There are files that are neither original, nor can they be generated
-on demand from originals.  This class of files is generally to be
-avoided, but with the right mitigation, we can live with it and still
-live in our Org Mode bubble within a world that isn't ready for it.
+Regrettably, this is not the end of the story.  The price of weaving
+code and documentation, then tangling code back for external
+reference, is a file neither original nor disposable.  Examples
+of these {{{dfn(persistent tangles)}}} include:
 
-**** Location
+- The [[*Nix Flake][Nix Flake]] and supporting files
+- Continuous integration descriptors, like GitHub workflows or [[*Garnix][Garnix]].
+- The git configurations described in this document!
 
-Some files must be tangled to specific locations in the repository to
-be loaded by other tools.  For example, Git looks for ~.gitignore~ and
-in the project root.
+As much as possible, these copies are isolated in [[https://github.com/rossabaker/cromulent/tree/main/gen][~gen/~]].  Sometimes
+their location is arbitrary, sometimes not.  ~nix flake~ expects a
+flake definition at [[https://github.com/rossabaker/cromulent/blob/main/flake.nix][~/flake.nix~]], but its myriad modules can be
+tangled to ~gen/~.
 
-Other files need to be tangled for non-Org tooling, but are imported
-by something else, like the [[*Build website with Nix][Nix package for our website]], which is
-imported into ~flake.nix~.  We stow all such files we can in the
-~gen/~ directory.
+***** TODO Desynchronization
 
-**** Problems and mitigation
-
-***** Desycnhronization
-
-The tangled source may be desynchronized with the Org Mode source.  We
-could check for this with a GitHub workflow, but don't yet.
+The tangled output may be desynchronized with the Org Mode source.  This
+should be prevented with a [[https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks][pre-commit hook]] or at least flagged by
+continuous integration, but isn't yet.
 
 ***** Bloated diffs
 
-When we commit tangled sources, each hunk of the diff may be
-duplicated between the original source and the tangled source.  This
-is distracting in review.  We can set a gitattribute of [[https://git-scm.com/docs/gitattributes#_diff][=-diff=]], which
-treats the specified file as binary.  It's a little white lie, but
-it prevents repeating each hunk.
+#+begin_aside
+This section is inspired by Bryan Clark's [[https://medium.com/@clarkbw/managing-generated-files-in-github-1f1989c09dfd][Managing Generated Files in
+GitHub]].
+#+end_aside
 
-A second problem is that a larger diff has a larger surface area for
-merge conflicts.  [[https://git-scm.com/docs/gitattributes#_merge][=-merge=]] avoids 3-way merges, but still flags the
-file as a conflict.  Typically the file needs to be regenerated
-in these cases.
+Each hunk of the diff may be duplicated between the original source
+and the tangled output.  This is distracting in review.  Unsetting the
+[[https://git-scm.com/docs/gitattributes#_marking_files_as_binary][=diff= gitattribute]] treats the specified file as binary.  A little
+white lie refocuses reviewers on the source of truth.
+
+A second problem is that a larger diff implies a larger surface area
+for merge conflicts.  Unsetting the [[https://git-scm.com/docs/gitattributes#_merge][=merge= gitattribute]] avoids 3-way
+merges, but still flags the file as a conflict.  The solution is to
+resolve any conflicts in the original sources, and then retangle.
 
 Finally, setting [[https://github.com/github/linguist/blob/97bc889ce840208652bf09b45f3b7859de43fe8e/docs/overrides.md#generated-code][=linguist-generated=]] suppresses these files from
 rendered diffs.  It also excludes them from GitHub language stats.
 
-We set all these gitattributes for all tangled sources.  The
-~.gitattributes~ file itself gets gitattributes set on it!
-
+#+caption: ~/.gitattributes~
 #+begin_src gitattributes
   gen/**          -diff -merge linguist-generated=true
   .gitignore      -diff -merge linguist-generated=true
@@ -583,6 +602,11 @@ We set all these gitattributes for all tangled sources.  The
   garnix.yaml     -diff -merge linguist-generated=true
   README.org      -diff -merge linguist-generated=true
 #+end_src
+
+#+begin_aside
+Because the ~.gitattributes~ file is tangled from this document, it
+defines its own gitattributes!
+#+end_aside
 
 *** Readme                                                         :noexport:
 :PROPERTIES:
@@ -2115,8 +2139,8 @@ derivation output.
   }
 #+end_src
 
-To avoid [[https://nixos.wiki/wiki/Import_From_Derivation][Import From Derivation]], this Nix expression is [[https://orgmode.org/manual/Extracting-Source-Code.html][tangled]] and
-[[/configs/git-repository/#committed-generated-sources][committed as generated source]].
+To avoid [[https://nixos.wiki/wiki/Import_From_Derivation][Import From Derivation]], this Nix expression is committed as a
+[[#persistent-tangles][persistent tangle]].
 
 **** Development
 
@@ -8480,6 +8504,9 @@ Particularly coming out of the social media archives.
 ** TODO web-key-directory has a stray copy button
 
 * Footnotes
+
+[fn:22] I struggle with why this isn't called "untangling."
+
 [fn:21] A universe that includes, and is probably limited to, me
 
 [fn:20]
