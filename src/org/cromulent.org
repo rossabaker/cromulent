@@ -693,7 +693,7 @@ https://www.rfc-editor.org/rfc/rfc7033.html#section-4.2
 HTTP redirects are beyond a pure static site, but ~rossabaker.com~
 deploys to Netlify, whose [[https://docs.netlify.com/routing/redirects/][redirect support]] is up to the job.
 
-#+begin_src text :code-license CC0-1.0
+#+begin_src text :tangle ../../tmp/hugo/static/_redirects :code-license CC0-1.0
   /.well-known/webfinger https://social.rossabaker.com/.well-known/webfinger
 #+end_src
 
