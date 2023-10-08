@@ -637,6 +637,102 @@ defines its own gitattributes!
 
 - /website/
 
+** DONE WebFinger                 :@tech:webfinger:mastodon:netlify:redirects:
+CLOSED: [2022-11-22 Tue 00:14 EST]
+:PROPERTIES:
+:EXPORT_FILE_NAME: webfinger
+:EXPORT_DATE: [2022-11-22 Tue 00:15 EST]
+:EXPORT_HUGO_LASTMOD: [2023-10-08 Sun 00:15 EDT]
+:END:
+
+#+begin_description
+How to implement WebFinger for Mastodon on a separate domain with
+Netlify redirects.
+#+end_description
+
+{{{dfn(WebFinger)}}}, specified by [[https://datatracker.ietf.org/doc/html/rfc7033][RFC7033]], is a discovery protocol
+over secure HTTP.  It is [[https://docs.joinmastodon.org/spec/webfinger/#intro][used by Mastodon]] to map account identifiers
+to actor IDs.
+
+#+begin_warning
+This protocol is not to be confused with [[/projects/finger/][Finger]].
+#+end_warning
+
+*** The WebFinger query
+
+To look up a Mastodon account, an HTTP GET request is constructed from
+the account ID.  For account ~@ross@rossabaker.com~, the WebFinger URI
+is
+[[https://rossabaker.com/.well-known/webfinger?resource=acct%3Aross%40rossabaker.com][~https://rossabaker.com/.well-known/webfinger?resource=acct%3Aross%40rossabaker.com~]]:
+
+- ~https://~ :: always a secure HTTP request
+- ~rossabaker.com~ :: the domain of the account
+- ~/.well-known/webfinger~ :: the WebFinger protocol's "[[https://www.rfc-editor.org/rfc/rfc8615.html][well-known URI]]"
+- ~?resource=acct%3Aross%40rossabaker.com~ :: the required query
+  parameter, ~resource~.  The leading ~@~ of the account ID is
+  replaced by ~acct:~, then the whole value is [[https://datatracker.ietf.org/doc/html/rfc3986#section-2.1][percent-encoded]].
+
+*** Redirecting to the Mastodon server with Netlify
+
+Mastodon servers have a WebFinger server built in.  When the account
+ID has the same domain as Mastodon, there's nothing else to do.  In
+this case, the account ID is on ~rossabaker.com~, while the Mastodon
+runs on [[https://social.rossabaker.com/][~social.rossabaker.com~]].[fn:23] The easiest thing to do is
+redirect all WebFinger requests to the Mastodon server.
+
+#+begin_quote
+A WebFinger resource MAY redirect the client; if it does, the
+redirection MUST only be to an "https" URI and the client MUST perform
+certificate validation again when redirected.
+
+#+begin_cite
+https://www.rfc-editor.org/rfc/rfc7033.html#section-4.2
+#+end_cite
+#+end_quote
+
+HTTP redirects are beyond a pure static site, but ~rossabaker.com~
+deploys to Netlify, whose [[https://docs.netlify.com/routing/redirects/][redirect support]] is up to the job.
+
+#+begin_src text :code-license CC0-1.0
+  /.well-known/webfinger https://social.rossabaker.com/.well-known/webfinger
+#+end_src
+
+#+begin_warning
+This forwards _all_ web finger requests to the Mastodon server.
+That's the only use of WebFinger on ~rossabaker.com~ at this time.
+The only supported resource today is ~acct:ross@rossabaker.com~, so
+that's fine here.
+
+If this ever changed, [[https://docs.netlify.com/routing/redirects/redirect-options/][more sophisticated redirects]] are possible with
+Netlify.  Specifically, query parameter matching, status codes, and
+[[https://docs.netlify.com/routing/redirects/rewrites-proxies/#shadowing][shadowing]] would allow dispatch to multiple servers on the ~resource~
+parameter, a ~404~ response for unknown resources, and a ~400~
+response for a missing resource.
+#+end_warning
+
+**** Why not a static solution?
+
+The Mastodon response appears to be static, and could be served
+directly from ~rossabaker.com~.  This could become necessary if the
+Mastodon-hosted resource were ever merged with non-Mastodon
+information.
+
+One problem is that a future version of Mastodon could eventually
+change its own response.  As long as WebFinger is implemented here
+only for Mastodon, it is wise to forward to the source of truth.
+
+A second, more urgent problem is that a static server can't dispatch
+on query parameters.  The static server would serve the same response
+_any_ ~resource~, or no ~resource~ at all.  The ~_redirects~ solution
+admits just enough dynamic behavior, at the expense of constraining
+where it can be hosted[fn:24].
+
+**** Redirects                                                     :noexport:
+
+#+begin_src text :tangle ../../tmp/hugo/static/_redirects
+  /projects/webfinger /configs/webfinger
+#+end_src
+
 ** DONE Web Key Directory
 CLOSED: [2022-11-02 Wed 23:39 EDT]
 :PROPERTIES:
@@ -7179,116 +7275,13 @@ be seen in [[/notes][~/notes~]].
 4. Drop toots that link back to own domain
 5. Trim trailing hashtags
 
-** DONE WebFinger                 :@tech:webfinger:mastodon:netlify:redirect:
-CLOSED: [2022-11-22 Tue 00:14 EST]
-:PROPERTIES:
-:EXPORT_FILE_NAME: webfinger
-:EXPORT_DATE: [2022-11-22 Tue 00:15 EST]
-:EXPORT_HUGO_LASTMOD: [2022-12-01 Thu 20:50 EST]
-:END:
-
-#+begin_description
-  Set up a WebFinger resource to alias your Mastodon account on
-  another server to your own domain.
-#+end_description
-
-#+begin_warning
-  I was using [[https://indieweb.social/][indieweb.social]] for my Mastodon presence, but wanted
-  like to be discoverable on my domain.  I'm now self-hosting, but
-  leaving these instructions for others.
-#+end_warning
-
-#+begin_warning
-Not to be confused with [[*Finger][Finger]].
-#+end_warning
-
-*** How it works on your Mastodon server
-
-[[https://docs.joinmastodon.org/spec/webfinger/][Mastodon uses WebFinger]] to look up the inbox and outbox from a
-username.  My ~@rossabaker@indieweb.social~ profile can be looked up
-with a simple GET call to ~indieweb.social~.
-
-#+begin_details
-#+begin_summary
-~GET https://indieweb.social/.well-known/webfinger?resource=acct%3Arossabaker%40indieweb.social~
-#+end_summary
-
-#+begin_example json
-{
-  "subject": "acct:rossabaker@indieweb.social",
-  "aliases": [
-    "https://indieweb.social/@rossabaker",
-    "https://indieweb.social/users/rossabaker"
-  ],
-  "links": [
-    {
-      "rel": "http://webfinger.net/rel/profile-page",
-      "type": "text/html",
-      "href": "https://indieweb.social/@rossabaker"
-    },
-    {
-      "rel": "self",
-      "type": "application/activity+json",
-      "href": "https://indieweb.social/users/rossabaker"
-    },
-    {
-      "rel": "http://ostatus.org/schema/1.0/subscribe",
-      "template": "https://indieweb.social/authorize_interaction?uri={uri}"
-    }
-  ]
-}
-#+end_example
-#+end_details
-
-*** Static solution
-
-We could copy the above JSON response and serve it on our own static
-server at the ~/.well-known/webfinger~ path.  It works!
-Unfortunately, a static server ignores the query string (i.e.,
-~resource=acct:ross@rossabaker.com~).  This becomes effectively a
-wildcard address: /any/ username ~@rossabaker.com~ would point to my
-indieweb.social account.  This is mostly harmless and works with any
-static site generator, but we can do better.
-
-*** Netlify redirect
-
-The resource can also be referenced via HTTP redirect.  Our site
-deploys to Netlify, which has [[https://docs.netlify.com/routing/redirects/][redirect support]], including matching
-query strings!  A one-liner served up at ~/_redirects~ is sufficient:
-
-#+begin_src text :code-license CC0-1.0
-  /.well-known/webfinger resource=acct:ross@rossabaker.com https://indieweb.social/.well-known/webfinger?resource=acct%3Arossabaker%40indieweb.social 301
-#+end_src
-
-#+begin_aside
-We're not being very good [[https://www.rfc-editor.org/rfc/rfc7033.html][RFC7033]] citizens yet.  Specifically, we are
-called to return an HTTP 400 when the ~resource~ parameter is missing.
-
-#+begin_quote
-  If the "resource" parameter is absent or malformed, the WebFinger
-  resource MUST indicate that the request is bad as per
-  Section 10.4.1 of RFC 2616 [2].
-
-  #+begin_cite
-  https://www.rfc-editor.org/rfc/rfc7033.html#section-4.2
-  #+end_cite
-#+end_quote
-
-But that's a problem for another day.
-#+end_aside
-
-*** Self-hosting                                                   :noexport:
-
-#+begin_src text :tangle ../../tmp/hugo/static/_redirects
-  /.well-known/webfinger* https://social.rossabaker.com/.well-known/webfinger:splat 301
-#+end_src
-
 ** DONE Finger                                             :finger:nostalgia:
 CLOSED: [2023-07-16 Sun 22:51 EDT]
 :PROPERTIES:
 :EXPORT_TITLE: Finger me
 :EXPORT_FILE_NAME: finger
 :header-args+: :code-license CC0-1.0
+:custom_id: finger
 :END:
 
 #+begin_description
@@ -8504,6 +8497,13 @@ Particularly coming out of the social media archives.
 ** TODO web-key-directory has a stray copy button
 
 * Footnotes
+
+[fn:24] GitHub Pages, for instance, does not support redirects.
+GitLab has [[https://docs.gitlab.com/ee/user/project/pages/redirects.html][partial support]] that would be enough for the current
+declaration, but not routing per resource.
+
+[fn:23] This distinction is made possible with the [[https://docs.joinmastodon.org/admin/config/#web_domain][~WEB_DOMAIN~]]
+environment variable on the Mastodon server.
 
 [fn:22] I struggle with why this isn't called "untangling."
 
