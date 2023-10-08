@@ -642,7 +642,7 @@ CLOSED: [2022-11-22 Tue 00:14 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: webfinger
 :EXPORT_DATE: [2022-11-22 Tue 00:15 EST]
-:EXPORT_HUGO_LASTMOD: [2023-10-08 Sun 00:15 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-10-08 Sun 00:46 EDT]
 :END:
 
 #+begin_description
@@ -699,9 +699,8 @@ deploys to Netlify, whose [[https://docs.netlify.com/routing/redirects/][redirec
 
 #+begin_warning
 This forwards _all_ web finger requests to the Mastodon server.
-That's the only use of WebFinger on ~rossabaker.com~ at this time.
-The only supported resource today is ~acct:ross@rossabaker.com~, so
-that's fine here.
+That's the only use of WebFinger on ~rossabaker.com~ today, so that's
+fine here.
 
 If this ever changed, [[https://docs.netlify.com/routing/redirects/redirect-options/][more sophisticated redirects]] are possible with
 Netlify.  Specifically, query parameter matching, status codes, and
