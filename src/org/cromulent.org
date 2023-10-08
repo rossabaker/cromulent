@@ -2259,7 +2259,7 @@ Our build creates some detritus that we don't want checked into Git.
 CLOSED: [2022-08-30 Tue 14:26 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: style
-:EXPORT_HUGO_LASTMOD: [2023-09-08 Fri 14:10 CDT]
+:EXPORT_HUGO_LASTMOD: [2023-10-08 Sun 00:35 EDT]
 :CUSTOM_ID: css-baseline
 :header-args+: :code-license MIT
 :END:
@@ -2528,6 +2528,24 @@ I'd probably rather these weren't in the HTML, but this works for now.
       margin: 1.5rem 0;
       padding: 0 2rem;
       border-left: #ccc 0.25rem solid;
+  }
+#+end_src
+
+**** Warnings
+
+It's not beautiful yet, but it's something.
+
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
+  .warning {
+      margin: 1.5rem 0;
+      padding: 2rem;
+      border-left: #c00 0.25rem solid;
+      background-color: #f8f8f8;
+  }
+
+  .warning::before {
+      content: '⚠';
+      color: #c00;
   }
 #+end_src
 
