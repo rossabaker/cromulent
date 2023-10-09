@@ -5349,7 +5349,7 @@ The Home Manager module is published to my flake as output
 CLOSED: [2022-12-25 Sun 22:14 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: /nix-flake
-:EXPORT_HUGO_LASTMOD: [2023-10-02 Mon 23:14 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-10-09 Mon 11:16 EDT]
 :header-args+: :code-license MIT
 :EXPORT_OPTIONS: h:6
 :END:
@@ -5544,7 +5544,6 @@ function of its inputs!
                 pkgs.google-cloud-sdk
                 pkgs.hugo
                 pkgs.nix
-                pkgs.terraform
               ];
             };
 

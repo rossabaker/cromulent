@@ -126,7 +126,6 @@ flake-parts.lib.mkFlake { inherit inputs; } (
               pkgs.google-cloud-sdk
               pkgs.hugo
               pkgs.nix
-              pkgs.terraform
             ];
           };
 
