@@ -5877,7 +5877,7 @@ CLOSED: [2023-08-07 Mon 09:48 EDT]
 :PROPERTIES:
 :EXPORT_HUGO_BUNDLE: nix-darwin
 :EXPORT_FILE_NAME: _index
-:EXPORT_HUGO_LASTMOD: [2023-10-02 Mon 23:14 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-10-09 Mon 13:53 EDT]
 :END:
 
 #+begin_description
@@ -5911,7 +5911,6 @@ further.
         # $ nix-env -qaP | grep wget
         environment.systemPackages =
           [
-            pkgs.cachix
             pkgs.docker
           ];
 
