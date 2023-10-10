@@ -1682,7 +1682,7 @@ CSS.  Lunch hour is almost over, so I'll describe it another day.
 CLOSED: [2022-09-02 Fri 11:41 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: header
-:EXPORT_HUGO_LASTMOD: [2023-08-11 Fri 00:13 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-10-09 Mon 21:05 EDT]
 :END:
 
 Our header is straightforward semantic HTML, with a ~<h1>~, ~<p>~,
@@ -1755,7 +1755,7 @@ It's monospace, because it's "code".
 
 #+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
   body > header {
-      font-family: var(--cromulent-monospace-font);
+      font-family: var(--bs-font-monospace);
   }
 #+end_src
 
@@ -1813,7 +1813,7 @@ to look like the rest.
       font-size: 1em;
       line-height: inherit;
       margin: 0;
-      font-family: var(--cromulent-monospace-font);
+      font-family: var(--bs-font-monospace);
   }
 #+end_src
 
