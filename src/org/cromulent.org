@@ -2258,7 +2258,7 @@ Our build creates some detritus that we don't want checked into Git.
 CLOSED: [2022-08-30 Tue 14:26 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: style
-:EXPORT_HUGO_LASTMOD: [2023-10-08 Sun 23:22 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-10-13 Fri 23:49 EDT]
 :CUSTOM_ID: css-baseline
 :header-args+: :code-license MIT
 :END:
@@ -2295,37 +2295,41 @@ gives a smooth experience as the window resizes.
 
 **** A splash of color
 
-My beloved Indiana Hoosiers wear [[https://www.thedailyhoosier.com/did-you-know-indianas-iconic-candy-stripes-didnt-originate-in-the-basketball-program/][candy-striped pants]].  So shall this website.
-
-#+begin_quote
-We will fight for
-the cream and crimson,
-for the glory of old IU
-#+end_quote
-
 ***** Palette
 
-Define some CSS variables. The link color is complementary to the
-crimson.
+****** Never daunted, we cannot falter
+
+My beloved Indiana Hoosiers wear [[https://www.thedailyhoosier.com/did-you-know-indianas-iconic-candy-stripes-didnt-originate-in-the-basketball-program/][candy-striped pants]].  So shall my website.
 
 #+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
   :root {
-      --bs-heading-color: #9d2235;
-      --bs-body-bg: #ffffff;
-      --bs-link-color: #146357;
-      --bs-link-color-rgb: 20, 99, 87;
+      --cromulent-crimson: #9d2235;
+      --cromulent-cream: #fff;
+  }
+#+end_src
+
+****** Bootstrap overrides
+
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
+  :root {
+      --bs-heading-color: var(--cromulent-crimson);
+      --bs-body-bg: var(--cromulent-cream);
+      --bs-code-color: var(--bs-purple);
   }
 #+end_src
 
 ***** Headers
 
 Modern CSS lets us draw stripes without a repeating background GIF.
-Neat.  This draws candy stripes beneath the main ~h1~.
+This draws candy stripes beneath the main ~h1~.
 
 #+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
   main h1::after {
       content: "";
-      background-image: linear-gradient(to right, var(--bs-body-bg) 50%, var(--bs-heading-color) 0%);
+      background-image:
+          linear-gradient(to right,
+                          var(--cromulent-cream) 50%,
+                          var(--cromulent-crimson) 0%);
       background-size: 8px 0.5rem;
       background-repeat: repeat-x;
       background-position: bottom;
@@ -2411,7 +2415,7 @@ It's not beautiful yet, but it's something.
       margin: 1.5rem 0;
       padding: 2rem;
       border-left: #c00 0.25rem solid;
-      background-color: #f8f8f8;
+      background-color: var(--bs-highlight-bg);
   }
 
   .warning::before {
