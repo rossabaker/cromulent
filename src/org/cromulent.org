@@ -870,7 +870,7 @@ convert the Markdown to HTML with [[https://gohugo.io/][Hugo]].
 CLOSED: [2022-09-01 Thu 16:48 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: hugo
-:EXPORT_HUGO_LASTMOD: [2023-10-08 Sun 23:25 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-08-26 Sat 14:43 EDT]
 :header-args+: :code-license CC0-1.0
 :END:
 
@@ -924,14 +924,14 @@ we'll use [[https://gohugo.io/hugo-modules/configuration/#module-config-mounts][
 The =css= parameter lets us add custom style sheets to the asset
 pipeline.
 
-- [[https://getbootstrap.com/docs/5.3/content/reboot/][~bootstrap-reboot.css~]] :: a trite CSS reset, licensed [[https://raw.githubusercontent.com/twbs/bootstrap/v5.3.2/LICENSE][MIT]].  I am not
-  a frontend engineer.
-- [[#css-baseline][~cromulent.css~]] :: our own CSS baseline
-- ~chroma.css~ :: [[*Syntax highlighting][generated below]].
+- [[https://csstools.github.io/sanitize.css/][sanitize.css]] is a CSS library, licensed [[https://creativecommons.org/publicdomain/zero/1.0/][CC0 1.0]].  It provides:
+  - ~sanitize.css~ is a basic reset
+  - ~assets.css~ constrains some widths to 100%
+- ~chroma.css~ is [[*Syntax highlighting][generated below]].
 
 #+begin_src conf-toml :tangle ../../tmp/hugo/config.toml
   [Params]
-    css = [ 'bootstrap-reboot.css', 'cromulent.css', 'chroma.css' ]
+    css = [ 'sanitize.css', 'assets.css', 'cromulent.css', 'chroma.css' ]
     js = [ 'copy-button.js' ]
     description = "A perfectly cromulent developer."
     username = 'rossabaker'
@@ -1682,7 +1682,7 @@ CSS.  Lunch hour is almost over, so I'll describe it another day.
 CLOSED: [2022-09-02 Fri 11:41 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: header
-:EXPORT_HUGO_LASTMOD: [2023-10-09 Mon 21:05 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-08-11 Fri 00:13 EDT]
 :END:
 
 Our header is straightforward semantic HTML, with a ~<h1>~, ~<p>~,
@@ -1755,7 +1755,7 @@ It's monospace, because it's "code".
 
 #+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
   body > header {
-      font-family: var(--bs-font-monospace);
+      font-family: var(--cromulent-monospace-font);
   }
 #+end_src
 
@@ -1813,7 +1813,7 @@ to look like the rest.
       font-size: 1em;
       line-height: inherit;
       margin: 0;
-      font-family: var(--bs-font-monospace);
+      font-family: var(--cromulent-monospace-font);
   }
 #+end_src
 
@@ -2258,7 +2258,7 @@ Our build creates some detritus that we don't want checked into Git.
 CLOSED: [2022-08-30 Tue 14:26 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: style
-:EXPORT_HUGO_LASTMOD: [2023-10-13 Fri 23:49 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-10-08 Sun 00:35 EDT]
 :CUSTOM_ID: css-baseline
 :header-args+: :code-license MIT
 :END:
@@ -2269,14 +2269,95 @@ use Hugo at all.  These rules are presently deployed to rossabaker.com,
 but could conceivably be used in future projects.
 #+hugo:more
 
-This is slimmed down considerably after the adoption of [[https://getbootstrap.com/docs/5.3/content/reboot/][Bootstrap
-Reboot]].
+**** Box sizing
+
+[[https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing][~border-box~]] includes the widths of the border and padding in the
+width of an element.  This cuts out a lot of =<div class="container">=
+nonsense.
+
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
+  *, *::before, *::after {
+      box-sizing: border-box;
+  }
+#+end_src
 
 **** Let the body breathe
 
 #+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
   body > * {
       padding: 1.5rem;
+  }
+#+end_src
+
+**** Let the text breathe
+
+The [[https://www.w3.org/TR/WCAG22/#visual-presentation][Web Content Accessibility Guidelines]] call for a line height of at
+least 1.5.
+
+There are more criteria there that are probably worth revisiting.
+
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
+  body {
+      line-height: 1.6;
+  }
+#+end_src
+
+**** Fonts
+
+These used to be the [[https://en.wikipedia.org/wiki/Noto_fonts][Noto fonts]], chosen because they have good IPA
+support, which floats my boat as someone who minored in linguistics.
+Because Google Fonts [[https://cookie-script.com/blog/google-fonts-and-gdpr][violates the GDPR]], I self hosted them.  This
+complicated the [[#license][license]] with an SIL exception.
+
+You know what?  I'm not a typographer, and the system fonts should
+support the various and sundry alphabets I may use.  I'm adapting
+[[https://getbootstrap.com/docs/5.3/content/reboot/#native-font-stack][the stacks Bootstrap uses]] and moving on with my life.
+
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
+  :root {
+      --cromulent-system-font:
+	  system-ui,
+	  -apple-system,
+	  "Segoe UI",
+	  Roboto,
+	  "Helvetica Neue",
+	  "Noto Sans",
+	  "Liberation Sans",
+	  Arial,
+	  sans-serif,
+	  "Apple Color Emoji",
+	  "Segoe UI Emoji",
+	  "Segoe UI Symbol",
+	  "Noto Color Emoji";
+  }
+#+end_src
+
+GitHub's are likely a more thoughtful version for code.  They're
+substantially similar to Bootstrap's anyway.
+
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
+  :root {
+      --cromulent-monospace-font:
+	  ui-monospace,
+	  SFMono-Regular,
+	  "SF Mono",
+	  Menlo,
+	  Consolas,
+	  "Liberation Mono",
+	  monospace
+  }
+#+end_src
+
+Now apply the system font generally, and a monospace font to traditionally
+monospace elements.
+
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
+  body {
+      font-family: var(--cromulent-system-font);
+  }
+
+  code, kbd, pre, samp, var {
+      font-family: var(--cromulent-monospace-font);
   }
 #+end_src
 
@@ -2295,41 +2376,37 @@ gives a smooth experience as the window resizes.
 
 **** A splash of color
 
+My beloved Indiana Hoosiers wear [[https://www.thedailyhoosier.com/did-you-know-indianas-iconic-candy-stripes-didnt-originate-in-the-basketball-program/][candy-striped pants]].  So shall this website.
+
+#+begin_quote
+We will fight for
+the cream and crimson,
+for the glory of old IU
+#+end_quote
+
 ***** Palette
 
-****** Never daunted, we cannot falter
-
-My beloved Indiana Hoosiers wear [[https://www.thedailyhoosier.com/did-you-know-indianas-iconic-candy-stripes-didnt-originate-in-the-basketball-program/][candy-striped pants]].  So shall my website.
-
-#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
-  :root {
-      --cromulent-crimson: #9d2235;
-      --cromulent-cream: #fff;
-  }
-#+end_src
-
-****** Bootstrap overrides
+Define some CSS variables. The link color is complementary to the
+crimson.
 
 #+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
   :root {
-      --bs-heading-color: var(--cromulent-crimson);
-      --bs-body-bg: var(--cromulent-cream);
-      --bs-code-color: var(--bs-purple);
+      --color-brand: #9d2235;
+      --color-brand-darker: #731927;
+      --color-stripe: #ffffff;
+      --link-color: #146357;
   }
 #+end_src
 
 ***** Headers
 
 Modern CSS lets us draw stripes without a repeating background GIF.
-This draws candy stripes beneath the main ~h1~.
+Neat.  This draws candy stripes beneath the main ~h1~.
 
 #+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
   main h1::after {
       content: "";
-      background-image:
-          linear-gradient(to right,
-                          var(--cromulent-cream) 50%,
-                          var(--cromulent-crimson) 0%);
+      background-image: linear-gradient(to right, var(--color-stripe) 50%, var(--color-brand) 0%);
       background-size: 8px 0.5rem;
       background-repeat: repeat-x;
       background-position: bottom;
@@ -2340,6 +2417,34 @@ This draws candy stripes beneath the main ~h1~.
   }
 #+end_src
 
+Changing the headers to crimson helps tie it to the decorative
+stripes.
+
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
+  h1, h2, h3, h4, h5, h6 {
+      color: var(--color-brand);
+  }
+#+end_src
+
+We'll sort out header sizes later, but the ~h1~ really needs to be
+bigger now.
+
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
+  h1 {
+      font-size: 2em;
+  }
+#+end_src
+
+***** Links
+
+Render the links in the complementary color.
+
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
+  a {
+      color: var(--link-color);
+  }
+#+end_src
+
 **** Redirects                                                     :noexport:
 
 #+begin_src text :tangle ../../tmp/hugo/static/_redirects :exports none
@@ -2347,6 +2452,15 @@ This draws candy stripes beneath the main ~h1~.
 #+end_src
 
 **** Code rendering
+
+Put a scroll bar on code samples, but only where necessary.
+
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
+  pre {
+      max-width: 100%;
+      overflow-x: auto;
+  }
+#+end_src
 
 Give the code samples a little more room to breathe.
 
@@ -2406,6 +2520,16 @@ I'd probably rather these weren't in the HTML, but this works for now.
   }
 #+end_src
 
+**** Quotes
+
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
+  blockquote {
+      margin: 1.5rem 0;
+      padding: 0 2rem;
+      border-left: #ccc 0.25rem solid;
+  }
+#+end_src
+
 **** Warnings
 
 It's not beautiful yet, but it's something.
@@ -2415,7 +2539,7 @@ It's not beautiful yet, but it's something.
       margin: 1.5rem 0;
       padding: 2rem;
       border-left: #c00 0.25rem solid;
-      background-color: var(--bs-highlight-bg);
+      background-color: #f8f8f8;
   }
 
   .warning::before {
