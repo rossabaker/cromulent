@@ -2261,6 +2261,7 @@ CLOSED: [2022-08-30 Tue 14:26 EDT]
 :EXPORT_HUGO_LASTMOD: [2023-10-08 Sun 00:35 EDT]
 :CUSTOM_ID: css-baseline
 :header-args+: :code-license MIT
+:header-args:css+: :tangle ../../tmp/hugo/assets/css/cromulent.css
 :END:
 
 We strive for [[https://en.wikipedia.org/wiki/Semantic_HTML][semantic HTML]].  The styles presented here provide a
@@ -2275,7 +2276,7 @@ but could conceivably be used in future projects.
 width of an element.  This cuts out a lot of =<div class="container">=
 nonsense.
 
-#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
+#+begin_src css
   *, *::before, *::after {
       box-sizing: border-box;
   }
@@ -2283,7 +2284,7 @@ nonsense.
 
 **** Let the body breathe
 
-#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
+#+begin_src css
   body > * {
       padding: 1.5rem;
   }
@@ -2296,7 +2297,7 @@ least 1.5.
 
 There are more criteria there that are probably worth revisiting.
 
-#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
+#+begin_src css
   body {
       line-height: 1.6;
   }
@@ -2313,7 +2314,7 @@ You know what?  I'm not a typographer, and the system fonts should
 support the various and sundry alphabets I may use.  I'm adapting
 [[https://getbootstrap.com/docs/5.3/content/reboot/#native-font-stack][the stacks Bootstrap uses]] and moving on with my life.
 
-#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
+#+begin_src css
   :root {
       --cromulent-system-font:
 	  system-ui,
@@ -2335,7 +2336,7 @@ support the various and sundry alphabets I may use.  I'm adapting
 GitHub's are likely a more thoughtful version for code.  They're
 substantially similar to Bootstrap's anyway.
 
-#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
+#+begin_src css
   :root {
       --cromulent-monospace-font:
 	  ui-monospace,
@@ -2351,7 +2352,7 @@ substantially similar to Bootstrap's anyway.
 Now apply the system font generally, and a monospace font to traditionally
 monospace elements.
 
-#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
+#+begin_src css
   body {
       font-family: var(--cromulent-system-font);
   }
@@ -2366,7 +2367,7 @@ monospace elements.
 Lots of people use media queries for this, but the clamp function
 gives a smooth experience as the window resizes.
 
-#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
+#+begin_src css
   body {
       width: clamp(10em, 100%, 70em);
       padding: 0;
@@ -2389,7 +2390,7 @@ for the glory of old IU
 Define some CSS variables. The link color is complementary to the
 crimson.
 
-#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
+#+begin_src css
   :root {
       --color-brand: #9d2235;
       --color-brand-darker: #731927;
@@ -2403,7 +2404,7 @@ crimson.
 Modern CSS lets us draw stripes without a repeating background GIF.
 Neat.  This draws candy stripes beneath the main ~h1~.
 
-#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
+#+begin_src css
   main h1::after {
       content: "";
       background-image: linear-gradient(to right, var(--color-stripe) 50%, var(--color-brand) 0%);
@@ -2420,7 +2421,7 @@ Neat.  This draws candy stripes beneath the main ~h1~.
 Changing the headers to crimson helps tie it to the decorative
 stripes.
 
-#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
+#+begin_src css
   h1, h2, h3, h4, h5, h6 {
       color: var(--color-brand);
   }
@@ -2429,7 +2430,7 @@ stripes.
 We'll sort out header sizes later, but the ~h1~ really needs to be
 bigger now.
 
-#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
+#+begin_src css
   h1 {
       font-size: 2em;
   }
@@ -2439,7 +2440,7 @@ bigger now.
 
 Render the links in the complementary color.
 
-#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
+#+begin_src css
   a {
       color: var(--link-color);
   }
@@ -2455,7 +2456,7 @@ Render the links in the complementary color.
 
 Put a scroll bar on code samples, but only where necessary.
 
-#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
+#+begin_src css
   pre {
       max-width: 100%;
       overflow-x: auto;
@@ -2464,7 +2465,7 @@ Put a scroll bar on code samples, but only where necessary.
 
 Give the code samples a little more room to breathe.
 
-#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
+#+begin_src css
   pre {
       border-left: #9f9f9f 0.25em solid;
       padding: 1em;
@@ -2473,7 +2474,7 @@ Give the code samples a little more room to breathe.
 
 Align the license to the right.
 
-#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
+#+begin_src css
   .code-snippet {
       position: relative;
   }
@@ -2492,7 +2493,7 @@ Align the license to the right.
 
 Move the copy code button, too.
 
-#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
+#+begin_src css
   .copy-code-button {
       display: inline-flex;
       float: right;
@@ -2505,7 +2506,7 @@ Move the copy code button, too.
 
 ***** Source block captions
 
-#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
+#+begin_src css
   .src-block-caption {
       font-size: 0.8em;
       font-style: italic;
@@ -2514,7 +2515,7 @@ Move the copy code button, too.
 
 I'd probably rather these weren't in the HTML, but this works for now.
 
-#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
+#+begin_src css
   .src-block-number {
       display: none;
   }
@@ -2522,7 +2523,7 @@ I'd probably rather these weren't in the HTML, but this works for now.
 
 **** Quotes
 
-#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
+#+begin_src css
   blockquote {
       margin: 1.5rem 0;
       padding: 0 2rem;
@@ -2534,7 +2535,7 @@ I'd probably rather these weren't in the HTML, but this works for now.
 
 It's not beautiful yet, but it's something.
 
-#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
+#+begin_src css
   .warning {
       margin: 1.5rem 0;
       padding: 2rem;
@@ -2552,7 +2553,7 @@ It's not beautiful yet, but it's something.
 
 A general way to float figures.
 
-#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
+#+begin_src css
   figure.float {
       float: right;
       margin: 0.5rem 1.5rem;
@@ -2564,7 +2565,7 @@ Wherever we float, we probably want a "clearfix" wrapper.  [[https://www.cssmojo
 latest clearfix reloaded]], which is seven years old at the time of
 writing, seems to work.
 
-#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
+#+begin_src css
   .clearfix:after {
       content: "";
       clear: both;
