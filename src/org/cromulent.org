@@ -123,10 +123,8 @@ CLOSED: [2022-09-05 Mon 00:30 EDT]
 [[file:under-construction.gif]]
 
 This is +my personal brand+, +my love letter to the Indieweb+, +my
-finely manicured digital garden+, me faffing about as I rediscover the
-joy of computing.  All that is published here should be considered
-@@html:<dfn>@@faff byproduct@@html:</dfn>@@.  Perpetually under
-construction.
+finely manicured digital garden+, my faffing about as I rediscover the
+joy of computing.  Perpetually under construction.
 #+end_clearfix
 
 * DONE Ross A. Baker                            :@personal:biography:contact:
