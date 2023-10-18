@@ -1681,7 +1681,7 @@ CSS.  Lunch hour is almost over, so I'll describe it another day.
 CLOSED: [2022-09-02 Fri 11:41 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: header
-:EXPORT_HUGO_LASTMOD: [2023-08-11 Fri 00:13 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-10-17 Tue 23:35 EDT]
 :END:
 
 Our header is straightforward semantic HTML, with a ~<h1>~, ~<p>~,
@@ -1764,7 +1764,12 @@ Introduce the Lisp syntax as CSS content.  The double paren on the
 last child is sloppy, but I haven't figured out another way to hug it.
 
 #+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
+  body > header {
+      color: rgba(33, 37, 41, 0.5);
+  }
+
   body > header strong::before {
+      font-size: 1rem;
       content: "(defvar ";
   }
   body > header p::before {
@@ -1809,8 +1814,8 @@ to look like the rest.
 
 #+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
   body > header strong {
-      font-size: 1em;
-      line-height: inherit;
+      font-size: 1.5rem;
+      font-weight: 900;
       margin: 0;
       font-family: var(--cromulent-monospace-font);
   }
@@ -2284,8 +2289,12 @@ nonsense.
 **** Let the body breathe
 
 #+begin_src css
+  body > header {
+      padding-top: 0;
+  }
+
   body > * {
-      padding: 1.5rem;
+      padding: 1.5rem 1.5rem;
   }
 #+end_src
 
@@ -2376,14 +2385,6 @@ gives a smooth experience as the window resizes.
 
 **** A splash of color
 
-My beloved Indiana Hoosiers wear [[https://www.thedailyhoosier.com/did-you-know-indianas-iconic-candy-stripes-didnt-originate-in-the-basketball-program/][candy-striped pants]].  So shall this website.
-
-#+begin_quote
-We will fight for
-the cream and crimson,
-for the glory of old IU
-#+end_quote
-
 ***** Palette
 
 Define some CSS variables. The link color is complementary to the
@@ -2398,22 +2399,34 @@ crimson.
   }
 #+end_src
 
-***** Headers
+***** Header
 
-Modern CSS lets us draw stripes without a repeating background GIF.
-Neat.  This draws candy stripes beneath the main ~h1~.
+My beloved Indiana Hoosiers wear [[https://www.thedailyhoosier.com/did-you-know-indianas-iconic-candy-stripes-didnt-originate-in-the-basketball-program/][candy-striped pants]], and so shall this website.
 
 #+begin_src css
-  main h1::after {
+  body > header::before {
       content: "";
-      background-image: linear-gradient(to right, var(--color-stripe) 50%, var(--color-brand) 0%);
-      background-size: 8px 0.5rem;
-      background-repeat: repeat-x;
-      background-position: bottom;
       display: block;
+      position: relative;
+      top: 0;
+      height: 3rem;
       width: 100%;
-      height: 0.8rem;
-      margin-bottom: 2.4rem;
+      background-image: repeating-linear-gradient(
+          to right,
+          var(--color-brand) 0,
+          var(--color-brand) 1ch,
+          var(--color-stripe) 1ch,
+          var(--color-stripe) 2ch);
+      background-position: bottom;
+      mask: linear-gradient(
+          rgba(255, 255, 255, 1) 0%,
+          rgba(255, 255, 255, 0.3) 50%,
+          rgba(255, 255, 255, 0.15) 65%,
+          rgba(255, 255, 255, 0.075) 75.5%,
+          rgba(255, 255, 255, 0.037) 82.85%,
+          rgba(255, 255, 255, 0.019) 88%,
+          rgba(255, 255, 255, 0) 100%
+      );
   }
 #+end_src
 
