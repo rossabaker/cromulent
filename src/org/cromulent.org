@@ -108,9 +108,10 @@ on this site:
 CLOSED: [2022-09-05 Mon 00:30 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: _index
-:EXPORT_HUGO_LASTMOD: [2023-07-07 Fri 19:15 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-10-17 Tue 22:11 EDT]
 :END:
 
+#+attr_html: :class lead
 #+begin_quote
   Yeah, well, I'm going to go build my own site. \\
   With Emacs!  And Nix! \\
@@ -2256,7 +2257,7 @@ Our build creates some detritus that we don't want checked into Git.
 CLOSED: [2022-08-30 Tue 14:26 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: style
-:EXPORT_HUGO_LASTMOD: [2023-10-08 Sun 00:35 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-10-17 Tue 22:11 EDT]
 :CUSTOM_ID: css-baseline
 :header-args+: :code-license MIT
 :header-args:css+: :tangle ../../tmp/hugo/assets/css/cromulent.css
@@ -2568,6 +2569,17 @@ writing, seems to work.
       content: "";
       clear: both;
       display: block;
+  }
+#+end_src
+
+**** Lead
+
+Lead paragraphs.  Inspired by [[https://getbootstrap.com/docs/5.3/content/typography/#lead][Bootstrap]].
+
+#+begin_src css
+  .lead {
+      font-size: 1.25em;
+      font-weight: 300;
   }
 #+end_src
 
