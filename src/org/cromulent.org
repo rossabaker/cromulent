@@ -2262,7 +2262,7 @@ Our build creates some detritus that we don't want checked into Git.
 CLOSED: [2022-08-30 Tue 14:26 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: style
-:EXPORT_HUGO_LASTMOD: [2023-10-17 Tue 22:11 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-10-18 Wed 22:28 EDT]
 :CUSTOM_ID: css-baseline
 :header-args+: :code-license MIT
 :header-args:css+: :tangle ../../tmp/hugo/assets/css/cromulent.css
@@ -2404,28 +2404,64 @@ crimson.
 My beloved Indiana Hoosiers wear [[https://www.thedailyhoosier.com/did-you-know-indianas-iconic-candy-stripes-didnt-originate-in-the-basketball-program/][candy-striped pants]], and so shall this website.
 
 #+begin_src css
-  body > header::before {
+  body::before, body::after {
       content: "";
       display: block;
       position: relative;
-      top: 0;
-      height: 3rem;
-      width: 100%;
+      height: 1.6rem;
       background-image: repeating-linear-gradient(
           to right,
           var(--color-brand) 0,
           var(--color-brand) 1ch,
           var(--color-stripe) 1ch,
           var(--color-stripe) 2ch);
-      background-position: bottom;
+  }
+#+end_src
+
+They fade out and in with gradients inspired by [[https://css-tricks.com/easing-linear-gradients/][Easing Linear Gradients]].
+
+#+begin_src css
+  body::before {
       mask: linear-gradient(
-          rgba(255, 255, 255, 1) 0%,
-          rgba(255, 255, 255, 0.3) 50%,
-          rgba(255, 255, 255, 0.15) 65%,
-          rgba(255, 255, 255, 0.075) 75.5%,
-          rgba(255, 255, 255, 0.037) 82.85%,
-          rgba(255, 255, 255, 0.019) 88%,
-          rgba(255, 255, 255, 0) 100%
+          to bottom,
+          hsl(0, 0%, 0%),
+          hsla(0, 0%, 0%, 0.94505) 7.9%,
+          hsla(0, 0%, 0%, 0.88294) 15.3%,
+          hsla(0, 0%, 0%, 0.81522) 22.2%,
+          hsla(0, 0%, 0%, 0.7426) 28.7%,
+          hsla(0, 0%, 0%, 0.66692) 34.8%,
+          hsla(0, 0%, 0%, 0.58891) 40.6%,
+          hsla(0, 0%, 0%, 0.50925) 46.2%,
+          hsla(0, 0%, 0%, 0.42866) 51.7%,
+          hsla(0, 0%, 0%, 0.34817) 57.2%,
+          hsla(0, 0%, 0%, 0.2693) 62.8%,
+          hsla(0, 0%, 0%, 0.19309) 68.7%,
+          hsla(0, 0%, 0%, 0.12126) 75.2%,
+          hsla(0, 0%, 0%, 0.05882) 82.6%,
+          hsla(0, 0%, 0%, 0.01457) 91.2%,
+          hsla(0, 0%, 0%, 0)
+      );
+  }
+
+  body::after {
+      mask: linear-gradient(
+          to top,
+          hsl(0, 0%, 0%),
+          hsla(0, 0%, 0%, 0.94505) 7.9%,
+          hsla(0, 0%, 0%, 0.88294) 15.3%,
+          hsla(0, 0%, 0%, 0.81522) 22.2%,
+          hsla(0, 0%, 0%, 0.7426) 28.7%,
+          hsla(0, 0%, 0%, 0.66692) 34.8%,
+          hsla(0, 0%, 0%, 0.58891) 40.6%,
+          hsla(0, 0%, 0%, 0.50925) 46.2%,
+          hsla(0, 0%, 0%, 0.42866) 51.7%,
+          hsla(0, 0%, 0%, 0.34817) 57.2%,
+          hsla(0, 0%, 0%, 0.2693) 62.8%,
+          hsla(0, 0%, 0%, 0.19309) 68.7%,
+          hsla(0, 0%, 0%, 0.12126) 75.2%,
+          hsla(0, 0%, 0%, 0.05882) 82.6%,
+          hsla(0, 0%, 0%, 0.01457) 91.2%,
+          hsla(0, 0%, 0%, 0)
       );
   }
 #+end_src
