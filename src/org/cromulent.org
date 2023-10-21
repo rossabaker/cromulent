@@ -2262,7 +2262,7 @@ Our build creates some detritus that we don't want checked into Git.
 CLOSED: [2022-08-30 Tue 14:26 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: style
-:EXPORT_HUGO_LASTMOD: [2023-10-18 Wed 22:28 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-10-20 Fri 22:18 EDT]
 :CUSTOM_ID: css-baseline
 :header-args+: :code-license MIT
 :header-args:css+: :tangle ../../tmp/hugo/assets/css/cromulent.css
@@ -2273,6 +2273,20 @@ solid foundation, independent of the [[https://gohugo.io/hugo-modules/theme-comp
 use Hugo at all.  These rules are presently deployed to rossabaker.com,
 but could conceivably be used in future projects.
 #+hugo:more
+
+**** Body margin
+
+The default in most browsers is =8px=.  Feels a little cramped.
+
+#+begin_src css
+  :root {
+      --cromulent-body-margin: 1rem;
+  }
+
+  body {
+      margin: var(--cromulent-body-margin);
+  }
+#+end_src
 
 **** Box sizing
 
@@ -2377,9 +2391,7 @@ gives a smooth experience as the window resizes.
 
 #+begin_src css
   body {
-      width: clamp(10em, 100%, 70em);
-      padding: 0;
-      margin: 0 auto;
+      width: clamp(10em, calc(100% - var(--cromulent-body-margin)), 70em);
   }
 #+end_src
 
@@ -2403,12 +2415,15 @@ crimson.
 
 My beloved Indiana Hoosiers wear [[https://www.thedailyhoosier.com/did-you-know-indianas-iconic-candy-stripes-didnt-originate-in-the-basketball-program/][candy-striped pants]], and so shall this website.
 
+The negative margin compensates the margin already on the body.
+
 #+begin_src css
   body::before, body::after {
       content: "";
       display: block;
       position: relative;
       height: 1.6rem;
+      margin: calc(-1 * var(--cromulent-body-margin));
       background-image: repeating-linear-gradient(
           to right,
           var(--color-brand) 0,
