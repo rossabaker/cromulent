@@ -1897,6 +1897,10 @@ verification.
     An <a href="https://xn--sr8hvo.ws">IndieWeb Webring</a> 🕸💍
     <a href="https://xn--sr8hvo.ws/next">→</a>
   </small>
+
+  <script type="text/javascript"
+    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
 #+end_src
 
 #+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
@@ -2262,7 +2266,7 @@ Our build creates some detritus that we don't want checked into Git.
 CLOSED: [2022-08-30 Tue 14:26 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: style
-:EXPORT_HUGO_LASTMOD: [2023-10-20 Fri 22:42 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-10-21 Sat 00:37 EDT]
 :CUSTOM_ID: css-baseline
 :header-args+: :code-license MIT
 :header-args:css+: :tangle ../../tmp/hugo/assets/css/cromulent.css
@@ -2288,20 +2292,66 @@ The default in most browsers is =8px=.  Feels a little cramped.
   }
 #+end_src
 
+**** Harmonic ratios
+
+Text looks nice when it's sized "harmoniously", each level a multiple
+of the previous.  5 steps are defined, with a multiplier of \(
+\sqrt[5]{2} \).
+
+#+begin_info
+This corresponds to the [[https://en.xen.wiki/w/5edo][{{{abbr(5 equal divisions of the
+octave,5edo)}}}]] musical scale.  Give it a listen!
+#+end_info
+
+#+begin_src css
+  :root {
+      --cromulent-step-1: 1.149;
+      --cromulent-step-2: 1.320;
+      --cromulent-step-3: 1.516;
+      --cromulent-step-4: 1.741;
+      --cromulent-step-5: 2.000;
+  }
+#+end_src
+
+#+begin_info
+There is a [[https://developer.mozilla.org/en-US/docs/Web/CSS/pow#browser_compatibility][~pow()~ function in CSS]], but browser compatibility is not
+there yet.
+#+end_info
+
 **** Text spacing
 
-[[https://www.w3.org/TR/WCAG22/#text-spacing][{{acronym("WCAG", "Web Content Accessibility Guidelines")}}]] requires
-support for line spacing up to 1.5 times the font size and paragraph
-spacing two times the font size.  Looks nice!
+[[https://www.w3.org/TR/WCAG22/#text-spacing][{{{abbr(Web Content Accessibility Guidelines,WCAG)}}}]] requires
+support for line spacing up to 1.5 times the font size.
 
 #+begin_src css
   body {
-      line-height: 1.6;
+      line-height: var(--cromulent-step-3);
   }
+#+end_src
 
-  p {
-      margin-block: 2em;
+It also calls for paragraph spacing two times the font size.  It's a
+touch too much, but the default =1em= falls short.  It's nice when
+paragraphs and headers have the same margin.
+
+#+begin_src css
+  h1, h2, h3, h4, h5, h6, p {
+      margin-block: calc(var(--cromulent-step-4) * 1rem);
   }
+#+end_src
+
+**** Headings
+
+Heading sizes follow the scale, with no header smaller than the base
+font.  The end result is that =<h1>= retains its default size of
+double the base.
+
+#+begin_src css
+  h1 { font-size: calc(var(--cromulent-step-5) * 1rem); }
+  h1 { font-size: calc(var(--cromulent-step-4) * 1rem); }
+  h3 { font-size: calc(var(--cromulent-step-3) * 1rem); }
+  h4 { font-size: calc(var(--cromulent-step-2) * 1rem); }
+  h5 { font-size: calc(var(--cromulent-step-1) * 1rem); }
+  h6 { font-size: 1rem; }
 #+end_src
 
 **** Box sizing
@@ -2490,15 +2540,6 @@ stripes.
 #+begin_src css
   h1, h2, h3, h4, h5, h6 {
       color: var(--color-brand);
-  }
-#+end_src
-
-We'll sort out header sizes later, but the ~h1~ really needs to be
-bigger now.
-
-#+begin_src css
-  h1 {
-      font-size: 2em;
   }
 #+end_src
 
