@@ -5383,7 +5383,7 @@ The module is exported to ~github:rossabaker/cromulent~ as three flake outputs:
 CLOSED: [2023-05-09 Tue 09:27 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: scala
-:EXPORT_HUGO_LASTMOD: [2023-09-08 Fri 15:58 CDT]
+:EXPORT_HUGO_LASTMOD: [2023-10-24 Tue 10:14 EDT]
 :header-args+: :tangle-mode (identity #o444) :mkdirp yes :code-license CC0-1.0
 :END:
 
@@ -5488,7 +5488,6 @@ The Home Manager module is published to my flake as output
         };
 
         home.packages = [
-          (pkgs.sbt.override { jre = pkgs.jdk17; })
           (pkgs.scala-cli.override { jre = pkgs.jdk17; })
         ];
 
@@ -5500,6 +5499,8 @@ The Home Manager module is published to my flake as output
             "metals.sbt"
           ];
         };
+
+        programs.sbt.enable = true;
       }
     );
   }
