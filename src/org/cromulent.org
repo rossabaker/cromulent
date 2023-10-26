@@ -2824,7 +2824,7 @@ permitting its [[https://commoncrawl.org/ccbot][~CCBot~]] for now.
 CLOSED: [2023-02-23 Thu 23:59 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: _index
-:EXPORT_HUGO_LASTMOD: [2023-09-24 Sun 20:51 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-10-25 Wed 21:54]
 :header-args+: :tangle-mode `,#o444 :mkdirp yes
 :header-args:emacs-lisp+: :tangle ../../gen/flake/emacs/init.el :tangle-mode `,#o444 :mkdirp yes
 :header-args:emacs-lisp+: :code-license CC0-1.0
@@ -3807,6 +3807,30 @@ Traveshamockery.  Once we're ready for that, we'll take a look at
     :commands sbt-start sbt-command)
 #+end_src
 
+[[https://github.com/ag91/scala-cli-repl][scala-cli-repl]] lets us run Scala in Org mode.
+
+#+begin_src emacs-lisp
+  (use-package scala-cli-repl
+    :ensure t
+    :defer t)
+#+end_src
+
+And the Nix build, with [patch to remove ellipses in Scala 2](https://github.com/ag91/scala-cli-repl/pull/5).
+
+#+begin_src nix :noweb-ref emacs-scala-cli-repl
+  (epkgs.trivialBuild {
+    pname = "scala-cli-repl";
+    src = inputs.scala-cli-repl;
+    patches = [ ../../../src/emacs/scala-cli-repl/github-5.patch ];
+    packageRequires = [
+      epkgs.s
+      epkgs.scala-mode
+      epkgs.xterm-color
+    ];
+    version = "HEAD";
+  })
+#+end_src
+
 ******* XML
 :PROPERTIES:
 :CUSTOM_ID: xml
@@ -4644,6 +4668,8 @@ Finally, we add a Home Manager module based on the configured app.
             <<emacs-ox-slack>>;
           git-related =
             <<emacs-git-related>>;
+          scala-cli-repl =
+            <<emacs-scala-cli-repl>>;
         };
         config = ./init.el;
         defaultInitFile = true;
@@ -5950,11 +5976,6 @@ Humdrum Nix flake exoskeleton and inputs
       firefox-darwin.inputs.nixpkgs.follows = "nixpkgs";
 
       # Emacs packages
-      ammonite-term-repl = {
-        url = "github:zwild/ammonite-term-repl";
-        flake = false;
-      };
-
       fill-sentences-correctly = {
         url = "github:duckwork/fill-sentences-correctly.el";
         flake = false;
@@ -5987,6 +6008,11 @@ Humdrum Nix flake exoskeleton and inputs
 
       unmodified-buffer = {
         url = "github:arthurcgusmao/unmodified-buffer";
+        flake = false;
+      };
+
+      scala-cli-repl = {
+        url = "github:ag91/scala-cli-repl";
         flake = false;
       };
 

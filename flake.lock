@@ -1,21 +1,5 @@
 {
   "nodes": {
-    "ammonite-term-repl": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1587016773,
-        "narHash": "sha256-5trLzx9NkyVcjKx/ud6NcxxZkQk+/NihqVmZyv5u1Dw=",
-        "owner": "zwild",
-        "repo": "ammonite-term-repl",
-        "rev": "b552fe21977e005c1c460bf6607557e67241a6b6",
-        "type": "github"
-      },
-      "original": {
-        "owner": "zwild",
-        "repo": "ammonite-term-repl",
-        "type": "github"
-      }
-    },
     "devshell": {
       "inputs": {
         "nixpkgs": [
@@ -321,7 +305,6 @@
     },
     "root": {
       "inputs": {
-        "ammonite-term-repl": "ammonite-term-repl",
         "devshell": "devshell",
         "emacs-overlay": "emacs-overlay",
         "emacs-src": "emacs-src",
@@ -336,8 +319,25 @@
         "nixpkgs": "nixpkgs",
         "ob-ammonite": "ob-ammonite",
         "on-el": "on-el",
+        "scala-cli-repl": "scala-cli-repl",
         "scala-mode": "scala-mode",
         "unmodified-buffer": "unmodified-buffer"
+      }
+    },
+    "scala-cli-repl": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1696262824,
+        "narHash": "sha256-v1HTlMpC2ata3pfc0GOfKDyY+m5JncYadsGMlz6ftis=",
+        "owner": "ag91",
+        "repo": "scala-cli-repl",
+        "rev": "f9b8c86aecce663014926a5023594512edc4e291",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ag91",
+        "repo": "scala-cli-repl",
+        "type": "github"
       }
     },
     "scala-mode": {

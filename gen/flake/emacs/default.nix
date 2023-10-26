@@ -87,6 +87,18 @@
             src = inputs.git-related;
             version = "1.1";
           };
+        scala-cli-repl =
+          (epkgs.trivialBuild {
+            pname = "scala-cli-repl";
+            src = inputs.scala-cli-repl;
+            patches = [ ../../../src/emacs/scala-cli-repl/github-5.patch ];
+            packageRequires = [
+              epkgs.s
+              epkgs.scala-mode
+              epkgs.xterm-color
+            ];
+            version = "HEAD";
+          });
       };
       config = ./init.el;
       defaultInitFile = true;

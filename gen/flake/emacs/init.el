@@ -241,6 +241,10 @@
   :ensure t
   :commands sbt-start sbt-command)
 
+(use-package scala-cli-repl
+  :ensure t
+  :defer t)
+
 (use-package esxml
   :ensure t
   :defer t)

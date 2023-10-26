@@ -30,11 +30,6 @@
     firefox-darwin.inputs.nixpkgs.follows = "nixpkgs";
 
     # Emacs packages
-    ammonite-term-repl = {
-      url = "github:zwild/ammonite-term-repl";
-      flake = false;
-    };
-
     fill-sentences-correctly = {
       url = "github:duckwork/fill-sentences-correctly.el";
       flake = false;
@@ -67,6 +62,11 @@
 
     unmodified-buffer = {
       url = "github:arthurcgusmao/unmodified-buffer";
+      flake = false;
+    };
+
+    scala-cli-repl = {
+      url = "github:ag91/scala-cli-repl";
       flake = false;
     };
 
