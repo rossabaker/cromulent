@@ -243,7 +243,9 @@
 
 (use-package scala-cli-repl
   :ensure t
-  :defer t)
+  :defer t
+  :init
+  (load-file (find-library-name "ob-scala-cli")))
 
 (use-package esxml
   :ensure t

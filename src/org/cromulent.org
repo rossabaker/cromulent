@@ -2824,7 +2824,7 @@ permitting its [[https://commoncrawl.org/ccbot][~CCBot~]] for now.
 CLOSED: [2023-02-23 Thu 23:59 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: _index
-:EXPORT_HUGO_LASTMOD: [2023-10-25 Wed 21:54]
+:EXPORT_HUGO_LASTMOD: [2023-10-25 Wed 23:47]
 :header-args+: :tangle-mode `,#o444 :mkdirp yes
 :header-args:emacs-lisp+: :tangle ../../gen/flake/emacs/init.el :tangle-mode `,#o444 :mkdirp yes
 :header-args:emacs-lisp+: :code-license CC0-1.0
@@ -3807,12 +3807,20 @@ Traveshamockery.  Once we're ready for that, we'll take a look at
     :commands sbt-start sbt-command)
 #+end_src
 
-[[https://github.com/ag91/scala-cli-repl][scala-cli-repl]] lets us run Scala in Org mode.
+[[https://github.com/ag91/scala-cli-repl][scala-cli-repl]] lets us run Scala in Org mode.  It's currently
+generating an error from the native compiled version, so the
+library is reloaded from source as an interim fix:
+
+#+begin_quote
+~Wrong number of arguments: #<subr s-split>, 1~
+#+end_quote
 
 #+begin_src emacs-lisp
   (use-package scala-cli-repl
     :ensure t
-    :defer t)
+    :defer t
+    :init
+    (load-file (find-library-name "ob-scala-cli")))
 #+end_src
 
 And the Nix build, with [patch to remove ellipses in Scala 2](https://github.com/ag91/scala-cli-repl/pull/5).
