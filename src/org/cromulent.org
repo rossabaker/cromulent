@@ -7512,6 +7512,7 @@ whenever someone scores on Purdue.
 CLOSED: [2023-09-24 Sun 21:32 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: indianapolis-symphony-orchestra
+:EXPORT_HUGO_LASTMOD: [2023-10-26 Thu 22:01]
 :END:
 
 #+begin_description
@@ -7534,6 +7535,23 @@ bit more familiar with the pieces.
 2. Puts: Contact
 3. Prokofiev: Symphony No. 5 in B-flat Major, Op.100
 
+***** October 6, 2023
+
+[[https://www.indianapolissymphony.org/event/lin-performs-saint-saens/][Event]], [[https://open.spotify.com/playlist/6MkfZgu1coecsmRNVePgGm][Spotify playlist]]
+
+1. Smetana: Má vlast: No. 2, Vltava
+2. Saint-Saëns: Violin Concerto No. 3 in B Minor, Op.61
+3. Tchaikovsky: Symphony No. 4 in F Minor, Op.36
+
+***** October 27, 2023
+
+[[https://www.indianapolissymphony.org/event/brahms-the-american-spirit/][Event]], [[https://open.spotify.com/playlist/30zBrPMOG1B96d66Mb07l8][Spotify playlist]]
+
+Only the Brahms is available on Spotify.
+
+1. Tower: Fanfare for the Uncommon Woman #6
+2. Hailstork: JFK: The Last Speech
+3. Brahms: Symphony No. 1 in C Minor, Op.68
 
 * Talks section
 :PROPERTIES:
