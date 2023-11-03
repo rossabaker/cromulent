@@ -7511,7 +7511,7 @@ whenever someone scores on Purdue.
 CLOSED: [2023-09-24 Sun 21:32 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: indianapolis-symphony-orchestra
-:EXPORT_HUGO_LASTMOD: [2023-10-26 Thu 22:01]
+:EXPORT_HUGO_LASTMOD: [2023-11-02 Thu 21:10]
 :END:
 
 #+begin_description
@@ -7551,6 +7551,14 @@ Only the Brahms is available on Spotify.
 1. Tower: Fanfare for the Uncommon Woman #6
 2. Hailstork: JFK: The Last Speech
 3. Brahms: Symphony No. 1 in C Minor, Op.68
+
+***** November 3, 2023
+
+[[https://www.indianapolissymphony.org/event/tchaikovskys-pathetique/][Event]], [[https://open.spotify.com/playlist/3t24jLipkw8YCDbqhUAfxk][Spotify playlist]]
+
+1. Lysenko: Taras Bulba: Overture
+2. Boulanger: Fantaisie variée
+3. Tchaikovsky: Symphony No. 6 in B Minor, Op.74, "Pathétique"
 
 * Talks section
 :PROPERTIES:
