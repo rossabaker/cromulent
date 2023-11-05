@@ -10,7 +10,7 @@
 * DONE License                               :licensing:gpl:creative_commons:
 CLOSED: [2022-11-06 Sun 10:40 EST]
 :PROPERTIES:
-:EXPORT_HUGO_LASTMOD: [2023-09-03 Sun 21:47 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-11-04 Sat 23:52]
 :EXPORT_FILE_NAME: license
 :CUSTOM_ID: license
 :END:
@@ -26,13 +26,10 @@ License v3.0 only]] (~GPL-3.0-only~).  These license terms apply to
 [[https://rossabaker.com/][~rossabaker.com~]] and its [[https://github.com/rossabaker/cromulent][source repository]].
 
 #+begin_quote
-Copyright (C) 2022-2023, Ross A. Baker <ross@rossabaker.com>
-
-This file is part of the Cromulent project.
-
-Cromulent is free software: you can redistribute it and/or modify it
-under the terms of the GNU General Public License as published by the
-Free Software Foundation, version 3.
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or (at
+your option) any later version.
 
 This program is distributed in the hope that it will be useful, but
 WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -45,11 +42,15 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 ** Nuanced and more permissive
 
-- Creative Commons is great for prose and images, but but [[https://creativecommons.org/faq/#can-i-apply-a-creative-commons-license-to-software][not for
-  code]].
-- Many configurations are trivial, and best suited to the pubic domain.
-- Some works are more substantial, and you may be asked to share alike.
-- Some works are derived, and I am bound by the original terms.
+No single license is optimal for all content.
+
+- Prose and images are well suited to Creative Commons.
+- Trivial configurations are well suited to the public domain.
+- More substantial software may best fit the MIT, Apache-2.0, or GPL.
+- Derived works are bound by the terms of the original.
+
+All content licenses herein combine compatibly under ~GPL-3.0-only~,
+but subcomponents may be distributed under more permissive licenses.
 
 #+name: license-compatibility
 #+begin_src dot :eval yes :results value file :exports results :dir ../../gen/hugo/static/img :file license-compatibility.svg :mkdirp yes
@@ -72,22 +73,18 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 #+results: license-compatibility
 [[file:../../gen/hugo/static/img/license-compatibility.svg]]
 
-Though everything combines to ~GPL-3.0-only~, most content is
-available under more permissive terms, as follows.
-
 *** ~CC-BY-SA-4.0~ by default
 
-Unless otherwise specified, all content is published under a [[https://creativecommons.org/licenses/by/4.0/][Creative
+Unless otherwise specified, all content is published under a [[https://creativecommons.org/licenses/by-sa/4.0/][Creative
 Commons Attribution-ShareAlike 4.0 International]] (~CC-BY-SA-4.0~)
 license.
 
 *** Code blocks
 
-Code blocks may be tagged with a [[https://spdx.org/licenses/][SPDX identifier]].  The indicated
-license applies to that code block.  For example, the following block,
-tagged ~CC0-1.0~, is distributed under the [[https://spdx.org/licenses/CC0-1.0.html][Creative Commons Zero v1.0
-Universal]] license.
+Code blocks may be annotated with a [[https://spdx.org/licenses/][SPDX identifier]].  The indicated
+license applies to that code block.
 
+#+caption: This code block is distributed under the [[https://spdx.org/licenses/CC0-1.0.html][Creative Commons Zero v1.0 Universal]] license, as indicated by the ~CC0-1.0~ annotation.
 #+begin_src emacs-lisp :code-license CC0-1.0
   (message "Hello.")
 #+end_src
@@ -97,12 +94,13 @@ Universal]] license.
 The following SPDX identifiers may be applied to various code blocks
 on this site:
 
-| SPDX ID        | License                                             |
-|----------------+-----------------------------------------------------|
-| ~CC-BY-SA-4.0~ | [[https://creativecommons.org/licenses/by/4.0/][Creative Commons Attribution-ShareAlike 4.0]]         |
-| ~CC0-1.0~      | [[https://spdx.org/licenses/CC0-1.0.html][Creative Commons Zero v1.0 Universal]]                |
-| ~GPL-3.0-only~ | [[https://www.gnu.org/licenses/gpl-3.0-standalone.html][GNU General Public License, version 3]] only          |
-| ~MIT~          | [[https://opensource.org/license/mit/][The MIT License]]                                     |
+| SPDX ID        | License                                     |
+|----------------+---------------------------------------------|
+| ~Apache-2.0~   | [[https://www.apache.org/licenses/LICENSE-2.0][Apache License, Version 2.0]]                 |
+| ~CC-BY-SA-4.0~ | [[https://creativecommons.org/licenses/by/4.0/][Creative Commons Attribution-ShareAlike 4.0]] |
+| ~CC0-1.0~      | [[https://spdx.org/licenses/CC0-1.0.html][Creative Commons Zero v1.0 Universal]]        |
+| ~GPL-3.0-only~ | [[https://www.gnu.org/licenses/gpl-3.0-standalone.html][GNU General Public License, version 3 only]]  |
+| ~MIT~          | [[https://opensource.org/license/mit/][The MIT License]]                             |
 
 * DONE Home page
 CLOSED: [2022-09-05 Mon 00:30 EDT]
