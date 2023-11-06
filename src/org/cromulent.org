@@ -2264,7 +2264,7 @@ Our build creates some detritus that we don't want checked into Git.
 CLOSED: [2022-08-30 Tue 14:26 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: style
-:EXPORT_HUGO_LASTMOD: [2023-11-05 Sun 20:45]
+:EXPORT_HUGO_LASTMOD: [2023-11-05 Sun 21:48 EST]
 :CUSTOM_ID: css-baseline
 :header-args+: :code-license MIT
 :header-args:css+: :tangle ../../tmp/hugo/assets/css/cromulent.css
@@ -2496,11 +2496,32 @@ The negative margin compensates the margin already on the body.
   }
 #+end_src
 
-They fade out and in with gradients inspired by [[https://css-tricks.com/easing-linear-gradients/][Easing Linear Gradients]].
+They fade out and in with gradients inspired by [[https://css-tricks.com/easing-linear-gradients/][Easing Linear
+Gradients]].  The =-webkit-mask-image= duplication is necessary on
+most browsers other than Firefox.
 
 #+begin_src css
   body::before {
       mask: linear-gradient(
+          to bottom,
+          hsl(0, 0%, 0%),
+          hsla(0, 0%, 0%, 0.94505) 7.9%,
+          hsla(0, 0%, 0%, 0.88294) 15.3%,
+          hsla(0, 0%, 0%, 0.81522) 22.2%,
+          hsla(0, 0%, 0%, 0.7426) 28.7%,
+          hsla(0, 0%, 0%, 0.66692) 34.8%,
+          hsla(0, 0%, 0%, 0.58891) 40.6%,
+          hsla(0, 0%, 0%, 0.50925) 46.2%,
+          hsla(0, 0%, 0%, 0.42866) 51.7%,
+          hsla(0, 0%, 0%, 0.34817) 57.2%,
+          hsla(0, 0%, 0%, 0.2693) 62.8%,
+          hsla(0, 0%, 0%, 0.19309) 68.7%,
+          hsla(0, 0%, 0%, 0.12126) 75.2%,
+          hsla(0, 0%, 0%, 0.05882) 82.6%,
+          hsla(0, 0%, 0%, 0.01457) 91.2%,
+          hsla(0, 0%, 0%, 0)
+      );
+    -webkit-mask-image: linear-gradient(
           to bottom,
           hsl(0, 0%, 0%),
           hsla(0, 0%, 0%, 0.94505) 7.9%,
