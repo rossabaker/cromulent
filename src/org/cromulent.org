@@ -2264,7 +2264,7 @@ Our build creates some detritus that we don't want checked into Git.
 CLOSED: [2022-08-30 Tue 14:26 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: style
-:EXPORT_HUGO_LASTMOD: [2023-10-21 Sat 00:37 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-11-05 Sun 20:45]
 :CUSTOM_ID: css-baseline
 :header-args+: :code-license MIT
 :header-args:css+: :tangle ../../tmp/hugo/assets/css/cromulent.css
@@ -2350,6 +2350,18 @@ double the base.
   h4 { font-size: calc(var(--cromulent-step-2) * 1rem); }
   h5 { font-size: calc(var(--cromulent-step-1) * 1rem); }
   h6 { font-size: 1rem; }
+#+end_src
+
+***** Balance
+
+[[https://developer.chrome.com/blog/css-text-wrap-balance/][Balanced text wrapping]] wraps multi-line headers to roughly equal
+length, rather than dangling the last word or two.  Browser support is
+still modest in late 2023, but we're ready when they are.
+
+#+begin_src css
+  h1, h2, h3, h4, h5, h6 {
+      text-wrap: balance;
+  }
 #+end_src
 
 **** Box sizing
