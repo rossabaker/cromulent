@@ -2165,7 +2165,7 @@ CLOSED: [2022-09-01 Thu 16:54 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: build
 :header-args+: :code-license MIT
-:EXPORT_HUGO_LASTMOD: [2023-09-13 Wed 23:49 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-11-05 Sun 22:56 EST]
 :END:
 
 The website is just another package within our flake.
@@ -2229,7 +2229,11 @@ derivation output.
 
     doCheck = true;
     checkPhase = ''
-      html5validator --log INFO --root public
+      # https://github.com/validator/validator/issues/1397
+      # https://github.com/validator/validator/issues/1569
+      html5validator --log INFO --root public \
+        --ignore-re 'Element "search" not allowed' \
+                    'Element "p" not allowed as child of element "hgroup"'
       hyperlink public/ --check-anchors
     '';
 

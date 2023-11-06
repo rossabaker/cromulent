@@ -27,7 +27,11 @@ stdenv.mkDerivation rec {
 
   doCheck = true;
   checkPhase = ''
-    html5validator --log INFO --root public
+    # https://github.com/validator/validator/issues/1397
+    # https://github.com/validator/validator/issues/1569
+    html5validator --log INFO --root public \
+      --ignore-re 'Element "search" not allowed' \
+                  'Element "p" not allowed as child of element "hgroup"'
     hyperlink public/ --check-anchors
   '';
 
