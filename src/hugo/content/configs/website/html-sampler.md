@@ -1,6 +1,7 @@
 ---
 title: HTML element sampler
 date: 2023-11-05T23:04:07-0500
+lastmod: 2023-11-06T23:41:19-0500
 description: A sampler of HTML elements used to develop the CSS.
 ---
 
@@ -18,8 +19,8 @@ domain](https://developer.mozilla.org/en-US/docs/MDN/Writing_guidelines/Attrib_c
 <p>Contact the author of this page:</p>
 
 <address>
-  <a href="mailto:jim@rock.com">jim@rock.com</a><br />
-  <a href="tel:+13115552368">(311) 555-2368</a>
+  <a href="mailto:ross@example.com">ross@example.com</a><br />
+  <a href="tel:+13175552368">(317) 555-2368</a>
 </address>
 
 ### Article
