@@ -2268,7 +2268,7 @@ Our build creates some detritus that we don't want checked into Git.
 CLOSED: [2022-08-30 Tue 14:26 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: style
-:EXPORT_HUGO_LASTMOD: [2023-11-05 Sun 21:48 EST]
+:EXPORT_HUGO_LASTMOD: [2023-11-07 Tue 23:42 EST]
 :CUSTOM_ID: css-baseline
 :header-args+: :code-license MIT
 :header-args:css+: :tangle ../../tmp/hugo/assets/css/cromulent.css
@@ -2337,9 +2337,9 @@ paragraphs and headers have the same margin.
 
 #+begin_src css
   h1, h2, h3, h4, h5, h6, p {
-      margin-block: calc(var(--cromulent-step-4) * 1rem);
+      margin-block: calc(var(--cromulent-step-3) * 1rem);
   }
-#+end_src
+#+end_srco
 
 **** Headings
 
