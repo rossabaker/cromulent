@@ -7595,6 +7595,47 @@ Only the Brahms is available on Spotify.
 2. Boulanger: Fantaisie variée
 3. Tchaikovsky: Symphony No. 6 in B Minor, Op.74, "Pathétique"
 
+
+*** DONE Tom Waits' favorite albums
+CLOSED: [2023-11-07 Tue 20:02 EST]
+:PROPERTIES:
+:EXPORT_FILE_NAME: tom-waits-favorite-albums
+:END:
+
+#+begin_description
+A playlist of Tom Waits' favorite albums, as published in The Observer
+in 2005.  Inspired by my love for Elvis Costello & The Imposters'
+Delivery Man.
+#+end_description
+
+Elvis Costello & The Imposters' /The Delivery Man/ isn't his most
+successful album, commercially nor critically, but it ranks among my
+all-time favorites.  It shouldn't matter who else agrees, but I was
+delighted when none other than [[https://www.theguardian.com/music/2005/mar/20/popandrock1][Tom Waits joined me]] in 2005.
+
+I found myself [[https://social.rossabaker.com/@ross/111370147164935943][discussing Emmylou Harris]] today on Mastodon, and the
+album came up.  I recalled Waits' endorsement and couldn't help but
+wonder what else I'd been missing, so I assembled a [[https://open.spotify.com/playlist/3LR9zuOQ4KTqtPIRNSkRfn][Spotify playlist]].
+I'm not the first to try, but Tom offered a [[https://open.spotify.com/playlist/3LR9zuOQ4KTqtPIRNSkRfn][few albums beyond twenty]],
+which I've added.
+
+**** Missing albums
+
+- Little Richard, /The Specialty Sessions/
+- /Passion for Opera Aria/
+- Alan Lomax, /Prison Songs: Murderous Home/
+- Houndog, /Houndog/
+- Charley Patton, /Screamin' and Hollerin' the Blues: "The Masked Marvel"/
+- Lenny Bruce, /Let the Buyer Beware/
+
+**** Unplayable albums
+
+These used to be available, but are grayed out for now, at least in my
+market:
+
+- /Trout Mask Replica/ by Captain Beefheart
+
+
 * Talks section
 :PROPERTIES:
 :EXPORT_HUGO_BUNDLE: talks
