@@ -1868,16 +1868,15 @@ Render the HTML list as a Lispy, inline list.
 CLOSED: [2022-09-02 Fri 10:35 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: footer
-:EXPORT_HUGO_LASTMOD: [2023-08-09 Wed 22:12 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-11-08 Wed 23:05 EST]
 :END:
 
-The footer is a simple ~<address>~ [[http://microformats.org/wiki/hcard][hCard]] with our name, pronouns, and
-socials.  Our social links will use the [[https://microformats.org/wiki/rel-me][rel-me microformat]] for
-verification.
+The footer is a simple [[http://microformats.org/wiki/hcard][hCard]] with our name, pronouns, and socials.
+Our social links will use the [[https://microformats.org/wiki/rel-me][rel-me microformat]] for verification.
 #+hugo:more
 
 #+begin_src html :tangle ../../tmp/hugo/layouts/partials/footer.html
-  <address class="h-card vcard">
+  <div class="h-card vcard">
       <img class="u-photo" alt="Profile photo of Ross A. Baker" src="/img/profile.jpg" />
       <a class="u-url u-uid p-name" href="https://rossabaker.com/">
 	  <span class="p-given-name">Ross</span>
@@ -1885,8 +1884,8 @@ verification.
 	  <span class="p-family-name">Baker</span>
       </a>
       <small><span class="u-pronoun">(he/him)</span></small><br />
-      {{ partial "contact-info-icons" . }}
-  </address>
+      <address>{{ partial "contact-info-icons" . }}</address>
+  </div>
 
   <p><a href="/license/">License</a> <a href="/security/">Security policy</a></p>
 
@@ -1902,24 +1901,24 @@ verification.
 #+end_src
 
 #+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
-  address {
+  body > footer {
       display: inline-block;
       width: 100%;
   }
 
-  address ul {
+  body > footer ul {
       display: inline-flex;
       list-style-type: none;
       margin: 0;
       padding-left: 0;
   }
 
-  address li {
+  body > footer li {
       display: inline;
       margin-left: 1ch;
   }
 
-  address li:first-child {
+  body > footer li:first-child {
       margin-left: 0;
   }
 
