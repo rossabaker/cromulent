@@ -2268,7 +2268,7 @@ Our build creates some detritus that we don't want checked into Git.
 CLOSED: [2022-08-30 Tue 14:26 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: style
-:EXPORT_HUGO_LASTMOD: [2023-11-07 Tue 23:42 EST]
+:EXPORT_HUGO_LASTMOD: [2023-11-08 Wed 22:21 EST]
 :CUSTOM_ID: css-baseline
 :header-args+: :code-license MIT
 :header-args:css+: :tangle ../../tmp/hugo/assets/css/cromulent.css
@@ -2365,6 +2365,16 @@ still modest in late 2023, but we're ready when they are.
 #+begin_src css
   h1, h2, h3, h4, h5, h6 {
       text-wrap: balance;
+  }
+#+end_src
+
+**** Addresses
+
+=<address>= is traditionally italicized, but, meh.
+
+#+begin_src css
+  address {
+      font-style: normal;
   }
 #+end_src
 
