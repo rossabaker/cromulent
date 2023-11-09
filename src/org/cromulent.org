@@ -1540,52 +1540,52 @@ abusing it here, but I like the result.
 
 #+begin_src html :tangle ../../tmp/hugo/layouts/partials/article-info.html
   <div class="article-info">
-      <dl>
-          <div class="type">
-              <dt>Type</dt>
-              {{ if ne .Type "page" }}
-                  <dd><a href="{{ .Type | relURL }}">{{ .Type | singularize | humanize }}</a></dd>
-              {{ else }}
-                  <dd>Page</dd>
-              {{ end }}
-          </div>
-          <div class="published">
-              <dt>Published</dt>
-              <dd>{{ dateFormat "2006-01-02" .Date }}</dd>
-          </div>
-          <div class="last-modified">
-              <dt>Last updated</dt>
-              <dd>{{ dateFormat "2006-01-02" .Lastmod }}</dd>
-          </div>
-          <div class="taxonomies">
-              <dt>Taxonomies</dt>
-              <dd>
-                  <dl>
-                      {{ if .Params.categories }}
-                          <dt>Categories</dt>
-                          <dd>
-                              <ul>
-                                  {{ range (sort .Params.categories) }}
-                                      <li class="category"><a href="{{ (print "/categories/" .) | absURL }}">{{ . | humanize }}</a></li>
-                                  {{ end }}
-                              </ul>
-                          </dd>
-                      {{ end }}
+    <dl>
+      <div class="type">
+        <dt>Type</dt>
+        {{ if ne .Type "page" }}
+        <dd><a href="{{ .Type | relURL }}">{{ .Type | singularize | humanize }}</a></dd>
+        {{ else }}
+        <dd>Page</dd>
+        {{ end }}
+      </div>
+      <div class="published">
+        <dt>Published</dt>
+        <dd>{{ dateFormat "2006-01-02" .Date }}</dd>
+      </div>
+      <div class="last-modified">
+        <dt>Last updated</dt>
+        <dd>{{ dateFormat "2006-01-02" .Lastmod }}</dd>
+      </div>
+      <div class="taxonomies">
+        <dt>Taxonomies</dt>
+        <dd>
+          <dl>
+            {{ if .Params.categories }}
+            <dt>Categories</dt>
+            <dd>
+              <ul>
+                {{ range (sort .Params.categories) }}
+                <li class="category"><a href="{{ (print "/categories/" .) | absURL }}">{{ . | humanize }}</a></li>
+                {{ end }}
+              </ul>
+            </dd>
+            {{ end }}
 
-                      {{ if .Params.tags }}
-                          <dt>Tags</dt>
-                          <dd>
-                              <ul>
-                                  {{ range (sort .Params.tags) }}
-                                      <li class="tag"><a href="{{ (print "/tags/" .) | absURL }}">{{ . }}</a></li>
-                                  {{ end }}
-                              </ul>
-                          </dd>
-                      {{ end }}
-                  </dl>
-              </dd>
-          </div>
-      </dl>
+            {{ if .Params.tags }}
+            <dt>Tags</dt>
+            <dd>
+              <ul>
+                {{ range (sort .Params.tags) }}
+                <li class="tag"><a href="{{ (print "/tags/" .) | absURL }}">{{ . }}</a></li>
+                {{ end }}
+              </ul>
+            </dd>
+            {{ end }}
+          </dl>
+        </dd>
+      </div>
+    </dl>
   </div>
 #+end_src
 
