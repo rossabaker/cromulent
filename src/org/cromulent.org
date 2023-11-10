@@ -2868,7 +2868,7 @@ permitting its [[https://commoncrawl.org/ccbot][~CCBot~]] for now.
 CLOSED: [2023-02-23 Thu 23:59 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: _index
-:EXPORT_HUGO_LASTMOD: [2023-11-09 Thu 21:13 EST]
+:EXPORT_HUGO_LASTMOD: [2023-11-09 Thu 21:52 EST]
 :header-args+: :tangle-mode `,#o444 :mkdirp yes
 :header-args:emacs-lisp+: :tangle ../../gen/flake/emacs/init.el :tangle-mode `,#o444 :mkdirp yes
 :header-args:emacs-lisp+: :code-license CC0-1.0
@@ -3918,10 +3918,17 @@ type to detect the engine, a derived mode is created:
     (web-mode-set-engine "go"))
 #+end_src
 
-Use with language =rab/hugo=:
+Also map the language =go-html-template= to it.  This language has
+support in both ox-hugo and Chroma.
+
+#+begin_src emcas-lisp
+  (add-to-list 'org-src-lang-modes '("go-html-template" . rab/hugo))
+#+end_src
+
+Use thusly:
 
 #+begin_src org :code-license CC0-BY0
-,#+begin_src rab/hugo
+,#+begin_src go-html-template
   <head>
     {{ block "head" . }}
       {{ partial "head" . }}
