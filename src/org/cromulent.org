@@ -2868,7 +2868,7 @@ permitting its [[https://commoncrawl.org/ccbot][~CCBot~]] for now.
 CLOSED: [2023-02-23 Thu 23:59 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: _index
-:EXPORT_HUGO_LASTMOD: [2023-11-09 Thu 20:16 EST]
+:EXPORT_HUGO_LASTMOD: [2023-11-09 Thu 21:13 EST]
 :header-args+: :tangle-mode `,#o444 :mkdirp yes
 :header-args:emacs-lisp+: :tangle ../../gen/flake/emacs/init.el :tangle-mode `,#o444 :mkdirp yes
 :header-args:emacs-lisp+: :code-license CC0-1.0
@@ -3902,7 +3902,10 @@ using it for Hugo templates.
 
 #+begin_src emacs-lisp
   (use-package web-mode
-    :ensure t)
+    :ensure t
+    :custom
+    (web-mode-markup-indent-offset 2)
+    (web-mode-code-indent-offset 2))
 #+end_src
 
 ******* YAML
