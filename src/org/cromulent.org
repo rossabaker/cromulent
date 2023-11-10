@@ -2868,7 +2868,7 @@ permitting its [[https://commoncrawl.org/ccbot][~CCBot~]] for now.
 CLOSED: [2023-02-23 Thu 23:59 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: _index
-:EXPORT_HUGO_LASTMOD: [2023-10-25 Wed 23:47]
+:EXPORT_HUGO_LASTMOD: [2023-11-09 Thu 20:16 EST]
 :header-args+: :tangle-mode `,#o444 :mkdirp yes
 :header-args:emacs-lisp+: :tangle ../../gen/flake/emacs/init.el :tangle-mode `,#o444 :mkdirp yes
 :header-args:emacs-lisp+: :code-license CC0-1.0
@@ -3770,7 +3770,6 @@ the flake.
 :CUSTOM_ID: languages
 :END:
 
-
 ******* C#
 :PROPERTIES:
 :CUSTOM_ID: c
@@ -3883,6 +3882,7 @@ And the Nix build, with [patch to remove ellipses in Scala 2](https://github.com
 #+end_src
 
 ******* XML
+
 :PROPERTIES:
 :CUSTOM_ID: xml
 :END:
@@ -3893,6 +3893,16 @@ And the Nix build, with [patch to remove ellipses in Scala 2](https://github.com
   (use-package esxml
     :ensure t
     :defer t)
+#+end_src
+
+******* Web Mode
+
+[[https://github.com/fxbois/web-mode][web-mode.el]] is powerful.  I'm just scratching the surface for now,
+using it for Hugo templates.
+
+#+begin_src emacs-lisp
+  (use-package web-mode
+    :ensure t)
 #+end_src
 
 ******* YAML
