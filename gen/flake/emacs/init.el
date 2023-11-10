@@ -252,7 +252,15 @@
   :defer t)
 
 (use-package web-mode
-  :ensure t)
+  :ensure t
+  :custom
+  (web-mode-markup-indent-offset 2)
+  (web-mode-code-indent-offset 2))
+
+(define-derived-mode rab/hugo-mode web-mode "Hugo"
+  "Major mode for editing Hugo templates."
+  (web-mode)
+  (web-mode-set-engine "go"))
 
 (use-package yaml-mode
   :ensure t

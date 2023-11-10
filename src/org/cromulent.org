@@ -3908,6 +3908,28 @@ using it for Hugo templates.
     (web-mode-code-indent-offset 2))
 #+end_src
 
+In order to make it work in Org source blocks, where there's no file
+type to detect the engine, a derived mode is created:
+
+#+begin_src emacs-lisp
+  (define-derived-mode rab/hugo-mode web-mode "Hugo"
+    "Major mode for editing Hugo templates."
+    (web-mode)
+    (web-mode-set-engine "go"))
+#+end_src
+
+Use with language =rab/hugo=:
+
+#+begin_src org :code-license CC0-BY0
+,#+begin_src rab/hugo
+  <head>
+    {{ block "head" . }}
+      {{ partial "head" . }}
+    {{ end }}
+  </head>
+,#+end_src
+#+end_src
+
 ******* YAML
 :PROPERTIES:
 :CUSTOM_ID: yaml
