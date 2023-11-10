@@ -1023,30 +1023,30 @@ template provide a ~main~, but this is the expectation.
 #+begin_src go-html-template :tangle ../../tmp/hugo/layouts/_default/baseof.html
   <!DOCTYPE html>
   <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{{ site.Language.Lang }}" lang="{{ site.Language.Lang }}">
-      <head>
-          {{ block "head" . }}
-              {{ partial "head" . }}
-          {{ end }}
-      </head>
+    <head>
+      {{ block "head" . }}
+        {{ partial "head" . }}
+      {{ end }}
+    </head>
 
-      <body>
-          <header>
-              {{ block "header" . }}
-                  {{ partial "header.html" . }}
-              {{ end }}
-          </header>
+    <body>
+      <header>
+        {{ block "header" . }}
+          {{ partial "header.html" . }}
+        {{ end }}
+      </header>
 
-          <main>
-              {{ block "main" . }}
-              {{ end }}
-          </main>
+      <main>
+        {{ block "main" . }}
+        {{ end }}
+      </main>
 
-          <footer>
-              {{ block "footer" . }}
-                  {{ partial "footer.html" . }}
-              {{ end }}
-          </footer>
-      </body>
+      <footer>
+        {{ block "footer" . }}
+          {{ partial "footer.html" . }}
+        {{ end }}
+      </footer>
+    </body>
   </html>
 #+end_src
 
@@ -1064,15 +1064,15 @@ Think of them as the articles.  Indeed, we mark them up in an
 
 #+begin_src go-html-template :tangle ../../tmp/hugo/layouts/_default/single.html
   {{ define "main" }}
-      <article>
-          <header>
-              <h1>{{ .Title }}</h1>
-          </header>
-          {{ .Content }}
-          <footer>
-              {{ partial "article-info" . }}
-          </footer>
-      </article>
+    <article>
+      <header>
+        <h1>{{ .Title }}</h1>
+      </header>
+      {{ .Content }}
+      <footer>
+        {{ partial "article-info" . }}
+      </footer>
+    </article>
   {{ end }}
 #+end_src
 
@@ -1098,26 +1098,26 @@ pages.
 
 #+begin_src go-html-template :tangle ../../tmp/hugo/layouts/index.html
   {{ define "main" }}
-      <article class="home-page">
-	  <h1 class="site-title">{{ .Site.Title }}</h1>
-	  {{ with .Content }}
-	      {{ . }}
-	  {{ end }}
+    <article class="home-page">
+      <h1 class="site-title">{{ .Site.Title }}</h1>
+      {{ with .Content }}
+        {{ . }}
+      {{ end }}
 
-	  <section class="recently-updated">
-	      <h2>Recently updated</h2>
+      <section class="recently-updated">
+        <h2>Recently updated</h2>
 
-	      <ul class="article-summaries">
-		  {{ $paginator := .Paginate (where site.Pages.ByLastmod.Reverse "Kind" "not in" (slice "home" "term" "taxonomy")) }}
-		  {{ range $paginator.Pages }}
-		      <li>
-			  {{ partial "article-summary" . }}
-		      </li>
-		  {{ end}}
-	      </ul>
-	      {{ template "_internal/pagination.html" . }}
-	  </section>
-      </article>
+        <ul class="article-summaries">
+          {{ $paginator := .Paginate (where site.Pages.ByLastmod.Reverse "Kind" "not in" (slice "home" "term" "taxonomy")) }}
+          {{ range $paginator.Pages }}
+            <li>
+              {{ partial "article-summary" . }}
+            </li>
+          {{ end}}
+        </ul>
+        {{ template "_internal/pagination.html" . }}
+      </section>
+    </article>
   {{ end }}
 #+end_src
 
@@ -1154,16 +1154,16 @@ Metadata appears in the article header.
 
 #+begin_src go-html-template :tangle ../../tmp/hugo/layouts/talks/single.html
   {{ define "article-header" }}
-      <h1>{{ .Title }}</h1>
-      <dl>
-          {{ if .Params.venue }}
-              <dt>Venue</dt>
-              <dd>{{ .Params.Venue | markdownify }}</dd>
+    <h1>{{ .Title }}</h1>
+    <dl>
+      {{ if .Params.venue }}
+        <dt>Venue</dt>
+        <dd>{{ .Params.Venue | markdownify }}</dd>
 
-              <dt>Source code</dt>
-              <dd><a href="{{ .Params.Source }}">{{ .Params.Source }}</a></dd>
-          {{ end }}
-      </dl>
+        <dt>Source code</dt>
+        <dd><a href="{{ .Params.Source }}">{{ .Params.Source }}</a></dd>
+      {{ end }}
+    </dl>
   {{ end }}
 #+end_src
 
@@ -1172,19 +1172,19 @@ inline below.
 
 #+begin_src go-html-template :tangle ../../tmp/hugo/layouts/talks/single.html
   {{ define "article-main" }}
-      {{ .Content }}
-      {{ if .Params.Slides }}
-          <div class="slides">
-              {{ if strings.HasSuffix .Params.Slides ".pdf" }}
-                  <object data="{{ .Params.Slides | absURL }}" type="application/pdf">
-                  </object>
-              {{ else }}
-                  <iframe src="{{ .Params.Slides | absURL }}">
-                  </iframe>
-              {{ end }}
-          </div>
-          <p>Download the <a href="{{ .Params.Slides | absURL }}">slides</a>.
-      {{ end }}
+    {{ .Content }}
+    {{ if .Params.Slides }}
+      <div class="slides">
+        {{ if strings.HasSuffix .Params.Slides ".pdf" }}
+          <object data="{{ .Params.Slides | absURL }}" type="application/pdf">
+          </object>
+        {{ else }}
+          <iframe src="{{ .Params.Slides | absURL }}">
+          </iframe>
+        {{ end }}
+      </div>
+      <p>Download the <a href="{{ .Params.Slides | absURL }}">slides</a>.
+    {{ end }}
   {{ end }}
 #+end_src
 
@@ -1224,27 +1224,27 @@ in reverse order of modification.
 #+hugo:more
 #+begin_src go-html-template :tangle ../../tmp/hugo/layouts/_default/list.html
   {{ define "main" }}
-      <article>
-	  <header>
-	      <h1>{{ .Title }}</h1>
-	  </header>
+    <article>
+      <header>
+        <h1>{{ .Title }}</h1>
+      </header>
 
-	  {{ with .Content }}
-	      {{ . }}
-	  {{ end }}
+      {{ with .Content }}
+        {{ . }}
+      {{ end }}
 
-	  <section class="recently-updated">
-	      <h2>Recently updated</h2>
+      <section class="recently-updated">
+        <h2>Recently updated</h2>
 
-	      <ul class="article-summaries">
-		  {{ range .Pages.ByLastmod.Reverse }}
-		      <li>
-			  {{ partial "article-summary" . }}
-		      </li>
-		  {{ end}}
-	      </ul>
-	  </section>
-      </article>
+        <ul class="article-summaries">
+          {{ range .Pages.ByLastmod.Reverse }}
+            <li>
+              {{ partial "article-summary" . }}
+            </li>
+          {{ end}}
+        </ul>
+      </section>
+    </article>
   {{ end }}
 #+end_src
 
@@ -1274,22 +1274,22 @@ roughly follow a power law.
 
 #+begin_src go-html-template :tangle ../../tmp/hugo/layouts/_default/terms.html
   {{ define "main" }}
-      <h1>{{ .Name }}</h1>
-      <ul class="terms {{.Name | urlize}}">
-          {{ $plural := .Data.Plural }}
-          {{ $max := math.Log (len (index .Data.Terms.ByCount 0).Pages) }}
-          {{ range .Data.Terms.Alphabetical }}
-              {{ $size := math.Floor (mul (div (math.Log (len .Pages)) $max) 6) }}
-              <li>
-                  <a href="/{{ $plural }}/{{ .Name }}" class="{{ printf "terms-size-%.0f" $size }}">{{ .Name }}</a>
-                  <sub>{{ len .Pages }}</sub>
-              </li>
-          {{ end }}
-      </ul>
-
-      {{ with .Content }}
-          {{ . }}
+    <h1>{{ .Name }}</h1>
+    <ul class="terms {{.Name | urlize}}">
+      {{ $plural := .Data.Plural }}
+      {{ $max := math.Log (len (index .Data.Terms.ByCount 0).Pages) }}
+      {{ range .Data.Terms.Alphabetical }}
+        {{ $size := math.Floor (mul (div (math.Log (len .Pages)) $max) 6) }}
+        <li>
+          <a href="/{{ $plural }}/{{ .Name }}" class="{{ printf "terms-size-%.0f" $size }}">{{ .Name }}</a>
+          <sub>{{ len .Pages }}</sub>
+        </li>
       {{ end }}
+    </ul>
+
+    {{ with .Content }}
+      {{ . }}
+    {{ end }}
   {{ end }}
 #+end_src
 
@@ -1366,21 +1366,21 @@ template that lists the article summaries in reverse order of modification.
 #+hugo:more
 #+begin_src go-html-template :tangle ../../tmp/hugo/layouts/_default/term.html
   {{ define "main" }}
-      <h1>{{ .Name }}</h1>
+    <h1>{{ .Name }}</h1>
 
-      {{ with .Content }}
-	  {{ . }}
+    {{ with .Content }}
+      {{ . }}
+    {{ end }}
+
+    <ul class="article-summaries">
+      {{ $paginator := .Paginate .Pages.ByLastmod.Reverse 10 }}
+      {{ range $paginator.Pages }}
+        <li>
+          {{ partial "article-summary" . }}
+        </li>
       {{ end }}
-
-      <ul class="article-summaries">
-	  {{ $paginator := .Paginate .Pages.ByLastmod.Reverse 10 }}
-	  {{ range $paginator.Pages }}
-	      <li>
-		  {{ partial "article-summary" . }}
-	      </li>
-	  {{ end }}
-      </ul>
-      {{ template "_internal/pagination.html" . }}
+    </ul>
+    {{ template "_internal/pagination.html" . }}
   {{ end }}
 #+end_src
 
@@ -1410,9 +1410,9 @@ Set the title tag.  Always include the site title.
 
 #+begin_src go-html-template :tangle ../../tmp/hugo/layouts/partials/head.html
   {{- if .IsHome }}
-      <title>{{ site.Title }}</title>
+    <title>{{ site.Title }}</title>
   {{- else }}
-      <title>{{ site.Title }}: {{ .Title }}</title>
+    <title>{{ site.Title }}: {{ .Title }}</title>
   {{- end }}
 #+end_src
 
@@ -1421,7 +1421,7 @@ Set the description, either at the site or page level.
 #+begin_src go-html-template :tangle ../../tmp/hugo/layouts/partials/head.html
   {{ $description := cond .IsHome .Site.Params.Description .Params.Description }}
   {{ if $description }}
-      <meta name="description" content="{{ $description }}">
+    <meta name="description" content="{{ $description }}">
   {{ end }}
 #+end_src
 
@@ -1429,19 +1429,19 @@ Load our own CSS and JavaScript through the [[https://gohugo.io/hugo-pipes/intro
 
 #+begin_src go-html-template :tangle ../../tmp/hugo/layouts/partials/head.html
   {{ range $css_file := site.Params.css }}
-      {{ $css_asset_path := printf "css/%s" $css_file }}
-      {{ $css := resources.Get $css_asset_path | minify | fingerprint }}
-      <link rel="stylesheet" href="{{ $css.RelPermalink }}">
-      <!-- Enable HTTP/2 Push -->
-      <link rel="preload" href="{{ $css.RelPermalink }}" as="style">
+    {{ $css_asset_path := printf "css/%s" $css_file }}
+    {{ $css := resources.Get $css_asset_path | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ $css.RelPermalink }}">
+    <!-- Enable HTTP/2 Push -->
+    <link rel="preload" href="{{ $css.RelPermalink }}" as="style">
   {{ end }}
 
   {{ range $js_file := site.Params.js }}
-      {{ $js_asset_path := printf "js/%s" $js_file }}
-      {{ $js := resources.Get $js_asset_path | minify | fingerprint }}
-      <script defer src="{{ $js.RelPermalink }}"></script>
-      <!-- Enable HTTP/2 Push -->
-      <link rel="preload" href="{{ $js.RelPermalink }}" as="script">
+    {{ $js_asset_path := printf "js/%s" $js_file }}
+    {{ $js := resources.Get $js_asset_path | minify | fingerprint }}
+    <script defer src="{{ $js.RelPermalink }}"></script>
+    <!-- Enable HTTP/2 Push -->
+    <link rel="preload" href="{{ $js.RelPermalink }}" as="script">
   {{ end }}
 #+end_src
 
@@ -1457,7 +1457,7 @@ Render our RSS feed.  Putting it in a ~<link>~ integrates with various
 
 #+begin_src go-html-template :tangle ../../tmp/hugo/layouts/partials/head.html
   {{ range .AlternativeOutputFormats -}}
-      {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink (printf "%s for %s" (.Name | title) site.Title) | safeHTML }}
+    {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink (printf "%s for %s" (.Name | title) site.Title) | safeHTML }}
   {{ end -}}
 #+end_src
 
@@ -1468,8 +1468,8 @@ an error logging into the Indiewebring without it.
 
 #+begin_src go-html-template :tangle ../../tmp/hugo/layouts/partials/head.html
   {{ if .IsHome }}
-  <link rel="pgpkey" href="/.well-known/openpgpkey/hu/eimhw3om3jynrs7fo7r7rrssmt1o4yxp">
-  <link rel="authorization_endpoint" href="https://indieauth.com/auth">
+    <link rel="pgpkey" href="/.well-known/openpgpkey/hu/eimhw3om3jynrs7fo7r7rrssmt1o4yxp">
+    <link rel="authorization_endpoint" href="https://indieauth.com/auth">
   {{ end }}
 #+end_src
 
@@ -1487,22 +1487,22 @@ description or summary.
 
 #+begin_src go-html-template :tangle ../../tmp/hugo/layouts/partials/article-summary.html
   <article>
-      <header>
-          <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
-      </header>
-      {{ if .Description }}
-          {{ .Description | markdownify }}
-      {{ else if .Truncated }}
-          {{ .Summary }}
-      {{ else }}
-          {{ .Content }}
-      {{ end }}
-      {{ if .Params.Canonical }}
-          <small><a href="{{ .Params.Canonical }}">Go to original</a></small>
-      {{ end }}
-      <footer>
-        {{ partial "article-info" . }}
-      </footer>
+    <header>
+      <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+    </header>
+    {{ if .Description }}
+      {{ .Description | markdownify }}
+    {{ else if .Truncated }}
+      {{ .Summary }}
+    {{ else }}
+      {{ .Content }}
+    {{ end }}
+    {{ if .Params.Canonical }}
+      <small><a href="{{ .Params.Canonical }}">Go to original</a></small>
+    {{ end }}
+    <footer>
+      {{ partial "article-info" . }}
+    </footer>
   </article>
 #+end_src
 
@@ -1544,9 +1544,9 @@ abusing it here, but I like the result.
       <div class="type">
         <dt>Type</dt>
         {{ if ne .Type "page" }}
-        <dd><a href="{{ .Type | relURL }}">{{ .Type | singularize | humanize }}</a></dd>
+          <dd><a href="{{ .Type | relURL }}">{{ .Type | singularize | humanize }}</a></dd>
         {{ else }}
-        <dd>Page</dd>
+          <dd>Page</dd>
         {{ end }}
       </div>
       <div class="published">
@@ -1562,25 +1562,25 @@ abusing it here, but I like the result.
         <dd>
           <dl>
             {{ if .Params.categories }}
-            <dt>Categories</dt>
-            <dd>
-              <ul>
-                {{ range (sort .Params.categories) }}
-                <li class="category"><a href="{{ (print "/categories/" .) | absURL }}">{{ . | humanize }}</a></li>
-                {{ end }}
-              </ul>
-            </dd>
+              <dt>Categories</dt>
+              <dd>
+                <ul>
+                  {{ range (sort .Params.categories) }}
+                    <li class="category"><a href="{{ (print "/categories/" .) | absURL }}">{{ . | humanize }}</a></li>
+                  {{ end }}
+                </ul>
+              </dd>
             {{ end }}
 
             {{ if .Params.tags }}
-            <dt>Tags</dt>
-            <dd>
-              <ul>
-                {{ range (sort .Params.tags) }}
-                <li class="tag"><a href="{{ (print "/tags/" .) | absURL }}">{{ . }}</a></li>
-                {{ end }}
-              </ul>
-            </dd>
+              <dt>Tags</dt>
+              <dd>
+                <ul>
+                  {{ range (sort .Params.tags) }}
+                    <li class="tag"><a href="{{ (print "/tags/" .) | absURL }}">{{ . }}</a></li>
+                  {{ end }}
+                </ul>
+              </dd>
             {{ end }}
           </dl>
         </dd>
@@ -1697,11 +1697,11 @@ make any sense as a Lisp variable.
   <strong><a href="{{ "/" | relURL }}">{{ .Site.Params.username }}</a></strong>
   <p>{{ .Site.Params.description }}</p>
   <nav>
-      <ul>
-          {{ range .Site.Menus.main }}
-              <li><a href="{{ .URL }}">{{ .Name | urlize }}</a></li>
-          {{ end }}
-      </ul>
+    <ul>
+      {{ range .Site.Menus.main }}
+        <li><a href="{{ .URL }}">{{ .Name | urlize }}</a></li>
+      {{ end }}
+    </ul>
   </nav>
 #+end_src
 
@@ -1877,14 +1877,14 @@ Our social links will use the [[https://microformats.org/wiki/rel-me][rel-me mic
 
 #+begin_src go-html-template :tangle ../../tmp/hugo/layouts/partials/footer.html
   <div class="h-card vcard">
-      <img class="u-photo" alt="Profile photo of Ross A. Baker" src="/img/profile.jpg" />
-      <a class="u-url u-uid p-name" href="https://rossabaker.com/">
-	  <span class="p-given-name">Ross</span>
-	  <span class="p-additional-name"><abbr>A.</abbr></span>
-	  <span class="p-family-name">Baker</span>
-      </a>
-      <small><span class="u-pronoun">(he/him)</span></small><br />
-      <address>{{ partial "contact-info-icons" . }}</address>
+    <img class="u-photo" alt="Profile photo of Ross A. Baker" src="/img/profile.jpg" />
+    <a class="u-url u-uid p-name" href="https://rossabaker.com/">
+      <span class="p-given-name">Ross</span>
+      <span class="p-additional-name"><abbr>A.</abbr></span>
+      <span class="p-family-name">Baker</span>
+    </a>
+    <small><span class="u-pronoun">(he/him)</span></small><br />
+    <address>{{ partial "contact-info-icons" . }}</address>
   </div>
 
   <p><a href="/license/">License</a> <a href="/security/">Security policy</a></p>
@@ -1896,7 +1896,7 @@ Our social links will use the [[https://microformats.org/wiki/rel-me][rel-me mic
   </small>
 
   <script type="text/javascript"
-    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+          src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
   </script>
 #+end_src
 
@@ -1956,8 +1956,8 @@ Put this file in =layouts/_default/_markup/render-heading.html=:
 
 #+begin_src go-html-template :tangle ../../tmp/hugo/layouts/_default/_markup/render-heading.html
   <h{{ .Level }} id="{{ .Anchor | safeURL }}">
-      {{ .Text | safeHTML }}
-      <a class="heading-anchor" href="#{{ .Anchor | safeURL }}">#</a>
+    {{ .Text | safeHTML }}
+    <a class="heading-anchor" href="#{{ .Anchor | safeURL }}">#</a>
   </h{{ .Level }}>
 #+end_src
 
@@ -2118,13 +2118,13 @@ page size.
 
 #+begin_src go-html-template :tangle ../../tmp/hugo/layouts/partials/contact-info-icons.html
   <ul class="contacts">
-      {{ range where .Site.Params.contacts "support" "eq" "supported" }}
-	<li><a href="{{ .url | safeURL }}" {{ with (not (eq .relMe false)) }}rel="me"{{ end }}>
-	    {{ $icon := printf "%s/%s.svg" "img/icons" (.icon | default (.network | urlize)) }}
-	    {{ $svg := resources.Get $icon | resources.Minify }}
-	    {{ $svg.Content | safeHTML }}
-	</a></li>
-      {{ end }}
+    {{ range where .Site.Params.contacts "support" "eq" "supported" }}
+      <li><a href="{{ .url | safeURL }}" {{ with (not (eq .relMe false)) }}rel="me"{{ end }}>
+        {{ $icon := printf "%s/%s.svg" "img/icons" (.icon | default (.network | urlize)) }}
+        {{ $svg := resources.Get $icon | resources.Minify }}
+        {{ $svg.Content | safeHTML }}
+      </a></li>
+    {{ end }}
   </ul>
 #+end_src
 
@@ -2144,18 +2144,18 @@ supported contacts from the experimental ones.
 
 #+begin_src go-html-template :tangle ../../tmp/hugo/layouts/shortcodes/contact-info-dl.html
   <dl>
-      {{ range where .Site.Params.contacts "support" "eq" (.Get "support") }}
-          <dt>{{ .network }}</dt>
-          {{ if .handle }}
-              <dd>
-              {{ if .url }}
-                <a href="{{ .url }}">{{ .handle }}</a>
-              {{ else }}
-                {{ .handle }}
-              {{ end }}
-              </dd>
+    {{ range where .Site.Params.contacts "support" "eq" (.Get "support") }}
+      <dt>{{ .network }}</dt>
+      {{ if .handle }}
+        <dd>
+          {{ if .url }}
+            <a href="{{ .url }}">{{ .handle }}</a>
+          {{ else }}
+            {{ .handle }}
           {{ end }}
+        </dd>
       {{ end }}
+    {{ end }}
   </dl>
 #+end_src
 
@@ -3928,13 +3928,13 @@ support in both ox-hugo and Chroma.
 Use thusly:
 
 #+begin_src org :code-license CC0-BY0
-,#+begin_src go-html-template
-  <head>
-    {{ block "head" . }}
-      {{ partial "head" . }}
-    {{ end }}
-  </head>
-,#+end_src
+  ,#+begin_src go-html-template
+    <head>
+      {{ block "head" . }}
+        {{ partial "head" . }}
+      {{ end }}
+    </head>
+  ,#+end_src
 #+end_src
 
 ******* YAML
