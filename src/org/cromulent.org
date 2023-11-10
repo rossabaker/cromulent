@@ -2267,7 +2267,7 @@ Our build creates some detritus that we don't want checked into Git.
 CLOSED: [2022-08-30 Tue 14:26 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: style
-:EXPORT_HUGO_LASTMOD: [2023-11-08 Wed 22:21 EST]
+:EXPORT_HUGO_LASTMOD: [2023-11-10 Fri 11:31 EST]
 :CUSTOM_ID: css-baseline
 :header-args+: :code-license MIT
 :header-args:css+: :tangle ../../tmp/hugo/assets/css/cromulent.css
@@ -2392,10 +2392,6 @@ nonsense.
 **** Let the body breathe
 
 #+begin_src css
-  body > header {
-      padding-top: 0;
-  }
-
   body > * {
       padding: 1.5rem 1.5rem;
   }
