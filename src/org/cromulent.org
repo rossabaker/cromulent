@@ -2267,7 +2267,7 @@ Our build creates some detritus that we don't want checked into Git.
 CLOSED: [2022-08-30 Tue 14:26 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: style
-:EXPORT_HUGO_LASTMOD: [2023-11-11 Sat 23:01 EST]
+:EXPORT_HUGO_LASTMOD: [2023-11-11 Sat 23:08 EST]
 :CUSTOM_ID: css-baseline
 :header-args+: :code-license MIT
 :header-args:css+: :tangle ../../tmp/hugo/assets/css/cromulent.css
@@ -2348,7 +2348,7 @@ double the base.
 
 #+begin_src css
   h1 { font-size: calc(var(--cromulent-step-5) * 1rem); }
-  h1 { font-size: calc(var(--cromulent-step-4) * 1rem); }
+  h2 { font-size: calc(var(--cromulent-step-4) * 1rem); }
   h3 { font-size: calc(var(--cromulent-step-3) * 1rem); }
   h4 { font-size: calc(var(--cromulent-step-2) * 1rem); }
   h5 { font-size: calc(var(--cromulent-step-1) * 1rem); }
