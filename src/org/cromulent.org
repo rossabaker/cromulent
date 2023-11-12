@@ -2267,7 +2267,7 @@ Our build creates some detritus that we don't want checked into Git.
 CLOSED: [2022-08-30 Tue 14:26 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: style
-:EXPORT_HUGO_LASTMOD: [2023-11-10 Fri 11:31 EST]
+:EXPORT_HUGO_LASTMOD: [2023-11-11 Sat 23:01 EST]
 :CUSTOM_ID: css-baseline
 :header-args+: :code-license MIT
 :header-args:css+: :tangle ../../tmp/hugo/assets/css/cromulent.css
@@ -2374,6 +2374,30 @@ still modest in late 2023, but we're ready when they are.
 #+begin_src css
   address {
       font-style: normal;
+  }
+#+end_src
+
+**** =<hgroup>=
+
+The [[https://html.spec.whatwg.org/multipage/sections.html#the-hgroup-element][=<hgroup>=]] tag is relatively obscure.  It contains:
+
+- zero or more =<p>= elements
+- a header element, one of =<h1>= through =<h6>=
+- zero or more =<p>= elements
+
+Paragraphs before the header are bizarre, but a single paragraph after
+the header is a nifty way to render a subtitle.
+
+#+begin_src css
+  hgroup :is(h1, h2, h3, h4, h5, h6) {
+      margin-bottom: 0;
+  }
+
+  hgroup :is(h1, h2, h3, h4, h5, h6) ~ p {
+      margin-top: 0;
+      font-weight: bold;
+      font-style: italic;
+      color: var(--color-brand);
   }
 #+end_src
 
