@@ -30,11 +30,11 @@
         "nixpkgs-stable": "nixpkgs-stable"
       },
       "locked": {
-        "lastModified": 1699237218,
-        "narHash": "sha256-4BRgCLbDJmU3Wbv8/nZ+S6MIuM4vC/s6X++N5Ao/I3Q=",
+        "lastModified": 1699812904,
+        "narHash": "sha256-+74SKAZrAFMytXfn0O1Sd5/bIl8OV+XxfjkXuGYqbYo=",
         "owner": "nix-community",
         "repo": "emacs-overlay",
-        "rev": "5ce24eed757d854bb290a0a0499053226fec1fc8",
+        "rev": "87219c6667c12e5f4442d27c073b9c56dbf0c95e",
         "type": "github"
       },
       "original": {
@@ -46,11 +46,11 @@
     "emacs-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1699112787,
-        "narHash": "sha256-PYgFsZasbmpCvV2/y2LnSQCMQNtdZK02QNz1e22vj50=",
+        "lastModified": 1699819902,
+        "narHash": "sha256-pDBCwgEjWExmaDnJMOMz+UwcIOGiNHShwIF9V66AwDw=",
         "owner": "emacs-mirror",
         "repo": "emacs",
-        "rev": "18e2de1bec9c2d49a9d7352db04b44deeea6a22b",
+        "rev": "5bebd292c63c9a54430854d7d63d01e6f6727e53",
         "type": "github"
       },
       "original": {
@@ -83,11 +83,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1699058439,
-        "narHash": "sha256-fvvrdBQ9vLb3TZRB3nMUaCLvBPVGnIgTqX6vPCFRv2o=",
+        "lastModified": 1699663243,
+        "narHash": "sha256-Plj2ypGV/5714enFtb4O5c3vXKvHUzoksgRx3zFmIJ4=",
         "owner": "bandithedoge",
         "repo": "nixpkgs-firefox-darwin",
-        "rev": "9edd9209798cb115ebadfb5424d49b79b257ebea",
+        "rev": "63df8ec2d300da9912ae5b56b74e7aa574b6de0c",
         "type": "github"
       },
       "original": {
@@ -171,11 +171,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1699025595,
-        "narHash": "sha256-e+o4PoSu2Z6Ww8y/AVUmMU200rNZoRK+p2opQ7Db8Rg=",
+        "lastModified": 1699783872,
+        "narHash": "sha256-4zTwLT2LL45Nmo6iwKB3ls3hWodVP9DiSWxki/oewWE=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "8765d4e38aa0be53cdeee26f7386173e6c65618d",
+        "rev": "280721186ab75a76537713ec310306f0eba3e407",
         "type": "github"
       },
       "original": {
@@ -187,11 +187,11 @@
     "jinx": {
       "flake": false,
       "locked": {
-        "lastModified": 1699108020,
-        "narHash": "sha256-Tyuxoh4Q4jysOZ6Mixq5zg6b5iyIpz2DReKOkMu5yUk=",
+        "lastModified": 1699692646,
+        "narHash": "sha256-kSzD4ikh0eG9arymIss9WSf7laMcvAOPkUYsFqj9BXw=",
         "owner": "minad",
         "repo": "jinx",
-        "rev": "6f6108896744d1da4887b08e4fe4fff403ac10ac",
+        "rev": "25279e36701ad0bea1331ccfa009c07fda2f85d0",
         "type": "github"
       },
       "original": {
@@ -207,11 +207,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1698429334,
-        "narHash": "sha256-Gq3+QabboczSu7RMpcy79RSLMSqnySO3wsnHQk4DfbE=",
+        "lastModified": 1699704228,
+        "narHash": "sha256-NApWG385goidsXmsakWgFRjvbH+aw/n1CGGHn/UuXsc=",
         "owner": "LnL7",
         "repo": "nix-darwin",
-        "rev": "afe83cbc2e673b1f08d32dd0f70df599678ff1e7",
+        "rev": "0f1ad801387445fdda01d080db8ecf169be8e793",
         "type": "github"
       },
       "original": {
@@ -257,11 +257,11 @@
     },
     "nixpkgs-stable": {
       "locked": {
-        "lastModified": 1699169573,
-        "narHash": "sha256-cvUb1xZkvOp3W2SzylStrTirhVd9zCeo5utJl9nSIhw=",
+        "lastModified": 1699596684,
+        "narHash": "sha256-XSXP8zjBZJBVvpNb2WmY0eW8O2ce+sVyj1T0/iBRIvg=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "aeefe2054617cae501809b82b44a8e8f7be7cc4b",
+        "rev": "da4024d0ead5d7820f6bd15147d3fe2a0c0cec73",
         "type": "github"
       },
       "original": {
@@ -327,11 +327,11 @@
     "scala-cli-repl": {
       "flake": false,
       "locked": {
-        "lastModified": 1698337110,
-        "narHash": "sha256-YnwVB+X71Zx0b++b7wBFUIuetGW5Px4HJRR0gsmMfck=",
+        "lastModified": 1699288665,
+        "narHash": "sha256-oAcBf25tOK7aCrm4y4zIg6diA3yVrbtRNnVbY4SllzE=",
         "owner": "ag91",
         "repo": "scala-cli-repl",
-        "rev": "9f1d7076d8045ee77ccab25256d0667e14a263e6",
+        "rev": "ed36cf764320a3e9a6f59f2af11f6e96971d9b3e",
         "type": "github"
       },
       "original": {
