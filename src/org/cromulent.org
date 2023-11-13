@@ -1006,6 +1006,7 @@ There is a lot to unpack here.
 CLOSED: [2022-09-02 Fri 09:17 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: base-template
+:EXPORT_HUGO_LASTMOD: [2023-11-12 Sun 23:47 EST]
 :END:
 
 This [[https://gohugo.io/templates/base/][base template]] defines the outermost HTML for single pages and
@@ -1048,6 +1049,29 @@ template provide a ~main~, but this is the expectation.
       </footer>
     </body>
   </html>
+#+end_src
+
+***** Style
+
+****** Responsive width
+
+Media queries are traditional for this, but the clamp function gives a
+smooth experience rather than "jolts" as various thresholds are met.
+
+#+begin_src css
+  body {
+      width: clamp(10em, calc(100% - var(--cromulent-body-margin)), 70em);
+  }
+#+end_src
+
+****** Spacing around the core elements
+
+The =<header>=, =<main>=, and =<footer>= need some room to breathe.
+
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
+  body > * {
+      padding: calc(var(--cromulent-step-3) * 1rem);
+  }
 #+end_src
 
 **** DONE Single-page template
@@ -1139,7 +1163,7 @@ CLOSED: [2022-09-02 Fri 12:48 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: talks
 :END:
-c
+
 Talks get their own single-page template based on custom front matter.
 #+hugo:more
 
@@ -2263,25 +2287,53 @@ Our build creates some detritus that we don't want checked into Git.
   /.hugo_build.lock
 #+end_src
 
-*** DONE CSS baseline                                                   :css:
+*** DONE An improved CSS baseline                              :css:
 CLOSED: [2022-08-30 Tue 14:26 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: style
-:EXPORT_HUGO_LASTMOD: [2023-11-11 Sat 23:08 EST]
+:EXPORT_HUGO_LASTMOD: [2023-11-13 Mon 00:29 EST]
 :CUSTOM_ID: css-baseline
 :header-args+: :code-license MIT
 :header-args:css+: :tangle ../../tmp/hugo/assets/css/cromulent.css
 :END:
 
-We strive for [[https://en.wikipedia.org/wiki/Semantic_HTML][semantic HTML]].  The styles presented here provide a
-solid foundation, independent of the [[https://gohugo.io/hugo-modules/theme-components/][Hugo theme]], or even the choice to
-use Hugo at all.  These rules are presently deployed to rossabaker.com,
-but could conceivably be used in future projects.
-#+hugo:more
+#+begin_description
+Provides a generic style baseline used on rossabaker.com, without
+branding or rules specific to its layouts.  It could plausibly be used
+elsewhere.
+#+end_description
 
-**** Body margin
+Default browser renderings have converged in a way that mostly
+obsoletes [[http://meyerweb.com/eric/thoughts/2007/04/18/reset-reasoning/][the venerable resets of yore]].  Consistency does not imply
+optimality.  There is room to improve the defaults without relying on
+classes or HTML structures particular to any project.  The rules here
+are implemented on rossabaker.com, but could be exported to start new
+projects.
 
-The default in most browsers is =8px=.  Feels a little cramped.
+**** Variables
+
+Some values in this reconditioning are configurable, and will be
+defined as =:root:= variables with a =--cromulent-= prefix.
+
+**** Spacing
+
+***** Border box sizing
+
+[[https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing][=border-box= sizing]] includes the padding and margin of a box in its
+width and height, which can substantially simplify layout
+calculations.  It wasn't an option before the 2010s, which is perhaps
+the reason it's not the global default now.  It will be the default
+here.
+
+#+begin_src css
+  *, *::before, *::after {
+      box-sizing: border-box;
+  }
+#+end_src
+
+***** Body margin
+
+The default in most browsers is =8px=, which is a bit cramped.
 
 #+begin_src css
   :root {
@@ -2293,15 +2345,20 @@ The default in most browsers is =8px=.  Feels a little cramped.
   }
 #+end_src
 
-**** Harmonic ratios
+***** Harmonic ratios
 
-Text looks nice when it's sized "harmoniously", each level a multiple
-of the previous.  5 steps are defined, with a multiplier of \(
-\sqrt[5]{2} \).
+Text looks nice when it's sized "harmonically," with each level a
+multiple of the previous.  5 steps are defined, with a multiplier of
+\( \sqrt[5]{2} \).
 
-#+begin_info
+#+begin_aside
 This corresponds to the [[https://en.xen.wiki/w/5edo][{{{abbr(5 equal divisions of the
 octave,5edo)}}}]] musical scale.  Give it a listen!
+#+end_aside
+
+#+begin_info
+There is a [[https://developer.mozilla.org/en-US/docs/Web/CSS/pow#browser_compatibility][~pow()~ function in CSS]], but browser compatibility is not
+there yet.
 #+end_info
 
 #+begin_src css
@@ -2314,33 +2371,40 @@ octave,5edo)}}}]] musical scale.  Give it a listen!
   }
 #+end_src
 
-#+begin_info
-There is a [[https://developer.mozilla.org/en-US/docs/Web/CSS/pow#browser_compatibility][~pow()~ function in CSS]], but browser compatibility is not
-there yet.
-#+end_info
+These steps are used throughout the reconditioning.
 
-**** Text spacing
+***** Line heights
 
-[[https://www.w3.org/TR/WCAG22/#text-spacing][{{{abbr(Web Content Accessibility Guidelines,WCAG)}}}]] requires
-support for line spacing up to 1.5 times the font size.
+[[https://www.w3.org/TR/WCAG22/#text-spacing][{{{abbr(Web Content Accessibility Guidelines,WCAG)}}}]] requires support
+for line spacing up to 1.5 times the font size.  The third step of our
+harmonic progression is just about there.
 
 #+begin_src css
+  :root {
+      --cromulent-line-height: var(--cromulent-step-3);
+  }
+
   body {
-      line-height: var(--cromulent-step-3);
+      line-height: var(--cromulent-line-height);
   }
 #+end_src
 
+***** Block margins
+
 It also calls for paragraph spacing two times the font size.  It's a
 touch too much, but the default =1em= falls short.  It's nice when
-paragraphs and headers have the same margin.
+paragraphs and headers have the same margin, and one line height looks
+good.
 
 #+begin_src css
-  h1, h2, h3, h4, h5, h6, p {
-      margin-block: calc(var(--cromulent-step-3) * 1rem);
+  h1, h2, h3, h4, h5, h6, p, blockquote {
+      margin-block: calc(var(--cromulent-line-height) * 1rem);
   }
-#+end_srco
+#+end_src
 
 **** Headings
+
+***** Relative size of headings
 
 Heading sizes follow the scale, with no header smaller than the base
 font.  The end result is that =<h1>= retains its default size of
@@ -2355,7 +2419,7 @@ double the base.
   h6 { font-size: 1rem; }
 #+end_src
 
-***** Balance
+***** Balanced text wrapping
 
 [[https://developer.chrome.com/blog/css-text-wrap-balance/][Balanced text wrapping]] wraps multi-line headers to roughly equal
 length, rather than dangling the last word or two.  Browser support is
@@ -2367,19 +2431,9 @@ still modest in late 2023, but we're ready when they are.
   }
 #+end_src
 
-**** Addresses
+***** =<hgroup>=
 
-=<address>= is traditionally italicized, but, meh.
-
-#+begin_src css
-  address {
-      font-style: normal;
-  }
-#+end_src
-
-**** =<hgroup>=
-
-The [[https://html.spec.whatwg.org/multipage/sections.html#the-hgroup-element][=<hgroup>=]] tag is relatively obscure.  It contains:
+The [[https://html.spec.whatwg.org/multipage/sections.html#the-hgroup-element][=<hgroup>=]] element is relatively obscure.  It contains:
 
 - zero or more =<p>= elements
 - a header element, one of =<h1>= through =<h6>=
@@ -2397,62 +2451,47 @@ the header is a nifty way to render a subtitle.
       margin-top: 0;
       font-weight: bold;
       font-style: italic;
-      color: var(--color-brand);
-  }
-#+end_src
-
-**** Box sizing
-
-[[https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing][~border-box~]] includes the widths of the border and padding in the
-width of an element.  This cuts out a lot of =<div class="container">=
-nonsense.
-
-#+begin_src css
-  *, *::before, *::after {
-      box-sizing: border-box;
-  }
-#+end_src
-
-**** Let the body breathe
-
-#+begin_src css
-  body > * {
-      padding: 1.5rem 1.5rem;
   }
 #+end_src
 
 **** Fonts
 
-These used to be the [[https://en.wikipedia.org/wiki/Noto_fonts][Noto fonts]], chosen because they have good IPA
-support, which floats my boat as someone who minored in linguistics.
-Because Google Fonts [[https://cookie-script.com/blog/google-fonts-and-gdpr][violates the GDPR]], I self hosted them.  This
-complicated the [[#license][license]] with an SIL exception.
+***** Prefer default system fonts
 
-You know what?  I'm not a typographer, and the system fonts should
-support the various and sundry alphabets I may use.  I'm adapting
-[[https://getbootstrap.com/docs/5.3/content/reboot/#native-font-stack][the stacks Bootstrap uses]] and moving on with my life.
+System fonts may be "boring," but they were chosen by better
+typographers than me, or may have been overridden by users with
+accessibility needs unknown to me, and that's good enough for me.
+This is an adaptation of [[https://getbootstrap.com/docs/5.3/content/reboot/#native-font-stack][Bootstrap Reboot's stack]].
 
 #+begin_src css
   :root {
       --cromulent-system-font:
-	  system-ui,
-	  -apple-system,
-	  "Segoe UI",
-	  Roboto,
-	  "Helvetica Neue",
-	  "Noto Sans",
-	  "Liberation Sans",
-	  Arial,
-	  sans-serif,
-	  "Apple Color Emoji",
-	  "Segoe UI Emoji",
-	  "Segoe UI Symbol",
-	  "Noto Color Emoji";
+          system-ui,
+          -apple-system,
+          "Segoe UI",
+          Roboto,
+          "Helvetica Neue",
+          "Noto Sans",
+          "Liberation Sans",
+          Arial,
+          sans-serif,
+          "Apple Color Emoji",
+          "Segoe UI Emoji",
+          "Segoe UI Symbol",
+          "Noto Color Emoji";
+  }
+
+  body {
+      font-family: var(--cromulent-system-font);
   }
 #+end_src
 
-GitHub's are likely a more thoughtful version for code.  They're
-substantially similar to Bootstrap's anyway.
+***** Monospace font
+
+Several HTML elements, particularly code samples, need a monospace
+font.  The =ui-monospace= is similar in spirit to =system-ui=.  This
+rule is adapted from GitHub, presumably one of the more thoughtful
+font stacks for code anywhere in the browser.
 
 #+begin_src css
   :root {
@@ -2465,35 +2504,52 @@ substantially similar to Bootstrap's anyway.
 	  "Liberation Mono",
 	  monospace
   }
-#+end_src
-
-Now apply the system font generally, and a monospace font to traditionally
-monospace elements.
-
-#+begin_src css
-  body {
-      font-family: var(--cromulent-system-font);
-  }
 
   code, kbd, pre, samp, var {
       font-family: var(--cromulent-monospace-font);
   }
 #+end_src
 
-**** Responsive width
+**** Element tweaks
+***** =<address>=
 
-Lots of people use media queries for this, but the clamp function
-gives a smooth experience as the window resizes.
+=<address>= is traditionally italicized, but, meh.
 
 #+begin_src css
-  body {
-      width: clamp(10em, calc(100% - var(--cromulent-body-margin)), 70em);
+  address {
+      font-style: normal;
   }
 #+end_src
 
-**** A splash of color
+***** =<blockquote>=
 
-***** Palette
+The default margin is expressed in pixels.
+
+#+begin_src css
+  blockquote {
+      margin-block-start: calc(var(--cromulent-step-5) * 1rem);
+  }
+#+end_src
+
+***** =<pre>=
+
+Put a scroll bar on preformatted text, but only where necessary.
+
+#+begin_src css
+  pre {
+      max-width: 100%;
+      overflow-x: auto;
+  }
+#+end_src
+
+**** TODO Misfiled rules                                           :noexport:
+
+These rules aren't appropriately generic for this page, but they're
+used, and it's bedtime.
+
+***** A splash of color
+
+****** Palette
 
 Define some CSS variables. The link color is complementary to the
 crimson.
@@ -2507,7 +2563,7 @@ crimson.
   }
 #+end_src
 
-***** Header
+****** Header
 
 My beloved Indiana Hoosiers wear [[https://www.thedailyhoosier.com/did-you-know-indianas-iconic-candy-stripes-didnt-originate-in-the-basketball-program/][candy-striped pants]], and so shall this website.
 
@@ -2607,7 +2663,7 @@ stripes.
   }
 #+end_src
 
-***** Links
+****** Links
 
 Render the links in the complementary color.
 
@@ -2617,22 +2673,13 @@ Render the links in the complementary color.
   }
 #+end_src
 
-**** Redirects                                                     :noexport:
+***** Redirects                                                    :noexport:
 
 #+begin_src text :tangle ../../tmp/hugo/static/_redirects :exports none
   /configs/css /configs/website/style
 #+end_src
 
-**** Code rendering
-
-Put a scroll bar on code samples, but only where necessary.
-
-#+begin_src css
-  pre {
-      max-width: 100%;
-      overflow-x: auto;
-  }
-#+end_src
+***** Code rendering
 
 Give the code samples a little more room to breathe.
 
@@ -2675,7 +2722,7 @@ Move the copy code button, too.
   }
 #+end_src
 
-***** Source block captions
+****** Source block captions
 
 #+begin_src css
   .src-block-caption {
@@ -2692,17 +2739,7 @@ I'd probably rather these weren't in the HTML, but this works for now.
   }
 #+end_src
 
-**** Quotes
-
-#+begin_src css
-  blockquote {
-      margin: 1.5rem 0;
-      padding: 0 2rem;
-      border-left: #ccc 0.25rem solid;
-  }
-#+end_src
-
-**** Warnings
+***** Warnings
 
 It's not beautiful yet, but it's something.
 
@@ -2720,7 +2757,7 @@ It's not beautiful yet, but it's something.
   }
 #+end_src
 
-**** Floats and clears
+***** Floats and clears
 
 A general way to float figures.
 
@@ -2744,7 +2781,7 @@ writing, seems to work.
   }
 #+end_src
 
-**** Lead
+***** Lead
 
 Lead paragraphs.  Inspired by [[https://getbootstrap.com/docs/5.3/content/typography/#lead][Bootstrap]].
 
