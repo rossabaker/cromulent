@@ -35,10 +35,10 @@
             jinx-mod = pkgs.stdenv.mkDerivation {
               name = "jinx-mod";
               src = inputs.jinx;
-              buildInputs = [ pkgs.enchant2 ];
+              buildInputs = [ pkgs.enchant ];
               buildPhase = ''
                 cc -I. -O2 -Wall -Wextra -fPIC -shared -o jinx-mod.dylib jinx-mod.c \
-                  -I${pkgs.enchant2.dev}/include/enchant-2 -lenchant-2
+                  -I${pkgs.enchant.dev}/include/enchant-2 -lenchant-2
               '';
               installPhase = ''
                 LISPDIR=$out/share/emacs/site-lisp
