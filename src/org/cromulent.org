@@ -1058,7 +1058,7 @@ template provide a ~main~, but this is the expectation.
 Media queries are traditional for this, but the clamp function gives a
 smooth experience rather than "jolts" as various thresholds are met.
 
-#+begin_src css
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
   body {
       width: clamp(10em, calc(100% - var(--cromulent-body-margin)), 70em);
   }
