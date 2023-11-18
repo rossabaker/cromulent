@@ -41,8 +41,9 @@ flake-parts.lib.mkFlake { inherit inputs; } (
     flake = {
       inherit flakeModules overlays;
 
-      nixosConfigurations.abe = {
-        imports = [ ./src/nix/hosts/abe/configuration.nix ];
+      nixosConfigurations.abe = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [ ../../src/nix/hosts/abe/configuration.nix ];
       };
 
       homeModules.default = {
