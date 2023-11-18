@@ -8,7 +8,7 @@ in
     enable = true;
     localDomain = "rossabaker.com";
     extraConfig = {
-      WEB_DOMAIN = "beta.social.rossabaker.com";
+      WEB_DOMAIN = "social.rossabaker.com";
     };
     configureNginx = false;
     smtp.fromAddress = "";
