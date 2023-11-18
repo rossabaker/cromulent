@@ -34,42 +34,44 @@
   '';
   # The RAIDs are assembled in stage1, so we need to make the config
   # available there.
-  boot.initrd.mdadmConf = config.environment.etc."mdadm.conf".text;
+  boot.swraid.mdadmConf = ''
+    HOMEHOST <ignore>
+  '';
 
-  # # Network (Hetzner uses static IP assignments, and we don't use DHCP here)
-  # networking.useDHCP = false;
-  # networking.interfaces."enp27s0".ipv4.addresses = [
-  #   {
-  #     address = "95.216.32.37";
-  #     # FIXME: The prefix length is commonly, but not always, 24.
-  #     # You should check what the prefix length is for your server
-  #     # by inspecting the netmask in the "IPs" tab of the Hetzner UI.
-  #     # For example, a netmask of 255.255.255.0 means prefix length 24
-  #     # (24 leading 1s), and 255.255.255.192 means prefix length 26
-  #     # (26 leading 1s).
-  #     prefixLength = 26;
-  #   }
-  # ];
-  # networking.interfaces."enp27s0".ipv6.addresses = [
-  #   {
-  #     address = "2a01:4f9:2a:2047::1";
-  #     prefixLength = 64;
-  #   }
-  # ];
-  # networking.defaultGateway = "95.216.32.1";
-  # networking.defaultGateway6 = { address = "fe80::1"; interface = "enp27s0"; };
-  # networking.nameservers = [ "8.8.8.8" ];
+  # Network (Hetzner uses static IP assignments, and we don't use DHCP here)
+  networking.useDHCP = false;
+  networking.interfaces."enp27s0".ipv4.addresses = [
+    {
+      address = "95.216.32.37";
+      # FIXME: The prefix length is commonly, but not always, 24.
+      # You should check what the prefix length is for your server
+      # by inspecting the netmask in the "IPs" tab of the Hetzner UI.
+      # For example, a netmask of 255.255.255.0 means prefix length 24
+      # (24 leading 1s), and 255.255.255.192 means prefix length 26
+      # (26 leading 1s).
+      prefixLength = 26;
+    }
+  ];
+  networking.interfaces."enp27s0".ipv6.addresses = [
+    {
+      address = "2a01:4f9:2a:2047::1";
+      prefixLength = 64;
+    }
+  ];
+  networking.defaultGateway = "95.216.32.1";
+  networking.defaultGateway6 = { address = "fe80::1"; interface = "enp27s0"; };
+  networking.nameservers = [ "8.8.8.8" ];
 
-  # # Initial empty root password for easy login:
-  # users.users.root.initialHashedPassword = "";
-  # services.openssh.permitRootLogin = "prohibit-password";
+  # Initial empty root password for easy login:
+  users.users.root.initialHashedPassword = "";
+  services.openssh.settings.PermitRootLogin = "prohibit-password";
 
-  # users.users.root.openssh.authorizedKeys.keys = [
-  #   # FIXME Replace this by your SSH pubkey!
-  #   "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFTwvnkKWbNTAPSiK/agHOV9xXoh1R6hx5B8lZYmPY6Z"
-  # ];
+  users.users.root.openssh.authorizedKeys.keys = [
+    # FIXME Replace this by your SSH pubkey!
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFTwvnkKWbNTAPSiK/agHOV9xXoh1R6hx5B8lZYmPY6Z"
+  ];
 
-  # services.openssh.enable = true;
+  services.openssh.enable = true;
 
   # FIXME
   # This value determines the NixOS release with which your system is to be
