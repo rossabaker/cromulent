@@ -4,6 +4,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./mastodon.nix
     ];
 
   # Use GRUB2 as the boot loader.
