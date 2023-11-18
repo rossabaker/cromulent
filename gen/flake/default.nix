@@ -41,6 +41,10 @@ flake-parts.lib.mkFlake { inherit inputs; } (
     flake = {
       inherit flakeModules overlays;
 
+      nixosConfigurations.abe = {
+        imports = [ ./src/nix/hosts/abe/configuration.nix ];
+      };
+
       homeModules.default = {
         imports = builtins.attrValues (builtins.removeAttrs self.homeModules [ "default" ]);
         home.stateVersion = "21.11";
