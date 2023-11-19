@@ -1,6 +1,6 @@
 { moduleWithSystem, ... }: {
   flake.homeModules.base = moduleWithSystem(
-    perSystem@{ pkgs }: {
+    perSystem@{ pkgs, inputs' }: {
       # Curiously not a default of home-manager, but required once we
       # start configuring Nix otherwise.
       nix.package = pkgs.nix;
@@ -17,6 +17,7 @@
         pkgs.jq
         pkgs.nixpkgs-fmt
         pkgs.postgresql_14
+        inputs'.agenix.packages.agenix
       ];
 
       programs.direnv = {

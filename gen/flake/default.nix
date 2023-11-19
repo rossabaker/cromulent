@@ -1,4 +1,4 @@
-inputs @ { self, nixpkgs, nix-darwin, devshell, emacs-overlay, flake-parts, home-manager, ... }:
+inputs @ { self, nixpkgs, nix-darwin, devshell, emacs-overlay, flake-parts, home-manager, agenix, ... }:
 
 flake-parts.lib.mkFlake { inherit inputs; } (
   { withSystem, flake-parts-lib, ... }:
@@ -43,7 +43,10 @@ flake-parts.lib.mkFlake { inherit inputs; } (
 
       nixosConfigurations.abe = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        modules = [ ../../src/nix/hosts/abe/configuration.nix ];
+        modules = [
+          ../../src/nix/hosts/abe/configuration.nix
+          agenix.nixosModules.default
+        ];
       };
 
       homeModules.default = {
@@ -137,5 +140,5 @@ flake-parts.lib.mkFlake { inherit inputs; } (
           overlayAttrs = {
           };
         };
- }
+  }
 )

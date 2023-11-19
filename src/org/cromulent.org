@@ -5773,7 +5773,7 @@ The Home Manager module is published to my flake as output
 CLOSED: [2022-12-25 Sun 22:14 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: /nix-flake
-:EXPORT_HUGO_LASTMOD: [2023-11-17 Fri 23:47 EST]
+:EXPORT_HUGO_LASTMOD: [2023-11-19 Sun 13:57 EST]
 :header-args+: :code-license MIT
 :EXPORT_OPTIONS: h:6
 :END:
@@ -5852,7 +5852,7 @@ Fellow functional programmers rejoice: a flake's outputs are a
 function of its inputs!
 
 #+begin_src nix :tangle ../../gen/flake/default.nix :noweb yes
-  inputs @ { self, nixpkgs, nix-darwin, devshell, emacs-overlay, flake-parts, home-manager, ... }:
+  inputs @ { self, nixpkgs, nix-darwin, devshell, emacs-overlay, flake-parts, home-manager, agenix, ... }:
 
   flake-parts.lib.mkFlake { inherit inputs; } (
     { withSystem, flake-parts-lib, ... }:
@@ -5885,7 +5885,10 @@ function of its inputs!
 
         nixosConfigurations.abe = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          modules = [ ../../src/nix/hosts/abe/configuration.nix ];
+          modules = [
+            ../../src/nix/hosts/abe/configuration.nix
+            agenix.nixosModules.default
+          ];
         };
 
         homeModules.default = {
@@ -5979,7 +5982,7 @@ function of its inputs!
             overlayAttrs = {
             };
           };
-   }
+    }
   )
 #+end_src
 
@@ -6130,6 +6133,11 @@ Humdrum Nix flake exoskeleton and inputs
       firefox-darwin.url = "github:bandithedoge/nixpkgs-firefox-darwin";
       firefox-darwin.inputs.nixpkgs.follows = "nixpkgs";
 
+      agenix = {
+        url = "github:ryantm/agenix";
+        inputs.nixpkgs.follows = "nixpkgs";
+      };
+
       # Emacs packages
       fill-sentences-correctly = {
         url = "github:duckwork/fill-sentences-correctly.el";
@@ -6200,7 +6208,7 @@ CLOSED: [2023-09-08 Fri 16:59 CDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: home-manager
 :header-args+: :tangle-mode (identity #o444) :mkdirp yes :code-license MIT
-:EXPORT_HUGO_LASTMOD: [2023-09-26 Tue 23:00 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-11-19 Sun 10:29 EST]
 :END:
 
 #+begin_description
@@ -6225,7 +6233,7 @@ further.
 #+begin_src nix :tangle ../../gen/flake/home-manager/default.nix
   { moduleWithSystem, ... }: {
     flake.homeModules.base = moduleWithSystem(
-      perSystem@{ pkgs }: {
+      perSystem@{ pkgs, inputs' }: {
         # Curiously not a default of home-manager, but required once we
         # start configuring Nix otherwise.
         nix.package = pkgs.nix;
@@ -6242,6 +6250,7 @@ further.
           pkgs.jq
           pkgs.nixpkgs-fmt
           pkgs.postgresql_14
+          inputs'.agenix.packages.agenix
         ];
 
         programs.direnv = {

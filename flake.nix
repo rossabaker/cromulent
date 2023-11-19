@@ -29,6 +29,11 @@
     firefox-darwin.url = "github:bandithedoge/nixpkgs-firefox-darwin";
     firefox-darwin.inputs.nixpkgs.follows = "nixpkgs";
 
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Emacs packages
     fill-sentences-correctly = {
       url = "github:duckwork/fill-sentences-correctly.el";
