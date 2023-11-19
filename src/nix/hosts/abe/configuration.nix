@@ -5,6 +5,7 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./mastodon.nix
+      ./borgbackup.nix
     ];
 
   # Use GRUB2 as the boot loader.
