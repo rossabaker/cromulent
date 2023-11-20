@@ -6829,6 +6829,7 @@ Configurations for various hosts, mostly with NixOS or Nix-Darwin.
 CLOSED: [2023-11-19 Sun 19:16 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: abe
+:EXPORT_HUGO_LASTMOD: [2023-11-19 Sun 22:46 EST]
 :END:
 
 #+begin_description
@@ -6853,6 +6854,7 @@ from the rescue image with a [[https://github.com/nix-community/nixos-install-sc
     imports =
       [ # Include the results of the hardware scan.
         ./hardware-configuration.nix
+        ./users.nix
         ./mastodon.nix
         ./borgbackup.nix
       ];
@@ -6969,6 +6971,23 @@ Generated code
 
 #+end_src
 #+end_details
+
+**** Users
+
+#+begin_src nix :tangle ../../gen/flake/nixos/abe/users.nix
+  { ... }:
+
+  {
+    users.users.ross = {
+      isNormalUser = true;
+      description = "Ross A. Baker";
+      extraGroups = [ "wheel" ];
+      openssh.authorizedKeys.keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFTwvnkKWbNTAPSiK/agHOV9xXoh1R6hx5B8lZYmPY6Z"
+      ];
+    };
+  }
+#+end_src
 
 **** Backup to Storage Box with Borg
 
