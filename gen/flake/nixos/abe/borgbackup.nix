@@ -1,7 +1,7 @@
 { config, ... }:
 
 {
-  age.secrets.abe-backups-default.file = ../../../secrets/abe-backups-default.age;
+  age.secrets.abe-backups-default.file = ../../../../src/secrets/abe-backups-default.age;
 
   services.borgbackup.jobs.default = {
     paths = [

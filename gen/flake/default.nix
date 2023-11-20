@@ -44,7 +44,7 @@ flake-parts.lib.mkFlake { inherit inputs; } (
       nixosConfigurations.abe = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ../../src/nix/hosts/abe/configuration.nix
+          ./nixos/abe/configuration.nix
           agenix.nixosModules.default
         ];
       };

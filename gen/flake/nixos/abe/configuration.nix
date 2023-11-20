@@ -45,13 +45,7 @@
   networking.interfaces."enp27s0".ipv4.addresses = [
     {
       address = "95.216.32.37";
-      # FIXME: The prefix length is commonly, but not always, 24.
-      # You should check what the prefix length is for your server
-      # by inspecting the netmask in the "IPs" tab of the Hetzner UI.
-      # For example, a netmask of 255.255.255.0 means prefix length 24
-      # (24 leading 1s), and 255.255.255.192 means prefix length 26
-      # (26 leading 1s).
-      prefixLength = 26;
+      prefixLength = 26; # netmask 255.255.255.192
     }
   ];
   networking.interfaces."enp27s0".ipv6.addresses = [
@@ -69,17 +63,11 @@
   services.openssh.settings.PermitRootLogin = "prohibit-password";
 
   users.users.root.openssh.authorizedKeys.keys = [
-    # FIXME Replace this by your SSH pubkey!
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFTwvnkKWbNTAPSiK/agHOV9xXoh1R6hx5B8lZYmPY6Z"
   ];
 
   services.openssh.enable = true;
 
-  # FIXME
-  # This value determines the NixOS release with which your system is to be
-  # compatible, in order to avoid breaking some software such as database
-  # servers. You should change this only after NixOS release notes say you
-  # should.
-  system.stateVersion = "23.05"; # Did you read the comment?
+  system.stateVersion = "23.05";
 
 }
