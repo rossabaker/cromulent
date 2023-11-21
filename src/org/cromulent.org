@@ -6841,7 +6841,7 @@ Configurations for various hosts, mostly with NixOS or Nix-Darwin.
 CLOSED: [2023-11-19 Sun 19:16 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: abe
-:EXPORT_HUGO_LASTMOD: [2023-11-21 Tue 00:12 EST]
+:EXPORT_HUGO_LASTMOD: [2023-11-21 Tue 10:25 EST]
 :END:
 
 #+begin_description
@@ -6869,6 +6869,7 @@ from the rescue image with a [[https://github.com/nix-community/nixos-install-sc
         ./users.nix
         ./mastodon.nix
         ./synapse.nix
+        ./forgejo.nix
         ./borgbackup.nix
     ];
 
@@ -7175,6 +7176,30 @@ to configure the [[https://docs.joinmastodon.org/admin/config/#web_domain][=WEB_
     };
   }
 #+end_src
+
+**** Forgejo
+
+#+begin_src nix :tangle ../../gen/flake/nixos/abe/forgejo.nix
+  {
+    services.forgejo = {
+      enable = true;
+      settings = {
+        service = {
+          DISABLE_REGISTRATION = true;
+        };
+      };
+    };
+
+    services.nginx.virtualHosts."src.rossabaker.com" = {
+      enableACME = true;
+      forceSSL = true;
+      locations."/" = {
+        proxyPass = "http://localhost:3000/";
+      };
+    };
+  }
+#+end_src
+
 * Projects section
 :PROPERTIES:
 :EXPORT_HUGO_BUNDLE: projects

@@ -7,6 +7,7 @@
       ./users.nix
       ./mastodon.nix
       ./synapse.nix
+      ./forgejo.nix
       ./borgbackup.nix
   ];
 
