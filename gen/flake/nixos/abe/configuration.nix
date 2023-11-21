@@ -6,8 +6,9 @@
       ./hardware-configuration.nix
       ./users.nix
       ./mastodon.nix
+      ./synapse.nix
       ./borgbackup.nix
-    ];
+  ];
 
   # Use GRUB2 as the boot loader.
   # We don't use systemd-boot because Hetzner uses BIOS legacy boot.

@@ -6841,7 +6841,7 @@ Configurations for various hosts, mostly with NixOS or Nix-Darwin.
 CLOSED: [2023-11-19 Sun 19:16 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: abe
-:EXPORT_HUGO_LASTMOD: [2023-11-19 Sun 22:46 EST]
+:EXPORT_HUGO_LASTMOD: [2023-11-21 Tue 00:12 EST]
 :END:
 
 #+begin_description
@@ -6868,8 +6868,9 @@ from the rescue image with a [[https://github.com/nix-community/nixos-install-sc
         ./hardware-configuration.nix
         ./users.nix
         ./mastodon.nix
+        ./synapse.nix
         ./borgbackup.nix
-      ];
+    ];
 
     # Use GRUB2 as the boot loader.
     # We don't use systemd-boot because Hetzner uses BIOS legacy boot.
@@ -7108,6 +7109,72 @@ to configure the [[https://docs.joinmastodon.org/admin/config/#web_domain][=WEB_
 
 #+end_src
 
+**** Synapse
+
+#+begin_src nix :tangle ../../gen/flake/nixos/abe/synapse.nix
+  { pkgs, ... }:
+
+  {
+    services.postgresql.enable = true;
+    services.postgresql.initialScript = pkgs.writeText "synapse-init.sql" ''
+      CREATE ROLE "matrix-synapse" WITH LOGIN PASSWORD 'synapse';
+      CREATE DATABASE "matrix-synapse" WITH OWNER "matrix-synapse"
+        TEMPLATE template0
+        LC_COLLATE = "C"
+        LC_CTYPE = "C";
+    '';
+
+    services.nginx = {
+      enable = true;
+      # only recommendedProxySettings and recommendedGzipSettings are strictly required,
+      # but the rest make sense as well
+      recommendedTlsSettings = true;
+      recommendedOptimisation = true;
+      recommendedGzipSettings = true;
+      recommendedProxySettings = true;
+
+      virtualHosts = {
+        # Reverse proxy for Matrix client-server and server-server communication
+        "matrix.rossabaker.com" = {
+          enableACME = true;
+          forceSSL = true;
+
+          # Or do a redirect instead of the 404, or whatever is appropriate for you.
+          # But do not put a Matrix Web client here! See the Element web section below.
+          locations."/".extraConfig = ''
+            return 404;
+          '';
+
+          # forward all Matrix API calls to the synapse Matrix homeserver
+          locations."/_matrix" = {
+            proxyPass = "http://[::1]:8008"; # without a trailing /
+          };
+        };
+      };
+    };
+    services.matrix-synapse = {
+      enable = true;
+      settings = {
+        server_name = "rossabaker.com";
+        listeners = [
+          {
+            port = 8008;
+            bind_addresses = [ "::1" ];
+            type = "http";
+            tls = false;
+            x_forwarded = true;
+            resources = [
+              {
+                names = [ "client" "federation" ];
+                compress = false;
+              }
+            ];
+          }
+        ];
+      };
+    };
+  }
+#+end_src
 * Projects section
 :PROPERTIES:
 :EXPORT_HUGO_BUNDLE: projects
