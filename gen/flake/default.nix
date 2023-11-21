@@ -71,6 +71,18 @@ flake-parts.lib.mkFlake { inherit inputs; } (
             }
           ];
         };
+
+      homeConfigurations."ross@abe" =
+        home-manager.lib.homeManagerConfiguration {
+          pkgs = import nixpkgs { system = "x86_64-linux"; };
+          modules = [
+            self.homeModules.default
+            {
+              home.username = "ross";
+              home.homeDirectory = "/home/ross";
+            }
+          ];
+        };
     };
 
     systems = [

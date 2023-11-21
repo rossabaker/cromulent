@@ -5913,6 +5913,18 @@ function of its inputs!
               }
             ];
           };
+
+        homeConfigurations."ross@abe" =
+          home-manager.lib.homeManagerConfiguration {
+            pkgs = import nixpkgs { system = "x86_64-linux"; };
+            modules = [
+              self.homeModules.default
+              {
+                home.username = "ross";
+                home.homeDirectory = "/home/ross";
+              }
+            ];
+          };
       };
 
       systems = [
@@ -6208,7 +6220,7 @@ CLOSED: [2023-09-08 Fri 16:59 CDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: home-manager
 :header-args+: :tangle-mode (identity #o444) :mkdirp yes :code-license MIT
-:EXPORT_HUGO_LASTMOD: [2023-11-19 Sun 10:29 EST]
+:EXPORT_HUGO_LASTMOD: [2023-11-20 Mon 23:40 EST]
 :END:
 
 #+begin_description
@@ -6294,7 +6306,7 @@ specifically for Darwin machines.
       perSystem@{ pkgs }:
       # nixpkgs.overlays doesn't work here
       let pkgs' = pkgs.extend inputs.firefox-darwin.overlay;
-      in {
+      in lib.mkIf pkgs.stdenv.isDarwin {
         home.packages = [
           pkgs'.firefox-bin
           pkgs.rectangle
@@ -6973,6 +6985,8 @@ Generated code
 #+end_details
 
 **** Users
+
+Just a stub for my personal user.
 
 #+begin_src nix :tangle ../../gen/flake/nixos/abe/users.nix
   { ... }:
