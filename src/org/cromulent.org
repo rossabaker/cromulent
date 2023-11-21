@@ -6841,7 +6841,7 @@ Configurations for various hosts, mostly with NixOS or Nix-Darwin.
 CLOSED: [2023-11-19 Sun 19:16 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: abe
-:EXPORT_HUGO_LASTMOD: [2023-11-21 Tue 10:25 EST]
+:EXPORT_HUGO_LASTMOD: [2023-11-21 Tue 13:46 EST]
 :END:
 
 #+begin_description
@@ -7180,6 +7180,9 @@ to configure the [[https://docs.joinmastodon.org/admin/config/#web_domain][=WEB_
 **** Forgejo
 
 #+begin_src nix :tangle ../../gen/flake/nixos/abe/forgejo.nix
+  let
+    domain = "git.rossabaker.com";
+  in
   {
     services.forgejo = {
       enable = true;
@@ -7190,12 +7193,18 @@ to configure the [[https://docs.joinmastodon.org/admin/config/#web_domain][=WEB_
       };
     };
 
-    services.nginx.virtualHosts."src.rossabaker.com" = {
+    services.nginx.virtualHosts.${domain} = {
       enableACME = true;
       forceSSL = true;
       locations."/" = {
         proxyPass = "http://localhost:3000/";
       };
+    };
+
+    services.nginx.virtualHosts."src.rossabaker.com" = {
+      enableACME = true;
+      forceSSL = true;
+      globalRedirect = domain;
     };
   }
 #+end_src
