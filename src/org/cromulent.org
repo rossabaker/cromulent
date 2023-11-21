@@ -7061,6 +7061,7 @@ to configure the [[https://docs.joinmastodon.org/admin/config/#web_domain][=WEB_
       };
       configureNginx = false;
       smtp.fromAddress = "";
+      streamingProcesses = 7;
     };
 
     networking.firewall.allowedTCPPorts = [ 80 443 ];

@@ -12,6 +12,7 @@ in
     };
     configureNginx = false;
     smtp.fromAddress = "";
+    streamingProcesses = 7;
   };
 
   networking.firewall.allowedTCPPorts = [ 80 443 ];
