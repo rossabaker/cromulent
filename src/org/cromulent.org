@@ -7216,22 +7216,26 @@ This mostly follows Solène Rapenne's guide, "[[https://dataswamp.org/~solene/20
 and connecting to Netdata cloud]]".
 
 #+begin_src nix :tangle ../../gen/flake/nixos/abe/netdata.nix
-  { ... }:
+    { lib, pkgs, ... }:
 
-  {
-    services.netdata = {
-      enable = true;
+    {
+      nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+        "netdata"
+      ];
 
-      config = {
-        global = {
-          "update every" = 15;
-        };
-        ml = {
-          "enabled" = "yes";
+      services.netdata = {
+        enable = true;
+        package = pkgs.netdataCloud;
+        config = {
+          global = {
+            "update every" = 15;
+          };
+          ml = {
+            "enabled" = "yes";
+          };
         };
       };
-    };
-  }
+    }
 #+end_src
 
 * Projects section
