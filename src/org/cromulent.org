@@ -5366,7 +5366,7 @@ modules.
 CLOSED: [2023-06-23 Fri 00:26 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: garnix
-:EXPORT_HUGO_LASTMOD: [2023-10-03 Tue 23:08 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-11-27 Mon 08:47 EST]
 :header-args+: :code-license CC0-1.0
 :header-args:nix+: :code-license MIT
 :END:
@@ -5375,6 +5375,10 @@ CLOSED: [2023-06-23 Fri 00:26 EDT]
 Describes our use of Garnix for continuous integration and defines a Nix
 module to configure it as a binary cache.
 #+end_description
+
+#+begin_info
+This integration is paused while we await [[https://github.com/garnix-io/issues/issues/21][alternatives to GitHub]].
+#+end_info
 
 I have an Apple M1 for work, which is [[https://github.com/github/roadmap/issues/528][not yet supported by GitHub
 Actions]].  That's okay, because [[https://garnix.io/][Garnix]] is a great alternative.
@@ -5388,7 +5392,7 @@ On each push to GitHub, Garnix is triggered to build:
 
 At this time, we only build for ~aarch64-darwin~ with Garnix.
 
-#+begin_src yaml :tangle ../../garnix.yaml
+#+begin_src yaml :tangle-disabled ../../garnix.yaml
   builds:
     include:
       - 'devShells.aarch64-darwin.default'
@@ -5419,7 +5423,7 @@ configuration.
     options = {
       cromulent.binaryCaches.garnix.enable =
         lib.mkEnableOption "Configures Nix to use the Garnix cache as a substituter" // {
-          default = true;
+          default = false;
         };
     };
 

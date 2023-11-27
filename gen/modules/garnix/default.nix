@@ -9,7 +9,7 @@ in
   options = {
     cromulent.binaryCaches.garnix.enable =
       lib.mkEnableOption "Configures Nix to use the Garnix cache as a substituter" // {
-        default = true;
+        default = false;
       };
   };
 
