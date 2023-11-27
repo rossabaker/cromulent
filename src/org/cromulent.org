@@ -5366,7 +5366,7 @@ modules.
 CLOSED: [2023-06-23 Fri 00:26 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: garnix
-:EXPORT_HUGO_LASTMOD: [2023-11-27 Mon 08:47 EST]
+:EXPORT_HUGO_LASTMOD: [2023-11-27 Mon 18:10 EST]
 :header-args+: :code-license CC0-1.0
 :header-args:nix+: :code-license MIT
 :END:
@@ -5396,8 +5396,6 @@ At this time, we only build for ~aarch64-darwin~ with Garnix.
   builds:
     include:
       - 'devShells.aarch64-darwin.default'
-      - 'packages.aarch64-darwin.aarch64-darwin-config-base'
-      - 'homeConfigurations.aarch64-darwin-example'
 #+end_src
 
 *** Nix binary cache
@@ -5781,7 +5779,7 @@ The Home Manager module is published to my flake as output
 CLOSED: [2022-12-25 Sun 22:14 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: /nix-flake
-:EXPORT_HUGO_LASTMOD: [2023-11-19 Sun 13:57 EST]
+:EXPORT_HUGO_LASTMOD: [2023-11-27 Mon 18:10 EST]
 :header-args+: :code-license MIT
 :EXPORT_OPTIONS: h:6
 :END:
@@ -5905,23 +5903,6 @@ function of its inputs!
           nixpkgs.overlays = [ emacs-overlay.overlay ];
         };
 
-        homeConfigurations.aarch64-darwin-example =
-          home-manager.lib.homeManagerConfiguration {
-            extraSpecialArgs = { inherit inputs; };
-            pkgs = import nixpkgs {
-              system = "aarch64-darwin";
-            };
-            modules = [
-              self.homeModules.default
-              {
-                home = rec {
-                  username = "Example";
-                  homeDirectory = "/Users/${username}";
-                };
-              }
-            ];
-          };
-
         homeConfigurations."ross@abe" =
           home-manager.lib.homeManagerConfiguration {
             pkgs = import nixpkgs { system = "x86_64-linux"; };
@@ -5943,14 +5924,6 @@ function of its inputs!
       perSystem = { config, self', inputs', system, pkgs, ... }:
         let
           hm = home-manager.defaultPackage."${system}";
-
-          darwinPackages =
-            if (system == "aarch64-darwin") then {
-              aarch64-darwin-config-base = (nix-darwin.lib.darwinSystem {
-                system = "aarch64-darwin";
-                modules = [ self.darwinModules.default ];
-              }).system;
-            } else { };
         in
           {
             _module.args.pkgs = import nixpkgs {
@@ -5973,7 +5946,7 @@ function of its inputs!
                 emacs = self'.packages.emacs-ross;
                 src = ../../src;
               };
-            } // darwinPackages;
+            };
 
             devShells.default = pkgs.devshell.mkShell {
               name = "cromulent";

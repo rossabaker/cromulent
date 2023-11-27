@@ -55,23 +55,6 @@ flake-parts.lib.mkFlake { inherit inputs; } (
         nixpkgs.overlays = [ emacs-overlay.overlay ];
       };
 
-      homeConfigurations.aarch64-darwin-example =
-        home-manager.lib.homeManagerConfiguration {
-          extraSpecialArgs = { inherit inputs; };
-          pkgs = import nixpkgs {
-            system = "aarch64-darwin";
-          };
-          modules = [
-            self.homeModules.default
-            {
-              home = rec {
-                username = "Example";
-                homeDirectory = "/Users/${username}";
-              };
-            }
-          ];
-        };
-
       homeConfigurations."ross@abe" =
         home-manager.lib.homeManagerConfiguration {
           pkgs = import nixpkgs { system = "x86_64-linux"; };
@@ -93,14 +76,6 @@ flake-parts.lib.mkFlake { inherit inputs; } (
     perSystem = { config, self', inputs', system, pkgs, ... }:
       let
         hm = home-manager.defaultPackage."${system}";
-
-        darwinPackages =
-          if (system == "aarch64-darwin") then {
-            aarch64-darwin-config-base = (nix-darwin.lib.darwinSystem {
-              system = "aarch64-darwin";
-              modules = [ self.darwinModules.default ];
-            }).system;
-          } else { };
       in
         {
           _module.args.pkgs = import nixpkgs {
@@ -123,7 +98,7 @@ flake-parts.lib.mkFlake { inherit inputs; } (
               emacs = self'.packages.emacs-ross;
               src = ../../src;
             };
-          } // darwinPackages;
+          };
 
           devShells.default = pkgs.devshell.mkShell {
             name = "cromulent";
