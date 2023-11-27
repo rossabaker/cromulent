@@ -611,13 +611,17 @@ defines its own gitattributes!
 :END:
 
 #+begin_src org :tangle ../../README.org
-  ,#+EXPORT_EXCLUDE_TAGS: noexport
-
-  ,* Cromulent
+  ,#+title: Cromulent
+  ,#+options: toc:nil
+  ,#+export_exclude_tags: noexport
 
   This repository hosts my configuration and [[https://rossabaker.com/][personal website]].  The most
-  interesting source file is [[file:src/org/cromulent.org][cromulent.org]], and the most interesting
-  view is the [[https://rossabaker.com/][published site]].
+  interesting source file is [[file:src/org/cromulent.org][cromulent.org]].
+
+  ,** Repositories
+
+  - [[https://git.rossabaker.com/ross/cromulent.git][~git.rossabaker.com~]] :: the canonical repository, hosted on my Forgejo.
+  - [[https://github.com/rossabaker/cromulent][~github.com~]] :: a deprecated mirror
 
   ,** Generated source :noexport:
 
