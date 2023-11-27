@@ -23,7 +23,7 @@ Licenses and attributions for the content on rossabaker.com
 
 The work /as a whole/ is distributed under the [[https://www.gnu.org/licenses/gpl-3.0-standalone.html][GNU General Public
 License v3.0 only]] (~GPL-3.0-only~).  These license terms apply to
-[[https://rossabaker.com/][~rossabaker.com~]] and its [[https://github.com/rossabaker/cromulent][source repository]].
+[[https://rossabaker.com/][~rossabaker.com~]] and its [[https://git.rossabaker.com/ross/cromulent][source repository]].
 
 #+begin_quote
 This program is free software: you can redistribute it and/or modify
@@ -503,7 +503,7 @@ Discusses the challenges brought on by literate programming, and how
 to manage them with Git attributes.
 #+end_description
 
-My personal Git repository, [[https://github.com/rossabaker/cromulent][Cromulent]], contains the source for various
+My personal Git repository, [[https://git.rossabaker.com/ross/cromulent][Cromulent]], contains the source for various
 projects, such as configurations and the contents of this website.
 
 Due to [[https://en.wikipedia.org/wiki/Literate_programming][literate programming]], much of the source code "weaves" code and
@@ -517,7 +517,7 @@ consumption.  This process requires a bit of extra care around Git.
 
 {{{dfn(Original sources)}}} are the minimal set of files that can't be
 derived from other sources as part of the build process.  As much as
-possible, original sources are confined to the [[https://github.com/rossabaker/cromulent/tree/main/src][~src/~]] directory.  So
+possible, original sources are confined to the [[https://git.rossabaker.com/ross/cromulent/tree/main/src][~src/~]] directory.  So
 far, so good.
 
 **** Transient outputs
@@ -558,9 +558,9 @@ of these {{{dfn(persistent tangles)}}} include:
 - Continuous integration descriptors, like GitHub workflows or [[*Garnix][Garnix]].
 - The git configurations described in this document!
 
-As much as possible, these copies are isolated in [[https://github.com/rossabaker/cromulent/tree/main/gen][~gen/~]].  Sometimes
+As much as possible, these copies are isolated in [[https://git.rossabaker.com/ross/cromulent/tree/main/gen][~gen/~]].  Sometimes
 their location is arbitrary, sometimes not.  ~nix flake~ expects a
-flake definition at [[https://github.com/rossabaker/cromulent/blob/main/flake.nix][~/flake.nix~]], but its myriad modules can be
+flake definition at [[https://git.rossabaker.com/ross/cromulent/src/branch/main/flake.nix][~/flake.nix~]], but its myriad modules can be
 tangled to ~gen/~.
 
 ***** TODO Desynchronization
@@ -934,7 +934,7 @@ pipeline.
     username = 'rossabaker'
 
     [Params.source]
-      url = "https://github.com/rossabaker/cromulent"
+      url = "https://git.rossabaker.com/ross/cromulent"
 #+end_src
 
 **** ox-hugo
@@ -1081,7 +1081,7 @@ CLOSED: [2022-09-02 Fri 12:53 EDT]
 :END:
 
 Most pages on the site are "single pages".  These are generally the
-subtrees in the [[https://github.com/rossabaker/cromulent/blob/main/src/org/cromulent.org][source]] with ~EXPORT_FILE_NAME~ not equal to ~_index~.
+subtrees in the [[https://git.rossabaker.com/ross/cromulent/src/branch/main/src/org/cromulent.org][source]] with ~EXPORT_FILE_NAME~ not equal to ~_index~.
 Think of them as the articles.  Indeed, we mark them up in an
 ~<article>~ tag.
 #+hugo:more
@@ -4865,7 +4865,7 @@ over a starter kit or your own configuration, but there's also nothing
 stopping you!
 
 #+begin_src sh :eval no :code-license CC0-1.0
-  nix run github:rossabaker/cromulent#emacs
+  nix run git+https://git.rossabaker.com/ross/cromulent#emacs
 #+end_src
 
 ***** On-the-fly load-paths
@@ -5338,7 +5338,7 @@ configuration.
   ./binaryCaches
 #+end_src
 
-The module is exported to ~github:rossabaker/cromulent~ as three flake outputs:
+The module is exported to ~git+https://git.rossabaker.com/ross/cromulent~ as three flake outputs:
 
 - ~nixosModules.binaryCaches~
 - ~darwinModules.binaryCaches~
@@ -5437,7 +5437,7 @@ configuration.
   ./garnix
 #+end_src
 
-The module is exported to ~github:rossabaker/cromulent~ as three flake outputs:
+The module is exported to ~git+https://git.rossabaker.com/ross/cromulent~ as three flake outputs:
 
 - ~nixosModules.garnix~
 - ~darwinModules.garnix~
@@ -5535,7 +5535,7 @@ in
   ./cachix
 #+end_src
 
-The module is exported to ~github:rossabaker/cromulent~ as three flake outputs:
+The module is exported to ~git+https://git.rossabaker.com/ross/cromulent~ as three flake outputs:
 
 - ~nixosModules.cachix~
 - ~darwinModules.cachix~
@@ -5783,7 +5783,7 @@ The Cromulent repository hosts a Nix flake for packages, shells, OS
 configurations, and home configurations.
 #+end_description
 
-At the root of the [[https://github.com/rossabaker/cromulent][Cromulent repository]] is a [[https://nixos.wiki/wiki/Flakes][Nix flake]].  It contains
+At the root of the [[https://git.rossabaker.com/ross/cromulent][Cromulent repository]] is a [[https://nixos.wiki/wiki/Flakes][Nix flake]].  It contains
 all my system configurations, home environment configurations,
 packages, development shells, and more.
 
@@ -5794,7 +5794,7 @@ packages, development shells, and more.
 
 #+name: flake-show-outputs
 #+begin_src sh :eval yes :exports code :results output verbatim :code-license CC0-1.0
-  nix flake show github:rossabaker/cromulent
+  nix flake show git+https://git.rossabaker.com/ross/cromulent
 #+end_src
 
 #+begin_details
@@ -5820,7 +5820,7 @@ nix run github.com:rossabaker#hello
 #+begin_example nix
 {
   inputs = {
-    cromulent.url = "github:rossabaker/cromulent";
+    cromulent.url = "git+https://git.rossabaker.com/ross/cromulent";
   };
 
   outputs = { self, nixpkgs, cromulent }: {
@@ -6641,7 +6641,7 @@ than Nix give me a rash.  I've attempted to replicate its [[https://github.com/P
 to a devshell.  Try it out like this:
 
 #+begin_src sh :eval no :code-license CC0-1.0
-  nix develop github:rossabaker/cromulent#modernTs
+  nix develop git+https://git.rossabaker.com/ross/cromulent#modernTs
 #+end_src
 
 #+begin_warning
@@ -8007,7 +8007,7 @@ file needs to have a ~*.scala~ suffix and an =IOApp=.
 
 *** Run it yourself
 
-The entire script is [[https://github.com/rossabaker/cromulent/blob/main/gen/scala/toot-archive.scala][on GitHub]].  You can run it directly, but you'll
+The entire script is [[https://git.rossabaker.com/ross/cromulent/src/branch/main/gen/scala/toot-archive.scala][on my Forgejo]].  You can run it directly, but you'll
 want to download it as ~toot-archive.scala~ and and customize at least
 the =me= variable.  Get ~outbox.json~ in the same directory, and run:
 
