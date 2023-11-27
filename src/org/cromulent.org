@@ -620,8 +620,8 @@ defines its own gitattributes!
 
   ,** Repositories
 
-  - ~[[https://git.rossabaker.com/ross/cromulent.git][git.rossabaker.com]]~ :: the canonical repository, hosted on my Forgejo.
-  - ~[[https://github.com/rossabaker/cromulent][github.com]]~ :: a deprecated mirror
+  - [[https://git.rossabaker.com/ross/cromulent.git][~git.rossabaker.com~]] :: the canonical repository, hosted on my Forgejo.
+  - [[https://github.com/rossabaker/cromulent][~github.com~]] :: a deprecated mirror
 
   ,** Generated source :noexport:
 
