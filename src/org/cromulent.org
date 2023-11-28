@@ -6814,6 +6814,7 @@ CLOSED: [2023-11-19 Sun 19:16 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: abe
 :EXPORT_HUGO_LASTMOD: [2023-11-22 Wed 20:09 CST]
+:CUSTOM_ID: abe
 :END:
 
 #+begin_description
@@ -7323,10 +7324,15 @@ CLOSED: [2022-11-21 Mon 21:03 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: matrix-home-server
 :EXPORT_DATE: [2022-05-05 Thu 17:27 EDT]
-:EXPORT_HUGO_LASTMOD: [2023-01-16 Mon 09:49 EST]
+:EXPORT_HUGO_LASTMOD: [2023-11-27 Mon 20:02 EST]
 :header-args+: :code-license CC0-1.0
 :header-args:nix+: :code-license MIT
 :END:
+
+#+begin_info
+This is no longer true.  Synapse runs on my [[#abe][dedicated Hetzner Robot
+server]] now.  Docs to follow.
+#+end_info
 
 I run my [[https://matrix.to/#/@ross:rossabaker.com][Matrix presence]] on a personal Synapse server in Google Cloud.
 Everything described here runs in the free tier, but I am not
