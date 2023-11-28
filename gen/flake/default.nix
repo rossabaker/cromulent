@@ -74,9 +74,6 @@ flake-parts.lib.mkFlake { inherit inputs; } (
     ];
 
     perSystem = { config, self', inputs', system, pkgs, ... }:
-      let
-        hm = home-manager.defaultPackage."${system}";
-      in
         {
           _module.args.pkgs = import nixpkgs {
             inherit system;
