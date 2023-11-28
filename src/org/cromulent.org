@@ -5779,7 +5779,7 @@ The Home Manager module is published to my flake as output
 CLOSED: [2022-12-25 Sun 22:14 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: /nix-flake
-:EXPORT_HUGO_LASTMOD: [2023-11-27 Mon 20:19 EST]
+:EXPORT_HUGO_LASTMOD: [2023-11-28 Tue 08:16 EST]
 :header-args+: :code-license MIT
 :EXPORT_OPTIONS: h:6
 :END:
@@ -5883,18 +5883,6 @@ function of its inputs!
           home.stateVersion = "21.11";
           nixpkgs.overlays = [ emacs-overlay.overlay ];
         };
-
-        homeConfigurations."ross@abe" =
-          home-manager.lib.homeManagerConfiguration {
-            pkgs = import nixpkgs { system = "x86_64-linux"; };
-            modules = [
-              self.homeModules.default
-              {
-                home.username = "ross";
-                home.homeDirectory = "/home/ross";
-              }
-            ];
-          };
       };
 
       systems = [
@@ -6790,7 +6778,7 @@ Configurations for various hosts, mostly with NixOS or Nix-Darwin.
 CLOSED: [2023-11-19 Sun 19:16 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: abe
-:EXPORT_HUGO_LASTMOD: [2023-11-27 Mon 23:48 EST]
+:EXPORT_HUGO_LASTMOD: [2023-11-28 Tue 08:16 EST]
 :CUSTOM_ID: abe
 :END:
 
@@ -7190,24 +7178,40 @@ and connecting to Netdata cloud]]".
 
 **** Flake module
 
-~abe~'s configuration is published as a flake module.
+~abe~'s configuration, and a home configuration for user ~ross@abe~,
+are published as a flake module.
 
 #+begin_src nix :exports no :noweb-ref flake-modules
   ./hosts/abe
 #+end_src
 
 #+begin_src nix :tangle ../../gen/flake/hosts/abe/default.nix
-  { inputs, ... }:
+  { inputs, self, withSystem, ... }:
 
   {
-    flake.nixosConfigurations.abe =
-      inputs.nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./configuration.nix
-          inputs.agenix.nixosModules.default
-        ];
-      };
+    flake = withSystem "x86_64-linux" ( ctx@{ pkgs, system, ... }:
+      {
+        nixosConfigurations.abe =
+          inputs.nixpkgs.lib.nixosSystem {
+            inherit system;
+            modules = [
+              ./configuration.nix
+              inputs.agenix.nixosModules.default
+            ];
+          };
+
+        homeConfigurations."ross@abe" =
+          inputs.home-manager.lib.homeManagerConfiguration {
+            inherit pkgs;
+            modules = [
+              self.homeModules.default
+              {
+                home.username = "ross";
+                home.homeDirectory = "/home/ross";
+              }
+            ];
+          };
+      });
   }
 #+end_src
 
