@@ -5961,9 +5961,6 @@ function of its inputs!
               pkgs.nix
             ];
           };
-
-          overlayAttrs = {
-          };
         };
     }
   )

@@ -109,13 +109,9 @@ flake-parts.lib.mkFlake { inherit inputs; } (
           ];
 
           packages = [
-            pkgs.google-cloud-sdk
             pkgs.hugo
             pkgs.nix
           ];
-        };
-
-        overlayAttrs = {
         };
       };
   }
