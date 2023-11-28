@@ -8,11 +8,6 @@ flake-parts.lib.mkFlake { inherit inputs; } (
       homeModules = ./homeModules;
       darwinModules = ./darwinModules;
     };
-
-    overlays = {
-      emacs = emacs-overlay.overlay;
-      devshell = devshell.overlays.default;
-    };
   in {
     imports = [
       flakeModules.homeModules
@@ -34,7 +29,7 @@ flake-parts.lib.mkFlake { inherit inputs; } (
     ];
 
     flake = {
-      inherit flakeModules overlays;
+      inherit flakeModules;
 
       nixosConfigurations.abe = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
