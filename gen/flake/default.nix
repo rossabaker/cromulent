@@ -25,18 +25,11 @@ flake-parts.lib.mkFlake { inherit inputs; } (
       ./podman
       ./postgresql
       ./modern_ts
+      ./hosts/abe
     ];
 
     flake = {
       inherit flakeModules;
-
-      nixosConfigurations.abe = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./nixos/abe/configuration.nix
-          agenix.nixosModules.default
-        ];
-      };
 
       homeModules.default = {
         imports = builtins.attrValues (builtins.removeAttrs self.homeModules [ "default" ]);
