@@ -74,49 +74,49 @@ flake-parts.lib.mkFlake { inherit inputs; } (
     ];
 
     perSystem = { config, self', inputs', system, pkgs, ... }:
-        {
-          _module.args.pkgs = import nixpkgs {
-            inherit system;
-            overlays = [
-              devshell.overlays.default
-              emacs-overlay.overlays.default
-            ];
-          };
+      {
+        _module.args.pkgs = import nixpkgs {
+          inherit system;
+          overlays = [
+            devshell.overlays.default
+            emacs-overlay.overlays.default
+          ];
+        };
 
-          apps = {
-            hello = {
-              type = "app";
-              program = "${pkgs.hello}/bin/hello";
-            };
-          };
-
-          packages = {
-            website = pkgs.callPackage ../pkgs/website {
-              emacs = self'.packages.emacs-ross;
-              src = ../../src;
-            };
-          };
-
-          devShells.default = pkgs.devshell.mkShell {
-            name = "cromulent";
-
-            commands = [
-              {
-                name = "serve";
-                help = "run 'hugo serve' on the local project";
-                command = "(cd $PRJ_ROOT && ${pkgs.hugo}/bin/hugo serve --disableFastRender --config tmp/hugo/config.toml)";
-              }
-            ];
-
-            packages = [
-              pkgs.google-cloud-sdk
-              pkgs.hugo
-              pkgs.nix
-            ];
-          };
-
-          overlayAttrs = {
+        apps = {
+          hello = {
+            type = "app";
+            program = "${pkgs.hello}/bin/hello";
           };
         };
+
+        packages = {
+          website = pkgs.callPackage ../pkgs/website {
+            emacs = self'.packages.emacs-ross;
+            src = ../../src;
+          };
+        };
+
+        devShells.default = pkgs.devshell.mkShell {
+          name = "cromulent";
+
+          commands = [
+            {
+              name = "serve";
+              help = "run 'hugo serve' on the local project";
+              command = "(cd $PRJ_ROOT && ${pkgs.hugo}/bin/hugo serve --disableFastRender --config tmp/hugo/config.toml)";
+            }
+          ];
+
+          packages = [
+            pkgs.google-cloud-sdk
+            pkgs.hugo
+            pkgs.nix
+          ];
+        };
+
+        overlayAttrs = {
+        };
+      };
   }
 )
