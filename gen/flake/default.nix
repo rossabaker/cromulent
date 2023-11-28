@@ -80,7 +80,6 @@ flake-parts.lib.mkFlake { inherit inputs; } (
 
           packages = [
             pkgs.hugo
-            pkgs.nix
           ];
         };
       };

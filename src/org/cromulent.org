@@ -5779,7 +5779,7 @@ The Home Manager module is published to my flake as output
 CLOSED: [2022-12-25 Sun 22:14 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: /nix-flake
-:EXPORT_HUGO_LASTMOD: [2023-11-28 Tue 08:16 EST]
+:EXPORT_HUGO_LASTMOD: [2023-11-28 Tue 11:47 EST]
 :header-args+: :code-license MIT
 :EXPORT_OPTIONS: h:6
 :END:
@@ -5927,7 +5927,6 @@ function of its inputs!
 
             packages = [
               pkgs.hugo
-              pkgs.nix
             ];
           };
         };
