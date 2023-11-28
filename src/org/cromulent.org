@@ -5957,7 +5957,6 @@ function of its inputs!
             ];
 
             packages = [
-              pkgs.google-cloud-sdk
               pkgs.hugo
               pkgs.nix
             ];
