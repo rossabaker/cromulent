@@ -13,11 +13,6 @@ flake-parts.lib.mkFlake { inherit inputs; } (
       emacs = emacs-overlay.overlay;
       devshell = devshell.overlays.default;
     };
-
-    pkgsFor = system: import nixpkgs {
-      inherit system;
-      overlays = builtins.attrValues self.overlays;
-    };
   in {
     imports = [
       flakeModules.homeModules
