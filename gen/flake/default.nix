@@ -67,7 +67,7 @@ flake-parts.lib.mkFlake { inherit inputs; } (
           };
         };
 
-        devShells.default = pkgs.devshell.mkShell {
+        devShells.cromulent = pkgs.devshell.mkShell {
           name = "cromulent";
 
           commands = [
