@@ -25,7 +25,6 @@ flake-parts.lib.mkFlake { inherit inputs; } (
       ./podman
       ./postgresql
       ./modern_ts
-      flake-parts.flakeModules.easyOverlay
     ];
 
     flake = {

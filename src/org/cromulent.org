@@ -5779,7 +5779,7 @@ The Home Manager module is published to my flake as output
 CLOSED: [2022-12-25 Sun 22:14 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: /nix-flake
-:EXPORT_HUGO_LASTMOD: [2023-11-27 Mon 20:18 EST]
+:EXPORT_HUGO_LASTMOD: [2023-11-27 Mon 20:19 EST]
 :header-args+: :code-license MIT
 :EXPORT_OPTIONS: h:6
 :END:
@@ -5873,7 +5873,6 @@ function of its inputs!
         flakeModules.homeModules
         flakeModules.darwinModules
         <<flake-modules>>
-        flake-parts.flakeModules.easyOverlay
       ];
 
       flake = {
