@@ -5779,7 +5779,7 @@ The Home Manager module is published to my flake as output
 CLOSED: [2022-12-25 Sun 22:14 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: /nix-flake
-:EXPORT_HUGO_LASTMOD: [2023-11-27 Mon 19:53 EST]
+:EXPORT_HUGO_LASTMOD: [2023-11-27 Mon 19:55 EST]
 :header-args+: :code-license MIT
 :EXPORT_OPTIONS: h:6
 :END:
@@ -5953,11 +5953,6 @@ function of its inputs!
 
               commands = [
                 {
-                  name = "hm-switch";
-                  help = "switch the home-manager config";
-                  command = "${hm}/bin/home-manager switch --flake $PRJ_ROOT";
-                }
-                {
                   name = "serve";
                   help = "run 'hugo serve' on the local project";
                   command = "(cd $PRJ_ROOT && ${pkgs.hugo}/bin/hugo serve --disableFastRender --config tmp/hugo/config.toml)";
@@ -5965,7 +5960,6 @@ function of its inputs!
               ];
 
               packages = [
-                hm
                 pkgs.google-cloud-sdk
                 pkgs.hugo
                 pkgs.nix

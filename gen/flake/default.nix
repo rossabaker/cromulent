@@ -105,11 +105,6 @@ flake-parts.lib.mkFlake { inherit inputs; } (
 
             commands = [
               {
-                name = "hm-switch";
-                help = "switch the home-manager config";
-                command = "${hm}/bin/home-manager switch --flake $PRJ_ROOT";
-              }
-              {
                 name = "serve";
                 help = "run 'hugo serve' on the local project";
                 command = "(cd $PRJ_ROOT && ${pkgs.hugo}/bin/hugo serve --disableFastRender --config tmp/hugo/config.toml)";
@@ -117,7 +112,6 @@ flake-parts.lib.mkFlake { inherit inputs; } (
             ];
 
             packages = [
-              hm
               pkgs.google-cloud-sdk
               pkgs.hugo
               pkgs.nix
