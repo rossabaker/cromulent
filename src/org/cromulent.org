@@ -5779,7 +5779,7 @@ The Home Manager module is published to my flake as output
 CLOSED: [2022-12-25 Sun 22:14 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: /nix-flake
-:EXPORT_HUGO_LASTMOD: [2023-11-27 Mon 18:10 EST]
+:EXPORT_HUGO_LASTMOD: [2023-11-27 Mon 19:53 EST]
 :header-args+: :code-license MIT
 :EXPORT_OPTIONS: h:6
 :END:
@@ -5818,7 +5818,7 @@ packages, development shells, and more.
 **** Running apps from the command line
 
 #+begin_src sh :eval yes :exports both :results verbatim
-nix run github.com:rossabaker#hello
+nix run git+https://git.rossabaker.com/ross/cromulent#hello
 #+end_src
 
 **** Composing Cromulent into your own flake
