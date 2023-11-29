@@ -6808,7 +6808,6 @@ from the rescue image with a [[https://github.com/nix-community/nixos-install-sc
         ./synapse.nix
         ./forgejo.nix
         ./borgbackup.nix
-        ./netdata.nix
       ];
 
     # Use GRUB2 as the boot loader.
@@ -7168,6 +7167,7 @@ are published as a flake module.
             inherit system;
             modules = [
               ./configuration.nix
+              self.nixosModules.netdata
               inputs.agenix.nixosModules.default
             ];
           };

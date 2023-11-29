@@ -8,6 +8,7 @@
           inherit system;
           modules = [
             ./configuration.nix
+            self.nixosModules.netdata
             inputs.agenix.nixosModules.default
           ];
         };

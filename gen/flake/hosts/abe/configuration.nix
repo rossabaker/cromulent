@@ -9,7 +9,6 @@
       ./synapse.nix
       ./forgejo.nix
       ./borgbackup.nix
-      ./netdata.nix
     ];
 
   # Use GRUB2 as the boot loader.
