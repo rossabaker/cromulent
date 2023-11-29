@@ -7332,7 +7332,6 @@ be unavailable precisely when it's needed most.  I'm already spending
 a lot on a dedicated server with no revenue, and this was the easiest
 way to take care of my investment.  I'm interested in self-hosting,
 but in the interim, I'm more interested in a working solution.
->>>>>>> 1c47690c8 (Extract netdata module)
 
 * Projects section
 :PROPERTIES:
