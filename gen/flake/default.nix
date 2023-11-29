@@ -26,6 +26,7 @@ flake-parts.lib.mkFlake { inherit inputs; } (
       ./postgresql
       ./modern_ts
       ./hosts/abe
+      ./netdata
     ];
 
     flake = {

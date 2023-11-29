@@ -6777,7 +6777,7 @@ Configurations for various hosts, mostly with NixOS or Nix-Darwin.
 CLOSED: [2023-11-19 Sun 19:16 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: abe
-:EXPORT_HUGO_LASTMOD: [2023-11-28 Tue 08:16 EST]
+:EXPORT_HUGO_LASTMOD: [2023-11-28 Tue 23:01 EST]
 :CUSTOM_ID: abe
 :END:
 
@@ -6809,7 +6809,7 @@ from the rescue image with a [[https://github.com/nix-community/nixos-install-sc
         ./forgejo.nix
         ./borgbackup.nix
         ./netdata.nix
-    ];
+      ];
 
     # Use GRUB2 as the boot loader.
     # We don't use systemd-boot because Hetzner uses BIOS legacy boot.
@@ -7147,33 +7147,6 @@ to configure the [[https://docs.joinmastodon.org/admin/config/#web_domain][=WEB_
   }
 #+end_src
 
-**** Netdata
-
-This mostly follows Solène Rapenne's guide, "[[https://dataswamp.org/~solene/2022-09-16-netdata-cloud-nixos.html][Using Netdata on NixOS
-and connecting to Netdata cloud]]".
-
-#+begin_src nix :tangle ../../gen/flake/hosts/abe/netdata.nix
-    { lib, pkgs, ... }:
-
-    {
-      nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-        "netdata"
-      ];
-
-      services.netdata = {
-        enable = true;
-        package = pkgs.netdataCloud;
-        config = {
-          global = {
-            "update every" = 15;
-          };
-          ml = {
-            "enabled" = "yes";
-          };
-        };
-      };
-    }
-#+end_src
 
 **** Flake module
 
@@ -7213,6 +7186,153 @@ are published as a flake module.
       });
   }
 #+end_src
+
+** DONE Monitoring a NixOS server with Netdata Cloud
+CLOSED: [2023-11-23 Thu 22:45 CST]
+:PROPERTIES:
+:EXPORT_FILE_NAME: netdata
+:header-args:nix+: :code-license CC0-BY0
+:EXPORT_HUGO_LASTMOD: [2023-11-28 Tue 22:50 EST]
+:END:
+
+Now that I'm self-hosting several services, responsibility falls on me
+to monitor them myself.  An easy way to cover the important bases on a
+NixOS server is {{{dfn(Netdata)}}}.
+#+hugo:more
+
+**** What is Netdata?
+
+When we say Netdata, we may be referring to two things.
+
+***** A libre local service
+
+[[https://github.com/netdata/netdata][Netdata]] is a daemon with a free software license (GPLv3+).
+It's reasonably lightweight.  Mine is currently running in about 140
+megabytes of RAM and 0.5% of a modest CPU core.  In exchange for this,
+it collects metrics on CPU, memory, disks, network traffic, and more,
+without me needing to define them.
+
+***** A commercial cloud service
+
+An easy way to visualize and alert on all that data is via the
+[[https://www.netdata.cloud/][Netdata Cloud]] service.  This is a commercial offering, with
+a free tier that's more than adequate for a single dedicated server.
+
+**** Setting it up on NixOS
+
+This module follows Solène Rapenne's guide, "[[https://dataswamp.org/~solene/2022-09-16-netdata-cloud-nixos.html][Using Netdata on NixOS
+and connecting to Netdata cloud]]", with some light updates.
+
+***** Configuring the Netdata service
+
+For now, the defaults are accepted.
+
+#+begin_aside
+Machine learning anomaly detection is [[https://github.com/netdata/netdata/pull/13158][turned on by default]].  Its
+omission here does not mean that it's off!
+#+end_aside
+
+#+begin_src nix :noweb-ref netdata-module
+  {
+    services.netdata.enable = true;
+    services.netdata.config = {
+      global = {
+        "update every" = 15;
+      };
+    };
+  }
+#+end_src
+
+=pkgs.netdataCloud= is new since Solène's post.  It has a non-free
+license, but is required to communicate with Netdata Cloud.
+
+#+begin_src nix :noweb-ref netdata-module
+  {
+    services.netdata.package = pkgs.netdataCloud;
+  }
+#+end_src
+
+Non-free packages must be added to the allow predicate.
+Alternatively, all non-free packages can be accepted, but it's
+preferred to admit them on a case-by-case basis.
+
+#+begin_src nix :noweb-ref netdata-module
+  {
+    nixpkgs.config.allowUnfreePredicate =
+      pkg: builtins.elem (lib.getName pkg) [
+        "netdata"
+      ];
+  }
+#+end_src
+
+***** Flake part
+
+The module is published as a flake part, defining
+=nixosModules.netdata=.
+
+#+begin_src nix :exports no :noweb-ref flake-modules
+  ./netdata
+#+end_src
+
+#+begin_info
+The =lib.mkMerge= is there so the rest of the module could be
+described in independent chunks above.
+#+end_info
+
+#+begin_details
+#+begin_summary
+View the entire flake part
+#+end_summary
+#+begin_src nix :noweb yes :tangle ../../gen/flake/netdata/default.nix
+  { self, ... }:
+  {
+    flake.nixosModules.netdata =
+      { pkgs, lib, ... }:
+      lib.mkMerge [
+        <<netdata-module>>
+      ];
+  }
+#+end_src
+#+end_details
+
+***** Claiming the machine
+
+The above is sufficient to configure the daemon, but does not connect
+to Netdata Cloud.  A [[https://learn.netdata.cloud/docs/configuring/connect-agent-to-cloud#remove-and-reclaim-a-node][{{{dfn(claiming token)}}}]] is necessary.  There is
+no direct link, but you can get it from [[https://learn.netdata.cloud/docs/configuring/connect-agent-to-cloud#connect-an-agent-running-in-linux][the kickstart]] or from "Add
+nodes" on your room.  I followed Solène's directions:
+
+#+begin_quote
+1. create /var/lib/netdata/cloud.d/token and write the token in it
+2. run nix-shell -p netdata --run "netdata-claim.sh" as root
+3. your node should be registered in Netdata cloud
+
+#+begin_footer
+#+begin_cite
+[[https://dataswamp.org/~solene/2022-09-16-netdata-cloud-nixos.html#_Adding_a_node][Adding a node]]
+#+end_cite
+#+end_footer
+#+end_quote
+
+After the next =nixos-rebuild switch=, I had a dashboard full of
+stats.
+
+#+begin_aside
+The token file disappeared on the first ~nixos-rebuild~, and I thought
+it was consumable.  Apparently the token remains fixed with the
+Netdata space.  If I were doing this again, I would consider using the
+[[https://github.com/NixOS/nixpkgs/blob/e4ad989506ec7d71f7302cc3067abd82730a4beb/nixos/modules/services/monitoring/netdata.nix#L163][=services.netdata.claimTokenFile=]] option with an agenix secret.
+#+end_aside
+
+*** Reflections
+
+Using a cloud service goes against my current lean toward
+self-hosting, but monitoring data needs to be exported, or else it may
+be unavailable precisely when it's needed most.  I'm already spending
+a lot on a dedicated server with no revenue, and this was the easiest
+way to take care of my investment.  I'm interested in self-hosting,
+but in the interim, I'm more interested in a working solution.
+>>>>>>> 1c47690c8 (Extract netdata module)
 
 * Projects section
 :PROPERTIES:
@@ -9298,6 +9418,8 @@ Particularly coming out of the social media archives.
 ** TODO web-key-directory has a stray copy button
 
 * Footnotes
+[fn:25] The =lib.mkMerge= isn't necessary, but lets us document the
+rest as independent chunks.
 
 [fn:24] GitHub Pages, for instance, does not support redirects.
 GitLab has [[https://docs.gitlab.com/ee/user/project/pages/redirects.html][partial support]] that would be enough for the current
