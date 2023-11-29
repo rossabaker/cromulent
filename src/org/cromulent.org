@@ -4783,7 +4783,7 @@ Additionally, an =emacs= flake app is created.  This builds on the
 
 Finally, we add a Home Manager module based on the configured app.
 
-#+begin_src nix :exports no :noweb-ref flake-modules
+#+begin_src nix :exports none :noweb-ref flake-modules
   ./emacs
 #+end_src
 
@@ -5654,7 +5654,7 @@ madness up until 1.8.0.
 The Home Manager module is published to my flake as output
 ~homeModules.scala~.
 
-#+begin_src nix :exports no :noweb-ref flake-modules
+#+begin_src nix :exports none :noweb-ref flake-modules
   ./scala
 #+end_src
 
@@ -5755,7 +5755,7 @@ version.
 The Home Manager module is published to my flake as output
 ~homeModules.python~.
 
-#+begin_src nix :exports no :noweb-ref flake-modules
+#+begin_src nix :exports none :noweb-ref flake-modules
   ./python
 #+end_src
 
@@ -6173,7 +6173,7 @@ other hosts that support the Nix package manager (e.g., Debian).
 This is imported from preliterate times and should be broken up
 further.
 
-#+begin_src nix :exports no :noweb-ref flake-modules
+#+begin_src nix :exports none :noweb-ref flake-modules
   ./home-manager
   ./home-manager/darwin.nix
 #+end_src
@@ -6649,7 +6649,7 @@ them can be templated from PyPi:
 
 It all comes together in this [[https://flake.parts/index.html][flake module]].
 
-#+begin_src nix :exports no :noweb-ref flake-modules
+#+begin_src nix :exports none :noweb-ref flake-modules
   ./modern_ts
 #+end_src
 
@@ -7153,7 +7153,7 @@ to configure the [[https://docs.joinmastodon.org/admin/config/#web_domain][=WEB_
 ~abe~'s configuration, and a home configuration for user ~ross@abe~,
 are published as a flake module.
 
-#+begin_src nix :exports no :noweb-ref flake-modules
+#+begin_src nix :exports none :noweb-ref flake-modules
   ./hosts/abe
 #+end_src
 
@@ -7270,7 +7270,7 @@ preferred to admit them on a case-by-case basis.
 The module is published as a flake part, defining
 =nixosModules.netdata=.
 
-#+begin_src nix :exports no :noweb-ref flake-modules
+#+begin_src nix :exports none :noweb-ref flake-modules
   ./netdata
 #+end_src
 
