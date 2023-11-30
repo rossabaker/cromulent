@@ -9,6 +9,8 @@
           modules = [
             ./configuration.nix
             self.nixosModules.netdata
+            self.nixosModules.synapse
+            self.nixosModules.forgejo
             inputs.agenix.nixosModules.default
           ];
         };

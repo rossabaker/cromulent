@@ -6777,7 +6777,7 @@ Configurations for various hosts, mostly with NixOS or Nix-Darwin.
 CLOSED: [2023-11-19 Sun 19:16 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: abe
-:EXPORT_HUGO_LASTMOD: [2023-11-28 Tue 23:01 EST]
+:EXPORT_HUGO_LASTMOD: [2023-12-01 Fri 18:32 EST]
 :CUSTOM_ID: abe
 :END:
 
@@ -6805,7 +6805,6 @@ from the rescue image with a [[https://github.com/nix-community/nixos-install-sc
         ./hardware-configuration.nix
         ./users.nix
         ./mastodon.nix
-        ./synapse.nix
         ./forgejo.nix
         ./borgbackup.nix
       ];
@@ -7047,106 +7046,6 @@ to configure the [[https://docs.joinmastodon.org/admin/config/#web_domain][=WEB_
 
 #+end_src
 
-**** Synapse
-
-#+begin_src nix :tangle ../../gen/flake/hosts/abe/synapse.nix
-  { pkgs, ... }:
-
-  {
-    services.postgresql.enable = true;
-    services.postgresql.initialScript = pkgs.writeText "synapse-init.sql" ''
-      CREATE ROLE "matrix-synapse" WITH LOGIN PASSWORD 'synapse';
-      CREATE DATABASE "matrix-synapse" WITH OWNER "matrix-synapse"
-        TEMPLATE template0
-        LC_COLLATE = "C"
-        LC_CTYPE = "C";
-    '';
-
-    services.nginx = {
-      enable = true;
-      # only recommendedProxySettings and recommendedGzipSettings are strictly required,
-      # but the rest make sense as well
-      recommendedTlsSettings = true;
-      recommendedOptimisation = true;
-      recommendedGzipSettings = true;
-      recommendedProxySettings = true;
-
-      virtualHosts = {
-        # Reverse proxy for Matrix client-server and server-server communication
-        "matrix.rossabaker.com" = {
-          enableACME = true;
-          forceSSL = true;
-
-          # Or do a redirect instead of the 404, or whatever is appropriate for you.
-          # But do not put a Matrix Web client here! See the Element web section below.
-          locations."/".extraConfig = ''
-            return 404;
-          '';
-
-          # forward all Matrix API calls to the synapse Matrix homeserver
-          locations."/_matrix" = {
-            proxyPass = "http://[::1]:8008"; # without a trailing /
-          };
-        };
-      };
-    };
-    services.matrix-synapse = {
-      enable = true;
-      settings = {
-        server_name = "rossabaker.com";
-        listeners = [
-          {
-            port = 8008;
-            bind_addresses = [ "::1" ];
-            type = "http";
-            tls = false;
-            x_forwarded = true;
-            resources = [
-              {
-                names = [ "client" "federation" ];
-                compress = false;
-              }
-            ];
-          }
-        ];
-      };
-    };
-  }
-#+end_src
-
-**** Forgejo
-
-#+begin_src nix :tangle ../../gen/flake/hosts/abe/forgejo.nix
-  let
-    domain = "git.rossabaker.com";
-  in
-  {
-    services.forgejo = {
-      enable = true;
-      settings = {
-        service = {
-          DISABLE_REGISTRATION = true;
-        };
-      };
-    };
-
-    services.nginx.virtualHosts.${domain} = {
-      enableACME = true;
-      forceSSL = true;
-      locations."/" = {
-        proxyPass = "http://localhost:3000/";
-      };
-    };
-
-    services.nginx.virtualHosts."src.rossabaker.com" = {
-      enableACME = true;
-      forceSSL = true;
-      globalRedirect = domain;
-    };
-  }
-#+end_src
-
-
 **** Flake module
 
 ~abe~'s configuration, and a home configuration for user ~ross@abe~,
@@ -7168,6 +7067,8 @@ are published as a flake module.
             modules = [
               ./configuration.nix
               self.nixosModules.netdata
+              self.nixosModules.synapse
+              self.nixosModules.forgejo
               inputs.agenix.nixosModules.default
             ];
           };
@@ -7333,6 +7234,71 @@ a lot on a dedicated server with no revenue, and this was the easiest
 way to take care of my investment.  I'm interested in self-hosting,
 but in the interim, I'm more interested in a working solution.
 
+** DONE Self-hosted Git with Forgejo
+CLOSED: [2023-12-01 Fri 18:25 EST]
+:PROPERTIES:
+:EXPORT_FILE_NAME: forgejo
+:header-args:nix+: :code-license MIT
+:END:
+
+#+begin_description
+How to self-host Git repositories with Forgejo on NixOS.
+#+end_description
+
+[[https://forgejo.org][Forgejo]] is a self-hosted {{{dfn(git forge)}}}.  More to say later.
+
+#+begin_src nix :exports none :noweb-ref flake-modules
+  ./forgejo
+#+end_src
+
+*** NixOS module
+
+#+begin_src nix :tangle ../../gen/flake/forgejo/nixos-module.nix
+  let
+    domain = "git.rossabaker.com";
+  in
+  {
+    services.forgejo = {
+      enable = true;
+      settings = {
+        service = {
+          DISABLE_REGISTRATION = true;
+        };
+      };
+    };
+
+    services.nginx.virtualHosts.${domain} = {
+      enableACME = true;
+      forceSSL = true;
+      locations."/" = {
+        proxyPass = "http://localhost:3000/";
+      };
+    };
+
+    services.nginx.virtualHosts."src.rossabaker.com" = {
+      enableACME = true;
+      forceSSL = true;
+      globalRedirect = domain;
+    };
+  }
+#+end_src
+
+*** Flake part
+
+#+begin_src nix :noweb yes :tangle ../../gen/flake/forgejo/default.nix
+  { ... }:
+  {
+    flake.nixosModules.forgejo =
+      { ... }:
+      {
+        imports = [
+          ./nixos-module.nix
+        ];
+      };
+  }
+#+end_src
+
+
 * Projects section
 :PROPERTIES:
 :EXPORT_HUGO_BUNDLE: projects
@@ -7441,12 +7407,12 @@ RESTful APIs, and real-time web programming.
   }
 #+end_src
 
-** DONE Matrix home server                             :@tech:matrix:synapse:
+** DONE Self-hosting a Matrix home server with Synapse :@tech:matrix:synapse:
 CLOSED: [2022-11-21 Mon 21:03 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: matrix-home-server
 :EXPORT_DATE: [2022-05-05 Thu 17:27 EDT]
-:EXPORT_HUGO_LASTMOD: [2023-11-27 Mon 20:02 EST]
+:EXPORT_HUGO_LASTMOD: [2023-11-29 Wed 20:08 EST]
 :header-args+: :code-license CC0-1.0
 :header-args:nix+: :code-license MIT
 :END:
@@ -7456,181 +7422,41 @@ This is no longer true.  Synapse runs on my [[#abe][dedicated Hetzner Robot
 server]] now.  Docs to follow.
 #+end_info
 
-I run my [[https://matrix.to/#/@ross:rossabaker.com][Matrix presence]] on a personal Synapse server in Google Cloud.
-Everything described here runs in the free tier, but I am not
-responsible if you run this and get a bill.
+[[https://matrix.org/][{{{dfn(Matrix)}}}]] is a decentralized communication protocol.  It is
+capable of many things, but I primarily use it for public chats on
+Open Source projects or private, end-to-end encrypted messaging.
 
-#+begin_warning
-  <2022-06-02 Thu>: I got charged $0.02 for storage last month.
-#+end_warning
+*** Self-hosting
 
-#+begin_info
-  [2022-11-15 Tue 19:15 EST]: I plan to move this to Hetzner Cloud.
-#+end_info
+I am hosting Matrix on my [[#abe][dedicated Hetzner server]].  Requirements will
+vary by usage, but my Synapse server, a Python process, currently
+consumes about 350MB of RAM.  Add on PostgreSQL and a reverse Nginx
+proxy, either of which might be shared with other services.
 
-*** Terraform
+#+begin_aside
+I used to run this setup on the free Google Cloud tier with an
+e2-micro instance.  It was a little sluggish when joining a large
+room, but it fit.  It would sporadically and inexplicably cost up to
+$0.02 per month in storage.
+#+end_aside
 
-~20.03~ is disappointingly old, but it's the newest one I can find
-publicly. I upgraded this on the instance after it was created. It
-would be good to get a fresher image on GCS, but it'll cost a few
-pennies.
-
-#+begin_src terraform /*:tangle main.tf*/
-  module "nixos_image" {
-    source = "github.com/tweag/terraform-nixos/google_image_nixos"
-    nixos_version = "20.03"
-  }
-#+end_src
-
-I created this project manually.  To create a project directly, we'd
-need another "admin" project to bootstrap things.  The
-~"rossabaker-348417"~ is repeated frequently and belongs in a
-variable.
-
-#+begin_src terraform /*:tangle main.tf*/
-  provider "google" {
-    project = "rossabaker-348417"
-    region  = "us-central1"
-    zone    = "us-central1-c"
-  }
-#+end_src
-
-These APIs need to be enabled for subsequent calls to work.
-
-#+begin_src terraform /*:tangle main.tf*/
-  resource "google_project_service" "compute" {
-    project = "rossabaker-348417"
-    service = "compute.googleapis.com"
-  }
-
-  resource "google_project_service" "oslogin" {
-    project = "rossabaker-348417"
-    service = "oslogin.googleapis.com"
-  }
-#+end_src
-
-~enable-oslogin~ lets us log into the machine as our Google identity.
-The ~nix-configuration~ is a handy way to expose the NixOS
-configuration, since we don't have a custom image to bake it into.
-
-#+begin_src terraform /*:tangle main.tf*/
-  resource "google_compute_instance" "vm_instance" {
-    name         = "abe"
-    machine_type = "e2-micro"
-
-    boot_disk {
-      initialize_params {
-        image = module.nixos_image.self_link
-        size  = 10
-      }
-    }
-
-    metadata = {
-      enable-oslogin = "TRUE"
-      nix-configuration = file("configuration.nix")
-    }
-
-    network_interface {
-      # A default network is created for all GCP projects
-      network = "default"
-      access_config {
-      }
-    }
-
-    tags = ["http-server"]
-  }
-#+end_src
-
-To refresh the configuration on the instance, we can run:
-
-#+begin_src sh :code-license CC0-1.0
-  curl "http://metadata.google.internal/computeMetadata/v1/instance/attributes/nix-configuration" -H "Metadata-Flavor: Google" | sudo tee /etc/nixos/configuration.nix && sudo nixos-rebuild --upgrade switch
-#+end_src
-
-The ~http-server~ tag links it up with the VM instance above so the
-firewall rules apply.  In hindsight, port ~443~ probably would have
-been sufficient here.
-
-#+begin_src terraform /*:tangle main.tf*/
-  resource "google_compute_firewall" "http-server" {
-    name    = "http-server"
-    network = "default"
-
-    allow {
-      protocol = "tcp"
-      ports    = ["80", "443"]
-    }
-
-    source_ranges = ["0.0.0.0/0"]
-    target_tags   = ["http-server"]
-  }
-#+end_src
-
-Make ourselves an admin:
-
-#+begin_src terraform /*:tangle main.tf*/
-  resource "google_project_iam_binding" "os-login-admin-users" {
-    project = "rossabaker-348417"
-    role = "roles/compute.osAdminLogin"
-
-    members = [
-      "user:rossabaker@gmail.com"
-    ]
-  }
-#+end_src
-
-Finally, lock our dependencies:
-
-#+begin_src hcl /*:tangle .terraform.lock.hcl*/ :code-license CC0-1.0
-  provider "registry.terraform.io/hashicorp/google" {
-    version = "4.19.0"
-    hashes = [
-      "h1:Qom1Evv0g66L2+oEiDzc3vgSKD2kUkpGcQt3R1m2Kdc=",
-      "zh:17aa6d222e00259bcf08a664a3a617ed1e41a6ab3428316be3b1aa997baa3642",
-      "zh:3e357ff59d6e75eef4b488db2a13105b7aa8a2bf71e27cb7fdcabfb30e6da5d7",
-      "zh:8af83e35bdda0df0f004c6294edc1d4119e457fab6eb7a73606529e245d8ae31",
-      "zh:9047896a8c7d3a9d749acdecaa7e5bc5589b2cbe54afeb30466a21597440d38f",
-      "zh:90dc3dbb28c368e76504f370c5f2d6887284369b072e4b74d0ad49eb87225ec8",
-      "zh:b3918565d747c92db62be37a91bdcd0a330334b25843746b85fe8279f7aa6c0b",
-      "zh:da845ee82ce4639bf348e9ac6e8f6a229c413a7e3d6a2e67a50c49561901d5ce",
-      "zh:db856e3830052ecc6b6ee5874bc9f7e97dcbbd9aaea6fc65e536121158cde630",
-      "zh:dc28a6f24a2aea6f7ddbfa4e69bc31796ceff88f0fefec99af2d1ee0f043af6c",
-      "zh:e5c05fee01c4c22077073155f0718c44e70983b865c6705e5e3d0f84df21fd8b",
-      "zh:fa7625309c9ed9df92657a3e398c827874415a885e52b13c4d6451265f5de485",
-    ]
-  }
-#+end_src
-
-***** Nix
+*** NixOS module
 
 Most of this configuration comes from the [[https://nixos.org/manual/nixos/stable/index.html#module-services-matrix-synapse][Synapse Homeserver]] section
 of the NixOS manual.
 
-#+begin_src nix /*:tangle default.nix*/
-  { pkgs, lib, modulesPath, ... }:
+#+begin_src nix :tangle ../../gen/flake/synapse/nixos-module.nix
+  { pkgs, ... }:
 
   {
-    imports = [
-      "${toString modulesPath}/virtualisation/google-compute-image.nix"
-    ];
-
-    networking = {
-      hostName = "abe";
-      domain = "gcp.rossabaker.com";
-    };
-    networking.firewall.allowedTCPPorts = [ 80 443 ];
-
-    security.acme.email = "ross@rossabaker.com";
-    security.acme.acceptTerms = true;
-
     services.postgresql.enable = true;
     services.postgresql.initialScript = pkgs.writeText "synapse-init.sql" ''
-        CREATE ROLE "matrix-synapse" WITH LOGIN PASSWORD 'synapse';
-        CREATE DATABASE "matrix-synapse" WITH OWNER "matrix-synapse"
-          TEMPLATE template0
-          LC_COLLATE = "C"
-          LC_CTYPE = "C";
-      '';
+      CREATE ROLE "matrix-synapse" WITH LOGIN PASSWORD 'synapse';
+      CREATE DATABASE "matrix-synapse" WITH OWNER "matrix-synapse"
+        TEMPLATE template0
+        LC_COLLATE = "C"
+        LC_CTYPE = "C";
+    '';
 
     services.nginx = {
       enable = true;
@@ -7650,8 +7476,8 @@ of the NixOS manual.
           # Or do a redirect instead of the 404, or whatever is appropriate for you.
           # But do not put a Matrix Web client here! See the Element web section below.
           locations."/".extraConfig = ''
-              return 404;
-            '';
+            return 404;
+          '';
 
           # forward all Matrix API calls to the synapse Matrix homeserver
           locations."/_matrix" = {
@@ -7684,6 +7510,7 @@ of the NixOS manual.
   }
 #+end_src
 
+#+begin_info
 The password in ~initialScript~ is gross, but NixOS' PostgreSQL
 defaults to peer authentication for domain sockets, and we don't
 expose PostgreSQL outside the localhost.  Just to be extra safe, I
@@ -7691,6 +7518,28 @@ manually ran:
 
 #+begin_src sql
   ALTER ROLE "matrix-synapse" PASSWORD null;
+#+end_src
+#+end_info
+
+*** Flake module
+
+A trivial wrapper.  All the heavy lifting is done in nixos-module.nix.
+
+#+begin_src nix :exports none :noweb-ref flake-modules
+  ./synapse
+#+end_src
+
+#+begin_src nix :noweb yes :tangle ../../gen/flake/synapse/default.nix
+  { ... }:
+  {
+    flake.nixosModules.synapse =
+      { ... }:
+      {
+        imports = [
+          ./nixos-module.nix
+        ];
+      };
+  }
 #+end_src
 
 *** Federation

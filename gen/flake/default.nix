@@ -27,6 +27,8 @@ flake-parts.lib.mkFlake { inherit inputs; } (
       ./modern_ts
       ./hosts/abe
       ./netdata
+      ./forgejo
+      ./synapse
     ];
 
     flake = {
