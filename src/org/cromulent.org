@@ -6777,7 +6777,7 @@ Configurations for various hosts, mostly with NixOS or Nix-Darwin.
 CLOSED: [2023-11-19 Sun 19:16 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: abe
-:EXPORT_HUGO_LASTMOD: [2023-12-01 Fri 22:45 EST]
+:EXPORT_HUGO_LASTMOD: [2023-12-02 Sat 15:33 EST]
 :CUSTOM_ID: abe
 :END:
 
@@ -7003,10 +7003,6 @@ to configure the [[https://docs.joinmastodon.org/admin/config/#web_domain][=WEB_
     };
 
     networking.firewall.allowedTCPPorts = [ 80 443 ];
-    security.acme = {
-      acceptTerms = true;
-      defaults.email = "ross@rossabaker.com";
-    };
 
     # The default module configures localDomain.  We need to configure
     # the WEB_DOMAIN.  This is a nasty copy-and-paste.
@@ -7322,10 +7318,22 @@ CLOSED: [2023-12-02 Sat 11:41 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: webserver
 :CUSTOM_ID: webserver
-:EXPORT_HUGO_LASTMOD: [2023-12-02 Sat 14:36 EST]
+:EXPORT_HUGO_LASTMOD: [2023-12-02 Sat 16:18 EST]
 :END:
 
-*** Nginx configuration
+#+begin_src description
+  Defines an HTTP server with Nginx, both for a static web site and
+  reverse proxies for various services.
+#+end_src
+
+I cut my teeth on [[https://httpd.apache.org/][Apache httpd]], but nobody gets fired in the 2020s for
+picking [[https://www.nginx.com/][Nginx]].  The needs are simple:
+
+- Host this static website
+- Reverse proxies for various services
+- Manage our certificates
+
+*** General configuration
 
 The canonical site is still hosted on Netlify, but the intent is to
 bring it home to [[#abe][~abe~]].  This is a testing ground.
@@ -7345,11 +7353,6 @@ managed.
         root = "/var/www/com.rossabaker.www.beta";
       };
     };
-
-    security.acme = {
-      acceptTerms = true;
-      defaults.email = "ross@rossabaker.com";
-    };
   }
 #+end_src
 
@@ -7362,9 +7365,57 @@ managed.
 The obligatory nix module:
 
 #+begin_src nix :tangle ../../gen/flake/webserver/default.nix
-  { ... }:
+  { self, ... }:
   {
-    flake.nixosModules.webserver = ./nixos-module.nix;
+    flake.nixosModules.webserver = {
+      imports = [
+        self.nixosModules.acme
+        ./nixos-module.nix
+      ];
+    };
+  }
+#+end_src
+
+** DONE Automated certificate management with ACME
+CLOSED: [2023-12-02 Sat 16:26 EST]
+:PROPERTIES:
+:EXPORT_FILE_NAME: acme
+:header-args:nix+: :code-license MIT
+:END:
+
+#+begin_description
+NixOS and ACME make certificate management trivial.
+#+end_description
+
+The deeper one gets into self-hosting, the more subdomains need to be
+managed, usually with a certificate.  [[https://en.wikipedia.org/wiki/Automatic_Certificate_Management_Environment][{{{dfn({{{abbr(Automatic
+Certificate Management Environment,ACME)}}})}}}]] and NixOS combine to
+streamline this process to a few lines of code.
+
+*** NixOS module
+
+The configuration is almost straight out of the [[https://nixos.org/manual/nixos/stable/#module-security-acme-prerequisites][NixOS manual]].
+
+#+begin_src nix :tangle ../../gen/flake/acme/nixos-module.nix
+  {
+    security.acme = {
+      acceptTerms = true;
+      defaults.email = "ross@rossabaker.com";
+    };
+  }
+#+end_src
+
+*** Flake module
+
+The Cromulent flake is composed of a flake modules.
+
+#+begin_src nix :exports none :noweb-ref flake-modules
+  ./acme
+#+end_src
+
+#+begin_src nix :tangle ../../gen/flake/acme/default.nix
+  {
+    flake.nixosModules.acme = ./nixos-module.nix;
   }
 #+end_src
 

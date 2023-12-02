@@ -7,9 +7,4 @@
       root = "/var/www/com.rossabaker.www.beta";
     };
   };
-
-  security.acme = {
-    acceptTerms = true;
-    defaults.email = "ross@rossabaker.com";
-  };
 }

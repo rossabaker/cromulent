@@ -29,6 +29,7 @@ flake-parts.lib.mkFlake { inherit inputs; } (
       ./netdata
       ./forgejo
       ./webserver
+      ./acme
       ./synapse
     ];
 

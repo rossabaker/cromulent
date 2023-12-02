@@ -16,10 +16,6 @@ in
   };
 
   networking.firewall.allowedTCPPorts = [ 80 443 ];
-  security.acme = {
-    acceptTerms = true;
-    defaults.email = "ross@rossabaker.com";
-  };
 
   # The default module configures localDomain.  We need to configure
   # the WEB_DOMAIN.  This is a nasty copy-and-paste.
