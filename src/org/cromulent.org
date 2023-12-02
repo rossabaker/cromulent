@@ -7389,8 +7389,8 @@ NixOS and ACME make certificate management trivial.
 #+end_description
 
 The deeper one gets into self-hosting, the more subdomains need to be
-managed, usually with a certificate.  [[https://en.wikipedia.org/wiki/Automatic_Certificate_Management_Environment][{{{dfn({{{abbr(Automatic
-Certificate Management Environment,ACME)}}})}}}]] and NixOS combine to
+managed, usually with a certificate.  [[https://en.wikipedia.org/wiki/Automatic_Certificate_Management_Environment][{{{dfn(abbr(Automatic
+Certificate Management Environment,ACME))}}}]] and NixOS combine to
 streamline this process to a few lines of code.
 
 *** NixOS module
