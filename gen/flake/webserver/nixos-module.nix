@@ -2,7 +2,7 @@
   services.nginx = {
     enable = true;
     virtualHosts."beta.www.rossabaker.com" = {
-      addSSL = true;
+      forceSSL = true;
       enableACME = true;
       root = "/var/www/com.rossabaker.www.beta";
     };

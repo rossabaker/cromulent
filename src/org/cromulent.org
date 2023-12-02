@@ -7322,6 +7322,7 @@ CLOSED: [2023-12-02 Sat 11:41 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: webserver
 :CUSTOM_ID: webserver
+:EXPORT_HUGO_LASTMOD: [2023-12-02 Sat 14:36 EST]
 :END:
 
 *** Nginx configuration
@@ -7339,7 +7340,7 @@ managed.
     services.nginx = {
       enable = true;
       virtualHosts."beta.www.rossabaker.com" = {
-        addSSL = true;
+        forceSSL = true;
         enableACME = true;
         root = "/var/www/com.rossabaker.www.beta";
       };
