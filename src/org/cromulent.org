@@ -7069,6 +7069,7 @@ are published as a flake module.
               self.nixosModules.netdata
               self.nixosModules.synapse
               self.nixosModules.forgejo
+              self.nixosModules.webserver
               inputs.agenix.nixosModules.default
               {
                 # TODO This is missing...
@@ -7316,6 +7317,55 @@ How to self-host Git repositories with Forgejo on NixOS.
   }
 #+end_src
 
+** DONE A self-hosted static site with NixOS and Nginx
+CLOSED: [2023-12-02 Sat 11:41 EST]
+:PROPERTIES:
+:EXPORT_FILE_NAME: webserver
+:CUSTOM_ID: webserver
+:END:
+
+*** Nginx configuration
+
+The canonical site is still hosted on Netlify, but the intent is to
+bring it home to [[#abe][~abe~]].  This is a testing ground.
+
+#+begin_warning
+There is no CI yet.  The ~/var/www/com.rossabaker~ link is manually
+managed.
+#+end_warning
+
+#+begin_src nix :tangle ../../gen/flake/webserver/nixos-module.nix
+  {
+    services.nginx = {
+      enable = true;
+      virtualHosts."beta.www.rossabaker.com" = {
+        addSSL = true;
+        enableACME = true;
+        root = "/var/www/com.rossabaker.www.beta";
+      };
+    };
+
+    security.acme = {
+      acceptTerms = true;
+      defaults.email = "ross@rossabaker.com";
+    };
+  }
+#+end_src
+
+*** Flake module
+
+#+begin_src nix :exports none :noweb-ref flake-modules
+  ./webserver
+#+end_src
+
+The obligatory nix module:
+
+#+begin_src nix :tangle ../../gen/flake/webserver/default.nix
+  { ... }:
+  {
+    flake.nixosModules.webserver = ./nixos-module.nix;
+  }
+#+end_src
 
 * Projects section
 :PROPERTIES:
@@ -8156,6 +8206,7 @@ market:
 CLOSED: [2023-12-02 Sat 01:02 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: december-adventure
+:EXPORT_HUGO_LASTMOD: [2023-12-02 Sat 11:42 EST]
 :END:
 
 *** 2023
@@ -8186,6 +8237,11 @@ I want to continue my movement toward self-hosting:
 - Got interested in the SystemCrafters Live series on Forgejo ([[https://systemcrafters.net/live-streams/november-17-2023/][Part 1]],
   [[https://systemcrafters.net/live-streams/november-17-2023/][Part 2]]).  Saw they've [[https://systemcrafters.net/live-streams/november-17-2023/][migrated to IRC]], whereupon I fell into a ZNC
   rabbit hole.
+
+**** December 2
+
+- Set up a [[#webserver][webserver flake module]] to self-host this site at a
+  temporary subdomain.
 
 * Talks section
 :PROPERTIES:
