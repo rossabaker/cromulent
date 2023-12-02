@@ -8152,6 +8152,40 @@ market:
 
 - /Trout Mask Replica/ by Captain Beefheart
 
+** DONE December Adventure
+CLOSED: [2023-12-02 Sat 01:02 EST]
+:PROPERTIES:
+:EXPORT_FILE_NAME: december-adventure
+:END:
+
+*** 2023
+
+Advent of Code is upon us again.  I'm reminded of those [[https://en.wikipedia.org/wiki/Paint_and_sip_industry][paint and sip]]
+classes.  You get to try something new and have fun with your friends,
+and both of those are great, but the end product looks a lot like
+everyone else's.
+
+I saw my [[http://plastic-idolatry.com/erik/2023/dec/][friend Erik's December Adventure]], which led me to [[https://eli.li/december-adventure][the
+original]].  I prefer Diet Mountain Dew to alcohol, and I'd rather
+paint something unique.  I'm a December Adventure sort of fellow.
+
+**** Goal
+
+I want to continue my movement toward self-hosting:
+
+- Set up my own CI to replace GitHub Actions
+- Publish to my own Nginx to replace Netlify
+- Integrate archives of some old silos
+- Consider Pixelfed or Peertube for new content types
+
+**** December 1
+
+- Extracted my [[https://rossabaker.com/configs/forgejo/][Forgejo]] configuration, without adequately describing
+  it.
+- Fixed an annoying issue with its =ROOT_URL= configuration.
+- Got interested in the SystemCrafters Live series on Forgejo ([[https://systemcrafters.net/live-streams/november-17-2023/][Part 1]],
+  [[https://systemcrafters.net/live-streams/november-17-2023/][Part 2]]).  Saw they've [[https://systemcrafters.net/live-streams/november-17-2023/][migrated to IRC]], whereupon I fell into a ZNC
+  rabbit hole.
 
 * Talks section
 :PROPERTIES:
