@@ -7380,6 +7380,7 @@ The obligatory nix module:
 CLOSED: [2023-12-02 Sat 16:26 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: acme
+:CUSTOM_ID: acme
 :header-args:nix+: :code-license MIT
 :END:
 
@@ -8258,7 +8259,7 @@ market:
 CLOSED: [2023-12-02 Sat 01:02 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: december-adventure
-:EXPORT_HUGO_LASTMOD: [2023-12-02 Sat 11:42 EST]
+:EXPORT_HUGO_LASTMOD: [2023-12-02 Sat 16:33 EST]
 :END:
 
 *** 2023
@@ -8294,6 +8295,7 @@ I want to continue my movement toward self-hosting:
 
 - Set up a [[#webserver][webserver flake module]] to self-host this site at a
   temporary subdomain.
+- Set up an [[https://nixos.org/manual/nixos/stable/#module-security-acme-prerequisites][ACME flake module]] to manage certificates.
 
 * Talks section
 :PROPERTIES:
