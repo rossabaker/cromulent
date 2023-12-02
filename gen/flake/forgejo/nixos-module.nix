@@ -8,6 +8,9 @@ in
       service = {
         DISABLE_REGISTRATION = true;
       };
+      server = {
+        ROOT_URL = "https://${domain}/";
+      };
     };
   };
 

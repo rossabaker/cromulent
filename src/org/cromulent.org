@@ -7239,6 +7239,7 @@ CLOSED: [2023-12-01 Fri 18:25 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: forgejo
 :header-args:nix+: :code-license MIT
+:EXPORT_HUGO_LASTMOD: [2023-12-01 Fri 19:37 EST]
 :END:
 
 #+begin_description
@@ -7263,6 +7264,9 @@ How to self-host Git repositories with Forgejo on NixOS.
       settings = {
         service = {
           DISABLE_REGISTRATION = true;
+        };
+        server = {
+          ROOT_URL = "https://${domain}/";
         };
       };
     };
