@@ -7382,6 +7382,7 @@ CLOSED: [2023-12-02 Sat 16:26 EST]
 :EXPORT_FILE_NAME: acme
 :CUSTOM_ID: acme
 :header-args:nix+: :code-license MIT
+:EXPORT_HUGO_LASTMOD: [2023-12-02 Sat 19:54 EST]
 :END:
 
 #+begin_description
@@ -7408,7 +7409,8 @@ The configuration is almost straight out of the [[https://nixos.org/manual/nixos
 
 *** Flake module
 
-The Cromulent flake is composed of a flake modules.
+All Cromulent outputs are packaged as flake modules for consistent
+composition.
 
 #+begin_src nix :exports none :noweb-ref flake-modules
   ./acme
