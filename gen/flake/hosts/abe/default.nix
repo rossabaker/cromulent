@@ -11,6 +11,7 @@
             self.nixosModules.netdata
             self.nixosModules.synapse
             self.nixosModules.forgejo
+            self.nixosModules.acme
             self.nixosModules.webserver
             inputs.agenix.nixosModules.default
             {

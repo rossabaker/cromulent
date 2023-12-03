@@ -6777,7 +6777,7 @@ Configurations for various hosts, mostly with NixOS or Nix-Darwin.
 CLOSED: [2023-11-19 Sun 19:16 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: abe
-:EXPORT_HUGO_LASTMOD: [2023-12-02 Sat 15:33 EST]
+:EXPORT_HUGO_LASTMOD: [2023-12-03 Sun 00:09 EST]
 :CUSTOM_ID: abe
 :END:
 
@@ -7065,6 +7065,7 @@ are published as a flake module.
               self.nixosModules.netdata
               self.nixosModules.synapse
               self.nixosModules.forgejo
+              self.nixosModules.acme
               self.nixosModules.webserver
               inputs.agenix.nixosModules.default
               {
@@ -7318,7 +7319,7 @@ CLOSED: [2023-12-02 Sat 11:41 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: webserver
 :CUSTOM_ID: webserver
-:EXPORT_HUGO_LASTMOD: [2023-12-02 Sat 16:18 EST]
+:EXPORT_HUGO_LASTMOD: [2023-12-03 Sun 00:09 EST]
 :END:
 
 #+begin_src description
@@ -7362,17 +7363,12 @@ managed.
   ./webserver
 #+end_src
 
-The obligatory nix module:
+All Cromulent outputs are packaged as [[https://flake.parts/][flake parts]] for consistent
+composition.
 
 #+begin_src nix :tangle ../../gen/flake/webserver/default.nix
-  { self, ... }:
   {
-    flake.nixosModules.webserver = {
-      imports = [
-        self.nixosModules.acme
-        ./nixos-module.nix
-      ];
-    };
+    flake.nixosModules.webserver = ./nixos-module.nix;
   }
 #+end_src
 
@@ -7382,7 +7378,7 @@ CLOSED: [2023-12-02 Sat 16:26 EST]
 :EXPORT_FILE_NAME: acme
 :CUSTOM_ID: acme
 :header-args:nix+: :code-license MIT
-:EXPORT_HUGO_LASTMOD: [2023-12-02 Sat 19:54 EST]
+:EXPORT_HUGO_LASTMOD: [2023-12-03 Sun 00:09 EST]
 :END:
 
 #+begin_description
@@ -7409,12 +7405,8 @@ The configuration is almost straight out of the [[https://nixos.org/manual/nixos
 
 *** Flake module
 
-All Cromulent outputs are packaged as flake modules for consistent
+All Cromulent outputs are packaged as [[https://flake.parts/][flake parts]] for consistent
 composition.
-
-#+begin_src nix :exports none :noweb-ref flake-modules
-  ./acme
-#+end_src
 
 #+begin_src nix :tangle ../../gen/flake/acme/default.nix
   {

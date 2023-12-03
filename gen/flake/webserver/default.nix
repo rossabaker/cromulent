@@ -1,9 +1,3 @@
-{ self, ... }:
 {
-  flake.nixosModules.webserver = {
-    imports = [
-      self.nixosModules.acme
-      ./nixos-module.nix
-    ];
-  };
+  flake.nixosModules.webserver = ./nixos-module.nix;
 }
