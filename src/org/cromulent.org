@@ -8253,7 +8253,7 @@ market:
 CLOSED: [2023-12-02 Sat 01:02 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: december-adventure
-:EXPORT_HUGO_LASTMOD: [2023-12-02 Sat 16:33 EST]
+:EXPORT_HUGO_LASTMOD: [2023-12-03 Sun 00:27 EST]
 :END:
 
 *** 2023
@@ -8290,6 +8290,7 @@ I want to continue my movement toward self-hosting:
 - Set up a [[#webserver][webserver flake module]] to self-host this site at a
   temporary subdomain.
 - Set up an [[https://nixos.org/manual/nixos/stable/#module-security-acme-prerequisites][ACME flake module]] to manage certificates.
+- Added a [[https://git.rossabaker.com/ross/forgejo_proof][Forgejo identity claim]] to my [[https://keyoxide.org/wkd/ross%40rossabaker.com][Keyoxide profile]].
 
 * Talks section
 :PROPERTIES:
