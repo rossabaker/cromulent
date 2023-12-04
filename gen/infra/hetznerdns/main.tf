@@ -75,7 +75,7 @@ resource "hetznerdns_record" "com_rossabaker_mx_pobox" {
   zone_id = hetznerdns_zone.com_rossabaker.id
   type    = "MX"
   name    = "@"
-  value   = "10 mx-${count.index + 1}.pobox.com"
+  value   = "10 mx-${count.index + 1}.pobox.com."
 }
 
 resource "hetznerdns_record" "com_rossabaker_spf" {
