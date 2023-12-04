@@ -3,6 +3,7 @@
 #+MACRO: abbr @@html:<abbr title="$1">$2</abbr>@@
 #+MACRO: dfn @@html:<dfn>$1</dfn>@@
 #+PROPERTY: header-args :eval never :mkdirp yes :code-license CC-BY-SA-4.0
+#+PROPERTY: header-args:terraform+: :code-license CC0-1.0
 
 # Automatically set the Hugo date: https://ox-hugo.scripter.co/doc/dates/#date
 #+STARTUP: logdone
@@ -6777,8 +6778,9 @@ Configurations for various hosts, mostly with NixOS or Nix-Darwin.
 CLOSED: [2023-11-19 Sun 19:16 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: abe
-:EXPORT_HUGO_LASTMOD: [2023-12-03 Sun 00:09 EST]
+:EXPORT_HUGO_LASTMOD: [2023-12-03 Sun 22:13 EST]
 :CUSTOM_ID: abe
+:header-args:terraform+: :code-license CC0-1.0
 :END:
 
 #+begin_description
@@ -6790,9 +6792,9 @@ driver, so it was picked up on [[https://www.hetzner.com/sb][server auction]] to
 
 **** Provisioning
 
-Ideally, it would be provisioned by [[https://opentofu.org/][OpenTofu]], but Hetzner Robot
-instances aren't as ephemeral as Hetzner Cloud.  NixOS was installed
-from the rescue image with a [[https://github.com/nix-community/nixos-install-scripts/blob/5dc786009cf8595090bfa8e337df2ff1693e825a/hosters/hetzner-dedicated/hetzner-dedicated-wipe-and-install-nixos.sh][Nix community script]].
+Ideally, the entire server would provisioned by [[https://opentofu.org/][OpenTofu]], but Hetzner
+Robot instances aren't as ephemeral as Hetzner Cloud.  NixOS was
+installed from the rescue image with a [[https://github.com/nix-community/nixos-install-scripts/blob/5dc786009cf8595090bfa8e337df2ff1693e825a/hosters/hetzner-dedicated/hetzner-dedicated-wipe-and-install-nixos.sh][Nix community script]].
 
 **** Base configuration
 
@@ -7098,6 +7100,87 @@ are published as a flake module.
           };
       });
   }
+#+end_src
+
+
+**** DNS entries
+
+~abe~ is the owner of several DNS records, as [[#dns][managed by OpenTofu]].
+Its full name is ~abe.hetzner.rossabaker.com~.
+
+#+begin_aside
+This haphazardly weaves OpenTofu with Nix, such that the inclusion of
+a module requires a DNS entry managed by another tool.  [[https://terranix.org/][Terranix]] might
+be a solution.
+#+end_aside
+
+***** IP addresses
+
+Foremost is the server address.  ~A~ is IPv4, and ~AAAA~ is IPv6.
+
+#+begin_src terraform :tangle ../../gen/infra/hetznerdns/main.tf
+  resource "hetznerdns_record" "com_rossabaker_hetzner_abe_a" {
+    zone_id = hetznerdns_zone.com_rossabaker.id
+    type     = "A"
+    name     = "abe.hetzner"
+    value    = "95.216.32.37"
+  }
+
+  resource "hetznerdns_record" "com_rossabaker_hetzner_abe_aaaa" {
+    zone_id = hetznerdns_zone.com_rossabaker.id
+    type     = "AAAA"
+    name     = "abe.hetzner"
+    value    = "2a01:4f9:2a:2047::1"
+  }
+#+end_src
+
+***** Canonical names
+
+When we mixed in certain NixOS services, we also took responsibility
+for the subdomains they declared.
+
+For ~forgejo~:
+
+#+begin_src terraform :tangle ../../gen/infra/hetznerdns/main.tf
+  resource "hetznerdns_record" "com_rossabaker_git" {
+    zone_id = hetznerdns_zone.com_rossabaker.id
+    type     = "CNAME"
+    name     = "git"
+    value    = "abe.hetzner.rossabaker.com."
+  }
+#+end_src
+
+For ~synapse~:
+
+#+begin_src terraform :tangle ../../gen/infra/hetznerdns/main.tf
+  resource "hetznerdns_record" "com_rossabaker_matrix" {
+    zone_id = hetznerdns_zone.com_rossabaker.id
+    type     = "CNAME"
+    name     = "matrix"
+    value    = "abe.hetzner.rossabaker.com."
+  }
+#+end_src
+
+For ~mastodon~:
+
+#+begin_src terraform :tangle ../../gen/infra/hetznerdns/main.tf
+  resource "hetznerdns_record" "com_rossabaker_social" {
+    zone_id = hetznerdns_zone.com_rossabaker.id
+    type     = "CNAME"
+    name     = "social"
+    value    = "abe.hetzner.rossabaker.com."
+  }
+#+end_src
+
+For ~webserver~:
+
+#+begin_src terraform :tangle ../../gen/infra/hetznerdns/main.tf
+resource "hetznerdns_record" "com_rossabaker_www_beta" {
+  zone_id = hetznerdns_zone.com_rossabaker.id
+  type     = "CNAME"
+  name     = "beta.www"
+  value    = "abe.hetzner.rossabaker.com."
+}
 #+end_src
 
 ** DONE Monitoring a NixOS server with Netdata Cloud
@@ -7411,6 +7494,262 @@ composition.
 #+begin_src nix :tangle ../../gen/flake/acme/default.nix
   {
     flake.nixosModules.acme = ./nixos-module.nix;
+  }
+#+end_src
+
+** DONE Declarative DNS with Hetzner DNS and OpenTofu
+CLOSED: [2023-12-03 Sun 21:26 EST]
+:PROPERTIES:
+:EXPORT_FILE_NAME: dns
+:CUSTOM_ID: dns
+:header-args:sh+: :code-license CC0-1.0
+:header-args:terraform+: :code-license CC0-1.0
+:EXPORT_HUGO_LASTMOD: [2023-12-04 Mon 00:20 EST]
+:END:
+
+#+begin_description
+Sets up a DNS zone for rossabaker.com in Hetzner DNS with OpenTofu.
+#+end_description
+
+The services hosted at ~rossabaker.com~ require multiple DNS entries.
+[[https://opentofu.org/][OpenTofu]] is used to manage them in a similar declarative spirit to the
+rest of this ecosystem.
+
+#+begin_aside
+OpenTofu is a [[https://opentofu.org/manifesto][fork of Terraform]] after the latter's adoption of a BUSL
+license.  This fork is new in 2023, and the word ~terraform~ is still
+frequently encountered even under OpenTofu.
+#+end_aside
+
+*** Choosing a host
+
+~rossabaker.com~ is registered with Namecheap, who has been a fine
+registrar and hosted the DNS for years.  However, I don't meet their
+requirements for [[https://www.namecheap.com/support/api/intro/][API access]].  This was a frustrating discovery after
+getting their sandbox working, but I digress.
+
+[[https://www.hetzner.com/dns-console][Hetzner DNS]] is a free product with a working API.  Their Cloud and
+Robot experiences have been good thus far, so I'm setting up shop
+there.  An [[https://docs.hetzner.com/dns-console/dns/general/api-access-token/][API access token]] is required.
+
+*** Provider
+
+OpenTofu plugins are called "providers," which are often written by
+third parties.  The [[https://registry.terraform.io/providers/timohirt/hetznerdns/latest/docs][~hetznerdns~ provider]] is no exception.
+
+#+begin_src terraform :tangle ../../gen/infra/hetznerdns/terraform.tf
+  terraform {
+    required_providers {
+      hetznerdns = {
+        source = "timohirt/hetznerdns"
+        version = "2.2.0"
+      }
+    }
+  }
+#+end_src
+
+This provider is better documented in [[https://github.com/timohirt/terraform-provider-hetznerdns/][its README]].
+
+**** Authentication
+
+It is possible to store the API access token in either a file or an
+environment variable.  I'm going to manage it out of band as an
+environment variable for now, and consider something slicker later.
+
+**** Initialization
+
+The provider must be initialized before first use.
+
+#+name: wrap-example
+#+begin_src emacs-lisp :var text="" :exports none
+  (concat "#+begin_example\n" text "\n#+end_example\n")
+#+end_src
+
+#+begin_info
+The generated Terraform is in the ~gen/infra/hetznerdns~ directory of
+the Cromulent root.  All commands should be run from there.
+#+end_info
+
+#+begin_src sh :cache yes :dir ../../gen/infra/hetznerdns :exports both :results verbatim :wrap details :post wrap-example(text=*this*) :code-license CC0-1.0
+  tofu init
+#+end_src
+
+*** DNS zone for ~rossabaker.com~
+
+All DNS records need to belong to a {{{dfn(DNS zone)}}}, which
+corresponds to a domain and all its subdomains.
+
+#+begin_aside
+The old Java programmer in me is going to give all the OpenTofu
+resources a reverse-domain name so they alphabetize neatly, but do
+what you like.
+#+end_aside
+
+#+begin_src terraform :tangle ../../gen/infra/hetznerdns/main.tf
+resource "hetznerdns_zone" "com_rossabaker" {
+  name = "rossabaker.com"
+  ttl  = 300
+}
+#+end_src
+
+**** Records
+
+The zone is full of {{{dfn(records)}}}.  A full tutorial is out of
+scope, but common types include:
+
+- ~A~ :: maps a domain to an IPv4 address
+- ~AAAA~ :: maps a domain to an IPv6 address
+- ~CNAME~ :: maps a domain to another domain as a "canonical name"
+- ~TXT~ :: a text record, usually used for ownership verification
+
+***** Domain verification
+
+This ~TXT~ record is an [[https://docs.keyoxide.org/service-providers/dns/][identity proof]] claimed in my [[https://keyoxide.org/wkd/ross%40rossabaker.com][OpenPGP profile]].
+
+#+begin_src terraform :tangle ../../gen/infra/hetznerdns/main.tf
+resource "hetznerdns_record" "com_rossabaker_openpgp4fpr" {
+  zone_id = hetznerdns_zone.com_rossabaker.id
+  type     = "TXT"
+  name     = "@"
+  value    = "openpgp4fpr:904c153733dbb0106915c0bd975be5bc29d92ca5"
+}
+#+end_src
+
+***** But wait, there's more!
+
+The OpenTofu declarations of other records are documented with the
+machines or services that need them, but can be found in the same
+~gen/infra/hetznerdns~ directory.
+
+***** Interim records :noexport:
+
+These are part of our interim Netlify solution.  They aren't worth
+documenting, but it would bring down the site if we didn't keep them.
+
+#+begin_src terraform :tangle ../../gen/infra/hetznerdns/main.tf
+  resource "hetznerdns_record" "com_rossabaker_apex" {
+    zone_id = hetznerdns_zone.com_rossabaker.id
+    type     = "A"
+    name     = "@"
+    value    = "75.2.60.5"
+  }
+
+  resource "hetznerdns_record" "com_rossabaker_www" {
+    zone_id = hetznerdns_zone.com_rossabaker.id
+    type     = "CNAME"
+    name     = "www"
+    value    = "rossabaker.com."
+  }
+#+end_src
+
+*** Applying
+
+~plan~ is a dry run.  It will not make any destructive changes.
+
+#+begin_src sh :eval no-export :exports code :dir ../../gen/infra/hetznerdns :results verbatim
+  tofu plan
+#+end_src
+
+~apply~ applies the plan.  It will reshow the plan and ask for confirmation.
+
+#+begin_warning
+Read carefully.  It might delete your records.  I got careless and
+lost my first Mastodon instance this way.
+#+end_warning
+
+#+begin_src sh :eval no :dir ../../gen/infra/hetznerdns
+  tofu apply
+#+end_src
+
+*** Gitignores
+
+OpenTofu dumps information about its providers and the known state of
+the infrastructure in the same directory as the declarations.  Those
+don't belong in git.
+
+#+begin_aside
+There's nothing specific to Hetzner DNS here.  These should be wildcard
+ignores if we ever add more OpenTofu projects.
+#+end_aside
+
+#+begin_src gitignore :tangle ../../.gitignore :code-license CC0-1.0
+  gen/infra/hetznerdns/.terraform/
+  gen/infra/hetznerdns/*.tfstate
+  gen/infra/hetznerdns/*.tfstate.*
+#+end_src
+
+** DONE Forwarding email with pobox.com
+CLOSED: [2023-12-03 Sun 23:59 EST]
+:PROPERTIES:
+:EXPORT_FILE_NAME: email
+:header-args:terraform+: :code-license CC0-1.0
+:EXPORT_HUGO_LASTMOD: [2023-12-04 Mon 00:17 EST]
+:CUSTOM_ID: pobox
+:END:
+
+#+begin_description
+Defines the DNS entries necessary to forward mail.
+#+end_description
+
+I would love to self-host Email, but [[https://cfenollosa.com/blog/after-self-hosting-my-email-for-twenty-three-years-i-have-thrown-in-the-towel-the-oligopoly-has-won.html][the oligopoly has won]].  I
+switched to [[https://www.pobox.com/][pobox.com]] when my forwarder became insufficient.
+
+*** DNS
+
+**** ~MX~ records
+
+To deliver my mail, these ~MX~ records are required in our [[#dns][Hetzner DNS
+project]].
+
+#+begin_src terraform :tangle ../../gen/infra/hetznerdns/main.tf
+  locals {
+    poboxes = range(1, 6)
+  }
+
+  resource "hetznerdns_record" "com_rossabaker_mx_pobox" {
+    count   = length(local.poboxes)
+    zone_id = hetznerdns_zone.com_rossabaker.id
+    type    = "MX"
+    name    = "@"
+    value   = "10 mx-${count.index + 1}.pobox.com"
+  }
+#+end_src
+
+**** ~SPF~
+
+All mail from ~rossabaker.com~ goes through ~pobox.com~.  Declaring
+this with an [[https://datatracker.ietf.org/doc/html/rfc7208][{{{abbr(Sender Policy Framework,SPF)}}}]] record helps
+protect against spoofs and spams.
+
+#+begin_warning
+Values containing spaces [[https://github.com/timohirt/terraform-provider-hetznerdns#example-usage][need to be JSON encoded]].
+#+end_warning
+
+#+begin_src terraform :tangle ../../gen/infra/hetznerdns/main.tf
+  resource "hetznerdns_record" "com_rossabaker_spf" {
+    zone_id = hetznerdns_zone.com_rossabaker.id
+    type     = "TXT"
+    name     = "@"
+    value    = jsonencode("v=spf1 include:pobox.com -all")
+  }
+#+end_src
+
+**** ~DKIM~
+
+To further the fight against spoofs and spams, ~pobox.com~ signs
+messages with a [[https://datatracker.ietf.org/doc/html/rfc8463][{{{abbr(DomainKeys Identified Mail,DKIM)}}} key]].
+The public key needs to be published as a ~TXT~ record:
+
+#+begin_warning
+Values containing spaces [[https://github.com/timohirt/terraform-provider-hetznerdns#example-usage][need to be JSON encoded]].
+#+end_warning
+
+#+begin_src terraform :tangle ../../gen/infra/hetznerdns/main.tf
+  resource "hetznerdns_record" "com_rossabaker_dkim" {
+    zone_id = hetznerdns_zone.com_rossabaker.id
+    type     = "TXT"
+    name     = "@"
+    value    = jsonencode("v=DKIM1; k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDIfBzlZiuOljOEgYr0nrIieWvmn9x4mrXlIqgw64oasNb/wn62Yai4APbQ4rAdwwEj2vI0FVs2Y5oTUKmPq+RSsWJKmdEWjv9zUKK+GNjVJ0mVBX75vU1nEwWUeS+Wz4haQxMVXQRrbCovQNoQjFcSX9ERdAbZVzXsf/0kDNzdiQIDAQAB")
   }
 #+end_src
 
@@ -8253,7 +8592,7 @@ market:
 CLOSED: [2023-12-02 Sat 01:02 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: december-adventure
-:EXPORT_HUGO_LASTMOD: [2023-12-03 Sun 00:27 EST]
+:EXPORT_HUGO_LASTMOD: [2023-12-04 Mon 00:26 EST]
 :END:
 
 *** 2023
@@ -8291,6 +8630,11 @@ I want to continue my movement toward self-hosting:
   temporary subdomain.
 - Set up an [[https://nixos.org/manual/nixos/stable/#module-security-acme-prerequisites][ACME flake module]] to manage certificates.
 - Added a [[https://git.rossabaker.com/ross/forgejo_proof][Forgejo identity claim]] to my [[https://keyoxide.org/wkd/ross%40rossabaker.com][Keyoxide profile]].
+
+**** December 3
+
+- Prepared to move my [[#dns][DNS]] to Hetzner DNS with OpenTofu.
+- Documented my [[#pobox][~pobox.com~ setup]]
 
 * Talks section
 :PROPERTIES:

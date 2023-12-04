@@ -6,3 +6,7 @@
 
 /tmp/hugo/
 /.hugo_build.lock
+
+gen/infra/hetznerdns/.terraform/
+gen/infra/hetznerdns/*.tfstate
+gen/infra/hetznerdns/*.tfstate.*
