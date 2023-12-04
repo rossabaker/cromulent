@@ -7683,7 +7683,7 @@ CLOSED: [2023-12-03 Sun 23:59 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: email
 :header-args:terraform+: :code-license CC0-1.0
-:EXPORT_HUGO_LASTMOD: [2023-12-04 Mon 15:57 EST]
+:EXPORT_HUGO_LASTMOD: [2023-12-04 Mon 16:41 EST]
 :CUSTOM_ID: pobox
 :END:
 
@@ -7748,7 +7748,7 @@ Values containing spaces [[https://github.com/timohirt/terraform-provider-hetzne
   resource "hetznerdns_record" "com_rossabaker_dkim" {
     zone_id = hetznerdns_zone.com_rossabaker.id
     type     = "TXT"
-    name     = "2020-06.pbsmtp._domainkey.rossabaker.com"
+    name     = "2020-06.pbsmtp._domainkey"
     value    = jsonencode("v=DKIM1; k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDIfBzlZiuOljOEgYr0nrIieWvmn9x4mrXlIqgw64oasNb/wn62Yai4APbQ4rAdwwEj2vI0FVs2Y5oTUKmPq+RSsWJKmdEWjv9zUKK+GNjVJ0mVBX75vU1nEwWUeS+Wz4haQxMVXQRrbCovQNoQjFcSX9ERdAbZVzXsf/0kDNzdiQIDAQAB")
   }
 #+end_src
