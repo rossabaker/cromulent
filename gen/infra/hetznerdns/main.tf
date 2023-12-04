@@ -88,6 +88,6 @@ resource "hetznerdns_record" "com_rossabaker_spf" {
 resource "hetznerdns_record" "com_rossabaker_dkim" {
   zone_id = hetznerdns_zone.com_rossabaker.id
   type     = "TXT"
-  name     = "@"
+  name     = "2020-06.pbsmtp._domainkey.rossabaker.com"
   value    = jsonencode("v=DKIM1; k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDIfBzlZiuOljOEgYr0nrIieWvmn9x4mrXlIqgw64oasNb/wn62Yai4APbQ4rAdwwEj2vI0FVs2Y5oTUKmPq+RSsWJKmdEWjv9zUKK+GNjVJ0mVBX75vU1nEwWUeS+Wz4haQxMVXQRrbCovQNoQjFcSX9ERdAbZVzXsf/0kDNzdiQIDAQAB")
 }
