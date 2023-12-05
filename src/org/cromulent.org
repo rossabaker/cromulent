@@ -7757,123 +7757,21 @@ Values containing spaces [[https://github.com/timohirt/terraform-provider-hetzne
   }
 #+end_src
 
-* Projects section
-:PROPERTIES:
-:EXPORT_HUGO_BUNDLE: projects
-:END:
-** DONE Projects
-CLOSED: [2022-11-07 Mon 22:35 EST]
-:PROPERTIES:
-:EXPORT_FILE_NAME: _index
-:END:
-** DONE Web Key Directory                         :pgp:wkd:indieweb:noexport:
-CLOSED:
-:PROPERTIES:
-:EXPORT_DATE: [2022-11-02 Wed 23:39 EDT]
-:EXPORT_HUGO_LASTMOD: [2022-11-15 Tue 16:22 EST]
-:EXPORT_FILE_NAME: web-key-directory
-:HEADER-ARGS+: :eval yes
-:END:
-
-#+begin_description
-  Walks through publishing a public key with the Web Key Directory (WKD) protocol.
-#+end_description
-
-#+begin_src text :tangle ../../tmp/hugo/static/_redirects :exports none
-  /configs/web-directory /configs/web-key-directory
-  /projects/web-key-directory /configs/web-key-directory
-#+end_src
-
-** DONE Personal Weather Station             :@personal:weather:indianapolis:
-CLOSED: [2022-08-28 Sun 21:03 EDT]
-:PROPERTIES:
-:EXPORT_FILE_NAME: personal-weather-station
-:EXPORT_DESCRIPTION: Data from my personal weather station in Indianapolis, Indiana.
-:EXPORT_HUGO_LASTMOD: [2022-09-07 Wed 00:00 EDT]
-:END:
-
-I run an [[https://ambientweather.net/][Ambient Weather]] WS-1400-IP weather station in the Castleton
-neighborhood of Indianapolis and share its [[https://ambientweather.net/devices/public/b78b5bb0e59646a78a623a940937335c][public dashboard]].  The
-anemometer is not raised high enough for accuracy, but the rest is
-reasonably accurate.
-
-#+begin_aside
-I learned on 2022-09-06 that the [[https://www.ind.com/business/general-aviation-airports/metropolitan-airport][Indianapolis Metropolitan Airport]] is
-now [[https://aviationweather.gov/metar/data?ids=kump&format=decoded&hours=24&taf=off&layout=on][publishing METAR data]].  That airport is just a mile away, and
-certainly has a more credible weather station, but it's fun to compare
-to mine.
-#+end_aside
-
-#+begin_export html
-  <iframe class="weather-station" src="https://ambientweather.net/devices/public/b78b5bb0e59646a78a623a940937335c?embed=true"></iframe>
-#+end_export
-
-#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css :exports none
-  .weather-station {
-      width: 500px;
-      height: 400px;
-      max-width: 100%;
-      display: block;
-      margin: 1.5em auto;
-  }
-#+end_src
-
-** Books                                                               :book:
-*** DONE Scalatra in Action           :@tech:scala:scalatra:http:sbt:scalate:
-CLOSED: [2022-11-21 Mon 21:03 EST]
-:PROPERTIES:
-:EXPORT_FILE_NAME: scalatra-in-action
-:EXPORT_DATE: <2016-05-23 Mon>
-:EXPORT_HUGO_PUBLISHDATE: [2022-08-30 Tue 22:44 EDT]
-:EXPORT_HUGO_LASTMOD: [2022-08-30 Tue 22:44 EDT]
-:END:
-
-[[https://www.manning.com/books/scalatra-in-action][Scalatra in Action]] was written by [[https://constructiveproof.com/][Dave Hrycyszyn,]] Stefan Ollinger, and
-me and covers the [[https://scalatra.org/][Scalatra micro-framework]] in depth.  Scalatra is a
-port of Ruby's Sinatra to Scala.
-
-#+hugo:more
-
-#+attr_html: :alt Scalatra in Action book cover :class scalatra-in-action
-[[https://www.manning.com/books/scalatra-in-action][file:../hugo/static/img/scalatra-in-action.jpg]]
-
-From the publisher:
-
-#+begin_quote
-_Scalatra in Action_ covers the Scalatra framework in its entirety,
-starting with concepts such as request routing, input handling,
-actions, and HTTP responses. For readers who don't already know Scala,
-the book introduces the Scala language and sbt, the Simple Build
-Tool. You'll learn how to use Scalatra's powerful template engine,
-Scalate. It also covers advanced topics such as data access, handling
-heavy load, asynchronicity, securing your application, designing
-RESTful APIs, and real-time web programming.
-#+end_quote
-
-#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css :exports none
-  figure.scalatra-in-action {
-      margin: 0 auto;
-      max-width: 360px;
-      max-height: 452px
-  }
-
-  .scalatra-in-action {
-      display: block;
-      width: auto;
-      height: auto;
-      margin: 0 auto;
-  }
-#+end_src
-
 ** DONE Self-hosting a Matrix home server with Synapse :@tech:matrix:synapse:
 CLOSED: [2022-11-21 Mon 21:03 EST]
 :PROPERTIES:
-:EXPORT_FILE_NAME: matrix-home-server
+:EXPORT_FILE_NAME: matrix
 :EXPORT_DATE: [2022-05-05 Thu 17:27 EDT]
-:EXPORT_HUGO_LASTMOD: [2023-12-05 Tue 16:13 EST]
+:EXPORT_HUGO_LASTMOD: [2023-12-05 Tue 16:19 EST]
 :header-args+: :code-license CC0-1.0
 :header-args:nix+: :code-license MIT
 :END:
+
+#+begin_description
+Walks through how to set up a Matrix home server on NixOS.  Uses
+Synapse, PostgreSQL, and a reverse Nginx proxy.  Also covers the
+.well-known URI on the apex domain, and CORS headers for Netlify.
+#+end_description
 
 [[https://matrix.org/][{{{dfn(Matrix)}}}]] is a decentralized communication protocol.  It is
 capable of many things, but I primarily use it for public chats on
@@ -8030,6 +7928,121 @@ The well-known files need CORS headers.  If deploying to Netlify, add this to ~n
     for = "/.well-known/matrix/*"
     [headers.values]
       Access-Control-Allow-Origin = "*"
+#+end_src
+
+*** Redirects                                                      :noexport:
+
+#+begin_src text :tangle ../../tmp/hugo/static/_redirects :exports none
+  /projects/matrix-home-server /configs/matrix
+#+end_src
+
+
+* Projects section
+:PROPERTIES:
+:EXPORT_HUGO_BUNDLE: projects
+:END:
+** DONE Projects
+CLOSED: [2022-11-07 Mon 22:35 EST]
+:PROPERTIES:
+:EXPORT_FILE_NAME: _index
+:END:
+** DONE Web Key Directory                         :pgp:wkd:indieweb:noexport:
+CLOSED:
+:PROPERTIES:
+:EXPORT_DATE: [2022-11-02 Wed 23:39 EDT]
+:EXPORT_HUGO_LASTMOD: [2022-11-15 Tue 16:22 EST]
+:EXPORT_FILE_NAME: web-key-directory
+:HEADER-ARGS+: :eval yes
+:END:
+
+#+begin_description
+  Walks through publishing a public key with the Web Key Directory (WKD) protocol.
+#+end_description
+
+#+begin_src text :tangle ../../tmp/hugo/static/_redirects :exports none
+  /configs/web-directory /configs/web-key-directory
+  /projects/web-key-directory /configs/web-key-directory
+#+end_src
+
+** DONE Personal Weather Station             :@personal:weather:indianapolis:
+CLOSED: [2022-08-28 Sun 21:03 EDT]
+:PROPERTIES:
+:EXPORT_FILE_NAME: personal-weather-station
+:EXPORT_DESCRIPTION: Data from my personal weather station in Indianapolis, Indiana.
+:EXPORT_HUGO_LASTMOD: [2022-09-07 Wed 00:00 EDT]
+:END:
+
+I run an [[https://ambientweather.net/][Ambient Weather]] WS-1400-IP weather station in the Castleton
+neighborhood of Indianapolis and share its [[https://ambientweather.net/devices/public/b78b5bb0e59646a78a623a940937335c][public dashboard]].  The
+anemometer is not raised high enough for accuracy, but the rest is
+reasonably accurate.
+
+#+begin_aside
+I learned on 2022-09-06 that the [[https://www.ind.com/business/general-aviation-airports/metropolitan-airport][Indianapolis Metropolitan Airport]] is
+now [[https://aviationweather.gov/metar/data?ids=kump&format=decoded&hours=24&taf=off&layout=on][publishing METAR data]].  That airport is just a mile away, and
+certainly has a more credible weather station, but it's fun to compare
+to mine.
+#+end_aside
+
+#+begin_export html
+  <iframe class="weather-station" src="https://ambientweather.net/devices/public/b78b5bb0e59646a78a623a940937335c?embed=true"></iframe>
+#+end_export
+
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css :exports none
+  .weather-station {
+      width: 500px;
+      height: 400px;
+      max-width: 100%;
+      display: block;
+      margin: 1.5em auto;
+  }
+#+end_src
+
+** Books                                                               :book:
+*** DONE Scalatra in Action           :@tech:scala:scalatra:http:sbt:scalate:
+CLOSED: [2022-11-21 Mon 21:03 EST]
+:PROPERTIES:
+:EXPORT_FILE_NAME: scalatra-in-action
+:EXPORT_DATE: <2016-05-23 Mon>
+:EXPORT_HUGO_PUBLISHDATE: [2022-08-30 Tue 22:44 EDT]
+:EXPORT_HUGO_LASTMOD: [2022-08-30 Tue 22:44 EDT]
+:END:
+
+[[https://www.manning.com/books/scalatra-in-action][Scalatra in Action]] was written by [[https://constructiveproof.com/][Dave Hrycyszyn,]] Stefan Ollinger, and
+me and covers the [[https://scalatra.org/][Scalatra micro-framework]] in depth.  Scalatra is a
+port of Ruby's Sinatra to Scala.
+
+#+hugo:more
+
+#+attr_html: :alt Scalatra in Action book cover :class scalatra-in-action
+[[https://www.manning.com/books/scalatra-in-action][file:../hugo/static/img/scalatra-in-action.jpg]]
+
+From the publisher:
+
+#+begin_quote
+_Scalatra in Action_ covers the Scalatra framework in its entirety,
+starting with concepts such as request routing, input handling,
+actions, and HTTP responses. For readers who don't already know Scala,
+the book introduces the Scala language and sbt, the Simple Build
+Tool. You'll learn how to use Scalatra's powerful template engine,
+Scalate. It also covers advanced topics such as data access, handling
+heavy load, asynchronicity, securing your application, designing
+RESTful APIs, and real-time web programming.
+#+end_quote
+
+#+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css :exports none
+  figure.scalatra-in-action {
+      margin: 0 auto;
+      max-width: 360px;
+      max-height: 452px
+  }
+
+  .scalatra-in-action {
+      display: block;
+      width: auto;
+      height: auto;
+      margin: 0 auto;
+  }
 #+end_src
 
 ** DONE Archive your toots to Hugo :@tech:scala:scala_cli:indieweb:hugo:pesos:mastodon:activity_streams:own_your_data:fs2:circe:
