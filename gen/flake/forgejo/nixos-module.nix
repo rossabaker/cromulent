@@ -10,6 +10,7 @@ in
       };
       server = {
         ROOT_URL = "https://${domain}/";
+        LANDING_PAGE = "explore";
       };
     };
   };

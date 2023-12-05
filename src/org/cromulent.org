@@ -7333,7 +7333,7 @@ CLOSED: [2023-12-01 Fri 18:25 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: forgejo
 :header-args:nix+: :code-license MIT
-:EXPORT_HUGO_LASTMOD: [2023-12-01 Fri 19:37 EST]
+:EXPORT_HUGO_LASTMOD: [2023-12-05 Tue 18:44 EST]
 :END:
 
 #+begin_description
@@ -7361,6 +7361,7 @@ How to self-host Git repositories with Forgejo on NixOS.
         };
         server = {
           ROOT_URL = "https://${domain}/";
+          LANDING_PAGE = "explore";
         };
       };
     };
@@ -8603,7 +8604,7 @@ market:
 CLOSED: [2023-12-02 Sat 01:02 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: december-adventure
-:EXPORT_HUGO_LASTMOD: [2023-12-05 Tue 18:42 EST]
+:EXPORT_HUGO_LASTMOD: [2023-12-05 Tue 18:47 EST]
 :END:
 
 #+begin_description
@@ -8659,7 +8660,8 @@ I want to continue my movement toward self-hosting:
 **** December 5
 
 - Air travel today.  Some offline cleanup tasks.
-- Set up 2FA on Forgejo.  This is not a code change.
+- Set up 2FA on [[https://git.rossabaker.com/][Forgejo]].  This is not a code change.
+- Set the landing page on Forgejo the "explore" view.
 
 * Talks section
 :PROPERTIES:
