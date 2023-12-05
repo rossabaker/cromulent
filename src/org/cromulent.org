@@ -8592,7 +8592,7 @@ market:
 CLOSED: [2023-12-02 Sat 01:02 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: december-adventure
-:EXPORT_HUGO_LASTMOD: [2023-12-04 Mon 00:26 EST]
+:EXPORT_HUGO_LASTMOD: [2023-12-04 Mon 23:58 EST]
 :END:
 
 *** 2023
@@ -8635,6 +8635,10 @@ I want to continue my movement toward self-hosting:
 
 - Prepared to move my [[#dns][DNS]] to Hetzner DNS with OpenTofu.
 - Documented my [[#pobox][~pobox.com~ setup]]
+
+**** December 4
+
+- Moved to Hetzner DNS.  Mind those trailing periods!
 
 * Talks section
 :PROPERTIES:
