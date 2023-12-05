@@ -42,7 +42,7 @@ resource "hetznerdns_record" "com_rossabaker_www_beta" {
 
 resource "hetznerdns_zone" "com_rossabaker" {
   name = "rossabaker.com"
-  ttl  = 300
+  ttl  = 8 * 60 * 60 # seconds
 }
 
 resource "hetznerdns_record" "com_rossabaker_openpgp4fpr" {

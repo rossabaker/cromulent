@@ -7504,7 +7504,7 @@ CLOSED: [2023-12-03 Sun 21:26 EST]
 :CUSTOM_ID: dns
 :header-args:sh+: :code-license CC0-1.0
 :header-args:terraform+: :code-license CC0-1.0
-:EXPORT_HUGO_LASTMOD: [2023-12-04 Mon 00:20 EST]
+:EXPORT_HUGO_LASTMOD: [2023-12-04 Mon 23:57 EST]
 :END:
 
 #+begin_description
@@ -7588,7 +7588,7 @@ what you like.
 #+begin_src terraform :tangle ../../gen/infra/hetznerdns/main.tf
 resource "hetznerdns_zone" "com_rossabaker" {
   name = "rossabaker.com"
-  ttl  = 300
+  ttl  = 8 * 60 * 60 # seconds
 }
 #+end_src
 
