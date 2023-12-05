@@ -7870,15 +7870,10 @@ CLOSED: [2022-11-21 Mon 21:03 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: matrix-home-server
 :EXPORT_DATE: [2022-05-05 Thu 17:27 EDT]
-:EXPORT_HUGO_LASTMOD: [2023-11-29 Wed 20:08 EST]
+:EXPORT_HUGO_LASTMOD: [2023-12-05 Tue 16:13 EST]
 :header-args+: :code-license CC0-1.0
 :header-args:nix+: :code-license MIT
 :END:
-
-#+begin_info
-This is no longer true.  Synapse runs on my [[#abe][dedicated Hetzner Robot
-server]] now.  Docs to follow.
-#+end_info
 
 [[https://matrix.org/][{{{dfn(Matrix)}}}]] is a decentralized communication protocol.  It is
 capable of many things, but I primarily use it for public chats on
