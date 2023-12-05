@@ -24,7 +24,7 @@ flake-parts.lib.mkFlake { inherit inputs; } (
       ./keyboard
       ./podman
       ./postgresql
-      ./modern_ts
+      # ./modern_ts
       ./hosts/abe
       ./netdata
       ./forgejo
