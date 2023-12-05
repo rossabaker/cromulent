@@ -7898,7 +7898,7 @@ A trivial wrapper.  All the heavy lifting is done in nixos-module.nix.
 Federation is configured via the ~.well-known~ directory.  All we need
 are two static files:
 
-***** ~/.well-known/matrix/server~
+**** ~/.well-known/matrix/server~
 
 #+begin_src json :tangle "../../tmp/hugo/static/.well-known/matrix/server" :eval no :mkdirp yes :eval no :mkdirp yes
   {
@@ -7906,7 +7906,7 @@ are two static files:
   }
 #+end_src
 
-***** ~/.well-known/matrix/client~
+**** ~/.well-known/matrix/client~
 
 #+begin_src json :tangle "../../tmp/hugo/static/.well-known/matrix/client" :eval no :mkdirp yes
   {
@@ -7919,7 +7919,7 @@ are two static files:
   }
 #+end_src
 
-***** CORS headers
+**** CORS headers
 
 The well-known files need CORS headers.  If deploying to Netlify, add this to ~netlify.toml~:
 
