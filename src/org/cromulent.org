@@ -8603,7 +8603,7 @@ market:
 CLOSED: [2023-12-02 Sat 01:02 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: december-adventure
-:EXPORT_HUGO_LASTMOD: [2023-12-05 Tue 16:01 EST]
+:EXPORT_HUGO_LASTMOD: [2023-12-05 Tue 18:42 EST]
 :END:
 
 #+begin_description
@@ -8655,6 +8655,11 @@ I want to continue my movement toward self-hosting:
 **** December 4
 
 - Moved to Hetzner DNS.  Mind those trailing periods!
+
+**** December 5
+
+- Air travel today.  Some offline cleanup tasks.
+- Set up 2FA on Forgejo.  This is not a code change.
 
 * Talks section
 :PROPERTIES:
