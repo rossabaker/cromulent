@@ -7491,6 +7491,10 @@ The configuration is almost straight out of the [[https://nixos.org/manual/nixos
 All Cromulent outputs are packaged as [[https://flake.parts/][flake parts]] for consistent
 composition.
 
+#+begin_src nix :exports none :noweb-ref flake-modules
+  ./acme
+#+end_src
+
 #+begin_src nix :tangle ../../gen/flake/acme/default.nix
   {
     flake.nixosModules.acme = ./nixos-module.nix;
