@@ -8592,8 +8592,13 @@ market:
 CLOSED: [2023-12-02 Sat 01:02 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: december-adventure
-:EXPORT_HUGO_LASTMOD: [2023-12-04 Mon 23:58 EST]
+:EXPORT_HUGO_LASTMOD: [2023-12-05 Tue 16:01 EST]
 :END:
+
+#+begin_description
+Notes from an alternative, lower key, less competitive alternative to
+Advent of Code.
+#+end_description
 
 *** 2023
 
