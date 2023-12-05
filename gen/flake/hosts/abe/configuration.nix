@@ -6,7 +6,6 @@
       ./hardware-configuration.nix
       ./users.nix
       ./mastodon.nix
-      ./forgejo.nix
       ./borgbackup.nix
     ];
 

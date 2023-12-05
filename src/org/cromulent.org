@@ -6778,7 +6778,7 @@ Configurations for various hosts, mostly with NixOS or Nix-Darwin.
 CLOSED: [2023-11-19 Sun 19:16 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: abe
-:EXPORT_HUGO_LASTMOD: [2023-12-03 Sun 22:13 EST]
+:EXPORT_HUGO_LASTMOD: [2023-12-05 Tue 18:35 EST]
 :CUSTOM_ID: abe
 :header-args:terraform+: :code-license CC0-1.0
 :END:
@@ -6807,7 +6807,6 @@ installed from the rescue image with a [[https://github.com/nix-community/nixos-
         ./hardware-configuration.nix
         ./users.nix
         ./mastodon.nix
-        ./forgejo.nix
         ./borgbackup.nix
       ];
 
