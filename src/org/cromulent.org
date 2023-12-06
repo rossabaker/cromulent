@@ -1820,7 +1820,7 @@ Mute all the frou-frou.
 #+begin_src css :tangle ../../tmp/hugo/assets/css/cromulent.css
   body > header::before, body > header::after,
   body > header ::before, body > header ::after {
-      font-weight: normal; 
+      font-weight: normal;
       white-space: pre-wrap;
   }
 #+end_src
@@ -5920,6 +5920,10 @@ function of its inputs!
               emacs = self'.packages.emacs-ross;
               src = ../../src;
             };
+          };
+
+          checks = {
+            inherit (self'.packages) website;
           };
 
           devShells.cromulent = pkgs.devshell.mkShell {

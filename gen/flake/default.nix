@@ -72,6 +72,10 @@ flake-parts.lib.mkFlake { inherit inputs; } (
           };
         };
 
+        checks = {
+          inherit (self'.packages) website;
+        };
+
         devShells.cromulent = pkgs.devshell.mkShell {
           name = "cromulent";
 
