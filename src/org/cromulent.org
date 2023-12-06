@@ -364,7 +364,7 @@ CLOSED: [2022-10-16 Sun 15:37 EDT]
 :PROPERTIES:
 :DESCRIPTION: How to contact Ross A. Baker about various subjects via various protocols.
 :EXPORT_FILE_NAME: contact
-:EXPORT_HUGO_LASTMOD: [2023-08-09 Wed 22:12 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-12-05 Tue 21:24 EST]
 :END:
 
 #+begin_description
@@ -391,8 +391,9 @@ I would rather connect in public, where everyone can benefit from the
 discussion.  Most of my open source is hosted on one of the following
 forges:
 
-- GitHub :: [[https://github.com/rossabaker][~@rossabaker~]]
-- Codeberg :: [[https://codeberg.org/rossabaker][~@rossabaker~]]
+- Self-hosted :: [[https://git.rossabaker.com/ross][~@ross~ on ~git.rossabaker.com~]]
+- Codeberg :: [[https://codeberg.org/rossabaker][~@rossabaker~ on ~codeberg.org~]]
+- GitHub :: [[https://github.com/rossabaker][~@rossabaker~ on ~github.com~]]
 
 I also have a published [[#security][security policy]].
 
@@ -2008,7 +2009,7 @@ Mute the header anchors until hover:
 CLOSED: [2022-09-12 Mon 22:11 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: contact-info
-:EXPORT_HUGO_LASTMOD: [2023-08-20 Sun 23:45 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-12-05 Tue 21:13 EST]
 :END:
 
 Contact info is rendered in two places: in the [[*Footer template][footer template]] and on the
@@ -2048,6 +2049,12 @@ Keys are:
   url = 'https://matrix.to/#/@ross:rossabaker.com'
   support = 'supported'
   relMe = false
+
+  [[Params.contacts]]
+  network = 'Forgejo'
+  handle = '@ross'
+  url = 'https://git.rossabaker.com/ross'
+  support = 'supported'
 
   [[Params.contacts]]
   network = 'GitHub'
@@ -8662,6 +8669,7 @@ I want to continue my movement toward self-hosting:
 - Air travel today.  Some offline cleanup tasks.
 - Set up 2FA on [[https://git.rossabaker.com/][Forgejo]].  This is not a code change.
 - Set the landing page on Forgejo the "explore" view.
+- Add Forgejo contact in footer and contacts page.
 
 * Talks section
 :PROPERTIES:
