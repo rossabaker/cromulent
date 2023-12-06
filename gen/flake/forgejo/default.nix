@@ -1,10 +1,3 @@
-{ ... }:
 {
-  flake.nixosModules.forgejo =
-    { ... }:
-    {
-      imports = [
-        ./nixos-module.nix
-      ];
-    };
+  flake.nixosModules.forgejo = ./nixos-module.nix;
 }

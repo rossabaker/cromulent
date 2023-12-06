@@ -7340,7 +7340,7 @@ CLOSED: [2023-12-01 Fri 18:25 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: forgejo
 :header-args:nix+: :code-license MIT
-:EXPORT_HUGO_LASTMOD: [2023-12-05 Tue 18:44 EST]
+:EXPORT_HUGO_LASTMOD: [2023-12-05 Tue 21:42 EST]
 :END:
 
 #+begin_description
@@ -7392,15 +7392,8 @@ How to self-host Git repositories with Forgejo on NixOS.
 *** Flake part
 
 #+begin_src nix :noweb yes :tangle ../../gen/flake/forgejo/default.nix
-  { ... }:
   {
-    flake.nixosModules.forgejo =
-      { ... }:
-      {
-        imports = [
-          ./nixos-module.nix
-        ];
-      };
+    flake.nixosModules.forgejo = ./nixos-module.nix;
   }
 #+end_src
 
