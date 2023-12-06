@@ -2303,7 +2303,7 @@ Our build creates some detritus that we don't want checked into Git.
 CLOSED: [2022-08-30 Tue 14:26 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: style
-:EXPORT_HUGO_LASTMOD: [2023-11-13 Mon 00:29 EST]
+:EXPORT_HUGO_LASTMOD: [2023-12-05 Tue 22:19 EST]
 :CUSTOM_ID: css-baseline
 :header-args+: :code-license MIT
 :header-args:css+: :tangle ../../tmp/hugo/assets/css/cromulent.css
@@ -2582,11 +2582,11 @@ My beloved Indiana Hoosiers wear [[https://www.thedailyhoosier.com/did-you-know-
 The negative margin compensates the margin already on the body.
 
 #+begin_src css
-  body::before, body::after {
+  body::before {
       content: "";
       display: block;
       position: relative;
-      height: 1.6rem;
+      height: 0.6rem;
       margin: calc(-1 * var(--cromulent-body-margin));
       background-image: repeating-linear-gradient(
           to right,
@@ -2594,75 +2594,6 @@ The negative margin compensates the margin already on the body.
           var(--color-brand) 1ch,
           var(--color-stripe) 1ch,
           var(--color-stripe) 2ch);
-  }
-#+end_src
-
-They fade out and in with gradients inspired by [[https://css-tricks.com/easing-linear-gradients/][Easing Linear
-Gradients]].  The =-webkit-mask-image= duplication is necessary on
-most browsers other than Firefox.
-
-#+begin_src css
-  body::before {
-      mask: linear-gradient(
-          to bottom,
-          hsl(0, 0%, 0%),
-          hsla(0, 0%, 0%, 0.94505) 7.9%,
-          hsla(0, 0%, 0%, 0.88294) 15.3%,
-          hsla(0, 0%, 0%, 0.81522) 22.2%,
-          hsla(0, 0%, 0%, 0.7426) 28.7%,
-          hsla(0, 0%, 0%, 0.66692) 34.8%,
-          hsla(0, 0%, 0%, 0.58891) 40.6%,
-          hsla(0, 0%, 0%, 0.50925) 46.2%,
-          hsla(0, 0%, 0%, 0.42866) 51.7%,
-          hsla(0, 0%, 0%, 0.34817) 57.2%,
-          hsla(0, 0%, 0%, 0.2693) 62.8%,
-          hsla(0, 0%, 0%, 0.19309) 68.7%,
-          hsla(0, 0%, 0%, 0.12126) 75.2%,
-          hsla(0, 0%, 0%, 0.05882) 82.6%,
-          hsla(0, 0%, 0%, 0.01457) 91.2%,
-          hsla(0, 0%, 0%, 0)
-      );
-    -webkit-mask-image: linear-gradient(
-          to bottom,
-          hsl(0, 0%, 0%),
-          hsla(0, 0%, 0%, 0.94505) 7.9%,
-          hsla(0, 0%, 0%, 0.88294) 15.3%,
-          hsla(0, 0%, 0%, 0.81522) 22.2%,
-          hsla(0, 0%, 0%, 0.7426) 28.7%,
-          hsla(0, 0%, 0%, 0.66692) 34.8%,
-          hsla(0, 0%, 0%, 0.58891) 40.6%,
-          hsla(0, 0%, 0%, 0.50925) 46.2%,
-          hsla(0, 0%, 0%, 0.42866) 51.7%,
-          hsla(0, 0%, 0%, 0.34817) 57.2%,
-          hsla(0, 0%, 0%, 0.2693) 62.8%,
-          hsla(0, 0%, 0%, 0.19309) 68.7%,
-          hsla(0, 0%, 0%, 0.12126) 75.2%,
-          hsla(0, 0%, 0%, 0.05882) 82.6%,
-          hsla(0, 0%, 0%, 0.01457) 91.2%,
-          hsla(0, 0%, 0%, 0)
-      );
-  }
-
-  body::after {
-      mask: linear-gradient(
-          to top,
-          hsl(0, 0%, 0%),
-          hsla(0, 0%, 0%, 0.94505) 7.9%,
-          hsla(0, 0%, 0%, 0.88294) 15.3%,
-          hsla(0, 0%, 0%, 0.81522) 22.2%,
-          hsla(0, 0%, 0%, 0.7426) 28.7%,
-          hsla(0, 0%, 0%, 0.66692) 34.8%,
-          hsla(0, 0%, 0%, 0.58891) 40.6%,
-          hsla(0, 0%, 0%, 0.50925) 46.2%,
-          hsla(0, 0%, 0%, 0.42866) 51.7%,
-          hsla(0, 0%, 0%, 0.34817) 57.2%,
-          hsla(0, 0%, 0%, 0.2693) 62.8%,
-          hsla(0, 0%, 0%, 0.19309) 68.7%,
-          hsla(0, 0%, 0%, 0.12126) 75.2%,
-          hsla(0, 0%, 0%, 0.05882) 82.6%,
-          hsla(0, 0%, 0%, 0.01457) 91.2%,
-          hsla(0, 0%, 0%, 0)
-      );
   }
 #+end_src
 
