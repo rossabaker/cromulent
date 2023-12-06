@@ -464,7 +464,7 @@ compliance with [[https://www.rfc-editor.org/rfc/rfc9116][RFC9116]].  Learn more
 CLOSED: [2022-09-05 Mon 23:48 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: _index
-:EXPORT_HUGO_LASTMOD: [2023-08-05 Sat 23:27 EDT]
+:EXPORT_HUGO_LASTMOD: [2023-12-05 Tue 21:30 EST]
 :END:
 
 #+begin_description
@@ -481,7 +481,7 @@ repository.
 - These configurations are intended to be declarative and
   reproducible.  We use [[https://nixos.org/][Nix]] to manage not only the dotfiles, but the
   software packages that they configure.  Infrastructure is defined
-  with [[https://www.terraform.io/][Terraform]].
+  with [[https://opentofu.org/][OpenTofu]].
 
 This is not a complete description of my environment.  Some things
 can't be automated [fn:3].  Some things are be redacted for security.
