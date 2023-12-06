@@ -472,8 +472,8 @@ Configurations are living documentation of Ross A. Baker's systems,
 both local and remote.
 #+end_description
 
-My /Configurations/ are an expansive take on the traditional dotfiles
-repository.
+The {{{dfn(configurations)}}} are an expansive take on the traditional
+dotfiles repository.
 
 - Most of it is [[https://en.wikipedia.org/wiki/Literate_programming][literate programming]].  It intersperses prose and
   source code and in [[https://orgmode.org/][Org Mode]], with the source is extracted with [[https://orgmode.org/worg/org-contrib/babel/][Babel]].
