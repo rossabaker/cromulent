@@ -8539,7 +8539,7 @@ market:
 CLOSED: [2023-12-02 Sat 01:02 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: december-adventure
-:EXPORT_HUGO_LASTMOD: [2023-12-05 Tue 18:47 EST]
+:EXPORT_HUGO_LASTMOD: [2023-12-06 Wed 23:45 CST]
 :END:
 
 #+begin_description
@@ -8598,6 +8598,10 @@ I want to continue my movement toward self-hosting:
 - Set up 2FA on [[https://git.rossabaker.com/][Forgejo]].  This is not a code change.
 - Set the landing page on Forgejo the "explore" view.
 - Add Forgejo contact in footer and contacts page.
+
+**** December 6
+
+- Archived GitHub orgs I participate in with [[https://github.com/maxkratz/github2gitea-mirror/tree/6428a6847c3fd879674afae5e71a3b9a605851d1][github2gitea-mirror]].
 
 * Talks section
 :PROPERTIES:
