@@ -6207,6 +6207,7 @@ CLOSED: [2023-08-07 Mon 09:48 EDT]
 :EXPORT_HUGO_BUNDLE: nix-darwin
 :EXPORT_FILE_NAME: _index
 :EXPORT_HUGO_LASTMOD: [2023-10-09 Mon 13:53 EDT]
+:CUSTOM_ID: nix-darwin
 :END:
 
 #+begin_description
@@ -7156,6 +7157,28 @@ For ~libravatar~:
     ttl      = 60
   }
 #+end_src
+
+*** DONE Work laptop
+CLOSED: [2023-12-08 Fri 13:23 CST]
+:PROPERTIES:
+:EXPORT_FILE_NAME: work-laptop
+:END:
+
+#+begin_description
+A not-so-open discussion of my work computer's configuration, and an
+invitation to share with current colleagues.
+#+end_description
+
+For understandable reasons, I can't be as open with my work
+configuration.  It depends on an internal flake and exposes internal
+tooling and addresses.
+
+The work computer is the only reason I am running a Darwin machine,
+and as much general configuration as possible is exposed as
+=darwinConfigurations=.
+
+If we are colleagues, reach out, and I will give you read access to
+a private repository of my full configuration.
 
 ** DONE Monitoring a NixOS server with Netdata Cloud
 CLOSED: [2023-11-23 Thu 22:45 CST]
