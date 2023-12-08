@@ -7914,7 +7914,7 @@ CLOSED: [2023-12-08 Fri 09:10 CST]
 :EXPORT_FILE_NAME: libravatar
 :header-args:nix+: :code-license MIT
 :header-args:terraform+: :code-license CC0-BY0
-:EXPORT_HUGO_LASTMOD: [2023-12-08 Fri 14:37 CST]
+:EXPORT_HUGO_LASTMOD: [2023-12-08 Fri 16:36 CST]
 :END:
 
 #+begin_description
@@ -7976,12 +7976,35 @@ See the result for yourself with the following command:
   ~avatars.rossabaker.com~.  I run it on [[#abe][~abe~]].
 #+end_info
 
+*** Building the images
+
+This Nix derivation scales a larger picture into the maximum avatar
+size.  It assumes the source picture is a square.
+
+#+begin_src nix :tangle ../../gen/flake/libravatar/avatar.nix
+  { pkgs, ... }:
+
+  pkgs.stdenv.mkDerivation {
+    name = "avatar";
+    src = ../../../src/hugo/static/img;
+    buildInputs = [ pkgs.imagemagick ];
+
+    buildPhase = ''
+      convert profile.jpg -resize 128x128 avatar.jpg
+    '';
+
+    installPhase = ''
+      mkdir $out
+      cp avatar.jpg $out/
+    '';
+  }
+#+end_src
+
 *** Nginx configuration
 
 For a single-user Libravatar, we need just a few config options:
 
 - A =domain= to host an ~/avatar~ path on.
-- The =avatar= image file.
 - An =md5= and =sha256= hash of the email address, as lower case.
 
   #+begin_example sh
@@ -7995,14 +8018,17 @@ A NixOS nginx configuration follows.  A location is added for each
 hash that serves ~avatar.jpg~ from the =root= directory.
 
 #+begin_src nix :tangle ../../gen/flake/libravatar/nixos-module.nix
+  { pkgs, ... }:
+
   let
     domain = "avatars.rossabaker.com";
-    avatar = ../../../src/avatars/avatar.jpg;
     md5 = "e8711ac481197ac9b13c8f9b3eccffe0";
     sha256 = "fb07324fd106bfe8d217ddd029dd901e1f98fb282844f5ce8191d8ab4a6cb74c";
+    avatar = pkgs.callPackage ./avatar.nix {};
     nginxConfig = {
       extraConfig = ''
-        alias ${avatar};
+        root ${avatar};
+        try_files /avatar.jpg =404;
       '';
     };
   in
