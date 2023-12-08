@@ -31,6 +31,7 @@ flake-parts.lib.mkFlake { inherit inputs; } (
       ./webserver
       ./acme
       ./synapse
+      ./libravatar
     ];
 
     flake = {

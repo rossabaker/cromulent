@@ -40,6 +40,30 @@ resource "hetznerdns_record" "com_rossabaker_www_beta" {
   value    = "abe.hetzner.rossabaker.com."
 }
 
+resource "hetznerdns_record" "com_rossabaker_avatars" {
+  zone_id = hetznerdns_zone.com_rossabaker.id
+  type     = "CNAME"
+  name     = "avatars"
+  value    = "abe.hetzner.rossabaker.com."
+  ttl      = 60
+}
+
+resource "hetznerdns_record" "com_rossabaker_avatars_srv" {
+  zone_id  = hetznerdns_zone.com_rossabaker.id
+  type     = "SRV"
+  name     = "_avatars._tcp"
+  value    = "0 0 80 avatars.rossabaker.com."
+  ttl      = 60
+}
+
+resource "hetznerdns_record" "com_rossabaker_avatars_srv_sec" {
+  zone_id  = hetznerdns_zone.com_rossabaker.id
+  type     = "SRV"
+  name     = "_avatars-sec._tcp"
+  value    = "0 0 443 avatars.rossabaker.com."
+  ttl      = 60
+}
+
 resource "hetznerdns_zone" "com_rossabaker" {
   name = "rossabaker.com"
   ttl  = 8 * 60 * 60 # seconds

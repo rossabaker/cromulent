@@ -13,6 +13,7 @@
             self.nixosModules.forgejo
             self.nixosModules.acme
             self.nixosModules.webserver
+            self.nixosModules.libravatar
             inputs.agenix.nixosModules.default
             {
               # TODO This is missing...
