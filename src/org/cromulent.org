@@ -7914,7 +7914,7 @@ CLOSED: [2023-12-08 Fri 09:10 CST]
 :EXPORT_FILE_NAME: libravatar
 :header-args:nix+: :code-license MIT
 :header-args:terraform+: :code-license CC0-BY0
-:EXPORT_HUGO_LASTMOD: [2023-12-08 Fri 16:36 CST]
+:EXPORT_HUGO_LASTMOD: [2023-12-08 Fri 16:40 CST]
 :END:
 
 #+begin_description
@@ -7922,7 +7922,7 @@ Sets up Libravatar for a single account.  Includes Terraform for the
 DNS SRV records and a NixOS module to configure nginx.
 #+end_description
 
-#+begin_src nix :noweb-ref flake-modules
+#+begin_src nix :exports none :noweb-ref flake-modules
   ./libravatar
 #+end_src
 
@@ -8052,6 +8052,10 @@ composition.
     flake.nixosModules.libravatar = ./nixos-module.nix;
   }
 #+end_src
+
+*** Seen in the wild
+
+- [[https://keyoxide.org/wkd/ross%40rossabaker.com][Keyoxide]]
 
 * Projects section
 :PROPERTIES:
