@@ -7138,26 +7138,6 @@ For ~libravatar~:
   }
 #+end_src
 
-#+begin_src terraform :tangle ../../gen/infra/hetznerdns/main.tf
-  resource "hetznerdns_record" "com_rossabaker_avatars_srv" {
-    zone_id  = hetznerdns_zone.com_rossabaker.id
-    type     = "SRV"
-    name     = "_avatars._tcp"
-    value    = "0 0 80 avatars.rossabaker.com."
-    ttl      = 60
-  }
-#+end_src
-
-#+begin_src terraform :tangle ../../gen/infra/hetznerdns/main.tf
-  resource "hetznerdns_record" "com_rossabaker_avatars_srv_sec" {
-    zone_id  = hetznerdns_zone.com_rossabaker.id
-    type     = "SRV"
-    name     = "_avatars-sec._tcp"
-    value    = "0 0 443 avatars.rossabaker.com."
-    ttl      = 60
-  }
-#+end_src
-
 *** DONE Work laptop
 CLOSED: [2023-12-08 Fri 13:23 CST]
 :PROPERTIES:
@@ -7932,35 +7912,114 @@ CLOSED: [2023-12-08 Fri 09:10 CST]
 :PROPERTIES:
 :CUSTOM_ID: libravatar
 :EXPORT_FILE_NAME: libravatar
+:header-args:nix+: :code-license MIT
+:header-args:terraform+: :code-license CC0-BY0
+:EXPORT_HUGO_LASTMOD: [2023-12-08 Fri 14:37 CST]
 :END:
+
+#+begin_description
+Sets up Libravatar for a single account.  Includes Terraform for the
+DNS SRV records and a NixOS module to configure nginx.
+#+end_description
 
 #+begin_src nix :noweb-ref flake-modules
   ./libravatar
 #+end_src
 
+[[https://www.libravatar.org/][{{{dfn(Libravatar)}}}]] is a decentralized alternative to [[https://gravatar.com/][Gravatar]] for
+displaying a profile picture.  There are [[https://wiki.libravatar.org/running_your_own/][several implementations]], but
+self-hosting can be as simple as a couple {{{abbr(Domain Name
+System,DNS)}}} records and a small Nginx configuration.
+
+*** OpenTofu configuration of =SRV= records
+
+This configuration sets up ~avatars.rossabaker.com~ as a domain to
+host the avatars.  When the avatar of ~user@example.com~ is requested,
+a Libravatar client looks up the [[https://en.wikipedia.org/wiki/SRV_record][{{{abbr(Service,~SRV~)}}} record]] for
+~_avatars._tcp.example.com~ (http) or ~avatars-sec._tcp.example.com~
+(https).
+
+This OpenTofu configuration defines the necessary records via [[https://www.hetzner.com/dns-console][Hetzner
+DNS]].  The first two numbers are the priority and weight, which can both
+be zero.  The third number is the port, 80 for http and 443 for https.
+
+#+begin_warning
+Don't forget the period at the end of the value!
+#+end_warning
+
+#+begin_src terraform :tangle ../../gen/infra/hetznerdns/main.tf
+  resource "hetznerdns_record" "com_rossabaker_avatars_srv" {
+    zone_id  = hetznerdns_zone.com_rossabaker.id
+    type     = "SRV"
+    name     = "_avatars._tcp"
+    value    = "0 0 80 avatars.rossabaker.com."
+  }
+#+end_src
+
+#+begin_src terraform :tangle ../../gen/infra/hetznerdns/main.tf
+  resource "hetznerdns_record" "com_rossabaker_avatars_srv_sec" {
+    zone_id  = hetznerdns_zone.com_rossabaker.id
+    type     = "SRV"
+    name     = "_avatars-sec._tcp"
+    value    = "0 0 443 avatars.rossabaker.com."
+  }
+#+end_src
+
+See the result for yourself with the following command:
+
+#+begin_example sh
+  dig _avatars-sec._tcp.rossabaker.com SRV
+#+end_example
+
+#+begin_info
+  An ~A~ or ~CNAME~ record is still required for
+  ~avatars.rossabaker.com~.  I run it on [[#abe][~abe~]].
+#+end_info
+
+*** Nginx configuration
+
+For a single-user Libravatar, we need just a few config options:
+
+- A =domain= to host an ~/avatar~ path on.
+- The =avatar= image file.
+- An =md5= and =sha256= hash of the email address, as lower case.
+
+  #+begin_example sh
+  echo -n "ross@rossabaker.com" | md5sum
+  echo -n "ross@rossabaker.com" | sha256sum
+  #+end_example
+
+  The hashes can also be calculated from the [[https://www.libravatar.org/tools/check/][Libravatar check page]].
+
+A NixOS nginx configuration follows.  A location is added for each
+hash that serves ~avatar.jpg~ from the =root= directory.
+
 #+begin_src nix :tangle ../../gen/flake/libravatar/nixos-module.nix
   let
-    profile = ../../../src/img;
+    domain = "avatars.rossabaker.com";
+    avatar = ../../../src/avatars/avatar.jpg;
+    md5 = "e8711ac481197ac9b13c8f9b3eccffe0";
+    sha256 = "fb07324fd106bfe8d217ddd029dd901e1f98fb282844f5ce8191d8ab4a6cb74c";
+    nginxConfig = {
+      extraConfig = ''
+        alias ${avatar};
+      '';
+    };
   in
   {
-    services.nginx.virtualHosts."avatars.rossabaker.com" = {
+    services.nginx.virtualHosts.${domain} = {
       forceSSL = true;
       enableACME = true;
-      locations."= /avatar/e8711ac481197ac9b13c8f9b3eccffe0" = {
-        root = profile;
-        extraConfig = ''
-          try_files /avatar.jpg =404;
-        '';
-      };
-      locations."= /avatar/fb07324fd106bfe8d217ddd029dd901e1f98fb282844f5ce8191d8ab4a6cb74c" = {
-        root = profile;
-        extraConfig = ''
-          try_files /avatar.jpg =404;
-        '';
-      };
+      locations."= /avatar/${md5}" = nginxConfig;
+      locations."= /avatar/${sha256}" = nginxConfig;
     };
   }
 #+end_src
+
+*** Flake module
+
+All Cromulent outputs are packaged as [[https://flake.parts/][flake parts]] for consistent
+composition.
 
 #+begin_src nix :tangle ../../gen/flake/libravatar/default.nix
   {

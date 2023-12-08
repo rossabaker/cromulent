@@ -48,22 +48,6 @@ resource "hetznerdns_record" "com_rossabaker_avatars" {
   ttl      = 60
 }
 
-resource "hetznerdns_record" "com_rossabaker_avatars_srv" {
-  zone_id  = hetznerdns_zone.com_rossabaker.id
-  type     = "SRV"
-  name     = "_avatars._tcp"
-  value    = "0 0 80 avatars.rossabaker.com."
-  ttl      = 60
-}
-
-resource "hetznerdns_record" "com_rossabaker_avatars_srv_sec" {
-  zone_id  = hetznerdns_zone.com_rossabaker.id
-  type     = "SRV"
-  name     = "_avatars-sec._tcp"
-  value    = "0 0 443 avatars.rossabaker.com."
-  ttl      = 60
-}
-
 resource "hetznerdns_zone" "com_rossabaker" {
   name = "rossabaker.com"
   ttl  = 8 * 60 * 60 # seconds
@@ -114,4 +98,18 @@ resource "hetznerdns_record" "com_rossabaker_dkim" {
   type     = "TXT"
   name     = "2020-06.pbsmtp._domainkey"
   value    = jsonencode("v=DKIM1; k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDIfBzlZiuOljOEgYr0nrIieWvmn9x4mrXlIqgw64oasNb/wn62Yai4APbQ4rAdwwEj2vI0FVs2Y5oTUKmPq+RSsWJKmdEWjv9zUKK+GNjVJ0mVBX75vU1nEwWUeS+Wz4haQxMVXQRrbCovQNoQjFcSX9ERdAbZVzXsf/0kDNzdiQIDAQAB")
+}
+
+resource "hetznerdns_record" "com_rossabaker_avatars_srv" {
+  zone_id  = hetznerdns_zone.com_rossabaker.id
+  type     = "SRV"
+  name     = "_avatars._tcp"
+  value    = "0 0 80 avatars.rossabaker.com."
+}
+
+resource "hetznerdns_record" "com_rossabaker_avatars_srv_sec" {
+  zone_id  = hetznerdns_zone.com_rossabaker.id
+  type     = "SRV"
+  name     = "_avatars-sec._tcp"
+  value    = "0 0 443 avatars.rossabaker.com."
 }
