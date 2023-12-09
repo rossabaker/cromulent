@@ -8792,6 +8792,10 @@ I want to continue my movement toward self-hosting:
 
 - Added support for [[#libravatar][Libravatar]].
 
+**** December 8
+
+- Enhanced support for [[#libravatar][Libravatar]].
+
 * Talks section
 :PROPERTIES:
 :EXPORT_HUGO_BUNDLE: talks
