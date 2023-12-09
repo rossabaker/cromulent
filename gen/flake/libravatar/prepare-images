@@ -1,0 +1,11 @@
+#!/bin/sh
+
+mkdir "$out"
+for img in *; do
+    username=${img%.*}
+    ext=${img##*.}
+    md5=$(printf "%s" "$username" | tr '[:upper:]' '[:lower:]' | md5sum | awk '{ print $1 }')
+    sha256=$(printf "%s" "$username" | tr '[:upper:]' '[:lower:]' | sha256sum | awk '{ print $1 }')
+    convert "$img" -resize 128x128 "$out/$md5.$ext"
+    ln "$out/$md5.$ext" "$out/$sha256.$ext"
+done

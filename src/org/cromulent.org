@@ -7913,8 +7913,9 @@ CLOSED: [2023-12-08 Fri 09:10 CST]
 :CUSTOM_ID: libravatar
 :EXPORT_FILE_NAME: libravatar
 :header-args:nix+: :code-license MIT
+:header-args:sh+: :code-license MIT
 :header-args:terraform+: :code-license CC0-BY0
-:EXPORT_HUGO_LASTMOD: [2023-12-08 Fri 16:40 CST]
+:EXPORT_HUGO_LASTMOD: [2023-12-09 Sat 20:02 EST]
 :END:
 
 #+begin_description
@@ -7978,28 +7979,44 @@ See the result for yourself with the following command:
 
 *** Deriving the images in advance
 
-This Nix derivation scales a larger picture into the maximum avatar
-size.  It assumes the source pictures are squares.
+Avatar images can be prepared in advance.  For any high-res image
+source, we need to accomplish three things:
+
+1. Scale the image.  The maximum size is 128x128.  This is done with ImageMagick.
+2. Calculate an MD5 sum of the lowercased e-mail address.
+3. Calculate a SHA-256 sum of the lowercased e-mail address.
+
+For a directory full of images with names like
+~someone@example.com.jpg~, this script outputs a scaled image to
+=$out/${md5}= and =$out/${sha256}=.  To save space, the pair of images
+are hardlinked.
+
+#+begin_src sh :tangle ../../gen/flake/libravatar/prepare-images
+  #!/bin/sh
+
+  mkdir "$out"
+  for img in *; do
+      username=${img%.*}
+      ext=${img##*.}
+      md5=$(printf "%s" "$username" | tr '[:upper:]' '[:lower:]' | md5sum | awk '{ print $1 }')
+      sha256=$(printf "%s" "$username" | tr '[:upper:]' '[:lower:]' | sha256sum | awk '{ print $1 }')
+      convert "$img" -resize 128x128 "$out/$md5.$ext"
+      ln "$out/$md5.$ext" "$out/$sha256.$ext"
+  done
+#+end_src
+
+The script is packaged up as the build step of a Nix derivation.  The
+process only needs to run when the sources change, or when the avatars
+aren't already in the Nix store.
 
 #+begin_src nix :tangle ../../gen/flake/libravatar/avatar.nix
-  { pkgs, lib, ... }:
+  { pkgs, lib, src, ... }:
 
   pkgs.stdenv.mkDerivation {
-    name = "avatar";
-    src = lib.cleanSourceWith {
-      src = ../../../src/hugo/static/img;
-      filter = (path: type: (baseNameOf path) == "profile.jpg");
-    };
+    inherit src;
+    name = "libravatar-avatars";
     buildInputs = [ pkgs.imagemagick ];
-
-    buildPhase = ''
-      convert profile.jpg -resize 128x128 avatar.jpg
-    '';
-
-    installPhase = ''
-      mkdir $out
-      cp avatar.jpg $out/
-    '';
+    buildPhase = builtins.readFile ./prepare-images;
   }
 #+end_src
 
@@ -8008,14 +8025,6 @@ size.  It assumes the source pictures are squares.
 For a single-user Libravatar, we need just a few config options:
 
 - A =domain= to host an ~/avatar~ path on.
-- An =md5= and =sha256= hash of the email address, as lower case.
-
-  #+begin_example sh
-  echo -n "ross@rossabaker.com" | md5sum
-  echo -n "ross@rossabaker.com" | sha256sum
-  #+end_example
-
-  The hashes can also be calculated from the [[https://www.libravatar.org/tools/check/][Libravatar check page]].
 
 A NixOS nginx configuration follows.  A location is added for each
 hash that serves ~avatar.jpg~ from the =root= directory.
@@ -8025,22 +8034,20 @@ hash that serves ~avatar.jpg~ from the =root= directory.
 
   let
     domain = "avatars.rossabaker.com";
-    md5 = "e8711ac481197ac9b13c8f9b3eccffe0";
-    sha256 = "fb07324fd106bfe8d217ddd029dd901e1f98fb282844f5ce8191d8ab4a6cb74c";
-    avatar = pkgs.callPackage ./avatar.nix {};
-    nginxConfig = {
-      extraConfig = ''
-        root ${avatar};
-        try_files /avatar.jpg =404;
-      '';
+    avatar = pkgs.callPackage ./avatar.nix {
+      src = ../../../src/avatars;
     };
   in
   {
     services.nginx.virtualHosts.${domain} = {
       forceSSL = true;
       enableACME = true;
-      locations."= /avatar/${md5}" = nginxConfig;
-      locations."= /avatar/${sha256}" = nginxConfig;
+      locations."~ ^/avatar/([0-9a-f]+)" = {
+        extraConfig = ''
+          root ${avatar};
+          try_files /$1.jpg /$1.png /$1.gif =404;
+        '';
+      };
     };
   }
 #+end_src

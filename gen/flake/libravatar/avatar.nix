@@ -1,19 +1,8 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, src, ... }:
 
 pkgs.stdenv.mkDerivation {
-  name = "avatar";
-  src = lib.cleanSourceWith {
-    src = ../../../src/hugo/static/img;
-    filter = (path: type: (baseNameOf path) == "profile.jpg");
-  };
+  inherit src;
+  name = "libravatar-avatars";
   buildInputs = [ pkgs.imagemagick ];
-
-  buildPhase = ''
-    convert profile.jpg -resize 128x128 avatar.jpg
-  '';
-
-  installPhase = ''
-    mkdir $out
-    cp avatar.jpg $out/
-  '';
+  buildPhase = builtins.readFile ./prepare-images;
 }
