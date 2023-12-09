@@ -1,8 +1,11 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 pkgs.stdenv.mkDerivation {
   name = "avatar";
-  src = ../../../src/hugo/static/img;
+  src = lib.cleanSourceWith {
+    src = ../../../src/hugo/static/img;
+    filter = (path: type: (baseNameOf path) == "profile.jpg");
+  };
   buildInputs = [ pkgs.imagemagick ];
 
   buildPhase = ''
