@@ -7945,7 +7945,7 @@ CLOSED: [2023-12-08 Fri 09:10 CST]
 :header-args:nix+: :code-license MIT
 :header-args:sh+: :code-license MIT
 :header-args:terraform+: :code-license CC0-BY0
-:EXPORT_HUGO_LASTMOD: [2023-12-09 Sat 22:30 EST]
+:EXPORT_HUGO_LASTMOD: [2023-12-10 Sun 00:41 EST]
 :END:
 
 #+begin_description
@@ -8112,11 +8112,22 @@ Translate to your own provider as necessary.
 
 *** Demonstration
 
+#+caption: Libravatar via MD5
 [[https://avatars.rossabaker.com/avatar/e8711ac481197ac9b13c8f9b3eccffe0]]
+
+#+caption: Libravatar via SHA-256
+[[https://avatars.rossabaker.com/avatar/fb07324fd106bfe8d217ddd029dd901e1f98fb282844f5ce8191d8ab4a6cb74c]]
 
 *** Seen in the wild
 
 - [[https://keyoxide.org/wkd/ross%40rossabaker.com][Keyoxide]]
+
+**** Snippet for later :noexport:
+
+(add-to-list 'org-html-inline-image-rules
+  `("https" .
+   ,(rx (or (seq line-start "//avatars.rossabaker.com/")
+    (seq (or ".jpeg" ".jpg" ".png" ".gif" ".svg" ".webp") line-end)))))
 
 * Projects section
 :PROPERTIES:
@@ -10074,6 +10085,8 @@ Language, but YAML Ain't Markup Language.
 
 [fn:18] Most of my Scala friends joined in April 2017, and I can't
 remember what we fled from.  Can anybody else?
+
 # Local Variables:
 # org-babel-exp-code-template: "#+begin_src %lang%switches%flags :code-license %code-license\n%body\n#+end_src"
+# org-html-inline-image-rules: (("https" . "^//avatars\\.rossabaker\\.com/\\|\\(?:\\.\\(?:gif\\|jp\\(?:e?g\\)\\|png\\|svg\\|webp\\)\\)$") ("file" . "\\(?:\\.\\(?:gif\\|jp\\(?:e?g\\)\\|png\\|svg\\|webp\\)\\)") ("http" . "\\(?:\\.\\(?:gif\\|jp\\(?:e?g\\)\\|png\\|svg\\|webp\\)\\)"))
 # End:
