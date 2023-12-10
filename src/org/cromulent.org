@@ -6721,7 +6721,7 @@ Configurations for various hosts, mostly with NixOS or Nix-Darwin.
 CLOSED: [2023-11-19 Sun 19:16 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: abe
-:EXPORT_HUGO_LASTMOD: [2023-12-07 Thu 22:27 CST]
+:EXPORT_HUGO_LASTMOD: [2023-12-09 Sat 21:54 EST]
 :CUSTOM_ID: abe
 :header-args:terraform+: :code-license CC0-1.0
 :END:
@@ -7048,7 +7048,7 @@ are published as a flake module.
 
 **** Libravatar setup
 
-This server hosts my [[#libravatar][Libravatar]].
+This server hosts [[#libravatar][Libravatar]].  It needs to be configured for Nix:
 
 #+begin_src nix :tangle ../../gen/flake/hosts/abe/libravatar.nix
   { config, ... }:
@@ -7058,6 +7058,23 @@ This server hosts my [[#libravatar][Libravatar]].
       domain = "avatars.rossabaker.com";
       avatars = ../../../../src/avatars;
     };
+  }
+#+end_src
+
+Also for Terraform.  An ~avatars.rossabaker.com~ alias is created for
+~abe~.
+
+#+begin_src terraform :tangle ../../gen/infra/hetznerdns/main.auto.tfvars
+  cromulent_avatars_host = "avatars.rossabaker.com."
+#+end_src
+
+#+begin_src terraform :tangle ../../gen/infra/hetznerdns/main.tf
+  resource "hetznerdns_record" "cromulent_avatars_cname" {
+    zone_id = hetznerdns_zone.com_rossabaker.id
+    type     = "CNAME"
+    name     = var.cromulent_avatars_host
+    value    = "abe.hetzner.rossabaker.com."
+    ttl      = 60
   }
 #+end_src
 
@@ -7139,18 +7156,6 @@ resource "hetznerdns_record" "com_rossabaker_www_beta" {
   name     = "beta.www"
   value    = "abe.hetzner.rossabaker.com."
 }
-#+end_src
-
-For ~libravatar~:
-
-#+begin_src terraform :tangle ../../gen/infra/hetznerdns/main.tf
-  resource "hetznerdns_record" "com_rossabaker_avatars" {
-    zone_id = hetznerdns_zone.com_rossabaker.id
-    type     = "CNAME"
-    name     = "avatars"
-    value    = "abe.hetzner.rossabaker.com."
-    ttl      = 60
-  }
 #+end_src
 
 *** DONE Work laptop
@@ -7930,7 +7935,7 @@ CLOSED: [2023-12-08 Fri 09:10 CST]
 :header-args:nix+: :code-license MIT
 :header-args:sh+: :code-license MIT
 :header-args:terraform+: :code-license CC0-BY0
-:EXPORT_HUGO_LASTMOD: [2023-12-09 Sat 20:02 EST]
+:EXPORT_HUGO_LASTMOD: [2023-12-09 Sat 21:54 EST]
 :END:
 
 #+begin_description
@@ -7964,33 +7969,30 @@ Don't forget the period at the end of the value!
 #+end_warning
 
 #+begin_src terraform :tangle ../../gen/infra/hetznerdns/main.tf
-  resource "hetznerdns_record" "com_rossabaker_avatars_srv" {
-    zone_id  = hetznerdns_zone.com_rossabaker.id
-    type     = "SRV"
-    name     = "_avatars._tcp"
-    value    = "0 0 80 avatars.rossabaker.com."
+  variable "cromulent_avatars_host" {
+    type = string
   }
 #+end_src
 
 #+begin_src terraform :tangle ../../gen/infra/hetznerdns/main.tf
-  resource "hetznerdns_record" "com_rossabaker_avatars_srv_sec" {
+  resource "hetznerdns_record" "cromulent_avatars_srv" {
     zone_id  = hetznerdns_zone.com_rossabaker.id
     type     = "SRV"
-    name     = "_avatars-sec._tcp"
-    value    = "0 0 443 avatars.rossabaker.com."
+    name     = "_avatars._tcp"
+    value    = "0 0 80 ${var.cromulent_avatars_host}"
+    ttl      = 60
   }
 #+end_src
 
-See the result for yourself with the following command:
-
-#+begin_example sh
-  dig _avatars-sec._tcp.rossabaker.com SRV
-#+end_example
-
-#+begin_info
-  An ~A~ or ~CNAME~ record is still required for
-  ~avatars.rossabaker.com~.  I run it on [[#abe][~abe~]].
-#+end_info
+#+begin_src terraform :tangle ../../gen/infra/hetznerdns/main.tf
+  resource "hetznerdns_record" "cromulent_avatars_srv_sec" {
+    zone_id  = hetznerdns_zone.com_rossabaker.id
+    type     = "SRV"
+    name     = "_avatars-sec._tcp"
+    value    = "0 0 443 ${var.cromulent_avatars_host}"
+    ttl      = 60
+  }
+#+end_src
 
 *** Deriving the images in advance
 

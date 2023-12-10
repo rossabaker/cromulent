@@ -1,3 +1,11 @@
+resource "hetznerdns_record" "cromulent_avatars_cname" {
+  zone_id = hetznerdns_zone.com_rossabaker.id
+  type     = "CNAME"
+  name     = var.cromulent_avatars_host
+  value    = "abe.hetzner.rossabaker.com."
+  ttl      = 60
+}
+
 resource "hetznerdns_record" "com_rossabaker_hetzner_abe_a" {
   zone_id = hetznerdns_zone.com_rossabaker.id
   type     = "A"
@@ -38,14 +46,6 @@ resource "hetznerdns_record" "com_rossabaker_www_beta" {
   type     = "CNAME"
   name     = "beta.www"
   value    = "abe.hetzner.rossabaker.com."
-}
-
-resource "hetznerdns_record" "com_rossabaker_avatars" {
-  zone_id = hetznerdns_zone.com_rossabaker.id
-  type     = "CNAME"
-  name     = "avatars"
-  value    = "abe.hetzner.rossabaker.com."
-  ttl      = 60
 }
 
 resource "hetznerdns_zone" "com_rossabaker" {
@@ -100,16 +100,22 @@ resource "hetznerdns_record" "com_rossabaker_dkim" {
   value    = jsonencode("v=DKIM1; k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDIfBzlZiuOljOEgYr0nrIieWvmn9x4mrXlIqgw64oasNb/wn62Yai4APbQ4rAdwwEj2vI0FVs2Y5oTUKmPq+RSsWJKmdEWjv9zUKK+GNjVJ0mVBX75vU1nEwWUeS+Wz4haQxMVXQRrbCovQNoQjFcSX9ERdAbZVzXsf/0kDNzdiQIDAQAB")
 }
 
-resource "hetznerdns_record" "com_rossabaker_avatars_srv" {
+variable "cromulent_avatars_host" {
+  type = string
+}
+
+resource "hetznerdns_record" "cromulent_avatars_srv" {
   zone_id  = hetznerdns_zone.com_rossabaker.id
   type     = "SRV"
   name     = "_avatars._tcp"
-  value    = "0 0 80 avatars.rossabaker.com."
+  value    = "0 0 80 ${var.cromulent_avatars_host}"
+  ttl      = 60
 }
 
-resource "hetznerdns_record" "com_rossabaker_avatars_srv_sec" {
+resource "hetznerdns_record" "cromulent_avatars_srv_sec" {
   zone_id  = hetznerdns_zone.com_rossabaker.id
   type     = "SRV"
   name     = "_avatars-sec._tcp"
-  value    = "0 0 443 avatars.rossabaker.com."
+  value    = "0 0 443 ${var.cromulent_avatars_host}"
+  ttl      = 60
 }
