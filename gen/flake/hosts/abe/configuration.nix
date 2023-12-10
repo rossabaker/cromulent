@@ -7,6 +7,7 @@
       ./users.nix
       ./mastodon.nix
       ./borgbackup.nix
+      ./libravatar.nix
     ];
 
   # Use GRUB2 as the boot loader.

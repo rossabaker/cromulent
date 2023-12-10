@@ -6751,6 +6751,7 @@ installed from the rescue image with a [[https://github.com/nix-community/nixos-
         ./users.nix
         ./mastodon.nix
         ./borgbackup.nix
+        ./libravatar.nix
       ];
 
     # Use GRUB2 as the boot loader.
@@ -7045,6 +7046,20 @@ are published as a flake module.
   }
 #+end_src
 
+**** Libravatar setup
+
+This server hosts my [[#libravatar][Libravatar]].
+
+#+begin_src nix :tangle ../../gen/flake/hosts/abe/libravatar.nix
+  { config, ... }:
+
+  {
+    com.rossabaker.services.libravatar = {
+      domain = "avatars.rossabaker.com";
+      avatars = ../../../../src/avatars;
+    };
+  }
+#+end_src
 
 **** DNS entries
 
