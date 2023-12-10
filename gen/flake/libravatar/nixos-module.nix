@@ -12,14 +12,14 @@ in
       type = lib.types.str;
       example = "avatars.example.com";
     };
-    avatars = lib.mkOption {
+    avatarSrc = lib.mkOption {
       type = lib.types.path;
     };
   };
 
   config = let
     avatars = pkgs.callPackage ./avatar.nix {
-      src = cfg.avatars;
+      src = cfg.avatarSrc;
     };
   in lib.mkIf cfg.enable {
     services.nginx.virtualHosts."${cfg.domain}" = {

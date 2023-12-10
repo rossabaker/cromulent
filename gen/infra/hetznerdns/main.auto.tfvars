@@ -1,1 +1,1 @@
-cromulent_avatars_host = "avatars.rossabaker.com."
+cromulent_avatars_domain = "avatars.rossabaker.com."
