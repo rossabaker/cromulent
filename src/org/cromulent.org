@@ -8796,7 +8796,7 @@ market:
 CLOSED: [2023-12-02 Sat 01:02 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: december-adventure
-:EXPORT_HUGO_LASTMOD: [2023-12-10 Sun 00:11 EST]
+:EXPORT_HUGO_LASTMOD: [2023-12-11 Mon 09:01 EST]
 :END:
 
 #+begin_description
@@ -8875,6 +8875,11 @@ I want to continue my movement toward self-hosting:
 - Introduced OpenTofu variables as a companion to the generalized module.
 - Created a [[https://git.rossabaker.com/data/weather][weather station archive]] repo after getting that working.
   Self-hosting is also for weather!
+
+***** December 10
+
+- Put my adventure on pause to help a friend start his hosting
+  adventure.
 
 * Talks section
 :PROPERTIES:
