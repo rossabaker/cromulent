@@ -8796,7 +8796,7 @@ market:
 CLOSED: [2023-12-02 Sat 01:02 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: december-adventure
-:EXPORT_HUGO_LASTMOD: [2023-12-11 Mon 09:01 EST]
+:EXPORT_HUGO_LASTMOD: [2023-12-13 Wed 16:05]
 :END:
 
 #+begin_description
@@ -8880,6 +8880,14 @@ I want to continue my movement toward self-hosting:
 
 - Put my adventure on pause to help a friend start his hosting
   adventure.
+
+***** December 11
+
+- Continued my friend's adventure.
+
+***** December 12
+
+- Began migration of DNS records to [[https://janik-haag.github.io/NixOS-DNS][NixOS-DNS]].
 
 * Talks section
 :PROPERTIES:
