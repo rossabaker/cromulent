@@ -7884,6 +7884,8 @@ Values containing spaces [[https://github.com/timohirt/terraform-provider-hetzne
 ***** NixOS-DNS                                                    :noexport:
 
 #+begin_src nix :tangle ../../gen/flake/mail/dnsExtraConfig/spf.nix
+  { ... }:
+
   {
     zones."rossabaker.com"."".txt.data = "v=spf1 include:pobox.com -all";
   }
