@@ -6726,7 +6726,7 @@ Configurations for various hosts, mostly with NixOS or Nix-Darwin.
 CLOSED: [2023-11-19 Sun 19:16 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: abe
-:EXPORT_HUGO_LASTMOD: [2023-12-13 Wed 20:01 EST]
+:EXPORT_HUGO_LASTMOD: [2023-12-13 Wed 20:25 EST]
 :CUSTOM_ID: abe
 :header-args:terraform+: :code-license CC0-1.0
 :END:
@@ -7148,18 +7148,15 @@ failure.
 #+begin_src nix :tangle ../../gen/flake/hosts/abe/dns/default.nix
   { config, ... }:
 
-  with builtins;
-  let
-    iface = config.networking.interfaces."enp27s0";
-    domain = config.networking.domain;
-    fqdn = "${config.networking.hostName}.${domain}";
-  in
   {
-    imports = [ ./addresses.nix ];
+    imports = [
+     ./addresses.nix
+     ./cnames.nix
+    ];
 
     networking.domains = {
       enable = true;
-      baseDomains."${domain}" = {};
+      baseDomains."rossabaker.com" = {};
     };
   }
 #+end_src
@@ -7182,14 +7179,35 @@ hint which is the public network interface.
     ipv6Addresses = config.networking.interfaces.${iface}.ipv6.addresses;
   in
   {
-    networking.domains.subDomains.${fqdn} = {
+    networking.domains.subDomains."${fqdn}" = {
       a.data = map (a: a.address) ipv4Addresses;
       aaaa.data = map (a: a.address) ipv6Addresses;
     };
   }
 #+end_src
 
-***** Canonical names
+******* Canonical names
+
+A ~CNAME~ record is necessary for all the services we host.
+
+#+begin_src nix :tangle ../../gen/flake/hosts/abe/dns/cnames.nix
+  { config, lib, ... }:
+
+  let
+    cname = "${config.networking.hostName}.${config.networking.domain}.";
+  in
+  {
+    networking.domains.subDomains =
+      lib.listToAttrs (map (host: { name = host; value = { cname.data = cname; };}) [
+        "git.rossabaker.com"
+        "matrix.rossabaker.com"
+        "social.rossabaker.com"
+        "beta.www.rossabaker.com"
+      ]);
+  }
+#+end_src
+
+****** Canonical names
 
 When we mixed in certain NixOS services, we also took responsibility
 for the subdomains they declared.
