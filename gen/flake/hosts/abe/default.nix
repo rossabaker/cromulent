@@ -8,6 +8,7 @@
           inherit system;
           modules = [
             ./configuration.nix
+            inputs.nixos-dns.nixosModules.dns
             self.nixosModules.netdata
             self.nixosModules.synapse
             self.nixosModules.forgejo

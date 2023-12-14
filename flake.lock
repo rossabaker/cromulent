@@ -140,6 +140,22 @@
         "type": "github"
       }
     },
+    "flake-compat": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1696426674,
+        "narHash": "sha256-kvjfFW7WAETZlt09AgDn1MrtKzP7t90Vf7vypd3OL1U=",
+        "owner": "edolstra",
+        "repo": "flake-compat",
+        "rev": "0f9255e01c2351cc7d116c072cb317785dd33b33",
+        "type": "github"
+      },
+      "original": {
+        "owner": "edolstra",
+        "repo": "flake-compat",
+        "type": "github"
+      }
+    },
     "flake-parts": {
       "inputs": {
         "nixpkgs-lib": "nixpkgs-lib"
@@ -286,6 +302,27 @@
         "type": "github"
       }
     },
+    "nixos-dns": {
+      "inputs": {
+        "flake-compat": "flake-compat",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1702487346,
+        "narHash": "sha256-JmHXcmosac70d9LGYQ7/RNGru2idWC669StnFlxLpdU=",
+        "owner": "Janik-Haag",
+        "repo": "NixOS-DNS",
+        "rev": "9f311873475479497e33709be826dc47917d3ee3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Janik-Haag",
+        "repo": "NixOS-DNS",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1702151865,
@@ -382,6 +419,7 @@
         "home-manager": "home-manager_2",
         "jinx": "jinx",
         "nix-darwin": "nix-darwin",
+        "nixos-dns": "nixos-dns",
         "nixpkgs": "nixpkgs",
         "ob-ammonite": "ob-ammonite",
         "on-el": "on-el",

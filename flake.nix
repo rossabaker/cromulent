@@ -34,6 +34,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nixos-dns = {
+      url = "github:Janik-Haag/NixOS-DNS";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Emacs packages
     fill-sentences-correctly = {
       url = "github:duckwork/fill-sentences-correctly.el";

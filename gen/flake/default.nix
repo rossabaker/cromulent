@@ -30,6 +30,7 @@ flake-parts.lib.mkFlake { inherit inputs; } (
       ./forgejo
       ./webserver
       ./acme
+      ./dns
       ./synapse
       ./libravatar
     ];

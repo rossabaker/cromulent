@@ -6029,6 +6029,11 @@ Humdrum Nix flake exoskeleton and inputs
         inputs.nixpkgs.follows = "nixpkgs";
       };
 
+      nixos-dns = {
+        url = "github:Janik-Haag/NixOS-DNS";
+        inputs.nixpkgs.follows = "nixpkgs";
+      };
+
       # Emacs packages
       fill-sentences-correctly = {
         url = "github:duckwork/fill-sentences-correctly.el";
@@ -6721,7 +6726,7 @@ Configurations for various hosts, mostly with NixOS or Nix-Darwin.
 CLOSED: [2023-11-19 Sun 19:16 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: abe
-:EXPORT_HUGO_LASTMOD: [2023-12-09 Sat 23:23 EST]
+:EXPORT_HUGO_LASTMOD: [2023-12-13 Wed 19:25 EST]
 :CUSTOM_ID: abe
 :header-args:terraform+: :code-license CC0-1.0
 :END:
@@ -7007,6 +7012,7 @@ are published as a flake module.
             inherit system;
             modules = [
               ./configuration.nix
+              inputs.nixos-dns.nixosModules.dns
               self.nixosModules.netdata
               self.nixosModules.synapse
               self.nixosModules.forgejo
@@ -7509,7 +7515,7 @@ CLOSED: [2023-12-03 Sun 21:26 EST]
 :CUSTOM_ID: dns
 :header-args:sh+: :code-license CC0-1.0
 :header-args:terraform+: :code-license CC0-1.0
-:EXPORT_HUGO_LASTMOD: [2023-12-04 Mon 23:57 EST]
+:EXPORT_HUGO_LASTMOD: [2023-12-13 Wed 19:25 EST]
 :END:
 
 #+begin_description
@@ -7681,6 +7687,32 @@ ignores if we ever add more OpenTofu projects.
   gen/infra/hetznerdns/.terraform/
   gen/infra/hetznerdns/*.tfstate
   gen/infra/hetznerdns/*.tfstate.*
+#+end_src
+
+
+*** NixOS-DNS                                                      :noexport:
+
+#+begin_src nix :exports none :noweb-ref flake-modules
+  ./dns
+#+end_src
+
+#+begin_src nix :tangle ../../gen/flake/dns/default.nix
+  { config, inputs, self, ... }:
+
+  let
+    dnsConfig = {
+      inherit (self) nixosConfigurations;
+    };
+  in
+  {
+    perSystem = { pkgs, ... }:
+      let
+        generate = inputs.nixos-dns.utils.generate pkgs;
+      in
+      {
+        packages.zoneFiles = generate.zoneFiles dnsConfig;
+      };
+  }
 #+end_src
 
 ** DONE Forwarding email with pobox.com
