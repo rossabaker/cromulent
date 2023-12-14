@@ -9,6 +9,7 @@
           modules = [
             ./configuration.nix
             inputs.nixos-dns.nixosModules.dns
+            ./dns
             self.nixosModules.netdata
             self.nixosModules.synapse
             self.nixosModules.forgejo

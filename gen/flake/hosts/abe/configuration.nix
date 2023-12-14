@@ -19,7 +19,10 @@
     devices = [ "/dev/sda" "/dev/sdb" ];
   };
 
-  networking.hostName = "abe";
+  networking = {
+    hostName = "abe";
+    domain = "hetzner.rossbaker.com";
+  };
 
   # The mdadm RAID1s were created with 'mdadm --create ... --homehost=hetzner',
   # but the hostname for each machine may be different, and mdadm's HOMEHOST

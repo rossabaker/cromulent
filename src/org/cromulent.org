@@ -6726,7 +6726,7 @@ Configurations for various hosts, mostly with NixOS or Nix-Darwin.
 CLOSED: [2023-11-19 Sun 19:16 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: abe
-:EXPORT_HUGO_LASTMOD: [2023-12-13 Wed 19:25 EST]
+:EXPORT_HUGO_LASTMOD: [2023-12-13 Wed 20:01 EST]
 :CUSTOM_ID: abe
 :header-args:terraform+: :code-license CC0-1.0
 :END:
@@ -6747,81 +6747,84 @@ installed from the rescue image with a [[https://github.com/nix-community/nixos-
 **** Base configuration
 
 #+begin_src nix :tangle ../../gen/flake/hosts/abe/configuration.nix
-  { config, pkgs, ... }:
+    { config, pkgs, ... }:
 
-  {
-    imports =
-      [ # Include the results of the hardware scan.
-        ./hardware-configuration.nix
-        ./users.nix
-        ./mastodon.nix
-        ./borgbackup.nix
-        ./libravatar.nix
+    {
+      imports =
+        [ # Include the results of the hardware scan.
+          ./hardware-configuration.nix
+          ./users.nix
+          ./mastodon.nix
+          ./borgbackup.nix
+          ./libravatar.nix
+        ];
+
+      # Use GRUB2 as the boot loader.
+      # We don't use systemd-boot because Hetzner uses BIOS legacy boot.
+      boot.loader.systemd-boot.enable = false;
+      boot.loader.grub = {
+        enable = true;
+        efiSupport = false;
+        devices = [ "/dev/sda" "/dev/sdb" ];
+      };
+
+      networking = {
+        hostName = "abe";
+        domain = "hetzner.rossbaker.com";
+      };
+
+      # The mdadm RAID1s were created with 'mdadm --create ... --homehost=hetzner',
+      # but the hostname for each machine may be different, and mdadm's HOMEHOST
+      # setting defaults to '<system>' (using the system hostname).
+      # This results mdadm considering such disks as "foreign" as opposed to
+      # "local", and showing them as e.g. '/dev/md/hetzner:root0'
+      # instead of '/dev/md/root0'.
+      # This is mdadm's protection against accidentally putting a RAID disk
+      # into the wrong machine and corrupting data by accidental sync, see
+      # https://bugzilla.redhat.com/show_bug.cgi?id=606481#c14 and onward.
+      # We do not worry about plugging disks into the wrong machine because
+      # we will never exchange disks between machines, so we tell mdadm to
+      # ignore the homehost entirely.
+      environment.etc."mdadm.conf".text = ''
+        HOMEHOST <ignore>
+      '';
+      # The RAIDs are assembled in stage1, so we need to make the config
+      # available there.
+      boot.swraid.mdadmConf = ''
+        HOMEHOST <ignore>
+      '';
+
+      # Network (Hetzner uses static IP assignments, and we don't use DHCP here)
+      networking.useDHCP = false;
+      networking.interfaces."enp27s0".ipv4.addresses = [
+        {
+          address = "95.216.32.37";
+          prefixLength = 26; # netmask 255.255.255.192
+        }
+      ];
+      networking.interfaces."enp27s0".ipv6.addresses = [
+        {
+          address = "2a01:4f9:2a:2047::1";
+          prefixLength = 64;
+        }
+      ];
+      networking.defaultGateway = "95.216.32.1";
+      networking.defaultGateway6 = { address = "fe80::1"; interface = "enp27s0"; };
+      networking.nameservers = [ "8.8.8.8" ];
+
+      # Initial empty root password for easy login:
+      users.users.root.initialHashedPassword = "";
+      services.openssh.settings.PermitRootLogin = "prohibit-password";
+
+      users.users.root.openssh.authorizedKeys.keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFTwvnkKWbNTAPSiK/agHOV9xXoh1R6hx5B8lZYmPY6Z"
       ];
 
-    # Use GRUB2 as the boot loader.
-    # We don't use systemd-boot because Hetzner uses BIOS legacy boot.
-    boot.loader.systemd-boot.enable = false;
-    boot.loader.grub = {
-      enable = true;
-      efiSupport = false;
-      devices = [ "/dev/sda" "/dev/sdb" ];
-    };
+      services.openssh.enable = true;
 
-    networking.hostName = "abe";
+      system.stateVersion = "23.05";
 
-    # The mdadm RAID1s were created with 'mdadm --create ... --homehost=hetzner',
-    # but the hostname for each machine may be different, and mdadm's HOMEHOST
-    # setting defaults to '<system>' (using the system hostname).
-    # This results mdadm considering such disks as "foreign" as opposed to
-    # "local", and showing them as e.g. '/dev/md/hetzner:root0'
-    # instead of '/dev/md/root0'.
-    # This is mdadm's protection against accidentally putting a RAID disk
-    # into the wrong machine and corrupting data by accidental sync, see
-    # https://bugzilla.redhat.com/show_bug.cgi?id=606481#c14 and onward.
-    # We do not worry about plugging disks into the wrong machine because
-    # we will never exchange disks between machines, so we tell mdadm to
-    # ignore the homehost entirely.
-    environment.etc."mdadm.conf".text = ''
-      HOMEHOST <ignore>
-    '';
-    # The RAIDs are assembled in stage1, so we need to make the config
-    # available there.
-    boot.swraid.mdadmConf = ''
-      HOMEHOST <ignore>
-    '';
-
-    # Network (Hetzner uses static IP assignments, and we don't use DHCP here)
-    networking.useDHCP = false;
-    networking.interfaces."enp27s0".ipv4.addresses = [
-      {
-        address = "95.216.32.37";
-        prefixLength = 26; # netmask 255.255.255.192
-      }
-    ];
-    networking.interfaces."enp27s0".ipv6.addresses = [
-      {
-        address = "2a01:4f9:2a:2047::1";
-        prefixLength = 64;
-      }
-    ];
-    networking.defaultGateway = "95.216.32.1";
-    networking.defaultGateway6 = { address = "fe80::1"; interface = "enp27s0"; };
-    networking.nameservers = [ "8.8.8.8" ];
-
-    # Initial empty root password for easy login:
-    users.users.root.initialHashedPassword = "";
-    services.openssh.settings.PermitRootLogin = "prohibit-password";
-
-    users.users.root.openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFTwvnkKWbNTAPSiK/agHOV9xXoh1R6hx5B8lZYmPY6Z"
-    ];
-
-    services.openssh.enable = true;
-
-    system.stateVersion = "23.05";
-
-  }
+    }
 #+end_src
 
 **** Hardware configuration
@@ -7013,6 +7016,7 @@ are published as a flake module.
             modules = [
               ./configuration.nix
               inputs.nixos-dns.nixosModules.dns
+              ./dns
               self.nixosModules.netdata
               self.nixosModules.synapse
               self.nixosModules.forgejo
@@ -7122,6 +7126,66 @@ Foremost is the server address.  ~A~ is IPv4, and ~AAAA~ is IPv6.
     type     = "AAAA"
     name     = "abe.hetzner"
     value    = "2a01:4f9:2a:2047::1"
+  }
+#+end_src
+
+****** NixOS-DNS                                                   :noexport:
+
+DNS records for ~abe~ and the services it hosts are managed by
+[[https://github.com/Janik-Haag/NixOS-DNS/][NixOS-DNS]].  This base module enables its networking module.
+
+The actual DNS records are defined in =networking.domains.subDomains=,
+but each gets its defaults from the closest matching
+=networking.domains.baseDomains=.  We don't specify any defaults, but
+if there is no matching record in =baseDomains=, no record is
+generated at all!
+
+#+begin_warning
+Forgetting =baseDomains= is [[https://janik-haag.github.io/NixOS-DNS/usage.html#nixos-module][documented as an error]], but I see silent
+failure.
+#+end_warning
+
+#+begin_src nix :tangle ../../gen/flake/hosts/abe/dns/default.nix
+  { config, ... }:
+
+  with builtins;
+  let
+    iface = config.networking.interfaces."enp27s0";
+    domain = config.networking.domain;
+    fqdn = "${config.networking.hostName}.${domain}";
+  in
+  {
+    imports = [ ./addresses.nix ];
+
+    networking.domains = {
+      enable = true;
+      baseDomains."${domain}" = {};
+    };
+  }
+#+end_src
+
+******* Address records
+
+Generate DNS address records ~A~ and ~AAAA~.  Most of it can be
+inferred from the standard NixOS =networking= config.  We give it a
+hint which is the public network interface.
+
+#+begin_src nix :tangle ../../gen/flake/hosts/abe/dns/addresses.nix
+  { config, ... }:
+
+  with builtins;
+  let
+    iface = "enp27s0";
+
+    fqdn = "${config.networking.hostName}.${config.networking.domain}";
+    ipv4Addresses = config.networking.interfaces.${iface}.ipv4.addresses;
+    ipv6Addresses = config.networking.interfaces.${iface}.ipv6.addresses;
+  in
+  {
+    networking.domains.subDomains.${fqdn} = {
+      a.data = map (a: a.address) ipv4Addresses;
+      aaaa.data = map (a: a.address) ipv6Addresses;
+    };
   }
 #+end_src
 
