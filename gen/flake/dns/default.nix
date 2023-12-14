@@ -3,6 +3,7 @@
 let
   dnsConfig = {
     inherit (self) nixosConfigurations;
+    extraConfig = import ../mail/dnsExtraConfig;
   };
 in
 {

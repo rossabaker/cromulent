@@ -7785,6 +7785,7 @@ ignores if we ever add more OpenTofu projects.
   let
     dnsConfig = {
       inherit (self) nixosConfigurations;
+      extraConfig = import ../mail/dnsExtraConfig;
     };
   in
   {
@@ -7803,7 +7804,7 @@ CLOSED: [2023-12-03 Sun 23:59 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: email
 :header-args:terraform+: :code-license CC0-1.0
-:EXPORT_HUGO_LASTMOD: [2023-12-04 Mon 16:41 EST]
+:EXPORT_HUGO_LASTMOD: [2023-12-13 Wed 20:47 EST]
 :CUSTOM_ID: pobox
 :END:
 
@@ -7815,6 +7816,17 @@ I would love to self-host Email, but [[https://cfenollosa.com/blog/after-self-ho
 switched to [[https://www.pobox.com/][pobox.com]] when my forwarder became insufficient.
 
 *** DNS
+
+**** NixOS-DNS                                                     :noexport:
+
+#+begin_src nix :tangle ../../gen/flake/mail/dnsExtraConfig/default.nix
+  { ... }:
+  {
+    imports = [
+      ./mx.nix
+    ];
+  }
+#+end_src
 
 **** ~MX~ records
 
@@ -7832,6 +7844,20 @@ project]].
     type    = "MX"
     name    = "@"
     value   = "10 mx-${count.index + 1}.pobox.com."
+  }
+#+end_src
+
+***** NixOS-DNS                                                    :noexport:
+
+#+begin_src nix :tangle ../../gen/flake/mail/dnsExtraConfig/mx.nix
+  { lib, ... }:
+
+  {
+    zones."rossabaker.com"."".mx.data =
+      map (i: {
+        preference = 10;
+        exchange = "mx-${toString i}.pobox.com";
+      }) (lib.lists.range 1 5);
   }
 #+end_src
 
