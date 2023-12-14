@@ -7804,7 +7804,7 @@ CLOSED: [2023-12-03 Sun 23:59 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: email
 :header-args:terraform+: :code-license CC0-1.0
-:EXPORT_HUGO_LASTMOD: [2023-12-13 Wed 20:47 EST]
+:EXPORT_HUGO_LASTMOD: [2023-12-13 Wed 20:50 EST]
 :CUSTOM_ID: pobox
 :END:
 
@@ -7824,6 +7824,7 @@ switched to [[https://www.pobox.com/][pobox.com]] when my forwarder became insuf
   {
     imports = [
       ./mx.nix
+      ./spf.nix
     ];
   }
 #+end_src
@@ -7877,6 +7878,14 @@ Values containing spaces [[https://github.com/timohirt/terraform-provider-hetzne
     type     = "TXT"
     name     = "@"
     value    = jsonencode("v=spf1 include:pobox.com -all")
+  }
+#+end_src
+
+***** NixOS-DNS                                                    :noexport:
+
+#+begin_src nix :tangle ../../gen/flake/mail/dnsExtraConfig/spf.nix
+  {
+    zones."rossabaker.com"."".txt.data = "v=spf1 include:pobox.com -all";
   }
 #+end_src
 
