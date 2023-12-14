@@ -1,11 +1,3 @@
-resource "hetznerdns_record" "cromulent_avatars_cname" {
-  zone_id = hetznerdns_zone.cromulent.id
-  type     = "CNAME"
-  name     = var.cromulent_avatars_domain
-  value    = "abe.hetzner.rossabaker.com."
-  ttl      = 60
-}
-
 resource "hetznerdns_record" "com_rossabaker_hetzner_abe_a" {
   zone_id = hetznerdns_zone.cromulent.id
   type     = "A"

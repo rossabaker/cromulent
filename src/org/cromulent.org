@@ -6731,7 +6731,7 @@ Configurations for various hosts, mostly with NixOS or Nix-Darwin.
 CLOSED: [2023-11-19 Sun 19:16 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: abe
-:EXPORT_HUGO_LASTMOD: [2023-12-13 Wed 20:25 EST]
+:EXPORT_HUGO_LASTMOD: [2023-12-14 Thu 15:39]
 :CUSTOM_ID: abe
 :header-args:terraform+: :code-license CC0-1.0
 :END:
@@ -7081,28 +7081,6 @@ find the source avatars.
   }
 #+end_src
 
-***** DNS
-
-Define the OpenTofu variable to match
-~com.rossabaker.services.libravatar~, plus a trailing period.
-
-#+begin_src terraform :tangle ../../gen/infra/hetznerdns/main.auto.tfvars
-  cromulent_avatars_domain = "avatars.rossabaker.com."
-#+end_src
-
-~avatars.rossabaker.com~ is a {{{abbr(common name,~CNAME)}}} for
-~abe~.
-
-#+begin_src terraform :tangle ../../gen/infra/hetznerdns/main.tf
-  resource "hetznerdns_record" "cromulent_avatars_cname" {
-    zone_id = hetznerdns_zone.cromulent.id
-    type     = "CNAME"
-    name     = var.cromulent_avatars_domain
-    value    = "abe.hetzner.rossabaker.com."
-    ttl      = 60
-  }
-#+end_src
-
 **** DNS records
 
 ~abe~ is the owner of several DNS records, as [[#dns][managed by OpenTofu]].
@@ -7208,7 +7186,6 @@ A ~CNAME~ record is necessary for all the services we host.
         "matrix.rossabaker.com"
         "social.rossabaker.com"
         "beta.www.rossabaker.com"
-        "avatars.rossabaker.com"
       ]);
   }
 #+end_src
@@ -8159,7 +8136,7 @@ CLOSED: [2023-12-08 Fri 09:10 CST]
 :header-args:nix+: :code-license MIT
 :header-args:sh+: :code-license MIT
 :header-args:terraform+: :code-license CC0-BY0
-:EXPORT_HUGO_LASTMOD: [2023-12-13 Wed 21:09 EST]
+:EXPORT_HUGO_LASTMOD: [2023-12-14 Thu 15:53]
 :END:
 
 #+begin_description
@@ -8228,7 +8205,8 @@ Two config options are required for this Libravatar:
 - =com.rossabaker.services.libravatar.avatarSrc= :: a path that
   contains original images to be prepared.
 
-This is enough to configure NixOS via its Nginx module.
+This is enough to configure NixOS via its Nginx module and create the
+corresponding DNS CNAME record.
 
 #+begin_src nix :tangle ../../gen/flake/libravatar/nixos-module.nix
   { config, lib, pkgs, ... }:
@@ -8265,6 +8243,8 @@ This is enough to configure NixOS via its Nginx module.
          '';
         };
       };
+      networking.domains.subDomains."${cfg.domain}".cname.data =
+        "${config.networking.hostName}.${config.networking.domain}.";
     };
   }
 #+end_src

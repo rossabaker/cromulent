@@ -32,5 +32,7 @@ in
        '';
       };
     };
+    networking.domains.subDomains."${cfg.domain}".cname.data =
+      "${config.networking.hostName}.${config.networking.domain}.";
   };
 }
