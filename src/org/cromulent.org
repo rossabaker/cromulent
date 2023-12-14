@@ -7804,7 +7804,7 @@ CLOSED: [2023-12-03 Sun 23:59 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: email
 :header-args:terraform+: :code-license CC0-1.0
-:EXPORT_HUGO_LASTMOD: [2023-12-13 Wed 20:50 EST]
+:EXPORT_HUGO_LASTMOD: [2023-12-13 Wed 20:54 EST]
 :CUSTOM_ID: pobox
 :END:
 
@@ -7825,6 +7825,7 @@ switched to [[https://www.pobox.com/][pobox.com]] when my forwarder became insuf
     imports = [
       ./mx.nix
       ./spf.nix
+      ./dkim.nix
     ];
   }
 #+end_src
@@ -7907,6 +7908,17 @@ Values containing spaces [[https://github.com/timohirt/terraform-provider-hetzne
     type     = "TXT"
     name     = "2020-06.pbsmtp._domainkey"
     value    = jsonencode("v=DKIM1; k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDIfBzlZiuOljOEgYr0nrIieWvmn9x4mrXlIqgw64oasNb/wn62Yai4APbQ4rAdwwEj2vI0FVs2Y5oTUKmPq+RSsWJKmdEWjv9zUKK+GNjVJ0mVBX75vU1nEwWUeS+Wz4haQxMVXQRrbCovQNoQjFcSX9ERdAbZVzXsf/0kDNzdiQIDAQAB")
+  }
+#+end_src
+
+***** NixOS-DNS                                                    :noexport:
+
+#+begin_src nix :tangle ../../gen/flake/mail/dnsExtraConfig/dkim.nix
+  { ... }:
+
+  {
+    zones."rossabaker.com"."2020-06.pbsmtp._domainkey".txt.data =
+      "v=DKIM1; k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDIfBzlZiuOljOEgYr0nrIieWvmn9x4mrXlIqgw64oasNb/wn62Yai4APbQ4rAdwwEj2vI0FVs2Y5oTUKmPq+RSsWJKmdEWjv9zUKK+GNjVJ0mVBX75vU1nEwWUeS+Wz4haQxMVXQRrbCovQNoQjFcSX9ERdAbZVzXsf/0kDNzdiQIDAQAB";
   }
 #+end_src
 
