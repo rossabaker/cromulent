@@ -5986,7 +5986,6 @@ consistent.  We'll roll with it.
 #+end_src
 #+end_details
 
-***
 *** Flake skeleton
 
 A flake is just a =description=, =inputs=, and =outputs=.  The
