@@ -91,6 +91,12 @@ flake-parts.lib.mkFlake { inherit inputs; } (
 
           packages = [
             pkgs.hugo
+            (pkgs.octodns.withProviders (ps:
+              with pkgs.octodns-providers; [
+                bind
+                hetzner
+              ]
+            ))
           ];
         };
       };

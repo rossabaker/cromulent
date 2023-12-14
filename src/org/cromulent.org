@@ -5718,7 +5718,7 @@ The Home Manager module is published to my flake as output
 CLOSED: [2022-12-25 Sun 22:14 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: /nix-flake
-:EXPORT_HUGO_LASTMOD: [2023-11-28 Tue 11:51 EST]
+:EXPORT_HUGO_LASTMOD: [2023-12-13 Wed 21:54 EST]
 :header-args+: :code-license MIT
 :EXPORT_OPTIONS: h:6
 :END:
@@ -5870,6 +5870,12 @@ function of its inputs!
 
             packages = [
               pkgs.hugo
+              (pkgs.octodns.withProviders (ps:
+                with pkgs.octodns-providers; [
+                  bind
+                  hetzner
+                ]
+              ))
             ];
           };
         };
@@ -7821,21 +7827,26 @@ ignores if we ever add more OpenTofu projects.
       let
         generate = inputs.nixos-dns.utils.generate pkgs;
       in
-      {
-        packages = {
-          zoneFiles = generate.zoneFiles dnsConfig;
-          octodns = generate.octodnsConfig {
-            inherit dnsConfig;
-            config.providers.hetzner = {
-              class = "octodns_hetzner.HetznerProvider";
-              token = "env/HETZNER_DNS_API_TOKEN";
-            };
-            zones = {
-              "rossabaker.com." = inputs.nixos-dns.utils.octodns.generateZoneAttrs [ "hetzner" ];
+        {
+          packages = {
+            zoneFiles = generate.zoneFiles dnsConfig;
+            octodns = generate.octodnsConfig {
+              inherit dnsConfig;
+              config.providers = {
+                hetzner = {
+                  class = "octodns_hetzner.HetznerProvider";
+                  token = "env/HETZNER_DNS_API_TOKEN";
+                };
+                config = {
+                  check_origin = false;
+                };
+              };
+              zones = {
+                "rossabaker.com." = inputs.nixos-dns.utils.octodns.generateZoneAttrs [ "hetzner" ];
+              };
             };
           };
         };
-      };
   }
 #+end_src
 
