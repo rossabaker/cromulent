@@ -21,7 +21,7 @@
 
   networking = {
     hostName = "abe";
-    domain = "hetzner.rossbaker.com";
+    domain = "hetzner.rossabaker.com";
   };
 
   # The mdadm RAID1s were created with 'mdadm --create ... --homehost=hetzner',

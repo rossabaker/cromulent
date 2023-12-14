@@ -6770,7 +6770,7 @@ installed from the rescue image with a [[https://github.com/nix-community/nixos-
 
       networking = {
         hostName = "abe";
-        domain = "hetzner.rossbaker.com";
+        domain = "hetzner.rossabaker.com";
       };
 
       # The mdadm RAID1s were created with 'mdadm --create ... --homehost=hetzner',
