@@ -7709,6 +7709,15 @@ resource "hetznerdns_record" "com_rossabaker_openpgp4fpr" {
 }
 #+end_src
 
+****** NixOS-DNS                                                   :noexport:
+
+#+begin_src nix :tangle ../../gen/flake/dns/verification.nix
+  { ... }:
+  {
+    zones."rossabaker.com"."".txt.data = "openpgp4fpr:904c153733dbb0106915c0bd975be5bc29d92ca5";
+  }
+#+end_src
+
 ***** But wait, there's more!
 
 The OpenTofu declarations of other records are documented with the
@@ -7789,6 +7798,7 @@ ignores if we ever add more OpenTofu projects.
         imports = [
           ../mail/dnsExtraConfig
           ../libravatar/dnsExtraConfig
+          ./verification.nix
         ];
       };
     };

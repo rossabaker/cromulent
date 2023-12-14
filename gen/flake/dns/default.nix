@@ -7,6 +7,7 @@ let
       imports = [
         ../mail/dnsExtraConfig
         ../libravatar/dnsExtraConfig
+        ./verification.nix
       ];
     };
   };
@@ -16,7 +17,7 @@ in
     let
       generate = inputs.nixos-dns.utils.generate pkgs;
     in
-      {
-        packages.zoneFiles = generate.zoneFiles dnsConfig;
-      };
+    {
+      packages.zoneFiles = generate.zoneFiles dnsConfig;
+    };
 }
