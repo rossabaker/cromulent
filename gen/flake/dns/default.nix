@@ -10,6 +10,8 @@ let
         ./verification.nix
         ./www.nix
       ];
+
+      defaultTTL = 60;
     };
   };
 in

@@ -7811,6 +7811,8 @@ ignores if we ever add more OpenTofu projects.
           ./verification.nix
           ./www.nix
         ];
+
+        defaultTTL = 60;
       };
     };
   in
