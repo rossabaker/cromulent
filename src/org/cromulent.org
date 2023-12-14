@@ -7203,6 +7203,7 @@ A ~CNAME~ record is necessary for all the services we host.
         "matrix.rossabaker.com"
         "social.rossabaker.com"
         "beta.www.rossabaker.com"
+        "avatars.rossabaker.com"
       ]);
   }
 #+end_src

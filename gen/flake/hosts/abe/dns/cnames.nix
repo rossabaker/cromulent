@@ -10,5 +10,6 @@ in
       "matrix.rossabaker.com"
       "social.rossabaker.com"
       "beta.www.rossabaker.com"
+      "avatars.rossabaker.com"
     ]);
 }
