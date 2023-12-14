@@ -11,7 +11,7 @@ let
         ./www.nix
       ];
 
-      defaultTTL = 60;
+      defaultTTL = 60 * 60 * 4;
     };
   };
 in
