@@ -1,18 +1,19 @@
 { config, ... }:
 
+let
+  priority = 0;
+  weight = 0;
+  target = "avatars.rossabaker.com";
+in
 {
   zones."rossabaker.com" = {
     "_avatars._tcp".srv.data = {
-      priority = 0;
-      weight = 0;
+      inherit priority weight target;
       port = 80;
-      target = "avatars.rossabaker.com";
     };
     "_avatars-sec._tcp".srv.data = {
-      priority = 0;
-      weight = 0;
+      inherit priority weight target;
       port = 443;
-      target = "avatars.rossabaker.com";
     };
   };
 }

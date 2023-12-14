@@ -8136,7 +8136,7 @@ CLOSED: [2023-12-08 Fri 09:10 CST]
 :header-args:nix+: :code-license MIT
 :header-args:sh+: :code-license MIT
 :header-args:terraform+: :code-license CC0-BY0
-:EXPORT_HUGO_LASTMOD: [2023-12-14 Thu 15:53]
+:EXPORT_HUGO_LASTMOD: [2023-12-14 Thu 15:56]
 :END:
 
 #+begin_description
@@ -8260,68 +8260,33 @@ composition.
   }
 #+end_src
 
-
-*** OpenTofu configuration of =SRV= records
+*** Configuration of =SRV= records
 
 Whenever the avatar of ~user@example.com~ is requested, a Libravatar
 client looks up the [[https://en.wikipedia.org/wiki/SRV_record][{{{abbr(Service,~SRV~)}}} record]] for
 ~_avatars._tcp.example.com~ (http) or ~avatars-sec._tcp.example.com~
 (https).
 
-=cromulent_avatars_domain= specifies the domain from which the avatars
-are to be served.  It must end in a period.  I use
-~avatars.rossabaker.com.~.
-
-#+begin_src terraform :tangle ../../gen/infra/hetznerdns/main.tf
-  variable "cromulent_avatars_domain" {
-    type        = string
-    description = "The domain for Libravatar avatars, ended with a period."
-    nullable    = false
-  }
-#+end_src
-
 There should be two ~SRV~ records, one for HTTP and one for HTTPS.  It
-is fine if the former redirecs to the latter.  The three parameters
-before the domain name are priority, weight, and port.  Priority and
-weight can both be zero.  This configuration is for [[https://www.hetzner.com/dns-console][Hetzner DNS]].
-Translate to your own provider as necessary.
-
-#+begin_src terraform :tangle ../../gen/infra/hetznerdns/main.tf
-  resource "hetznerdns_record" "cromulent_avatars_srv" {
-    zone_id  = hetznerdns_zone.cromulent.id
-    type     = "SRV"
-    name     = "_avatars._tcp"
-    value    = "0 0 80 ${var.cromulent_avatars_domain}"
-    ttl      = 60
-  }
-
-  resource "hetznerdns_record" "cromulent_avatars_srv_sec" {
-    zone_id  = hetznerdns_zone.cromulent.id
-    type     = "SRV"
-    name     = "_avatars-sec._tcp"
-    value    = "0 0 443 ${var.cromulent_avatars_domain}"
-    ttl      = 60
-  }
-#+end_src
-
-**** NixOS-DNS                                                     :noexport:
+is fine if the former redirects to the latter.
 
 #+begin_src nix :tangle ../../gen/flake/libravatar/dnsExtraConfig/default.nix
   { config, ... }:
 
+  let
+    priority = 0;
+    weight = 0;
+    target = "avatars.rossabaker.com";
+  in
   {
     zones."rossabaker.com" = {
       "_avatars._tcp".srv.data = {
-        priority = 0;
-        weight = 0;
+        inherit priority weight target;
         port = 80;
-        target = "avatars.rossabaker.com";
       };
       "_avatars-sec._tcp".srv.data = {
-        priority = 0;
-        weight = 0;
+        inherit priority weight target;
         port = 443;
-        target = "avatars.rossabaker.com";
       };
     };
   }
