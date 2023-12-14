@@ -3,7 +3,12 @@
 let
   dnsConfig = {
     inherit (self) nixosConfigurations;
-    extraConfig = import ../mail/dnsExtraConfig;
+    extraConfig = { ... }: {
+      imports = [
+        ../mail/dnsExtraConfig
+        ../libravatar/dnsExtraConfig
+      ];
+    };
   };
 in
 {
@@ -11,7 +16,7 @@ in
     let
       generate = inputs.nixos-dns.utils.generate pkgs;
     in
-    {
-      packages.zoneFiles = generate.zoneFiles dnsConfig;
-    };
+      {
+        packages.zoneFiles = generate.zoneFiles dnsConfig;
+      };
 }

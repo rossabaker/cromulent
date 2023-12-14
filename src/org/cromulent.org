@@ -7598,7 +7598,7 @@ CLOSED: [2023-12-03 Sun 21:26 EST]
 :CUSTOM_ID: dns
 :header-args:sh+: :code-license CC0-1.0
 :header-args:terraform+: :code-license CC0-1.0
-:EXPORT_HUGO_LASTMOD: [2023-12-13 Wed 19:25 EST]
+:EXPORT_HUGO_LASTMOD: [2023-12-13 Wed 21:10 EST]
 :END:
 
 #+begin_description
@@ -7785,7 +7785,12 @@ ignores if we ever add more OpenTofu projects.
   let
     dnsConfig = {
       inherit (self) nixosConfigurations;
-      extraConfig = import ../mail/dnsExtraConfig;
+      extraConfig = { ... }: {
+        imports = [
+          ../mail/dnsExtraConfig
+          ../libravatar/dnsExtraConfig
+        ];
+      };
     };
   in
   {
@@ -8109,7 +8114,7 @@ CLOSED: [2023-12-08 Fri 09:10 CST]
 :header-args:nix+: :code-license MIT
 :header-args:sh+: :code-license MIT
 :header-args:terraform+: :code-license CC0-BY0
-:EXPORT_HUGO_LASTMOD: [2023-12-10 Sun 00:41 EST]
+:EXPORT_HUGO_LASTMOD: [2023-12-13 Wed 21:09 EST]
 :END:
 
 #+begin_description
@@ -8271,6 +8276,29 @@ Translate to your own provider as necessary.
     name     = "_avatars-sec._tcp"
     value    = "0 0 443 ${var.cromulent_avatars_domain}"
     ttl      = 60
+  }
+#+end_src
+
+**** NixOS-DNS                                                     :noexport:
+
+#+begin_src nix :tangle ../../gen/flake/libravatar/dnsExtraConfig/default.nix
+  { config, ... }:
+
+  {
+    zones."rossabaker.com" = {
+      "_avatars._tcp".srv.data = {
+        priority = 0;
+        weight = 0;
+        port = 80;
+        target = "avatars.rossabaker.com";
+      };
+      "_avatars-sec._tcp".srv.data = {
+        priority = 0;
+        weight = 0;
+        port = 443;
+        target = "avatars.rossabaker.com";
+      };
+    };
   }
 #+end_src
 
