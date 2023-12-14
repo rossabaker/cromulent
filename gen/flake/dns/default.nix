@@ -8,6 +8,7 @@ let
         ../mail/dnsExtraConfig
         ../libravatar/dnsExtraConfig
         ./verification.nix
+        ./www.nix
       ];
     };
   };

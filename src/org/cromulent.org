@@ -7598,7 +7598,7 @@ CLOSED: [2023-12-03 Sun 21:26 EST]
 :CUSTOM_ID: dns
 :header-args:sh+: :code-license CC0-1.0
 :header-args:terraform+: :code-license CC0-1.0
-:EXPORT_HUGO_LASTMOD: [2023-12-13 Wed 21:10 EST]
+:EXPORT_HUGO_LASTMOD: [2023-12-13 Wed 21:17 EST]
 :END:
 
 #+begin_description
@@ -7745,6 +7745,16 @@ documenting, but it would bring down the site if we didn't keep them.
   }
 #+end_src
 
+#+begin_src nix :tangle ../../gen/flake/dns/www.nix
+  { ... }:
+  {
+    zones."rossabaker.com" = {
+      "".a.data = "75.2.60.5";
+      "www".cname.data = "rossabaker.com.";
+    };
+  }
+#+end_src
+
 *** Applying
 
 ~plan~ is a dry run.  It will not make any destructive changes.
@@ -7799,6 +7809,7 @@ ignores if we ever add more OpenTofu projects.
           ../mail/dnsExtraConfig
           ../libravatar/dnsExtraConfig
           ./verification.nix
+          ./www.nix
         ];
       };
     };
