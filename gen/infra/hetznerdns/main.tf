@@ -12,13 +12,6 @@ resource "hetznerdns_record" "com_rossabaker_hetzner_abe_aaaa" {
   value    = "2a01:4f9:2a:2047::1"
 }
 
-resource "hetznerdns_record" "com_rossabaker_git" {
-  zone_id = hetznerdns_zone.cromulent.id
-  type     = "CNAME"
-  name     = "git"
-  value    = "abe.hetzner.rossabaker.com."
-}
-
 resource "hetznerdns_record" "com_rossabaker_matrix" {
   zone_id = hetznerdns_zone.cromulent.id
   type     = "CNAME"

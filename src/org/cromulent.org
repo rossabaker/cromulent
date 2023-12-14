@@ -7182,7 +7182,6 @@ A ~CNAME~ record is necessary for all the services we host.
   {
     networking.domains.subDomains =
       lib.listToAttrs (map (host: { name = host; value = { cname.data = cname; };}) [
-        "git.rossabaker.com"
         "matrix.rossabaker.com"
         "social.rossabaker.com"
         "beta.www.rossabaker.com"
@@ -7194,17 +7193,6 @@ A ~CNAME~ record is necessary for all the services we host.
 
 When we mixed in certain NixOS services, we also took responsibility
 for the subdomains they declared.
-
-For ~forgejo~:
-
-#+begin_src terraform :tangle ../../gen/infra/hetznerdns/main.tf
-  resource "hetznerdns_record" "com_rossabaker_git" {
-    zone_id = hetznerdns_zone.cromulent.id
-    type     = "CNAME"
-    name     = "git"
-    value    = "abe.hetzner.rossabaker.com."
-  }
-#+end_src
 
 For ~synapse~:
 
@@ -7412,7 +7400,7 @@ CLOSED: [2023-12-01 Fri 18:25 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: forgejo
 :header-args:nix+: :code-license MIT
-:EXPORT_HUGO_LASTMOD: [2023-12-05 Tue 21:42 EST]
+:EXPORT_HUGO_LASTMOD: [2023-12-14 Thu 17:48 EST]
 :END:
 
 #+begin_description
@@ -7428,6 +7416,8 @@ How to self-host Git repositories with Forgejo on NixOS.
 *** NixOS module
 
 #+begin_src nix :tangle ../../gen/flake/forgejo/nixos-module.nix
+  { config, ... }:
+
   let
     domain = "git.rossabaker.com";
   in
@@ -7453,11 +7443,8 @@ How to self-host Git repositories with Forgejo on NixOS.
       };
     };
 
-    services.nginx.virtualHosts."src.rossabaker.com" = {
-      enableACME = true;
-      forceSSL = true;
-      globalRedirect = domain;
-    };
+    networking.domains.subDomains."${domain}".cname.data =
+      "${config.networking.hostName}.${config.networking.domain}.";
   }
 #+end_src
 

@@ -1,3 +1,5 @@
+{ config, ... }:
+
 let
   domain = "git.rossabaker.com";
 in
@@ -23,9 +25,6 @@ in
     };
   };
 
-  services.nginx.virtualHosts."src.rossabaker.com" = {
-    enableACME = true;
-    forceSSL = true;
-    globalRedirect = domain;
-  };
+  networking.domains.subDomains."${domain}".cname.data =
+    "${config.networking.hostName}.${config.networking.domain}.";
 }
