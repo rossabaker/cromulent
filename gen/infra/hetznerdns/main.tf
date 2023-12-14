@@ -19,13 +19,6 @@ resource "hetznerdns_record" "com_rossabaker_matrix" {
   value    = "abe.hetzner.rossabaker.com."
 }
 
-resource "hetznerdns_record" "com_rossabaker_social" {
-  zone_id = hetznerdns_zone.cromulent.id
-  type     = "CNAME"
-  name     = "social"
-  value    = "abe.hetzner.rossabaker.com."
-}
-
 resource "hetznerdns_record" "com_rossabaker_www_beta" {
   zone_id = hetznerdns_zone.cromulent.id
   type     = "CNAME"

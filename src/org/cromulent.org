@@ -6731,7 +6731,7 @@ Configurations for various hosts, mostly with NixOS or Nix-Darwin.
 CLOSED: [2023-11-19 Sun 19:16 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: abe
-:EXPORT_HUGO_LASTMOD: [2023-12-14 Thu 15:39]
+:EXPORT_HUGO_LASTMOD: [2023-12-14 Thu 17:54 EST]
 :CUSTOM_ID: abe
 :header-args:terraform+: :code-license CC0-1.0
 :END:
@@ -6996,8 +6996,10 @@ to configure the [[https://docs.joinmastodon.org/admin/config/#web_domain][=WEB_
     };
 
     users.groups.${cfg.group}.members = [ config.services.nginx.user ];
-  }
 
+    networking.domains.subDomains."${cfg.extraConfig.WEB_DOMAIN}".cname.data =
+      "${config.networking.hostName}.${config.networking.domain}.";
+  }
 #+end_src
 
 **** Flake module
@@ -7201,17 +7203,6 @@ For ~synapse~:
     zone_id = hetznerdns_zone.cromulent.id
     type     = "CNAME"
     name     = "matrix"
-    value    = "abe.hetzner.rossabaker.com."
-  }
-#+end_src
-
-For ~mastodon~:
-
-#+begin_src terraform :tangle ../../gen/infra/hetznerdns/main.tf
-  resource "hetznerdns_record" "com_rossabaker_social" {
-    zone_id = hetznerdns_zone.cromulent.id
-    type     = "CNAME"
-    name     = "social"
     value    = "abe.hetzner.rossabaker.com."
   }
 #+end_src

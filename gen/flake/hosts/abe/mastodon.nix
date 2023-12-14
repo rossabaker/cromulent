@@ -51,4 +51,7 @@ in
   };
 
   users.groups.${cfg.group}.members = [ config.services.nginx.user ];
+
+  networking.domains.subDomains."${cfg.extraConfig.WEB_DOMAIN}".cname.data =
+    "${config.networking.hostName}.${config.networking.domain}.";
 }
