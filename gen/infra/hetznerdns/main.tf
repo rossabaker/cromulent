@@ -3,13 +3,6 @@ resource "hetznerdns_zone" "cromulent" {
   ttl  = 8 * 60 * 60 # seconds
 }
 
-resource "hetznerdns_record" "com_rossabaker_openpgp4fpr" {
-  zone_id = hetznerdns_zone.cromulent.id
-  type     = "TXT"
-  name     = "@"
-  value    = "openpgp4fpr:904c153733dbb0106915c0bd975be5bc29d92ca5"
-}
-
 resource "hetznerdns_record" "com_rossabaker_apex" {
   zone_id = hetznerdns_zone.cromulent.id
   type     = "A"

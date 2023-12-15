@@ -7586,17 +7586,6 @@ scope, but common types include:
 
 This ~TXT~ record is an [[https://docs.keyoxide.org/service-providers/dns/][identity proof]] claimed in my [[https://keyoxide.org/wkd/ross%40rossabaker.com][OpenPGP profile]].
 
-#+begin_src terraform :tangle ../../gen/infra/hetznerdns/main.tf
-resource "hetznerdns_record" "com_rossabaker_openpgp4fpr" {
-  zone_id = hetznerdns_zone.cromulent.id
-  type     = "TXT"
-  name     = "@"
-  value    = "openpgp4fpr:904c153733dbb0106915c0bd975be5bc29d92ca5"
-}
-#+end_src
-
-****** NixOS-DNS                                                   :noexport:
-
 #+begin_src nix :tangle ../../gen/flake/dns/verification.nix
   { ... }:
   {
@@ -7606,9 +7595,8 @@ resource "hetznerdns_record" "com_rossabaker_openpgp4fpr" {
 
 ***** But wait, there's more!
 
-The OpenTofu declarations of other records are documented with the
-machines or services that need them, but can be found in the same
-~gen/infra/hetznerdns~ directory.
+Declarations of other records are made in the =nixosConfigurations=
+of the relevant host.
 
 ***** Interim records :noexport:
 
