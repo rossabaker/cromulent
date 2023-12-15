@@ -7184,7 +7184,6 @@ A ~CNAME~ record is necessary for all the services we host.
   {
     networking.domains.subDomains =
       lib.listToAttrs (map (host: { name = host; value = { cname.data = cname; };}) [
-        "social.rossabaker.com"
         "beta.www.rossabaker.com"
       ]);
   }
