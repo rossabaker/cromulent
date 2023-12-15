@@ -8920,7 +8920,7 @@ market:
 CLOSED: [2023-12-02 Sat 01:02 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: december-adventure
-:EXPORT_HUGO_LASTMOD: [2023-12-13 Wed 16:05]
+:EXPORT_HUGO_LASTMOD: [2023-12-14 Thu 19:47 EST]
 :END:
 
 #+begin_description
@@ -9012,6 +9012,11 @@ I want to continue my movement toward self-hosting:
 ***** December 12
 
 - Began migration of DNS records to [[https://janik-haag.github.io/NixOS-DNS][NixOS-DNS]].
+
+***** December 13
+
+- Fully implemented, but did not finish documenting, [[https://janik-haag.github.io/NixOS-DNS/usage.html#octodns][OctoDNS]]
+  integration.
 
 * Talks section
 :PROPERTIES:
