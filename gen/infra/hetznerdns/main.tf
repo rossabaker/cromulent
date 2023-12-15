@@ -1,17 +1,3 @@
-resource "hetznerdns_record" "com_rossabaker_hetzner_abe_a" {
-  zone_id = hetznerdns_zone.cromulent.id
-  type     = "A"
-  name     = "abe.hetzner"
-  value    = "95.216.32.37"
-}
-
-resource "hetznerdns_record" "com_rossabaker_hetzner_abe_aaaa" {
-  zone_id = hetznerdns_zone.cromulent.id
-  type     = "AAAA"
-  name     = "abe.hetzner"
-  value    = "2a01:4f9:2a:2047::1"
-}
-
 resource "hetznerdns_zone" "cromulent" {
   name = "rossabaker.com"
   ttl  = 8 * 60 * 60 # seconds

@@ -6731,7 +6731,7 @@ Configurations for various hosts, mostly with NixOS or Nix-Darwin.
 CLOSED: [2023-11-19 Sun 19:16 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: abe
-:EXPORT_HUGO_LASTMOD: [2023-12-14 Thu 19:44 EST]
+:EXPORT_HUGO_LASTMOD: [2023-12-14 Thu 19:49 EST]
 :CUSTOM_ID: abe
 :header-args:terraform+: :code-license CC0-1.0
 :END:
@@ -7085,48 +7085,15 @@ find the source avatars.
 
 **** DNS records
 
-~abe~ is the owner of several DNS records, as [[#dns][managed by OpenTofu]].
-Its full name is ~abe.hetzner.rossabaker.com~.
-
-#+begin_aside
-This haphazardly weaves OpenTofu with Nix, such that the inclusion of
-a module requires a DNS entry managed by another tool.  [[https://terranix.org/][Terranix]] might
-be a solution.
-#+end_aside
-
-***** IP addresses
-
-Foremost is the server address.  ~A~ is IPv4, and ~AAAA~ is IPv6.
-
-#+begin_src terraform :tangle ../../gen/infra/hetznerdns/main.tf
-  resource "hetznerdns_record" "com_rossabaker_hetzner_abe_a" {
-    zone_id = hetznerdns_zone.cromulent.id
-    type     = "A"
-    name     = "abe.hetzner"
-    value    = "95.216.32.37"
-  }
-
-  resource "hetznerdns_record" "com_rossabaker_hetzner_abe_aaaa" {
-    zone_id = hetznerdns_zone.cromulent.id
-    type     = "AAAA"
-    name     = "abe.hetzner"
-    value    = "2a01:4f9:2a:2047::1"
-  }
-#+end_src
-
-****** NixOS-DNS                                                   :noexport:
-
 DNS records for ~abe~ and the services it hosts are managed by
-[[https://github.com/Janik-Haag/NixOS-DNS/][NixOS-DNS]].  This base module enables its networking module.
-
-The actual DNS records are defined in =networking.domains.subDomains=,
-but each gets its defaults from the closest matching
-=networking.domains.baseDomains=.  We don't specify any defaults, but
-if there is no matching record in =baseDomains=, no record is
-generated at all!
+[[https://github.com/Janik-Haag/NixOS-DNS/][NixOS-DNS]].  The actual DNS records are defined in
+=networking.domains.subDomains=, but each gets its defaults from the
+closest matching =networking.domains.baseDomains=.  We don't specify
+any defaults, but if there is no matching record in =baseDomains=, no
+record is generated at all!
 
 #+begin_warning
-Forgetting =baseDomains= is [[https://janik-haag.github.io/NixOS-DNS/usage.html#nixos-module][documented as an error]], but I see silent
+Forgetting =baseDomains= is [[https://janik-haag.github.io/NixOS-DNS/usage.html#nixos-module][documented as an error]], but I saw silent
 failure.
 #+end_warning
 
@@ -7145,7 +7112,7 @@ failure.
   }
 #+end_src
 
-******* Address records
+***** Address records
 
 Generate DNS address records ~A~ and ~AAAA~.  Most of it can be
 inferred from the standard NixOS =networking= config.  We give it a
