@@ -1,5 +1,8 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
+let
+  domain = "matrix.rossabaker.com";
+in
 {
   services.postgresql.enable = true;
   services.postgresql.initialScript = pkgs.writeText "synapse-init.sql" ''
@@ -21,7 +24,7 @@
 
     virtualHosts = {
       # Reverse proxy for Matrix client-server and server-server communication
-      "matrix.rossabaker.com" = {
+      "${domain}" = {
         enableACME = true;
         forceSSL = true;
 
@@ -59,4 +62,6 @@
       ];
     };
   };
+  networking.domains.subDomains."${domain}".cname.data =
+    "${config.networking.hostName}.${config.networking.domain}.";
 }

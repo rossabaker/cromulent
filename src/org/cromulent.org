@@ -7184,7 +7184,6 @@ A ~CNAME~ record is necessary for all the services we host.
   {
     networking.domains.subDomains =
       lib.listToAttrs (map (host: { name = host; value = { cname.data = cname; };}) [
-        "matrix.rossabaker.com"
         "social.rossabaker.com"
         "beta.www.rossabaker.com"
       ]);
@@ -7195,17 +7194,6 @@ A ~CNAME~ record is necessary for all the services we host.
 
 When we mixed in certain NixOS services, we also took responsibility
 for the subdomains they declared.
-
-For ~synapse~:
-
-#+begin_src terraform :tangle ../../gen/infra/hetznerdns/main.tf
-  resource "hetznerdns_record" "com_rossabaker_matrix" {
-    zone_id = hetznerdns_zone.cromulent.id
-    type     = "CNAME"
-    name     = "matrix"
-    value    = "abe.hetzner.rossabaker.com."
-  }
-#+end_src
 
 For ~webserver~:
 
@@ -7932,7 +7920,7 @@ CLOSED: [2022-11-21 Mon 21:03 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: matrix
 :EXPORT_DATE: [2022-05-05 Thu 17:27 EDT]
-:EXPORT_HUGO_LASTMOD: [2023-12-05 Tue 16:19 EST]
+:EXPORT_HUGO_LASTMOD: [2023-12-14 Thu 19:39 EST]
 :header-args+: :code-license CC0-1.0
 :header-args:nix+: :code-license MIT
 :END:
@@ -7967,8 +7955,11 @@ Most of this configuration comes from the [[https://nixos.org/manual/nixos/stabl
 of the NixOS manual.
 
 #+begin_src nix :tangle ../../gen/flake/synapse/nixos-module.nix
-  { pkgs, ... }:
+  { config, pkgs, ... }:
 
+  let
+    domain = "matrix.rossabaker.com";
+  in
   {
     services.postgresql.enable = true;
     services.postgresql.initialScript = pkgs.writeText "synapse-init.sql" ''
@@ -7990,7 +7981,7 @@ of the NixOS manual.
 
       virtualHosts = {
         # Reverse proxy for Matrix client-server and server-server communication
-        "matrix.rossabaker.com" = {
+        "${domain}" = {
           enableACME = true;
           forceSSL = true;
 
@@ -8028,6 +8019,8 @@ of the NixOS manual.
         ];
       };
     };
+    networking.domains.subDomains."${domain}".cname.data =
+      "${config.networking.hostName}.${config.networking.domain}.";
   }
 #+end_src
 
