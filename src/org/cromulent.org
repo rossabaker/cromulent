@@ -6731,7 +6731,7 @@ Configurations for various hosts, mostly with NixOS or Nix-Darwin.
 CLOSED: [2023-11-19 Sun 19:16 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: abe
-:EXPORT_HUGO_LASTMOD: [2023-12-14 Thu 17:54 EST]
+:EXPORT_HUGO_LASTMOD: [2023-12-14 Thu 19:44 EST]
 :CUSTOM_ID: abe
 :header-args:terraform+: :code-license CC0-1.0
 :END:
@@ -7136,7 +7136,6 @@ failure.
   {
     imports = [
      ./addresses.nix
-     ./cnames.nix
     ];
 
     networking.domains = {
@@ -7169,40 +7168,6 @@ hint which is the public network interface.
       aaaa.data = map (a: a.address) ipv6Addresses;
     };
   }
-#+end_src
-
-******* Canonical names
-
-A ~CNAME~ record is necessary for all the services we host.
-
-#+begin_src nix :tangle ../../gen/flake/hosts/abe/dns/cnames.nix
-  { config, lib, ... }:
-
-  let
-    cname = "${config.networking.hostName}.${config.networking.domain}.";
-  in
-  {
-    networking.domains.subDomains =
-      lib.listToAttrs (map (host: { name = host; value = { cname.data = cname; };}) [
-        "beta.www.rossabaker.com"
-      ]);
-  }
-#+end_src
-
-****** Canonical names
-
-When we mixed in certain NixOS services, we also took responsibility
-for the subdomains they declared.
-
-For ~webserver~:
-
-#+begin_src terraform :tangle ../../gen/infra/hetznerdns/main.tf
-resource "hetznerdns_record" "com_rossabaker_www_beta" {
-  zone_id = hetznerdns_zone.cromulent.id
-  type     = "CNAME"
-  name     = "beta.www"
-  value    = "abe.hetzner.rossabaker.com."
-}
 #+end_src
 
 *** DONE Work laptop
@@ -7439,7 +7404,7 @@ CLOSED: [2023-12-02 Sat 11:41 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: webserver
 :CUSTOM_ID: webserver
-:EXPORT_HUGO_LASTMOD: [2023-12-03 Sun 00:09 EST]
+:EXPORT_HUGO_LASTMOD: [2023-12-14 Thu 19:43 EST]
 :END:
 
 #+begin_src description
@@ -7465,15 +7430,22 @@ managed.
 #+end_warning
 
 #+begin_src nix :tangle ../../gen/flake/webserver/nixos-module.nix
+  { config, ... }:
+
+  let
+    domain = "beta.www.rossabaker.com";
+  in
   {
     services.nginx = {
       enable = true;
-      virtualHosts."beta.www.rossabaker.com" = {
+      virtualHosts.${domain} = {
         forceSSL = true;
         enableACME = true;
         root = "/var/www/com.rossabaker.www.beta";
       };
     };
+    networking.domains.subDomains."${domain}".cname.data =
+      "${config.networking.hostName}.${config.networking.domain}.";
   }
 #+end_src
 

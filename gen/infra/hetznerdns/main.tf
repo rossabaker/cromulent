@@ -12,13 +12,6 @@ resource "hetznerdns_record" "com_rossabaker_hetzner_abe_aaaa" {
   value    = "2a01:4f9:2a:2047::1"
 }
 
-resource "hetznerdns_record" "com_rossabaker_www_beta" {
-  zone_id = hetznerdns_zone.cromulent.id
-  type     = "CNAME"
-  name     = "beta.www"
-  value    = "abe.hetzner.rossabaker.com."
-}
-
 resource "hetznerdns_zone" "cromulent" {
   name = "rossabaker.com"
   ttl  = 8 * 60 * 60 # seconds
