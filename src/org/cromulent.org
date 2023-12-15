@@ -7707,20 +7707,21 @@ CLOSED: [2023-12-03 Sun 23:59 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: email
 :header-args:terraform+: :code-license CC0-1.0
-:EXPORT_HUGO_LASTMOD: [2023-12-13 Wed 20:54 EST]
+:EXPORT_HUGO_LASTMOD: [2023-12-14 Thu 20:01 EST]
 :CUSTOM_ID: pobox
 :END:
 
 #+begin_description
-Defines the DNS entries necessary to forward mail.
+Defines the DNS configuration necessary to forward mail to my domain
+via Pobox, including MX, SPF, and DKIM records.
 #+end_description
 
 I would love to self-host Email, but [[https://cfenollosa.com/blog/after-self-hosting-my-email-for-twenty-three-years-i-have-thrown-in-the-towel-the-oligopoly-has-won.html][the oligopoly has won]].  I
-switched to [[https://www.pobox.com/][pobox.com]] when my forwarder became insufficient.
+switched to [[https://www.pobox.com/][Pobox]] when my forwarder became insufficient.  This
+requires a handful of DNS records to route mail to our domain
+and fight spam.
 
 *** DNS
-
-**** NixOS-DNS                                                     :noexport:
 
 #+begin_src nix :tangle ../../gen/flake/mail/dnsExtraConfig/default.nix
   { ... }:
@@ -7735,24 +7736,8 @@ switched to [[https://www.pobox.com/][pobox.com]] when my forwarder became insuf
 
 **** ~MX~ records
 
-To deliver my mail, these ~MX~ records are required in our [[#dns][Hetzner DNS
-project]].
-
-#+begin_src terraform :tangle ../../gen/infra/hetznerdns/main.tf
-  locals {
-    poboxes = range(1, 6)
-  }
-
-  resource "hetznerdns_record" "com_rossabaker_mx_pobox" {
-    count   = length(local.poboxes)
-    zone_id = hetznerdns_zone.cromulent.id
-    type    = "MX"
-    name    = "@"
-    value   = "10 mx-${count.index + 1}.pobox.com."
-  }
-#+end_src
-
-***** NixOS-DNS                                                    :noexport:
+To deliver mail to my domain via Pobox, these ~MX~ records are
+required.  It's neat that they can be generated from Nix.
 
 #+begin_src nix :tangle ../../gen/flake/mail/dnsExtraConfig/mx.nix
   { lib, ... }:
@@ -7768,24 +7753,9 @@ project]].
 
 **** ~SPF~
 
-All mail from ~rossabaker.com~ goes through ~pobox.com~.  Declaring
-this with an [[https://datatracker.ietf.org/doc/html/rfc7208][{{{abbr(Sender Policy Framework,SPF)}}}]] record helps
-protect against spoofs and spams.
-
-#+begin_warning
-Values containing spaces [[https://github.com/timohirt/terraform-provider-hetznerdns#example-usage][need to be JSON encoded]].
-#+end_warning
-
-#+begin_src terraform :tangle ../../gen/infra/hetznerdns/main.tf
-  resource "hetznerdns_record" "com_rossabaker_spf" {
-    zone_id = hetznerdns_zone.cromulent.id
-    type     = "TXT"
-    name     = "@"
-    value    = jsonencode("v=spf1 include:pobox.com -all")
-  }
-#+end_src
-
-***** NixOS-DNS                                                    :noexport:
+All mail from ~rossabaker.com~ goes through Pobox.  Declaring this
+with an [[https://datatracker.ietf.org/doc/html/rfc7208][{{{abbr(Sender Policy Framework,SPF)}}}]] record helps protect
+against spoofs and spams.
 
 #+begin_src nix :tangle ../../gen/flake/mail/dnsExtraConfig/spf.nix
   { ... }:
@@ -7798,23 +7768,8 @@ Values containing spaces [[https://github.com/timohirt/terraform-provider-hetzne
 **** ~DKIM~
 
 To further the fight against spoofs and spams, ~pobox.com~ signs
-messages with a [[https://datatracker.ietf.org/doc/html/rfc8463][{{{abbr(DomainKeys Identified Mail,DKIM)}}} key]].
-The public key needs to be published as a ~TXT~ record:
-
-#+begin_warning
-Values containing spaces [[https://github.com/timohirt/terraform-provider-hetznerdns#example-usage][need to be JSON encoded]].
-#+end_warning
-
-#+begin_src terraform :tangle ../../gen/infra/hetznerdns/main.tf
-  resource "hetznerdns_record" "com_rossabaker_dkim" {
-    zone_id = hetznerdns_zone.cromulent.id
-    type     = "TXT"
-    name     = "2020-06.pbsmtp._domainkey"
-    value    = jsonencode("v=DKIM1; k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDIfBzlZiuOljOEgYr0nrIieWvmn9x4mrXlIqgw64oasNb/wn62Yai4APbQ4rAdwwEj2vI0FVs2Y5oTUKmPq+RSsWJKmdEWjv9zUKK+GNjVJ0mVBX75vU1nEwWUeS+Wz4haQxMVXQRrbCovQNoQjFcSX9ERdAbZVzXsf/0kDNzdiQIDAQAB")
-  }
-#+end_src
-
-***** NixOS-DNS                                                    :noexport:
+messages with a [[https://datatracker.ietf.org/doc/html/rfc8463][{{{abbr(DomainKeys Identified Mail,DKIM)}}} key]].  The
+public key needs to be published as a ~TXT~ record.
 
 #+begin_src nix :tangle ../../gen/flake/mail/dnsExtraConfig/dkim.nix
   { ... }:
