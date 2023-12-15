@@ -3,20 +3,6 @@ resource "hetznerdns_zone" "cromulent" {
   ttl  = 8 * 60 * 60 # seconds
 }
 
-resource "hetznerdns_record" "com_rossabaker_apex" {
-  zone_id = hetznerdns_zone.cromulent.id
-  type     = "A"
-  name     = "@"
-  value    = "75.2.60.5"
-}
-
-resource "hetznerdns_record" "com_rossabaker_www" {
-  zone_id = hetznerdns_zone.cromulent.id
-  type     = "CNAME"
-  name     = "www"
-  value    = "rossabaker.com."
-}
-
 locals {
   poboxes = range(1, 6)
 }

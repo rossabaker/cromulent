@@ -7603,22 +7603,6 @@ of the relevant host.
 These are part of our interim Netlify solution.  They aren't worth
 documenting, but it would bring down the site if we didn't keep them.
 
-#+begin_src terraform :tangle ../../gen/infra/hetznerdns/main.tf
-  resource "hetznerdns_record" "com_rossabaker_apex" {
-    zone_id = hetznerdns_zone.cromulent.id
-    type     = "A"
-    name     = "@"
-    value    = "75.2.60.5"
-  }
-
-  resource "hetznerdns_record" "com_rossabaker_www" {
-    zone_id = hetznerdns_zone.cromulent.id
-    type     = "CNAME"
-    name     = "www"
-    value    = "rossabaker.com."
-  }
-#+end_src
-
 #+begin_src nix :tangle ../../gen/flake/dns/www.nix
   { ... }:
   {
