@@ -7477,29 +7477,24 @@ composition.
   }
 #+end_src
 
-** DONE Declarative DNS with Hetzner DNS and OpenTofu
+** DONE Declarative DNS with NixOS-DNS, OctoDNS, and Hetzner
 CLOSED: [2023-12-03 Sun 21:26 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: dns
 :CUSTOM_ID: dns
 :header-args:sh+: :code-license CC0-1.0
 :header-args:terraform+: :code-license CC0-1.0
-:EXPORT_HUGO_LASTMOD: [2023-12-13 Wed 21:17 EST]
+:EXPORT_HUGO_LASTMOD: [2023-12-14 Thu 20:12 EST]
 :END:
 
 #+begin_description
-Sets up a DNS zone for rossabaker.com in Hetzner DNS with OpenTofu.
+Sets up a DNS zone for rossabaker.com in Hetzner DNS with NixOS-DNS
+and OctoDNS.
 #+end_description
 
 The services hosted at ~rossabaker.com~ require multiple DNS entries.
-[[https://opentofu.org/][OpenTofu]] is used to manage them in a similar declarative spirit to the
-rest of this ecosystem.
-
-#+begin_aside
-OpenTofu is a [[https://opentofu.org/manifesto][fork of Terraform]] after the latter's adoption of a BUSL
-license.  This fork is new in 2023, and the word ~terraform~ is still
-frequently encountered even under OpenTofu.
-#+end_aside
+They are declared in various parts of the Nix flake with [[https://janik-haag.github.io/NixOS-DNS/][NixOS-DNS]],
+and synchronized to the name server with [[https://github.com/octodns/octodns][OctoDNS]].
 
 *** Choosing a host
 
@@ -7512,67 +7507,16 @@ getting their sandbox working, but I digress.
 Robot experiences have been good thus far, so I'm setting up shop
 there.  An [[https://docs.hetzner.com/dns-console/dns/general/api-access-token/][API access token]] is required.
 
-*** Provider
-
-OpenTofu plugins are called "providers," which are often written by
-third parties.  The [[https://registry.terraform.io/providers/timohirt/hetznerdns/latest/docs][~hetznerdns~ provider]] is no exception.
-
-#+begin_src terraform :tangle ../../gen/infra/hetznerdns/terraform.tf
-  terraform {
-    required_providers {
-      hetznerdns = {
-        source = "timohirt/hetznerdns"
-        version = "2.2.0"
-      }
-    }
-  }
-#+end_src
-
-This provider is better documented in [[https://github.com/timohirt/terraform-provider-hetznerdns/][its README]].
-
 **** Authentication
 
 It is possible to store the API access token in either a file or an
 environment variable.  I'm going to manage it out of band as an
 environment variable for now, and consider something slicker later.
 
-**** Initialization
-
-The provider must be initialized before first use.
-
-#+name: wrap-example
-#+begin_src emacs-lisp :var text="" :exports none
-  (concat "#+begin_example\n" text "\n#+end_example\n")
-#+end_src
-
-#+begin_info
-The generated Terraform is in the ~gen/infra/hetznerdns~ directory of
-the Cromulent root.  All commands should be run from there.
-#+end_info
-
-#+begin_src sh :cache yes :dir ../../gen/infra/hetznerdns :exports both :results verbatim :wrap details :post wrap-example(text=*this*) :code-license CC0-1.0
-  tofu init
-#+end_src
-
 *** DNS zone for ~rossabaker.com~
 
 All DNS records need to belong to a {{{dfn(DNS zone)}}}, which
 corresponds to a domain and all its subdomains.
-
-#+begin_aside
-The old Java programmer in me is going to give all the OpenTofu
-resources a reverse-domain name so they alphabetize neatly, but do
-what you like.
-#+end_aside
-
-#+begin_src terraform :tangle ../../gen/infra/hetznerdns/main.tf
-resource "hetznerdns_zone" "cromulent" {
-  name = "rossabaker.com"
-  ttl  = 8 * 60 * 60 # seconds
-}
-#+end_src
-
-**** Records
 
 The zone is full of {{{dfn(records)}}}.  A full tutorial is out of
 scope, but common types include:
@@ -7582,7 +7526,7 @@ scope, but common types include:
 - ~CNAME~ :: maps a domain to another domain as a "canonical name"
 - ~TXT~ :: a text record, usually used for ownership verification
 
-***** Domain verification
+**** Domain verification
 
 This ~TXT~ record is an [[https://docs.keyoxide.org/service-providers/dns/][identity proof]] claimed in my [[https://keyoxide.org/wkd/ross%40rossabaker.com][OpenPGP profile]].
 
@@ -7593,12 +7537,12 @@ This ~TXT~ record is an [[https://docs.keyoxide.org/service-providers/dns/][iden
   }
 #+end_src
 
-***** But wait, there's more!
+**** But wait, there's more!
 
 Declarations of other records are made in the =nixosConfigurations=
-of the relevant host.
+of the relevant host and the email module.
 
-***** Interim records :noexport:
+**** Interim records                                               :noexport:
 
 These are part of our interim Netlify solution.  They aren't worth
 documenting, but it would bring down the site if we didn't keep them.
@@ -7613,44 +7557,10 @@ documenting, but it would bring down the site if we didn't keep them.
   }
 #+end_src
 
-*** Applying
+*** Building the OctoDNS configuration
 
-~plan~ is a dry run.  It will not make any destructive changes.
+OctoDNS is a package in the flake.
 
-#+begin_src sh :eval no-export :exports code :dir ../../gen/infra/hetznerdns :results verbatim
-  tofu plan
-#+end_src
-
-~apply~ applies the plan.  It will reshow the plan and ask for confirmation.
-
-#+begin_warning
-Read carefully.  It might delete your records.  I got careless and
-lost my first Mastodon instance this way.
-#+end_warning
-
-#+begin_src sh :eval no :dir ../../gen/infra/hetznerdns
-  tofu apply
-#+end_src
-
-*** Gitignores
-
-OpenTofu dumps information about its providers and the known state of
-the infrastructure in the same directory as the declarations.  Those
-don't belong in git.
-
-#+begin_aside
-There's nothing specific to Hetzner DNS here.  These should be wildcard
-ignores if we ever add more OpenTofu projects.
-#+end_aside
-
-#+begin_src gitignore :tangle ../../.gitignore :code-license CC0-1.0
-  gen/infra/hetznerdns/.terraform/
-  gen/infra/hetznerdns/*.tfstate
-  gen/infra/hetznerdns/*.tfstate.*
-#+end_src
-
-
-*** NixOS-DNS                                                      :noexport:
 
 #+begin_src nix :exports none :noweb-ref flake-modules
   ./dns
@@ -7701,6 +7611,28 @@ ignores if we ever add more OpenTofu projects.
         };
   }
 #+end_src
+
+To build the package, run:
+
+#+begin_example sh
+nix build .#octodns
+#+end_example
+
+*** Synchronizing to Hetzner DNS
+
+OctoDNS is provided in the Cromulent devshell, with the necessary Bind
+and Hetzner providers.  After building as above, you can do a dry run:
+
+#+begin_example sh
+octodns-sync --config-file=./result rossabaker.com.
+#+end_example
+
+Read the plan carefully.  Once satisfied, add the =--doit= incantation,
+and all updates (including removals!) are synchronized to Hetzner DNS:
+
+#+begin_example sh
+octodns-sync --config-file=./result rossabaker.com. --doit
+#+end_example
 
 ** DONE Forwarding email with pobox.com
 CLOSED: [2023-12-03 Sun 23:59 EST]
