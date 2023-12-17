@@ -556,7 +556,7 @@ code and documentation, then tangling code back for external
 reference, is a file neither original nor disposable.  Examples
 of these {{{dfn(persistent tangles)}}} include:
 
-- The [[*Nix Flake][Nix Flake]] and supporting files
+- The [[#nix-flake][Nix Flake]] and supporting files
 - Continuous integration descriptors, like GitHub workflows or [[*Garnix][Garnix]].
 - The git configurations described in this document!
 
@@ -5718,43 +5718,61 @@ The Home Manager module is published to my flake as output
 CLOSED: [2022-12-25 Sun 22:14 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: /nix-flake
-:EXPORT_HUGO_LASTMOD: [2023-12-13 Wed 21:54 EST]
+:EXPORT_HUGO_LASTMOD: [2023-12-17 Sun 10:46 EST]
 :header-args+: :code-license MIT
 :EXPORT_OPTIONS: h:6
+:custom_id: nix-flake
 :END:
 
-#+begin_description
-The Cromulent repository hosts a Nix flake for packages, shells, OS
-configurations, and home configurations.
-#+end_description
+The [[https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-flake.html][Nix flake]] is the central nervous system of these configurations.
+It declaratively manages:
 
-At the root of the [[https://git.rossabaker.com/ross/cromulent][Cromulent repository]] is a [[https://nixos.wiki/wiki/Flakes][Nix flake]].  It contains
-all my system configurations, home environment configurations,
-packages, development shells, and more.
+- installed packages, on Linux and Darwin
+- services, on Linux and Darwin
+- user packages, including dot files, on Linux and Darwin
+- custom software packages to run anywhere
+- development environments for various projects
+- {{{abbr(Domain Name Server,DNS)}}} entries
+- modules for building your own flakes
 
-*** What's in the flake
+*** Viewing the contents of the flake
 :PROPERTIES:
 :CUSTOM_ID: whats-in-the-flake
 :END:
 
-#+name: flake-show-outputs
+The =nix flake show= command shows all the outputs of a flake:
+
 #+begin_src sh :eval yes :exports code :results output verbatim :code-license CC0-1.0
-  nix flake show git+https://git.rossabaker.com/ross/cromulent
+  nix flake show git+https://git.rossabaker.com/ross/cromulent --all-systems
 #+end_src
 
 #+begin_details
 #+begin_summary
-  Flake outputs
+  Current contents of this flake
 #+end_summary
+
+#+name: flake-show-outputs
+#+begin_src sh :eval yes :exports none :results output verbatim :code-license CC0-1.0
+  nix flake show ../../ --all-systems
+#+end_src
 
 #+begin_src emacs-lisp :eval yes :var in=flake-show-outputs() :exports results
   (ansi-color-filter-apply in)
 #+end_src
 #+end_details
 
-*** How to use the Cromulent flake
+*** Consuming the flake
 
-**** Running apps from the command line
+**** Running applications from the command line
+
+~apps~ or ~packages~ can be run directly from the flake.  Without
+having Cromulent's custom binary caches installed, some may build
+from source and take a while, but they're there.
+
+#+begin_info
+An overview of how attributes are translated into Flake outputs
+can be found in the [[https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-run#flake-output-attributes][Nix manual]].
+#+end_info
 
 #+begin_src sh :eval yes :exports both :results verbatim
 nix run git+https://git.rossabaker.com/ross/cromulent#hello
@@ -5769,22 +5787,121 @@ nix run git+https://git.rossabaker.com/ross/cromulent#hello
   };
 
   outputs = { self, nixpkgs, cromulent }: {
-    # Your outputs here
+    # Refer to cromulent outputs here
   };
 }
 #+end_example
 
-***** Flake inputs
+*** Flake structure
 
-#+begin_details
-#+begin_summary
-Not scintillating to read, but necessary to run
-#+end_summary
+A flake has four top-level attributes:
 
-#+begin_src nix :noweb-ref flake-inputs
+- =description= :: self explanatory
+- =inputs= :: the dependencies of our flake.  Often, but not always,
+  another flake.
+- =outputs= :: a function of the =inputs=, and the only one of the
+  four that accepts arbitrary Nix evaluations rather than a literal
+- =nixConfig= :: limited in scope and omitted here
 
+#+begin_src nix :tangle ../../flake.nix :tangle-mode `,#o444 :noweb tangle
+  {
+    description = "Ross A. Baker's perfectly cromulent Nix flake";
+
+    inputs = {
+      flake-parts.url = "github:hercules-ci/flake-parts";
+
+      # Core nix flakes
+      nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+
+      # Home manager flake
+      home-manager.url = "github:nix-community/home-manager";
+      home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+      # nix-darwin flake
+      nix-darwin = {
+        url = "github:LnL7/nix-darwin/master";
+        inputs.nixpkgs.follows = "nixpkgs";
+      };
+
+      # Extra community flakes
+      devshell.url = "github:numtide/devshell";
+      devshell.inputs.nixpkgs.follows = "nixpkgs";
+
+      emacs-overlay.url = "github:nix-community/emacs-overlay";
+      emacs-overlay.inputs.nixpkgs.follows = "nixpkgs";
+
+      firefox-darwin.url = "github:bandithedoge/nixpkgs-firefox-darwin";
+      firefox-darwin.inputs.nixpkgs.follows = "nixpkgs";
+
+      agenix = {
+        url = "github:ryantm/agenix";
+        inputs.nixpkgs.follows = "nixpkgs";
+      };
+
+      nixos-dns = {
+        url = "github:Janik-Haag/NixOS-DNS";
+        inputs.nixpkgs.follows = "nixpkgs";
+      };
+
+      # Emacs packages
+      fill-sentences-correctly = {
+        url = "github:duckwork/fill-sentences-correctly.el";
+        flake = false;
+      };
+
+      git-related = {
+        url = "git+https://codeberg.org/rossabaker/git-related";
+        flake = false;
+      };
+
+      hocon-mode = {
+        url = "github:jxq0/hocon-mode";
+        flake = false;
+      };
+
+      ob-ammonite = {
+        url = "github:zwild/ob-ammonite";
+        flake = false;
+      };
+
+      on-el = {
+        url = "gitlab:ajgrf/on.el";
+        flake = false;
+      };
+
+      scala-mode = {
+        url = "github:Kazark/emacs-scala-mode?ref=scala3";
+        flake = false;
+      };
+
+      unmodified-buffer = {
+        url = "github:arthurcgusmao/unmodified-buffer";
+        flake = false;
+      };
+
+      scala-cli-repl = {
+        url = "github:ag91/scala-cli-repl";
+        flake = false;
+      };
+
+      emacs-src.url = "github:emacs-mirror/emacs/emacs-29";
+      emacs-src.flake = false;
+
+      jinx = {
+        url = "github:minad/jinx";
+        flake = false;
+      };
+
+      # Disabled pending license
+      #   copilot-el = {
+      #     url = "github:zerolfx/copilot.el";
+      #     flake = false;
+      #   };
+    };
+
+    outputs = inputs: import ./gen/flake inputs;
+  }
 #+end_src
-#+end_details
 
 *** Flake outputs
 
@@ -5981,118 +6098,6 @@ consistent.  We'll roll with it.
           '';
         };
       };
-    };
-  }
-#+end_src
-#+end_details
-
-*** Flake skeleton
-
-A flake is just a =description=, =inputs=, and =outputs=.  The
-outputs, covered above, are the exciting part.  But this makes it a
-flake.
-
-#+begin_details
-#+begin_summary
-Humdrum Nix flake exoskeleton and inputs
-#+end_summary
-
-#+begin_src nix :tangle ../../flake.nix :tangle-mode `,#o444 :noweb tangle
-  {
-    description = "Ross A. Baker's perfectly cromulent Nix flake";
-
-    outputs = inputs: import ./gen/flake inputs;
-
-    inputs = {
-      flake-parts.url = "github:hercules-ci/flake-parts";
-
-      # Core nix flakes
-      nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-
-      # Home manager flake
-      home-manager.url = "github:nix-community/home-manager";
-      home-manager.inputs.nixpkgs.follows = "nixpkgs";
-
-      # nix-darwin flake
-      nix-darwin = {
-        url = "github:LnL7/nix-darwin/master";
-        inputs.nixpkgs.follows = "nixpkgs";
-      };
-
-      # Extra community flakes
-      devshell.url = "github:numtide/devshell";
-      devshell.inputs.nixpkgs.follows = "nixpkgs";
-
-      emacs-overlay.url = "github:nix-community/emacs-overlay";
-      emacs-overlay.inputs.nixpkgs.follows = "nixpkgs";
-
-      firefox-darwin.url = "github:bandithedoge/nixpkgs-firefox-darwin";
-      firefox-darwin.inputs.nixpkgs.follows = "nixpkgs";
-
-      agenix = {
-        url = "github:ryantm/agenix";
-        inputs.nixpkgs.follows = "nixpkgs";
-      };
-
-      nixos-dns = {
-        url = "github:Janik-Haag/NixOS-DNS";
-        inputs.nixpkgs.follows = "nixpkgs";
-      };
-
-      # Emacs packages
-      fill-sentences-correctly = {
-        url = "github:duckwork/fill-sentences-correctly.el";
-        flake = false;
-      };
-
-      git-related = {
-        url = "git+https://codeberg.org/rossabaker/git-related";
-        flake = false;
-      };
-
-      hocon-mode = {
-        url = "github:jxq0/hocon-mode";
-        flake = false;
-      };
-
-      ob-ammonite = {
-        url = "github:zwild/ob-ammonite";
-        flake = false;
-      };
-
-      on-el = {
-        url = "gitlab:ajgrf/on.el";
-        flake = false;
-      };
-
-      scala-mode = {
-        url = "github:Kazark/emacs-scala-mode?ref=scala3";
-        flake = false;
-      };
-
-      unmodified-buffer = {
-        url = "github:arthurcgusmao/unmodified-buffer";
-        flake = false;
-      };
-
-      scala-cli-repl = {
-        url = "github:ag91/scala-cli-repl";
-        flake = false;
-      };
-
-      emacs-src.url = "github:emacs-mirror/emacs/emacs-29";
-      emacs-src.flake = false;
-
-      jinx = {
-        url = "github:minad/jinx";
-        flake = false;
-      };
-
-      # Disabled pending license
-      #   copilot-el = {
-      #     url = "github:zerolfx/copilot.el";
-      #     flake = false;
-      #   };
     };
   }
 #+end_src
@@ -8843,6 +8848,20 @@ I want to continue my movement toward self-hosting:
 
 - Fully implemented, but did not finish documenting, [[https://janik-haag.github.io/NixOS-DNS/usage.html#octodns][OctoDNS]]
   integration.
+
+***** December 14
+
+- Finished migrating to NixOS-DNS, with deeper integration into
+  existing modules.
+
+***** December 15
+
+- Back on my friend's adventure.
+
+***** December 16
+
+- Began a refactoring of the Nix flake.  No new functionality, but
+  better organization.
 
 * Talks section
 :PROPERTIES:

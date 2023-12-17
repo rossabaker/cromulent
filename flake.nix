@@ -1,8 +1,6 @@
 {
   description = "Ross A. Baker's perfectly cromulent Nix flake";
 
-  outputs = inputs: import ./gen/flake inputs;
-
   inputs = {
     flake-parts.url = "github:hercules-ci/flake-parts";
 
@@ -94,4 +92,6 @@
     #     flake = false;
     #   };
   };
+
+  outputs = inputs: import ./gen/flake inputs;
 }
