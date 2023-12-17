@@ -2,45 +2,38 @@
   description = "Ross A. Baker's perfectly cromulent Nix flake";
 
   inputs = {
-    flake-parts.url = "github:hercules-ci/flake-parts";
-
-    # Core nix flakes
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-
-    # Home manager flake
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
-
-    # nix-darwin flake
-    nix-darwin = {
-      url = "github:LnL7/nix-darwin/master";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    # Extra community flakes
-    devshell.url = "github:numtide/devshell";
-    devshell.inputs.nixpkgs.follows = "nixpkgs";
-
-    emacs-overlay.url = "github:nix-community/emacs-overlay";
-    emacs-overlay.inputs.nixpkgs.follows = "nixpkgs";
-
-    firefox-darwin.url = "github:bandithedoge/nixpkgs-firefox-darwin";
-    firefox-darwin.inputs.nixpkgs.follows = "nixpkgs";
-
     agenix = {
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixos-dns = {
-      url = "github:Janik-Haag/NixOS-DNS";
+    devshell = {
+      url = "github:numtide/devshell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Emacs packages
+    emacs-overlay = {
+      url = "github:nix-community/emacs-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    emacs-src = {
+      url = "github:emacs-mirror/emacs/emacs-29";
+      flake = false;
+    };
+
     fill-sentences-correctly = {
       url = "github:duckwork/fill-sentences-correctly.el";
       flake = false;
+    };
+
+    firefox-darwin = {
+      url = "github:bandithedoge/nixpkgs-firefox-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
     };
 
     git-related = {
@@ -53,6 +46,30 @@
       flake = false;
     };
 
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    jinx = {
+      url = "github:minad/jinx";
+      flake = false;
+    };
+
+    nix-darwin = {
+      url = "github:LnL7/nix-darwin/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nixos-dns = {
+      url = "github:Janik-Haag/NixOS-DNS";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nixpkgs = {
+      url = "github:nixos/nixpkgs/nixos-unstable";
+    };
+
     ob-ammonite = {
       url = "github:zwild/ob-ammonite";
       flake = false;
@@ -60,6 +77,11 @@
 
     on-el = {
       url = "gitlab:ajgrf/on.el";
+      flake = false;
+    };
+
+    scala-cli-repl = {
+      url = "github:ag91/scala-cli-repl";
       flake = false;
     };
 
@@ -72,25 +94,6 @@
       url = "github:arthurcgusmao/unmodified-buffer";
       flake = false;
     };
-
-    scala-cli-repl = {
-      url = "github:ag91/scala-cli-repl";
-      flake = false;
-    };
-
-    emacs-src.url = "github:emacs-mirror/emacs/emacs-29";
-    emacs-src.flake = false;
-
-    jinx = {
-      url = "github:minad/jinx";
-      flake = false;
-    };
-
-    # Disabled pending license
-    #   copilot-el = {
-    #     url = "github:zerolfx/copilot.el";
-    #     flake = false;
-    #   };
   };
 
   outputs = inputs: import ./gen/flake inputs;

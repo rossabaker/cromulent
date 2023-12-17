@@ -5718,7 +5718,7 @@ The Home Manager module is published to my flake as output
 CLOSED: [2022-12-25 Sun 22:14 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: /nix-flake
-:EXPORT_HUGO_LASTMOD: [2023-12-17 Sun 10:46 EST]
+:EXPORT_HUGO_LASTMOD: [2023-12-17 Sun 13:42 EST]
 :header-args+: :code-license MIT
 :EXPORT_OPTIONS: h:6
 :custom_id: nix-flake
@@ -5808,45 +5808,38 @@ A flake has four top-level attributes:
     description = "Ross A. Baker's perfectly cromulent Nix flake";
 
     inputs = {
-      flake-parts.url = "github:hercules-ci/flake-parts";
-
-      # Core nix flakes
-      nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-
-      # Home manager flake
-      home-manager.url = "github:nix-community/home-manager";
-      home-manager.inputs.nixpkgs.follows = "nixpkgs";
-
-      # nix-darwin flake
-      nix-darwin = {
-        url = "github:LnL7/nix-darwin/master";
-        inputs.nixpkgs.follows = "nixpkgs";
-      };
-
-      # Extra community flakes
-      devshell.url = "github:numtide/devshell";
-      devshell.inputs.nixpkgs.follows = "nixpkgs";
-
-      emacs-overlay.url = "github:nix-community/emacs-overlay";
-      emacs-overlay.inputs.nixpkgs.follows = "nixpkgs";
-
-      firefox-darwin.url = "github:bandithedoge/nixpkgs-firefox-darwin";
-      firefox-darwin.inputs.nixpkgs.follows = "nixpkgs";
-
       agenix = {
         url = "github:ryantm/agenix";
         inputs.nixpkgs.follows = "nixpkgs";
       };
 
-      nixos-dns = {
-        url = "github:Janik-Haag/NixOS-DNS";
+      devshell = {
+        url = "github:numtide/devshell";
         inputs.nixpkgs.follows = "nixpkgs";
       };
 
-      # Emacs packages
+      emacs-overlay = {
+        url = "github:nix-community/emacs-overlay";
+        inputs.nixpkgs.follows = "nixpkgs";
+      };
+
+      emacs-src = {
+        url = "github:emacs-mirror/emacs/emacs-29";
+        flake = false;
+      };
+
       fill-sentences-correctly = {
         url = "github:duckwork/fill-sentences-correctly.el";
         flake = false;
+      };
+
+      firefox-darwin = {
+        url = "github:bandithedoge/nixpkgs-firefox-darwin";
+        inputs.nixpkgs.follows = "nixpkgs";
+      };
+
+      flake-parts = {
+        url = "github:hercules-ci/flake-parts";
       };
 
       git-related = {
@@ -5859,6 +5852,30 @@ A flake has four top-level attributes:
         flake = false;
       };
 
+      home-manager = {
+        url = "github:nix-community/home-manager";
+        inputs.nixpkgs.follows = "nixpkgs";
+      };
+
+      jinx = {
+        url = "github:minad/jinx";
+        flake = false;
+      };
+
+      nix-darwin = {
+        url = "github:LnL7/nix-darwin/master";
+        inputs.nixpkgs.follows = "nixpkgs";
+      };
+
+      nixos-dns = {
+        url = "github:Janik-Haag/NixOS-DNS";
+        inputs.nixpkgs.follows = "nixpkgs";
+      };
+
+      nixpkgs = {
+        url = "github:nixos/nixpkgs/nixos-unstable";
+      };
+
       ob-ammonite = {
         url = "github:zwild/ob-ammonite";
         flake = false;
@@ -5866,6 +5883,11 @@ A flake has four top-level attributes:
 
       on-el = {
         url = "gitlab:ajgrf/on.el";
+        flake = false;
+      };
+
+      scala-cli-repl = {
+        url = "github:ag91/scala-cli-repl";
         flake = false;
       };
 
@@ -5878,25 +5900,6 @@ A flake has four top-level attributes:
         url = "github:arthurcgusmao/unmodified-buffer";
         flake = false;
       };
-
-      scala-cli-repl = {
-        url = "github:ag91/scala-cli-repl";
-        flake = false;
-      };
-
-      emacs-src.url = "github:emacs-mirror/emacs/emacs-29";
-      emacs-src.flake = false;
-
-      jinx = {
-        url = "github:minad/jinx";
-        flake = false;
-      };
-
-      # Disabled pending license
-      #   copilot-el = {
-      #     url = "github:zerolfx/copilot.el";
-      #     flake = false;
-      #   };
     };
 
     outputs = inputs: import ./gen/flake inputs;
