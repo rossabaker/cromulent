@@ -5718,7 +5718,7 @@ The Home Manager module is published to my flake as output
 CLOSED: [2022-12-25 Sun 22:14 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: /nix-flake
-:EXPORT_HUGO_LASTMOD: [2023-12-17 Sun 13:42 EST]
+:EXPORT_HUGO_LASTMOD: [2023-12-17 Sun 16:17 EST]
 :header-args+: :code-license MIT
 :EXPORT_OPTIONS: h:6
 :custom_id: nix-flake
@@ -5917,7 +5917,7 @@ Fellow functional programmers rejoice: a flake's outputs are a
 function of its inputs!
 
 #+begin_src nix :tangle ../../gen/flake/default.nix :noweb yes
-  inputs @ { self, nixpkgs, nix-darwin, devshell, emacs-overlay, flake-parts, home-manager, agenix, ... }:
+  inputs @ { self, nixpkgs, flake-parts, emacs-overlay, devshell, ... }:
 
   flake-parts.lib.mkFlake { inherit inputs; } (
     { withSystem, flake-parts-lib, ... }:

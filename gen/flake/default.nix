@@ -1,4 +1,4 @@
-inputs @ { self, nixpkgs, nix-darwin, devshell, emacs-overlay, flake-parts, home-manager, agenix, ... }:
+inputs @ { self, nixpkgs, flake-parts, emacs-overlay, devshell, ... }:
 
 flake-parts.lib.mkFlake { inherit inputs; } (
   { withSystem, flake-parts-lib, ... }:
