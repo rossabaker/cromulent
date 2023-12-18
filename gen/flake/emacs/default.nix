@@ -6,7 +6,7 @@
     overlayAttrs = {
       inherit (config.packages) emacs29;
     };
-    packages.emacs29 = pkgs.emacs-git.overrideAttrs (old: {
+    packages.emacs29 = inputs.emacs-overlay.packages.${system}.emacs-git.overrideAttrs (old: {
       name = "emacs29";
       # It's important this starts with the major number for Nix's
       # Emacs infra.  For example, it's used to blank out archaic
@@ -16,7 +16,7 @@
       # This doesn't apply to Emacs29.
       patches = builtins.filter (p: baseNameOf p != "bytecomp-revert.patch") old.patches;
     });
-    packages.emacs-ross = pkgs.emacsWithPackagesFromUsePackage {
+    packages.emacs-ross = inputs.emacs-overlay.lib.${system}.emacsWithPackagesFromUsePackage {
       package = config.packages.emacs29;
       override = epkgs: epkgs // {
         on = epkgs.trivialBuild {

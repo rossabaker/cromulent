@@ -51,7 +51,6 @@ flake-parts.lib.mkFlake { inherit inputs; } (
           inherit system;
           overlays = [
             devshell.overlays.default
-            emacs-overlay.overlays.default
           ];
         };
 

@@ -2868,7 +2868,7 @@ permitting its [[https://commoncrawl.org/ccbot][~CCBot~]] for now.
 CLOSED: [2023-02-23 Thu 23:59 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: _index
-:EXPORT_HUGO_LASTMOD: [2023-11-09 Thu 21:52 EST]
+:EXPORT_HUGO_LASTMOD: [2023-12-17 Sun 23:17 EST]
 :header-args+: :tangle-mode `,#o444 :mkdirp yes
 :header-args:emacs-lisp+: :tangle ../../gen/flake/emacs/init.el :tangle-mode `,#o444 :mkdirp yes
 :header-args:emacs-lisp+: :code-license CC0-1.0
@@ -4735,7 +4735,7 @@ Finally, we add a Home Manager module based on the configured app.
       overlayAttrs = {
         inherit (config.packages) emacs29;
       };
-      packages.emacs29 = pkgs.emacs-git.overrideAttrs (old: {
+      packages.emacs29 = inputs.emacs-overlay.packages.${system}.emacs-git.overrideAttrs (old: {
         name = "emacs29";
         # It's important this starts with the major number for Nix's
         # Emacs infra.  For example, it's used to blank out archaic
@@ -4745,7 +4745,7 @@ Finally, we add a Home Manager module based on the configured app.
         # This doesn't apply to Emacs29.
         patches = builtins.filter (p: baseNameOf p != "bytecomp-revert.patch") old.patches;
       });
-      packages.emacs-ross = pkgs.emacsWithPackagesFromUsePackage {
+      packages.emacs-ross = inputs.emacs-overlay.lib.${system}.emacsWithPackagesFromUsePackage {
         package = config.packages.emacs29;
         override = epkgs: epkgs // {
           on = epkgs.trivialBuild {
@@ -5950,7 +5950,6 @@ function of its inputs!
             inherit system;
             overlays = [
               devshell.overlays.default
-              emacs-overlay.overlays.default
             ];
           };
 
