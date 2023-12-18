@@ -5718,7 +5718,7 @@ The Home Manager module is published to my flake as output
 CLOSED: [2022-12-25 Sun 22:14 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: /nix-flake
-:EXPORT_HUGO_LASTMOD: [2023-12-17 Sun 16:17 EST]
+:EXPORT_HUGO_LASTMOD: [2023-12-17 Sun 22:23 EST]
 :header-args+: :code-license MIT
 :EXPORT_OPTIONS: h:6
 :custom_id: nix-flake
@@ -5922,21 +5922,14 @@ function of its inputs!
   flake-parts.lib.mkFlake { inherit inputs; } (
     { withSystem, flake-parts-lib, ... }:
 
-    let
-      flakeModules = {
-        homeModules = ./homeModules;
-        darwinModules = ./darwinModules;
-      };
-    in {
+    {
       imports = [
-        flakeModules.homeModules
-        flakeModules.darwinModules
+        ./homeModules
+        ./darwinModules
         <<flake-modules>>
       ];
 
       flake = {
-        inherit flakeModules;
-
         homeModules.default = {
           imports = builtins.attrValues (builtins.removeAttrs self.homeModules [ "default" ]);
           home.stateVersion = "21.11";

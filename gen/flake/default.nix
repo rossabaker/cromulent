@@ -3,15 +3,10 @@ inputs @ { self, nixpkgs, flake-parts, emacs-overlay, devshell, ... }:
 flake-parts.lib.mkFlake { inherit inputs; } (
   { withSystem, flake-parts-lib, ... }:
 
-  let
-    flakeModules = {
-      homeModules = ./homeModules;
-      darwinModules = ./darwinModules;
-    };
-  in {
+  {
     imports = [
-      flakeModules.homeModules
-      flakeModules.darwinModules
+      ./homeModules
+      ./darwinModules
       ./emacs
       ./binaryCaches
       ./garnix
@@ -36,8 +31,6 @@ flake-parts.lib.mkFlake { inherit inputs; } (
     ];
 
     flake = {
-      inherit flakeModules;
-
       homeModules.default = {
         imports = builtins.attrValues (builtins.removeAttrs self.homeModules [ "default" ]);
         home.stateVersion = "21.11";
