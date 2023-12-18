@@ -50,7 +50,7 @@ let
   ];
 in {
   perSystem = { config, self', inputs', pkgs, system, ... }: {
-    devShells.modernTs = pkgs.devshell.mkShell {
+    devshells.modernTs = {
       name = "modern-ts";
       packages = [
         (pkgs.python3.withPackages pythonPackages)

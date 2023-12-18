@@ -5,6 +5,7 @@ flake-parts.lib.mkFlake { inherit inputs; } (
 
   {
     imports = [
+      inputs.devshell.flakeModule
       ./homeModules
       ./darwinModules
       ./emacs
@@ -47,13 +48,6 @@ flake-parts.lib.mkFlake { inherit inputs; } (
 
     perSystem = { config, self', inputs', system, pkgs, ... }:
       {
-        _module.args.pkgs = import nixpkgs {
-          inherit system;
-          overlays = [
-            devshell.overlays.default
-          ];
-        };
-
         apps = {
           hello = {
             type = "app";
@@ -72,7 +66,7 @@ flake-parts.lib.mkFlake { inherit inputs; } (
           inherit (self'.packages) website;
         };
 
-        devShells.cromulent = pkgs.devshell.mkShell {
+        devshells.cromulent = {
           name = "cromulent";
 
           commands = [
