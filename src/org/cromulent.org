@@ -6956,13 +6956,19 @@ to configure the [[https://docs.joinmastodon.org/admin/config/#web_domain][=WEB_
         };
 
         locations."/api/v1/streaming/" = {
-          proxyPass = (if cfg.enableUnixSocket then "http://unix:/run/mastodon-streaming/streaming.socket" else "http://127.0.0.1:${toString(cfg.streamingPort)}/");
+          proxyPass = "http://mastodon-streaming";
           proxyWebsockets = true;
         };
-
+      };
+      upstreams.mastodon-streaming = {
         extraConfig = ''
-          client_max_body_size 30m;
+          least_conn;
         '';
+        servers = builtins.listToAttrs
+          (map (i: {
+            name = "unix:/run/mastodon-streaming/streaming-${toString i}.socket";
+            value = { };
+          }) (lib.range 1 cfg.streamingProcesses));
       };
     };
 

@@ -16,6 +16,9 @@ flake-parts.lib.mkFlake { inherit inputs; } (
       ./python
       ./home-manager
       ./home-manager/darwin.nix
+      ./nix-darwin
+      ./keyboard
+      ./podman
       ./postgresql
       # ./modern_ts
       ./hosts/abe
