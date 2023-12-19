@@ -8829,6 +8829,16 @@ I want to continue my movement toward self-hosting:
 - Began a refactoring of the Nix flake.  No new functionality, but
   better organization.
 
+***** December 17
+
+- Continued Nix flake refactoring.  No more overlays!
+
+***** December 18
+
+- Thought about rendering my Nix flake inputs as a table.
+- Abandoned experiment with a babel executor for Nix.
+- To make some progress, dropped some unused flake inputs.
+
 * Talks section
 :PROPERTIES:
 :EXPORT_HUGO_BUNDLE: talks
