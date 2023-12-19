@@ -104,22 +104,6 @@
         "type": "github"
       }
     },
-    "fill-sentences-correctly": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1641793608,
-        "narHash": "sha256-Un+gg8o4CkXeCfd7xYhTjKhSxl8CMNbs+7vIEn+QdRM=",
-        "owner": "duckwork",
-        "repo": "fill-sentences-correctly.el",
-        "rev": "46f433e83534c4058be4fba6120426fad5e896db",
-        "type": "github"
-      },
-      "original": {
-        "owner": "duckwork",
-        "repo": "fill-sentences-correctly.el",
-        "type": "github"
-      }
-    },
     "firefox-darwin": {
       "inputs": {
         "nixpkgs": [
@@ -206,22 +190,6 @@
       "original": {
         "type": "git",
         "url": "https://codeberg.org/rossabaker/git-related"
-      }
-    },
-    "hocon-mode": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1577586121,
-        "narHash": "sha256-LNnCXBzDScTVL84I2LyiNNLxFUS1H37PlDmUyfnk174=",
-        "owner": "jxq0",
-        "repo": "hocon-mode",
-        "rev": "4cf561eaca69b67015e5fec8d4481b1e8b91844d",
-        "type": "github"
-      },
-      "original": {
-        "owner": "jxq0",
-        "repo": "hocon-mode",
-        "type": "github"
       }
     },
     "home-manager": {
@@ -373,22 +341,6 @@
         "type": "github"
       }
     },
-    "ob-ammonite": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1565657991,
-        "narHash": "sha256-DUf2waPQhnhWdEDvWhKId7HoxSIdGtpj2lwLyWHeKyo=",
-        "owner": "zwild",
-        "repo": "ob-ammonite",
-        "rev": "39937dff395e70aff76a4224fa49cf2ec6c57cca",
-        "type": "github"
-      },
-      "original": {
-        "owner": "zwild",
-        "repo": "ob-ammonite",
-        "type": "github"
-      }
-    },
     "on-el": {
       "flake": false,
       "locked": {
@@ -411,21 +363,16 @@
         "devshell": "devshell",
         "emacs-overlay": "emacs-overlay",
         "emacs-src": "emacs-src",
-        "fill-sentences-correctly": "fill-sentences-correctly",
         "firefox-darwin": "firefox-darwin",
         "flake-parts": "flake-parts",
         "git-related": "git-related",
-        "hocon-mode": "hocon-mode",
         "home-manager": "home-manager_2",
         "jinx": "jinx",
         "nix-darwin": "nix-darwin",
         "nixos-dns": "nixos-dns",
         "nixpkgs": "nixpkgs",
-        "ob-ammonite": "ob-ammonite",
         "on-el": "on-el",
-        "scala-cli-repl": "scala-cli-repl",
-        "scala-mode": "scala-mode",
-        "unmodified-buffer": "unmodified-buffer"
+        "scala-cli-repl": "scala-cli-repl"
       }
     },
     "scala-cli-repl": {
@@ -441,23 +388,6 @@
       "original": {
         "owner": "ag91",
         "repo": "scala-cli-repl",
-        "type": "github"
-      }
-    },
-    "scala-mode": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1688672909,
-        "narHash": "sha256-Ul2BdHK71M1XFBF42bBWzU/lx3yMmPoVaukviuSPK44=",
-        "owner": "Kazark",
-        "repo": "emacs-scala-mode",
-        "rev": "238d4ea85530b44fefd2604eda8b47278e553d34",
-        "type": "github"
-      },
-      "original": {
-        "owner": "Kazark",
-        "ref": "scala3",
-        "repo": "emacs-scala-mode",
         "type": "github"
       }
     },
@@ -488,22 +418,6 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
-        "type": "github"
-      }
-    },
-    "unmodified-buffer": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1643487728,
-        "narHash": "sha256-aMkM/2/ahQfWZI8ZN/XIWaw7uECN70mQI88BEI2p6Kw=",
-        "owner": "arthurcgusmao",
-        "repo": "unmodified-buffer",
-        "rev": "9095a3f870aa570804a11d75aba0952294199715",
-        "type": "github"
-      },
-      "original": {
-        "owner": "arthurcgusmao",
-        "repo": "unmodified-buffer",
         "type": "github"
       }
     }

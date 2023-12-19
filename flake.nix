@@ -22,11 +22,6 @@
       flake = false;
     };
 
-    fill-sentences-correctly = {
-      url = "github:duckwork/fill-sentences-correctly.el";
-      flake = false;
-    };
-
     firefox-darwin = {
       url = "github:bandithedoge/nixpkgs-firefox-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -38,11 +33,6 @@
 
     git-related = {
       url = "git+https://codeberg.org/rossabaker/git-related";
-      flake = false;
-    };
-
-    hocon-mode = {
-      url = "github:jxq0/hocon-mode";
       flake = false;
     };
 
@@ -70,11 +60,6 @@
       url = "github:nixos/nixpkgs/nixos-unstable";
     };
 
-    ob-ammonite = {
-      url = "github:zwild/ob-ammonite";
-      flake = false;
-    };
-
     on-el = {
       url = "gitlab:ajgrf/on.el";
       flake = false;
@@ -82,16 +67,6 @@
 
     scala-cli-repl = {
       url = "github:ag91/scala-cli-repl";
-      flake = false;
-    };
-
-    scala-mode = {
-      url = "github:Kazark/emacs-scala-mode?ref=scala3";
-      flake = false;
-    };
-
-    unmodified-buffer = {
-      url = "github:arthurcgusmao/unmodified-buffer";
       flake = false;
     };
   };
