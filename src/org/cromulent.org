@@ -8790,7 +8790,7 @@ market:
 CLOSED: [2023-12-02 Sat 01:02 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: december-adventure
-:EXPORT_HUGO_LASTMOD: [2023-12-23 Sat 00:46 EST]
+:EXPORT_HUGO_LASTMOD: [2023-12-23 Sat 00:57 EST]
 :END:
 
 #+begin_description
@@ -8870,50 +8870,60 @@ I want to continue my movement toward self-hosting:
 - Created a [[https://git.rossabaker.com/data/weather][weather station archive]] repo after getting that working.
   Self-hosting is also for weather!
 
-***** December 10
+**** December 10
 
 - Put my adventure on pause to help a friend start his hosting
   adventure.
 
-***** December 11
+**** December 11
 
 - Continued my friend's adventure.
 
-***** December 12
+**** December 12
 
 - Began migration of DNS records to [[https://janik-haag.github.io/NixOS-DNS][NixOS-DNS]].
 
-***** December 13
+**** December 13
 
 - Fully implemented, but did not finish documenting, [[https://janik-haag.github.io/NixOS-DNS/usage.html#octodns][OctoDNS]]
   integration.
 
-***** December 14
+**** December 14
 
 - Finished migrating to NixOS-DNS, with deeper integration into
   existing modules.
 
-***** December 15
+**** December 15
 
 - Back on my friend's adventure.
 
-***** December 16
+**** December 16
 
 - Began a refactoring of the Nix flake.  No new functionality, but
   better organization.
 
-***** December 17
+**** December 17
 
 - Continued Nix flake refactoring.  No more overlays!
 
-***** December 18
+**** December 18
 
 - Thought about rendering my Nix flake inputs as a table.
 - Abandoned experiment with a babel executor for Nix.
 - To make some progress, dropped some unused flake inputs.
 
-***** December 22
+**** December 19
+- A drawback to copying the Nginx configuration from the Nixpkgs
+  Mastodon module in support of =WEB_DOMAIN= is that it falls out
+  of sync.  Patched the way it forwards the streaming sockets.
 
+**** December 20
+- No progress.
+
+**** December 21
+- A day of patching and testing.
+
+**** December 22
 - Experimenting with [[https://github.com/thomiceli/opengist][Opengist]].  I have a working Nix package, but
   not a NixOS module.
 
