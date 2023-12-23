@@ -5718,7 +5718,7 @@ The Home Manager module is published to my flake as output
 CLOSED: [2022-12-25 Sun 22:14 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: /nix-flake
-:EXPORT_HUGO_LASTMOD: [2023-12-17 Sun 23:26 EST]
+:EXPORT_HUGO_LASTMOD: [2023-12-22 Fri 23:10 EST]
 :header-args+: :code-license MIT
 :EXPORT_OPTIONS: h:6
 :custom_id: nix-flake
@@ -5868,6 +5868,11 @@ A flake has four top-level attributes:
 
       on-el = {
         url = "gitlab:ajgrf/on.el";
+        flake = false;
+      };
+
+      opengist = {
+        url = "github:thomiceli/opengist?ref=v1.5.3";
         flake = false;
       };
 
@@ -7343,6 +7348,68 @@ How to self-host Git repositories with Forgejo on NixOS.
   }
 #+end_src
 
+** Opengist
+:PROPERTIES:
+:EXPORT_FILE_NAME: opengist
+:header-args:nix+: :code-license MIT
+:END:
+
+[[https://github.com/thomiceli/opengist][Opengist]] is a self-hosted pastebin.
+
+#+begin_src nix :exports none :noweb-ref flake-modules
+  ./opengist
+#+end_src
+
+#+begin_src nix :tangle ../../gen/flake/opengist/default.nix
+  { inputs, lib, ... }:
+
+  {
+    perSystem = { config, self', inputs', pkgs, system, ... }:
+      let
+        version = "1.5.3";
+
+        assets =
+          pkgs.buildNpmPackage rec {
+            pname = "opengist-assets";
+            inherit version;
+            src = inputs.opengist;
+            npmDepsHash = "sha256-I7u9FkqkMaECozLxOJED95B3cT9nvHk0IMu6QJo+Cqs=";
+            installPhase = "
+              mkdir -p $out
+              cp -a public/* $out
+            ";
+          };
+      in {
+        packages.opengist = pkgs.buildGoModule {
+          pname = "opengist";
+          inherit version;
+          src = inputs.opengist;
+
+          vendorHash = "sha256-tB75KHgcAEuwyMArTAvI4t8tWVSh+pyZ0e+lgt4KWSQ=";
+
+          tags = [ "fs_embed" ];
+
+          preBuild = ''
+            cp -a ${assets}/* public
+          '';
+
+          preCheck = ''
+            mkdir -p test-home
+            export HOME=$PWD/test-home
+          '';
+
+          nativeCheckInputs = [ pkgs.git ];
+
+          meta = with lib; {
+            description = "Self-hosted pastebin powered by Git, open-source alternative to Github Gist.";
+            homepage = "https://github.com/thomiceli/opengist";
+            license = licenses.agpl3;
+          };
+        };
+      };
+  }
+#+end_src
+
 ** DONE A self-hosted static site with NixOS and Nginx
 CLOSED: [2023-12-02 Sat 11:41 EST]
 :PROPERTIES:
@@ -8723,7 +8790,7 @@ market:
 CLOSED: [2023-12-02 Sat 01:02 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: december-adventure
-:EXPORT_HUGO_LASTMOD: [2023-12-14 Thu 19:47 EST]
+:EXPORT_HUGO_LASTMOD: [2023-12-23 Sat 00:46 EST]
 :END:
 
 #+begin_description
@@ -8844,6 +8911,11 @@ I want to continue my movement toward self-hosting:
 - Thought about rendering my Nix flake inputs as a table.
 - Abandoned experiment with a babel executor for Nix.
 - To make some progress, dropped some unused flake inputs.
+
+***** December 22
+
+- Experimenting with [[https://github.com/thomiceli/opengist][Opengist]].  I have a working Nix package, but
+  not a NixOS module.
 
 * Talks section
 :PROPERTIES:

@@ -357,6 +357,23 @@
         "type": "gitlab"
       }
     },
+    "opengist": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1700502586,
+        "narHash": "sha256-FQghimy4KPxxwRlD73zouXaLXq8ktNcAWKN7/oxgEGo=",
+        "owner": "thomiceli",
+        "repo": "opengist",
+        "rev": "3444fb9b75a7f98d765dabdd22ae7886e46fc4ec",
+        "type": "github"
+      },
+      "original": {
+        "owner": "thomiceli",
+        "ref": "v1.5.3",
+        "repo": "opengist",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "agenix": "agenix",
@@ -372,6 +389,7 @@
         "nixos-dns": "nixos-dns",
         "nixpkgs": "nixpkgs",
         "on-el": "on-el",
+        "opengist": "opengist",
         "scala-cli-repl": "scala-cli-repl"
       }
     },

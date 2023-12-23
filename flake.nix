@@ -65,6 +65,11 @@
       flake = false;
     };
 
+    opengist = {
+      url = "github:thomiceli/opengist?ref=v1.5.3";
+      flake = false;
+    };
+
     scala-cli-repl = {
       url = "github:ag91/scala-cli-repl";
       flake = false;
