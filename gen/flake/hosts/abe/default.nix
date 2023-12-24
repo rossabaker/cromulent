@@ -13,6 +13,7 @@
             self.nixosModules.netdata
             self.nixosModules.synapse
             self.nixosModules.forgejo
+            self.nixosModules.opengist
             self.nixosModules.acme
             self.nixosModules.webserver
             self.nixosModules.libravatar
@@ -22,6 +23,11 @@
               nix.settings = {
                 substituters = [ "https://cache.nixos.org/" ];
                 trusted-public-keys = [ "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=" ];
+              };
+
+              cromulent.services.opengist = {
+                enabled = true;
+                domain = "paste.rossabaker.com";
               };
             }
           ];

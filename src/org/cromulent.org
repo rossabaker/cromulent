@@ -6707,7 +6707,7 @@ Configurations for various hosts, mostly with NixOS or Nix-Darwin.
 CLOSED: [2023-11-19 Sun 19:16 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: abe
-:EXPORT_HUGO_LASTMOD: [2023-12-14 Thu 19:49 EST]
+:EXPORT_HUGO_LASTMOD: [2023-12-23 Sat 22:04 EST]
 :CUSTOM_ID: abe
 :header-args:terraform+: :code-license CC0-1.0
 :END:
@@ -7009,6 +7009,7 @@ are published as a flake module.
               self.nixosModules.netdata
               self.nixosModules.synapse
               self.nixosModules.forgejo
+              self.nixosModules.opengist
               self.nixosModules.acme
               self.nixosModules.webserver
               self.nixosModules.libravatar
@@ -7018,6 +7019,11 @@ are published as a flake module.
                 nix.settings = {
                   substituters = [ "https://cache.nixos.org/" ];
                   trusted-public-keys = [ "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=" ];
+                };
+
+                cromulent.services.opengist = {
+                  enabled = true;
+                  domain = "paste.rossabaker.com";
                 };
               }
             ];
@@ -7348,65 +7354,269 @@ How to self-host Git repositories with Forgejo on NixOS.
   }
 #+end_src
 
-** Opengist
+** DONE Opengist: a self-hosted pastebin with NixOS
+CLOSED: [2023-12-23 Sat 22:07 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: opengist
 :header-args:nix+: :code-license MIT
+:EXPORT_HUGO_LASTMOD: [2023-12-23 Sat 22:13 EST]
 :END:
 
-[[https://github.com/thomiceli/opengist][Opengist]] is a self-hosted pastebin.
+#+begin_description
+Walks through self-hosting the Opengist pastebin service with Nix
+flakes.  A package is defined to try it out locally, and a NixOS
+module is defined with instructions to run a Systemd service behind
+Nginx.
+#+end_description
+
+[[https://github.com/thomiceli/opengist][Opengist]] is a self-hosted pastebin.  There is [[https://codeberg.org/forgejo/forgejo/issues/1069][not yet support in
+Forgejo]], so Opengist makes an excellent companion for those snippets
+that don't quite merit their own repository.
+
+#+begin_info
+My pastebin is hosted at [[https://paste.rossabaker.com/all][~paste.rossabaker.com~]].
+#+end_info
 
 #+begin_src nix :exports none :noweb-ref flake-modules
   ./opengist
 #+end_src
 
-#+begin_src nix :tangle ../../gen/flake/opengist/default.nix
-  { inputs, lib, ... }:
+*** Nix package
 
+Opengist needs its frontend assets compiled with {{{abbr(Node Package
+Manager,NPM)}}}, and then embeds them into a Go application.  The
+compiled =assets= are added as an input to the upstream source.
+
+#+begin_src nix :tangle ../../gen/flake/opengist/package.nix
+  { pkgs, lib, src, ... }:
+
+  pkgs.buildGoModule rec {
+    pname = "opengist";
+    version = "1.5.3";
+
+    inherit src;
+
+    assets = pkgs.buildNpmPackage {
+      inherit src version;
+      pname = "opengist-assets";
+      npmDepsHash = "sha256-I7u9FkqkMaECozLxOJED95B3cT9nvHk0IMu6QJo+Cqs=";
+      installPhase = ''
+        mkdir -p $out
+        cp -r public $out
+      '';
+    };
+    nativeBuildInputs = [ assets ];
+    preBuild = ''
+      cp -rT ${assets} .
+    '';
+
+    vendorHash = "sha256-tB75KHgcAEuwyMArTAvI4t8tWVSh+pyZ0e+lgt4KWSQ=";
+
+    tags = [ "fs_embed" ];
+
+    nativeCheckInputs = [ pkgs.git ];
+    preCheck = ''
+      mkdir -p test-home
+      export HOME=$PWD/test-home
+    '';
+
+    meta = with lib; {
+      description = "Self-hosted pastebin powered by Git, open-source alternative to Github Gist.";
+      homepage = "https://github.com/thomiceli/opengist";
+      license = licenses.agpl3;
+      mainProgram = "opengist";
+    };
+  }
+#+end_src
+
+**** Trying out the package
+
+The binary can be run directly from the flake.
+
+#+begin_example sh
+nix run git+https://git.rossabaker.com/ross/cromulent#opengist
+#+end_example
+
+By default, the service runs on [[http://localhost:6157/]].
+
+*** NixOS module
+
+Opengist is designed to run well a [[https://github.com/thomiceli/opengist/blob/master/docs/administration/run-with-systemd.md][systemd service]] behind an [[https://github.com/thomiceli/opengist/blob/master/docs/administration/nginx-reverse-proxy.md][Nginx
+reverse proxy]].  Both of these are configured here as a NixOS module.
+
+#+begin_aside
+Most NixOS modules take one argument list.  This one takes two, using
+the [[https://flake.parts/define-module-in-separate-file#importapply][importApply]] pattern from Flake Parts, so we can access the custom
+package.
+#+end_aside
+
+#+begin_src nix :tangle ../../gen/flake/opengist/nixos-module.nix
+  { withSystem, ... }:
+  { config, lib, pkgs, ... }:
+
+  let
+    cfg = config.cromulent.services.opengist;
+
+    inherit (lib)
+      mkEnableOption
+      mkIf
+      mkOption
+      mkPackageOption
+      types
+      ;
+  in
   {
-    perSystem = { config, self', inputs', pkgs, system, ... }:
-      let
-        version = "1.5.3";
+    options.cromulent.services.opengist = {
+      enabled = mkEnableOption "Opengist" // {
+        default = true;
+      };
 
-        assets =
-          pkgs.buildNpmPackage rec {
-            pname = "opengist-assets";
-            inherit version;
-            src = inputs.opengist;
-            npmDepsHash = "sha256-I7u9FkqkMaECozLxOJED95B3cT9nvHk0IMu6QJo+Cqs=";
-            installPhase = "
-              mkdir -p $out
-              cp -a public/* $out
-            ";
-          };
-      in {
-        packages.opengist = pkgs.buildGoModule {
-          pname = "opengist";
-          inherit version;
-          src = inputs.opengist;
+      package = mkOption {
+        type = types.package;
+        description = "The opengist package to use";
+        default = withSystem pkgs.stdenv.hostPlatform.system ({ config, ... }:
+          config.packages.opengist
+        );
+        defaultText = "`packages.opengist` from the Cromulent flake";
+      };
 
-          vendorHash = "sha256-tB75KHgcAEuwyMArTAvI4t8tWVSh+pyZ0e+lgt4KWSQ=";
+      domain = mkOption {
+        type = types.str;
+        description = "Domain name of Opengist server";
+        example = "paste.example.com";
+      };
 
-          tags = [ "fs_embed" ];
+      user = mkOption {
+        type = types.str;
+        default = "opengist";
+        description = "User account under which Opengist runs";
+      };
 
-          preBuild = ''
-            cp -a ${assets}/* public
-          '';
+      group = mkOption {
+        type = types.str;
+        default = "opengist";
+        description = "Group under which Opengist runs";
+      };
 
-          preCheck = ''
-            mkdir -p test-home
-            export HOME=$PWD/test-home
-          '';
+      configureNginx = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Configures Nginx as a reverse proxy for Opengist.";
+      };
+    };
 
-          nativeCheckInputs = [ pkgs.git ];
-
-          meta = with lib; {
-            description = "Self-hosted pastebin powered by Git, open-source alternative to Github Gist.";
-            homepage = "https://github.com/thomiceli/opengist";
-            license = licenses.agpl3;
+    config = mkIf cfg.enabled {
+      services.nginx = lib.mkIf cfg.configureNginx {
+        enable = true;
+        virtualHosts."${cfg.domain}" = {
+          forceSSL = true;
+          enableACME = true;
+          locations."/" = {
+            proxyPass = "http://localhost:6157";
           };
         };
       };
+
+      systemd.services.opengist = {
+        description = "Opengist paste bin, powered by Git";
+        after = [ "network.target" ];
+        wantedBy = [ "multi-user.target" ];
+        path = [ cfg.package pkgs.git pkgs.openssh ];
+        serviceConfig = {
+          Type = "simple";
+          User = cfg.user;
+          Group = cfg.group;
+          ExecStart = lib.getExe cfg.package;
+          WorkingDirectory = cfg.package;
+          StateDirectory = "opengist";
+          StateDirectoryMode = "0750";
+          LogsDirectory = "opengist";
+          LogsDirectoryMode = "0750";
+        };
+        environment = {
+          OG_OPENGIST_HOME = "/var/lib/opengist";
+        };
+      };
+
+      users.users = mkIf (cfg.user == "opengist") {
+        opengist = {
+          isSystemUser = true;
+          home = "/var/lib/opengist";
+          inherit (cfg) group;
+        };
+      };
+
+      users.groups = mkIf (cfg.group == "opengist") {
+        opengist = { };
+      };
+    };
+  }
+#+end_src
+
+**** Getting started from a flake
+
+Given a =cromulent= input, add =cromulent.nixosModules.opengist= to
+modules, and set the following two properties:
+
+- =cromulent.services.opengist.enabled= :: set to =true=
+- =cromulent.services.opengist.domain= :: set to the domain from which
+  you wish to serve Opengist
+- =cromulent.services.opengist.configureNginx= :: whether to create a
+  virtual host at =domain=.
+
+#+begin_warning
+There are no [[https://github.com/thomiceli/opengist/issues/5][initial credentials]].  Registration begins as open, and
+the first user becomes an admin!  Subsequent registration can be
+configured at =/admin-panel/configuration=.
+
+Consider setting =cromulent.services.opengist.configureNginx= to
+=false= or otherwise limiting access until administrative access is
+secured.
+#+end_warning
+
+#+begin_example
+{
+  inputs = {
+    cromulent = "git+https://git.rossabaker.com/ross/cromulent";
+  };
+
+  outputs = { self, nixpkgs, cromulent, ... }: {
+    nixosConfigurations.example = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = [
+        cromulent.nixosModules.opengist
+        {
+          cromulent.services.opengist = {
+            enabled = true;
+            domain = "opengist.example.com";
+          };
+        }
+      ];
+    };
+  };
+}
+#+end_example
+
+*** Flake module                                                   :noexport:
+
+Adds the Opengist package and NixOS module to the flake.
+
+#+begin_src nix :tangle ../../gen/flake/opengist/default.nix
+  { inputs, lib, flake-parts-lib, self, withSystem, ... }:
+
+  let
+    inherit (flake-parts-lib) importApply;
+  in
+  {
+    flake.nixosModules.opengist = importApply ./nixos-module.nix {
+      inherit withSystem;
+    };
+
+    perSystem = { config, self', inputs', pkgs, system, ... }: {
+      packages.opengist = pkgs.callPackage ./package.nix {
+        src = inputs.opengist;
+      };
+    };
   }
 #+end_src
 
