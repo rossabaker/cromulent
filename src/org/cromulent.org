@@ -2069,6 +2069,12 @@ Keys are:
   support = 'supported'
 
   [[Params.contacts]]
+  network = 'Opengist'
+  handle = 'ross'
+  url = 'https://paste.rossabaker.com/ross'
+  support = 'supported'
+
+  [[Params.contacts]]
   network = 'Cohost'
   handle = '@rossabaker'
   url = 'https://cohost.org/rossabaker'
