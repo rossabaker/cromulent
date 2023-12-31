@@ -10065,6 +10065,87 @@ the caller is just going to ~void~ it out anyway.
 Surely this list isn't complete.  Did I overlook your favorite?
 [[file:contact.org][Contact me]], and we'll make this a living post.
 
+** DONE Code 2023                                                     :@tech:
+CLOSED: [2023-12-31 Sun 00:00]
+:PROPERTIES:
+:EXPORT_FILE_NAME: code-2023
+:EXPORT_TITLE: ~#code2023~
+:header-args:scala+: :code-license CC0-1.0
+:END:
+
+#+begin_description
+A continuation of the old Twitter tradition of listing all the
+languages we coded in the past year.
+#+end_description
+
+In the Avian Period of social media, we had a late December tradition
+of enumerating the coding languages we used over the last year.  Some
+people would aggregate them into a language ranking, which I never
+cared for.  However, I thought they were great as a recommendation
+engine while browing specific developers.
+
+Without further ado, my ~#code2023~.
+
+*** Languages used in 2023
+
+- [[https://www.gnu.org/software/gawk/manual/gawk.html][Awk]] :: Part of the old fart's command line toolbox.  Similar to
+  Perl, but with less social stigma.  It really hits the spot for some
+  [[https://www.scala-sbt.org/1.x/docs/Testing-sbt-plugins.html][sbt-scripted]] tests.
+- [[https://www.gnu.org/software/bash/][Bash]] :: Several years too late, I have added [[https://www.shellcheck.net/][Shellcheck]] to my
+  repertoire.
+- [[https://www.w3.org/TR/CSS/][CSS]] :: I got back into it this year, and it is way more fun than it
+  was in the Aughts.  [[https://www.w3.org/TR/css-variables-1/][Variables]], [[https://drafts.csswg.org/css-ui-3/#box-model][=box-sizing=]] and [[https://www.w3.org/TR/css-values-4/#calc-func][=calc=]] have all
+  delighted me.
+- [[https://www.gnu.org/software/emacs/manual/html_node/elisp/][Emacs Lisp]] :: Emacs is the editor of a lifetime, and as I approach
+  middle age, my Emacs Lisp skills are approaching mediocrity.
+- [[https://go.dev/][Go]] :: I am not yet cynical enough to code under the hideous premise
+  that "[[https://www.youtube.com/watch?v=uwajp0g-bY4][[Googlers] are not capable of understanding a brilliant
+  language]]", but isn't it refreshing to deploy?
+- [[https://groovy-lang.org/][Groovy]] :: The language of [[https://www.jenkins.io/doc/book/pipeline/jenkinsfile/][Jenkinsfiles]].  It's fine until you try
+  to refactor it and discover it's [[https://www.jenkins.io/doc/book/pipeline/cps-method-mismatches/][CPS]] with glasses and a mustache.
+- [[https://github.com/hashicorp/hcl][HCL]] :: With NixOS configurations frequently referring to
+  infrastructure declared in HCL, my hunch is that I should be
+  generating more HCL with something like [[https://terranix.org/][Terranix]].
+- [[https://html.spec.whatwg.org/][HTML]] :: Look, I'm not here to argue about what's a real language,
+  okay?
+- [[https://www.java.com/en/][Java]] :: I read more than I write these days, and I'm more into its
+  virtual machine than the language, but it's the reason we get to
+  write languages like Scala or Clojure professionally.  Respect.
+- [[https://jqlang.github.io/jq/][JQ]] :: The homepage says it's "like sed for JSON data", which
+  resonates with me.  Next year, I'm going to tell the youngs, "sed is
+  like jq for text."
+- [[https://nixos.org/manual/nix/stable/language/index.html][Nix]] :: I wish it had been Scheme, like [[https://guix.gnu.org/][Guix]], but the language is the
+  heart and soul of my [[*Configurations][configurations]].  Superpowers lurk herein.
+- [[https://www.python.org/][Python]] :: Well, sort of.  I got a book on Python, and spent the
+  better part of a week trying to install the packages I needed,
+  without success.  I would love to use it for data science, but it is
+  the language of "it works on my machine."  I will try again next
+  year, not because I like it, but because I like what it does.
+- [[https://www.scala-lang.org/][Scala]] :: Still my primary language at work, even as The Discord
+  Curtain has further estranged me from the community.  I continue to
+  enjoy teaching and writing Scala, and I see nothing on the horizon
+  to displace it as my default backend language.
+- [[https://www.gnu.org/software/sed/manual/sed.html][Sed]] :: See Awk.
+- [[https://en.wikipedia.org/wiki/SQL][SQL]] :: Lately it's more often futzing with [[https://www.sqlite.org/index.html][SQLite]] stores of
+  self-hosted services, but the number of ways to use it is why it's
+  on everybody's list.
+- [[https://toml.io/en/][TOML]] :: "[[https://www.youtube.com/watch?v=9zIlSVT4mBA][Wow, whoopie!  A zeppelin!]]"
+- [[https://www.typescriptlang.org/][TypeScript]] :: I fixed a bug in a GitHub Action.  I don't know this
+  language, but I got in and out quickly and it worked, and that was
+  pleasing.
+- [[https://yaml.org/][YAML]] :: Last alphabetically, and last in my heart.
+
+*** On the radar for 2024
+
+- [[https://www.modular.com/max/mojo][Mojo]] :: There's some buzz about this Python superset among my
+  colleagues.  I'm skeptical, but curious.
+- [[https://www.rust-lang.org/][Rust]] :: I don't anticipate joining the exodus from functional
+  programming to Rust, but I yearn to write a [[https://www.rfc-editor.org/rfc/rfc1288][finger daemon]], and that
+  screams Rust.
+- [[https://mc-stan.org/][Stan]] :: I used this in the past for Bayesian inference, via its R
+  bindings.  I'd like to revive those projects, perhaps as part of my
+  Python reckoning.
+
 * Notes section
 :PROPERTIES:
 :EXPORT_HUGO_BUNDLE: notes
