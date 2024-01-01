@@ -49,6 +49,14 @@
                 trusted-public-keys = [ "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=" ];
               };
             }
+            {
+              # Sloppy fix for now
+              nix = {
+                extraOptions = ''
+                  experimental-features = nix-command flakes
+                '';
+              };
+            }
           ];
         };
     });

@@ -6736,7 +6736,7 @@ Configurations for various hosts, mostly with NixOS or Nix-Darwin.
 CLOSED: [2023-11-19 Sun 19:16 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: abe
-:EXPORT_HUGO_LASTMOD: [2023-12-23 Sat 22:04 EST]
+:EXPORT_HUGO_LASTMOD: [2024-01-01 Mon 16:57 EST]
 :CUSTOM_ID: abe
 :header-args:terraform+: :code-license CC0-1.0
 :END:
@@ -7072,6 +7072,14 @@ are published as a flake module.
                 nix.settings = {
                   substituters = [ "https://cache.nixos.org/" ];
                   trusted-public-keys = [ "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=" ];
+                };
+              }
+              {
+                # Sloppy fix for now
+                nix = {
+                  extraOptions = ''
+                    experimental-features = nix-command flakes
+                  '';
                 };
               }
             ];
