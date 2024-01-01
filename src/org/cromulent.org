@@ -2309,7 +2309,7 @@ Our build creates some detritus that we don't want checked into Git.
 CLOSED: [2022-08-30 Tue 14:26 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: style
-:EXPORT_HUGO_LASTMOD: [2023-12-05 Tue 22:19 EST]
+:EXPORT_HUGO_LASTMOD: [2024-01-01 Mon 13:43 EST]
 :CUSTOM_ID: css-baseline
 :header-args+: :code-license MIT
 :header-args:css+: :tangle ../../tmp/hugo/assets/css/cromulent.css
@@ -2572,12 +2572,19 @@ used, and it's bedtime.
 Define some CSS variables. The link color is complementary to the
 crimson.
 
+# Palette generator:
+# #9b2235
+# #fc7753
+# #66d7d1
+# #40d358
+# #db356e
+
 #+begin_src css
   :root {
-      --color-brand: #9d2235;
-      --color-brand-darker: #731927;
+      --color-brand: #9b2235;
       --color-stripe: #ffffff;
-      --link-color: #146357;
+      --link-color: #403d58;
+      --link-hover-color: #746f9b;
   }
 #+end_src
 
@@ -2619,6 +2626,10 @@ Render the links in the complementary color.
 #+begin_src css
   a {
       color: var(--link-color);
+  }
+
+  a:hover {
+      color: var(--link-hover-color);
   }
 #+end_src
 
