@@ -9014,147 +9014,6 @@ market:
 
 - /Trout Mask Replica/ by Captain Beefheart
 
-** DONE December Adventure
-CLOSED: [2023-12-02 Sat 01:02 EST]
-:PROPERTIES:
-:EXPORT_FILE_NAME: december-adventure
-:EXPORT_HUGO_LASTMOD: [2023-12-23 Sat 00:57 EST]
-:END:
-
-#+begin_description
-Notes from an alternative, lower key, less competitive alternative to
-Advent of Code.
-#+end_description
-
-*** 2023
-
-Advent of Code is upon us again.  I'm reminded of those [[https://en.wikipedia.org/wiki/Paint_and_sip_industry][paint and sip]]
-classes.  You get to try something new and have fun with your friends,
-and both of those are great, but the end product looks a lot like
-everyone else's.
-
-I saw my [[http://plastic-idolatry.com/erik/2023/dec/][friend Erik's December Adventure]], which led me to [[https://eli.li/december-adventure][the
-original]].  I prefer Diet Mountain Dew to alcohol, and I'd rather
-paint something unique.  I'm a December Adventure sort of fellow.
-
-**** Goal
-
-I want to continue my movement toward self-hosting:
-
-- Set up my own CI to replace GitHub Actions
-- Publish to my own Nginx to replace Netlify
-- Integrate archives of some old silos
-- Consider Pixelfed or Peertube for new content types
-
-**** December 1
-
-- Extracted my [[https://rossabaker.com/configs/forgejo/][Forgejo]] configuration, without adequately describing
-  it.
-- Fixed an annoying issue with its =ROOT_URL= configuration.
-- Got interested in the SystemCrafters Live series on Forgejo ([[https://systemcrafters.net/live-streams/november-17-2023/][Part 1]],
-  [[https://systemcrafters.net/live-streams/november-17-2023/][Part 2]]).  Saw they've [[https://systemcrafters.net/live-streams/november-17-2023/][migrated to IRC]], whereupon I fell into a ZNC
-  rabbit hole.
-
-**** December 2
-
-- Set up a [[#webserver][webserver flake module]] to self-host this site at a
-  temporary subdomain.
-- Set up an [[https://nixos.org/manual/nixos/stable/#module-security-acme-prerequisites][ACME flake module]] to manage certificates.
-- Added a [[https://git.rossabaker.com/ross/forgejo_proof][Forgejo identity claim]] to my [[https://keyoxide.org/wkd/ross%40rossabaker.com][Keyoxide profile]].
-
-**** December 3
-
-- Prepared to move my [[#dns][DNS]] to Hetzner DNS with OpenTofu.
-- Documented my [[#pobox][~pobox.com~ setup]]
-
-**** December 4
-
-- Moved to Hetzner DNS.  Mind those trailing periods!
-
-**** December 5
-
-- Air travel today.  Some offline cleanup tasks.
-- Set up 2FA on [[https://git.rossabaker.com/][Forgejo]].  This is not a code change.
-- Set the landing page on Forgejo the "explore" view.
-- Add Forgejo contact in footer and contacts page.
-
-**** December 6
-
-- Archived GitHub orgs I participate in with [[https://github.com/maxkratz/github2gitea-mirror/tree/6428a6847c3fd879674afae5e71a3b9a605851d1][github2gitea-mirror]].
-
-**** December 7
-
-- Added support for [[#libravatar][Libravatar]].
-
-**** December 8
-
-- Enhanced support for [[#libravatar][Libravatar]].
-
-**** December 9
-
-- Automated hash calculation of [[#libravatar][Libravatar]] and turned it into a
-  general NixOS module.
-- Introduced OpenTofu variables as a companion to the generalized module.
-- Created a [[https://git.rossabaker.com/data/weather][weather station archive]] repo after getting that working.
-  Self-hosting is also for weather!
-
-**** December 10
-
-- Put my adventure on pause to help a friend start his hosting
-  adventure.
-
-**** December 11
-
-- Continued my friend's adventure.
-
-**** December 12
-
-- Began migration of DNS records to [[https://janik-haag.github.io/NixOS-DNS][NixOS-DNS]].
-
-**** December 13
-
-- Fully implemented, but did not finish documenting, [[https://janik-haag.github.io/NixOS-DNS/usage.html#octodns][OctoDNS]]
-  integration.
-
-**** December 14
-
-- Finished migrating to NixOS-DNS, with deeper integration into
-  existing modules.
-
-**** December 15
-
-- Back on my friend's adventure.
-
-**** December 16
-
-- Began a refactoring of the Nix flake.  No new functionality, but
-  better organization.
-
-**** December 17
-
-- Continued Nix flake refactoring.  No more overlays!
-
-**** December 18
-
-- Thought about rendering my Nix flake inputs as a table.
-- Abandoned experiment with a babel executor for Nix.
-- To make some progress, dropped some unused flake inputs.
-
-**** December 19
-- A drawback to copying the Nginx configuration from the Nixpkgs
-  Mastodon module in support of =WEB_DOMAIN= is that it falls out
-  of sync.  Patched the way it forwards the streaming sockets.
-
-**** December 20
-- No progress.
-
-**** December 21
-- A day of patching and testing.
-
-**** December 22
-- Experimenting with [[https://github.com/thomiceli/opengist][Opengist]].  I have a working Nix package, but
-  not a NixOS module.
-
 * Talks section
 :PROPERTIES:
 :EXPORT_HUGO_BUNDLE: talks
@@ -10167,6 +10026,182 @@ Without further ado, my ~#code2023~.
 *** Languages used
 - Emacs Lisp
 
+
+** DONE December Adventure, 2023
+CLOSED: [2023-12-02 Sat 01:02 EST]
+:PROPERTIES:
+:EXPORT_FILE_NAME: december-adventure-2023
+:EXPORT_HUGO_LASTMOD: [2024-01-01 Mon 01:49 EST]
+:END:
+
+#+begin_description
+Notes from an alternative, lower key, less competitive alternative to
+Advent of Code.
+#+end_description
+
+#+toc: headlines 2
+
+Advent of Code is upon us again.  I'm reminded of those [[https://en.wikipedia.org/wiki/Paint_and_sip_industry][paint and sip]]
+classes.  You get to try something new and have fun with your friends,
+and both of those are great, but the end product looks a lot like
+everyone else's.
+
+I saw my [[http://plastic-idolatry.com/erik/2023/dec/][friend Erik's December Adventure]], which led me to [[https://eli.li/december-adventure][the
+original]].  I prefer Diet Mountain Dew to wine, and I'd rather paint
+something unique.  I'm going to try a December Adventure.
+
+*** Goal
+
+I want to continue my movement toward self-hosting:
+
+- Set up my own CI to replace GitHub Actions
+- Publish to my own Nginx to replace Netlify
+- Integrate archives of some old silos
+- Consider Pixelfed or Peertube for new content types
+
+*** Daily log
+
+**** December 1
+
+- Extracted my [[https://rossabaker.com/configs/forgejo/][Forgejo]] configuration, without adequately describing
+  it.
+- Fixed an annoying issue with its =ROOT_URL= configuration.
+- Got interested in the SystemCrafters Live series on Forgejo ([[https://systemcrafters.net/live-streams/november-17-2023/][Part 1]],
+  [[https://systemcrafters.net/live-streams/november-17-2023/][Part 2]]).  Saw they've [[https://systemcrafters.net/live-streams/november-17-2023/][migrated to IRC]], whereupon I fell into a ZNC
+  rabbit hole.
+
+**** December 2
+
+- Set up a [[#webserver][webserver flake module]] to self-host this site at a
+  temporary subdomain.
+- Set up an [[https://nixos.org/manual/nixos/stable/#module-security-acme-prerequisites][ACME flake module]] to manage certificates.
+- Added a [[https://git.rossabaker.com/ross/forgejo_proof][Forgejo identity claim]] to my [[https://keyoxide.org/wkd/ross%40rossabaker.com][Keyoxide profile]].
+
+**** December 3
+
+- Prepared to move my [[#dns][DNS]] to Hetzner DNS with OpenTofu.
+- Documented my [[#pobox][~pobox.com~ setup]]
+
+**** December 4
+
+- Moved to Hetzner DNS.  Mind those trailing periods!
+
+**** December 5
+
+- Air travel today.  Some offline cleanup tasks.
+- Set up 2FA on [[https://git.rossabaker.com/][Forgejo]].  This is not a code change.
+- Set the landing page on Forgejo the "explore" view.
+- Add Forgejo contact in footer and contacts page.
+
+**** December 6
+
+- Archived GitHub orgs I participate in with [[https://github.com/maxkratz/github2gitea-mirror/tree/6428a6847c3fd879674afae5e71a3b9a605851d1][github2gitea-mirror]].
+
+**** December 7
+
+- Added support for [[#libravatar][Libravatar]].
+
+**** December 8
+
+- Enhanced support for [[#libravatar][Libravatar]].
+
+**** December 9
+
+- Automated hash calculation of [[#libravatar][Libravatar]] and turned it into a
+  general NixOS module.
+- Introduced OpenTofu variables as a companion to the generalized module.
+- Created a [[https://git.rossabaker.com/data/weather][weather station archive]] repo after getting that working.
+  Self-hosting is also for weather!
+
+**** December 10
+
+- Put my adventure on pause to help a friend start his hosting
+  adventure.
+
+**** December 11
+
+- Continued my friend's adventure.
+
+**** December 12
+
+- Began migration of DNS records to [[https://janik-haag.github.io/NixOS-DNS][NixOS-DNS]].
+
+**** December 13
+
+- Fully implemented, but did not finish documenting, [[https://janik-haag.github.io/NixOS-DNS/usage.html#octodns][OctoDNS]]
+  integration.
+
+**** December 14
+
+- Finished migrating to NixOS-DNS, with deeper integration into
+  existing modules.
+
+**** December 15
+
+- Back on my friend's adventure.
+
+**** December 16
+
+- Began a refactoring of the Nix flake.  No new functionality, but
+  better organization.
+
+**** December 17
+
+- Continued Nix flake refactoring.  No more overlays!
+
+**** December 18
+
+- Thought about rendering my Nix flake inputs as a table.
+- Abandoned experiment with a babel executor for Nix.
+- To make some progress, dropped some unused flake inputs.
+
+**** December 19
+- A drawback to copying the Nginx configuration from the Nixpkgs
+  Mastodon module in support of =WEB_DOMAIN= is that it falls out
+  of sync.  Patched the way it forwards the streaming sockets.
+
+**** December 21
+- A day of patching and testing.
+
+**** December 22
+- Experimenting with [[https://github.com/thomiceli/opengist][Opengist]].  I have a working Nix package, but
+  not a NixOS module.
+**** December 23
+- Published an [[*Opengist: a self-hosted pastebin with NixOS][Opengist guide]] with flake package and NixOS module.
+- Set up a working Opengist service at [[https://paste.rossabaker.com][=paste.rossabaker.com=]].
+**** December 25
+- Migrated 14 years' worth of GitHub gists to my Opengist.  Gists are
+  usually ephemeral, but revisiting old interests and hacks, and
+  remembering some people I interacted with, brought great joy.
+
+
+*** Retrospective
+
+In my adventurous December exuberance, I accomplished no original
+goals, but made great strides nevertheless:
+
+- All my code is now in a self-hosted [[https://git.rossabaker.com/][Forgejo]], as primary or a mirror.
+- All my gists are in a self-hosted [[https://paste.rossabaker.com/all][Opengist]].
+- All my DNS is now declared in Nix.
+
+I underestimated the holiday pressures.  We had a late family
+gathering that included a day trip to Peoria, seven hours in the car
+plus Christmas cheer.  Time well spent, but I decided to end my
+adventure on Christmas Day, much like the Advent of Code.
+
+The daily log felt mostly redundant with the Git log.  Next time, I'd
+like to write a few more brief paragraphs, even at the expense of
+daily bullets.
+
+I'm glad I participated, I had fun following some others, and I was
+relieved by the slower pace of it all.
+
+*** Redirect :noexport:
+
+#+begin_src text :tangle ../../tmp/hugo/static/_redirects :exports none
+  /projects/december-adventure /blog/december-adventure-2023
+#+end_src
+
 * Notes section
 :PROPERTIES:
 :EXPORT_HUGO_BUNDLE: notes
@@ -10376,6 +10411,7 @@ Particularly coming out of the social media archives.
 ** TODO web-key-directory has a stray copy button
 
 * Footnotes
+
 [fn:25] The =lib.mkMerge= isn't necessary, but lets us document the
 rest as independent chunks.
 
