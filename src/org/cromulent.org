@@ -10031,7 +10031,7 @@ Without further ado, my ~#code2023~.
 CLOSED: [2023-12-02 Sat 01:02 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: december-adventure-2023
-:EXPORT_HUGO_LASTMOD: [2024-01-01 Mon 01:49 EST]
+:EXPORT_HUGO_LASTMOD: [2024-01-01 Mon 02:02 EST]
 :END:
 
 #+begin_description
@@ -10183,6 +10183,7 @@ goals, but made great strides nevertheless:
 - All my code is now in a self-hosted [[https://git.rossabaker.com/][Forgejo]], as primary or a mirror.
 - All my gists are in a self-hosted [[https://paste.rossabaker.com/all][Opengist]].
 - All my DNS is now declared in Nix.
+- Guided a friend's IndieWeb adventure.
 
 I underestimated the holiday pressures.  We had a late family
 gathering that included a day trip to Peoria, seven hours in the car
