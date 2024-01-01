@@ -179,6 +179,9 @@
   ;; Not a defcustom, has to be setq!
   (setq org-time-stamp-formats '("%Y-%m-%d %a" . "%Y-%m-%d %a %H:%M %Z")))
 
+(use-package ob-shell
+  :after org)
+
 (use-package ox-hugo
   :ensure t
   :after org)

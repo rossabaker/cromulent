@@ -2874,7 +2874,7 @@ permitting its [[https://commoncrawl.org/ccbot][~CCBot~]] for now.
 CLOSED: [2023-02-23 Thu 23:59 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: _index
-:EXPORT_HUGO_LASTMOD: [2024-01-01 Mon 00:45 EST]
+:EXPORT_HUGO_LASTMOD: [2024-01-01 Mon 00:52 EST]
 :header-args+: :tangle-mode `,#o444 :mkdirp yes
 :header-args:emacs-lisp+: :tangle ../../gen/flake/emacs/init.el :tangle-mode `,#o444 :mkdirp yes
 :header-args:emacs-lisp+: :code-license CC0-1.0
@@ -3639,6 +3639,17 @@ crudely approximate support by [[https://emacs.stackexchange.com/a/60590][settin
     :config
     ;; Not a defcustom, has to be setq!
     (setq org-time-stamp-formats '("%Y-%m-%d %a" . "%Y-%m-%d %a %H:%M %Z")))
+#+end_src
+
+******** ob-shell
+
+Cromulent evaluates shell source code.  =org-confirm-babel-evaluate=
+keeps it from running in untrusted places, so loading it shouldn't
+hurt anything.
+
+#+begin_src emacs-lisp
+  (use-package ob-shell
+    :after org)
 #+end_src
 
 ******** ox-hugo
