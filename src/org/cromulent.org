@@ -10158,6 +10158,15 @@ Without further ado, my ~#code2023~.
   bindings.  I'd like to revive those projects, perhaps as part of my
   Python reckoning.
 
+** TODO Code 2024
+:PROPERTIES:
+:EXPORT_TITLE: ~#code2024~
+:EXPORT_FILE_NAME: code-2024
+:END:
+
+*** Languages used
+- Emacs Lisp
+
 * Notes section
 :PROPERTIES:
 :EXPORT_HUGO_BUNDLE: notes
