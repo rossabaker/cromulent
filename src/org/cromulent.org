@@ -10035,6 +10035,7 @@ Without further ado, my ~#code2023~.
 :END:
 
 *** Languages used
+- CSS
 - Emacs Lisp
 
 
