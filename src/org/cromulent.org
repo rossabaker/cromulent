@@ -10053,6 +10053,7 @@ Without further ado, my ~#code2023~.
 - CSS
 - Emacs Lisp
 - Nix
+- Scala
 
 ** DONE December Adventure, 2023
 CLOSED: [2023-12-02 Sat 01:02 EST]
