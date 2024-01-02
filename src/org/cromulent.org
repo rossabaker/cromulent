@@ -6734,7 +6734,7 @@ Configurations for various hosts, mostly with NixOS or Nix-Darwin.
 CLOSED: [2023-11-19 Sun 19:16 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: abe
-:EXPORT_HUGO_LASTMOD: [2024-01-01 Mon 16:57 EST]
+:EXPORT_HUGO_LASTMOD: [2024-01-01 Mon 22:35 EST]
 :CUSTOM_ID: abe
 :header-args:terraform+: :code-license CC0-1.0
 :END:
@@ -7005,9 +7005,6 @@ to configure the [[https://docs.joinmastodon.org/admin/config/#web_domain][=WEB_
     };
 
     users.groups.${cfg.group}.members = [ config.services.nginx.user ];
-
-    networking.domains.subDomains."${cfg.extraConfig.WEB_DOMAIN}".cname.data =
-      "${config.networking.hostName}.${config.networking.domain}.";
   }
 #+end_src
 
@@ -7126,6 +7123,7 @@ failure.
   {
     imports = [
      ./addresses.nix
+     ./cnames.nix
     ];
 
     networking.domains = {
@@ -7157,6 +7155,27 @@ hint which is the public network interface.
       a.data = map (a: a.address) ipv4Addresses;
       aaaa.data = map (a: a.address) ipv6Addresses;
     };
+  }
+#+end_src
+
+***** CNAME records
+
+All the nginx virtual hosts we've configured should declare a CNAME
+to refer back to this host.
+
+#+begin_src nix :tangle ../../gen/flake/hosts/abe/dns/cnames.nix
+  { config, ... }:
+
+  let
+    vhosts = builtins.attrNames config.services.nginx.virtualHosts;
+    fqdn = "${config.networking.hostName}.${config.networking.domain}";
+  in
+  {
+    networking.domains.subDomains =
+      builtins.listToAttrs (builtins.map (vhost: {
+        name = vhost;
+        value = { cname.data = "${fqdn}."; };
+      }) vhosts);
   }
 #+end_src
 
@@ -7375,9 +7394,6 @@ How to self-host Git repositories with Forgejo on NixOS.
         proxyPass = "http://localhost:3000/";
       };
     };
-
-    networking.domains.subDomains."${domain}".cname.data =
-      "${config.networking.hostName}.${config.networking.domain}.";
   }
 #+end_src
 
@@ -7700,8 +7716,6 @@ managed.
         root = "/var/www/com.rossabaker.www.beta";
       };
     };
-    networking.domains.subDomains."${domain}".cname.data =
-      "${config.networking.hostName}.${config.networking.domain}.";
   }
 #+end_src
 
@@ -8105,8 +8119,6 @@ of the NixOS manual.
         ];
       };
     };
-    networking.domains.subDomains."${domain}".cname.data =
-      "${config.networking.hostName}.${config.networking.domain}.";
   }
 #+end_src
 
@@ -8262,8 +8274,7 @@ Two config options are required for this Libravatar:
 - =com.rossabaker.services.libravatar.avatarSrc= :: a path that
   contains original images to be prepared.
 
-This is enough to configure NixOS via its Nginx module and create the
-corresponding DNS CNAME record.
+This is enough to configure NixOS via its Nginx module.
 
 #+begin_src nix :tangle ../../gen/flake/libravatar/nixos-module.nix
   { config, lib, pkgs, ... }:
@@ -8300,8 +8311,6 @@ corresponding DNS CNAME record.
          '';
         };
       };
-      networking.domains.subDomains."${cfg.domain}".cname.data =
-        "${config.networking.hostName}.${config.networking.domain}.";
     };
   }
 #+end_src

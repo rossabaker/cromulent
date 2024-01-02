@@ -24,7 +24,4 @@ in
       proxyPass = "http://localhost:3000/";
     };
   };
-
-  networking.domains.subDomains."${domain}".cname.data =
-    "${config.networking.hostName}.${config.networking.domain}.";
 }

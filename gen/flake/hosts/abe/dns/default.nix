@@ -3,6 +3,7 @@
 {
   imports = [
    ./addresses.nix
+   ./cnames.nix
   ];
 
   networking.domains = {

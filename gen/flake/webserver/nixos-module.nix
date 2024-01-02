@@ -12,6 +12,4 @@ in
       root = "/var/www/com.rossabaker.www.beta";
     };
   };
-  networking.domains.subDomains."${domain}".cname.data =
-    "${config.networking.hostName}.${config.networking.domain}.";
 }
