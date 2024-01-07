@@ -1,0 +1,13 @@
+name: website-deploy
+on:
+  push:
+    branches:
+      - main
+jobs:
+  test:
+    runs-on: nix
+    steps:
+      - uses: actions/checkout@v4
+      - run: nix -L run .#websiteDeploy
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}

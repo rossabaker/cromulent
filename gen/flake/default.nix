@@ -27,6 +27,7 @@ flake-parts.lib.mkFlake { inherit inputs; } (
       ./forgejo
       ./forgejoActions
       ./opengist
+      ./website/deploy.nix
       ./webserver
       ./acme
       ./dns

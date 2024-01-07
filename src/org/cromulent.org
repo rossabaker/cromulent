@@ -7995,6 +7995,60 @@ managed.
   }
 #+end_src
 
+*** Action                                                         :noexport:
+
+#+begin_src yaml :tangle ../../.forgejo/workflows/website-deploy.yaml
+  name: website-deploy
+  on:
+    push:
+      branches:
+        - main
+  jobs:
+    test:
+      runs-on: nix
+      steps:
+        - uses: actions/checkout@v4
+        - run: nix -L run .#websiteDeploy
+          env:
+            SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+#+end_src
+
+#+begin_src nix :exports none :noweb-ref flake-modules
+  ./website/deploy.nix
+#+end_src
+
+#+begin_src nix :tangle  ../../gen/flake/website/deploy.nix
+  {
+    perSystem = { lib, pkgs, self', ... }:
+      let
+        deploy = pkgs.writeScript "deploy.sh" ''
+          set -euo pipefail
+
+          export PATH="${lib.makeBinPath [
+            pkgs.coreutils
+            pkgs.openssh
+            pkgs.rsync
+          ]}"
+
+          echo "$SSH_PRIVATE_KEY" > ./ssh_key
+          chmod 600 ./ssh_key
+
+          rsync \
+            -e "ssh -o StrictHostKeyChecking=no -i ./ssh_key" \
+            -rvp ${self'.packages.website}/ \
+            --chmod=Du=rwx,Dg=rx,Do=rx,Fu=rw,Fg=r,Fo=r \
+            --delete \
+            www@abe.hetzner.rossabaker.com:/var/lib/www
+
+          rm ./ssh_key
+        '';
+      in
+      {
+        apps.websiteDeploy.program = "${deploy}";
+      };
+  }
+#+end_src
+
 *** Flake module
 
 #+begin_src nix :exports none :noweb-ref flake-modules
