@@ -1,10 +1,11 @@
-{ src, emacs, gnupg, graphviz, hugo, html5validator, hyperlink, stdenv }:
+{ src, emacs, gawk, gnupg, graphviz, hugo, html5validator, hyperlink, stdenv }:
 
 stdenv.mkDerivation rec {
   name = "rossabaker.com";
   inherit src;
   nativeBuildInputs = [
     emacs
+    gawk
     gnupg
     graphviz
     hugo
@@ -23,6 +24,9 @@ stdenv.mkDerivation rec {
     done
 
     ${hugo}/bin/hugo --config tmp/hugo/config.toml
+
+    # Make nginx-compatible redirects map
+    ${gawk}/bin/awk 'NF { $1 = "~^"$1"/?$"; $2 = $2";"; print}' public/_redirects > public/_redirects.map
   '';
 
   doCheck = true;

@@ -2,14 +2,28 @@
 
 let
   domain = "beta.www.rossabaker.com";
+  redirectFile = "${config.users.users.www.home}/public/_redirects.map";
 in
 {
   services.nginx = {
     enable = true;
+    appendHttpConfig = ''
+      map $uri $redirectedUri {
+        default "";
+        include ${redirectFile};
+      }
+    '';
+    mapHashBucketSize = 128;
+
     virtualHosts.${domain} = {
       forceSSL = true;
       enableACME = true;
       root = "${config.users.users.www.home}/public";
+      extraConfig = ''
+        if ($redirectedUri) {
+          return 301 $redirectedUri;
+        }
+      '';
     };
   };
 

@@ -2206,7 +2206,7 @@ CLOSED: [2022-09-01 Thu 16:54 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: build
 :header-args+: :code-license MIT
-:EXPORT_HUGO_LASTMOD: [2023-11-05 Sun 22:56 EST]
+:EXPORT_HUGO_LASTMOD: [2024-01-07 Sun 13:31 EST]
 :END:
 
 The website is just another package within our flake.
@@ -2241,13 +2241,14 @@ Finally, the =public/= directory rendered by Hugo is copied to the
 derivation output.
 
 #+begin_src nix :tangle ../../gen/pkgs/website/default.nix
-  { src, emacs, gnupg, graphviz, hugo, html5validator, hyperlink, stdenv }:
+  { src, emacs, gawk, gnupg, graphviz, hugo, html5validator, hyperlink, stdenv }:
 
   stdenv.mkDerivation rec {
     name = "rossabaker.com";
     inherit src;
     nativeBuildInputs = [
       emacs
+      gawk
       gnupg
       graphviz
       hugo
@@ -2266,6 +2267,9 @@ derivation output.
       done
 
       ${hugo}/bin/hugo --config tmp/hugo/config.toml
+
+      # Make nginx-compatible redirects map
+      ${gawk}/bin/awk 'NF { $1 = "~^"$1"/?$"; $2 = $2";"; print}' public/_redirects > public/_redirects.map
     '';
 
     doCheck = true;
@@ -7935,7 +7939,7 @@ CLOSED: [2023-12-02 Sat 11:41 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: webserver
 :CUSTOM_ID: webserver
-:EXPORT_HUGO_LASTMOD: [2024-01-06 Sat 20:36 EST]
+:EXPORT_HUGO_LASTMOD: [2024-01-07 Sun 12:46 EST]
 :END:
 
 #+begin_src description
@@ -7955,7 +7959,7 @@ picking [[https://www.nginx.com/][Nginx]].  The needs are simple:
 The canonical site is still hosted on Netlify, but the intent is to
 bring it home to [[#abe][~abe~]].  This is a testing ground.
 
-The =www= user will be used by CI to rsync the website content.
+The =www= user is used by CI to rsync the website content.
 
 #+begin_warning
 There is no CI yet.  The ~/var/www/com.rossabaker~ link is manually
@@ -7967,14 +7971,28 @@ managed.
 
   let
     domain = "beta.www.rossabaker.com";
+    redirectFile = "${config.users.users.www.home}/public/_redirects.map";
   in
   {
     services.nginx = {
       enable = true;
+      appendHttpConfig = ''
+        map $uri $redirectedUri {
+          default "";
+          include ${redirectFile};
+        }
+      '';
+      mapHashBucketSize = 128;
+
       virtualHosts.${domain} = {
         forceSSL = true;
         enableACME = true;
         root = "${config.users.users.www.home}/public";
+        extraConfig = ''
+          if ($redirectedUri) {
+            return 301 $redirectedUri;
+          }
+        '';
       };
     };
 
