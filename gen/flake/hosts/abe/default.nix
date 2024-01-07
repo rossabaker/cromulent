@@ -13,6 +13,7 @@
             self.nixosModules.netdata
             self.nixosModules.synapse
             self.nixosModules.forgejo
+            self.nixosModules.forgejoActions
             self.nixosModules.opengist
             self.nixosModules.acme
             self.nixosModules.webserver

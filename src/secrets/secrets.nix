@@ -3,4 +3,5 @@ let
 in
 {
   "abe-backups-default.age".publicKeys = [ abe ];
+  "abe-forgejo-runner-env.age".publicKeys = [ abe ];
 }
