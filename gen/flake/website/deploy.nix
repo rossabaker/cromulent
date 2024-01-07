@@ -15,7 +15,7 @@
 
         rsync \
           -e "ssh -o StrictHostKeyChecking=no -i ./ssh_key" \
-          -rvp ${self'.packages.website}/ \
+          -rvpc ${self'.packages.website}/ \
           --chmod=Du=rwx,Dg=rx,Do=rx,Fu=rw,Fg=r,Fo=r \
           --delete \
           www@abe.hetzner.rossabaker.com:/var/lib/www
