@@ -18,7 +18,7 @@
           -rvpc ${self'.packages.website}/ \
           --chmod=Du=rwx,Dg=rx,Do=rx,Fu=rw,Fg=r,Fo=r \
           --delete \
-          www@abe.hetzner.rossabaker.com:/var/lib/www
+          www@abe.hetzner.rossabaker.com:/var/lib/www/public
 
         rm ./ssh_key
       '';
