@@ -7676,7 +7676,7 @@ CLOSED: [2023-12-02 Sat 11:41 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: webserver
 :CUSTOM_ID: webserver
-:EXPORT_HUGO_LASTMOD: [2023-12-14 Thu 19:43 EST]
+:EXPORT_HUGO_LASTMOD: [2024-01-06 Sat 20:36 EST]
 :END:
 
 #+begin_src description
@@ -7696,6 +7696,8 @@ picking [[https://www.nginx.com/][Nginx]].  The needs are simple:
 The canonical site is still hosted on Netlify, but the intent is to
 bring it home to [[#abe][~abe~]].  This is a testing ground.
 
+The =www= user will be used by CI to rsync the website content.
+
 #+begin_warning
 There is no CI yet.  The ~/var/www/com.rossabaker~ link is manually
 managed.
@@ -7713,9 +7715,24 @@ managed.
       virtualHosts.${domain} = {
         forceSSL = true;
         enableACME = true;
-        root = "/var/www/com.rossabaker.www.beta";
+        root = "${config.users.users.www.home}/public";
       };
     };
+
+    users.users.www = {
+      description = "Owns the web root for www";
+      isSystemUser = true;
+      home = "/var/lib/www";
+      createHome = true;
+      homeMode = "755";
+      group = "www";
+      useDefaultShell = true;
+      openssh.authorizedKeys.keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID+UMMyU0dpJMX2hVRAu2tTqvcTIueNLdJmG049iSrtu"
+      ];
+    };
+
+    users.groups.www = { };
   }
 #+end_src
 
