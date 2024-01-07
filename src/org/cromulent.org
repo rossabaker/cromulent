@@ -6335,7 +6335,7 @@ intended ~Control~ to be to the immediate left of ~A~.
 CLOSED: [2023-09-16 Sat 22:51 EDT]
 :PROPERTIES:
 :EXPORT_FILE_NAME: podman
-:EXPORT_HUGO_LASTMOD: [2023-09-16 Sat 22:55 EDT]
+:EXPORT_HUGO_LASTMOD: [2024-01-06 Sat 23:33 EST]
 :END:
 
 #+begin_description
@@ -6343,17 +6343,39 @@ Defines =darwinModules.podman= to set up Podman as an alternative to
 Docker.
 #+end_description
 
-There's no Docker service built into nix-darwin, but [[https://podman.io/][Podman]] has been
-an effective substitute thus far.  This defines a Darwin module and
-exports it to the flake as =darwinModules.podman=.
-
 #+begin_src nix :exports none :noweb-ref flake-modules
-  ./podman
+  ./podman/nixos.nix
+  ./podman/nix-darwin.nix
 #+end_src
 
-#+begin_src nix :tangle ../../gen/flake/podman/default.nix
+I don't have enough interest nor expertise in containers to add much
+to the [[https://podman.io/][Podman]] vs. [[https://www.docker.com/][Docker]] debate.  I chose Podman for two reasons:
+
+- Podman is configurable with Nix-Darwin.
+- Podman's daemonless architecture is one less running root.
+
+*** NixOS
+
+Enabling Podman on NixOS can be reduced to a one-liner.  The default
+storage is =overlay=.
+
+#+begin_src nix :tangle ../../gen/flake/podman/nixos.nix
   {
-    flake.darwinModules.podman = (
+    flake.nixosModules.podman = {
+      virtualisation.podman.enable = true;
+    };
+  }
+#+end_src
+
+*** Nix-Darwin
+
+There's [[https://github.com/LnL7/nix-darwin/issues/112][no Docker virtualization in Nix-Darwin]] [fn:26], nor is there
+any =virtualisation= config at all.  With a little extra work and a
+couple hacks, it's possible to get a working Podman installation.
+
+#+begin_src nix :tangle ../../gen/flake/podman/nix-darwin.nix
+  {
+    flake.darwinModules.podman =
       { config, lib, pkgs, ... }:
       {
         environment.systemPackages =
@@ -6363,21 +6385,33 @@ exports it to the flake as =darwinModules.podman=.
             pkgs.xz
           ];
 
+        # https://github.com/containers/podman/issues/17026
         environment.pathsToLink = [ "/share/qemu" ];
-
-        programs.zsh.interactiveShellInit = lib.strings.concatStringsSep "\n" [
-          config.system.build.setAliases.text
-          "export DOCKER_HOST=unix://$(podman machine inspect --format '{{.ConnectionInfo.PodmanSocket.Path}}')"
-        ];
 
         # https://github.com/LnL7/nix-darwin/issues/432#issuecomment-1024951660
         environment.etc."containers/containers.conf.d/99-gvproxy-path.conf".text = ''
           [engine]
           helper_binaries_dir = ["${pkgs.gvproxy}/bin"]
         '';
-      }
-    );
+      };
   }
+#+end_src
+
+**** Manual toil for the launchd-ignorant
+
+Darwin still requires a bit more from us.  This could likely be
+managed in launchd, except I don't understand launchd yet.
+
+On first run, we need to initialize a Podman machine.
+
+#+begin_src sh
+  podman machine init
+#+end_src
+
+The machine needs to be started after init, and again on each boot.
+
+#+begin_src sh
+  podman machine start
 #+end_src
 
 ** DONE PostgreSQL                                    :nix_darwin:postgresql:
@@ -7037,6 +7071,7 @@ are published as a flake module.
               self.nixosModules.acme
               self.nixosModules.webserver
               self.nixosModules.libravatar
+              self.nixosModules.podman
               inputs.agenix.nixosModules.default
               {
                 # TODO This is missing...
@@ -7404,6 +7439,17 @@ How to self-host Git repositories with Forgejo on NixOS.
     flake.nixosModules.forgejo = ./nixos-module.nix;
   }
 #+end_src
+
+** Continuous integration with Forgejo Actions
+:PROPERTIES:
+:EXPORT_FILE_NAME: forgejo-actions
+:header-args:nix+: :code-license MIT
+:END:
+
+#+begin_info
+This setup borrows heavily from [[https://git.clan.lol/clan/clan-infra/src/commit/e5e55bcca09261c30ae4a7bde1d16bfb4b975401/modules/web01/gitea/actions-runner.nix][clan-infra's =actions-runner.nix=]], as
+[[https://discourse.nixos.org/t/gitea-nix-actions-runner-setup/35279][shared on NixOS Discourse]].
+#+end_info
 
 ** DONE Opengist: a self-hosted pastebin with NixOS
 CLOSED: [2023-12-23 Sat 22:07 EST]
@@ -10457,6 +10503,7 @@ Particularly coming out of the social media archives.
 ** TODO web-key-directory has a stray copy button
 
 * Footnotes
+[fn:26] We Americans spell it with a "zee".
 
 [fn:25] The =lib.mkMerge= isn't necessary, but lets us document the
 rest as independent chunks.

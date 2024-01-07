@@ -17,6 +17,7 @@
             self.nixosModules.acme
             self.nixosModules.webserver
             self.nixosModules.libravatar
+            self.nixosModules.podman
             inputs.agenix.nixosModules.default
             {
               # TODO This is missing...

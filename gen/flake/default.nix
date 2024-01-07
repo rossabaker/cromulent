@@ -18,7 +18,8 @@ flake-parts.lib.mkFlake { inherit inputs; } (
       ./home-manager/darwin.nix
       ./nix-darwin
       ./keyboard
-      ./podman
+      ./podman/nixos.nix
+      ./podman/nix-darwin.nix
       ./postgresql
       # ./modern_ts
       ./hosts/abe
