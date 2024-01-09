@@ -7402,7 +7402,7 @@ CLOSED: [2023-12-01 Fri 18:25 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: forgejo
 :header-args:nix+: :code-license MIT
-:EXPORT_HUGO_LASTMOD: [2023-12-14 Thu 17:48 EST]
+:EXPORT_HUGO_LASTMOD: [2024-01-08 Mon 23:14 EST]
 :END:
 
 #+begin_description
@@ -7437,11 +7437,23 @@ How to self-host Git repositories with Forgejo on NixOS.
       };
     };
 
+    services.nginx = {
+      appendHttpConfig = ''
+        map $uri $forgejo_access_log {
+          default 1;
+          /api/actions/runner.v1.RunnerService/FetchTask 0;
+        }
+      '';
+    };
+
     services.nginx.virtualHosts.${domain} = {
       enableACME = true;
       forceSSL = true;
       locations."/" = {
         proxyPass = "http://localhost:3000/";
+        extraConfig = ''
+          access_log /var/log/nginx/access.log combined if=$forgejo_access_log;
+        '';
       };
     };
   }
