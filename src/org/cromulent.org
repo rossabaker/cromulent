@@ -6772,7 +6772,7 @@ Configurations for various hosts, mostly with NixOS or Nix-Darwin.
 CLOSED: [2023-11-19 Sun 19:16 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: abe
-:EXPORT_HUGO_LASTMOD: [2024-01-06 Sat 23:50 EST]
+:EXPORT_HUGO_LASTMOD: [2024-01-08 Mon 21:52 EST]
 :CUSTOM_ID: abe
 :header-args:terraform+: :code-license CC0-1.0
 :END:
@@ -7179,6 +7179,9 @@ Generate DNS address records ~A~ and ~AAAA~.  Most of it can be
 inferred from the standard NixOS =networking= config.  We give it a
 hint which is the public network interface.
 
+The same records are set for the apex domain, ~rossabaker.com~, so
+we can host the website.
+
 #+begin_src nix :tangle ../../gen/flake/hosts/abe/dns/addresses.nix
   { config, ... }:
 
@@ -7189,12 +7192,17 @@ hint which is the public network interface.
     fqdn = "${config.networking.hostName}.${config.networking.domain}";
     ipv4Addresses = config.networking.interfaces.${iface}.ipv4.addresses;
     ipv6Addresses = config.networking.interfaces.${iface}.ipv6.addresses;
+
+    records = {
+      a.data = map (a: a.address) ipv4Addresses;
+      a.ttl = 30;
+      aaaa.data = map (a: a.address) ipv6Addresses;
+      aaaa.ttl = 30;
+    };
   in
   {
-    networking.domains.subDomains."${fqdn}" = {
-      a.data = map (a: a.address) ipv4Addresses;
-      aaaa.data = map (a: a.address) ipv6Addresses;
-    };
+    networking.domains.subDomains."${fqdn}" = records;
+    networking.domains.subDomains."rossabaker.com" = records;
   }
 #+end_src
 
@@ -7208,6 +7216,8 @@ to refer back to this host.
 
   let
     vhosts = builtins.attrNames config.services.nginx.virtualHosts;
+    baseDomains = builtins.attrNames config.networking.domains.baseDomains;
+    isBaseDomain = x: builtins.elem x baseDomains;
     fqdn = "${config.networking.hostName}.${config.networking.domain}";
   in
   {
@@ -7215,7 +7225,7 @@ to refer back to this host.
       builtins.listToAttrs (builtins.map (vhost: {
         name = vhost;
         value = { cname.data = "${fqdn}."; };
-      }) vhosts);
+      }) (builtins.filter (x: !isBaseDomain x) vhosts));
   }
 #+end_src
 
@@ -7956,21 +7966,13 @@ picking [[https://www.nginx.com/][Nginx]].  The needs are simple:
 
 *** General configuration
 
-The canonical site is still hosted on Netlify, but the intent is to
-bring it home to [[#abe][~abe~]].  This is a testing ground.
-
 The =www= user is used by CI to rsync the website content.
-
-#+begin_warning
-There is no CI yet.  The ~/var/www/com.rossabaker~ link is manually
-managed.
-#+end_warning
 
 #+begin_src nix :tangle ../../gen/flake/webserver/nixos-module.nix
   { config, ... }:
 
   let
-    domain = "beta.www.rossabaker.com";
+    domain = "rossabaker.com";
     redirectFile = "${config.users.users.www.home}/public/_redirects.map";
   in
   {
@@ -8205,8 +8207,6 @@ documenting, but it would bring down the site if we didn't keep them.
   { ... }:
   {
     zones."rossabaker.com" = {
-      "".a.data = "75.2.60.5";
-      "".a.ttl = 30;
       "www".cname.data = "rossabaker.com.";
     };
   }

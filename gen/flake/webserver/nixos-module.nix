@@ -1,7 +1,7 @@
 { config, ... }:
 
 let
-  domain = "beta.www.rossabaker.com";
+  domain = "rossabaker.com";
   redirectFile = "${config.users.users.www.home}/public/_redirects.map";
 in
 {
