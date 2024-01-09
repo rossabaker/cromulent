@@ -7939,7 +7939,7 @@ CLOSED: [2023-12-02 Sat 11:41 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: webserver
 :CUSTOM_ID: webserver
-:EXPORT_HUGO_LASTMOD: [2024-01-07 Sun 12:46 EST]
+:EXPORT_HUGO_LASTMOD: [2024-01-08 Mon 21:10 EST]
 :END:
 
 #+begin_src description
@@ -7988,11 +7988,14 @@ managed.
         forceSSL = true;
         enableACME = true;
         root = "${config.users.users.www.home}/public";
-        extraConfig = ''
+        locations."/".extraConfig = ''
           if ($redirectedUri) {
             return 301 $redirectedUri;
           }
         '';
+        locations."= /.well-known/webfinger" = {
+          return = "302 https://social.rossabaker.com/.well-known/webfinger$is_args$args";
+        };
       };
     };
 

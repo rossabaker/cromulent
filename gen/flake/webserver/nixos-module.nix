@@ -19,11 +19,14 @@ in
       forceSSL = true;
       enableACME = true;
       root = "${config.users.users.www.home}/public";
-      extraConfig = ''
+      locations."/".extraConfig = ''
         if ($redirectedUri) {
           return 301 $redirectedUri;
         }
       '';
+      locations."= /.well-known/webfinger" = {
+        return = "302 https://social.rossabaker.com/.well-known/webfinger$is_args$args";
+      };
     };
   };
 
