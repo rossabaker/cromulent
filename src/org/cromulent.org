@@ -7949,7 +7949,7 @@ CLOSED: [2023-12-02 Sat 11:41 EST]
 :PROPERTIES:
 :EXPORT_FILE_NAME: webserver
 :CUSTOM_ID: webserver
-:EXPORT_HUGO_LASTMOD: [2024-01-08 Mon 21:10 EST]
+:EXPORT_HUGO_LASTMOD: [2024-01-08 Mon 22:43 EST]
 :END:
 
 #+begin_src description
@@ -7998,6 +7998,12 @@ The =www= user is used by CI to rsync the website content.
         locations."= /.well-known/webfinger" = {
           return = "302 https://social.rossabaker.com/.well-known/webfinger$is_args$args";
         };
+      };
+
+      virtualHosts."www.${domain}" = {
+        forceSSL = true;
+        enableACME = true;
+        globalRedirect = domain;
       };
     };
 
@@ -8197,20 +8203,6 @@ This ~TXT~ record is an [[https://docs.keyoxide.org/service-providers/dns/][iden
 
 Declarations of other records are made in the =nixosConfigurations=
 of the relevant host and the email module.
-
-**** Interim records                                               :noexport:
-
-These are part of our interim Netlify solution.  They aren't worth
-documenting, but it would bring down the site if we didn't keep them.
-
-#+begin_src nix :tangle ../../gen/flake/dns/www.nix
-  { ... }:
-  {
-    zones."rossabaker.com" = {
-      "www".cname.data = "rossabaker.com.";
-    };
-  }
-#+end_src
 
 *** Building the OctoDNS configuration
 

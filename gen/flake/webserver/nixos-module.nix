@@ -28,6 +28,12 @@ in
         return = "302 https://social.rossabaker.com/.well-known/webfinger$is_args$args";
       };
     };
+
+    virtualHosts."www.${domain}" = {
+      forceSSL = true;
+      enableACME = true;
+      globalRedirect = domain;
+    };
   };
 
   users.users.www = {
