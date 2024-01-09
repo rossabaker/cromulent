@@ -8206,6 +8206,7 @@ documenting, but it would bring down the site if we didn't keep them.
   {
     zones."rossabaker.com" = {
       "".a.data = "75.2.60.5";
+      "".a.ttl = 30;
       "www".cname.data = "rossabaker.com.";
     };
   }
