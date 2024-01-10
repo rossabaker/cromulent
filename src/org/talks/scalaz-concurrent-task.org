@@ -1,9 +1,0 @@
-#+TITLE: scalaz.concurrent.Task
-#+AUTHOR: Ross A. Baker
-#+DATE:	<2014-11-03 Mon>
-
-Delivered at the November, 2014 meetup of IndyScala.
-
-* Slides
-
-- [[https://github.com/indyscala/scalaz-task-intro][Source]]

@@ -1,8 +1,0 @@
-/target/
-/tmp/
-
-/result
-/result-*
-
-/tmp/hugo/
-/.hugo_build.lock

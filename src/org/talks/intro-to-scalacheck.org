@@ -1,9 +1,0 @@
-#+TITLE: Intro to Scalacheck
-#+AUTHOR: Ross A. Baker
-#+DATE:	<2017-02-06 Mon>
-
-Delivered at the February, 2017 meetup of IndyScala.
-
-* Slides
-
-- [[https://github.com/indyscala/scalacheck][Source]]
