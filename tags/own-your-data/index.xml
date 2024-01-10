@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>own-your-data on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/own-your-data/</link>
+    <description>Recent content in own-your-data on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 08 Nov 2022 03:49:55 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/own-your-data/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/indieweb.social/rossabaker/109306144082815818/</link>
+      <pubDate>Tue, 08 Nov 2022 03:49:55 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/indieweb.social/rossabaker/109306144082815818/</guid>
+      <description>How I archived toots from my prior instance to my personal Hugo site:&#xA;https://rossabaker.com/projects/toot-archive/&#xA;#Indieweb #PESOS #OwnYourData #Hugo #ScalaCLI #Typelevel</description>
+    </item>
+    <item>
+      <title>Archive your toots to Hugo</title>
+      <link>https://rossabaker.com/projects/toot-archive/</link>
+      <pubDate>Mon, 07 Nov 2022 22:37:00 +0000</pubDate>
+      <guid>https://rossabaker.com/projects/toot-archive/</guid>
+      <description>An important Indieweb principle is to own your data. I tooted on mastodon.social sporadically for five years. The service is public, the protocol open, and the implementation open source. Still, it exists at the pleasure of its admins, with whom I have no contract.&#xA;After moving to another instance, I wanted to preserve my old content. We will use a technique called PESOS, or Publish Elsewhere, Syndicate to Own Site.</description>
+    </item>
+    <item>
+      <title>Notes</title>
+      <link>https://rossabaker.com/notes/</link>
+      <pubDate>Mon, 07 Nov 2022 09:53:00 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/</guid>
+      <description>This is my microblog. I archive new threads from various social networks here. Replies and boosts or retweets are out of scope. Content is archived here in the Indieweb spirit of owning your data.&#xA;Includes:&#xA;@rossabaker@mastodon.social account (April 2017 — November 2022) @rossabaker@indieweb.social account (November 2022) @ross@rossabaker.com account (November 2022 — present, periodically synchronized) </description>
+    </item>
+  </channel>
+</rss>

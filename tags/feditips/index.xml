@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>feditips on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/feditips/</link>
+    <description>Recent content in feditips on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 28 Oct 2022 14:16:40 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/feditips/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/109246323135977944/</link>
+      <pubDate>Fri, 28 Oct 2022 14:16:40 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/109246323135977944/</guid>
+      <description>Welcome! Mastodon&amp;#39;s filters are more flexible than what you may be used to. I set mine up early to keep the vibes good. #feditips&#xA;https://docs.joinmastodon.org/user/moderating/</description>
+    </item>
+  </channel>
+</rss>

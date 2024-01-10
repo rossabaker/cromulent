@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>css on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/css/</link>
+    <description>Recent content in css on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 02 Sep 2022 13:16:00 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/css/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Article info</title>
+      <link>https://rossabaker.com/configs/website/templates/article-info/</link>
+      <pubDate>Fri, 02 Sep 2022 13:16:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/templates/article-info/</guid>
+      <description>&lt;p&gt;Article info appears at the bottom of every article and article&#xA;summary on the site.  It describes:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;The content type&lt;/li&gt;&#xA;&lt;li&gt;The date&lt;/li&gt;&#xA;&lt;li&gt;The modification date&lt;/li&gt;&#xA;&lt;li&gt;The category, usually one, prefixed with &lt;code&gt;@&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;The tags, usually many, prefixed with &lt;code&gt;#&lt;/code&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>Article summary</title>
+      <link>https://rossabaker.com/configs/website/templates/article-summary/</link>
+      <pubDate>Fri, 02 Sep 2022 13:12:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/templates/article-summary/</guid>
+      <description>&lt;p&gt;Provide a standard article summary for our various list templates.  It&#xA;includes the title, dates, category, tags, and either the page&#xA;description or summary.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Taxonomy tag cloud</title>
+      <link>https://rossabaker.com/configs/website/templates/terms/</link>
+      <pubDate>Fri, 02 Sep 2022 13:07:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/templates/terms/</guid>
+      <description>&lt;p&gt;This is the taxonomy list page, which is rendered as a tag cloud.  We&#xA;use it for categories and tags.  Terms are rendered in a font&#xA;proportional to the logarithm of its page count.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Talks template</title>
+      <link>https://rossabaker.com/configs/website/templates/talks/</link>
+      <pubDate>Fri, 02 Sep 2022 12:48:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/templates/talks/</guid>
+      <description>&lt;p&gt;Talks get their own single-page template based on custom front matter.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Header template</title>
+      <link>https://rossabaker.com/configs/website/templates/header/</link>
+      <pubDate>Fri, 02 Sep 2022 11:41:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/templates/header/</guid>
+      <description>&lt;p&gt;Our header is straightforward semantic HTML, with a &lt;code&gt;&amp;lt;h1&amp;gt;&lt;/code&gt;, &lt;code&gt;&amp;lt;p&amp;gt;&lt;/code&gt;,&#xA;&lt;code&gt;&amp;lt;nav&amp;gt;&lt;/code&gt;, etc.  It establishes the brand, and my brand is to be a&#xA;complete dweeb.  Therefore, we&amp;rsquo;re going to abuse CSS to render it as&#xA;an Emacs Lisp definition.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>An improved CSS baseline</title>
+      <link>https://rossabaker.com/configs/website/style/</link>
+      <pubDate>Tue, 30 Aug 2022 14:26:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/style/</guid>
+      <description>Default browser renderings have converged in a way that mostly obsoletes the venerable resets of yore. Consistency does not imply optimality. There is room to improve the defaults without relying on classes or HTML structures particular to any project. The rules here are implemented on rossabaker.com, but could be exported to start new projects.&#xA;Variables # Some values in this reconditioning are configurable, and will be defined as :root: variables with a --cromulent- prefix.</description>
+    </item>
+  </channel>
+</rss>

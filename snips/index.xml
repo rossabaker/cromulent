@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Snips on Ross A. Baker</title>
+    <link>https://rossabaker.com/snips/</link>
+    <description>Recent content in Snips on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 14 Sep 2023 22:17:00 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/snips/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Akka pins in Scala Steward</title>
+      <link>https://rossabaker.com/snips/akka-pins/</link>
+      <pubDate>Thu, 14 Sep 2023 22:32:00 +0000</pubDate>
+      <guid>https://rossabaker.com/snips/akka-pins/</guid>
+      <description>Akka&amp;rsquo;s move to the Business Source License puts an upper bound on the version many shops can freely run.1 Scala Steward paired with an unaware teammate or automation run amok risk an unintended and costly upgrade. This pins the versions of modules in the Akka, Akka-HTTP, and Alpakka repositories to the final Apache-licensed version.&#xA;Add the following to your repository&amp;rsquo;s .scala-steward.conf. If you use diy-steward, put it in .github/.scala-steward.conf.&#xA;CC0</description>
+    </item>
+  </channel>
+</rss>

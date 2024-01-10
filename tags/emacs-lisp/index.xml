@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>emacs-lisp on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/emacs-lisp/</link>
+    <description>Recent content in emacs-lisp on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 12 Sep 2023 23:42:00 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/emacs-lisp/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Lisp extensions</title>
+      <link>https://rossabaker.com/configs/emacs/rab-lisp/</link>
+      <pubDate>Tue, 12 Sep 2023 23:42:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/emacs/rab-lisp/</guid>
+      <description>Indentation # I would like my property lists to align not like this&#xA;GPL-3.0-only&#xA;(:prefix-map rab/git-map :prefix &amp;#34;C-c g&amp;#34;) but like this:&#xA;GPL-3.0-only&#xA;(:prefix-map rab/git-map :prefix &amp;#34;C-c g&amp;#34;) The answer is almost verbatim from Emacs Stack Exchange, but changed to my namespace. I also applied the &amp;ldquo;bonus,&amp;rdquo; because my primary itch is use-package bindings.&#xA;GPL-3.0-only&#xA;(defun rab/lisp-calculate-indent (&amp;amp;optional parse-start) &amp;#34;Add better indentation for quoted and backquoted lists.&amp;#34; ;; This line because `calculate-lisp-indent-last-sexp` was defined with `defvar` ;; with it&amp;#39;s value ommited, marking it special and only defining it locally.</description>
+    </item>
+    <item>
+      <title>Taxonomy tag cloud</title>
+      <link>https://rossabaker.com/configs/website/templates/terms/</link>
+      <pubDate>Fri, 02 Sep 2022 13:07:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/templates/terms/</guid>
+      <description>&lt;p&gt;This is the taxonomy list page, which is rendered as a tag cloud.  We&#xA;use it for categories and tags.  Terms are rendered in a font&#xA;proportional to the logarithm of its page count.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Header template</title>
+      <link>https://rossabaker.com/configs/website/templates/header/</link>
+      <pubDate>Fri, 02 Sep 2022 11:41:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/templates/header/</guid>
+      <description>&lt;p&gt;Our header is straightforward semantic HTML, with a &lt;code&gt;&amp;lt;h1&amp;gt;&lt;/code&gt;, &lt;code&gt;&amp;lt;p&amp;gt;&lt;/code&gt;,&#xA;&lt;code&gt;&amp;lt;nav&amp;gt;&lt;/code&gt;, etc.  It establishes the brand, and my brand is to be a&#xA;complete dweeb.  Therefore, we&amp;rsquo;re going to abuse CSS to render it as&#xA;an Emacs Lisp definition.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

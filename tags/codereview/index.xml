@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>codereview on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/codereview/</link>
+    <description>Recent content in codereview on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 20 Feb 2023 01:53:40 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/codereview/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109894567233702155/</link>
+      <pubDate>Mon, 20 Feb 2023 01:53:40 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109894567233702155/</guid>
+      <description>Please don&amp;#39;t rebase or force-push your pull requests, especially after an initial review. This forces the maintainers to review the entire PR again, instead of the changes since the previous review. The maintainers can still squash-merge or rebase-merge for a tidier history at their discretion.&#xA;#Git #CodeReview</description>
+    </item>
+  </channel>
+</rss>

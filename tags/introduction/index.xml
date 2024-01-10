@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>introduction on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/introduction/</link>
+    <description>Recent content in introduction on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 29 Dec 2022 05:46:36 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/introduction/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109595380738434617/</link>
+      <pubDate>Thu, 29 Dec 2022 05:46:36 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109595380738434617/</guid>
+      <description>Post-disaster #Introduction:&#xA;I am best known for #Scala, #Typelevel, and #http4s. I geek out over #Emacs, #Nix, and the #Indieweb. I&amp;#39;m probably a #Bayesian.&#xA;I live in #Indianapolis, #Indiana with a #Dachshund, #Coonhound, #TuxedoCat, and a freshwater #Aquarium or five. I offset my #Jogging with #BBQ. I coach youth #Soccer and attend North United #Methodist Church.&#xA;This is a #SelfHosted sequel after a Terraform disaster. Boosts appreciated to relocate my peeps.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/108196347588800056/</link>
+      <pubDate>Tue, 26 Apr 2022 03:54:05 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/108196347588800056/</guid>
+      <description>#introduction: I&amp;#39;m a software developer from #Indianapolis. I mostly write #Scala and #fp. I&amp;#39;m a contributor to #Typelevel and co-founder of #http4s. I nerd out over #Emacs and #Nix.&#xA;Also enjoy #bbq and freshwater #fishkeeping. I have a #dachshund and a #coonhound and a tuxedo #cat. A couple kids, too, but the pets get more clicks.&#xA;Pronouns are he/him.&#xA;Go Hoosiers. #GoIU #iufb #iubb #iums</description>
+    </item>
+  </channel>
+</rss>

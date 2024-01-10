@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>personal on Ross A. Baker</title>
+    <link>https://rossabaker.com/categories/personal/</link>
+    <description>Recent content in personal on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 07 Nov 2022 09:53:00 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/categories/personal/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Notes</title>
+      <link>https://rossabaker.com/notes/</link>
+      <pubDate>Mon, 07 Nov 2022 09:53:00 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/</guid>
+      <description>This is my microblog. I archive new threads from various social networks here. Replies and boosts or retweets are out of scope. Content is archived here in the Indieweb spirit of owning your data.&#xA;Includes:&#xA;@rossabaker@mastodon.social account (April 2017 — November 2022) @rossabaker@indieweb.social account (November 2022) @ross@rossabaker.com account (November 2022 — present, periodically synchronized) </description>
+    </item>
+    <item>
+      <title>Imperfectly Indieweb</title>
+      <link>https://rossabaker.com/blog/imperfectly-indieweb/</link>
+      <pubDate>Tue, 01 Nov 2022 23:17:00 +0000</pubDate>
+      <guid>https://rossabaker.com/blog/imperfectly-indieweb/</guid>
+      <description>Updated &amp;lt;2022-11-02 Wed&amp;gt;: some edits for concision&#xA;The asteroid hurtling toward Twitter last week forced many of us to look back on our digital lives. I reflected on my mistakes with perfectionism and proprietorship, and am looking to Indieweb for solutions.&#xA;Portrait of 1990s geekery # Figure 1: Dinosaur fossil by Nigel Holt, licensed under CC BY 2.0&#xA;The Wayback Machine has preserved my juvenilia. The soft tissue is gone, but here is the skeleton of a twentieth-century personal web page, the author not yet twenty.</description>
+    </item>
+    <item>
+      <title>Contact</title>
+      <link>https://rossabaker.com/contact/</link>
+      <pubDate>Sun, 16 Oct 2022 15:37:00 +0000</pubDate>
+      <guid>https://rossabaker.com/contact/</guid>
+      <description>Direct communication # I can&amp;rsquo;t offer an SLA on response times, but I try to carry my Midwestern Nice online.&#xA;Email ross@rossabaker.com; optionally with PGP Matrix @ross:rossabaker.com ActivityPub1 @ross@rossabaker.com Pronouns # My pronouns are he / him / his, and I will respect yours.&#xA;Special topics # Open source inquiries # I would rather connect in public, where everyone can benefit from the discussion. Most of my open source is hosted on one of the following forges:</description>
+    </item>
+    <item>
+      <title>Running up the score in Scrabble</title>
+      <link>https://rossabaker.com/blog/running-up-the-score-in-scrabble/</link>
+      <pubDate>Mon, 12 Sep 2022 00:32:00 +0000</pubDate>
+      <guid>https://rossabaker.com/blog/running-up-the-score-in-scrabble/</guid>
+      <description>&lt;aside&gt;&#xA;&lt;p&gt;My grandmother recently passed away.  A lightly edited version of&#xA;this was read at her memorial service.&lt;/p&gt;&#xA;&lt;/aside&gt;&#xA;&lt;p&gt;Grandma and I had a tradition of playing Scrabble.  We used her&#xA;vintage set.  It still had score pads with games featuring players&#xA;further up the family tree.  It was intimidating.  I feared I might&#xA;draw a &amp;ldquo;þ&amp;rdquo; or &amp;ldquo;æ&amp;rdquo;, just like Chaucer used to play.  But it was indeed&#xA;the Modern English Alphabet Edition.  True to her meticulous nature,&#xA;it retained all its original pieces.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Ross A. Baker</title>
+      <link>https://rossabaker.com/about/</link>
+      <pubDate>Wed, 31 Aug 2022 00:23:00 +0000</pubDate>
+      <guid>https://rossabaker.com/about/</guid>
+      <description>Ross A. Baker Name Ross A. Baker Occupation software engineer Style functional Pronouns he/him Interjections ope Personality BBQ $EDITOR Emacs HTML tag &amp;lt;dl&amp;gt; Number e Sandwich Italian beef, dipped MLB team Cubs NFL team Bears NHL team Blackhawks NBA team Pacers Disposition curmudgeonly Ross A. Baker (/​ɹɔs eɪ beɪ.kɚ/) is an American software engineer who is not notable enough for a Wikipedia article. He&amp;rsquo;s arguably not even notable enough for this article on an eponymous domain.</description>
+    </item>
+    <item>
+      <title>Personal Weather Station</title>
+      <link>https://rossabaker.com/projects/personal-weather-station/</link>
+      <pubDate>Sun, 28 Aug 2022 21:03:00 +0000</pubDate>
+      <guid>https://rossabaker.com/projects/personal-weather-station/</guid>
+      <description>I run an Ambient Weather WS-1400-IP weather station in the Castleton neighborhood of Indianapolis and share its public dashboard. The anemometer is not raised high enough for accuracy, but the rest is reasonably accurate.&#xA;I learned on 2022-09-06 that the Indianapolis Metropolitan Airport is now publishing METAR data. That airport is just a mile away, and certainly has a more credible weather station, but it&amp;rsquo;s fun to compare to mine.</description>
+    </item>
+  </channel>
+</rss>

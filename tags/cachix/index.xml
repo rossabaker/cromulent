@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>cachix on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/cachix/</link>
+    <description>Recent content in cachix on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 19 Sep 2023 00:21:00 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/cachix/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Cachix</title>
+      <link>https://rossabaker.com/configs/cachix/</link>
+      <pubDate>Tue, 19 Sep 2023 00:21:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/cachix/</guid>
+      <description>Cachix is a binary cache for Nix. Three Cachix instances are of particular interest to Cromulent users1.&#xA;Cromulent&amp;rsquo;s GitHub Actions publish Linux binaries to rossabaker.cachix.org. I help maintain Typelevel Nix, which publishes to typelevel.cachix.org. A handful of our flake dependencies publish to nix-community.cachix.org. Nix module # This module may be mixed into a NixOS, Nix-Darwin, or Home Manager configuration.&#xA;CC0-1.0&#xA;{ config, lib, ... }: let cfg = config.cromulent.cache.cachix; in { imports = [ .</description>
+    </item>
+  </channel>
+</rss>

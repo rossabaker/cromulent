@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>chilicrisp on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/chilicrisp/</link>
+    <description>Recent content in chilicrisp on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 27 May 2023 04:00:06 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/chilicrisp/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110438646161983141/</link>
+      <pubDate>Sat, 27 May 2023 04:00:06 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110438646161983141/</guid>
+      <description>The `-&amp;gt;&amp;gt;` macro reminds me of my early days with chili crisp, in that I want to put it in everything.&#xA;https://github.com/magnars/dash.el#--x-optional-form-rest-more-1&#xA;#Emacs #ChiliCrisp</description>
+    </item>
+  </channel>
+</rss>

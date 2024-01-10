@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>podcast on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/podcast/</link>
+    <description>Recent content in podcast on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 08 Feb 2020 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/podcast/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>The Scala Logs</title>
+      <link>https://rossabaker.com/talks/podcasts/scala-logs/</link>
+      <pubDate>Sat, 08 Feb 2020 00:00:00 +0000</pubDate>
+      <guid>https://rossabaker.com/talks/podcasts/scala-logs/</guid>
+      <description>It was my honor to join Zach McCoy on the first full episode of The Scala Logs, where we talked http4s, Haskell, and hockey.</description>
+    </item>
+    <item>
+      <title>CoRecursive Episode #017</title>
+      <link>https://rossabaker.com/talks/podcasts/corecursive-17/</link>
+      <pubDate>Fri, 27 Jul 2018 00:00:00 +0000</pubDate>
+      <guid>https://rossabaker.com/talks/podcasts/corecursive-17/</guid>
+      <description>&lt;p&gt;I was interviewed by Adam Gordon Bell on the &lt;a href=&#34;https://corecursive.com/017-http4s-with-ross-baker/&#34;&gt;CoRecursive podcast&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Podcasts</title>
+      <link>https://rossabaker.com/talks/podcasts/</link>
+      <pubDate>Sat, 08 Feb 2020 00:00:00 +0000</pubDate>
+      <guid>https://rossabaker.com/talks/podcasts/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

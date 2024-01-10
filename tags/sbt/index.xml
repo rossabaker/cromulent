@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>sbt on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/sbt/</link>
+    <description>Recent content in sbt on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 09 May 2023 09:27:00 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/sbt/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Scala configuration</title>
+      <link>https://rossabaker.com/configs/scala/</link>
+      <pubDate>Tue, 09 May 2023 09:27:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/scala/</guid>
+      <description>This configuration provides a module to Home Manager. It sets up a global SBT, a few plugins, and some gitignores relevant to Scala.&#xA;Sonatype credentials # This tells sbt where to look for our Sonatype credentials.&#xA;CC0-1.0&#xA;credentials += Credentials(Path.userHome / &amp;#34;.sbt&amp;#34; / &amp;#34;sonatype-credentials.properties&amp;#34;) Code Snippet 1: ~/.sbt/1.0/sonatype.sbt This will not work until a credentials file is added:&#xA;realm=Sonatype Nexus Repository Manager host=oss.sonatype.org user=&amp;lt;&amp;lt;username&amp;gt;&amp;gt; password=&amp;lt;&amp;lt;password&amp;gt;&amp;gt; Code Snippet 1: ~/.sbt/sonatype-credentials.properties This file contains a secret, and is not installed by our Nix derivation!</description>
+    </item>
+    <item>
+      <title>Scalatra in Action</title>
+      <link>https://rossabaker.com/projects/scalatra-in-action/</link>
+      <pubDate>Mon, 21 Nov 2022 21:03:00 +0000</pubDate>
+      <guid>https://rossabaker.com/projects/scalatra-in-action/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://www.manning.com/books/scalatra-in-action&#34;&gt;Scalatra in Action&lt;/a&gt; was written by &lt;a href=&#34;https://constructiveproof.com/&#34;&gt;Dave Hrycyszyn,&lt;/a&gt; Stefan Ollinger, and&#xA;me and covers the &lt;a href=&#34;https://scalatra.org/&#34;&gt;Scalatra micro-framework&lt;/a&gt; in depth.  Scalatra is a&#xA;port of Ruby&amp;rsquo;s Sinatra to Scala.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

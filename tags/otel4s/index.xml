@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>otel4s on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/otel4s/</link>
+    <description>Recent content in otel4s on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 12 May 2023 02:39:56 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/otel4s/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110353396312274020/</link>
+      <pubDate>Fri, 12 May 2023 02:39:56 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110353396312274020/</guid>
+      <description>A short response on why there&amp;#39;s not a useful `Otel4s[Future]`, which is roughly the same reason most Typelevel libraries don&amp;#39;t provide `Future`-based implementations. It&amp;#39;s not spite.&#xA;https://github.com/typelevel/otel4s/issues/210#issuecomment-1545022660&#xA;#Scala #Typelevel #Otel4s</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109824950098770022/</link>
+      <pubDate>Tue, 07 Feb 2023 18:49:07 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109824950098770022/</guid>
+      <description>First public release of otel4s, an OpenTelemetry implementation for Cats Effect. otel4s aims to be a full and faithful impemenation of the OpenTelemetry Specification, built for the idioms of the Typelevel ecosystem.&#xA;https://github.com/typelevel/otel4s/discussions/121&#xA;#Otel4s #Typelevel #Scala #OpenTelemetry #CatsEffect</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109740426441917010/</link>
+      <pubDate>Mon, 23 Jan 2023 20:33:38 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109740426441917010/</guid>
+      <description>If anyone wants to dip their toe into the waters of open source, this is an easy first pull request. I can explain more if it&amp;#39;s not clear what&amp;#39;s going on there. Please comment on the issue if you want to take it.&#xA;https://github.com/typelevel/otel4s/issues/87&#xA;#Scala #Typelevel #Otel4s</description>
+    </item>
+  </channel>
+</rss>

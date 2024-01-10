@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>hyperlink on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/hyperlink/</link>
+    <description>Recent content in hyperlink on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 13 Sep 2023 23:36:00 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/hyperlink/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hyperlink</title>
+      <link>https://rossabaker.com/configs/hyperlink/</link>
+      <pubDate>Wed, 13 Sep 2023 23:36:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/hyperlink/</guid>
+      <description>Hyperlink is a command-line link checker. It is quite fast, and is used to test the generation of this web site.&#xA;This package has been a merged to nixpkgs and is no longer maintained in Cromulent.&#xA;GitHub Actions # </description>
+    </item>
+  </channel>
+</rss>

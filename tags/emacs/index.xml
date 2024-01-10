@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>emacs on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/emacs/</link>
+    <description>Recent content in emacs on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 12 Sep 2023 23:42:00 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/emacs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Lisp extensions</title>
+      <link>https://rossabaker.com/configs/emacs/rab-lisp/</link>
+      <pubDate>Tue, 12 Sep 2023 23:42:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/emacs/rab-lisp/</guid>
+      <description>Indentation # I would like my property lists to align not like this&#xA;GPL-3.0-only&#xA;(:prefix-map rab/git-map :prefix &amp;#34;C-c g&amp;#34;) but like this:&#xA;GPL-3.0-only&#xA;(:prefix-map rab/git-map :prefix &amp;#34;C-c g&amp;#34;) The answer is almost verbatim from Emacs Stack Exchange, but changed to my namespace. I also applied the &amp;ldquo;bonus,&amp;rdquo; because my primary itch is use-package bindings.&#xA;GPL-3.0-only&#xA;(defun rab/lisp-calculate-indent (&amp;amp;optional parse-start) &amp;#34;Add better indentation for quoted and backquoted lists.&amp;#34; ;; This line because `calculate-lisp-indent-last-sexp` was defined with `defvar` ;; with it&amp;#39;s value ommited, marking it special and only defining it locally.</description>
+    </item>
+    <item>
+      <title>Ox-Hugo extensions</title>
+      <link>https://rossabaker.com/configs/emacs/rab-ox-hugo/</link>
+      <pubDate>Sun, 10 Sep 2023 01:23:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/emacs/rab-ox-hugo/</guid>
+      <description>Dependencies # GPL-3.0-only&#xA;(require &amp;#39;cl-macs) (require &amp;#39;ox-hugo) (require &amp;#39;s) Customization group # Needed because of our minor mode.&#xA;GPL-3.0-only&#xA;(defgroup rab/ox-hugo nil &amp;#34;Ross A. Baker&amp;#39;s Ox-Hugo extensions.&amp;#34; :group &amp;#39;org-export-hugo) Code licensing # We lightly customize Ox-Hugo by adding support for a :code-license header. The technique is inspired by Sacha Chua&amp;rsquo;s custom summary header.&#xA;When exporting, a source block is replaced with org-babel-exp-code-template, which is filled by org-fill-template. This enhancement will only work when the template propagates this header argument.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110555919590824743/</link>
+      <pubDate>Fri, 16 Jun 2023 21:04:16 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110555919590824743/</guid>
+      <description>Ever need to transpose a large Markdown table? Me neither, until today. It&amp;#39;s just C-c C-c t. These are the flourishes that will likely keep me on Emacs until my ultimate C-x C-c.&#xA;#Emacs #Markdown</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110475179739261355/</link>
+      <pubDate>Fri, 02 Jun 2023 14:51:04 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110475179739261355/</guid>
+      <description>Exciting development for the dozens of us Scala developers on Emacs: a new, tree-sitter mode!&#xA;https://github.com/KaranAhlawat/scala-ts-mode&#xA;#Scala #Emacs</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110438646161983141/</link>
+      <pubDate>Sat, 27 May 2023 04:00:06 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110438646161983141/</guid>
+      <description>The `-&amp;gt;&amp;gt;` macro reminds me of my early days with chili crisp, in that I want to put it in everything.&#xA;https://github.com/magnars/dash.el#--x-optional-form-rest-more-1&#xA;#Emacs #ChiliCrisp</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110296554005554511/</link>
+      <pubDate>Tue, 02 May 2023 01:44:11 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110296554005554511/</guid>
+      <description>An Emacs package to make you do a nuisance math problem before opening your init file. https://github.com/localauthor/init-lock&#xA;I need one that makes me do a JIRA chore before I earn my treat.&#xA;#Emacs</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110219946065535217/</link>
+      <pubDate>Tue, 18 Apr 2023 13:01:47 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110219946065535217/</guid>
+      <description>This complexity is the result of humankind straying from the light of sentences separated by two spaces.&#xA;[Edit: The package is a great idea and I plan to install it. The conventions that make it necessary were a bad idea!]&#xA;https://codeberg.org/martianh/sentex&#xA;#Typography #Emacs</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110200216005623046/</link>
+      <pubDate>Sat, 15 Apr 2023 01:24:10 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110200216005623046/</guid>
+      <description>Ever notice how `ls -h` returns binary units (i.e., 1K == 1024 bytes) and Emacs&amp;#39; `size-indication-mode` returns SI units (i.e., 1K == 1000 bytes)? Piffle! https://rossabaker.com/configs/emacs/#size-indication&#xA;#Emacs</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110177959407083873/</link>
+      <pubDate>Tue, 11 Apr 2023 03:04:01 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110177959407083873/</guid>
+      <description>&amp;quot;Monads for Elisp&amp;quot; 🤔 https://github.com/Fuco1/emacs-cats&#xA;#Emacs #FP</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110144766326810510/</link>
+      <pubDate>Wed, 05 Apr 2023 06:22:35 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110144766326810510/</guid>
+      <description>Currently pulling an all-nighter because kid left chewing gum out, and now I have to keep vigil for xylitol poisoning in the wienerdog. The dog is doing well, but I am fading.&#xA;Time for a Diet Mountain Dew and some quality time with my Emacs config until dawn.&#xA;#Emacs #Dogs #AllNighter</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110127359451030403/</link>
+      <pubDate>Sun, 02 Apr 2023 04:35:47 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110127359451030403/</guid>
+      <description>The violin soloist gets to tour with their favorite Italian instrument from Sixteen Dickety-Two, but the piano soloist has to play whatever&amp;#39;s there. I like to imagine violinists maintain elaborate Emacs configs, and pianists run Vim with no config because &amp;quot;it&amp;#39;s installed everywhere.&amp;quot;&#xA;#ClassicalMusic #Emacs #Vim</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110093256698412846/</link>
+      <pubDate>Mon, 27 Mar 2023 04:03:01 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110093256698412846/</guid>
+      <description>Neat new Emacs 29 feature: `setopt` is like `setq`, but aware of any custom setters. A nice replacement for various ad hoc macros people have developed over the years.&#xA;#Emacs</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109957443970458605/</link>
+      <pubDate>Fri, 03 Mar 2023 04:24:03 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109957443970458605/</guid>
+      <description>I&amp;#39;m an Emacs nerd and an Internet protocol nerd and OMG how did I not know about this?&#xA;https://github.com/galdor/rfc-mode&#xA;#Emacs</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109939071337099163/</link>
+      <pubDate>Mon, 27 Feb 2023 22:31:39 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109939071337099163/</guid>
+      <description>A good barometer for how frustrated I am with everything else is how fast my init.el is changing.&#xA;#Emacs</description>
+    </item>
+    <item>
+      <title>Emacs config</title>
+      <link>https://rossabaker.com/configs/emacs/</link>
+      <pubDate>Thu, 23 Feb 2023 23:59:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/emacs/</guid>
+      <description>Introduction # The flavor of the day is vanilla # This is a &amp;ldquo;vanilla&amp;rdquo; configuration, or an &amp;ldquo;Emacs from scratch,&amp;rdquo; built on a prerelease of Emacs 29 from Git.&#xA;Some users use a community configuration such as Spacemacs or Doom. A more moderate approach is a starter kit like like Prelude or Crafted Emacs, which hew closer to vanilla Emacs but give users a sensible head start. These are recommended paths for new users, and remain reasonable even after decades of experience.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109895096585604319/</link>
+      <pubDate>Mon, 20 Feb 2023 04:08:17 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109895096585604319/</guid>
+      <description>I&amp;#39;m a sucker for Emacs content. Blogs, videos, books, etc. But a quite surprising medium for this topic is a podcast!&#xA;https://www.discovering-emacs.com/&#xA;#Emacs</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109661860459350840/</link>
+      <pubDate>Mon, 09 Jan 2023 23:33:16 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109661860459350840/</guid>
+      <description>It&amp;#39;s great how Nix lets you leave the beaten path, if you don&amp;#39;t mind being swallowed whole by quicksand now and then.&#xA;https://github.com/nix-community/emacs-overlay/issues/275#issuecomment-1376487302&#xA;#Nix #Emacs</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109595380738434617/</link>
+      <pubDate>Thu, 29 Dec 2022 05:46:36 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109595380738434617/</guid>
+      <description>Post-disaster #Introduction:&#xA;I am best known for #Scala, #Typelevel, and #http4s. I geek out over #Emacs, #Nix, and the #Indieweb. I&amp;#39;m probably a #Bayesian.&#xA;I live in #Indianapolis, #Indiana with a #Dachshund, #Coonhound, #TuxedoCat, and a freshwater #Aquarium or five. I offset my #Jogging with #BBQ. I coach youth #Soccer and attend North United #Methodist Church.&#xA;This is a #SelfHosted sequel after a Terraform disaster. Boosts appreciated to relocate my peeps.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/indieweb.social/rossabaker/109266510911512492/</link>
+      <pubDate>Tue, 01 Nov 2022 03:50:41 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/indieweb.social/rossabaker/109266510911512492/</guid>
+      <description>Monday night means #Emacs news!&#xA;https://sachachua.com/blog/category/emacs-news/</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/indieweb.social/rossabaker/109266011901701598/</link>
+      <pubDate>Tue, 01 Nov 2022 01:43:47 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/indieweb.social/rossabaker/109266011901701598/</guid>
+      <description>Post-move #reintroduction:&#xA;I&amp;#39;m a software engineer, mostly #Typelevel #Scala. I started #http4s and love #FP and #FOSS.&#xA;I&amp;#39;m getting into the #Indieweb, where I&amp;#39;ll #blog and share my #config, talks, and other projects. I geek out over #Emacs and #Nix. I&amp;#39;m probably also a #Bayesian.&#xA;I have a #dachshund, #coonhound, #tuxedoCat, and multiple freshwater #aquarium. I live in #Indianapolis, where I coach youth #soccer, attend North #UMC, and cheer on my beloved #Hoosiers.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/109241028411388526/</link>
+      <pubDate>Thu, 27 Oct 2022 15:50:09 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/109241028411388526/</guid>
+      <description>I&amp;#39;m curious whether this article is meaningful to non-Emacs users. The benefits certainly are, but the nomenclature could be a hurdle.&#xA;https://www.masteringemacs.org/article/keyboard-shortcuts-every-command-line-hacker-should-know-about-gnu-readline&#xA;#Emacs #cli</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/108551263033693800/</link>
+      <pubDate>Mon, 27 Jun 2022 20:13:45 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/108551263033693800/</guid>
+      <description>A rudimentary scala-cli for #Emacs. Fires up an inferior REPL for those quick tasks that don&amp;#39;t need an sbt build. Medium-term goal: restore #Org #Babel support for #Scala.&#xA;https://github.com/rossabaker/scala-cli.el</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/108196347588800056/</link>
+      <pubDate>Tue, 26 Apr 2022 03:54:05 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/108196347588800056/</guid>
+      <description>#introduction: I&amp;#39;m a software developer from #Indianapolis. I mostly write #Scala and #fp. I&amp;#39;m a contributor to #Typelevel and co-founder of #http4s. I nerd out over #Emacs and #Nix.&#xA;Also enjoy #bbq and freshwater #fishkeeping. I have a #dachshund and a #coonhound and a tuxedo #cat. A couple kids, too, but the pets get more clicks.&#xA;Pronouns are he/him.&#xA;Go Hoosiers. #GoIU #iufb #iubb #iums</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>scala on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/scala/</link>
+    <description>Recent content in scala on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 23 Jun 2023 02:54:10 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/scala/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110591269306104377/</link>
+      <pubDate>Fri, 23 Jun 2023 02:54:10 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110591269306104377/</guid>
+      <description>sbt-dependency-submission is a nifty GitHub Action to report dependencies at build time for vulnerability scanning. It even sees your transitive dependencies. But it can be hard to debug why a dependency was submitted.&#xA;In ~/.sbt/1.0/sbt-dependency-submission.sbt:&#xA;```&#xA;addSbtPlugin(&amp;quot;ch.epfl.scala&amp;quot; % &amp;quot;sbt-github-dependency-submission&amp;quot; % &amp;quot;2.1.2&amp;quot;)&#xA;```&#xA;Now you can run `show githubDependencyManifest` to debug!&#xA;#Scala #Dependabot</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110475179739261355/</link>
+      <pubDate>Fri, 02 Jun 2023 14:51:04 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110475179739261355/</guid>
+      <description>Exciting development for the dozens of us Scala developers on Emacs: a new, tree-sitter mode!&#xA;https://github.com/KaranAhlawat/scala-ts-mode&#xA;#Scala #Emacs</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110364389666761105/</link>
+      <pubDate>Sun, 14 May 2023 01:15:41 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110364389666761105/</guid>
+      <description>Caution: cats-effect-3.5 broke both http4s-blaze and http4s-servlet backends. Working on it. http4s-ember-0.23.19 is fine.&#xA;#Scala #Typelevel #http4s</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110353396312274020/</link>
+      <pubDate>Fri, 12 May 2023 02:39:56 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110353396312274020/</guid>
+      <description>A short response on why there&amp;#39;s not a useful `Otel4s[Future]`, which is roughly the same reason most Typelevel libraries don&amp;#39;t provide `Future`-based implementations. It&amp;#39;s not spite.&#xA;https://github.com/typelevel/otel4s/issues/210#issuecomment-1545022660&#xA;#Scala #Typelevel #Otel4s</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110339641040472193/</link>
+      <pubDate>Tue, 09 May 2023 16:21:47 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110339641040472193/</guid>
+      <description>If you&amp;#39;re an absolute misanthrope, consider using `Provided` scope in your SBT builds.&#xA;#Scala</description>
+    </item>
+    <item>
+      <title>Scala configuration</title>
+      <link>https://rossabaker.com/configs/scala/</link>
+      <pubDate>Tue, 09 May 2023 09:27:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/scala/</guid>
+      <description>This configuration provides a module to Home Manager. It sets up a global SBT, a few plugins, and some gitignores relevant to Scala.&#xA;Sonatype credentials # This tells sbt where to look for our Sonatype credentials.&#xA;CC0-1.0&#xA;credentials += Credentials(Path.userHome / &amp;#34;.sbt&amp;#34; / &amp;#34;sonatype-credentials.properties&amp;#34;) Code Snippet 1: ~/.sbt/1.0/sonatype.sbt This will not work until a credentials file is added:&#xA;realm=Sonatype Nexus Repository Manager host=oss.sonatype.org user=&amp;lt;&amp;lt;username&amp;gt;&amp;gt; password=&amp;lt;&amp;lt;password&amp;gt;&amp;gt; Code Snippet 1: ~/.sbt/sonatype-credentials.properties This file contains a secret, and is not installed by our Nix derivation!</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110282464276693299/</link>
+      <pubDate>Sat, 29 Apr 2023 14:00:59 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110282464276693299/</guid>
+      <description>Scala&amp;#39;s binary compatibility verification (MiMa and friends) got so good and so focused upon, maintainers now underprice source and behavior breakage. We need an SBT plugin that says &amp;quot;This hurdle you&amp;#39;re placing will prevent us from patching Boogerbleed in 2Q 2024&amp;quot; or &amp;quot;This is the final straw for 47 enterprise developers.&amp;quot;&#xA;#Scala</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110265874393829577/</link>
+      <pubDate>Wed, 26 Apr 2023 15:41:58 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110265874393829577/</guid>
+      <description>A quick article on building your Scala vocabulary by understanding common affixes. &amp;quot;bi-&amp;quot; is intuitive, but what&amp;#39;s &amp;quot;co-&amp;quot;? What are all those cryptic &amp;quot;-T&amp;quot;, &amp;quot;-K&amp;quot;, and underscore suffixes? Familiarity with these can help us find the function we&amp;#39;re looking for, and name the ones we write so they can be found.&#xA;https://rossabaker.com/blog/scala-affixes/&#xA;#Scala</description>
+    </item>
+    <item>
+      <title>Build your vocabulary with Scala affixes</title>
+      <link>https://rossabaker.com/blog/scala-affixes/</link>
+      <pubDate>Wed, 26 Apr 2023 09:28:00 +0000</pubDate>
+      <guid>https://rossabaker.com/blog/scala-affixes/</guid>
+      <description>A powerful way to build one&amp;rsquo;s vocabulary is to study prefixes and suffixes. In elementary school, we learn that bi- means two. We can see it in common words like bicycle and bilingual. As we progress through school into binomials and bivalence, we&amp;rsquo;re ready. It&amp;rsquo;s not perfect: is biennial twice a year or once every two years? Biryani isn&amp;rsquo;t two helpings of ryani. Still, they are surely worth studying.&#xA;A colleague in our Scala study group asked, &amp;ldquo;Can we do the same with Scala?</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110240322811513636/</link>
+      <pubDate>Sat, 22 Apr 2023 03:23:51 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110240322811513636/</guid>
+      <description>```&#xA;// It recognizes this *: as a Tuple2 (1 *: 2 *: EmptyTuple): Tuple2[_, _]&#xA;// But then why not also a Product2?&#xA;(1 *: 2 *: EmptyTuple): Product2[_, _]&#xA;```&#xA;https://scastie.scala-lang.org/eRT8upcTQG6IvTkZrSArnQ&#xA;#Scala #Scala3</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110191444910478415/</link>
+      <pubDate>Thu, 13 Apr 2023 12:13:34 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110191444910478415/</guid>
+      <description>Scala developers&amp;#39; contempt for Java interop is baffling, when that interop is the primary reason most of us are able to write Scala professionally.&#xA;#Scala #Java</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110175725972676137/</link>
+      <pubDate>Mon, 10 Apr 2023 17:36:02 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110175725972676137/</guid>
+      <description>After another rigorous and thoughtful HTTP benchmark from my colleagues in the Scala Community, I&amp;#39;ve updated my business card with a new title.&#xA;#Scala #http4s</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110089339292311154/</link>
+      <pubDate>Sun, 26 Mar 2023 11:26:46 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110089339292311154/</guid>
+      <description>Magic tricks that trade referential transparency for &amp;quot;direct syntax&amp;quot; are well trod in Scala, but it has never worn well beyond slide decks and tutorials, and I don&amp;#39;t anticipate it being different this time.&#xA;https://raw.githubusercontent.com/lampepfl/async/main/scalar-slides.pdf&#xA;#Scala</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109923453893839656/</link>
+      <pubDate>Sat, 25 Feb 2023 04:19:55 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109923453893839656/</guid>
+      <description>Has anyone written a scalafix yet to disable this `boundary` nonsense?&#xA;#Scala</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109832256826889128/</link>
+      <pubDate>Thu, 09 Feb 2023 01:47:19 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109832256826889128/</guid>
+      <description>http4s-jdk-client-0.9 and 1.0.0-M9 are out. They use fs2-3.6.0&amp;#39;s new integration with Java&amp;#39;s Flow to drop the depenedency on fs2-reactive-streams. This is a nice streamlining for projects that have dropped Java 8.&#xA;https://github.com/http4s/http4s-jdk-http-client/releases/tag/v0.9.0&#xA;#http4s #Typelevel #Scala</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109824950098770022/</link>
+      <pubDate>Tue, 07 Feb 2023 18:49:07 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109824950098770022/</guid>
+      <description>First public release of otel4s, an OpenTelemetry implementation for Cats Effect. otel4s aims to be a full and faithful impemenation of the OpenTelemetry Specification, built for the idioms of the Typelevel ecosystem.&#xA;https://github.com/typelevel/otel4s/discussions/121&#xA;#Otel4s #Typelevel #Scala #OpenTelemetry #CatsEffect</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109797414399585260/</link>
+      <pubDate>Thu, 02 Feb 2023 22:06:25 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109797414399585260/</guid>
+      <description>Society if this printed `1`:&#xA;```&#xA;statefulIO(0).flatMap {&#xA;(stateful: cats.mtl.Stateful[IO, Int]) =&amp;gt;&#xA;stateful.set(1).race(IO.never) &amp;gt;&amp;gt;&#xA;stateful.get.flatMap(IO.println)&#xA;}&#xA;```&#xA;#Typelevel #Scala</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109757942537475021/</link>
+      <pubDate>Thu, 26 Jan 2023 22:48:13 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109757942537475021/</guid>
+      <description>How annoyed would you be if code constrained by `MonadError` or less needed `MonadCancelThrow` for tracing that you may or may not have enabled?&#xA;#Scala</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109747212105028452/</link>
+      <pubDate>Wed, 25 Jan 2023 01:19:19 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109747212105028452/</guid>
+      <description>http4s-1.0.0-M39 is out. It&amp;#39;s the dev line, with the production fixes from 0.23.18.&#xA;This one is binary compatible with the last milestone, but if you need the satellite repos rereleased, speak up here:&#xA;https://github.com/http4s/http4s/discussions/6941&#xA;#Scala #Typelevel #http4s</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109740510632680621/</link>
+      <pubDate>Mon, 23 Jan 2023 20:55:03 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109740510632680621/</guid>
+      <description>There is now an org-level project with Good First Issue tickets across both Typelevel and affiliate projects.&#xA;https://github.com/orgs/typelevel/projects/1/&#xA;#Typelevel #Scala</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109740426441917010/</link>
+      <pubDate>Mon, 23 Jan 2023 20:33:38 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109740426441917010/</guid>
+      <description>If anyone wants to dip their toe into the waters of open source, this is an easy first pull request. I can explain more if it&amp;#39;s not clear what&amp;#39;s going on there. Please comment on the issue if you want to take it.&#xA;https://github.com/typelevel/otel4s/issues/87&#xA;#Scala #Typelevel #Otel4s</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109733674485760332/</link>
+      <pubDate>Sun, 22 Jan 2023 15:56:32 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109733674485760332/</guid>
+      <description>The concept of &amp;quot;monadic profunctors&amp;quot;¹ for codecs is beautiful:&#xA;```&#xA;data Codec r w c a = Codec&#xA;{ codecIn :: r a,&#xA;codecOut :: c → w a&#xA;}&#xA;```&#xA;A parser `r a` may have expensive optimizations in its functor ops (run once) and then fast on each parse. Printer `w a` may be the same, but depends on input `c`, and must be recreated on each run.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109713010957712376/</link>
+      <pubDate>Thu, 19 Jan 2023 00:21:31 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109713010957712376/</guid>
+      <description>Because I&amp;#39;m tired of being confused by object pools and their limitations and aliases, even though I&amp;#39;m supposed to be maintaining a couple:&#xA;https://github.com/typelevel/keypool/discussions/442&#xA;Corrections welcome.&#xA;#Scala #Typelevel</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109708377359311207/</link>
+      <pubDate>Wed, 18 Jan 2023 04:43:08 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109708377359311207/</guid>
+      <description>http4s-0.23.18 is out. Fixes a `StackOverflowError` that hit users with unusually small stacks, and a few optimizations hither and yon.&#xA;https://github.com/http4s/http4s/releases/tag/v0.23.18&#xA;#http4s #Typelevel #Scala</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109676627140428880/</link>
+      <pubDate>Thu, 12 Jan 2023 14:08:38 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109676627140428880/</guid>
+      <description>Faffing about with free invariant algebras to define HTTP codecs in a way that can be shared across backends. Computers can be fun sometimes.&#xA;https://github.com/http4s/http4s/pull/6917&#xA;#http4s #Typelevel #Scala</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109643259623362940/</link>
+      <pubDate>Fri, 06 Jan 2023 16:42:50 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109643259623362940/</guid>
+      <description>Happy to welcome a pair of new http4s maintainers this week:&#xA;- @valencik has joined the Core team.&#xA;- @dhinojosa will be helping out with Servlet and Tomcat support.&#xA;👏 👏 #http4s #Scala #Servlet #Tomcat</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109634836702582371/</link>
+      <pubDate>Thu, 05 Jan 2023 05:00:47 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109634836702582371/</guid>
+      <description>The following http4s integrations are in need of a maintainer:&#xA;- http4s-async-http-client&#xA;- http4s-boopickle&#xA;- http4s-dropwizard-metrics&#xA;- http4s-okhttp-client&#xA;- http4s-tomcat&#xA;I&amp;#39;m trying to narrow my focus, but I will happily assist anyone who steps forward on these.&#xA;https://github.com/http4s/http4s/discussions/6908&#xA;#http4s #Scala</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109631425715706011/</link>
+      <pubDate>Wed, 04 Jan 2023 14:33:19 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109631425715706011/</guid>
+      <description>http4s security patches:&#xA;* 0.21.34&#xA;* 0.22.15&#xA;* 0.23.17&#xA;* 1.0.0-M38&#xA;We can talk about cool stuff later, but please patch ASAP if you&amp;#39;re parsing a User-Agent or Server header.&#xA;https://github.com/http4s/http4s/security/advisories/GHSA-54w6-vxfh-fw7f&#xA;#http4s #Typelevel #Scala</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109595380738434617/</link>
+      <pubDate>Thu, 29 Dec 2022 05:46:36 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109595380738434617/</guid>
+      <description>Post-disaster #Introduction:&#xA;I am best known for #Scala, #Typelevel, and #http4s. I geek out over #Emacs, #Nix, and the #Indieweb. I&amp;#39;m probably a #Bayesian.&#xA;I live in #Indianapolis, #Indiana with a #Dachshund, #Coonhound, #TuxedoCat, and a freshwater #Aquarium or five. I offset my #Jogging with #BBQ. I coach youth #Soccer and attend North United #Methodist Church.&#xA;This is a #SelfHosted sequel after a Terraform disaster. Boosts appreciated to relocate my peeps.</description>
+    </item>
+    <item>
+      <title>Scalatra in Action</title>
+      <link>https://rossabaker.com/projects/scalatra-in-action/</link>
+      <pubDate>Mon, 21 Nov 2022 21:03:00 +0000</pubDate>
+      <guid>https://rossabaker.com/projects/scalatra-in-action/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://www.manning.com/books/scalatra-in-action&#34;&gt;Scalatra in Action&lt;/a&gt; was written by &lt;a href=&#34;https://constructiveproof.com/&#34;&gt;Dave Hrycyszyn,&lt;/a&gt; Stefan Ollinger, and&#xA;me and covers the &lt;a href=&#34;https://scalatra.org/&#34;&gt;Scalatra micro-framework&lt;/a&gt; in depth.  Scalatra is a&#xA;port of Ruby&amp;rsquo;s Sinatra to Scala.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Archive your toots to Hugo</title>
+      <link>https://rossabaker.com/projects/toot-archive/</link>
+      <pubDate>Mon, 07 Nov 2022 22:37:00 +0000</pubDate>
+      <guid>https://rossabaker.com/projects/toot-archive/</guid>
+      <description>An important Indieweb principle is to own your data. I tooted on mastodon.social sporadically for five years. The service is public, the protocol open, and the implementation open source. Still, it exists at the pleasure of its admins, with whom I have no contract.&#xA;After moving to another instance, I wanted to preserve my old content. We will use a technique called PESOS, or Publish Elsewhere, Syndicate to Own Site.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/indieweb.social/rossabaker/109266011901701598/</link>
+      <pubDate>Tue, 01 Nov 2022 01:43:47 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/indieweb.social/rossabaker/109266011901701598/</guid>
+      <description>Post-move #reintroduction:&#xA;I&amp;#39;m a software engineer, mostly #Typelevel #Scala. I started #http4s and love #FP and #FOSS.&#xA;I&amp;#39;m getting into the #Indieweb, where I&amp;#39;ll #blog and share my #config, talks, and other projects. I geek out over #Emacs and #Nix. I&amp;#39;m probably also a #Bayesian.&#xA;I have a #dachshund, #coonhound, #tuxedoCat, and multiple freshwater #aquarium. I live in #Indianapolis, where I coach youth #soccer, attend North #UMC, and cheer on my beloved #Hoosiers.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/108551263033693800/</link>
+      <pubDate>Mon, 27 Jun 2022 20:13:45 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/108551263033693800/</guid>
+      <description>A rudimentary scala-cli for #Emacs. Fires up an inferior REPL for those quick tasks that don&amp;#39;t need an sbt build. Medium-term goal: restore #Org #Babel support for #Scala.&#xA;https://github.com/rossabaker/scala-cli.el</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/108530702200211657/</link>
+      <pubDate>Fri, 24 Jun 2022 05:04:51 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/108530702200211657/</guid>
+      <description>Immutable builder pattern required parameters: constructor args or phantom types? #scala Gist: https://gist.github.com/rossabaker/3d696ad20ece5e4838add46159472a38&#xA;Context: https://github.com/http4s/http4s-servlet/pull/80</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/108519369287230063/</link>
+      <pubDate>Wed, 22 Jun 2022 05:02:45 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/108519369287230063/</guid>
+      <description>Published some #scalacheck generators for #scala-xml: https://github.com/typelevel/scalacheck-xml/releases/tag/v0.1.0</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/108277669352049026/</link>
+      <pubDate>Tue, 10 May 2022 12:35:16 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/108277669352049026/</guid>
+      <description>otel4s: an #OpenTelemetry client for functional #Scala. Metrics only so far, highly experimental. Feeling cute, might delete later:&#xA;https://github.com/rossabaker/otel4s/</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/108196347588800056/</link>
+      <pubDate>Tue, 26 Apr 2022 03:54:05 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/108196347588800056/</guid>
+      <description>#introduction: I&amp;#39;m a software developer from #Indianapolis. I mostly write #Scala and #fp. I&amp;#39;m a contributor to #Typelevel and co-founder of #http4s. I nerd out over #Emacs and #Nix.&#xA;Also enjoy #bbq and freshwater #fishkeeping. I have a #dachshund and a #coonhound and a tuxedo #cat. A couple kids, too, but the pets get more clicks.&#xA;Pronouns are he/him.&#xA;Go Hoosiers. #GoIU #iufb #iubb #iums</description>
+    </item>
+    <item>
+      <title>Algebras in Scala</title>
+      <link>https://rossabaker.com/talks/algebras-in-scala/</link>
+      <pubDate>Mon, 02 Dec 2019 00:00:00 +0000</pubDate>
+      <guid>https://rossabaker.com/talks/algebras-in-scala/</guid>
+      <description>Scala developers like to talk about &amp;ldquo;algebras&amp;rdquo;. Or when they&amp;rsquo;re feeling particularly precious, &amp;ldquo;algebrae.&amp;rdquo; Ross gives an overview, and promises any references to &amp;ldquo;F-algebra&amp;rdquo; are not a taunt about your ninth grade report card.</description>
+    </item>
+    <item>
+      <title>CoRecursive Episode #017</title>
+      <link>https://rossabaker.com/talks/podcasts/corecursive-17/</link>
+      <pubDate>Fri, 27 Jul 2018 00:00:00 +0000</pubDate>
+      <guid>https://rossabaker.com/talks/podcasts/corecursive-17/</guid>
+      <description>&lt;p&gt;I was interviewed by Adam Gordon Bell on the &lt;a href=&#34;https://corecursive.com/017-http4s-with-ross-baker/&#34;&gt;CoRecursive podcast&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Akka IO and Netty</title>
+      <link>https://rossabaker.com/talks/akka-io-and-netty/</link>
+      <pubDate>Mon, 04 Nov 2013 00:00:00 +0000</pubDate>
+      <guid>https://rossabaker.com/talks/akka-io-and-netty/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Anorm</title>
+      <link>https://rossabaker.com/talks/anorm/</link>
+      <pubDate>Mon, 13 Aug 2012 00:00:00 +0000</pubDate>
+      <guid>https://rossabaker.com/talks/anorm/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

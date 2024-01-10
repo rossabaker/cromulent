@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>postgresql on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/postgresql/</link>
+    <description>Recent content in postgresql on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 16 Sep 2023 23:13:00 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/postgresql/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>PostgreSQL</title>
+      <link>https://rossabaker.com/configs/postgresql/</link>
+      <pubDate>Sat, 16 Sep 2023 23:13:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/postgresql/</guid>
+      <description>Running PostgreSQL on Darwin is not as smooth an experience as the NixOS module:&#xA;The nix-darwin module doesn&amp;rsquo;t create a dedicated postgres system user. Everything runs as the local user. It doesn&amp;rsquo;t create the data directory. It doesn&amp;rsquo;t set up the logs. The initdb call doesn&amp;rsquo;t work out of the box. It creates a postgres superuser, but because it&amp;rsquo;s peer authenticated and there&amp;rsquo;s no postgres system user. We fix all of those here.</description>
+    </item>
+    <item>
+      <title>Nix-Darwin</title>
+      <link>https://rossabaker.com/configs/nix-darwin/</link>
+      <pubDate>Mon, 07 Aug 2023 09:48:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/nix-darwin/</guid>
+      <description>nix-darwin is a set of Nix modules for a declarative MacOS system. It is similar in purpose, but less thorough, than NixOS is for Linux.&#xA;I only own a MacBook because work chose it for me, and I hope to never own two. In practice, all of these modules will likely be mixed into a single machine config, but it&amp;rsquo;s still nice to separate them.&#xA;This is imported from preliterate times, and could be broken up further.</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>nix on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/nix/</link>
+    <description>Recent content in nix on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 08 Sep 2023 16:59:00 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/nix/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Home Manager</title>
+      <link>https://rossabaker.com/configs/home-manager/</link>
+      <pubDate>Fri, 08 Sep 2023 16:59:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/home-manager/</guid>
+      <description>We prefer to keep a robust user environment along with a lean configurations for NixOS and nix-darwin. This keeps our environment maximally portable between those operating systems, as well as any other hosts that support the Nix package manager (e.g., Debian).&#xA;Base configuration # This is imported from preliterate times and should be broken up further.&#xA;MIT&#xA;{ moduleWithSystem, ... }: { flake.homeModules.base = moduleWithSystem( perSystem@{ pkgs, inputs&amp;#39; }: { # Curiously not a default of home-manager, but required once we # start configuring Nix otherwise.</description>
+    </item>
+    <item>
+      <title>Nix-Darwin</title>
+      <link>https://rossabaker.com/configs/nix-darwin/</link>
+      <pubDate>Mon, 07 Aug 2023 09:48:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/nix-darwin/</guid>
+      <description>nix-darwin is a set of Nix modules for a declarative MacOS system. It is similar in purpose, but less thorough, than NixOS is for Linux.&#xA;I only own a MacBook because work chose it for me, and I hope to never own two. In practice, all of these modules will likely be mixed into a single machine config, but it&amp;rsquo;s still nice to separate them.&#xA;This is imported from preliterate times, and could be broken up further.</description>
+    </item>
+    <item>
+      <title>Garnix</title>
+      <link>https://rossabaker.com/configs/garnix/</link>
+      <pubDate>Fri, 23 Jun 2023 00:26:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/garnix/</guid>
+      <description>This integration is paused while we await alternatives to GitHub.&#xA;I have an Apple M1 for work, which is not yet supported by GitHub Actions. That&amp;rsquo;s okay, because Garnix is a great alternative.&#xA;Continuous integration # On each push to GitHub, Garnix is triggered to build:&#xA;Our default dev shell Our default nix-darwin configuration Our default Home Manager configuration At this time, we only build for aarch64-darwin with Garnix.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110580226779246680/</link>
+      <pubDate>Wed, 21 Jun 2023 04:05:54 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110580226779246680/</guid>
+      <description>This found a stale nixpkgs reference in one of my flake dependencies because I got sloppy with my `inputs.nixpkgs.follows`.&#xA;https://github.com/DeterminateSystems/flake-checker&#xA;#Nix</description>
+    </item>
+    <item>
+      <title>Scala configuration</title>
+      <link>https://rossabaker.com/configs/scala/</link>
+      <pubDate>Tue, 09 May 2023 09:27:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/scala/</guid>
+      <description>This configuration provides a module to Home Manager. It sets up a global SBT, a few plugins, and some gitignores relevant to Scala.&#xA;Sonatype credentials # This tells sbt where to look for our Sonatype credentials.&#xA;CC0-1.0&#xA;credentials += Credentials(Path.userHome / &amp;#34;.sbt&amp;#34; / &amp;#34;sonatype-credentials.properties&amp;#34;) Code Snippet 1: ~/.sbt/1.0/sonatype.sbt This will not work until a credentials file is added:&#xA;realm=Sonatype Nexus Repository Manager host=oss.sonatype.org user=&amp;lt;&amp;lt;username&amp;gt;&amp;gt; password=&amp;lt;&amp;lt;password&amp;gt;&amp;gt; Code Snippet 1: ~/.sbt/sonatype-credentials.properties This file contains a secret, and is not installed by our Nix derivation!</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110259416618105160/</link>
+      <pubDate>Tue, 25 Apr 2023 12:19:40 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110259416618105160/</guid>
+      <description>I don&amp;#39;t have a design, but I wish there were a way to keep a private system and home manager config with a private input in an otherwise public flake. I&amp;#39;m wrapping the public flake with a thin private flake, and the workflow hurts.&#xA;#Nix</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109833230264662747/</link>
+      <pubDate>Thu, 09 Feb 2023 05:54:52 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109833230264662747/</guid>
+      <description>Need to add one line to kid&amp;#39;s soccer league site that we are in Indiana, and all you Ohioans need to s/.com/.org/.&#xA;The custom theme from 2020 is too old for modern Hugo. Ugh. I pinned it with Nix, but that old nixpkgs doesn&amp;#39;t work on Apple Silicon. Upgrading the theme is a beast. Everything is terrible.&#xA;But change a version and a couple hashes, and I quickly rebuilt the precise old Hugo from source, which is now cached.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109661860459350840/</link>
+      <pubDate>Mon, 09 Jan 2023 23:33:16 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109661860459350840/</guid>
+      <description>It&amp;#39;s great how Nix lets you leave the beaten path, if you don&amp;#39;t mind being swallowed whole by quicksand now and then.&#xA;https://github.com/nix-community/emacs-overlay/issues/275#issuecomment-1376487302&#xA;#Nix #Emacs</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109595380738434617/</link>
+      <pubDate>Thu, 29 Dec 2022 05:46:36 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109595380738434617/</guid>
+      <description>Post-disaster #Introduction:&#xA;I am best known for #Scala, #Typelevel, and #http4s. I geek out over #Emacs, #Nix, and the #Indieweb. I&amp;#39;m probably a #Bayesian.&#xA;I live in #Indianapolis, #Indiana with a #Dachshund, #Coonhound, #TuxedoCat, and a freshwater #Aquarium or five. I offset my #Jogging with #BBQ. I coach youth #Soccer and attend North United #Methodist Church.&#xA;This is a #SelfHosted sequel after a Terraform disaster. Boosts appreciated to relocate my peeps.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/indieweb.social/rossabaker/109266011901701598/</link>
+      <pubDate>Tue, 01 Nov 2022 01:43:47 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/indieweb.social/rossabaker/109266011901701598/</guid>
+      <description>Post-move #reintroduction:&#xA;I&amp;#39;m a software engineer, mostly #Typelevel #Scala. I started #http4s and love #FP and #FOSS.&#xA;I&amp;#39;m getting into the #Indieweb, where I&amp;#39;ll #blog and share my #config, talks, and other projects. I geek out over #Emacs and #Nix. I&amp;#39;m probably also a #Bayesian.&#xA;I have a #dachshund, #coonhound, #tuxedoCat, and multiple freshwater #aquarium. I live in #Indianapolis, where I coach youth #soccer, attend North #UMC, and cheer on my beloved #Hoosiers.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/108969813364928969/</link>
+      <pubDate>Fri, 09 Sep 2022 18:16:36 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/108969813364928969/</guid>
+      <description>Chagrined to realize that using #Hugo&amp;#39;s scheduled posts feature introduces an impurity into a #Nix build. I want my next computer to come without a system clock.</description>
+    </item>
+    <item>
+      <title>Build website with Nix</title>
+      <link>https://rossabaker.com/configs/website/build/</link>
+      <pubDate>Thu, 01 Sep 2022 16:54:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/build/</guid>
+      <description>The website is just another package within our flake.&#xA;Export script # export.el is a small Emacs script that finds the Org file and exports its contents with ox-hugo.&#xA;MIT&#xA;(require &amp;#39;ob-dot) (require &amp;#39;ob-shell) (require &amp;#39;rab-ox-hugo) (rab/ox-hugo-mode) (with-current-buffer (find-file-noselect &amp;#34;src/org/cromulent.org&amp;#34;) (let ((org-confirm-babel-evaluate nil)) (org-babel-tangle) (org-hugo-export-wim-to-md t))) Nix derivation # The build first runs the export script to tangle the files and export to Hugo sources. Hugo is then run to create a public/ directory.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/108232936085199109/</link>
+      <pubDate>Mon, 02 May 2022 14:59:01 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/108232936085199109/</guid>
+      <description>Looking for examples of tangling a #Nix module from #orgmode, and using import-from-derivation on the result. End goal is a &amp;quot;literate flake&amp;quot;. I keep hitting infinite recursion.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/108206241126781156/</link>
+      <pubDate>Wed, 27 Apr 2022 21:50:08 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/108206241126781156/</guid>
+      <description>New #matrix account just dropped: https://matrix.to/#/@ross:rossabaker.com. Built it on #gcp with #terraform and #nix.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/108196347588800056/</link>
+      <pubDate>Tue, 26 Apr 2022 03:54:05 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/108196347588800056/</guid>
+      <description>#introduction: I&amp;#39;m a software developer from #Indianapolis. I mostly write #Scala and #fp. I&amp;#39;m a contributor to #Typelevel and co-founder of #http4s. I nerd out over #Emacs and #Nix.&#xA;Also enjoy #bbq and freshwater #fishkeeping. I have a #dachshund and a #coonhound and a tuxedo #cat. A couple kids, too, but the pets get more clicks.&#xA;Pronouns are he/him.&#xA;Go Hoosiers. #GoIU #iufb #iubb #iums</description>
+    </item>
+  </channel>
+</rss>

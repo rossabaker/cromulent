@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>functional-programming on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/functional-programming/</link>
+    <description>Recent content in functional-programming on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 27 Jul 2018 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/functional-programming/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CoRecursive Episode #017</title>
+      <link>https://rossabaker.com/talks/podcasts/corecursive-17/</link>
+      <pubDate>Fri, 27 Jul 2018 00:00:00 +0000</pubDate>
+      <guid>https://rossabaker.com/talks/podcasts/corecursive-17/</guid>
+      <description>&lt;p&gt;I was interviewed by Adam Gordon Bell on the &lt;a href=&#34;https://corecursive.com/017-http4s-with-ross-baker/&#34;&gt;CoRecursive podcast&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

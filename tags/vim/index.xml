@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>vim on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/vim/</link>
+    <description>Recent content in vim on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 02 Apr 2023 04:35:47 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/vim/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110127359451030403/</link>
+      <pubDate>Sun, 02 Apr 2023 04:35:47 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110127359451030403/</guid>
+      <description>The violin soloist gets to tour with their favorite Italian instrument from Sixteen Dickety-Two, but the piano soloist has to play whatever&amp;#39;s there. I like to imagine violinists maintain elaborate Emacs configs, and pianists run Vim with no config because &amp;quot;it&amp;#39;s installed everywhere.&amp;quot;&#xA;#ClassicalMusic #Emacs #Vim</description>
+    </item>
+  </channel>
+</rss>

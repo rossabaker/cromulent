@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>wkd on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/wkd/</link>
+    <description>Recent content in wkd on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 03 Nov 2022 04:39:59 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/wkd/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/indieweb.social/rossabaker/109278029404970596/</link>
+      <pubDate>Thu, 03 Nov 2022 04:39:59 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/indieweb.social/rossabaker/109278029404970596/</guid>
+      <description>Skip the third-party server and self-host your PGP key via Web Key Directory (WKD)&#xA;Here&amp;#39;s how I did it with Hugo and Netlify:&#xA;https://rossabaker.com/configs/web-key-directory/&#xA;#pgp #wkd #indieweb #hugo #netlify</description>
+    </item>
+  </channel>
+</rss>

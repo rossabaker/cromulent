@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>scala-cli on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/scala-cli/</link>
+    <description>Recent content in scala-cli on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 09 May 2023 09:27:00 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/scala-cli/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Scala configuration</title>
+      <link>https://rossabaker.com/configs/scala/</link>
+      <pubDate>Tue, 09 May 2023 09:27:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/scala/</guid>
+      <description>This configuration provides a module to Home Manager. It sets up a global SBT, a few plugins, and some gitignores relevant to Scala.&#xA;Sonatype credentials # This tells sbt where to look for our Sonatype credentials.&#xA;CC0-1.0&#xA;credentials += Credentials(Path.userHome / &amp;#34;.sbt&amp;#34; / &amp;#34;sonatype-credentials.properties&amp;#34;) Code Snippet 1: ~/.sbt/1.0/sonatype.sbt This will not work until a credentials file is added:&#xA;realm=Sonatype Nexus Repository Manager host=oss.sonatype.org user=&amp;lt;&amp;lt;username&amp;gt;&amp;gt; password=&amp;lt;&amp;lt;password&amp;gt;&amp;gt; Code Snippet 1: ~/.sbt/sonatype-credentials.properties This file contains a secret, and is not installed by our Nix derivation!</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/indieweb.social/rossabaker/109306144082815818/</link>
+      <pubDate>Tue, 08 Nov 2022 03:49:55 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/indieweb.social/rossabaker/109306144082815818/</guid>
+      <description>How I archived toots from my prior instance to my personal Hugo site:&#xA;https://rossabaker.com/projects/toot-archive/&#xA;#Indieweb #PESOS #OwnYourData #Hugo #ScalaCLI #Typelevel</description>
+    </item>
+    <item>
+      <title>Archive your toots to Hugo</title>
+      <link>https://rossabaker.com/projects/toot-archive/</link>
+      <pubDate>Mon, 07 Nov 2022 22:37:00 +0000</pubDate>
+      <guid>https://rossabaker.com/projects/toot-archive/</guid>
+      <description>An important Indieweb principle is to own your data. I tooted on mastodon.social sporadically for five years. The service is public, the protocol open, and the implementation open source. Still, it exists at the pleasure of its admins, with whom I have no contract.&#xA;After moving to another instance, I wanted to preserve my old content. We will use a technique called PESOS, or Publish Elsewhere, Syndicate to Own Site.</description>
+    </item>
+  </channel>
+</rss>

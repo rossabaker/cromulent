@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>itches on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/itches/</link>
+    <description>Recent content in itches on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 06 Aug 2023 21:30:00 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/itches/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Todo</title>
+      <link>https://rossabaker.com/todo/</link>
+      <pubDate>Sun, 06 Aug 2023 21:30:00 +0000</pubDate>
+      <guid>https://rossabaker.com/todo/</guid>
+      <description>On the IndieWeb, we are taught to focus on our own itches. In Org Mode, we have TODO items. They&amp;rsquo;re two sides of the same coin, and either seems more fun than struggling with JIRA.&#xA;These are not yet prioritized.&#xA;TODO Improve typography. # I foolishly started from scratch.&#xA;TODO Finish descriptions on all my pages. # TODO Post my Twitter and Facebook archives. # TODO Automate synchronization of notes. # TODO Clean up tags # Particularly coming out of the social media archives.</description>
+    </item>
+  </channel>
+</rss>

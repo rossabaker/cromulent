@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>juvenilia on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/juvenilia/</link>
+    <description>Recent content in juvenilia on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 01 Nov 2022 23:17:00 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/juvenilia/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Imperfectly Indieweb</title>
+      <link>https://rossabaker.com/blog/imperfectly-indieweb/</link>
+      <pubDate>Tue, 01 Nov 2022 23:17:00 +0000</pubDate>
+      <guid>https://rossabaker.com/blog/imperfectly-indieweb/</guid>
+      <description>Updated &amp;lt;2022-11-02 Wed&amp;gt;: some edits for concision&#xA;The asteroid hurtling toward Twitter last week forced many of us to look back on our digital lives. I reflected on my mistakes with perfectionism and proprietorship, and am looking to Indieweb for solutions.&#xA;Portrait of 1990s geekery # Figure 1: Dinosaur fossil by Nigel Holt, licensed under CC BY 2.0&#xA;The Wayback Machine has preserved my juvenilia. The soft tissue is gone, but here is the skeleton of a twentieth-century personal web page, the author not yet twenty.</description>
+    </item>
+  </channel>
+</rss>

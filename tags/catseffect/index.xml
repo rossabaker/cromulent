@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>catseffect on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/catseffect/</link>
+    <description>Recent content in catseffect on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 07 Feb 2023 18:49:07 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/catseffect/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109824950098770022/</link>
+      <pubDate>Tue, 07 Feb 2023 18:49:07 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109824950098770022/</guid>
+      <description>First public release of otel4s, an OpenTelemetry implementation for Cats Effect. otel4s aims to be a full and faithful impemenation of the OpenTelemetry Specification, built for the idioms of the Typelevel ecosystem.&#xA;https://github.com/typelevel/otel4s/discussions/121&#xA;#Otel4s #Typelevel #Scala #OpenTelemetry #CatsEffect</description>
+    </item>
+  </channel>
+</rss>

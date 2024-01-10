@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>search on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/search/</link>
+    <description>Recent content in search on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 06 Nov 2022 15:53:43 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/search/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/indieweb.social/rossabaker/109297665538751644/</link>
+      <pubDate>Sun, 06 Nov 2022 15:53:43 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/indieweb.social/rossabaker/109297665538751644/</guid>
+      <description>Thoughts on https://mastovue.glitch.me/#/? It solves the small-instance problem of search finding only federated content, but it seems abusive of larger instances.&#xA;#search #fediverse</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/indieweb.social/rossabaker/109277586548398134/</link>
+      <pubDate>Thu, 03 Nov 2022 02:47:22 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/indieweb.social/rossabaker/109277586548398134/</guid>
+      <description>Do you see different search results between instances? Here&amp;#39;s why:&#xA;https://github.com/mastodon/mastodon/issues/9529&#xA;#search #fedisplaining</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/109246235912674364/</link>
+      <pubDate>Fri, 28 Oct 2022 13:54:29 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/109246235912674364/</guid>
+      <description>I appreciate how and why #search is based on hashtags. But search shows longer, dormant hashtags over exact matches on active subjects.</description>
+    </item>
+  </channel>
+</rss>

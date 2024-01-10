@@ -1,0 +1,1991 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    
+      <meta charset="utf-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ross A. Baker: Emacs config</title>
+
+
+
+  <meta name="description" content="  Ross A. Baker&#39;s Emacs configuration.  Defines the packages,
+  configurations, and Nix build.
+  ">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/css/sanitize.min.aff94e5b4264fbc756e1f961da6345decc6c55c97f01733a04419f1a12b2daba.css">
+  
+  <link rel="preload" href="/css/sanitize.min.aff94e5b4264fbc756e1f961da6345decc6c55c97f01733a04419f1a12b2daba.css" as="style">
+
+  
+  
+  <link rel="stylesheet" href="/css/assets.min.e1aa19b7b34925a0f478831cb9b1efbded8fceeaf559dbdc1cbe5ee00b1992fd.css">
+  
+  <link rel="preload" href="/css/assets.min.e1aa19b7b34925a0f478831cb9b1efbded8fceeaf559dbdc1cbe5ee00b1992fd.css" as="style">
+
+  
+  
+  <link rel="stylesheet" href="/css/cromulent.min.f903da9efc97539fdab1c15148dba3dbda4745f4797187764453815db70e39ff.css">
+  
+  <link rel="preload" href="/css/cromulent.min.f903da9efc97539fdab1c15148dba3dbda4745f4797187764453815db70e39ff.css" as="style">
+
+  
+  
+  <link rel="stylesheet" href="/css/chroma.min.1fd55e98fdc858a7c9d423a512014a936202c852840c2b48c04300634fa3eef3.css">
+  
+  <link rel="preload" href="/css/chroma.min.1fd55e98fdc858a7c9d423a512014a936202c852840c2b48c04300634fa3eef3.css" as="style">
+
+
+
+  
+  
+  <script defer src="/js/copy-button.min.b3814956fbbab3c2ca2da8ca65b880c596b2d7e0acf0158603f5bdd12deca671.js"></script>
+  
+  <link rel="preload" href="/js/copy-button.min.b3814956fbbab3c2ca2da8ca65b880c596b2d7e0acf0158603f5bdd12deca671.js" as="script">
+
+
+<link rel="icon" href="/img/profile.ico">
+
+<link rel="alternate" type="application/rss+xml" href="https://rossabaker.com/configs/emacs/index.xml" title="Rss for Ross A. Baker" />
+
+
+    
+  </head>
+
+  <body>
+    <header>
+      
+        <strong><a href="/">rossabaker</a></strong>
+<p>A perfectly cromulent developer.</p>
+<nav>
+  <ul>
+    
+      <li><a href="/about">about</a></li>
+    
+      <li><a href="/blog">blog</a></li>
+    
+      <li><a href="/talks">talks</a></li>
+    
+      <li><a href="/projects">projects</a></li>
+    
+      <li><a href="/configs">configs</a></li>
+    
+      <li><a href="/categories">categories</a></li>
+    
+      <li><a href="/tags">tags</a></li>
+    
+  </ul>
+</nav>
+
+      
+    </header>
+
+    <main>
+      
+  <article>
+    <header>
+      <h1>Emacs config</h1>
+    </header>
+
+    
+      <h2 id="introduction">
+  Introduction
+  <a class="heading-anchor" href="#introduction">#</a>
+</h2>
+<h3 id="the-flavor-of-the-day-is-vanilla">
+  The flavor of the day is vanilla
+  <a class="heading-anchor" href="#the-flavor-of-the-day-is-vanilla">#</a>
+</h3>
+<p>This is a &ldquo;vanilla&rdquo; configuration, or an &ldquo;Emacs from scratch,&rdquo; built
+on a prerelease of Emacs 29 from Git.</p>
+<p>Some users use a community configuration such as <a href="https://www.spacemacs.org/">Spacemacs</a> or <a href="https://github.com/doomemacs/doomemacs">Doom</a>.  A
+more moderate approach is a starter kit like like <a href="https://github.com/bbatsov/prelude">Prelude</a> or <a href="https://github.com/SystemCrafters/crafted-emacs">Crafted
+Emacs</a>, which hew closer to vanilla Emacs but give users a sensible
+head start.  These are recommended paths for new users, and remain
+reasonable even after decades of experience.</p>
+<p>I choose to start from the wretched defaults.</p>
+<ul>
+<li>It helps me better understand how it works.</li>
+<li>I am less likely to be surprised on upgrades.</li>
+<li>It&rsquo;s relaxing.  Editor bonsai, if you will.</li>
+</ul>
+<h3 id="guiding-principles">
+  Guiding principles
+  <a class="heading-anchor" href="#guiding-principles">#</a>
+</h3>
+<p>The default is to try built-in packages first, but be unafraid to
+augment with <a href="https://elpa.gnu.org/">ELPA</a>, <a href="https://melpa.org/">MELPA</a>, or even Git.  These extra moving parts are
+managed by rigorously pinning all dependencies with Nix.</p>
+<h3 id="on-licensing">
+  On licensing
+  <a class="heading-anchor" href="#on-licensing">#</a>
+</h3>
+<p>Most of my configurations are permissively licensed, for both your
+convenience and their triviality.  Emacs is challenging:</p>
+<ul>
+<li>
+<p>Most configurations are markup and duct tape.  Emacs configurations
+are written in a whole-ass language.</p>
+</li>
+<li>
+<p>Emacs Lisp has a stronger copyleft culture than most languages.
+Many of the <code>use-package</code> blocks that follow are copied straight out
+of of GPL-licensed documentation.  The entire Emacs core, many
+third-party libraries, and several of its inspirational
+configurations are under the GPL, beckoning us to quote them in all
+their virality.</p>
+</li>
+</ul>
+<p>So let&rsquo;s just publish under the GPL and call it a day, right?</p>
+<p>This is a literate configuration.  Prose and code.  Creative Commons
+licenses are great for prose, but <a href="https://creativecommons.org/faq/#can-i-apply-a-creative-commons-license-to-software">not for code</a>.  <code>CC-BY-SA-4.0</code> is
+<a href="https://creativecommons.org/faq/#can-i-apply-a-creative-commons-license-to-software">one-way compatible</a> with the <code>GPL-3.0</code>.  We can license this entire work
+under the <code>CC-BY-SA-4.0</code>.  Unified license, dual purpose.</p>
+<p>That&rsquo;s swell, until we redistribute code licensed to us under the GPL.
+The compatibility is only one way.  We can&rsquo;t republish that code under
+<code>CC-BY-SA-4.0</code>.  Either the prose gets subsumed into the GPL, or else
+there&rsquo;s no license to unify the entire document.</p>
+<p>Some <code>use-package</code> statements that follow are little more than
+&ldquo;installation&rdquo; recipes taken from the documentation of GPL projects.
+I assert that these falls under <a href="https://www.gnu.org/licenses/gpl-faq.en.html#GPLFairUse">&ldquo;fair use&rdquo; of GPL-covered programs</a>.
+Any configuration that triggers the GPL will be published in a
+separate repository and stitched in here like any other GPL library.</p>
+<p>With that effort, the license of this configuration as a whole is
+<code>CC-BY-SA-4.0</code>.  I encourage you to try the same with your own
+literate configs.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="c1">;; SPDX-License-Identifier: CC-BY-SA-4.0</span>
+</span></span></code></pre></div></div>
+<p>Trivial stanzas are tagged into the public domain (<code>CC0-1.0</code>).</p>
+<h2 id="early-tasks">
+  Early tasks
+  <a class="heading-anchor" href="#early-tasks">#</a>
+</h2>
+<p>An Emacs configuration can mostly be declared in any order,
+particularly with intelligent use of <code>use-package</code>&rsquo;s <code>:after</code> keyword.
+But there are a few things that benefit from going first.</p>
+<h3 id="startup-time">
+  Startup time
+  <a class="heading-anchor" href="#startup-time">#</a>
+</h3>
+<p>I don&rsquo;t go to <a href="https://github.com/doomemacs/doomemacs/blob/35865ef5e89442e3809b8095199977053dd4210f/docs/faq.org#how-does-doom-start-up-so-quickly">Doom&rsquo;s extreme lengths</a> to optimize startup time, but
+there are usually a few heavy hitters, and <a href="https://github.com/dholm/benchmark-init-el">benchmark-init-el</a> helps
+find them.  And with my Nix setup, I&rsquo;m restarting Emacs a lot whenever
+I&rsquo;m trying new packages, so it&rsquo;s worth a modest effort.</p>
+<h4 id="benchmark">
+  Benchmark
+  <a class="heading-anchor" href="#benchmark">#</a>
+</h4>
+<p><a href="https://github.com/dholm/benchmark-init-el">benchmark-init</a> is a simple package that may or may not carry its
+weight versus <code>usepackage-compute-statistics</code>.  Run
+<code>benchmark-init/show-durations-tabulated</code> to check this one out.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">benchmark-init</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:ensure</span> <span class="no">t</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:demand</span> <span class="no">t</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:hook</span> <span class="p">(</span><span class="nv">after-init</span> <span class="o">.</span> <span class="nv">benchmark-init/deactivate</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:config</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">benchmark-init/activate</span><span class="p">))</span>
+</span></span></code></pre></div></div>
+<h4 id="garbage-collection">
+  Garbage collection
+  <a class="heading-anchor" href="#garbage-collection">#</a>
+</h4>
+<p>Increasing the garbage collector threshold is reputed to help at init.
+After startup, we revert on the <a href="https://gitlab.com/koral/gcmh">Garbage Collector Magic Hack</a>.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">gcmh</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:ensure</span> <span class="no">t</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:diminish</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:init</span> <span class="p">(</span><span class="nb">setq</span> <span class="nv">gc-cons-threshold</span> <span class="p">(</span><span class="nf">*</span> <span class="mi">80</span> <span class="mi">1024</span> <span class="mi">1024</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:hook</span> <span class="p">(</span><span class="nv">emacs-startup</span> <span class="o">.</span> <span class="nv">gcmh-mode</span><span class="p">))</span>
+</span></span></code></pre></div></div>
+<h4 id="doom-like-hooks">
+  Doom-like hooks
+  <a class="heading-anchor" href="#doom-like-hooks">#</a>
+</h4>
+<p>We&rsquo;re also going to use <a href="https://gitlab.com/ajgrf/on.el">on.el</a> to provide some of the same hooks Doom
+uses.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">on</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:ensure</span><span class="p">)</span>
+</span></span></code></pre></div></div>
+<h4 id="security">
+  Security
+  <a class="heading-anchor" href="#security">#</a>
+</h4>
+<p>For the love of all that is holy, do not continue with untrusted
+connections!</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">gnutls</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:defer</span> <span class="no">t</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:custom</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">gnutls-verify-error</span> <span class="no">t</span><span class="p">))</span>
+</span></span></code></pre></div></div>
+<h4 id="no-littering">
+  No littering
+  <a class="heading-anchor" href="#no-littering">#</a>
+</h4>
+<p>Many packages leave crumbs in <code>user-emacs-directory</code> or even <code>$HOME</code>.
+Finding and configuring them individually is a hassle, so we rely on
+the community configuration of <a href="https://github.com/emacscollective/no-littering"><code>no-littering</code></a>.  Run this early,
+because many of the crumb droppers are configured below!</p>
+<p>The default is to put everything under <code>user-emacs-directory</code>, which
+for me is under <code>~/.config</code>.  If I considered any of this data to be
+config, they&rsquo;d be in this file!  I keep mine in <code>~/.cache</code>.</p>
+<p>Cleaning up the <a href="https://github.com/emacscollective/no-littering#native-compilation-cache">native compilation cache</a> is &ldquo;preferably&rdquo; supposed to
+happen in <code>early-init.el</code>, but I&rsquo;m trying to keep that as light as
+possible so as much as possible works without Home Manager.  This
+seems early enough to avoid crapping in <code>~/.config/emacs</code>.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">no-littering</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:ensure</span> <span class="no">t</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:init</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">no-littering-etc-directory</span> <span class="s">&#34;~/.cache/emacs/etc/&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">no-littering-var-directory</span> <span class="s">&#34;~/.cache/emacs/var/&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nf">fboundp</span> <span class="ss">&#39;startup-redirect-eln-cache</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nv">startup-redirect-eln-cache</span>
+</span></span><span class="line"><span class="cl">     <span class="p">(</span><span class="nv">convert-standard-filename</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nf">expand-file-name</span>  <span class="s">&#34;eln-cache/&#34;</span> <span class="nv">no-littering-var-directory</span><span class="p">)))))</span>
+</span></span></code></pre></div></div>
+<h3 id="use-package-keywords">
+  use-package keywords
+  <a class="heading-anchor" href="#use-package-keywords">#</a>
+</h3>
+<h4 id="bind-key">
+  bind-key
+  <a class="heading-anchor" href="#bind-key">#</a>
+</h4>
+<p><a href="https://github.com/jwiegley/use-package">use-package</a> is built-in as of Emacs 29, but since we use <code>:bind</code>, we
+need to load <code>bind-key</code>.  If we forget, we get the error: <code>Symbol's value as variable is void: personal-keybindings</code>.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">bind-key</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:demand</span> <span class="no">t</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:bind</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">:prefix-map</span> <span class="nv">rab/files-map</span>
+</span></span><span class="line"><span class="cl">   <span class="nb">:prefix</span> <span class="s">&#34;C-c f&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:bind</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">:prefix-map</span> <span class="nv">rab/toggles-map</span>
+</span></span><span class="line"><span class="cl">   <span class="nb">:prefix</span> <span class="s">&#34;C-c t&#34;</span><span class="p">))</span>
+</span></span></code></pre></div></div>
+<h4 id="diminish">
+  Diminish
+  <a class="heading-anchor" href="#diminish">#</a>
+</h4>
+<p>We also want to &ldquo;diminish&rdquo; most minor-mode indicators on the mode
+line.  They&rsquo;re only interesting if they&rsquo;re in an unexpected state.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">diminish</span> <span class="nb">:ensure</span> <span class="no">t</span><span class="p">)</span>
+</span></span></code></pre></div></div>
+<h3 id="path-setup">
+  Path setup
+  <a class="heading-anchor" href="#path-setup">#</a>
+</h3>
+<p>Launching Emacs from the MacOS dock does not source my shell config,
+which leads to my Nix profile not being on the <code>$PATH</code>, which leads to
+errors, or worse, trying to install the execrable Xcode.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">exec-path-from-shell</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:ensure</span> <span class="no">t</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:demand</span> <span class="no">t</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:if</span> <span class="p">(</span><span class="nf">memq</span> <span class="nf">window-system</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">mac</span> <span class="nv">ns</span> <span class="nv">x</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:config</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">exec-path-from-shell-initialize</span><span class="p">))</span>
+</span></span></code></pre></div></div>
+<h2 id="general-customization">
+  General customization
+  <a class="heading-anchor" href="#general-customization">#</a>
+</h2>
+<p>I spun my wheels for a while over how to arrange my customizations,
+ignoring that Emacs has already done most of that work!  I don&rsquo;t use
+Emacs&rsquo; customize interface, preferring this version-controlled,
+literate config.  However, its tree of <code>defgroups</code> is pretty
+reasonable, and more importantly, stops me from agonizing over them.
+This structure is modeled after that.</p>
+<h3 id="editing">
+  Editing
+  <a class="heading-anchor" href="#editing">#</a>
+</h3>
+<h4 id="editing-basics">
+  Editing basics
+  <a class="heading-anchor" href="#editing-basics">#</a>
+</h4>
+<h5 id="character-radix">
+  Character radix
+  <a class="heading-anchor" href="#character-radix">#</a>
+</h5>
+<p>Make <code>C-q</code> read a hex sequence instead of the default octal.  Obscure,
+but I know more characters by their hex codes.  This is also
+consistent with <code>C-x 8 &lt;RET&gt;</code>, which is more chars, but offers
+minibuffer completion.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nv">setopt</span> <span class="nv">read-quoted-char-radix</span> <span class="mi">16</span><span class="p">)</span>
+</span></span></code></pre></div></div>
+<h5 id="mark-ring">
+  Mark ring
+  <a class="heading-anchor" href="#mark-ring">#</a>
+</h5>
+<p>The mark ring is the trail of breadcrumbs we leave with various
+commands.  Vernon Grant gives a <a href="https://vernon-grant.com/discovering-emacs/efficiency-with-the-mark-ring/">good tutorial</a> in his Discovering Emacs
+series.</p>
+<p><code>set-mark-command-repeat-pop</code> means we only need to hit <code>C-u</code> or <code>C-x</code>
+once before subsequent <code>C-SPC</code>, which makes it much nicer to navigate.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nv">setopt</span> <span class="nv">set-mark-command-repeat-pop</span> <span class="no">t</span><span class="p">)</span>
+</span></span></code></pre></div></div>
+<h4 id="indent">
+  Indent
+  <a class="heading-anchor" href="#indent">#</a>
+</h4>
+<p>Tabs are the devil&rsquo;s whitespace.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">simple</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:config</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq-default</span> <span class="nv">indent-tabs-mode</span> <span class="no">nil</span><span class="p">))</span>
+</span></span></code></pre></div></div>
+<h4 id="killing">
+  Killing
+  <a class="heading-anchor" href="#killing">#</a>
+</h4>
+<p>Put the clipboard on the kill ring before killing something else.
+Emacs isn&rsquo;t as violent as it sometimes sounds, I swear.</p>
+<p>We also don&rsquo;t want to clutter the ring with consecutively duplicate
+values.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">simple</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:custom</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">save-interprogram-paste-before-kill</span> <span class="no">t</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">kill-do-not-save-duplicates</span> <span class="no">t</span><span class="p">))</span>
+</span></span></code></pre></div></div>
+<h4 id="matching">
+  Matching
+  <a class="heading-anchor" href="#matching">#</a>
+</h4>
+<h5 id="bookmark">
+  Bookmark
+  <a class="heading-anchor" href="#bookmark">#</a>
+</h5>
+<p>Persist bookmarks each time we set one, not when Emacs exits.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">bookmark</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:custom</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">bookmark-save-flag</span> <span class="mi">1</span><span class="p">))</span>
+</span></span></code></pre></div></div>
+<h4 id="selected-dot-el">
+  selected.el
+  <a class="heading-anchor" href="#selected-dot-el">#</a>
+</h4>
+<p><a href="https://github.com/Kungsgeten/selected.el"><code>selected.el</code></a> activates a keymap when there is an active region.  I&rsquo;m
+using it to replace the more traditional <code>delete-selection-mode</code>.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">selected</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:ensure</span> <span class="no">t</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:diminish</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:config</span> <span class="p">(</span><span class="nv">selected-global-mode</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:bind</span> <span class="p">(</span><span class="nb">:map</span> <span class="nv">selected-keymap</span>
+</span></span><span class="line"><span class="cl">         <span class="p">(</span><span class="s">&#34;q&#34;</span> <span class="o">.</span> <span class="nv">selected-off</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">         <span class="p">(</span><span class="s">&#34;u&#34;</span> <span class="o">.</span> <span class="nf">upcase-region</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">         <span class="p">(</span><span class="s">&#34;d&#34;</span> <span class="o">.</span> <span class="nf">downcase-region</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">         <span class="p">(</span><span class="s">&#34;w&#34;</span> <span class="o">.</span> <span class="nv">count-words-region</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">         <span class="p">(</span><span class="s">&#34;m&#34;</span> <span class="o">.</span> <span class="nv">apply-macro-to-region-lines</span><span class="p">)))</span>
+</span></span></code></pre></div></div>
+<h3 id="convenience">
+  Convenience
+  <a class="heading-anchor" href="#convenience">#</a>
+</h3>
+<h4 id="completion">
+  Completion
+  <a class="heading-anchor" href="#completion">#</a>
+</h4>
+<h5 id="copilot">
+  Copilot
+  <a class="heading-anchor" href="#copilot">#</a>
+</h5>
+<div class="info">
+<p>This package is currently disabled due to absence of a license.  See
+<a href="https://github.com/zerolfx/copilot.el/issues/80">issue #80</a> for a discussion of what it would take.</p>
+</div>
+<p>I think Copilot&rsquo;s training was unethical, and I&rsquo;m skeptical of its
+utility, but I need to get some experience with it.</p>
+<p><code>always</code> in <code>copilot-disable-predicates</code> turns off <span class="underline">automatic</span>
+completion.  We can still reach it from <code>M-`</code>, which is chosen to be
+close to <code>M-TAB</code> and bound to a menubar command I don&rsquo;t ever use.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">copilot</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:disabled</span> <span class="no">t</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:ensure</span> <span class="no">t</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:custom</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">copilot-disable-predicates</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">always</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:hook</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">prog-mode</span> <span class="o">.</span> <span class="nv">copilot-mode</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:bind</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="s">&#34;M-`&#34;</span> <span class="o">.</span> <span class="nv">copilot-complete</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:bind</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">:map</span> <span class="nv">rab/toggles-map</span>
+</span></span><span class="line"><span class="cl">   <span class="p">(</span><span class="s">&#34;`&#34;</span> <span class="o">.</span> <span class="nv">copilot-mode</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:bind</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">:map</span> <span class="nv">copilot-completion-map</span>
+</span></span><span class="line"><span class="cl">   <span class="p">(</span><span class="s">&#34;C-g&#34;</span> <span class="o">.</span>  <span class="ss">&#39;copilot-clear-overlay</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">   <span class="p">(</span><span class="s">&#34;M-p&#34;</span> <span class="o">.</span> <span class="ss">&#39;copilot-previous-completion</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">   <span class="p">(</span><span class="s">&#34;M-n&#34;</span> <span class="o">.</span> <span class="ss">&#39;copilot-next-completion</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">   <span class="p">(</span><span class="s">&#34;&lt;tab&gt;&#34;</span> <span class="o">.</span> <span class="ss">&#39;copilot-accept-completion</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">   <span class="p">(</span><span class="s">&#34;M-f&#34;</span> <span class="o">.</span> <span class="ss">&#39;copilot-accept-completion-by-word</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">   <span class="p">(</span><span class="s">&#34;M-&lt;return&gt;&#34;</span> <span class="o">.</span> <span class="ss">&#39;copilot-accept-completion-by-line</span><span class="p">)))</span>
+</span></span></code></pre></div></div>
+<p>It&rsquo;s not in MELPA, but it&rsquo;s a trivial build:</p>
+<div class="code-snippet"><p class="license">MIT</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nix" data-lang="nix"><span class="line"><span class="cl"><span class="k">let</span>
+</span></span><span class="line"><span class="cl">  <span class="n">copilot-lisp</span> <span class="o">=</span> <span class="n">epkgs</span><span class="o">.</span><span class="n">trivialBuild</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pname</span> <span class="o">=</span> <span class="s2">&#34;copilot-lisp&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">src</span> <span class="o">=</span> <span class="n">inputs</span><span class="o">.</span><span class="n">copilot-el</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">packageRequires</span> <span class="o">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">      <span class="n">epkgs</span><span class="o">.</span><span class="n">dash</span>
+</span></span><span class="line"><span class="cl">      <span class="n">epkgs</span><span class="o">.</span><span class="n">editorconfig</span>
+</span></span><span class="line"><span class="cl">      <span class="n">epkgs</span><span class="o">.</span><span class="n">s</span>
+</span></span><span class="line"><span class="cl">    <span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="n">version</span> <span class="o">=</span> <span class="s2">&#34;0.0.0&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">};</span>
+</span></span><span class="line"><span class="cl">  <span class="n">copilot-dist</span> <span class="o">=</span> <span class="n">pkgs</span><span class="o">.</span><span class="n">stdenv</span><span class="o">.</span><span class="n">mkDerivation</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">name</span> <span class="o">=</span> <span class="s2">&#34;copilot-dist&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">src</span> <span class="o">=</span> <span class="n">inputs</span><span class="o">.</span><span class="n">copilot-el</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">installPhase</span> <span class="o">=</span> <span class="s1">&#39;&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">      LISPDIR=$out/share/emacs/site-lisp
+</span></span></span><span class="line"><span class="cl"><span class="s1">      mkdir -p $LISPDIR
+</span></span></span><span class="line"><span class="cl"><span class="s1">      cp -R dist $LISPDIR
+</span></span></span><span class="line"><span class="cl"><span class="s1">    &#39;&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="k">in</span>
+</span></span><span class="line"><span class="cl"><span class="n">pkgs</span><span class="o">.</span><span class="n">symlinkJoin</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">name</span> <span class="o">=</span> <span class="s2">&#34;copilot.el&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">paths</span> <span class="o">=</span> <span class="p">[</span> <span class="n">copilot-lisp</span> <span class="n">copilot-dist</span> <span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></div>
+<p>It also depends on Node.</p>
+<div class="code-snippet"><p class="license">MIT</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nix" data-lang="nix"><span class="line"><span class="cl"><span class="p">({</span> <span class="n">pkgs</span><span class="o">,</span> <span class="o">...</span><span class="p">}:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">home</span><span class="o">.</span><span class="n">packages</span> <span class="o">=</span> <span class="p">[</span> <span class="n">pkgs</span><span class="o">.</span><span class="n">nodejs</span> <span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span></code></pre></div></div>
+<h4 id="corfu">
+  Corfu
+  <a class="heading-anchor" href="#corfu">#</a>
+</h4>
+<p>We use <a href="https://github.com/minad/corfu">Corfu</a> for small, in-buffer popups of completion candidates.
+Autocompletion of method names in code is a classic use case.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">corfu</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:ensure</span> <span class="no">t</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:hook</span> <span class="p">(</span><span class="nv">on-first-buffer</span> <span class="o">.</span> <span class="nv">global-corfu-mode</span><span class="p">))</span>
+</span></span></code></pre></div></div>
+<h4 id="docker">
+  Docker
+  <a class="heading-anchor" href="#docker">#</a>
+</h4>
+<p><a href="https://github.com/Silex/docker.el"><code>docker.el</code></a> &ldquo;manages Docker from Emacs.&rdquo;  Note that while a <a href="https://podman.io/">Podman
+daemon</a> works great, the Podman client <a href="https://github.com/Silex/docker.el/issues/110">is incompatible</a>.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">docker</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:ensure</span> <span class="no">t</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:defer</span> <span class="no">t</span><span class="p">)</span>
+</span></span></code></pre></div></div>
+<h4 id="emacs-lock">
+  Emacs lock
+  <a class="heading-anchor" href="#emacs-lock">#</a>
+</h4>
+<p>Emacs Lock is a built-in minor mode to protect buffers.  This prevents
+killing the scratch buffer, which I usually regret.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">emacs-lock</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:config</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">with-current-buffer</span> <span class="s">&#34;*scratch*&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nv">emacs-lock-mode</span> <span class="ss">&#39;kill</span><span class="p">)))</span>
+</span></span></code></pre></div></div>
+<h4 id="exiting">
+  Exiting
+  <a class="heading-anchor" href="#exiting">#</a>
+</h4>
+<p>I&rsquo;d usually rather exit Slack, to be quite honest.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nv">setopt</span> <span class="nv">confirm-kill-emacs</span> <span class="ss">&#39;yes-or-no-p</span><span class="p">)</span>
+</span></span></code></pre></div></div>
+<h4 id="display-line-numbers">
+  Display line numbers
+  <a class="heading-anchor" href="#display-line-numbers">#</a>
+</h4>
+<p><code>display-line-numbers</code> is a more performant replacement for the
+venerable old <code>linum</code>.  We turn it on for program and configuration
+modes.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">display-line-numbers</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:custom</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">display-line-numbers-widen</span> <span class="no">t</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:hook</span>
+</span></span><span class="line"><span class="cl">  <span class="p">((</span><span class="nv">prog-mode</span> <span class="nv">conf-mode</span><span class="p">)</span> <span class="o">.</span> <span class="nv">display-line-numbers-mode</span><span class="p">))</span>
+</span></span></code></pre></div></div>
+<h4 id="highlight-line">
+  Highlight line
+  <a class="heading-anchor" href="#highlight-line">#</a>
+</h4>
+<p>Highlight the current line, only in the current buffer.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">hl-line</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:hook</span> <span class="p">(</span><span class="nv">on-first-buffer</span> <span class="o">.</span> <span class="nv">global-hl-line-mode</span><span class="p">))</span>
+</span></span></code></pre></div></div>
+<h4 id="ffap">
+  ffap
+  <a class="heading-anchor" href="#ffap">#</a>
+</h4>
+<p><code>ffap</code>, short for &ldquo;find file at point,&rdquo; guesses a default file from the
+point.  <code>ffap-bindings</code> rebinds several commands with ffap equivalents.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">ffap</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:hook</span> <span class="p">(</span><span class="nv">on-first-input</span> <span class="o">.</span> <span class="nv">ffap-bindings</span><span class="p">))</span>
+</span></span></code></pre></div></div>
+<p>ffap invokes <code>gcc</code> and <code>g++</code>, which is fine, except on a Mac without
+Xcode.  That brings up a dreaded dialog box.</p>
+<div class="code-snippet"><p class="license">MIT</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nix" data-lang="nix"><span class="line"><span class="cl"><span class="p">({</span> <span class="n">pkgs</span><span class="o">,</span> <span class="o">...</span><span class="p">}:</span> <span class="p">{</span> <span class="n">home</span><span class="o">.</span><span class="n">packages</span> <span class="o">=</span> <span class="p">[</span> <span class="n">pkgs</span><span class="o">.</span><span class="n">gcc</span> <span class="p">];</span> <span class="p">})</span>
+</span></span></code></pre></div></div>
+<h4 id="persist-state">
+  Persist state
+  <a class="heading-anchor" href="#persist-state">#</a>
+</h4>
+<p><a href="https://codeberg.org/bram85/emacs-persist-state.git">Persist State</a> flushes state that is normally flushed in
+<code>kill-emacs-hook</code>, which I&rsquo;m trying not to call until I die.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">persist-state</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:ensure</span> <span class="no">t</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:hook</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">on-first-input</span> <span class="o">.</span> <span class="nv">persist-state-mode</span><span class="p">))</span>
+</span></span></code></pre></div></div>
+<h4 id="suggest">
+  Suggest
+  <a class="heading-anchor" href="#suggest">#</a>
+</h4>
+<p>I keep lamenting the lack of a <a href="https://hoogle.haskell.org/">Hoogle</a> for Emacs Lisp.  <a href="https://github.com/Wilfred/suggest.el/">suggest.el</a> is
+an interesting alternative: instead of types, it finds functions from
+example inputs and outputs.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">suggest</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:ensure</span> <span class="no">t</span><span class="p">)</span>
+</span></span></code></pre></div></div>
+<h4 id="whitespace-butler">
+  Whitespace butler
+  <a class="heading-anchor" href="#whitespace-butler">#</a>
+</h4>
+<p>I like builtin packages, but I like minimal diffs more.  <a href="https://github.com/lewang/ws-butler">ws-butler</a> is
+&ldquo;unobtrusive&rdquo;, which wins the day for me.</p>
+<blockquote>
+<ul>
+<li>Only lines touched get trimmed. If the white space at end of buffer
+is changed, then blank lines at the end of buffer are truncated
+respecting <code>require-final-newline</code>.</li>
+<li>Trimming only happens when saving.</li>
+</ul>
+</blockquote>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">ws-butler</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:ensure</span> <span class="no">t</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:hook</span> <span class="p">(</span><span class="nv">on-first-buffer</span> <span class="o">.</span> <span class="nv">ws-butler-global-mode</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:diminish</span><span class="p">)</span>
+</span></span></code></pre></div></div>
+<h3 id="files">
+  Files
+  <a class="heading-anchor" href="#files">#</a>
+</h3>
+<h4 id="lock-files">
+  Lock files
+  <a class="heading-anchor" href="#lock-files">#</a>
+</h4>
+<p>On single-user environments, as we tend to run Emacs these days, those
+<code>.#*</code> files are more likely to confuse some other program as they are
+to protect us from conflicting edits.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nv">setopt</span> <span class="nv">create-lockfiles</span> <span class="no">nil</span><span class="p">)</span>
+</span></span></code></pre></div></div>
+<h4 id="auto-revert">
+  Auto-revert
+  <a class="heading-anchor" href="#auto-revert">#</a>
+</h4>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">autorevert</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:diminish</span> <span class="nv">auto-revert-mode</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:hook</span> <span class="p">(</span><span class="nv">on-first-buffer</span> <span class="o">.</span> <span class="nv">global-auto-revert-mode</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:custom</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">global-auto-revert-non-file-buffers</span> <span class="no">t</span><span class="p">))</span>
+</span></span></code></pre></div></div>
+<h4 id="recent-files">
+  Recent files
+  <a class="heading-anchor" href="#recent-files">#</a>
+</h4>
+<p>This maintains a list of recent files, as we often find in other
+applications.  I wonder if it can or should be integrated with MacOS'
+list of recent files?</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">recentf</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:hook</span> <span class="p">(</span><span class="nv">on-first-file-hook</span> <span class="o">.</span> <span class="nv">recentf-mode</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:bind</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">:map</span> <span class="nv">rab/files-map</span>
+</span></span><span class="line"><span class="cl">   <span class="p">(</span><span class="s">&#34;r&#34;</span> <span class="o">.</span> <span class="nv">recentf-open</span><span class="p">)))</span>
+</span></span></code></pre></div></div>
+<h3 id="text">
+  Text
+  <a class="heading-anchor" href="#text">#</a>
+</h3>
+<h4 id="case">
+  Case
+  <a class="heading-anchor" href="#case">#</a>
+</h4>
+<h5 id="dwim-case">
+  DWIM case
+  <a class="heading-anchor" href="#dwim-case">#</a>
+</h5>
+<p>These do-what-I-mean bindings are newer than the classic keybindings,
+but a better default.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">emacs</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:bind</span>
+</span></span><span class="line"><span class="cl">  <span class="p">([</span><span class="nv">remap</span> <span class="nf">capitalize-word</span><span class="p">]</span> <span class="o">.</span> <span class="nv">capitalize-dwim</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">([</span><span class="nv">remap</span> <span class="nf">downcase-word</span><span class="p">]</span> <span class="o">.</span> <span class="nv">downcase-dwim</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">([</span><span class="nv">remap</span> <span class="nf">upcase-word</span><span class="p">]</span> <span class="o">.</span> <span class="nv">upcase-dwim</span><span class="p">))</span>
+</span></span></code></pre></div></div>
+<h5 id="title-case">
+  Title case
+  <a class="heading-anchor" href="#title-case">#</a>
+</h5>
+<p>Gosh, I wish I&rsquo;d had this when I was so active on <a href="https://musicbrainz.org/">MusicBrainz</a>.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">titlecase</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:ensure</span> <span class="no">t</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:defer</span> <span class="no">t</span><span class="p">)</span>
+</span></span></code></pre></div></div>
+<h4 id="jinx">
+  Jinx
+  <a class="heading-anchor" href="#jinx">#</a>
+</h4>
+<p><a href="https://github.com/minad/jinx">Jinx</a> is a just-in-time spell checker.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">jinx</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:ensure</span> <span class="no">t</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:hook</span> <span class="p">(</span><span class="nv">on-first-buffer</span> <span class="o">.</span> <span class="nv">global-jinx-mode</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:bind</span>
+</span></span><span class="line"><span class="cl">  <span class="p">([</span><span class="nv">remap</span> <span class="nv">ispell-word</span><span class="p">]</span> <span class="o">.</span> <span class="nv">jinx-correct</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:bind</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">:map</span> <span class="nv">rab/toggles-map</span>
+</span></span><span class="line"><span class="cl">   <span class="p">(</span><span class="s">&#34;$&#34;</span> <span class="o">.</span> <span class="nv">jinx-mode</span><span class="p">)))</span>
+</span></span></code></pre></div></div>
+<p>This one requires a Nix build, <a href="https://github.com/GTrunSec/hive/blob/ce7c0087a055fb3f91a402ec0d2caeb4a3579d5f/nix/emacs/homeModules/packages.nix#L16">inspired by hive-std</a>:</p>
+<div class="code-snippet"><p class="license">MIT</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nix" data-lang="nix"><span class="line"><span class="cl"><span class="k">let</span>
+</span></span><span class="line"><span class="cl">  <span class="n">jinx-lisp</span> <span class="o">=</span> <span class="n">epkgs</span><span class="o">.</span><span class="n">trivialBuild</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pname</span> <span class="o">=</span> <span class="s2">&#34;jinx-lisp&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">src</span> <span class="o">=</span> <span class="n">inputs</span><span class="o">.</span><span class="n">jinx</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">packageRequires</span> <span class="o">=</span> <span class="p">[</span> <span class="n">epkgs</span><span class="o">.</span><span class="n">compat</span> <span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="n">version</span> <span class="o">=</span> <span class="s2">&#34;0.9&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">};</span>
+</span></span><span class="line"><span class="cl">  <span class="n">jinx-mod</span> <span class="o">=</span> <span class="n">pkgs</span><span class="o">.</span><span class="n">stdenv</span><span class="o">.</span><span class="n">mkDerivation</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">name</span> <span class="o">=</span> <span class="s2">&#34;jinx-mod&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">src</span> <span class="o">=</span> <span class="n">inputs</span><span class="o">.</span><span class="n">jinx</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">buildInputs</span> <span class="o">=</span> <span class="p">[</span> <span class="n">pkgs</span><span class="o">.</span><span class="n">enchant</span> <span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="n">buildPhase</span> <span class="o">=</span> <span class="s1">&#39;&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">      cc -I. -O2 -Wall -Wextra -fPIC -shared -o jinx-mod.dylib jinx-mod.c \
+</span></span></span><span class="line"><span class="cl"><span class="s1">        -I</span><span class="si">${</span><span class="n">pkgs</span><span class="o">.</span><span class="n">enchant</span><span class="o">.</span><span class="n">dev</span><span class="si">}</span><span class="s1">/include/enchant-2 -lenchant-2
+</span></span></span><span class="line"><span class="cl"><span class="s1">    &#39;&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">installPhase</span> <span class="o">=</span> <span class="s1">&#39;&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">      LISPDIR=$out/share/emacs/site-lisp
+</span></span></span><span class="line"><span class="cl"><span class="s1">      install -d $LISPDIR
+</span></span></span><span class="line"><span class="cl"><span class="s1">      install *.dylib $LISPDIR
+</span></span></span><span class="line"><span class="cl"><span class="s1">    &#39;&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="k">in</span>
+</span></span><span class="line"><span class="cl"><span class="n">pkgs</span><span class="o">.</span><span class="n">symlinkJoin</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">name</span> <span class="o">=</span> <span class="s2">&#34;jinx&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">paths</span> <span class="o">=</span> <span class="p">[</span> <span class="n">jinx-lisp</span> <span class="n">jinx-mod</span> <span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></div>
+<p>Let&rsquo;s not forget a dictionary.</p>
+<div class="code-snippet"><p class="license">MIT</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nix" data-lang="nix"><span class="line"><span class="cl"><span class="p">({</span> <span class="n">pkgs</span><span class="o">,</span> <span class="o">...</span><span class="p">}:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">home</span><span class="o">.</span><span class="n">packages</span> <span class="o">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pkgs</span><span class="o">.</span><span class="n">nuspell</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pkgs</span><span class="o">.</span><span class="n">hunspellDicts</span><span class="o">.</span><span class="n">en_US</span>
+</span></span><span class="line"><span class="cl">  <span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span></code></pre></div></div>
+<h4 id="markdown">
+  Markdown
+  <a class="heading-anchor" href="#markdown">#</a>
+</h4>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">markdown-mode</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:ensure</span> <span class="no">t</span><span class="p">)</span>
+</span></span></code></pre></div></div>
+<h4 id="outlines">
+  Outlines
+  <a class="heading-anchor" href="#outlines">#</a>
+</h4>
+<h5 id="org">
+  Org
+  <a class="heading-anchor" href="#org">#</a>
+</h5>
+<p>Org Mode&rsquo;s timestamps are sadly not aware of time zones, but we can
+crudely approximate support by <a href="https://emacs.stackexchange.com/a/60590">setting <code>org-time-stamp-formats</code></a>.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">org</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:config</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">;; Not a defcustom, has to be setq!</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">org-time-stamp-formats</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;%Y-%m-%d %a&#34;</span> <span class="o">.</span> <span class="s">&#34;%Y-%m-%d %a %H:%M %Z&#34;</span><span class="p">)))</span>
+</span></span></code></pre></div></div>
+<h6 id="ob-shell">
+  ob-shell
+  <a class="heading-anchor" href="#ob-shell">#</a>
+</h6>
+<p>Cromulent evaluates shell source code.  <code>org-confirm-babel-evaluate</code>
+keeps it from running in untrusted places, so loading it shouldn&rsquo;t
+hurt anything.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">ob-shell</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:after</span> <span class="nv">org</span><span class="p">)</span>
+</span></span></code></pre></div></div>
+<h6 id="ox-hugo">
+  ox-hugo
+  <a class="heading-anchor" href="#ox-hugo">#</a>
+</h6>
+<p>We use <a href="https://github.com/kaushalmodi/ox-hugo">ox-hugo</a> for publishing, with <a href="/configs/emacs/rab-ox-hugo/">custom extensions</a>.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">ox-hugo</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:ensure</span> <span class="no">t</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:after</span> <span class="nv">org</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">rab-ox-hugo</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:after</span> <span class="nv">ox-hugo</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:config</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">rab/ox-hugo-mode</span><span class="p">))</span>
+</span></span></code></pre></div></div>
+<h6 id="ox-slack">
+  ox-slack
+  <a class="heading-anchor" href="#ox-slack">#</a>
+</h6>
+<p>Mostly useful for <code>org-slack-export-to-clipboard-as-slack</code>.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">ox-slack</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:ensure</span> <span class="no">t</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:after</span> <span class="nv">org</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:bind</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">:map</span> <span class="nv">org-mode-map</span>
+</span></span><span class="line"><span class="cl">   <span class="nb">:prefix-map</span> <span class="nv">rab/org-mode-map</span>
+</span></span><span class="line"><span class="cl">   <span class="nb">:prefix</span> <span class="s">&#34;C-c m&#34;</span>
+</span></span><span class="line"><span class="cl">   <span class="p">(</span><span class="s">&#34;w&#34;</span> <span class="o">.</span> <span class="nv">org-slack-export-to-clipboard-as-slack</span><span class="p">)))</span>
+</span></span></code></pre></div></div>
+<p>Apply <a href="https://github.com/titaniumbones/ox-slack/pull/9">this patch</a> to fix the syntax for links.  In Slack, turn on
+&ldquo;Format messages with markup&rdquo; in Advanced settings for link support.</p>
+<div class="code-snippet"><p class="license">MIT</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nix" data-lang="nix"><span class="line"><span class="cl"><span class="n">epkgs</span><span class="o">.</span><span class="n">ox-slack</span><span class="o">.</span><span class="n">overrideAttrs</span><span class="p">(</span><span class="n">old</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">patches</span> <span class="o">=</span> <span class="p">[</span> <span class="sr">../../../src/emacs/ox-slack/github-9.patch</span> <span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span></code></pre></div></div>
+<h4 id="subword-mode">
+  Subword mode
+  <a class="heading-anchor" href="#subword-mode">#</a>
+</h4>
+<p>Subword mode helps us move around camel-case languages, and is mostly
+configured as a hook in those major modes.  The only thing we
+customize about it is not wanting it cluttering the mode line.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">subword</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:defer</span> <span class="no">t</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:diminish</span><span class="p">)</span>
+</span></span></code></pre></div></div>
+<h4 id="counting-words">
+  Counting words
+  <a class="heading-anchor" href="#counting-words">#</a>
+</h4>
+<p>The default binding of <code>M-=</code> is <code>count-words-region</code>.  The newer
+<code>count-words</code> counts the buffer when there&rsquo;s no active region.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nv">bind-key</span> <span class="p">[</span><span class="nv">remap</span> <span class="nv">count-words-region</span><span class="p">]</span> <span class="ss">&#39;count-words</span><span class="p">)</span>
+</span></span></code></pre></div></div>
+<h3 id="data">
+  Data
+  <a class="heading-anchor" href="#data">#</a>
+</h3>
+<h4 id="save-place">
+  Save place
+  <a class="heading-anchor" href="#save-place">#</a>
+</h4>
+<p>This mode saves our place for when we revisit a file.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">saveplace</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:hook</span> <span class="p">(</span><span class="nv">on-first-buffer</span> <span class="o">.</span> <span class="nv">save-place-mode</span><span class="p">))</span>
+</span></span></code></pre></div></div>
+<h3 id="external">
+  External
+  <a class="heading-anchor" href="#external">#</a>
+</h3>
+<h4 id="processes">
+  Processes
+  <a class="heading-anchor" href="#processes">#</a>
+</h4>
+<h4 id="rfc-mode">
+  RFC mode
+  <a class="heading-anchor" href="#rfc-mode">#</a>
+</h4>
+<p>As an http4s author, I refer to RFCs constantly.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">rfc-mode</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:ensure</span> <span class="no">t</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:defer</span> <span class="no">t</span><span class="p">)</span>
+</span></span></code></pre></div></div>
+<h5 id="envrc">
+  Envrc
+  <a class="heading-anchor" href="#envrc">#</a>
+</h5>
+<p>I maintain a minimal home environment and push as much as I can to Nix
+flakes.  This insulates me from conflicting dependencies, makes my
+projects more portable, and helps me share with Nix-enabled teammates.</p>
+<p>Where possible, I add an <code>.envrc</code> file to load the environment from
+the flake.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">envrc</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:ensure</span> <span class="no">t</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:hook</span> <span class="p">(</span><span class="nv">on-first-file</span> <span class="o">.</span> <span class="nv">envrc-global-mode</span><span class="p">))</span>
+</span></span></code></pre></div></div>
+<h3 id="programming">
+  Programming
+  <a class="heading-anchor" href="#programming">#</a>
+</h3>
+<h4 id="languages">
+  Languages
+  <a class="heading-anchor" href="#languages">#</a>
+</h4>
+<h5 id="c">
+  C#
+  <a class="heading-anchor" href="#c">#</a>
+</h5>
+<p>I am not a C# developer, but I&rsquo;ve been known to interview them.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">csharp-mode</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:mode</span> <span class="p">((</span><span class="nb">rx</span> <span class="s">&#34;.cs&#34;</span> <span class="nv">eos</span><span class="p">)</span> <span class="o">.</span> <span class="ss">&#39;csharp-ts-mode</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:hook</span> <span class="p">(</span><span class="nv">csharp-ts-mode</span> <span class="o">.</span> <span class="nv">subword-mode</span><span class="p">))</span>
+</span></span></code></pre></div></div>
+<h5 id="lisp">
+  Lisp
+  <a class="heading-anchor" href="#lisp">#</a>
+</h5>
+<p>Load my <a href="/configs/emacs/rab-lisp/">Lisp extensions</a> to fix the indentation of <code>use-package</code>
+blocks.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">rab-lisp</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:after</span> <span class="nv">lisp-mode</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:config</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">advice-add</span> <span class="nf">#&#39;</span><span class="nv">calculate-lisp-indent</span> <span class="nb">:override</span> <span class="nf">#&#39;</span><span class="nv">rab/lisp-calculate-indent</span><span class="p">))</span>
+</span></span></code></pre></div></div>
+<h6 id="compilation">
+  Compilation
+  <a class="heading-anchor" href="#compilation">#</a>
+</h6>
+<p>I get a bunch of asynchronous warnings from native compilation in a
+<code>*Warnings*</code> popup.  It&rsquo;s nice that they&rsquo;re there, but unless they&rsquo;re
+an error, I don&rsquo;t need them all up in my business.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">comp</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:custom</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">native-comp-async-report-warnings-errors</span> <span class="ss">&#39;silent</span><span class="p">))</span>
+</span></span></code></pre></div></div>
+<h5 id="nix">
+  Nix
+  <a class="heading-anchor" href="#nix">#</a>
+</h5>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">nix-mode</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:ensure</span> <span class="no">t</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:defer</span> <span class="no">t</span><span class="p">)</span>
+</span></span></code></pre></div></div>
+<h5 id="scala">
+  Scala
+  <a class="heading-anchor" href="#scala">#</a>
+</h5>
+<p>Much of this configuration starts from the <a href="https://scalameta.org/metals/docs/editors/emacs/">Metals guide</a>.</p>
+<div class="warning">
+<p>This doesn&rsquo;t work well with Scala 3&rsquo;s Significant Whitespace
+Traveshamockery.  Once we&rsquo;re ready for that, we&rsquo;ll take a look at
+<a href="https://github.com/KaranAhlawat/scala-ts-mode/issues/1#issuecomment-1573884094">scala-ts-mode</a>.</p>
+</div>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">scala-mode</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:ensure</span> <span class="no">t</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:interpreter</span> <span class="p">(</span><span class="s">&#34;scala&#34;</span> <span class="o">.</span> <span class="nv">scala-mode</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:hook</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">scala-mode</span> <span class="o">.</span> <span class="nv">eglot-ensure</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">scala-mode</span> <span class="o">.</span> <span class="nv">subword-mode</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">sbt-mode</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:ensure</span> <span class="no">t</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:commands</span> <span class="nv">sbt-start</span> <span class="nv">sbt-command</span><span class="p">)</span>
+</span></span></code></pre></div></div>
+<p><a href="https://github.com/ag91/scala-cli-repl">scala-cli-repl</a> lets us run Scala in Org mode.  It&rsquo;s currently
+generating an error from the native compiled version, so the
+library is reloaded from source as an interim fix:</p>
+<blockquote>
+<p><code>Wrong number of arguments: #&lt;subr s-split&gt;, 1</code></p>
+</blockquote>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">scala-cli-repl</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:ensure</span> <span class="no">t</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:defer</span> <span class="no">t</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:init</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">load-file</span> <span class="p">(</span><span class="nv">find-library-name</span> <span class="s">&#34;ob-scala-cli&#34;</span><span class="p">)))</span>
+</span></span></code></pre></div></div>
+<p>And the Nix build, with <a href="https://github.com/ag91/scala-cli-repl/pull/5">patch to remove ellipses in Scala 2</a>.</p>
+<div class="code-snippet"><p class="license">MIT</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nix" data-lang="nix"><span class="line"><span class="cl"><span class="p">(</span><span class="n">epkgs</span><span class="o">.</span><span class="n">trivialBuild</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">pname</span> <span class="o">=</span> <span class="s2">&#34;scala-cli-repl&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">src</span> <span class="o">=</span> <span class="n">inputs</span><span class="o">.</span><span class="n">scala-cli-repl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">packageRequires</span> <span class="o">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="n">epkgs</span><span class="o">.</span><span class="n">s</span>
+</span></span><span class="line"><span class="cl">    <span class="n">epkgs</span><span class="o">.</span><span class="n">scala-mode</span>
+</span></span><span class="line"><span class="cl">    <span class="n">epkgs</span><span class="o">.</span><span class="n">xterm-color</span>
+</span></span><span class="line"><span class="cl">  <span class="p">];</span>
+</span></span><span class="line"><span class="cl">  <span class="n">version</span> <span class="o">=</span> <span class="s2">&#34;HEAD&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span></code></pre></div></div>
+<h5 id="xml">
+  XML
+  <a class="heading-anchor" href="#xml">#</a>
+</h5>
+<p>:CUSTOM_ID: xml</p>
+<p><a href="https://github.com/tali713/esxml">esxml</a> essentially turns Lisp into an XML (or XHTML) templating engine.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">esxml</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:ensure</span> <span class="no">t</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:defer</span> <span class="no">t</span><span class="p">)</span>
+</span></span></code></pre></div></div>
+<h5 id="web-mode">
+  Web Mode
+  <a class="heading-anchor" href="#web-mode">#</a>
+</h5>
+<p><a href="https://github.com/fxbois/web-mode">web-mode.el</a> is powerful.  I&rsquo;m just scratching the surface for now,
+using it for Hugo templates.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">web-mode</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:ensure</span> <span class="no">t</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:custom</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">web-mode-markup-indent-offset</span> <span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">web-mode-code-indent-offset</span> <span class="mi">2</span><span class="p">))</span>
+</span></span></code></pre></div></div>
+<p>In order to make it work in Org source blocks, where there&rsquo;s no file
+type to detect the engine, a derived mode is created:</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">define-derived-mode</span> <span class="nv">rab/hugo-mode</span> <span class="nv">web-mode</span> <span class="s">&#34;Hugo&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;Major mode for editing Hugo templates.&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">web-mode</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">web-mode-set-engine</span> <span class="s">&#34;go&#34;</span><span class="p">))</span>
+</span></span></code></pre></div></div>
+<p>Also map the language <code>go-html-template</code> to it.  This language has
+support in both ox-hugo and Chroma.</p>
+<div class="code-snippet"><p class="license">CC-BY-SA-4.0</p>
+<pre tabindex="0"><code class="language-emcas-lisp" data-lang="emcas-lisp">(add-to-list &#39;org-src-lang-modes &#39;(&#34;go-html-template&#34; . rab/hugo))
+</code></pre></div>
+<p>Use thusly:</p>
+<div class="code-snippet"><p class="license">CC-BY-SA-4.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-org" data-lang="org"><span class="line"><span class="cl"><span class="c">#+begin_src </span><span class="cs">go-html-template</span><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c"></span>  <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="cp">{{</span><span class="w"> </span><span class="k">block</span><span class="w"> </span><span class="s">&#34;head&#34;</span><span class="w"> </span><span class="na">.</span><span class="w"> </span><span class="cp">}}</span>
+</span></span><span class="line"><span class="cl">      <span class="cp">{{</span><span class="w"> </span><span class="nx">partial</span><span class="w"> </span><span class="s">&#34;head&#34;</span><span class="w"> </span><span class="na">.</span><span class="w"> </span><span class="cp">}}</span>
+</span></span><span class="line"><span class="cl">    <span class="cp">{{</span><span class="w"> </span><span class="k">end</span><span class="w"> </span><span class="cp">}}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="c">#+end_src</span>
+</span></span></code></pre></div></div>
+<h5 id="yaml">
+  YAML
+  <a class="heading-anchor" href="#yaml">#</a>
+</h5>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">yaml-mode</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:ensure</span> <span class="no">t</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:defer</span> <span class="no">t</span><span class="p">)</span>
+</span></span></code></pre></div></div>
+<h4 id="tools">
+  Tools
+  <a class="heading-anchor" href="#tools">#</a>
+</h4>
+<h5 id="dumb-jump">
+  Dumb jump
+  <a class="heading-anchor" href="#dumb-jump">#</a>
+</h5>
+<p><a href="https://github.com/jacktasia/dumb-jump">dumb-jump</a> is dumber than LSP, but it&rsquo;s a lot less fussy and makes for
+a wonderful fallback option.</p>
+<p><code>git-grep</code> is not working for me.  It appears to be <a href="https://github.com/jacktasia/dumb-jump/issues/428">option rot</a>.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">dumb-jump</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:ensure</span> <span class="no">t</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:config</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;xref-backend-functions</span> <span class="nf">#&#39;</span><span class="nv">dumb-jump-xref-activate</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:custom</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">dumb-jump-force-searcher</span> <span class="ss">&#39;rg</span><span class="p">))</span>
+</span></span></code></pre></div></div>
+<p>Make sure ripgrep is available.</p>
+<div class="code-snippet"><p class="license">MIT</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nix" data-lang="nix"><span class="line"><span class="cl"><span class="p">({</span> <span class="n">pkgs</span><span class="o">,</span> <span class="o">...</span><span class="p">}:</span> <span class="p">{</span> <span class="n">home</span><span class="o">.</span><span class="n">packages</span> <span class="o">=</span> <span class="p">[</span> <span class="n">pkgs</span><span class="o">.</span><span class="n">ripgrep</span> <span class="p">];</span> <span class="p">})</span>
+</span></span></code></pre></div></div>
+<h5 id="git">
+  Git
+  <a class="heading-anchor" href="#git">#</a>
+</h5>
+<h6 id="git-modes">
+  Git Modes
+  <a class="heading-anchor" href="#git-modes">#</a>
+</h6>
+<p><a href="https://github.com/magit/git-modes">Git modes</a> provides three modes:</p>
+<ul>
+<li><code>.gitattributes</code> and similar</li>
+<li><code>.gitconfig</code> and similar</li>
+<li><code>.gitignore</code> and similar</li>
+</ul>
+<p>We want them all.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">git-modes</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:defer</span> <span class="no">t</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:ensure</span> <span class="no">t</span><span class="p">)</span>
+</span></span></code></pre></div></div>
+<h6 id="magit">
+  Magit
+  <a class="heading-anchor" href="#magit">#</a>
+</h6>
+<p>I have known people to leave Emacs, but continuing to use <a href="https://magit.vc/">Magit</a> for
+version control.  It&rsquo;s that good.</p>
+<p>I am giving built-ins the benefit of the doubt in this config, and
+would like to get into <code>vc-mode</code>.  But I&rsquo;m an advanced enough Git user
+that something tailor-made carries its weight here.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">magit</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:ensure</span> <span class="no">t</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:defer</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:functions</span> <span class="nv">rab/magit-clone-read-args-a</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:bind</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">:prefix-map</span> <span class="nv">rab/git-map</span>
+</span></span><span class="line"><span class="cl">   <span class="nb">:prefix</span> <span class="s">&#34;C-c g&#34;</span>
+</span></span><span class="line"><span class="cl">   <span class="p">(</span><span class="s">&#34;g&#34;</span> <span class="o">.</span> <span class="nv">magit-status</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">   <span class="p">(</span><span class="s">&#34;c&#34;</span> <span class="o">.</span> <span class="nv">magit-clone</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:custom</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">magit-clone-default-directory</span> <span class="s">&#34;~/src/&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">magit-no-message</span> <span class="p">(</span><span class="nf">list</span> <span class="s">&#34;Turning on magit-auto-revert-mode...&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">magit-save-repository-buffers</span> <span class="ss">&#39;dontask</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:config</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">defun</span> <span class="nv">rab/magit-clone-read-args-a</span> <span class="p">(</span><span class="nv">orig-fun</span> <span class="kp">&amp;rest</span> <span class="nv">args</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;Sets </span><span class="ss">`vertico-preselect&#39;</span><span class="s"> to </span><span class="ss">`prompt&#39;</span><span class="s"> when cloning repos, so we
+</span></span></span><span class="line"><span class="cl"><span class="s">clone to the default prompted directory, and not some random
+</span></span></span><span class="line"><span class="cl"><span class="s">existing directory under </span><span class="ss">`magit-clone-default-directory&#39;</span><span class="s">.&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">let</span> <span class="p">((</span><span class="nv">vertico-preselect</span> <span class="ss">&#39;prompt</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nf">apply</span> <span class="nv">orig-fun</span> <span class="nv">args</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">advice-add</span> <span class="ss">&#39;magit-clone-read-args</span> <span class="nb">:around</span> <span class="nf">#&#39;</span><span class="nv">rab/magit-clone-read-args-a</span><span class="p">))</span>
+</span></span></code></pre></div></div>
+<p>Some commits are mostly reformats, and it&rsquo;s irritating when browsing
+history.  This makes it easy to give Git a hint to ignore them:</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">rab/git-add-to-blame-ignore-revs</span> <span class="p">(</span><span class="nv">revision</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;Adds COMMIT to .git-blame-ignore-revs.  Runs `git rev parse&#39; on COMMIT to resolve it first.&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">interactive</span> <span class="p">(</span><span class="nf">list</span> <span class="p">(</span><span class="nv">magit-read-other-branch-or-commit</span> <span class="s">&#34;Blame-ignored revision&#34;</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">when-let</span> <span class="p">((</span><span class="nv">file</span> <span class="p">(</span><span class="nf">expand-file-name</span> <span class="s">&#34;.git-blame-ignore-revs&#34;</span> <span class="p">(</span><span class="nv">project-root</span> <span class="p">(</span><span class="nv">project-current</span><span class="p">))))</span>
+</span></span><span class="line"><span class="cl">             <span class="p">(</span><span class="nv">parsed</span> <span class="p">(</span><span class="nv">magit-rev-parse</span> <span class="nv">revision</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">with-current-buffer</span> <span class="p">(</span><span class="nv">find-file-noselect</span> <span class="nv">file</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nb">save-excursion</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nv">end-of-buffer</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nf">insert</span> <span class="nv">parsed</span> <span class="s">&#34;\n&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nv">save-buffer</span><span class="p">)))))</span>
+</span></span></code></pre></div></div>
+<h6 id="git-link">
+  Git-Link
+  <a class="heading-anchor" href="#git-link">#</a>
+</h6>
+<p><a href="https://github.com/sshaw/git-link/">git-link</a> grabs links to lines, regions, commits, or home pages.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">git-link</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:ensure</span> <span class="no">t</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:custom</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">git-link-use-commit</span> <span class="no">t</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">git-link-use-single-line-number</span> <span class="no">t</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:commands</span> <span class="p">(</span><span class="nv">git-link</span> <span class="nv">git-link-commit</span> <span class="nv">git-link-homepage</span><span class="p">))</span>
+</span></span></code></pre></div></div>
+<h6 id="git-related">
+  Git-Related
+  <a class="heading-anchor" href="#git-related">#</a>
+</h6>
+<p><a href="https://macroexpand.net/pages/git-related.html"><code>git-related</code></a> sorts files in a project by a similarity score derived
+from how often they change in the same commit.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">git-related</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:bind</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">:map</span> <span class="nv">rab/files-map</span>
+</span></span><span class="line"><span class="cl">   <span class="p">(</span><span class="s">&#34;g&#34;</span> <span class="o">.</span> <span class="nv">git-related-find-file</span><span class="p">)))</span>
+</span></span></code></pre></div></div>
+<p>The original is not in a public Git repository, so I <a href="https://codeberg.org/rossabaker/git-related">forked it</a>.</p>
+<p>I don&rsquo;t prefer the way it propertizes the string with the score.  The
+main thing I want is the sort, so I lightly customized it.  The score
+might still be compelling as an <code>:annotation-function</code>.</p>
+<div class="code-snippet"><p class="license">MIT</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nix" data-lang="nix"><span class="line"><span class="cl"><span class="n">epkgs</span><span class="o">.</span><span class="n">trivialBuild</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">pname</span> <span class="o">=</span> <span class="s2">&#34;git-related&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">src</span> <span class="o">=</span> <span class="n">inputs</span><span class="o">.</span><span class="n">git-related</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">version</span> <span class="o">=</span> <span class="s2">&#34;1.1&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></div>
+<p>The sort order is customized in <a href="#vertico-multiform">Vertico multiform</a>.</p>
+<h5 id="restclient">
+  Restclient
+  <a class="heading-anchor" href="#restclient">#</a>
+</h5>
+<p><a href="https://github.com/pashky/restclient.el">restclient.el</a> is essentially an HTTP worksheet.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">restclient</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:ensure</span> <span class="no">t</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:defer</span> <span class="no">t</span><span class="p">)</span>
+</span></span></code></pre></div></div>
+<p>I&rsquo;d like to look into <a href="https://github.com/alf/ob-restclient.el">ob-restclient.el</a> for org-babel integration.</p>
+<h5 id="treesitter">
+  Treesitter
+  <a class="heading-anchor" href="#treesitter">#</a>
+</h5>
+<p><a href="https://github.com/renzmann/treesit-auto"><code>treesit-auto</code></a> finds treesitter modes by naming convention.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">treesit-auto</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:ensure</span> <span class="no">t</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:demand</span> <span class="no">t</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:config</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">global-treesit-auto-mode</span><span class="p">))</span>
+</span></span></code></pre></div></div>
+<h5 id="uuid-generation">
+  UUID Generation
+  <a class="heading-anchor" href="#uuid-generation">#</a>
+</h5>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">uuidgen</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:ensure</span> <span class="no">t</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:defer</span> <span class="no">t</span><span class="p">)</span>
+</span></span></code></pre></div></div>
+<h5 id="xref">
+  Xref
+  <a class="heading-anchor" href="#xref">#</a>
+</h5>
+<p>Regardless of LSP or dumb-jump, we want Vertico to handle when
+multiple definitions are found.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">xref</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:defer</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:custom</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">xref-show-definitions-function</span> <span class="nf">#&#39;</span><span class="nv">xref-show-definitions-completing-read</span><span class="p">))</span>
+</span></span></code></pre></div></div>
+<h5 id="verb">
+  Verb
+  <a class="heading-anchor" href="#verb">#</a>
+</h5>
+<p><a href="https://github.com/federicotdn/verb">Verb</a> is an alternative to <a href="#restclient">restclient.el</a> that many of my colleagues
+use.  The feature sets look roughly equivalent, so I&rsquo;ll give it a shot
+in the spirit of comity.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">verb</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:after</span> <span class="nv">org</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:ensure</span> <span class="no">t</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:config</span> <span class="p">(</span><span class="nf">define-key</span> <span class="nv">org-mode-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&#34;C-c C-r&#34;</span><span class="p">)</span> <span class="nv">verb-command-map</span><span class="p">))</span>
+</span></span></code></pre></div></div>
+<h3 id="applications">
+  Applications
+  <a class="heading-anchor" href="#applications">#</a>
+</h3>
+<h4 id="dictionary">
+  Dictionary
+  <a class="heading-anchor" href="#dictionary">#</a>
+</h4>
+<p>The <code>M-#</code> keybinding is dubious because it&rsquo;s not reserved, but it&rsquo;s
+<a href="https://www.masteringemacs.org/article/wordsmithing-in-emacs">good enough for Mickey Petersen</a>.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">dictionary</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:bind</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="s">&#34;M-#&#34;</span> <span class="o">.</span> <span class="nv">dictionary-lookup-definition</span><span class="p">))</span>
+</span></span></code></pre></div></div>
+<p>Until I find a working dictd for MacOS on Nix, we&rsquo;ll sigh heavily and
+use dict.org.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">dictionary</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:if</span> <span class="p">(</span><span class="nf">memq</span> <span class="nf">window-system</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">mac</span> <span class="nv">ns</span> <span class="nv">x</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:custom</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">dictionary-server</span> <span class="s">&#34;dict.org&#34;</span><span class="p">))</span>
+</span></span></code></pre></div></div>
+<h4 id="language-server-protocol">
+  Language server protocol
+  <a class="heading-anchor" href="#language-server-protocol">#</a>
+</h4>
+<p>We&rsquo;re going to give <a href="https://joaotavora.github.io/eglot/">eglot</a> a try now that it&rsquo;s built into Emacs.  It&rsquo;s
+a bit more minimalist than the excellent <a href="https://emacs-lsp.github.io/lsp-mode/">lsp-mode</a>.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">eglot</span> <span class="nb">:defer</span> <span class="no">t</span><span class="p">)</span>
+</span></span></code></pre></div></div>
+<h3 id="development">
+  Development
+  <a class="heading-anchor" href="#development">#</a>
+</h3>
+<h4 id="extensions">
+  Extensions
+  <a class="heading-anchor" href="#extensions">#</a>
+</h4>
+<h5 id="htmlize">
+  htmlize
+  <a class="heading-anchor" href="#htmlize">#</a>
+</h5>
+<p><a href="https://github.com/hniksic/emacs-htmlize/blob/master/htmlize.el"><code>htmlize</code></a> provides syntax highlighting for our code snippets when
+exported to HTML.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">htmlize</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:ensure</span> <span class="no">t</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:after</span> <span class="nv">ox-html</span><span class="p">)</span>
+</span></span></code></pre></div></div>
+<h3 id="environment">
+  Environment
+  <a class="heading-anchor" href="#environment">#</a>
+</h3>
+<h4 id="dired">
+  Dired
+  <a class="heading-anchor" href="#dired">#</a>
+</h4>
+<p>Dired should refresh the listing on each revisit.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">dired</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:defer</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:custom</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">dired-auto-revert-buffer</span> <span class="no">t</span><span class="p">))</span>
+</span></span></code></pre></div></div>
+<h4 id="frames">
+  Frames
+  <a class="heading-anchor" href="#frames">#</a>
+</h4>
+<p>I like tiled windows more than I need Emacs to maintain a static
+number of columns and rows.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nv">setopt</span> <span class="nv">frame-inhibit-implied-resize</span> <span class="no">t</span><span class="p">)</span>
+</span></span></code></pre></div></div>
+<h5 id="cursor">
+  Cursor
+  <a class="heading-anchor" href="#cursor">#</a>
+</h5>
+<p>I like a non-blinking bar cursor.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nv">setopt</span> <span class="nv">cursor-type</span> <span class="ss">&#39;bar</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">frame</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:config</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">blink-cursor-mode</span> <span class="mi">-1</span><span class="p">))</span>
+</span></span></code></pre></div></div>
+<h5 id="mode-line">
+  Mode line
+  <a class="heading-anchor" href="#mode-line">#</a>
+</h5>
+<h6 id="column-number">
+  Column number
+  <a class="heading-anchor" href="#column-number">#</a>
+</h6>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">simple</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:hook</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">on-first-buffer</span> <span class="o">.</span> <span class="nv">column-number-mode</span><span class="p">))</span>
+</span></span></code></pre></div></div>
+<h6 id="size-indication">
+  Size indication
+  <a class="heading-anchor" href="#size-indication">#</a>
+</h6>
+<p>Put the buffer size in the mode line.  coreutils use binary
+(base 1024) units, so I will too.  I mostly wanted to see if I could.
+Of course I could.  This is Emacs.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">rab/mode-line-binary-size-indication</span> <span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;Replaces the size indication in the mode line with base 1024 units.&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;cl-seq</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">setopt</span> <span class="nv">mode-line-position</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nv">cl-subst-if</span>
+</span></span><span class="line"><span class="cl">         <span class="o">&#39;</span><span class="p">(</span><span class="nv">size-indication-mode</span>
+</span></span><span class="line"><span class="cl">           <span class="p">(</span><span class="mi">8</span> <span class="s">&#34; of &#34;</span> <span class="p">(</span><span class="nb">:eval</span> <span class="p">(</span><span class="nv">file-size-human-readable</span> <span class="p">(</span><span class="nf">buffer-size</span><span class="p">)</span> <span class="ss">&#39;iec</span> <span class="s">&#34;&#34;</span> <span class="s">&#34;B&#34;</span><span class="p">))))</span>
+</span></span><span class="line"><span class="cl">         <span class="p">(</span><span class="nb">lambda</span> <span class="p">(</span><span class="nv">x</span><span class="p">)</span> <span class="p">(</span><span class="nb">and</span> <span class="p">(</span><span class="nf">listp</span> <span class="nv">x</span><span class="p">)</span> <span class="p">(</span><span class="nf">eq</span> <span class="ss">&#39;size-indication-mode</span> <span class="p">(</span><span class="nf">car</span> <span class="nv">x</span><span class="p">))))</span>
+</span></span><span class="line"><span class="cl">         <span class="nv">mode-line-position</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;on-first-buffer-hook</span> <span class="nf">#&#39;</span><span class="nv">rab/mode-line-binary-size-indication</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;on-first-buffer-hook</span> <span class="nf">#&#39;</span><span class="nv">size-indication-mode</span><span class="p">)</span>
+</span></span></code></pre></div></div>
+<h5 id="scroll-bars">
+  Scroll bars
+  <a class="heading-anchor" href="#scroll-bars">#</a>
+</h5>
+<p>The mode line tells us where we&rsquo;re at, and we mostly eschew the mouse.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">scroll-bar</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:config</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">scroll-bar-mode</span> <span class="mi">-1</span><span class="p">))</span>
+</span></span></code></pre></div></div>
+<h5 id="tool-bars">
+  Tool bars
+  <a class="heading-anchor" href="#tool-bars">#</a>
+</h5>
+<p>The much despised tool bar is not a terrible default for the Emacs
+neophyte, but I&rsquo;m old and grizzled.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">tool-bar</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:config</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">tool-bar-mode</span> <span class="mi">-1</span><span class="p">))</span>
+</span></span></code></pre></div></div>
+<h5 id="minimization-lets-not-minimization-lets-not">
+  Minimization: let&rsquo;s not {#minimization-let&rsquo;s-not}
+  <a class="heading-anchor" href="#minimization-lets-not-minimization-lets-not">#</a>
+</h5>
+<p>I don&rsquo;t much care for minimizing windows in the first place, and
+particularly not my favorite window with a keybinding that&rsquo;s too easy to hit.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">frame</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:bind</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="s">&#34;C-z&#34;</span> <span class="o">.</span> <span class="no">nil</span><span class="p">))</span>
+</span></span></code></pre></div></div>
+<h5 id="beep-beep-your-ass">
+  Beep beep, your ass
+  <a class="heading-anchor" href="#beep-beep-your-ass">#</a>
+</h5>
+<p>Decades ago, there was a meme of Wile E. Coyote, having finally caught
+Road Runner, saying &ldquo;Beep beep your ass.&rdquo;  This comes from
+approximately the same era as the last time anyone wanted a system
+bell.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">mode-line-bell</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:ensure</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:hook</span> <span class="p">(</span><span class="nv">on-first-input</span> <span class="o">.</span> <span class="nv">mode-line-bell-mode</span><span class="p">))</span>
+</span></span></code></pre></div></div>
+<h4 id="faces">
+  Faces
+  <a class="heading-anchor" href="#faces">#</a>
+</h4>
+<h5 id="fontaine">
+  Fontaine
+  <a class="heading-anchor" href="#fontaine">#</a>
+</h5>
+<p>I give an increasing number of live presentations at work.  The
+<a href="https://protesilaos.com/emacs/fontaine">Fontaine</a> package lets me scale up the font for screen sharing, and
+return to normalcy.</p>
+<p><a href="https://www.ibm.com/plex/">IBM Plex Mono</a> is used if it&rsquo;s installed.  Their <a href="https://www.ibm.com/design/language/typography/type-specs-ui/"><code>code-02</code> utility
+claas</a> suggests a line height of 20px, which translates to a
+<code>line-spacing</code> of 6.  This is too much.  Particularly, the cursor gets
+distractingly tall when the point is not at a character.  <a href="https://lists.gnu.org/archive/html/bug-gnu-emacs/2015-11/msg00236.html">Bug#21835</a> is
+related.  <code>0.25</code> gives the text room to breathe, without the cursor
+growing and shrinking by leaps and bounds.</p>
+<p>Note that Emacs line heights are &ldquo;printer&rsquo;s points,&rdquo; which are ten to
+the rest of the world&rsquo;s points.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">fontaine</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:ensure</span> <span class="no">t</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:demand</span> <span class="no">t</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:bind</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">:map</span> <span class="nv">rab/toggles-map</span>
+</span></span><span class="line"><span class="cl">   <span class="p">(</span><span class="s">&#34;p&#34;</span> <span class="o">.</span> <span class="nv">rab/presentation-mode</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:custom</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">fontaine-presets</span>
+</span></span><span class="line"><span class="cl">   <span class="o">`</span><span class="p">((</span><span class="nv">regular</span>
+</span></span><span class="line"><span class="cl">      <span class="nb">:default-height</span> <span class="mi">140</span>
+</span></span><span class="line"><span class="cl">      <span class="nb">:line-spacing</span> <span class="mf">0.25</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">     <span class="p">(</span><span class="nv">presentation</span>
+</span></span><span class="line"><span class="cl">      <span class="nb">:default-height</span> <span class="mi">210</span>
+</span></span><span class="line"><span class="cl">      <span class="nb">:line-spacing</span> <span class="mf">0.125</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">     <span class="p">(</span><span class="no">t</span> <span class="c1">;; defaults</span>
+</span></span><span class="line"><span class="cl">      <span class="nb">:default-family</span>
+</span></span><span class="line"><span class="cl">      <span class="o">,</span><span class="p">(</span><span class="nb">cond</span>
+</span></span><span class="line"><span class="cl">        <span class="p">((</span><span class="nf">find-font</span> <span class="p">(</span><span class="nf">font-spec</span> <span class="nb">:name</span> <span class="s">&#34;IBM Plex Mono&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">         <span class="s">&#34;IBM Plex Mono&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="s">&#34;Monospace&#34;</span><span class="p">)))))</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:config</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">fontaine-set-preset</span> <span class="p">(</span><span class="nb">or</span> <span class="nv">fontaine-current-preset</span> <span class="ss">&#39;regular</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">define-minor-mode</span> <span class="nv">rab/presentation-mode</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;Toggles global rab/presentation-mode.&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="no">nil</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">:global</span> <span class="no">t</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">if</span> <span class="nv">rab/presentation-mode</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nv">fontaine-set-preset</span> <span class="ss">&#39;presentation</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">fontaine-set-preset</span> <span class="ss">&#39;regular</span><span class="p">))))</span>
+</span></span></code></pre></div></div>
+<h5 id="modus-themes">
+  Modus themes
+  <a class="heading-anchor" href="#modus-themes">#</a>
+</h5>
+<p>I like the <a href="https://protesilaos.com/emacs/modus-themes">modus-themes</a>.  They are built into modern Emacs, but the
+author continues to work on them, so we grab them from ELPA with
+<code>:ensure t</code>.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">modus-themes</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:ensure</span> <span class="no">t</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:config</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">load-theme</span> <span class="ss">&#39;modus-operandi</span> <span class="nb">:no-confirm</span><span class="p">))</span>
+</span></span></code></pre></div></div>
+<h4 id="initialization">
+  Initialization
+  <a class="heading-anchor" href="#initialization">#</a>
+</h4>
+<p>I don&rsquo;t need a dashboard and I know where the manuals are.  I prefer a
+quiet startup.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="s">&#34;startup&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:custom</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">inhibit-startup-screen</span> <span class="no">t</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">initial-major-mode</span> <span class="ss">&#39;fundamental-mode</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">initial-scratch-message</span> <span class="no">nil</span><span class="p">))</span>
+</span></span></code></pre></div></div>
+<h4 id="marginalia">
+  Marginalia
+  <a class="heading-anchor" href="#marginalia">#</a>
+</h4>
+<p><a href="https://github.com/minad/marginalia">Marginalia</a> annotates minibuffer completions with some useful info.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">marginalia</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:ensure</span> <span class="no">t</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:after</span> <span class="nv">vertico</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:bind</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">:map</span> <span class="nv">minibuffer-local-map</span>
+</span></span><span class="line"><span class="cl">   <span class="p">(</span><span class="s">&#34;M-A&#34;</span> <span class="o">.</span> <span class="nv">marginalia-cycle</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:config</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">marginalia-mode</span><span class="p">))</span>
+</span></span></code></pre></div></div>
+<h4 id="minibuffer">
+  Minibuffer
+  <a class="heading-anchor" href="#minibuffer">#</a>
+</h4>
+<h5 id="consult">
+  Consult
+  <a class="heading-anchor" href="#consult">#</a>
+</h5>
+<p><a href="https://github.com/minad/consult">Consult</a> provides several enhanced functions for <code>completing-read</code>.  It fits nicely with <a href="#vertico">Vertico</a>.</p>
+<p>I generally remapped everything obvious.
+<code>consult-yank-from-kill-ring</code> as a remapping of <code>yank</code> proved a bit
+too disorienting.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">consult</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:ensure</span> <span class="no">t</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:bind</span>
+</span></span><span class="line"><span class="cl">  <span class="p">([</span><span class="nv">remap</span> <span class="nv">switch-to-buffer</span><span class="p">]</span> <span class="o">.</span> <span class="nv">consult-buffer</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">([</span><span class="nv">remap</span> <span class="nv">switch-to-buffer-other-window</span><span class="p">]</span> <span class="o">.</span> <span class="nv">consult-buffer-other-window</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">([</span><span class="nv">remap</span> <span class="nv">switch-to-buffer-other-frame</span><span class="p">]</span> <span class="o">.</span> <span class="nv">consult-buffer-other-frame</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">([</span><span class="nv">remap</span> <span class="nv">project-switch-to-buffer</span><span class="p">]</span> <span class="o">.</span> <span class="nv">consult-project-buffer</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">([</span><span class="nv">remap</span> <span class="nv">bookmark-jump</span><span class="p">]</span> <span class="o">.</span> <span class="nv">consult-bookmark</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">([</span><span class="nv">remap</span> <span class="nv">recentf-open</span><span class="p">]</span> <span class="o">.</span> <span class="nv">consult-recent-file</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">([</span><span class="nv">remap</span> <span class="nv">yank</span><span class="p">]</span> <span class="o">.</span> <span class="no">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">([</span><span class="nv">remap</span> <span class="nv">yank-pop</span><span class="p">]</span> <span class="o">.</span> <span class="nv">consult-yank-pop</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">([</span><span class="nv">remap</span> <span class="nv">goto-line</span><span class="p">]</span> <span class="o">.</span> <span class="nv">consult-goto-line</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="s">&#34;M-g m&#34;</span> <span class="o">.</span> <span class="nv">consult-mark</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="s">&#34;M-g M&#34;</span> <span class="o">.</span> <span class="nv">consult-global-mark</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="s">&#34;M-g o&#34;</span> <span class="o">.</span> <span class="nv">consult-outline</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="s">&#34;M-g i&#34;</span> <span class="o">.</span> <span class="nv">consult-imenu</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="s">&#34;M-g I&#34;</span> <span class="o">.</span> <span class="nv">consult-imenu-multi</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="s">&#34;M-s l&#34;</span> <span class="o">.</span> <span class="nv">consult-line</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="s">&#34;M-s L&#34;</span> <span class="o">.</span> <span class="nv">consult-line-multi</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="s">&#34;M-s k&#34;</span> <span class="o">.</span> <span class="nv">consult-keep-lines</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="s">&#34;M-s u&#34;</span> <span class="o">.</span> <span class="nv">consult-focus-lines</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="s">&#34;M-s r&#34;</span> <span class="o">.</span> <span class="nv">consult-ripgrep</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="s">&#34;M-s f&#34;</span> <span class="o">.</span> <span class="nv">consult-find</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="s">&#34;M-s F&#34;</span> <span class="o">.</span> <span class="nv">consult-locate</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="s">&#34;M-g e&#34;</span> <span class="o">.</span> <span class="nv">consult-compile-error</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="s">&#34;M-g f&#34;</span> <span class="o">.</span> <span class="nv">consult-flymake</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">([</span><span class="nv">remap</span> <span class="nv">repeat-complex-command</span><span class="p">]</span> <span class="o">.</span> <span class="nv">consult-complex-command</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="s">&#34;M-s e&#34;</span> <span class="o">.</span> <span class="nv">consult-isearch-history</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">([</span><span class="nv">remap</span> <span class="nv">isearch-edit-string</span><span class="p">]</span> <span class="o">.</span> <span class="nv">consult-isearch-history</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">([</span><span class="nv">remap</span> <span class="nv">next-matching-history-element</span><span class="p">]</span> <span class="o">.</span> <span class="nv">consult-history</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">([</span><span class="nv">remap</span> <span class="nv">previous-matching-history-element</span><span class="p">]</span> <span class="o">.</span> <span class="nv">consult-history</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">([</span><span class="nv">remap</span> <span class="nv">Info-search</span><span class="p">]</span> <span class="o">.</span> <span class="nv">consult-info</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:custom</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">xref-show-xrefs-function</span> <span class="ss">&#39;consult-xref</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">xref-show-definitions-function</span> <span class="ss">&#39;consult-xref</span><span class="p">))</span>
+</span></span></code></pre></div></div>
+<h4 id="menu">
+  Menu
+  <a class="heading-anchor" href="#menu">#</a>
+</h4>
+<p>Dialog boxes are an unemacsian abomination.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nv">setopt</span> <span class="nv">use-dialog-box</span> <span class="no">nil</span><span class="p">)</span>
+</span></span></code></pre></div></div>
+<h4 id="mouse">
+  Mouse
+  <a class="heading-anchor" href="#mouse">#</a>
+</h4>
+<p>I don&rsquo;t use the mouse much in Emacs, but if I do, it&rsquo;s the scroll
+wheel.  This makes it feel less like a trip back to a time before
+scroll wheels.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">pixel-scroll</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:hook</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">on-first-buffer</span> <span class="o">.</span> <span class="nv">pixel-scroll-precision-mode</span><span class="p">))</span>
+</span></span></code></pre></div></div>
+<h4 id="vertico">
+  Vertico
+  <a class="heading-anchor" href="#vertico">#</a>
+</h4>
+<p><a href="https://github.com/minad/vertico">Vertico</a> is a little bit nicer version of the builtin
+<code>icomplete-vertical</code>.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">vertico</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:ensure</span> <span class="no">t</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:hook</span> <span class="p">(</span><span class="nv">on-first-input</span> <span class="o">.</span> <span class="nv">vertico-mode</span><span class="p">))</span>
+</span></span></code></pre></div></div>
+<h5 id="vertico-indexed">
+  Vertico indexed
+  <a class="heading-anchor" href="#vertico-indexed">#</a>
+</h5>
+<p><code>vertico-indexed</code> lets us select candidates by number with <code>C-u RET</code>.
+It&rsquo;s an alternative to <code>vertico-quick</code>.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">vertico-indexed</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:after</span> <span class="nv">vertico</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:config</span> <span class="p">(</span><span class="nv">vertico-indexed-mode</span><span class="p">))</span>
+</span></span></code></pre></div></div>
+<h5 id="vertico-repeat">
+  Vertico repeat
+  <a class="heading-anchor" href="#vertico-repeat">#</a>
+</h5>
+<p><code>vertico-repeat</code> resumes a prior completion session.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">vertico-repeat</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:after</span> <span class="nv">vertico</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:hook</span> <span class="p">(</span><span class="nv">minibuffer-setup</span> <span class="o">.</span> <span class="nv">vertico-repeat-save</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:bind</span> <span class="p">(</span><span class="s">&#34;M-R&#34;</span> <span class="o">.</span> <span class="nv">vertico-repeat</span><span class="p">))</span>
+</span></span></code></pre></div></div>
+<h5 id="vertico-directory">
+  Vertico directory
+  <a class="heading-anchor" href="#vertico-directory">#</a>
+</h5>
+<p><code>vertico-directory</code> does some smarter things when completing directories:</p>
+<ul>
+<li><code>RET</code> continues completing in that directory instead of jumping to
+dired.</li>
+<li><code>M-DEL</code> deletes whole directories at a time if the prompt ends in a
+slash.  There&rsquo;s a recommended binding for <code>DEL</code>, but I&rsquo;d rather keep
+that deleting chars.</li>
+</ul>
+<p>I never understood <code>vertico-directory-tidy</code> before <a href="https://kristofferbalintona.me/posts/202202211546/#niceties">this demo</a>.  When we
+start with <code>/</code> or <code>~/</code>, it cleans up the leading default prompt that&rsquo;s
+&ldquo;shadowed&rdquo;.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">vertico-directory</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:after</span> <span class="nv">vertico</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:bind</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">:map</span> <span class="nv">vertico-map</span>
+</span></span><span class="line"><span class="cl">   <span class="p">(</span><span class="s">&#34;RET&#34;</span> <span class="o">.</span> <span class="nv">vertico-directory-enter</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">   <span class="p">(</span><span class="s">&#34;M-DEL&#34;</span> <span class="o">.</span> <span class="nv">vertico-directory-delete-word</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:hook</span> <span class="p">(</span><span class="nv">rfn-eshadow-update-overlay</span> <span class="o">.</span> <span class="nv">vertico-directory-tidy</span><span class="p">))</span>
+</span></span></code></pre></div></div>
+<h5 id="vertico-multiform">
+  Vertico multiform
+  <a class="heading-anchor" href="#vertico-multiform">#</a>
+</h5>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">vertico-multiform</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:after</span> <span class="nv">vertico</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:custom</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">vertico-multiform-commands</span> <span class="o">&#39;</span><span class="p">((</span><span class="nv">git-related-find-file</span> <span class="p">(</span><span class="nv">vertico-sort-function</span> <span class="o">.</span> <span class="no">nil</span><span class="p">))))</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:config</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">vertico-multiform-mode</span><span class="p">))</span>
+</span></span></code></pre></div></div>
+<h5 id="zoom">
+  Zoom
+  <a class="heading-anchor" href="#zoom">#</a>
+</h5>
+<p><a href="https://github.com/cyrus-and/zoom">Zoom</a> resizes the selected window.  It&rsquo;s a modernized version of
+<a href="https://github.com/roman/golden-ratio.el">golden-ratio.el</a>, and indeed, we configure it to use the golden ratio.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">zoom</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:ensure</span> <span class="no">t</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:custom</span>
+</span></span><span class="line"><span class="cl">  <span class="o">`</span><span class="p">(</span><span class="nv">zoom-size</span> <span class="o">,</span><span class="p">(</span><span class="nb">let</span> <span class="p">((</span><span class="nv">phi</span> <span class="p">(</span><span class="nf">-</span> <span class="p">(</span><span class="nf">/</span> <span class="p">(</span><span class="nf">+</span> <span class="mi">1</span> <span class="p">(</span><span class="nf">sqrt</span> <span class="mi">5</span><span class="p">))</span> <span class="mi">2</span><span class="p">)</span> <span class="mi">1</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">                <span class="p">(</span><span class="nf">cons</span> <span class="nv">phi</span> <span class="nv">phi</span><span class="p">))))</span>
+</span></span></code></pre></div></div>
+<h3 id="help">
+  Help
+  <a class="heading-anchor" href="#help">#</a>
+</h3>
+<h4 id="which-key">
+  Which Key
+  <a class="heading-anchor" href="#which-key">#</a>
+</h4>
+<p><a href="https://github.com/justbur/emacs-which-key"><code>which-key</code></a> pops up a menu of keybindings.  The traditional way is to
+run it on a timer, but I prefer <a href="https://github.com/justbur/emacs-which-key#manual-activation">manual activation</a>.</p>
+<p>I also relabel all my keymaps of the form <code>rab/blah-map</code> to <code>blah</code>.
+Neither <code>:prefix-docstring</code> nor <code>:menu-item</code> in <code>bind-key</code> seem to do
+the trick.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">which-key</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:ensure</span> <span class="no">t</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:hook</span> <span class="p">(</span><span class="nv">on-first-input</span> <span class="o">.</span> <span class="nv">which-key-mode</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:diminish</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:custom</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">which-key-show-early-on-C-h</span> <span class="no">t</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">which-key-idle-delay</span> <span class="nv">most-positive-fixnum</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">which-key-idle-secondary-delay</span> <span class="mf">1e-9</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:config</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">push</span> <span class="o">`</span><span class="p">((</span><span class="no">nil</span> <span class="o">.</span> <span class="o">,</span><span class="p">(</span><span class="nb">rx</span> <span class="nv">bos</span> <span class="s">&#34;rab/&#34;</span> <span class="p">(</span><span class="nv">group</span> <span class="p">(</span><span class="nf">1+</span> <span class="nv">any</span><span class="p">))</span> <span class="s">&#34;-map&#34;</span> <span class="nv">eos</span><span class="p">))</span> <span class="o">.</span>
+</span></span><span class="line"><span class="cl">          <span class="p">(</span><span class="no">nil</span> <span class="o">.</span> <span class="o">,</span><span class="p">(</span><span class="nb">rx</span> <span class="p">(</span><span class="nv">backref</span> <span class="mi">1</span><span class="p">))))</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">which-key-replacement-alist</span><span class="p">))</span>
+</span></span></code></pre></div></div>
+<p><code>C-h C-h</code> shadows which-key with something less useful.</p>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">help</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:config</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">dolist</span> <span class="p">(</span><span class="nv">key</span> <span class="p">(</span><span class="nf">where-is-internal</span> <span class="ss">&#39;help-for-help</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nv">unbind-key</span> <span class="nv">key</span><span class="p">)))</span>
+</span></span></code></pre></div></div>
+<h3 id="junk-drawer">
+  Junk drawer
+  <a class="heading-anchor" href="#junk-drawer">#</a>
+</h3>
+<p>These customizations don&rsquo;t fit anywhere else.</p>
+<h4 id="remove-the-training-wheels">
+  Remove the training wheels
+  <a class="heading-anchor" href="#remove-the-training-wheels">#</a>
+</h4>
+<div class="code-snippet"><p class="license">CC0-1.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nf">put</span> <span class="ss">&#39;narrow-to-region</span> <span class="ss">&#39;disabled</span> <span class="no">nil</span><span class="p">)</span>
+</span></span></code></pre></div></div>
+<h2 id="nix-module">
+  Nix module
+  <a class="heading-anchor" href="#nix-module">#</a>
+</h2>
+<p>This Emacs configuration is built with Nix using <a href="https://github.com/nix-community/emacs-overlay">emacs-overlay</a> and
+published to my <a href="/configs/nix-flake#whats-in-the-flake">Nix flake</a>.</p>
+<p>Even though Emacs 29 is not released at the time of writing, git is on
+Emacs 30!  We publish an <code>emacs29</code> flake package with the desired
+branch pinned via the <code>emacs-src</code> input.  It&rsquo;s also added to our
+default overlay, so it can be used as a dependency by other packages
+and apps.  The package has no configuration.</p>
+<p>Additionally, an <code>emacs</code> flake app is created.  This builds on the
+<code>emacs29</code> package with the config above to make a usable Emacs.</p>
+<p>Finally, we add a Home Manager module based on the configured app.</p>
+<div class="code-snippet"><p class="license">MIT</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nix" data-lang="nix"><span class="line"><span class="cl"><span class="p">{</span> <span class="n">inputs</span><span class="o">,</span> <span class="n">lib</span><span class="o">,</span> <span class="n">moduleWithSystem</span><span class="o">,</span> <span class="o">...</span> <span class="p">}:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">imports</span> <span class="o">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="n">inputs</span><span class="o">.</span><span class="n">flake-parts</span><span class="o">.</span><span class="n">flakeModules</span><span class="o">.</span><span class="n">easyOverlay</span>
+</span></span><span class="line"><span class="cl">  <span class="p">];</span>
+</span></span><span class="line"><span class="cl">  <span class="n">perSystem</span> <span class="o">=</span> <span class="p">{</span> <span class="n">config</span><span class="o">,</span> <span class="n">self&#39;</span><span class="o">,</span> <span class="n">inputs&#39;</span><span class="o">,</span> <span class="n">pkgs</span><span class="o">,</span> <span class="n">system</span><span class="o">,</span> <span class="o">...</span> <span class="p">}:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">overlayAttrs</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">inherit</span> <span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">packages</span><span class="p">)</span> <span class="n">emacs29</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">};</span>
+</span></span><span class="line"><span class="cl">    <span class="n">packages</span><span class="o">.</span><span class="n">emacs29</span> <span class="o">=</span> <span class="n">inputs</span><span class="o">.</span><span class="n">emacs-overlay</span><span class="o">.</span><span class="n">packages</span><span class="o">.</span><span class="si">${</span><span class="n">system</span><span class="si">}</span><span class="o">.</span><span class="n">emacs-git</span><span class="o">.</span><span class="n">overrideAttrs</span> <span class="p">(</span><span class="n">old</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">name</span> <span class="o">=</span> <span class="s2">&#34;emacs29&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="c1"># It&#39;s important this starts with the major number for Nix&#39;s</span>
+</span></span><span class="line"><span class="cl">      <span class="c1"># Emacs infra.  For example, it&#39;s used to blank out archaic</span>
+</span></span><span class="line"><span class="cl">      <span class="c1"># versions of the Seq package in MELPA.</span>
+</span></span><span class="line"><span class="cl">      <span class="n">version</span> <span class="o">=</span> <span class="s2">&#34;29.0-</span><span class="si">${</span><span class="n">inputs</span><span class="o">.</span><span class="n">emacs-src</span><span class="o">.</span><span class="n">shortRev</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">src</span> <span class="o">=</span> <span class="n">inputs</span><span class="o">.</span><span class="n">emacs-src</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="c1"># This doesn&#39;t apply to Emacs29.</span>
+</span></span><span class="line"><span class="cl">      <span class="n">patches</span> <span class="o">=</span> <span class="nb">builtins</span><span class="o">.</span><span class="n">filter</span> <span class="p">(</span><span class="n">p</span><span class="p">:</span> <span class="nb">baseNameOf</span> <span class="n">p</span> <span class="o">!=</span> <span class="s2">&#34;bytecomp-revert.patch&#34;</span><span class="p">)</span> <span class="n">old</span><span class="o">.</span><span class="n">patches</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">});</span>
+</span></span><span class="line"><span class="cl">    <span class="n">packages</span><span class="o">.</span><span class="n">emacs-ross</span> <span class="o">=</span> <span class="n">inputs</span><span class="o">.</span><span class="n">emacs-overlay</span><span class="o">.</span><span class="n">lib</span><span class="o">.</span><span class="si">${</span><span class="n">system</span><span class="si">}</span><span class="o">.</span><span class="n">emacsWithPackagesFromUsePackage</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">package</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">packages</span><span class="o">.</span><span class="n">emacs29</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">override</span> <span class="o">=</span> <span class="n">epkgs</span><span class="p">:</span> <span class="n">epkgs</span> <span class="o">//</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">on</span> <span class="o">=</span> <span class="n">epkgs</span><span class="o">.</span><span class="n">trivialBuild</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="n">pname</span> <span class="o">=</span> <span class="s2">&#34;on.el&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="n">src</span> <span class="o">=</span> <span class="n">inputs</span><span class="o">.</span><span class="n">on-el</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="n">version</span> <span class="o">=</span> <span class="s2">&#34;0.1.0&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">};</span>
+</span></span><span class="line"><span class="cl">        <span class="n">jinx</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">          <span class="o">&lt;</span><span class="sr">&lt;emacs-jinx&gt;</span><span class="o">&gt;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">copilot</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">          <span class="o">&lt;</span><span class="sr">&lt;emacs-copilot&gt;</span><span class="o">&gt;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ox-slack</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">          <span class="o">&lt;</span><span class="sr">&lt;emacs-ox-slack&gt;</span><span class="o">&gt;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">git-related</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">          <span class="o">&lt;</span><span class="sr">&lt;emacs-git-related&gt;</span><span class="o">&gt;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">scala-cli-repl</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">          <span class="o">&lt;</span><span class="sr">&lt;emacs-scala-cli-repl&gt;</span><span class="o">&gt;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">};</span>
+</span></span><span class="line"><span class="cl">      <span class="n">config</span> <span class="o">=</span> <span class="sr">./init.el</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">defaultInitFile</span> <span class="o">=</span> <span class="no">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">alwaysEnsure</span> <span class="o">=</span> <span class="no">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">extraEmacsPackages</span> <span class="o">=</span> <span class="n">epkgs</span><span class="p">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="n">epkgs</span><span class="o">.</span><span class="n">trivialBuild</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="n">pname</span> <span class="o">=</span> <span class="s2">&#34;rab-lisp&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="n">src</span> <span class="o">=</span> <span class="sr">./lisp/rab-lisp.el</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="n">version</span> <span class="o">=</span> <span class="s2">&#34;0.1.0&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">})</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="n">epkgs</span><span class="o">.</span><span class="n">trivialBuild</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="n">pname</span> <span class="o">=</span> <span class="s2">&#34;rab-ox-hugo&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="n">src</span> <span class="o">=</span> <span class="sr">./lisp/rab-ox-hugo.el</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="n">packageRequires</span> <span class="o">=</span> <span class="p">[</span> <span class="n">epkgs</span><span class="o">.</span><span class="n">ox-hugo</span> <span class="n">epkgs</span><span class="o">.</span><span class="n">s</span> <span class="p">];</span>
+</span></span><span class="line"><span class="cl">          <span class="n">version</span> <span class="o">=</span> <span class="s2">&#34;0.1.0&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">})</span>
+</span></span><span class="line"><span class="cl">      <span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="p">};</span>
+</span></span><span class="line"><span class="cl">    <span class="n">apps</span><span class="o">.</span><span class="n">emacs</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">type</span> <span class="o">=</span> <span class="s2">&#34;app&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">program</span> <span class="o">=</span> <span class="s2">&#34;</span><span class="si">${</span><span class="n">config</span><span class="o">.</span><span class="n">packages</span><span class="o">.</span><span class="n">emacs-ross</span><span class="si">}</span><span class="s2">/bin/emacs&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">};</span>
+</span></span><span class="line"><span class="cl">  <span class="p">};</span>
+</span></span><span class="line"><span class="cl">  <span class="n">flake</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">homeModules</span><span class="o">.</span><span class="n">emacs</span> <span class="o">=</span> <span class="n">moduleWithSystem</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">      <span class="n">perSystem</span><span class="o">@</span><span class="p">{</span> <span class="n">config</span><span class="o">,</span> <span class="n">pkgs</span> <span class="p">}:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">imports</span> <span class="o">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">          <span class="o">&lt;</span><span class="sr">&lt;emacs-home-packages&gt;</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="n">programs</span><span class="o">.</span><span class="n">emacs</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="n">enable</span> <span class="o">=</span> <span class="no">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="n">package</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">packages</span><span class="o">.</span><span class="n">emacs-ross</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">};</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></div>
+<p>As long as I have access to Nix, I can install and run my complete
+Emacs app as a one-liner.  There&rsquo;s little reason for you to choose it
+over a starter kit or your own configuration, but there&rsquo;s also nothing
+stopping you!</p>
+<div class="code-snippet"><p class="license">CC-BY-SA-4.0</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">nix run git+https://git.rossabaker.com/ross/cromulent#emacs
+</span></span></code></pre></div></div>
+<h3 id="on-the-fly-load-paths">
+  On-the-fly load-paths
+  <a class="heading-anchor" href="#on-the-fly-load-paths">#</a>
+</h3>
+<p>A disadvantage to a Nix-based Emacs config is that we have to restart
+Emacs every time we install a new package.  <a href="https://discourse.nixos.org/t/emacs-exwm-home-manager-and-loading-new-emacs-modules/10097/3">This hack</a> from the Nix
+forums lets us update the <code>load-path</code> after a home-manager switch.
+From the original posting, we change <code>finalPackage</code> to <code>package</code>:
+<code>finalPackage</code> refers to a wrapper with an empty site-lisp.</p>
+<div class="info">
+<p>The solution is <a href="https://discourse.nixos.org/tos#3">licensed CC-BY-NC-SA-3.0</a>, which is incompatible.</p>
+</div>
+<p>Finally, a convenience function to reload it.  This won&rsquo;t work until
+we find a licensed solution for <code>load-path.el</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">(defun rab/refresh-load-path ()
+</span></span><span class="line"><span class="cl">  &#34;Refresh the load path written by home-manager to pick up new
+</span></span><span class="line"><span class="cl"> packages without restarting Emacs.&#34;
+</span></span><span class="line"><span class="cl">  (interactive)
+</span></span><span class="line"><span class="cl">  (load-file &#34;~/.config/emacs/load-path.el&#34;))
+</span></span></code></pre></div>
+    
+
+    <section class="recently-updated">
+      <h2>Recently updated</h2>
+
+      <ul class="article-summaries">
+        
+          <li>
+            <article>
+  <header>
+    <h3><a href="https://rossabaker.com/configs/emacs/rab-lisp/">Lisp extensions</a></h3>
+  </header>
+  
+    Extensions to the Ox-Hugo backend for Org Export.
+  
+  
+  <footer>
+    <div class="article-info">
+  <dl>
+    <div class="type">
+      <dt>Type</dt>
+      
+        <dd><a href="/configs">Config</a></dd>
+      
+    </div>
+    <div class="published">
+      <dt>Published</dt>
+      <dd>2023-09-12</dd>
+    </div>
+    <div class="last-modified">
+      <dt>Last updated</dt>
+      <dd>2023-09-12</dd>
+    </div>
+    <div class="taxonomies">
+      <dt>Taxonomies</dt>
+      <dd>
+        <dl>
+          
+            <dt>Categories</dt>
+            <dd>
+              <ul>
+                
+                  <li class="category"><a href="https://rossabaker.com/categories/tech">Tech</a></li>
+                
+              </ul>
+            </dd>
+          
+
+          
+            <dt>Tags</dt>
+            <dd>
+              <ul>
+                
+                  <li class="tag"><a href="https://rossabaker.com/tags/emacs">emacs</a></li>
+                
+                  <li class="tag"><a href="https://rossabaker.com/tags/emacs-lisp">emacs-lisp</a></li>
+                
+              </ul>
+            </dd>
+          
+        </dl>
+      </dd>
+    </div>
+  </dl>
+</div>
+
+  </footer>
+</article>
+
+          </li>
+        
+          <li>
+            <article>
+  <header>
+    <h3><a href="https://rossabaker.com/configs/emacs/rab-ox-hugo/">Ox-Hugo extensions</a></h3>
+  </header>
+  
+    Extensions to the Ox-Hugo backend for Org Export.
+  
+  
+  <footer>
+    <div class="article-info">
+  <dl>
+    <div class="type">
+      <dt>Type</dt>
+      
+        <dd><a href="/configs">Config</a></dd>
+      
+    </div>
+    <div class="published">
+      <dt>Published</dt>
+      <dd>2023-09-10</dd>
+    </div>
+    <div class="last-modified">
+      <dt>Last updated</dt>
+      <dd>2023-09-12</dd>
+    </div>
+    <div class="taxonomies">
+      <dt>Taxonomies</dt>
+      <dd>
+        <dl>
+          
+            <dt>Categories</dt>
+            <dd>
+              <ul>
+                
+                  <li class="category"><a href="https://rossabaker.com/categories/tech">Tech</a></li>
+                
+              </ul>
+            </dd>
+          
+
+          
+            <dt>Tags</dt>
+            <dd>
+              <ul>
+                
+                  <li class="tag"><a href="https://rossabaker.com/tags/emacs">emacs</a></li>
+                
+                  <li class="tag"><a href="https://rossabaker.com/tags/licensing">licensing</a></li>
+                
+                  <li class="tag"><a href="https://rossabaker.com/tags/ox-hugo">ox-hugo</a></li>
+                
+              </ul>
+            </dd>
+          
+        </dl>
+      </dd>
+    </div>
+  </dl>
+</div>
+
+  </footer>
+</article>
+
+          </li>
+        
+      </ul>
+    </section>
+  </article>
+
+    </main>
+
+    <footer>
+      
+        <div class="h-card vcard">
+  <img class="u-photo" alt="Profile photo of Ross A. Baker" src="/img/profile.jpg" />
+  <a class="u-url u-uid p-name" href="https://rossabaker.com/">
+    <span class="p-given-name">Ross</span>
+    <span class="p-additional-name"><abbr>A.</abbr></span>
+    <span class="p-family-name">Baker</span>
+  </a>
+  <small><span class="u-pronoun">(he/him)</span></small><br />
+  <address><ul class="contacts">
+  
+    <li><a href="mailto:ross@rossabaker.com" >
+      
+      
+      <svg width="24" height="24" viewBox="0 0 48 48" fill="currentcolor" xmlns="http://www.w3.org/2000/svg"><title>Email</title><path d="M4 39H44V24 9H24 4V24 39z" fill="none" stroke="currentcolor" stroke-width="4" stroke-linejoin="round"/><path d="M4 9 24 24 44 9" fill="none" stroke="currentcolor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 9H4V24" fill="none" stroke="currentcolor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M44 24V9H24" fill="none" stroke="currentcolor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a></li>
+  
+    <li><a href="https://social.rossabaker.com/@ross" rel="me">
+      
+      
+      <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Mastodon</title><path d="M23.268 5.313c-.35-2.578-2.617-4.61-5.304-5.004C17.51.242 15.792.0 11.813.0h-.03c-3.98.0-4.835.242-5.288.309C3.882.692 1.496 2.518.917 5.127.64 6.412.61 7.837.661 9.143c.074 1.874.088 3.745.26 5.611.118 1.24.325 2.47.62 3.68.55 2.237 2.777 4.098 4.96 4.857 2.336.792 4.849.923 7.256.38.265-.061.527-.132.786-.213.585-.184 1.27-.39 1.774-.753a.057.057.0 00.023-.043v-1.809a.052.052.0 00-.02-.041.053.053.0 00-.046-.01 20.282 20.282.0 01-4.709.545c-2.73.0-3.463-1.284-3.674-1.818a5.593 5.593.0 01-.319-1.433.053.053.0 01.066-.054c1.517.363 3.072.546 4.632.546.376.0.75.0 1.125-.01 1.57-.044 3.224-.124 4.768-.422.038-.008.077-.015.11-.024 2.435-.464 4.753-1.92 4.989-5.604.008-.145.03-1.52.03-1.67.002-.512.167-3.63-.024-5.545zm-3.748 9.195h-2.561V8.29c0-1.309-.55-1.976-1.67-1.976-1.23.0-1.846.79-1.846 2.35v3.403h-2.546V8.663c0-1.56-.617-2.35-1.848-2.35-1.112.0-1.668.668-1.67 1.977v6.218H4.822V8.102c0-1.31.337-2.35 1.011-3.12.696-.77 1.608-1.164 2.74-1.164 1.311.0 2.302.5 2.962 1.498l.638 1.06.638-1.06c.66-.999 1.65-1.498 2.96-1.498 1.13.0 2.043.395 2.74 1.164.675.77 1.012 1.81 1.012 3.12z"/></svg>
+    </a></li>
+  
+    <li><a href="https://matrix.to/#/@ross:rossabaker.com" >
+      
+      
+      <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Matrix</title><path d="M.632.55v22.9H2.28V24H0V0h2.28v.55zm7.043 7.26v1.157h.033c.309-.443.683-.784 1.117-1.024.433-.245.936-.365 1.5-.365.54.0 1.033.107 1.481.314.448.208.785.582 1.02 1.108.254-.374.6-.706 1.034-.992.434-.287.95-.43 1.546-.43.453.0.872.056 1.26.167.388.11.716.286.993.53.276.245.489.559.646.951.152.392.23.863.23 1.417v5.728h-2.349V11.52c0-.286-.01-.559-.032-.812a1.755 1.755.0 00-.18-.66 1.106 1.106.0 00-.438-.448c-.194-.11-.457-.166-.785-.166-.332.0-.6.064-.803.189a1.38 1.38.0 00-.48.499 1.946 1.946.0 00-.231.696 5.56 5.56.0 00-.06.785v4.768h-2.35v-4.8c0-.254-.004-.503-.018-.752a2.074 2.074.0 00-.143-.688 1.052 1.052.0 00-.415-.503c-.194-.125-.476-.19-.854-.19-.111.0-.259.024-.439.074-.18.051-.36.143-.53.282-.171.138-.319.337-.439.595-.12.259-.18.6-.18 1.02v4.966H5.46V7.81zm15.693 15.64V.55H21.72V0H24v24h-2.28v-.55z"/></svg>
+    </a></li>
+  
+    <li><a href="https://git.rossabaker.com/ross" rel="me">
+      
+      
+      <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Forgejo</title><path d="M16.7773.0c1.6018.0 2.9004 1.2986 2.9004 2.9005s-1.2986 2.9004-2.9004 2.9004c-1.0854.0-2.0315-.596-2.5288-1.4787H12.91c-2.3322.0-4.2272 1.8718-4.2649 4.195l-7e-4 2.1175a7.0759 7.0759.0 014.148-1.4205l.1176-.001 1.3385 2e-4c.4973-.8827 1.4434-1.4788 2.5288-1.4788 1.6018.0 2.9004 1.2986 2.9004 2.9005s-1.2986 2.9004-2.9004 2.9004c-1.0854.0-2.0315-.596-2.5288-1.4787H12.91c-2.3322.0-4.2272 1.8718-4.2649 4.195l-7e-4 2.319c.8827.4973 1.4788 1.4434 1.4788 2.5287.0 1.602-1.2986 2.9005-2.9005 2.9005-1.6018.0-2.9004-1.2986-2.9004-2.9005.0-1.0853.596-2.0314 1.4788-2.5287l-2e-4-9.9831c0-3.887 3.1195-7.0453 6.9915-7.108l.1176-.001h1.3385C14.7458.5962 15.692.0 16.7773.0zM7.2227 19.9052c-.6596.0-1.1943.5347-1.1943 1.1943s.5347 1.1943 1.1943 1.1943 1.1944-.5347 1.1944-1.1943-.5348-1.1943-1.1944-1.1943zm9.5546-10.4644c-.6596.0-1.1944.5347-1.1944 1.1943s.5348 1.1943 1.1944 1.1943 1.1943-.5347 1.1943-1.1943-.5347-1.1943-1.1943-1.1943zm0-7.7346c-.6596.0-1.1944.5347-1.1944 1.1943s.5348 1.1943 1.1944 1.1943 1.1943-.5347 1.1943-1.1943-.5347-1.1943-1.1943-1.1943z"/></svg>
+    </a></li>
+  
+    <li><a href="https://github.com/rossabaker" rel="me">
+      
+      
+      <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63.0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577.0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93.0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176.0.0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22.0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22.0 1.606-.015 2.896-.015 3.286.0.315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+    </a></li>
+  
+    <li><a href="https://codeberg.org/rossabaker" rel="me">
+      
+      
+      <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Codeberg</title><path d="M11.955.49A12 12 0 000 12.49a12 12 0 001.832 6.373L11.838 5.928a.187.14.0 01.324.0l10.006 12.935A12 12 0 0024 12.49a12 12 0 00-12-12 12 12 0 00-.045.0zm.375 6.467 4.416 16.553a12 12 0 005.137-4.213z"/></svg>
+    </a></li>
+  
+    <li><a href="https://paste.rossabaker.com/ross" rel="me">
+      
+      
+      <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="currentcolor"><path fill-rule="evenodd" clip-rule="evenodd" d="M10.57 1.14l3.28 3.3.15.36v9.7l-.5.5h-11l-.5-.5v-13l.5-.5h7.72l.35.14zM10 5h3l-3-3v3zM3 2v12h10V6H9.5L9 5.5V2H3zm2.062 7.533 1.817-1.828L6.17 7 4 9.179v.707l2.171 2.174.707-.707-1.816-1.82zM8.8 7.714l.7-.709 2.189 2.175v.709L9.5 12.062l-.705-.709 1.831-1.82L8.8 7.714z"/></svg>
+    </a></li>
+  
+    <li><a href="/projects/finger" >
+      
+      
+      <svg width="24" height="24" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><title>Finger</title><path d="M12.5658 26.1824C10.8553 27.3542 10 29.2935 10 32.0002c0 4.0601 4.9753 11 9.4618 11s7.0884.0 11.4797.0c4.3913.0 7.0585-3.8506 7.0585-6.9399.0-4.3504.0-8.7007.0-13.051.0-1.6569-1.3431-3-3-3H34.9909C33.3391 20.0093 32 21.3484 32 23.0002" stroke="currentcolor" stroke-width="4" stroke-linecap="round" style="fill:none"/><path d="M13.981 28.4452V8.00587c0-1.65551 1.342-2.99757 2.9975-2.99757.0028.0.0056.0.0083 1e-5 1.6614.0046 3.0059 1.35275 3.0059 3.01419V23.592" stroke="currentcolor" stroke-width="4" stroke-linecap="round" style="fill:none"/><path d="m19.9927 23.0083v-3.9928c0-1.6654 1.3501-3.0155 3.0155-3.0155 1.6654.0 3.0154 1.3501 3.0154 3.0155v3.9928" stroke="currentcolor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" style="fill:none"/><path d="m26 22.7158v-2.7124c0-1.6568 1.3431-3 3-3s3 1.3432 3 3v3" stroke="currentcolor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" style="fill:none"/></svg>
+    </a></li>
+  
+    <li><a href="https://keyoxide.org/ross%40rossabaker.com" >
+      
+      
+      <svg width="1024" height="1024" viewBox="0 0 1024 1024" style="clip-rule:evenodd;fill-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2"><title>Keyoxide</title><defs id="defs19"><mask maskUnits="userSpaceOnUse" id="mask5391"><g id="g5411" style="clip-rule:evenodd;display:inline;fill-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2"><rect id="rect5393" x="-2.0001934" y="2" width="1024" height="1024" style="clip-rule:evenodd;display:inline;fill:#fff;fill-opacity:1;fill-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2"/><g id="g5409" style="clip-rule:evenodd;display:inline;fill:#000;fill-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2"><g id="g5397" transform="scale(0.264583)" style="fill:#000"><path d="m2253.77 664.99c-104.02.001-188.34 84.324-188.34 188.342.0 62.866 31.2 120.27 81.08 154.838 14.37 9.95 22.63 11.1 24.54 26.67 1.92 15.56-19.41 29.99-19.41 29.99l-983.69 765.1c-88.43 68.8-140.16 174.56-140.17 286.6v725.67c0 200.54 162.56 363.1 363.09 363.1s363.1-162.56 363.1-363.1v-548.09l948.32-737.56c139.21-108.27 179.15-299.23 99.99-452.74-5.91-11.46-7.79-15.53-20.1-20.31-12.3-4.78-22.2.57-34.51 5.19-16.92 6.35-34.93 9.65-53.21 9.65-83.65.0-151.47-67.81-151.47-151.465.01-11.352 2.02-18.009-1.34-25.073s-12.29-11.63-21.08-12.633c-14.59-1.666-29.27-2.446-43.97-2.333-14.42.109-25.38-1.186-31.6-11.734-6.21-10.549-2.88-22.638-2.88-41.77.0-104.021-84.33-188.345-188.35-188.342z" style="fill:#000;fill-rule:nonzero" id="path5395"/></g><path d="m464 508.622 245.251 163.501c44.085 29.39 56.016 89.043 26.626 133.128-29.39 44.085-89.043 56.016-133.128 26.626l-288-192C288.042 622.072 272 592.098 272 560V336c0-52.984 43.016-96 96-96s96 43.016 96 96z" style="fill:#000" id="path5399"/><circle id="circle5401" cx="503.53201" cy="185.784" r="33.993" style="fill:#000"/><circle id="circle5403" cx="535.98901" cy="119.866" r="22.177999" style="fill:#000"/><circle id="circle5405" cx="475.59799" cy="103.58" r="15.485" style="fill:#000"/><circle id="circle5407" cx="712.90997" cy="250.52699" r="27.167999" style="fill:#000"/></g></g></mask></defs><g id="bg_color_circle" style="display:inline"><g id="bg_color_circle_element" style="clip-rule:evenodd;display:inline;fill-opacity:1;fill-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2" mask="url(#mask5391)"><rect id="rect840" x="0" y="0" width="1024" height="1023.9998" style="display:inline;fill-opacity:1" ry="511.99991"/></g></g></svg>
+    </a></li>
+  
+</ul>
+</address>
+</div>
+
+<p><a href="/license/">License</a> <a href="/security/">Security policy</a></p>
+
+<small class="indiewebring">
+  <a href="https://xn--sr8hvo.ws/previous">←</a>
+  An <a href="https://xn--sr8hvo.ws">IndieWeb Webring</a> 🕸💍
+  <a href="https://xn--sr8hvo.ws/next">→</a>
+</small>
+
+<script type="text/javascript"
+        src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+      
+    </footer>
+  </body>
+</html>

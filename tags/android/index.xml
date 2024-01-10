@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>android on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/android/</link>
+    <description>Recent content in android on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 25 Jun 2023 16:49:01 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/android/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110605876716583436/</link>
+      <pubDate>Sun, 25 Jun 2023 16:49:01 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110605876716583436/</guid>
+      <description>Problem: for weeks, I&amp;#39;ve only been able to listen in Spanish on the Android MLB app. The English feed hangs indefinitely &amp;quot;Buffering&amp;quot;. This is a widely reported issue.&#xA;Solution: select the English station and hit the rewind 10 seconds button. It starts immediately.&#xA;I might keep a couple innings a day in Spanish to keep sharpening my skills!&#xA;#MLB #Android</description>
+    </item>
+  </channel>
+</rss>

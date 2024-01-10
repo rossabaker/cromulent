@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>allnighter on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/allnighter/</link>
+    <description>Recent content in allnighter on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 05 Apr 2023 06:22:35 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/allnighter/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110144766326810510/</link>
+      <pubDate>Wed, 05 Apr 2023 06:22:35 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110144766326810510/</guid>
+      <description>Currently pulling an all-nighter because kid left chewing gum out, and now I have to keep vigil for xylitol poisoning in the wienerdog. The dog is doing well, but I am fading.&#xA;Time for a Diet Mountain Dew and some quality time with my Emacs config until dawn.&#xA;#Emacs #Dogs #AllNighter</description>
+    </item>
+  </channel>
+</rss>

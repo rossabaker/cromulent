@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>lemmy on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/lemmy/</link>
+    <description>Recent content in lemmy on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 06 Jun 2023 19:21:14 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/lemmy/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110498891336648304/</link>
+      <pubDate>Tue, 06 Jun 2023 19:21:14 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110498891336648304/</guid>
+      <description>Since Lemmy is having a moment: does it fix brigading? If not, could it?&#xA;#Lemmy</description>
+    </item>
+  </channel>
+</rss>

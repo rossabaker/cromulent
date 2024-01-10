@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Devshells on Ross A. Baker</title>
+    <link>https://rossabaker.com/configs/devshells/</link>
+    <description>Recent content in Devshells on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 25 Jul 2023 12:27:00 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/configs/devshells/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Devshell for Modern Time Series Forecasting with Python</title>
+      <link>https://rossabaker.com/configs/devshells/modern-time-series-forecasting-with-python/</link>
+      <pubDate>Tue, 25 Jul 2023 12:06:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/devshells/modern-time-series-forecasting-with-python/</guid>
+      <description>This doesn&amp;rsquo;t work at all. I have tabled this effort for now in grudging favor of Micromamba.&#xA;I&amp;rsquo;m reading Modern Time Series Forecasting with Python. The first thing it asks me to do is install Conda, but package managers other than Nix give me a rash. I&amp;rsquo;ve attempted to replicate its anaconda env to a devshell. Try it out like this:&#xA;MIT&#xA;nix develop git+https://git.rossabaker.com/ross/cromulent#modernTs This shell will only work with nixpkgs.</description>
+    </item>
+  </channel>
+</rss>

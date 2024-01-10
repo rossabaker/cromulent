@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>markdown on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/markdown/</link>
+    <description>Recent content in markdown on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 16 Jun 2023 21:04:16 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/markdown/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110555919590824743/</link>
+      <pubDate>Fri, 16 Jun 2023 21:04:16 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110555919590824743/</guid>
+      <description>Ever need to transpose a large Markdown table? Me neither, until today. It&amp;#39;s just C-c C-c t. These are the flourishes that will likely keep me on Emacs until my ultimate C-x C-c.&#xA;#Emacs #Markdown</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110158094954284802/</link>
+      <pubDate>Fri, 07 Apr 2023 14:52:14 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110158094954284802/</guid>
+      <description>When you check &amp;quot;Format messages with markup&amp;quot; in Slack&amp;#39;s advanced settings, in addition to escaping the maw of its WYSIWYG editor, you can use Markdown link syntax!&#xA;#Slack #Markdown</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109712708951143137/</link>
+      <pubDate>Wed, 18 Jan 2023 23:04:43 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109712708951143137/</guid>
+      <description>GitHub&amp;#39;s footnotes support seems limited to 9. Ask me how I know.[^1]&#xA;[^1] I made another big ass table.&#xA;#GitHub #Markdown</description>
+    </item>
+  </channel>
+</rss>

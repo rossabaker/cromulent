@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>tuxedo-cat on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/tuxedo-cat/</link>
+    <description>Recent content in tuxedo-cat on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 21 May 2023 16:29:18 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/tuxedo-cat/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110407618272205793/</link>
+      <pubDate>Sun, 21 May 2023 16:29:18 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110407618272205793/</guid>
+      <description>In Extreme Programming, we picked a new pair programmer every day. I decided that was nonsense, and adopted Pete. We paired for the next nineteen years. He preferred the title &amp;quot;alpha&amp;quot; to &amp;quot;principal staff,&amp;quot; but he shared his opinions whether you wanted them or not. He logged off this morning. Rest easy, friend.&#xA;P.S., this is what he thought of YAML.&#xA;#TuxedoCat #RIP</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109775248030087751/</link>
+      <pubDate>Mon, 30 Jan 2023 00:09:13 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109775248030087751/</guid>
+      <description>Happy 21st birthday to Pete, patrolling the baby gate and sassing the young hounds it keeps on other side.&#xA;#TuxedoCat</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109595380738434617/</link>
+      <pubDate>Thu, 29 Dec 2022 05:46:36 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109595380738434617/</guid>
+      <description>Post-disaster #Introduction:&#xA;I am best known for #Scala, #Typelevel, and #http4s. I geek out over #Emacs, #Nix, and the #Indieweb. I&amp;#39;m probably a #Bayesian.&#xA;I live in #Indianapolis, #Indiana with a #Dachshund, #Coonhound, #TuxedoCat, and a freshwater #Aquarium or five. I offset my #Jogging with #BBQ. I coach youth #Soccer and attend North United #Methodist Church.&#xA;This is a #SelfHosted sequel after a Terraform disaster. Boosts appreciated to relocate my peeps.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/indieweb.social/rossabaker/109266011901701598/</link>
+      <pubDate>Tue, 01 Nov 2022 01:43:47 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/indieweb.social/rossabaker/109266011901701598/</guid>
+      <description>Post-move #reintroduction:&#xA;I&amp;#39;m a software engineer, mostly #Typelevel #Scala. I started #http4s and love #FP and #FOSS.&#xA;I&amp;#39;m getting into the #Indieweb, where I&amp;#39;ll #blog and share my #config, talks, and other projects. I geek out over #Emacs and #Nix. I&amp;#39;m probably also a #Bayesian.&#xA;I have a #dachshund, #coonhound, #tuxedoCat, and multiple freshwater #aquarium. I live in #Indianapolis, where I coach youth #soccer, attend North #UMC, and cheer on my beloved #Hoosiers.</description>
+    </item>
+  </channel>
+</rss>

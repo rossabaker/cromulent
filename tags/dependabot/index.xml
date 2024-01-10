@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>dependabot on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/dependabot/</link>
+    <description>Recent content in dependabot on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 23 Jun 2023 02:54:10 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/dependabot/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110591269306104377/</link>
+      <pubDate>Fri, 23 Jun 2023 02:54:10 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110591269306104377/</guid>
+      <description>sbt-dependency-submission is a nifty GitHub Action to report dependencies at build time for vulnerability scanning. It even sees your transitive dependencies. But it can be hard to debug why a dependency was submitted.&#xA;In ~/.sbt/1.0/sbt-dependency-submission.sbt:&#xA;```&#xA;addSbtPlugin(&amp;quot;ch.epfl.scala&amp;quot; % &amp;quot;sbt-github-dependency-submission&amp;quot; % &amp;quot;2.1.2&amp;quot;)&#xA;```&#xA;Now you can run `show githubDependencyManifest` to debug!&#xA;#Scala #Dependabot</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110278705093136235/</link>
+      <pubDate>Fri, 28 Apr 2023 22:04:59 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110278705093136235/</guid>
+      <description>Dependabot finds things we don&amp;#39;t, but vulnerability fatigue is real. We have a telemetry client that uses OkHttp. We don&amp;#39;t write Kotlin, we don&amp;#39;t use our telemetry client in a way that invokes Kotlin, and our client probably doesn&amp;#39;t use the vulnerable parts of Kotlin. But every Scala repo will be pinged about every Kotlin stdlib vulnerability because it&amp;#39;s dormant on the classpath.&#xA;#Security #Dependabot</description>
+    </item>
+  </channel>
+</rss>

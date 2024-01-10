@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>babel on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/babel/</link>
+    <description>Recent content in babel on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 01 Sep 2022 16:54:00 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/babel/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Build website with Nix</title>
+      <link>https://rossabaker.com/configs/website/build/</link>
+      <pubDate>Thu, 01 Sep 2022 16:54:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/build/</guid>
+      <description>The website is just another package within our flake.&#xA;Export script # export.el is a small Emacs script that finds the Org file and exports its contents with ox-hugo.&#xA;MIT&#xA;(require &amp;#39;ob-dot) (require &amp;#39;ob-shell) (require &amp;#39;rab-ox-hugo) (rab/ox-hugo-mode) (with-current-buffer (find-file-noselect &amp;#34;src/org/cromulent.org&amp;#34;) (let ((org-confirm-babel-evaluate nil)) (org-babel-tangle) (org-hugo-export-wim-to-md t))) Nix derivation # The build first runs the export script to tangle the files and export to Hugo sources. Hugo is then run to create a public/ directory.</description>
+    </item>
+    <item>
+      <title>Configuring Git for literate programming</title>
+      <link>https://rossabaker.com/configs/git-repository/</link>
+      <pubDate>Wed, 24 Aug 2022 15:04:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/git-repository/</guid>
+      <description>My personal Git repository, Cromulent, contains the source for various projects, such as configurations and the contents of this website.&#xA;Due to literate programming, much of the source code &amp;ldquo;weaves&amp;rdquo; code and documentation in Org. Most tools aren&amp;rsquo;t Org interpreters, so the Org must be &amp;ldquo;tangled&amp;rdquo; 1 back into separate files for general consumption. This process requires a bit of extra care around Git.&#xA;Three types of files # Original sources # Original sources are the minimal set of files that can&amp;rsquo;t be derived from other sources as part of the build process.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/108551263033693800/</link>
+      <pubDate>Mon, 27 Jun 2022 20:13:45 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/108551263033693800/</guid>
+      <description>A rudimentary scala-cli for #Emacs. Fires up an inferior REPL for those quick tasks that don&amp;#39;t need an sbt build. Medium-term goal: restore #Org #Babel support for #Scala.&#xA;https://github.com/rossabaker/scala-cli.el</description>
+    </item>
+  </channel>
+</rss>

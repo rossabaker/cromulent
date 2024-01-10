@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>nix-darwin on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/nix-darwin/</link>
+    <description>Recent content in nix-darwin on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 19 Sep 2023 00:21:00 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/nix-darwin/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Cachix</title>
+      <link>https://rossabaker.com/configs/cachix/</link>
+      <pubDate>Tue, 19 Sep 2023 00:21:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/cachix/</guid>
+      <description>Cachix is a binary cache for Nix. Three Cachix instances are of particular interest to Cromulent users1.&#xA;Cromulent&amp;rsquo;s GitHub Actions publish Linux binaries to rossabaker.cachix.org. I help maintain Typelevel Nix, which publishes to typelevel.cachix.org. A handful of our flake dependencies publish to nix-community.cachix.org. Nix module # This module may be mixed into a NixOS, Nix-Darwin, or Home Manager configuration.&#xA;CC0-1.0&#xA;{ config, lib, ... }: let cfg = config.cromulent.cache.cachix; in { imports = [ .</description>
+    </item>
+    <item>
+      <title>Keyboard</title>
+      <link>https://rossabaker.com/configs/keyboard/</link>
+      <pubDate>Mon, 18 Sep 2023 23:53:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/keyboard/</guid>
+      <description>The Indiana University Computer Science Department used to be housed in Lindley Hall. In the basement was a cluster of machines called &amp;ldquo;The Burrow&amp;rdquo;. There were SparcStations, if memory serves with Sun Type 5 keyboards. In any case, they taught me that the good Lord intended Control to be to the immediate left of A.&#xA;MacOS # CC0-1.0&#xA;{ flake.darwinModules.keyboard = { system.keyboard = { enableKeyMapping = true; remapCapsLockToControl = true; }; }; } </description>
+    </item>
+    <item>
+      <title>PostgreSQL</title>
+      <link>https://rossabaker.com/configs/postgresql/</link>
+      <pubDate>Sat, 16 Sep 2023 23:13:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/postgresql/</guid>
+      <description>Running PostgreSQL on Darwin is not as smooth an experience as the NixOS module:&#xA;The nix-darwin module doesn&amp;rsquo;t create a dedicated postgres system user. Everything runs as the local user. It doesn&amp;rsquo;t create the data directory. It doesn&amp;rsquo;t set up the logs. The initdb call doesn&amp;rsquo;t work out of the box. It creates a postgres superuser, but because it&amp;rsquo;s peer authenticated and there&amp;rsquo;s no postgres system user. We fix all of those here.</description>
+    </item>
+    <item>
+      <title>Podman</title>
+      <link>https://rossabaker.com/configs/podman/</link>
+      <pubDate>Sat, 16 Sep 2023 22:51:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/podman/</guid>
+      <description>I don&amp;rsquo;t have enough interest nor expertise in containers to add much to the Podman vs. Docker debate. I chose Podman for two reasons:&#xA;Podman is configurable with Nix-Darwin. Podman&amp;rsquo;s daemonless architecture is one less running root. NixOS # Enabling Podman on NixOS can be reduced to a one-liner. The default storage is overlay.&#xA;CC-BY-SA-4.0&#xA;{ flake.nixosModules.podman = { virtualisation.podman.enable = true; }; } Nix-Darwin # There&amp;rsquo;s no Docker virtualization in Nix-Darwin 1, nor is there any virtualisation config at all.</description>
+    </item>
+    <item>
+      <title>Nix-Darwin</title>
+      <link>https://rossabaker.com/configs/nix-darwin/</link>
+      <pubDate>Mon, 07 Aug 2023 09:48:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/nix-darwin/</guid>
+      <description>nix-darwin is a set of Nix modules for a declarative MacOS system. It is similar in purpose, but less thorough, than NixOS is for Linux.&#xA;I only own a MacBook because work chose it for me, and I hope to never own two. In practice, all of these modules will likely be mixed into a single machine config, but it&amp;rsquo;s still nice to separate them.&#xA;This is imported from preliterate times, and could be broken up further.</description>
+    </item>
+    <item>
+      <title>Garnix</title>
+      <link>https://rossabaker.com/configs/garnix/</link>
+      <pubDate>Fri, 23 Jun 2023 00:26:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/garnix/</guid>
+      <description>This integration is paused while we await alternatives to GitHub.&#xA;I have an Apple M1 for work, which is not yet supported by GitHub Actions. That&amp;rsquo;s okay, because Garnix is a great alternative.&#xA;Continuous integration # On each push to GitHub, Garnix is triggered to build:&#xA;Our default dev shell Our default nix-darwin configuration Our default Home Manager configuration At this time, we only build for aarch64-darwin with Garnix.</description>
+    </item>
+  </channel>
+</rss>

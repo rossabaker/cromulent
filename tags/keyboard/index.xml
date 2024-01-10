@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>keyboard on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/keyboard/</link>
+    <description>Recent content in keyboard on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 18 Sep 2023 23:53:00 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/keyboard/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Keyboard</title>
+      <link>https://rossabaker.com/configs/keyboard/</link>
+      <pubDate>Mon, 18 Sep 2023 23:53:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/keyboard/</guid>
+      <description>The Indiana University Computer Science Department used to be housed in Lindley Hall. In the basement was a cluster of machines called &amp;ldquo;The Burrow&amp;rdquo;. There were SparcStations, if memory serves with Sun Type 5 keyboards. In any case, they taught me that the good Lord intended Control to be to the immediate left of A.&#xA;MacOS # CC0-1.0&#xA;{ flake.darwinModules.keyboard = { system.keyboard = { enableKeyMapping = true; remapCapsLockToControl = true; }; }; } </description>
+    </item>
+  </channel>
+</rss>

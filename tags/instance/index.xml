@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>instance on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/instance/</link>
+    <description>Recent content in instance on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 21 Oct 2022 02:41:01 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/instance/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/109203951565832906/</link>
+      <pubDate>Fri, 21 Oct 2022 02:41:01 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/109203951565832906/</guid>
+      <description>If you&amp;#39;re on a non-default home #instance, did the value you get from Mastodon increase as a result?</description>
+    </item>
+  </channel>
+</rss>

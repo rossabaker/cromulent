@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>fedisplaining on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/fedisplaining/</link>
+    <description>Recent content in fedisplaining on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 03 Nov 2022 02:47:22 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/fedisplaining/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/indieweb.social/rossabaker/109277586548398134/</link>
+      <pubDate>Thu, 03 Nov 2022 02:47:22 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/indieweb.social/rossabaker/109277586548398134/</guid>
+      <description>Do you see different search results between instances? Here&amp;#39;s why:&#xA;https://github.com/mastodon/mastodon/issues/9529&#xA;#search #fedisplaining</description>
+    </item>
+  </channel>
+</rss>

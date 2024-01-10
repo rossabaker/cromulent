@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>book on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/book/</link>
+    <description>Recent content in book on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 21 Nov 2022 21:03:00 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/book/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Scalatra in Action</title>
+      <link>https://rossabaker.com/projects/scalatra-in-action/</link>
+      <pubDate>Mon, 21 Nov 2022 21:03:00 +0000</pubDate>
+      <guid>https://rossabaker.com/projects/scalatra-in-action/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://www.manning.com/books/scalatra-in-action&#34;&gt;Scalatra in Action&lt;/a&gt; was written by &lt;a href=&#34;https://constructiveproof.com/&#34;&gt;Dave Hrycyszyn,&lt;/a&gt; Stefan Ollinger, and&#xA;me and covers the &lt;a href=&#34;https://scalatra.org/&#34;&gt;Scalatra micro-framework&lt;/a&gt; in depth.  Scalatra is a&#xA;port of Ruby&amp;rsquo;s Sinatra to Scala.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

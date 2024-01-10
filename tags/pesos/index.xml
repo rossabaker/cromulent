@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>pesos on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/pesos/</link>
+    <description>Recent content in pesos on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 08 Nov 2022 03:49:55 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/pesos/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/indieweb.social/rossabaker/109306144082815818/</link>
+      <pubDate>Tue, 08 Nov 2022 03:49:55 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/indieweb.social/rossabaker/109306144082815818/</guid>
+      <description>How I archived toots from my prior instance to my personal Hugo site:&#xA;https://rossabaker.com/projects/toot-archive/&#xA;#Indieweb #PESOS #OwnYourData #Hugo #ScalaCLI #Typelevel</description>
+    </item>
+    <item>
+      <title>Archive your toots to Hugo</title>
+      <link>https://rossabaker.com/projects/toot-archive/</link>
+      <pubDate>Mon, 07 Nov 2022 22:37:00 +0000</pubDate>
+      <guid>https://rossabaker.com/projects/toot-archive/</guid>
+      <description>An important Indieweb principle is to own your data. I tooted on mastodon.social sporadically for five years. The service is public, the protocol open, and the implementation open source. Still, it exists at the pleasure of its admins, with whom I have no contract.&#xA;After moving to another instance, I wanted to preserve my old content. We will use a technique called PESOS, or Publish Elsewhere, Syndicate to Own Site.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/indieweb.social/rossabaker/109299576723616335/</link>
+      <pubDate>Sun, 06 Nov 2022 23:59:45 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/indieweb.social/rossabaker/109299576723616335/</guid>
+      <description>I want to archive posts from siloed networks to my personal website. I thought LinkedIn would be an easy start. Too easy: in fourteen years, I never posted. Oops.&#xA;#Indieweb #PESOS</description>
+    </item>
+  </channel>
+</rss>

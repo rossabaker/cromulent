@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>macos on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/macos/</link>
+    <description>Recent content in macos on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 07 Aug 2023 09:48:00 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/macos/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Nix-Darwin</title>
+      <link>https://rossabaker.com/configs/nix-darwin/</link>
+      <pubDate>Mon, 07 Aug 2023 09:48:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/nix-darwin/</guid>
+      <description>nix-darwin is a set of Nix modules for a declarative MacOS system. It is similar in purpose, but less thorough, than NixOS is for Linux.&#xA;I only own a MacBook because work chose it for me, and I hope to never own two. In practice, all of these modules will likely be mixed into a single machine config, but it&amp;rsquo;s still nice to separate them.&#xA;This is imported from preliterate times, and could be broken up further.</description>
+    </item>
+  </channel>
+</rss>

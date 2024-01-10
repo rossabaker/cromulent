@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>code2022 on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/code2022/</link>
+    <description>Recent content in code2022 on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 31 Dec 2022 07:08:59 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/code2022/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109607029298110367/</link>
+      <pubDate>Sat, 31 Dec 2022 07:08:59 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109607029298110367/</guid>
+      <description>Languages I wrote this year:&#xA;Awk&#xA;Bash&#xA;Emacs Lisp&#xA;Go&#xA;JavaScript&#xA;Nix&#xA;Perl&#xA;Python&#xA;R&#xA;Ruby&#xA;Scala&#xA;Sed&#xA;SQL&#xA;Stan&#xA;Terraform&#xA;TypeScript&#xA;#Code2022</description>
+    </item>
+  </channel>
+</rss>

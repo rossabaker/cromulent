@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Talks on Ross A. Baker</title>
+    <link>https://rossabaker.com/talks/</link>
+    <description>Recent content in Talks on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 08 Feb 2020 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/talks/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Algebras in Scala</title>
+      <link>https://rossabaker.com/talks/algebras-in-scala/</link>
+      <pubDate>Mon, 02 Dec 2019 00:00:00 +0000</pubDate>
+      <guid>https://rossabaker.com/talks/algebras-in-scala/</guid>
+      <description>Scala developers like to talk about &amp;ldquo;algebras&amp;rdquo;. Or when they&amp;rsquo;re feeling particularly precious, &amp;ldquo;algebrae.&amp;rdquo; Ross gives an overview, and promises any references to &amp;ldquo;F-algebra&amp;rdquo; are not a taunt about your ninth grade report card.</description>
+    </item>
+    <item>
+      <title>Akka IO and Netty</title>
+      <link>https://rossabaker.com/talks/akka-io-and-netty/</link>
+      <pubDate>Mon, 04 Nov 2013 00:00:00 +0000</pubDate>
+      <guid>https://rossabaker.com/talks/akka-io-and-netty/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Anorm</title>
+      <link>https://rossabaker.com/talks/anorm/</link>
+      <pubDate>Mon, 13 Aug 2012 00:00:00 +0000</pubDate>
+      <guid>https://rossabaker.com/talks/anorm/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

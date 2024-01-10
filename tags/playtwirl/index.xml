@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>playtwirl on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/playtwirl/</link>
+    <description>Recent content in playtwirl on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 12 Jan 2023 17:54:10 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/playtwirl/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109677513970467422/</link>
+      <pubDate>Thu, 12 Jan 2023 17:54:10 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109677513970467422/</guid>
+      <description>http4s-twirl releases are out, courtesy of Kailuo Wang:&#xA;* 0.23.17 makes the jump from scala-xml-1 to scala-xml-2. Beware, binary breaking!&#xA;* 0.24.0-M1 is based on twirl-1.6 milestones for Scala 3 support.&#xA;Server-side templates are cool again.&#xA;#http4s #Typelevel #PlayTwirl</description>
+    </item>
+  </channel>
+</rss>

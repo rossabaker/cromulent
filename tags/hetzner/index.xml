@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>hetzner on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/hetzner/</link>
+    <description>Recent content in hetzner on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 29 Dec 2022 05:18:13 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/hetzner/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109595269119337373/</link>
+      <pubDate>Thu, 29 Dec 2022 05:18:13 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109595269119337373/</guid>
+      <description>Today I learned Hetzner Cloud backups are associated with a single server instance. This is very bad news when you accidentally delete it.&#xA;#Hetzner #Fail</description>
+    </item>
+  </channel>
+</rss>

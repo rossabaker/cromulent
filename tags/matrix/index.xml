@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>matrix on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/matrix/</link>
+    <description>Recent content in matrix on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 27 Jan 2023 16:31:13 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/matrix/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109762122429723504/</link>
+      <pubDate>Fri, 27 Jan 2023 16:31:13 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109762122429723504/</guid>
+      <description>If we talk on Matrix, I half-assed the self-hosting and got an unintentionally clean start, but I&amp;#39;m back!&#xA;Matrix is good. Self-hosting Synapse competently requires more dedication to chat than I have these days. Anyway:&#xA;https://matrix.to/#/@ross:rossabaker.com&#xA;#Matrix #Synapse</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109759781799528154/</link>
+      <pubDate>Fri, 27 Jan 2023 06:35:58 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109759781799528154/</guid>
+      <description>Anybody running NixOS on GCP free tier? I have hit a tipping point running nixos-rebuild on an ec2-micro. It otherwise runs my Synapse server like a champ.&#xA;#NixOS #GCP #Synapse #Matrix</description>
+    </item>
+    <item>
+      <title>Self-hosting a Matrix home server with Synapse</title>
+      <link>https://rossabaker.com/configs/matrix/</link>
+      <pubDate>Mon, 21 Nov 2022 21:03:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/matrix/</guid>
+      <description>Matrix is a decentralized communication protocol. It is capable of many things, but I primarily use it for public chats on Open Source projects or private, end-to-end encrypted messaging.&#xA;Self-hosting # I am hosting Matrix on my dedicated Hetzner server. Requirements will vary by usage, but my Synapse server, a Python process, currently consumes about 350MB of RAM. Add on PostgreSQL and a reverse Nginx proxy, either of which might be shared with other services.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/indieweb.social/rossabaker/109299845502357608/</link>
+      <pubDate>Mon, 07 Nov 2022 01:08:07 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/indieweb.social/rossabaker/109299845502357608/</guid>
+      <description>Had a nice chat out of the blue on #Matrix, another place to check out during the Internet&amp;#39;s Grand Reopening.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/108251735633218543/</link>
+      <pubDate>Thu, 05 May 2022 22:39:59 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/108251735633218543/</guid>
+      <description>Been working on literate configurations. Some notes on how I set up a #Matrix&#xA;server on #GCP free tier with #Terraform and #NixOS: https://rossabaker.com/config/infrastructure/</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/108206241126781156/</link>
+      <pubDate>Wed, 27 Apr 2022 21:50:08 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/108206241126781156/</guid>
+      <description>New #matrix account just dropped: https://matrix.to/#/@ross:rossabaker.com. Built it on #gcp with #terraform and #nix.</description>
+    </item>
+  </channel>
+</rss>

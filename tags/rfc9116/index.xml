@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>RFC9116 on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/rfc9116/</link>
+    <description>Recent content in RFC9116 on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 09 Aug 2023 22:01:00 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/rfc9116/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Security</title>
+      <link>https://rossabaker.com/security/</link>
+      <pubDate>Wed, 09 Aug 2023 22:01:00 +0000</pubDate>
+      <guid>https://rossabaker.com/security/</guid>
+      <description>I appreciate coordinated vulnerability disclosure. I will respond as quickly as possible to credible reports.&#xA;Open source # I collaborate on projects across multiple open source organizations. Most projects declare a SECURITY.md either in the organization&amp;rsquo;s profile or the project&amp;rsquo;s root directory.&#xA;Typelevel # Please see the Typelevel security policy.&#xA;http4s # Please see the http4s security policy.&#xA;Other concerns # If you have a concern with any of my projects and can&amp;rsquo;t find a relevant security policy, please contact me directly.</description>
+    </item>
+  </channel>
+</rss>

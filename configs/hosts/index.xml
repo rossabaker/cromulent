@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Host configurations on Ross A. Baker</title>
+    <link>https://rossabaker.com/configs/hosts/</link>
+    <description>Recent content in Host configurations on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 19 Nov 2023 18:58:00 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/configs/hosts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Work laptop</title>
+      <link>https://rossabaker.com/configs/hosts/work-laptop/</link>
+      <pubDate>Fri, 08 Dec 2023 13:23:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/hosts/work-laptop/</guid>
+      <description>For understandable reasons, I can&amp;rsquo;t be as open with my work configuration. It depends on an internal flake and exposes internal tooling and addresses.&#xA;The work computer is the only reason I am running a Darwin machine, and as much general configuration as possible is exposed as darwinConfigurations.&#xA;If we are colleagues, reach out, and I will give you read access to a private repository of my full configuration.</description>
+    </item>
+    <item>
+      <title>abe: a server for personal, self-hosted services</title>
+      <link>https://rossabaker.com/configs/hosts/abe/</link>
+      <pubDate>Sun, 19 Nov 2023 19:16:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/hosts/abe/</guid>
+      <description>abe is a dedicated server on Hetzner Robot. It&amp;rsquo;s not a revenue driver, so it was picked up on server auction to save a few Euro.&#xA;Provisioning # Ideally, the entire server would provisioned by OpenTofu, but Hetzner Robot instances aren&amp;rsquo;t as ephemeral as Hetzner Cloud. NixOS was installed from the rescue image with a Nix community script.&#xA;Base configuration # CC-BY-SA-4.0&#xA;{ config, pkgs, ... }: { imports = [ # Include the results of the hardware scan.</description>
+    </item>
+  </channel>
+</rss>

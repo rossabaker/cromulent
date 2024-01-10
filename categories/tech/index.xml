@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>tech on Ross A. Baker</title>
+    <link>https://rossabaker.com/categories/tech/</link>
+    <description>Recent content in tech on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 07 Jan 2024 10:40:00 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/categories/tech/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Continuous integration with Forgejo Actions and Nix</title>
+      <link>https://rossabaker.com/configs/forgejo-actions/</link>
+      <pubDate>Sun, 07 Jan 2024 10:40:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/forgejo-actions/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://forgejo.org/docs/v1.20/user/actions/&#34;&gt;Forgejo Actions&lt;/a&gt; is a continuous integration service, vaguely&#xA;compatible with GitHub Actions.  Builds require local runners,&#xA;typically containers.  Here, we create minimalistic containers geared&#xA;toward running Nix builds, so projects supply their logic and Actions&#xA;provides the compute.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>#code2023</title>
+      <link>https://rossabaker.com/blog/code-2023/</link>
+      <pubDate>Sun, 31 Dec 2023 00:00:00 +0000</pubDate>
+      <guid>https://rossabaker.com/blog/code-2023/</guid>
+      <description>In the Avian Period of social media, we had a late December tradition of enumerating the coding languages we used over the last year. Some people would aggregate them into a language ranking, which I never cared for. However, I thought they were great as a recommendation engine while browing specific developers.&#xA;Without further ado, my #code2023.&#xA;Languages used in 2023 # Awk Part of the old fart&amp;rsquo;s command line toolbox.</description>
+    </item>
+    <item>
+      <title>Opengist: a self-hosted pastebin with NixOS</title>
+      <link>https://rossabaker.com/configs/opengist/</link>
+      <pubDate>Sat, 23 Dec 2023 22:07:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/opengist/</guid>
+      <description>Opengist is a self-hosted pastebin. There is not yet support in Forgejo, so Opengist makes an excellent companion for those snippets that don&amp;rsquo;t quite merit their own repository.&#xA;My pastebin is hosted at paste.rossabaker.com.&#xA;Nix package # Opengist needs its frontend assets compiled with NPM, and then embeds them into a Go application. The compiled assets are added as an input to the upstream source.&#xA;MIT&#xA;{ pkgs, lib, src, .</description>
+    </item>
+    <item>
+      <title>Work laptop</title>
+      <link>https://rossabaker.com/configs/hosts/work-laptop/</link>
+      <pubDate>Fri, 08 Dec 2023 13:23:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/hosts/work-laptop/</guid>
+      <description>For understandable reasons, I can&amp;rsquo;t be as open with my work configuration. It depends on an internal flake and exposes internal tooling and addresses.&#xA;The work computer is the only reason I am running a Darwin machine, and as much general configuration as possible is exposed as darwinConfigurations.&#xA;If we are colleagues, reach out, and I will give you read access to a private repository of my full configuration.</description>
+    </item>
+    <item>
+      <title>Decentralized avatars with Nginx and Libravatar</title>
+      <link>https://rossabaker.com/configs/libravatar/</link>
+      <pubDate>Fri, 08 Dec 2023 09:10:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/libravatar/</guid>
+      <description>Libravatar is a decentralized alternative to Gravatar for displaying a profile picture. There are several implementations, but self-hosting can be as simple as a couple DNS records and a small Nginx configuration.&#xA;Deriving the images in advance # Avatar images can be prepared in advance. For any high-res image source, we need to accomplish three things:&#xA;Scale the image. The maximum size is 128x128. This is done with ImageMagick. Calculate an MD5 sum of the lowercased e-mail address.</description>
+    </item>
+    <item>
+      <title>Forwarding email with pobox.com</title>
+      <link>https://rossabaker.com/configs/email/</link>
+      <pubDate>Sun, 03 Dec 2023 23:59:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/email/</guid>
+      <description>I would love to self-host Email, but the oligopoly has won. I switched to Pobox when my forwarder became insufficient. This requires a handful of DNS records to route mail to our domain and fight spam.&#xA;DNS # CC-BY-SA-4.0&#xA;{ ... }: { imports = [ ./mx.nix ./spf.nix ./dkim.nix ]; } MX records # To deliver mail to my domain via Pobox, these MX records are required. It&amp;rsquo;s neat that they can be generated from Nix.</description>
+    </item>
+    <item>
+      <title>Declarative DNS with NixOS-DNS, OctoDNS, and Hetzner</title>
+      <link>https://rossabaker.com/configs/dns/</link>
+      <pubDate>Sun, 03 Dec 2023 21:26:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/dns/</guid>
+      <description>The services hosted at rossabaker.com require multiple DNS entries. They are declared in various parts of the Nix flake with NixOS-DNS, and synchronized to the name server with OctoDNS.&#xA;Choosing a host # rossabaker.com is registered with Namecheap, who has been a fine registrar and hosted the DNS for years. However, I don&amp;rsquo;t meet their requirements for API access. This was a frustrating discovery after getting their sandbox working, but I digress.</description>
+    </item>
+    <item>
+      <title>Automated certificate management with ACME</title>
+      <link>https://rossabaker.com/configs/acme/</link>
+      <pubDate>Sat, 02 Dec 2023 16:26:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/acme/</guid>
+      <description>The deeper one gets into self-hosting, the more subdomains need to be managed, usually with a certificate. abbr(Automatic Certificate Management Environment and NixOS combine to streamline this process to a few lines of code.&#xA;NixOS module # The configuration is almost straight out of the NixOS manual.&#xA;MIT&#xA;{ security.acme = { acceptTerms = true; defaults.email = &amp;#34;ross@rossabaker.com&amp;#34;; }; } Flake module # All Cromulent outputs are packaged as flake parts for consistent composition.</description>
+    </item>
+    <item>
+      <title>A self-hosted static site with NixOS and Nginx</title>
+      <link>https://rossabaker.com/configs/webserver/</link>
+      <pubDate>Sat, 02 Dec 2023 11:41:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/webserver/</guid>
+      <description>CC-BY-SA-4.0&#xA;Defines an HTTP server with Nginx, both for a static web site and reverse proxies for various services. I cut my teeth on Apache httpd, but nobody gets fired in the 2020s for picking Nginx. The needs are simple:&#xA;Host this static website Reverse proxies for various services Manage our certificates General configuration # The www user is used by CI to rsync the website content.&#xA;CC-BY-SA-4.0&#xA;{ config, .</description>
+    </item>
+    <item>
+      <title>Self-hosted Git with Forgejo</title>
+      <link>https://rossabaker.com/configs/forgejo/</link>
+      <pubDate>Fri, 01 Dec 2023 18:25:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/forgejo/</guid>
+      <description>Forgejo is a self-hosted git forge. More to say later.&#xA;NixOS module # MIT&#xA;{ config, ... }: let domain = &amp;#34;git.rossabaker.com&amp;#34;; in { services.forgejo = { enable = true; settings = { service = { DISABLE_REGISTRATION = true; }; server = { ROOT_URL = &amp;#34;https://${domain}/&amp;#34;; LANDING_PAGE = &amp;#34;explore&amp;#34;; }; }; }; services.nginx = { appendHttpConfig = &amp;#39;&amp;#39; map $uri $forgejo_access_log { default 1; /api/actions/runner.v1.RunnerService/FetchTask 0; } &amp;#39;&amp;#39;; }; services.nginx.virtualHosts.${domain} = { enableACME = true; forceSSL = true; locations.</description>
+    </item>
+    <item>
+      <title>Monitoring a NixOS server with Netdata Cloud</title>
+      <link>https://rossabaker.com/configs/netdata/</link>
+      <pubDate>Thu, 23 Nov 2023 22:45:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/netdata/</guid>
+      <description>&lt;p&gt;Now that I&amp;rsquo;m self-hosting several services, responsibility falls on me&#xA;to monitor them myself.  An easy way to cover the important bases on a&#xA;NixOS server is &lt;dfn&gt;Netdata&lt;/dfn&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>abe: a server for personal, self-hosted services</title>
+      <link>https://rossabaker.com/configs/hosts/abe/</link>
+      <pubDate>Sun, 19 Nov 2023 19:16:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/hosts/abe/</guid>
+      <description>abe is a dedicated server on Hetzner Robot. It&amp;rsquo;s not a revenue driver, so it was picked up on server auction to save a few Euro.&#xA;Provisioning # Ideally, the entire server would provisioned by OpenTofu, but Hetzner Robot instances aren&amp;rsquo;t as ephemeral as Hetzner Cloud. NixOS was installed from the rescue image with a Nix community script.&#xA;Base configuration # CC-BY-SA-4.0&#xA;{ config, pkgs, ... }: { imports = [ # Include the results of the hardware scan.</description>
+    </item>
+    <item>
+      <title>Host configurations</title>
+      <link>https://rossabaker.com/configs/hosts/</link>
+      <pubDate>Sun, 19 Nov 2023 18:58:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/hosts/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Nix binary caches</title>
+      <link>https://rossabaker.com/configs/nix-binary-caches/</link>
+      <pubDate>Tue, 03 Oct 2023 21:51:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/nix-binary-caches/</guid>
+      <description>Nix sits in a sweet spot between source and binary distribution. For esoterica, like personal projects or a patched versions of more popular application, source builds give us full control of our system. But most builds are not novel the world over, and we&amp;rsquo;d rather quickly fetch a binary than reminisce over our Gentoo days while glibc recompiles.&#xA;To realize a derivation, which is roughly Nixian for &amp;ldquo;build a package,&amp;rdquo; we:</description>
+    </item>
+    <item>
+      <title>Cachix</title>
+      <link>https://rossabaker.com/configs/cachix/</link>
+      <pubDate>Tue, 19 Sep 2023 00:21:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/cachix/</guid>
+      <description>Cachix is a binary cache for Nix. Three Cachix instances are of particular interest to Cromulent users1.&#xA;Cromulent&amp;rsquo;s GitHub Actions publish Linux binaries to rossabaker.cachix.org. I help maintain Typelevel Nix, which publishes to typelevel.cachix.org. A handful of our flake dependencies publish to nix-community.cachix.org. Nix module # This module may be mixed into a NixOS, Nix-Darwin, or Home Manager configuration.&#xA;CC0-1.0&#xA;{ config, lib, ... }: let cfg = config.cromulent.cache.cachix; in { imports = [ .</description>
+    </item>
+    <item>
+      <title>Keyboard</title>
+      <link>https://rossabaker.com/configs/keyboard/</link>
+      <pubDate>Mon, 18 Sep 2023 23:53:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/keyboard/</guid>
+      <description>The Indiana University Computer Science Department used to be housed in Lindley Hall. In the basement was a cluster of machines called &amp;ldquo;The Burrow&amp;rdquo;. There were SparcStations, if memory serves with Sun Type 5 keyboards. In any case, they taught me that the good Lord intended Control to be to the immediate left of A.&#xA;MacOS # CC0-1.0&#xA;{ flake.darwinModules.keyboard = { system.keyboard = { enableKeyMapping = true; remapCapsLockToControl = true; }; }; } </description>
+    </item>
+    <item>
+      <title>PostgreSQL</title>
+      <link>https://rossabaker.com/configs/postgresql/</link>
+      <pubDate>Sat, 16 Sep 2023 23:13:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/postgresql/</guid>
+      <description>Running PostgreSQL on Darwin is not as smooth an experience as the NixOS module:&#xA;The nix-darwin module doesn&amp;rsquo;t create a dedicated postgres system user. Everything runs as the local user. It doesn&amp;rsquo;t create the data directory. It doesn&amp;rsquo;t set up the logs. The initdb call doesn&amp;rsquo;t work out of the box. It creates a postgres superuser, but because it&amp;rsquo;s peer authenticated and there&amp;rsquo;s no postgres system user. We fix all of those here.</description>
+    </item>
+    <item>
+      <title>Podman</title>
+      <link>https://rossabaker.com/configs/podman/</link>
+      <pubDate>Sat, 16 Sep 2023 22:51:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/podman/</guid>
+      <description>I don&amp;rsquo;t have enough interest nor expertise in containers to add much to the Podman vs. Docker debate. I chose Podman for two reasons:&#xA;Podman is configurable with Nix-Darwin. Podman&amp;rsquo;s daemonless architecture is one less running root. NixOS # Enabling Podman on NixOS can be reduced to a one-liner. The default storage is overlay.&#xA;CC-BY-SA-4.0&#xA;{ flake.nixosModules.podman = { virtualisation.podman.enable = true; }; } Nix-Darwin # There&amp;rsquo;s no Docker virtualization in Nix-Darwin 1, nor is there any virtualisation config at all.</description>
+    </item>
+    <item>
+      <title>Hyperlink</title>
+      <link>https://rossabaker.com/configs/hyperlink/</link>
+      <pubDate>Wed, 13 Sep 2023 23:36:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/hyperlink/</guid>
+      <description>Hyperlink is a command-line link checker. It is quite fast, and is used to test the generation of this web site.&#xA;This package has been a merged to nixpkgs and is no longer maintained in Cromulent.&#xA;GitHub Actions # </description>
+    </item>
+    <item>
+      <title>Lisp extensions</title>
+      <link>https://rossabaker.com/configs/emacs/rab-lisp/</link>
+      <pubDate>Tue, 12 Sep 2023 23:42:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/emacs/rab-lisp/</guid>
+      <description>Indentation # I would like my property lists to align not like this&#xA;GPL-3.0-only&#xA;(:prefix-map rab/git-map :prefix &amp;#34;C-c g&amp;#34;) but like this:&#xA;GPL-3.0-only&#xA;(:prefix-map rab/git-map :prefix &amp;#34;C-c g&amp;#34;) The answer is almost verbatim from Emacs Stack Exchange, but changed to my namespace. I also applied the &amp;ldquo;bonus,&amp;rdquo; because my primary itch is use-package bindings.&#xA;GPL-3.0-only&#xA;(defun rab/lisp-calculate-indent (&amp;amp;optional parse-start) &amp;#34;Add better indentation for quoted and backquoted lists.&amp;#34; ;; This line because `calculate-lisp-indent-last-sexp` was defined with `defvar` ;; with it&amp;#39;s value ommited, marking it special and only defining it locally.</description>
+    </item>
+    <item>
+      <title>Ox-Hugo extensions</title>
+      <link>https://rossabaker.com/configs/emacs/rab-ox-hugo/</link>
+      <pubDate>Sun, 10 Sep 2023 01:23:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/emacs/rab-ox-hugo/</guid>
+      <description>Dependencies # GPL-3.0-only&#xA;(require &amp;#39;cl-macs) (require &amp;#39;ox-hugo) (require &amp;#39;s) Customization group # Needed because of our minor mode.&#xA;GPL-3.0-only&#xA;(defgroup rab/ox-hugo nil &amp;#34;Ross A. Baker&amp;#39;s Ox-Hugo extensions.&amp;#34; :group &amp;#39;org-export-hugo) Code licensing # We lightly customize Ox-Hugo by adding support for a :code-license header. The technique is inspired by Sacha Chua&amp;rsquo;s custom summary header.&#xA;When exporting, a source block is replaced with org-babel-exp-code-template, which is filled by org-fill-template. This enhancement will only work when the template propagates this header argument.</description>
+    </item>
+    <item>
+      <title>Home Manager</title>
+      <link>https://rossabaker.com/configs/home-manager/</link>
+      <pubDate>Fri, 08 Sep 2023 16:59:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/home-manager/</guid>
+      <description>We prefer to keep a robust user environment along with a lean configurations for NixOS and nix-darwin. This keeps our environment maximally portable between those operating systems, as well as any other hosts that support the Nix package manager (e.g., Debian).&#xA;Base configuration # This is imported from preliterate times and should be broken up further.&#xA;MIT&#xA;{ moduleWithSystem, ... }: { flake.homeModules.base = moduleWithSystem( perSystem@{ pkgs, inputs&amp;#39; }: { # Curiously not a default of home-manager, but required once we # start configuring Nix otherwise.</description>
+    </item>
+    <item>
+      <title>Security</title>
+      <link>https://rossabaker.com/security/</link>
+      <pubDate>Wed, 09 Aug 2023 22:01:00 +0000</pubDate>
+      <guid>https://rossabaker.com/security/</guid>
+      <description>I appreciate coordinated vulnerability disclosure. I will respond as quickly as possible to credible reports.&#xA;Open source # I collaborate on projects across multiple open source organizations. Most projects declare a SECURITY.md either in the organization&amp;rsquo;s profile or the project&amp;rsquo;s root directory.&#xA;Typelevel # Please see the Typelevel security policy.&#xA;http4s # Please see the http4s security policy.&#xA;Other concerns # If you have a concern with any of my projects and can&amp;rsquo;t find a relevant security policy, please contact me directly.</description>
+    </item>
+    <item>
+      <title>Webcrawler configuration</title>
+      <link>https://rossabaker.com/configs/website/webcrawlers/</link>
+      <pubDate>Wed, 09 Aug 2023 20:31:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/webcrawlers/</guid>
+      <description>RFC9309 defines the Robots Exclusion Protocol, wherein a file is served at /robots.txt to configure the behavior of automated clients, or webcrawlers.&#xA;The most malicious actors will ignore this file. It&amp;rsquo;s more petulant than effective, but I&amp;rsquo;m not one to pass up a chance to express my contempt in conformance with an RFC.&#xA;Search engines # Generally, I like my content to be indexed and discoverable via search engines, and I welcome most crawlers.</description>
+    </item>
+    <item>
+      <title>Nix-Darwin</title>
+      <link>https://rossabaker.com/configs/nix-darwin/</link>
+      <pubDate>Mon, 07 Aug 2023 09:48:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/nix-darwin/</guid>
+      <description>nix-darwin is a set of Nix modules for a declarative MacOS system. It is similar in purpose, but less thorough, than NixOS is for Linux.&#xA;I only own a MacBook because work chose it for me, and I hope to never own two. In practice, all of these modules will likely be mixed into a single machine config, but it&amp;rsquo;s still nice to separate them.&#xA;This is imported from preliterate times, and could be broken up further.</description>
+    </item>
+    <item>
+      <title>Python home-manager module</title>
+      <link>https://rossabaker.com/configs/python/</link>
+      <pubDate>Fri, 28 Jul 2023 21:51:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/python/</guid>
+      <description>I have dabbled with Python for years, but have little production experience. I am used to not knowing what I&amp;rsquo;m doing, but the feeling is stronger in this module.&#xA;Package management # I am fighting hard to use Nix to manage my Python packages, but I don&amp;rsquo;t have time for a side quest while I&amp;rsquo;m getting comfortable with the language.&#xA;Micromamba # Micromamba is an alternative to Anaconda and Miniconda, neither of which installs cleanly on my Mac.</description>
+    </item>
+    <item>
+      <title>Devshells</title>
+      <link>https://rossabaker.com/configs/devshells/</link>
+      <pubDate>Tue, 25 Jul 2023 12:27:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/devshells/</guid>
+      <description>I use Nix devshells extensively. I am a strong believer that projects should declare their development environment in code, so getting started on a project is as simple as cloning from Git and pulling down some (hopefully cached) dependencies. This effort has two paydays:&#xA;Whenever you onboard a teammate Whenever you set up a new workstation </description>
+    </item>
+    <item>
+      <title>Devshell for Modern Time Series Forecasting with Python</title>
+      <link>https://rossabaker.com/configs/devshells/modern-time-series-forecasting-with-python/</link>
+      <pubDate>Tue, 25 Jul 2023 12:06:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/devshells/modern-time-series-forecasting-with-python/</guid>
+      <description>This doesn&amp;rsquo;t work at all. I have tabled this effort for now in grudging favor of Micromamba.&#xA;I&amp;rsquo;m reading Modern Time Series Forecasting with Python. The first thing it asks me to do is install Conda, but package managers other than Nix give me a rash. I&amp;rsquo;ve attempted to replicate its anaconda env to a devshell. Try it out like this:&#xA;MIT&#xA;nix develop git+https://git.rossabaker.com/ross/cromulent#modernTs This shell will only work with nixpkgs.</description>
+    </item>
+    <item>
+      <title>Garnix</title>
+      <link>https://rossabaker.com/configs/garnix/</link>
+      <pubDate>Fri, 23 Jun 2023 00:26:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/garnix/</guid>
+      <description>This integration is paused while we await alternatives to GitHub.&#xA;I have an Apple M1 for work, which is not yet supported by GitHub Actions. That&amp;rsquo;s okay, because Garnix is a great alternative.&#xA;Continuous integration # On each push to GitHub, Garnix is triggered to build:&#xA;Our default dev shell Our default nix-darwin configuration Our default Home Manager configuration At this time, we only build for aarch64-darwin with Garnix.</description>
+    </item>
+    <item>
+      <title>Scala configuration</title>
+      <link>https://rossabaker.com/configs/scala/</link>
+      <pubDate>Tue, 09 May 2023 09:27:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/scala/</guid>
+      <description>This configuration provides a module to Home Manager. It sets up a global SBT, a few plugins, and some gitignores relevant to Scala.&#xA;Sonatype credentials # This tells sbt where to look for our Sonatype credentials.&#xA;CC0-1.0&#xA;credentials += Credentials(Path.userHome / &amp;#34;.sbt&amp;#34; / &amp;#34;sonatype-credentials.properties&amp;#34;) Code Snippet 1: ~/.sbt/1.0/sonatype.sbt This will not work until a credentials file is added:&#xA;realm=Sonatype Nexus Repository Manager host=oss.sonatype.org user=&amp;lt;&amp;lt;username&amp;gt;&amp;gt; password=&amp;lt;&amp;lt;password&amp;gt;&amp;gt; Code Snippet 1: ~/.sbt/sonatype-credentials.properties This file contains a secret, and is not installed by our Nix derivation!</description>
+    </item>
+    <item>
+      <title>Build your vocabulary with Scala affixes</title>
+      <link>https://rossabaker.com/blog/scala-affixes/</link>
+      <pubDate>Wed, 26 Apr 2023 09:28:00 +0000</pubDate>
+      <guid>https://rossabaker.com/blog/scala-affixes/</guid>
+      <description>A powerful way to build one&amp;rsquo;s vocabulary is to study prefixes and suffixes. In elementary school, we learn that bi- means two. We can see it in common words like bicycle and bilingual. As we progress through school into binomials and bivalence, we&amp;rsquo;re ready. It&amp;rsquo;s not perfect: is biennial twice a year or once every two years? Biryani isn&amp;rsquo;t two helpings of ryani. Still, they are surely worth studying.&#xA;A colleague in our Scala study group asked, &amp;ldquo;Can we do the same with Scala?</description>
+    </item>
+    <item>
+      <title>Emacs config</title>
+      <link>https://rossabaker.com/configs/emacs/</link>
+      <pubDate>Thu, 23 Feb 2023 23:59:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/emacs/</guid>
+      <description>Introduction # The flavor of the day is vanilla # This is a &amp;ldquo;vanilla&amp;rdquo; configuration, or an &amp;ldquo;Emacs from scratch,&amp;rdquo; built on a prerelease of Emacs 29 from Git.&#xA;Some users use a community configuration such as Spacemacs or Doom. A more moderate approach is a starter kit like like Prelude or Crafted Emacs, which hew closer to vanilla Emacs but give users a sensible head start. These are recommended paths for new users, and remain reasonable even after decades of experience.</description>
+    </item>
+    <item>
+      <title>Nix Flake</title>
+      <link>https://rossabaker.com/configs/nix-flake/</link>
+      <pubDate>Sun, 25 Dec 2022 22:14:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/nix-flake/</guid>
+      <description>The Nix flake is the central nervous system of these configurations. It declaratively manages:&#xA;installed packages, on Linux and Darwin services, on Linux and Darwin user packages, including dot files, on Linux and Darwin custom software packages to run anywhere development environments for various projects DNS entries modules for building your own flakes Viewing the contents of the flake # The nix flake show command shows all the outputs of a flake:</description>
+    </item>
+    <item>
+      <title>Ox. Hugo. Why not both?</title>
+      <link>https://rossabaker.com/blog/ox-hugo-why-not-both/</link>
+      <pubDate>Tue, 22 Nov 2022 15:53:00 +0000</pubDate>
+      <guid>https://rossabaker.com/blog/ox-hugo-why-not-both/</guid>
+      <description>This site is built on a static site generator (SSG). They are a dime a dozen. I chose a less mainstream one, ox-hugo. After recently questioning that choice, I have new clarity on why it&amp;rsquo;s right for me.&#xA;The goal # I want to write and sometimes generate content in a markup language. The SSG generator should apply a template, create aggregate views (such as tags), and output a directory that can be served off a cloud CDN, self-hosted with open source like nginx, or even out of a local directory with a simple Rust binary.</description>
+    </item>
+    <item>
+      <title>WebFinger</title>
+      <link>https://rossabaker.com/configs/webfinger/</link>
+      <pubDate>Tue, 22 Nov 2022 00:14:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/webfinger/</guid>
+      <description>WebFinger, specified by RFC7033, is a discovery protocol over secure HTTP. It is used by Mastodon to map account identifiers to actor IDs.&#xA;This protocol is not to be confused with Finger.&#xA;The WebFinger query # To look up a Mastodon account, an HTTP GET request is constructed from the account ID. For account @ross@rossabaker.com, the WebFinger URI is https://rossabaker.com/.well-known/webfinger?resource=acct%3Aross%40rossabaker.com:&#xA;https:// always a secure HTTP request rossabaker.com the domain of the account /.</description>
+    </item>
+    <item>
+      <title>Scalatra in Action</title>
+      <link>https://rossabaker.com/projects/scalatra-in-action/</link>
+      <pubDate>Mon, 21 Nov 2022 21:03:00 +0000</pubDate>
+      <guid>https://rossabaker.com/projects/scalatra-in-action/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://www.manning.com/books/scalatra-in-action&#34;&gt;Scalatra in Action&lt;/a&gt; was written by &lt;a href=&#34;https://constructiveproof.com/&#34;&gt;Dave Hrycyszyn,&lt;/a&gt; Stefan Ollinger, and&#xA;me and covers the &lt;a href=&#34;https://scalatra.org/&#34;&gt;Scalatra micro-framework&lt;/a&gt; in depth.  Scalatra is a&#xA;port of Ruby&amp;rsquo;s Sinatra to Scala.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Self-hosting a Matrix home server with Synapse</title>
+      <link>https://rossabaker.com/configs/matrix/</link>
+      <pubDate>Mon, 21 Nov 2022 21:03:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/matrix/</guid>
+      <description>Matrix is a decentralized communication protocol. It is capable of many things, but I primarily use it for public chats on Open Source projects or private, end-to-end encrypted messaging.&#xA;Self-hosting # I am hosting Matrix on my dedicated Hetzner server. Requirements will vary by usage, but my Synapse server, a Python process, currently consumes about 350MB of RAM. Add on PostgreSQL and a reverse Nginx proxy, either of which might be shared with other services.</description>
+    </item>
+    <item>
+      <title>Archive your toots to Hugo</title>
+      <link>https://rossabaker.com/projects/toot-archive/</link>
+      <pubDate>Mon, 07 Nov 2022 22:37:00 +0000</pubDate>
+      <guid>https://rossabaker.com/projects/toot-archive/</guid>
+      <description>An important Indieweb principle is to own your data. I tooted on mastodon.social sporadically for five years. The service is public, the protocol open, and the implementation open source. Still, it exists at the pleasure of its admins, with whom I have no contract.&#xA;After moving to another instance, I wanted to preserve my old content. We will use a technique called PESOS, or Publish Elsewhere, Syndicate to Own Site.</description>
+    </item>
+    <item>
+      <title>Web Key Directory</title>
+      <link>https://rossabaker.com/configs/web-key-directory/</link>
+      <pubDate>Wed, 02 Nov 2022 23:39:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/web-key-directory/</guid>
+      <description>Web Key Directory (WKD) is a standard to map email addresses to PGP public keys over HTTPS. In this guide, we&amp;rsquo;ll configure WKD for our domain.&#xA;Motivation # Independence # Public keys are traditionally submitted to one or more public key servers. Some, like pgp.mit.edu, are federated1. Others, like keys.openpgp.org, are not2. In neither case can I control whether they&amp;rsquo;re here tomorrow.&#xA;Consistent with Indieweb principles, WKD lets us self-host our identity.</description>
+    </item>
+    <item>
+      <title>Home page template</title>
+      <link>https://rossabaker.com/configs/website/templates/home/</link>
+      <pubDate>Wed, 12 Oct 2022 00:05:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/templates/home/</guid>
+      <description>&lt;p&gt;The home page is rendered as a paginated list.  We want branch bundles,&#xA;so we have to exclude the home page, taxonomies, and terms from the&#xA;pages.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Public keys</title>
+      <link>https://rossabaker.com/public-keys/</link>
+      <pubDate>Wed, 14 Sep 2022 13:30:00 +0000</pubDate>
+      <guid>https://rossabaker.com/public-keys/</guid>
+      <description>PGP # My PGP public key is published to this domain via WKD, and can also be downloaded in binary and ASCII armored formats. Its fingerprint is:&#xA;pub rsa4096 2018-01-31 [SC] 904C153733DBB0106915C0BD975BE5BC29D92CA5 uid [ unknown] Ross A. Baker &amp;lt;ross@rossabaker.com&amp;gt; sub rsa4096 2018-01-31 [E] sub rsa4096 2022-11-21 [S] Verification # This key is notated with Ariadne Identity claims, which can be verified on Keyoxide.</description>
+    </item>
+    <item>
+      <title>Contact info templates</title>
+      <link>https://rossabaker.com/configs/website/templates/contact-info/</link>
+      <pubDate>Mon, 12 Sep 2022 22:11:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/templates/contact-info/</guid>
+      <description>&lt;p&gt;Contact info is rendered in two places: in the &lt;a href=&#34;https://rossabaker.com/configs/website/templates/footer/&#34;&gt;footer template&lt;/a&gt; and on the&#xA;&lt;a href=&#34;https://rossabaker.com/about/&#34;&gt;about page&lt;/a&gt;.  They share a common definition.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Configurations</title>
+      <link>https://rossabaker.com/configs/</link>
+      <pubDate>Mon, 05 Sep 2022 23:48:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/</guid>
+      <description>The configurations are an expansive take on the traditional dotfiles repository.&#xA;Most of it is literate programming. It intersperses prose and source code and in Org Mode, with the source is extracted with Babel. These are living documents. I am dogfooding this. These configurations are intended to be declarative and reproducible. We use Nix to manage not only the dotfiles, but the software packages that they configure. Infrastructure is defined with OpenTofu.</description>
+    </item>
+    <item>
+      <title>Heading rendering</title>
+      <link>https://rossabaker.com/configs/website/templates/heading-renderer/</link>
+      <pubDate>Sun, 04 Sep 2022 17:50:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/templates/heading-renderer/</guid>
+      <description>&lt;p&gt;We &lt;a href=&#34;https://gohugo.io/templates/render-hooks&#34;&gt;hook&lt;/a&gt; into the heading renderer to generate anchor targets for subheadings.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Article info</title>
+      <link>https://rossabaker.com/configs/website/templates/article-info/</link>
+      <pubDate>Fri, 02 Sep 2022 13:16:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/templates/article-info/</guid>
+      <description>&lt;p&gt;Article info appears at the bottom of every article and article&#xA;summary on the site.  It describes:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;The content type&lt;/li&gt;&#xA;&lt;li&gt;The date&lt;/li&gt;&#xA;&lt;li&gt;The modification date&lt;/li&gt;&#xA;&lt;li&gt;The category, usually one, prefixed with &lt;code&gt;@&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;The tags, usually many, prefixed with &lt;code&gt;#&lt;/code&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>Article summary</title>
+      <link>https://rossabaker.com/configs/website/templates/article-summary/</link>
+      <pubDate>Fri, 02 Sep 2022 13:12:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/templates/article-summary/</guid>
+      <description>&lt;p&gt;Provide a standard article summary for our various list templates.  It&#xA;includes the title, dates, category, tags, and either the page&#xA;description or summary.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Taxonomy term template</title>
+      <link>https://rossabaker.com/configs/website/templates/term/</link>
+      <pubDate>Fri, 02 Sep 2022 13:10:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/templates/term/</guid>
+      <description>&lt;p&gt;Taxonomy terms (e.g., &lt;code&gt;/categories/tech&lt;/code&gt;) are rendered in a simple&#xA;template that lists the article summaries in reverse order of modification.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Taxonomy tag cloud</title>
+      <link>https://rossabaker.com/configs/website/templates/terms/</link>
+      <pubDate>Fri, 02 Sep 2022 13:07:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/templates/terms/</guid>
+      <description>&lt;p&gt;This is the taxonomy list page, which is rendered as a tag cloud.  We&#xA;use it for categories and tags.  Terms are rendered in a font&#xA;proportional to the logarithm of its page count.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>List template</title>
+      <link>https://rossabaker.com/configs/website/templates/list/</link>
+      <pubDate>Fri, 02 Sep 2022 12:55:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/templates/list/</guid>
+      <description>&lt;p&gt;The list template renders for the home page, section listings,&#xA;taxonomies, and terms.  By default, we render our article summaries&#xA;in reverse order of modification.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Single-page template</title>
+      <link>https://rossabaker.com/configs/website/templates/single/</link>
+      <pubDate>Fri, 02 Sep 2022 12:53:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/templates/single/</guid>
+      <description>&lt;p&gt;Most pages on the site are &amp;ldquo;single pages&amp;rdquo;.  These are generally the&#xA;subtrees in the &lt;a href=&#34;https://git.rossabaker.com/ross/cromulent/src/branch/main/src/org/cromulent.org&#34;&gt;source&lt;/a&gt; with &lt;code&gt;EXPORT_FILE_NAME&lt;/code&gt; not equal to &lt;code&gt;_index&lt;/code&gt;.&#xA;Think of them as the articles.  Indeed, we mark them up in an&#xA;&lt;code&gt;&amp;lt;article&amp;gt;&lt;/code&gt; tag.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Talks template</title>
+      <link>https://rossabaker.com/configs/website/templates/talks/</link>
+      <pubDate>Fri, 02 Sep 2022 12:48:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/templates/talks/</guid>
+      <description>&lt;p&gt;Talks get their own single-page template based on custom front matter.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Header template</title>
+      <link>https://rossabaker.com/configs/website/templates/header/</link>
+      <pubDate>Fri, 02 Sep 2022 11:41:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/templates/header/</guid>
+      <description>&lt;p&gt;Our header is straightforward semantic HTML, with a &lt;code&gt;&amp;lt;h1&amp;gt;&lt;/code&gt;, &lt;code&gt;&amp;lt;p&amp;gt;&lt;/code&gt;,&#xA;&lt;code&gt;&amp;lt;nav&amp;gt;&lt;/code&gt;, etc.  It establishes the brand, and my brand is to be a&#xA;complete dweeb.  Therefore, we&amp;rsquo;re going to abuse CSS to render it as&#xA;an Emacs Lisp definition.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Templates</title>
+      <link>https://rossabaker.com/configs/website/templates/</link>
+      <pubDate>Fri, 02 Sep 2022 11:28:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/templates/</guid>
+      <description>I&amp;rsquo;ve eschewed the many community themes to lay everything out from scratch. I took over a decade off front ends and wanted to see what I&amp;rsquo;ve missed. If you have no such need, don&amp;rsquo;t follow my footsteps. There is a lot to unpack here.</description>
+    </item>
+    <item>
+      <title>Footer template</title>
+      <link>https://rossabaker.com/configs/website/templates/footer/</link>
+      <pubDate>Fri, 02 Sep 2022 10:35:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/templates/footer/</guid>
+      <description>&lt;p&gt;The footer is a simple &lt;a href=&#34;http://microformats.org/wiki/hcard&#34;&gt;hCard&lt;/a&gt; with our name, pronouns, and socials.&#xA;Our social links will use the &lt;a href=&#34;https://microformats.org/wiki/rel-me&#34;&gt;rel-me microformat&lt;/a&gt; for verification.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Head template</title>
+      <link>https://rossabaker.com/configs/website/templates/head/</link>
+      <pubDate>Fri, 02 Sep 2022 10:29:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/templates/head/</guid>
+      <description>&lt;p&gt;This template defines our default &lt;code&gt;&amp;lt;head&amp;gt;&lt;/code&gt; element, and is not often&#xA;customized.  Most of it originated in &lt;a href=&#34;https://gitlab.com/hugo-mwe/hugo-mwe&#34;&gt;hugo-mwe&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Base template</title>
+      <link>https://rossabaker.com/configs/website/templates/base-template/</link>
+      <pubDate>Fri, 02 Sep 2022 09:17:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/templates/base-template/</guid>
+      <description>&lt;p&gt;This &lt;a href=&#34;https://gohugo.io/templates/base/&#34;&gt;base template&lt;/a&gt; defines the outermost HTML for single pages and&#xA;lists alike.  Nothing here is extraordinary.  It is a simple&#xA;foundation for semantic HTML.  It specifies four blocks:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://rossabaker.com/configs/website/templates/head/&#34;&gt;&lt;code&gt;head&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://rossabaker.com/configs/website/templates/header/&#34;&gt;&lt;code&gt;header&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;main&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://rossabaker.com/configs/website/templates/footer/&#34;&gt;&lt;code&gt;footer&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>Build website with Nix</title>
+      <link>https://rossabaker.com/configs/website/build/</link>
+      <pubDate>Thu, 01 Sep 2022 16:54:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/build/</guid>
+      <description>The website is just another package within our flake.&#xA;Export script # export.el is a small Emacs script that finds the Org file and exports its contents with ox-hugo.&#xA;MIT&#xA;(require &amp;#39;ob-dot) (require &amp;#39;ob-shell) (require &amp;#39;rab-ox-hugo) (rab/ox-hugo-mode) (with-current-buffer (find-file-noselect &amp;#34;src/org/cromulent.org&amp;#34;) (let ((org-confirm-babel-evaluate nil)) (org-babel-tangle) (org-hugo-export-wim-to-md t))) Nix derivation # The build first runs the export script to tangle the files and export to Hugo sources. Hugo is then run to create a public/ directory.</description>
+    </item>
+    <item>
+      <title>Hugo configuration</title>
+      <link>https://rossabaker.com/configs/website/hugo/</link>
+      <pubDate>Thu, 01 Sep 2022 16:48:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/hugo/</guid>
+      <description>&lt;p&gt;Hugo can be configured with either TOML or YAML.  I spent my weirdness&#xA;budget on a literate config, so let&amp;rsquo;s stick to the default.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>An improved CSS baseline</title>
+      <link>https://rossabaker.com/configs/website/style/</link>
+      <pubDate>Tue, 30 Aug 2022 14:26:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/style/</guid>
+      <description>Default browser renderings have converged in a way that mostly obsoletes the venerable resets of yore. Consistency does not imply optimality. There is room to improve the defaults without relying on classes or HTML structures particular to any project. The rules here are implemented on rossabaker.com, but could be exported to start new projects.&#xA;Variables # Some values in this reconditioning are configurable, and will be defined as :root: variables with a --cromulent- prefix.</description>
+    </item>
+    <item>
+      <title>Configuring Git for literate programming</title>
+      <link>https://rossabaker.com/configs/git-repository/</link>
+      <pubDate>Wed, 24 Aug 2022 15:04:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/git-repository/</guid>
+      <description>My personal Git repository, Cromulent, contains the source for various projects, such as configurations and the contents of this website.&#xA;Due to literate programming, much of the source code &amp;ldquo;weaves&amp;rdquo; code and documentation in Org. Most tools aren&amp;rsquo;t Org interpreters, so the Org must be &amp;ldquo;tangled&amp;rdquo; 1 back into separate files for general consumption. This process requires a bit of extra care around Git.&#xA;Three types of files # Original sources # Original sources are the minimal set of files that can&amp;rsquo;t be derived from other sources as part of the build process.</description>
+    </item>
+    <item>
+      <title>Website</title>
+      <link>https://rossabaker.com/configs/website/</link>
+      <pubDate>Wed, 24 Aug 2022 15:04:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/</guid>
+      <description>rossabaker.com is sourced from an Org file. We tangle the configuration, export the content to Markdown with with ox-hugo, and convert the Markdown to HTML with Hugo.</description>
+    </item>
+    <item>
+      <title>The Scala Logs</title>
+      <link>https://rossabaker.com/talks/podcasts/scala-logs/</link>
+      <pubDate>Sat, 08 Feb 2020 00:00:00 +0000</pubDate>
+      <guid>https://rossabaker.com/talks/podcasts/scala-logs/</guid>
+      <description>It was my honor to join Zach McCoy on the first full episode of The Scala Logs, where we talked http4s, Haskell, and hockey.</description>
+    </item>
+    <item>
+      <title>Algebras in Scala</title>
+      <link>https://rossabaker.com/talks/algebras-in-scala/</link>
+      <pubDate>Mon, 02 Dec 2019 00:00:00 +0000</pubDate>
+      <guid>https://rossabaker.com/talks/algebras-in-scala/</guid>
+      <description>Scala developers like to talk about &amp;ldquo;algebras&amp;rdquo;. Or when they&amp;rsquo;re feeling particularly precious, &amp;ldquo;algebrae.&amp;rdquo; Ross gives an overview, and promises any references to &amp;ldquo;F-algebra&amp;rdquo; are not a taunt about your ninth grade report card.</description>
+    </item>
+    <item>
+      <title>CoRecursive Episode #017</title>
+      <link>https://rossabaker.com/talks/podcasts/corecursive-17/</link>
+      <pubDate>Fri, 27 Jul 2018 00:00:00 +0000</pubDate>
+      <guid>https://rossabaker.com/talks/podcasts/corecursive-17/</guid>
+      <description>&lt;p&gt;I was interviewed by Adam Gordon Bell on the &lt;a href=&#34;https://corecursive.com/017-http4s-with-ross-baker/&#34;&gt;CoRecursive podcast&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Akka IO and Netty</title>
+      <link>https://rossabaker.com/talks/akka-io-and-netty/</link>
+      <pubDate>Mon, 04 Nov 2013 00:00:00 +0000</pubDate>
+      <guid>https://rossabaker.com/talks/akka-io-and-netty/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Anorm</title>
+      <link>https://rossabaker.com/talks/anorm/</link>
+      <pubDate>Mon, 13 Aug 2012 00:00:00 +0000</pubDate>
+      <guid>https://rossabaker.com/talks/anorm/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

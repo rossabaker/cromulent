@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>org-mode on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/org-mode/</link>
+    <description>Recent content in org-mode on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 22 Nov 2022 15:53:00 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/org-mode/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Ox. Hugo. Why not both?</title>
+      <link>https://rossabaker.com/blog/ox-hugo-why-not-both/</link>
+      <pubDate>Tue, 22 Nov 2022 15:53:00 +0000</pubDate>
+      <guid>https://rossabaker.com/blog/ox-hugo-why-not-both/</guid>
+      <description>This site is built on a static site generator (SSG). They are a dime a dozen. I chose a less mainstream one, ox-hugo. After recently questioning that choice, I have new clarity on why it&amp;rsquo;s right for me.&#xA;The goal # I want to write and sometimes generate content in a markup language. The SSG generator should apply a template, create aggregate views (such as tags), and output a directory that can be served off a cloud CDN, self-hosted with open source like nginx, or even out of a local directory with a simple Rust binary.</description>
+    </item>
+  </channel>
+</rss>

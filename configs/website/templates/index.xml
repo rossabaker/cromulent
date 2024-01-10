@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Templates on Ross A. Baker</title>
+    <link>https://rossabaker.com/configs/website/templates/</link>
+    <description>Recent content in Templates on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 02 Sep 2022 11:28:00 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/configs/website/templates/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Home page template</title>
+      <link>https://rossabaker.com/configs/website/templates/home/</link>
+      <pubDate>Wed, 12 Oct 2022 00:05:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/templates/home/</guid>
+      <description>&lt;p&gt;The home page is rendered as a paginated list.  We want branch bundles,&#xA;so we have to exclude the home page, taxonomies, and terms from the&#xA;pages.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Contact info templates</title>
+      <link>https://rossabaker.com/configs/website/templates/contact-info/</link>
+      <pubDate>Mon, 12 Sep 2022 22:11:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/templates/contact-info/</guid>
+      <description>&lt;p&gt;Contact info is rendered in two places: in the &lt;a href=&#34;https://rossabaker.com/configs/website/templates/footer/&#34;&gt;footer template&lt;/a&gt; and on the&#xA;&lt;a href=&#34;https://rossabaker.com/about/&#34;&gt;about page&lt;/a&gt;.  They share a common definition.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Heading rendering</title>
+      <link>https://rossabaker.com/configs/website/templates/heading-renderer/</link>
+      <pubDate>Sun, 04 Sep 2022 17:50:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/templates/heading-renderer/</guid>
+      <description>&lt;p&gt;We &lt;a href=&#34;https://gohugo.io/templates/render-hooks&#34;&gt;hook&lt;/a&gt; into the heading renderer to generate anchor targets for subheadings.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Article info</title>
+      <link>https://rossabaker.com/configs/website/templates/article-info/</link>
+      <pubDate>Fri, 02 Sep 2022 13:16:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/templates/article-info/</guid>
+      <description>&lt;p&gt;Article info appears at the bottom of every article and article&#xA;summary on the site.  It describes:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;The content type&lt;/li&gt;&#xA;&lt;li&gt;The date&lt;/li&gt;&#xA;&lt;li&gt;The modification date&lt;/li&gt;&#xA;&lt;li&gt;The category, usually one, prefixed with &lt;code&gt;@&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;The tags, usually many, prefixed with &lt;code&gt;#&lt;/code&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>Article summary</title>
+      <link>https://rossabaker.com/configs/website/templates/article-summary/</link>
+      <pubDate>Fri, 02 Sep 2022 13:12:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/templates/article-summary/</guid>
+      <description>&lt;p&gt;Provide a standard article summary for our various list templates.  It&#xA;includes the title, dates, category, tags, and either the page&#xA;description or summary.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Taxonomy term template</title>
+      <link>https://rossabaker.com/configs/website/templates/term/</link>
+      <pubDate>Fri, 02 Sep 2022 13:10:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/templates/term/</guid>
+      <description>&lt;p&gt;Taxonomy terms (e.g., &lt;code&gt;/categories/tech&lt;/code&gt;) are rendered in a simple&#xA;template that lists the article summaries in reverse order of modification.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Taxonomy tag cloud</title>
+      <link>https://rossabaker.com/configs/website/templates/terms/</link>
+      <pubDate>Fri, 02 Sep 2022 13:07:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/templates/terms/</guid>
+      <description>&lt;p&gt;This is the taxonomy list page, which is rendered as a tag cloud.  We&#xA;use it for categories and tags.  Terms are rendered in a font&#xA;proportional to the logarithm of its page count.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>List template</title>
+      <link>https://rossabaker.com/configs/website/templates/list/</link>
+      <pubDate>Fri, 02 Sep 2022 12:55:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/templates/list/</guid>
+      <description>&lt;p&gt;The list template renders for the home page, section listings,&#xA;taxonomies, and terms.  By default, we render our article summaries&#xA;in reverse order of modification.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Single-page template</title>
+      <link>https://rossabaker.com/configs/website/templates/single/</link>
+      <pubDate>Fri, 02 Sep 2022 12:53:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/templates/single/</guid>
+      <description>&lt;p&gt;Most pages on the site are &amp;ldquo;single pages&amp;rdquo;.  These are generally the&#xA;subtrees in the &lt;a href=&#34;https://git.rossabaker.com/ross/cromulent/src/branch/main/src/org/cromulent.org&#34;&gt;source&lt;/a&gt; with &lt;code&gt;EXPORT_FILE_NAME&lt;/code&gt; not equal to &lt;code&gt;_index&lt;/code&gt;.&#xA;Think of them as the articles.  Indeed, we mark them up in an&#xA;&lt;code&gt;&amp;lt;article&amp;gt;&lt;/code&gt; tag.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Talks template</title>
+      <link>https://rossabaker.com/configs/website/templates/talks/</link>
+      <pubDate>Fri, 02 Sep 2022 12:48:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/templates/talks/</guid>
+      <description>&lt;p&gt;Talks get their own single-page template based on custom front matter.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Header template</title>
+      <link>https://rossabaker.com/configs/website/templates/header/</link>
+      <pubDate>Fri, 02 Sep 2022 11:41:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/templates/header/</guid>
+      <description>&lt;p&gt;Our header is straightforward semantic HTML, with a &lt;code&gt;&amp;lt;h1&amp;gt;&lt;/code&gt;, &lt;code&gt;&amp;lt;p&amp;gt;&lt;/code&gt;,&#xA;&lt;code&gt;&amp;lt;nav&amp;gt;&lt;/code&gt;, etc.  It establishes the brand, and my brand is to be a&#xA;complete dweeb.  Therefore, we&amp;rsquo;re going to abuse CSS to render it as&#xA;an Emacs Lisp definition.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Footer template</title>
+      <link>https://rossabaker.com/configs/website/templates/footer/</link>
+      <pubDate>Fri, 02 Sep 2022 10:35:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/templates/footer/</guid>
+      <description>&lt;p&gt;The footer is a simple &lt;a href=&#34;http://microformats.org/wiki/hcard&#34;&gt;hCard&lt;/a&gt; with our name, pronouns, and socials.&#xA;Our social links will use the &lt;a href=&#34;https://microformats.org/wiki/rel-me&#34;&gt;rel-me microformat&lt;/a&gt; for verification.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Head template</title>
+      <link>https://rossabaker.com/configs/website/templates/head/</link>
+      <pubDate>Fri, 02 Sep 2022 10:29:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/templates/head/</guid>
+      <description>&lt;p&gt;This template defines our default &lt;code&gt;&amp;lt;head&amp;gt;&lt;/code&gt; element, and is not often&#xA;customized.  Most of it originated in &lt;a href=&#34;https://gitlab.com/hugo-mwe/hugo-mwe&#34;&gt;hugo-mwe&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Base template</title>
+      <link>https://rossabaker.com/configs/website/templates/base-template/</link>
+      <pubDate>Fri, 02 Sep 2022 09:17:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/templates/base-template/</guid>
+      <description>&lt;p&gt;This &lt;a href=&#34;https://gohugo.io/templates/base/&#34;&gt;base template&lt;/a&gt; defines the outermost HTML for single pages and&#xA;lists alike.  Nothing here is extraordinary.  It is a simple&#xA;foundation for semantic HTML.  It specifies four blocks:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://rossabaker.com/configs/website/templates/head/&#34;&gt;&lt;code&gt;head&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://rossabaker.com/configs/website/templates/header/&#34;&gt;&lt;code&gt;header&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;main&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://rossabaker.com/configs/website/templates/footer/&#34;&gt;&lt;code&gt;footer&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+  </channel>
+</rss>

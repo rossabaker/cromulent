@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>haskell on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/haskell/</link>
+    <description>Recent content in haskell on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 22 Jan 2023 15:56:32 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/haskell/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109733674485760332/</link>
+      <pubDate>Sun, 22 Jan 2023 15:56:32 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109733674485760332/</guid>
+      <description>The concept of &amp;quot;monadic profunctors&amp;quot;¹ for codecs is beautiful:&#xA;```&#xA;data Codec r w c a = Codec&#xA;{ codecIn :: r a,&#xA;codecOut :: c → w a&#xA;}&#xA;```&#xA;A parser `r a` may have expensive optimizations in its functor ops (run once) and then fast on each parse. Printer `w a` may be the same, but depends on input `c`, and must be recreated on each run.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109679310125418733/</link>
+      <pubDate>Fri, 13 Jan 2023 01:30:57 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109679310125418733/</guid>
+      <description>Sometimes, Haskell documentation disappoints. Other times:&#xA;&amp;gt; Mnemonic: Clowns to the left (parameter of the Bifunctor), jokers to the right.&#xA;https://hackage.haskell.org/package/bifunctors-5.5.7/docs/Data-Bifunctor-Clown.html&#xA;#Haskell</description>
+    </item>
+    <item>
+      <title>The Scala Logs</title>
+      <link>https://rossabaker.com/talks/podcasts/scala-logs/</link>
+      <pubDate>Sat, 08 Feb 2020 00:00:00 +0000</pubDate>
+      <guid>https://rossabaker.com/talks/podcasts/scala-logs/</guid>
+      <description>It was my honor to join Zach McCoy on the first full episode of The Scala Logs, where we talked http4s, Haskell, and hockey.</description>
+    </item>
+  </channel>
+</rss>

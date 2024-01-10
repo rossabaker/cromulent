@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>copilot on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/copilot/</link>
+    <description>Recent content in copilot on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 10 Feb 2023 19:03:02 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/copilot/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109841991772222920/</link>
+      <pubDate>Fri, 10 Feb 2023 19:03:02 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109841991772222920/</guid>
+      <description>Instead of signing a CLA, can&amp;#39;t we all just wait for Copilot to launder it?&#xA;#GitHub #Copilot #OSS</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>webcrawlers on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/webcrawlers/</link>
+    <description>Recent content in webcrawlers on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 09 Aug 2023 20:31:00 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/webcrawlers/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Webcrawler configuration</title>
+      <link>https://rossabaker.com/configs/website/webcrawlers/</link>
+      <pubDate>Wed, 09 Aug 2023 20:31:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/webcrawlers/</guid>
+      <description>RFC9309 defines the Robots Exclusion Protocol, wherein a file is served at /robots.txt to configure the behavior of automated clients, or webcrawlers.&#xA;The most malicious actors will ignore this file. It&amp;rsquo;s more petulant than effective, but I&amp;rsquo;m not one to pass up a chance to express my contempt in conformance with an RFC.&#xA;Search engines # Generally, I like my content to be indexed and discoverable via search engines, and I welcome most crawlers.</description>
+    </item>
+  </channel>
+</rss>

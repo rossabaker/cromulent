@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>microblog on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/microblog/</link>
+    <description>Recent content in microblog on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 07 Nov 2022 09:53:00 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/microblog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Notes</title>
+      <link>https://rossabaker.com/notes/</link>
+      <pubDate>Mon, 07 Nov 2022 09:53:00 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/</guid>
+      <description>This is my microblog. I archive new threads from various social networks here. Replies and boosts or retweets are out of scope. Content is archived here in the Indieweb spirit of owning your data.&#xA;Includes:&#xA;@rossabaker@mastodon.social account (April 2017 — November 2022) @rossabaker@indieweb.social account (November 2022) @ross@rossabaker.com account (November 2022 — present, periodically synchronized) </description>
+    </item>
+  </channel>
+</rss>

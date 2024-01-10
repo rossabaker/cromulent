@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>tag-cloud on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/tag-cloud/</link>
+    <description>Recent content in tag-cloud on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 02 Sep 2022 13:07:00 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/tag-cloud/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Taxonomy tag cloud</title>
+      <link>https://rossabaker.com/configs/website/templates/terms/</link>
+      <pubDate>Fri, 02 Sep 2022 13:07:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/templates/terms/</guid>
+      <description>&lt;p&gt;This is the taxonomy list page, which is rendered as a tag cloud.  We&#xA;use it for categories and tags.  Terms are rendered in a font&#xA;proportional to the logarithm of its page count.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>kleisli on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/kleisli/</link>
+    <description>Recent content in kleisli on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 21 Oct 2022 04:18:34 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/kleisli/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/109204335120626413/</link>
+      <pubDate>Fri, 21 Oct 2022 04:18:34 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/109204335120626413/</guid>
+      <description>Many people making #http4s #kleisli reform proposals that sound familiar. A brief history of the server abstraction: https://github.com/http4s/http4s/discussions/4846#discussioncomment-3930100</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>music on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/music/</link>
+    <description>Recent content in music on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 27 Mar 2023 23:49:18 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/music/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110097921343455024/</link>
+      <pubDate>Mon, 27 Mar 2023 23:49:18 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110097921343455024/</guid>
+      <description>I&amp;#39;ve been doing some ML work lately, and in my darkest moments, YouTube Music tosses Van Morrison into my De La Soul radio, and I remember nobody knows what they&amp;#39;re doing.&#xA;#MachineLearning #Music</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>python on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/python/</link>
+    <description>Recent content in python on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 28 Jul 2023 21:51:00 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Python home-manager module</title>
+      <link>https://rossabaker.com/configs/python/</link>
+      <pubDate>Fri, 28 Jul 2023 21:51:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/python/</guid>
+      <description>I have dabbled with Python for years, but have little production experience. I am used to not knowing what I&amp;rsquo;m doing, but the feeling is stronger in this module.&#xA;Package management # I am fighting hard to use Nix to manage my Python packages, but I don&amp;rsquo;t have time for a side quest while I&amp;rsquo;m getting comfortable with the language.&#xA;Micromamba # Micromamba is an alternative to Anaconda and Miniconda, neither of which installs cleanly on my Mac.</description>
+    </item>
+  </channel>
+</rss>

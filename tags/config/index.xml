@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>config on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/config/</link>
+    <description>Recent content in config on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 01 Nov 2022 01:43:47 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/config/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/indieweb.social/rossabaker/109266011901701598/</link>
+      <pubDate>Tue, 01 Nov 2022 01:43:47 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/indieweb.social/rossabaker/109266011901701598/</guid>
+      <description>Post-move #reintroduction:&#xA;I&amp;#39;m a software engineer, mostly #Typelevel #Scala. I started #http4s and love #FP and #FOSS.&#xA;I&amp;#39;m getting into the #Indieweb, where I&amp;#39;ll #blog and share my #config, talks, and other projects. I geek out over #Emacs and #Nix. I&amp;#39;m probably also a #Bayesian.&#xA;I have a #dachshund, #coonhound, #tuxedoCat, and multiple freshwater #aquarium. I live in #Indianapolis, where I coach youth #soccer, attend North #UMC, and cheer on my beloved #Hoosiers.</description>
+    </item>
+  </channel>
+</rss>

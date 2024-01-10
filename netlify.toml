@@ -1,0 +1,8 @@
+[[headers]]
+  for = "/.well-known/matrix/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+[[headers]]
+  for = "/.well-known/openpgpkey/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"

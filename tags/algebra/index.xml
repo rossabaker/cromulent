@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>algebra on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/algebra/</link>
+    <description>Recent content in algebra on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 02 Dec 2019 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/algebra/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Algebras in Scala</title>
+      <link>https://rossabaker.com/talks/algebras-in-scala/</link>
+      <pubDate>Mon, 02 Dec 2019 00:00:00 +0000</pubDate>
+      <guid>https://rossabaker.com/talks/algebras-in-scala/</guid>
+      <description>Scala developers like to talk about &amp;ldquo;algebras&amp;rdquo;. Or when they&amp;rsquo;re feeling particularly precious, &amp;ldquo;algebrae.&amp;rdquo; Ross gives an overview, and promises any references to &amp;ldquo;F-algebra&amp;rdquo; are not a taunt about your ninth grade report card.</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>oss on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/oss/</link>
+    <description>Recent content in oss on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 13 Jun 2023 02:34:01 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/oss/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110534567001842406/</link>
+      <pubDate>Tue, 13 Jun 2023 02:34:01 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110534567001842406/</guid>
+      <description>It&amp;#39;s not the repeated accusations of racism from people who don&amp;#39;t know my life that burn me out. I can easily file that away next to my monad transformers getting blamed for global warming.&#xA;But have you never been stuck working with such people? Would you do so for free? When you demand it of your maintainers, *that&amp;#39;s* how the joie de OSS dies. I have repeatedly seen it from the outside, and I feel it on the inside.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109853105912543655/</link>
+      <pubDate>Sun, 12 Feb 2023 18:09:30 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109853105912543655/</guid>
+      <description>It&amp;#39;s going to be delicious when GitHub&amp;#39;s AI renders GitHub uninhabitable with spammy pull requests, if and only if Open Source communities are prepared with an alternative.&#xA;#GitHub #OSS #AI #Enshittification</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109841991772222920/</link>
+      <pubDate>Fri, 10 Feb 2023 19:03:02 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109841991772222920/</guid>
+      <description>Instead of signing a CLA, can&amp;#39;t we all just wait for Copilot to launder it?&#xA;#GitHub #Copilot #OSS</description>
+    </item>
+  </channel>
+</rss>

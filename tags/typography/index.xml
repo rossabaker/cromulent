@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>typography on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/typography/</link>
+    <description>Recent content in typography on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 18 Apr 2023 13:01:47 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/typography/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110219946065535217/</link>
+      <pubDate>Tue, 18 Apr 2023 13:01:47 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110219946065535217/</guid>
+      <description>This complexity is the result of humankind straying from the light of sentences separated by two spaces.&#xA;[Edit: The package is a great idea and I plan to install it. The conventions that make it necessary were a bad idea!]&#xA;https://codeberg.org/martianh/sentex&#xA;#Typography #Emacs</description>
+    </item>
+  </channel>
+</rss>

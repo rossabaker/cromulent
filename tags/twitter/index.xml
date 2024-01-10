@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>twitter on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/twitter/</link>
+    <description>Recent content in twitter on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 09 Aug 2023 20:31:00 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/twitter/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Webcrawler configuration</title>
+      <link>https://rossabaker.com/configs/website/webcrawlers/</link>
+      <pubDate>Wed, 09 Aug 2023 20:31:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/webcrawlers/</guid>
+      <description>RFC9309 defines the Robots Exclusion Protocol, wherein a file is served at /robots.txt to configure the behavior of automated clients, or webcrawlers.&#xA;The most malicious actors will ignore this file. It&amp;rsquo;s more petulant than effective, but I&amp;rsquo;m not one to pass up a chance to express my contempt in conformance with an RFC.&#xA;Search engines # Generally, I like my content to be indexed and discoverable via search engines, and I welcome most crawlers.</description>
+    </item>
+    <item>
+      <title>Imperfectly Indieweb</title>
+      <link>https://rossabaker.com/blog/imperfectly-indieweb/</link>
+      <pubDate>Tue, 01 Nov 2022 23:17:00 +0000</pubDate>
+      <guid>https://rossabaker.com/blog/imperfectly-indieweb/</guid>
+      <description>Updated &amp;lt;2022-11-02 Wed&amp;gt;: some edits for concision&#xA;The asteroid hurtling toward Twitter last week forced many of us to look back on our digital lives. I reflected on my mistakes with perfectionism and proprietorship, and am looking to Indieweb for solutions.&#xA;Portrait of 1990s geekery # Figure 1: Dinosaur fossil by Nigel Holt, licensed under CC BY 2.0&#xA;The Wayback Machine has preserved my juvenilia. The soft tissue is gone, but here is the skeleton of a twentieth-century personal web page, the author not yet twenty.</description>
+    </item>
+  </channel>
+</rss>

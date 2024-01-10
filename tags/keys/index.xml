@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>keys on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/keys/</link>
+    <description>Recent content in keys on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 14 Sep 2022 13:30:00 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/keys/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Public keys</title>
+      <link>https://rossabaker.com/public-keys/</link>
+      <pubDate>Wed, 14 Sep 2022 13:30:00 +0000</pubDate>
+      <guid>https://rossabaker.com/public-keys/</guid>
+      <description>PGP # My PGP public key is published to this domain via WKD, and can also be downloaded in binary and ASCII armored formats. Its fingerprint is:&#xA;pub rsa4096 2018-01-31 [SC] 904C153733DBB0106915C0BD975BE5BC29D92CA5 uid [ unknown] Ross A. Baker &amp;lt;ross@rossabaker.com&amp;gt; sub rsa4096 2018-01-31 [E] sub rsa4096 2022-11-21 [S] Verification # This key is notated with Ariadne Identity claims, which can be verified on Keyoxide.</description>
+    </item>
+  </channel>
+</rss>

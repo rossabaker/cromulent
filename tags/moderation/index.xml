@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>moderation on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/moderation/</link>
+    <description>Recent content in moderation on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 01 Nov 2022 19:24:12 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/moderation/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/indieweb.social/rossabaker/109270181650052462/</link>
+      <pubDate>Tue, 01 Nov 2022 19:24:12 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/indieweb.social/rossabaker/109270181650052462/</guid>
+      <description>My new instance appears to be more liberally federated than my prior one, and while the local timeline is nice, the federated timeline is leaking sewage. All is not lost: there&amp;#39;s a &amp;quot;block domain&amp;quot; option on the triple dots. #moderation</description>
+    </item>
+  </channel>
+</rss>

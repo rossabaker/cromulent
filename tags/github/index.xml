@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>github on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/github/</link>
+    <description>Recent content in github on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 12 Feb 2023 18:09:30 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/github/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109853105912543655/</link>
+      <pubDate>Sun, 12 Feb 2023 18:09:30 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109853105912543655/</guid>
+      <description>It&amp;#39;s going to be delicious when GitHub&amp;#39;s AI renders GitHub uninhabitable with spammy pull requests, if and only if Open Source communities are prepared with an alternative.&#xA;#GitHub #OSS #AI #Enshittification</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109841991772222920/</link>
+      <pubDate>Fri, 10 Feb 2023 19:03:02 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109841991772222920/</guid>
+      <description>Instead of signing a CLA, can&amp;#39;t we all just wait for Copilot to launder it?&#xA;#GitHub #Copilot #OSS</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109712708951143137/</link>
+      <pubDate>Wed, 18 Jan 2023 23:04:43 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109712708951143137/</guid>
+      <description>GitHub&amp;#39;s footnotes support seems limited to 9. Ask me how I know.[^1]&#xA;[^1] I made another big ass table.&#xA;#GitHub #Markdown</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109638473522742759/</link>
+      <pubDate>Thu, 05 Jan 2023 20:25:40 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109638473522742759/</guid>
+      <description>https://github.com/settings/profile -&amp;gt; &amp;quot;Show Achievements on my profile&amp;quot; -&amp;gt; uncheck -&amp;gt; 😀 #GitHub #Degamification</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109637377251987951/</link>
+      <pubDate>Thu, 05 Jan 2023 15:46:52 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109637377251987951/</guid>
+      <description>GitHub is still an ethical trashfire, but this is a positive development:&#xA;https://docs.github.com/en/code-security/security-advisories/guidance-on-reporting-and-writing/privately-reporting-a-security-vulnerability&#xA;#GitHub #Security</description>
+    </item>
+  </channel>
+</rss>

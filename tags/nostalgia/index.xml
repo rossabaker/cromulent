@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>nostalgia on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/nostalgia/</link>
+    <description>Recent content in nostalgia on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 16 Jul 2023 22:51:00 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/nostalgia/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Finger me</title>
+      <link>https://rossabaker.com/projects/finger/</link>
+      <pubDate>Sun, 16 Jul 2023 22:51:00 +0000</pubDate>
+      <guid>https://rossabaker.com/projects/finger/</guid>
+      <description>Long ago, I stumbled across HyperTerminal on the family Windows 95 machine. I figured out how to dial into my mom-and-pop ISP with that, and had my first shell access on a multi-user machine. Magical. A friendly admin taught me a lot, including how to make a .plan on one of the great social networks of the day, Finger.&#xA;I can be fingered once again on Happy Net Box. Run this from your own shell:</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110103605769521601/</link>
+      <pubDate>Tue, 28 Mar 2023 23:54:55 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110103605769521601/</guid>
+      <description>As a child, I didn&amp;#39;t have portable electronics to play with or siblings to fart on, so on long drives, I kept a checklist until I spotted a license plate from all 50 states. Hawai`i was last, but I saw them all.&#xA;Anyway, there&amp;#39;s a Nassau-Bahamas plate at the Indianapolis Menards if you hurry.&#xA;#Nostalgia</description>
+    </item>
+  </channel>
+</rss>

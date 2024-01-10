@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>protip on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/protip/</link>
+    <description>Recent content in protip on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 11 Jun 2023 21:56:34 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/protip/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110527813700773086/</link>
+      <pubDate>Sun, 11 Jun 2023 21:56:34 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110527813700773086/</guid>
+      <description>You can filter usernames from other social networks and not see their quoted bullshit here.&#xA;#Protip</description>
+    </item>
+  </channel>
+</rss>

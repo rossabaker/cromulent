@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>synapse on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/synapse/</link>
+    <description>Recent content in synapse on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 27 Jan 2023 16:31:13 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/synapse/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109762122429723504/</link>
+      <pubDate>Fri, 27 Jan 2023 16:31:13 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109762122429723504/</guid>
+      <description>If we talk on Matrix, I half-assed the self-hosting and got an unintentionally clean start, but I&amp;#39;m back!&#xA;Matrix is good. Self-hosting Synapse competently requires more dedication to chat than I have these days. Anyway:&#xA;https://matrix.to/#/@ross:rossabaker.com&#xA;#Matrix #Synapse</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109759781799528154/</link>
+      <pubDate>Fri, 27 Jan 2023 06:35:58 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109759781799528154/</guid>
+      <description>Anybody running NixOS on GCP free tier? I have hit a tipping point running nixos-rebuild on an ec2-micro. It otherwise runs my Synapse server like a champ.&#xA;#NixOS #GCP #Synapse #Matrix</description>
+    </item>
+    <item>
+      <title>Self-hosting a Matrix home server with Synapse</title>
+      <link>https://rossabaker.com/configs/matrix/</link>
+      <pubDate>Mon, 21 Nov 2022 21:03:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/matrix/</guid>
+      <description>Matrix is a decentralized communication protocol. It is capable of many things, but I primarily use it for public chats on Open Source projects or private, end-to-end encrypted messaging.&#xA;Self-hosting # I am hosting Matrix on my dedicated Hetzner server. Requirements will vary by usage, but my Synapse server, a Python process, currently consumes about 350MB of RAM. Add on PostgreSQL and a reverse Nginx proxy, either of which might be shared with other services.</description>
+    </item>
+  </channel>
+</rss>

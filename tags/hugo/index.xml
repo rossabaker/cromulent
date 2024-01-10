@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>hugo on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/hugo/</link>
+    <description>Recent content in hugo on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 09 Feb 2023 05:54:52 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109833230264662747/</link>
+      <pubDate>Thu, 09 Feb 2023 05:54:52 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109833230264662747/</guid>
+      <description>Need to add one line to kid&amp;#39;s soccer league site that we are in Indiana, and all you Ohioans need to s/.com/.org/.&#xA;The custom theme from 2020 is too old for modern Hugo. Ugh. I pinned it with Nix, but that old nixpkgs doesn&amp;#39;t work on Apple Silicon. Upgrading the theme is a beast. Everything is terrible.&#xA;But change a version and a couple hashes, and I quickly rebuilt the precise old Hugo from source, which is now cached.</description>
+    </item>
+    <item>
+      <title>Ox. Hugo. Why not both?</title>
+      <link>https://rossabaker.com/blog/ox-hugo-why-not-both/</link>
+      <pubDate>Tue, 22 Nov 2022 15:53:00 +0000</pubDate>
+      <guid>https://rossabaker.com/blog/ox-hugo-why-not-both/</guid>
+      <description>This site is built on a static site generator (SSG). They are a dime a dozen. I chose a less mainstream one, ox-hugo. After recently questioning that choice, I have new clarity on why it&amp;rsquo;s right for me.&#xA;The goal # I want to write and sometimes generate content in a markup language. The SSG generator should apply a template, create aggregate views (such as tags), and output a directory that can be served off a cloud CDN, self-hosted with open source like nginx, or even out of a local directory with a simple Rust binary.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/indieweb.social/rossabaker/109306144082815818/</link>
+      <pubDate>Tue, 08 Nov 2022 03:49:55 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/indieweb.social/rossabaker/109306144082815818/</guid>
+      <description>How I archived toots from my prior instance to my personal Hugo site:&#xA;https://rossabaker.com/projects/toot-archive/&#xA;#Indieweb #PESOS #OwnYourData #Hugo #ScalaCLI #Typelevel</description>
+    </item>
+    <item>
+      <title>Archive your toots to Hugo</title>
+      <link>https://rossabaker.com/projects/toot-archive/</link>
+      <pubDate>Mon, 07 Nov 2022 22:37:00 +0000</pubDate>
+      <guid>https://rossabaker.com/projects/toot-archive/</guid>
+      <description>An important Indieweb principle is to own your data. I tooted on mastodon.social sporadically for five years. The service is public, the protocol open, and the implementation open source. Still, it exists at the pleasure of its admins, with whom I have no contract.&#xA;After moving to another instance, I wanted to preserve my old content. We will use a technique called PESOS, or Publish Elsewhere, Syndicate to Own Site.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/indieweb.social/rossabaker/109278029404970596/</link>
+      <pubDate>Thu, 03 Nov 2022 04:39:59 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/indieweb.social/rossabaker/109278029404970596/</guid>
+      <description>Skip the third-party server and self-host your PGP key via Web Key Directory (WKD)&#xA;Here&amp;#39;s how I did it with Hugo and Netlify:&#xA;https://rossabaker.com/configs/web-key-directory/&#xA;#pgp #wkd #indieweb #hugo #netlify</description>
+    </item>
+    <item>
+      <title>Home page template</title>
+      <link>https://rossabaker.com/configs/website/templates/home/</link>
+      <pubDate>Wed, 12 Oct 2022 00:05:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/templates/home/</guid>
+      <description>&lt;p&gt;The home page is rendered as a paginated list.  We want branch bundles,&#xA;so we have to exclude the home page, taxonomies, and terms from the&#xA;pages.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Contact info templates</title>
+      <link>https://rossabaker.com/configs/website/templates/contact-info/</link>
+      <pubDate>Mon, 12 Sep 2022 22:11:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/templates/contact-info/</guid>
+      <description>&lt;p&gt;Contact info is rendered in two places: in the &lt;a href=&#34;https://rossabaker.com/configs/website/templates/footer/&#34;&gt;footer template&lt;/a&gt; and on the&#xA;&lt;a href=&#34;https://rossabaker.com/about/&#34;&gt;about page&lt;/a&gt;.  They share a common definition.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/108969813364928969/</link>
+      <pubDate>Fri, 09 Sep 2022 18:16:36 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/108969813364928969/</guid>
+      <description>Chagrined to realize that using #Hugo&amp;#39;s scheduled posts feature introduces an impurity into a #Nix build. I want my next computer to come without a system clock.</description>
+    </item>
+    <item>
+      <title>Heading rendering</title>
+      <link>https://rossabaker.com/configs/website/templates/heading-renderer/</link>
+      <pubDate>Sun, 04 Sep 2022 17:50:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/templates/heading-renderer/</guid>
+      <description>&lt;p&gt;We &lt;a href=&#34;https://gohugo.io/templates/render-hooks&#34;&gt;hook&lt;/a&gt; into the heading renderer to generate anchor targets for subheadings.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Article info</title>
+      <link>https://rossabaker.com/configs/website/templates/article-info/</link>
+      <pubDate>Fri, 02 Sep 2022 13:16:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/templates/article-info/</guid>
+      <description>&lt;p&gt;Article info appears at the bottom of every article and article&#xA;summary on the site.  It describes:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;The content type&lt;/li&gt;&#xA;&lt;li&gt;The date&lt;/li&gt;&#xA;&lt;li&gt;The modification date&lt;/li&gt;&#xA;&lt;li&gt;The category, usually one, prefixed with &lt;code&gt;@&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;The tags, usually many, prefixed with &lt;code&gt;#&lt;/code&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>Article summary</title>
+      <link>https://rossabaker.com/configs/website/templates/article-summary/</link>
+      <pubDate>Fri, 02 Sep 2022 13:12:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/templates/article-summary/</guid>
+      <description>&lt;p&gt;Provide a standard article summary for our various list templates.  It&#xA;includes the title, dates, category, tags, and either the page&#xA;description or summary.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Taxonomy term template</title>
+      <link>https://rossabaker.com/configs/website/templates/term/</link>
+      <pubDate>Fri, 02 Sep 2022 13:10:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/templates/term/</guid>
+      <description>&lt;p&gt;Taxonomy terms (e.g., &lt;code&gt;/categories/tech&lt;/code&gt;) are rendered in a simple&#xA;template that lists the article summaries in reverse order of modification.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Taxonomy tag cloud</title>
+      <link>https://rossabaker.com/configs/website/templates/terms/</link>
+      <pubDate>Fri, 02 Sep 2022 13:07:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/templates/terms/</guid>
+      <description>&lt;p&gt;This is the taxonomy list page, which is rendered as a tag cloud.  We&#xA;use it for categories and tags.  Terms are rendered in a font&#xA;proportional to the logarithm of its page count.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>List template</title>
+      <link>https://rossabaker.com/configs/website/templates/list/</link>
+      <pubDate>Fri, 02 Sep 2022 12:55:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/templates/list/</guid>
+      <description>&lt;p&gt;The list template renders for the home page, section listings,&#xA;taxonomies, and terms.  By default, we render our article summaries&#xA;in reverse order of modification.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Single-page template</title>
+      <link>https://rossabaker.com/configs/website/templates/single/</link>
+      <pubDate>Fri, 02 Sep 2022 12:53:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/templates/single/</guid>
+      <description>&lt;p&gt;Most pages on the site are &amp;ldquo;single pages&amp;rdquo;.  These are generally the&#xA;subtrees in the &lt;a href=&#34;https://git.rossabaker.com/ross/cromulent/src/branch/main/src/org/cromulent.org&#34;&gt;source&lt;/a&gt; with &lt;code&gt;EXPORT_FILE_NAME&lt;/code&gt; not equal to &lt;code&gt;_index&lt;/code&gt;.&#xA;Think of them as the articles.  Indeed, we mark them up in an&#xA;&lt;code&gt;&amp;lt;article&amp;gt;&lt;/code&gt; tag.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Talks template</title>
+      <link>https://rossabaker.com/configs/website/templates/talks/</link>
+      <pubDate>Fri, 02 Sep 2022 12:48:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/templates/talks/</guid>
+      <description>&lt;p&gt;Talks get their own single-page template based on custom front matter.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Header template</title>
+      <link>https://rossabaker.com/configs/website/templates/header/</link>
+      <pubDate>Fri, 02 Sep 2022 11:41:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/templates/header/</guid>
+      <description>&lt;p&gt;Our header is straightforward semantic HTML, with a &lt;code&gt;&amp;lt;h1&amp;gt;&lt;/code&gt;, &lt;code&gt;&amp;lt;p&amp;gt;&lt;/code&gt;,&#xA;&lt;code&gt;&amp;lt;nav&amp;gt;&lt;/code&gt;, etc.  It establishes the brand, and my brand is to be a&#xA;complete dweeb.  Therefore, we&amp;rsquo;re going to abuse CSS to render it as&#xA;an Emacs Lisp definition.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Templates</title>
+      <link>https://rossabaker.com/configs/website/templates/</link>
+      <pubDate>Fri, 02 Sep 2022 11:28:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/templates/</guid>
+      <description>I&amp;rsquo;ve eschewed the many community themes to lay everything out from scratch. I took over a decade off front ends and wanted to see what I&amp;rsquo;ve missed. If you have no such need, don&amp;rsquo;t follow my footsteps. There is a lot to unpack here.</description>
+    </item>
+    <item>
+      <title>Footer template</title>
+      <link>https://rossabaker.com/configs/website/templates/footer/</link>
+      <pubDate>Fri, 02 Sep 2022 10:35:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/templates/footer/</guid>
+      <description>&lt;p&gt;The footer is a simple &lt;a href=&#34;http://microformats.org/wiki/hcard&#34;&gt;hCard&lt;/a&gt; with our name, pronouns, and socials.&#xA;Our social links will use the &lt;a href=&#34;https://microformats.org/wiki/rel-me&#34;&gt;rel-me microformat&lt;/a&gt; for verification.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Head template</title>
+      <link>https://rossabaker.com/configs/website/templates/head/</link>
+      <pubDate>Fri, 02 Sep 2022 10:29:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/templates/head/</guid>
+      <description>&lt;p&gt;This template defines our default &lt;code&gt;&amp;lt;head&amp;gt;&lt;/code&gt; element, and is not often&#xA;customized.  Most of it originated in &lt;a href=&#34;https://gitlab.com/hugo-mwe/hugo-mwe&#34;&gt;hugo-mwe&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Base template</title>
+      <link>https://rossabaker.com/configs/website/templates/base-template/</link>
+      <pubDate>Fri, 02 Sep 2022 09:17:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/templates/base-template/</guid>
+      <description>&lt;p&gt;This &lt;a href=&#34;https://gohugo.io/templates/base/&#34;&gt;base template&lt;/a&gt; defines the outermost HTML for single pages and&#xA;lists alike.  Nothing here is extraordinary.  It is a simple&#xA;foundation for semantic HTML.  It specifies four blocks:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://rossabaker.com/configs/website/templates/head/&#34;&gt;&lt;code&gt;head&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://rossabaker.com/configs/website/templates/header/&#34;&gt;&lt;code&gt;header&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;main&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://rossabaker.com/configs/website/templates/footer/&#34;&gt;&lt;code&gt;footer&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>Build website with Nix</title>
+      <link>https://rossabaker.com/configs/website/build/</link>
+      <pubDate>Thu, 01 Sep 2022 16:54:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/build/</guid>
+      <description>The website is just another package within our flake.&#xA;Export script # export.el is a small Emacs script that finds the Org file and exports its contents with ox-hugo.&#xA;MIT&#xA;(require &amp;#39;ob-dot) (require &amp;#39;ob-shell) (require &amp;#39;rab-ox-hugo) (rab/ox-hugo-mode) (with-current-buffer (find-file-noselect &amp;#34;src/org/cromulent.org&amp;#34;) (let ((org-confirm-babel-evaluate nil)) (org-babel-tangle) (org-hugo-export-wim-to-md t))) Nix derivation # The build first runs the export script to tangle the files and export to Hugo sources. Hugo is then run to create a public/ directory.</description>
+    </item>
+    <item>
+      <title>Hugo configuration</title>
+      <link>https://rossabaker.com/configs/website/hugo/</link>
+      <pubDate>Thu, 01 Sep 2022 16:48:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/hugo/</guid>
+      <description>&lt;p&gt;Hugo can be configured with either TOML or YAML.  I spent my weirdness&#xA;budget on a literate config, so let&amp;rsquo;s stick to the default.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

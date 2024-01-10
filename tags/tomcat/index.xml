@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>tomcat on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/tomcat/</link>
+    <description>Recent content in tomcat on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 06 Jan 2023 16:42:50 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/tomcat/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109643259623362940/</link>
+      <pubDate>Fri, 06 Jan 2023 16:42:50 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109643259623362940/</guid>
+      <description>Happy to welcome a pair of new http4s maintainers this week:&#xA;- @valencik has joined the Core team.&#xA;- @dhinojosa will be helping out with Servlet and Tomcat support.&#xA;👏 👏 #http4s #Scala #Servlet #Tomcat</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>fp on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/fp/</link>
+    <description>Recent content in fp on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 11 Apr 2023 03:04:01 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/fp/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110177959407083873/</link>
+      <pubDate>Tue, 11 Apr 2023 03:04:01 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110177959407083873/</guid>
+      <description>&amp;quot;Monads for Elisp&amp;quot; 🤔 https://github.com/Fuco1/emacs-cats&#xA;#Emacs #FP</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109733674485760332/</link>
+      <pubDate>Sun, 22 Jan 2023 15:56:32 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109733674485760332/</guid>
+      <description>The concept of &amp;quot;monadic profunctors&amp;quot;¹ for codecs is beautiful:&#xA;```&#xA;data Codec r w c a = Codec&#xA;{ codecIn :: r a,&#xA;codecOut :: c → w a&#xA;}&#xA;```&#xA;A parser `r a` may have expensive optimizations in its functor ops (run once) and then fast on each parse. Printer `w a` may be the same, but depends on input `c`, and must be recreated on each run.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109668797734851024/</link>
+      <pubDate>Wed, 11 Jan 2023 04:57:31 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109668797734851024/</guid>
+      <description>Coyoneda, to the tune of Handel&amp;#39;s Hallelujah Chorus&#xA;#FP #Dork</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/indieweb.social/rossabaker/109266011901701598/</link>
+      <pubDate>Tue, 01 Nov 2022 01:43:47 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/indieweb.social/rossabaker/109266011901701598/</guid>
+      <description>Post-move #reintroduction:&#xA;I&amp;#39;m a software engineer, mostly #Typelevel #Scala. I started #http4s and love #FP and #FOSS.&#xA;I&amp;#39;m getting into the #Indieweb, where I&amp;#39;ll #blog and share my #config, talks, and other projects. I geek out over #Emacs and #Nix. I&amp;#39;m probably also a #Bayesian.&#xA;I have a #dachshund, #coonhound, #tuxedoCat, and multiple freshwater #aquarium. I live in #Indianapolis, where I coach youth #soccer, attend North #UMC, and cheer on my beloved #Hoosiers.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/108196347588800056/</link>
+      <pubDate>Tue, 26 Apr 2022 03:54:05 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/108196347588800056/</guid>
+      <description>#introduction: I&amp;#39;m a software developer from #Indianapolis. I mostly write #Scala and #fp. I&amp;#39;m a contributor to #Typelevel and co-founder of #http4s. I nerd out over #Emacs and #Nix.&#xA;Also enjoy #bbq and freshwater #fishkeeping. I have a #dachshund and a #coonhound and a tuxedo #cat. A couple kids, too, but the pets get more clicks.&#xA;Pronouns are he/him.&#xA;Go Hoosiers. #GoIU #iufb #iubb #iums</description>
+    </item>
+  </channel>
+</rss>

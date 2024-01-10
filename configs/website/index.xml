@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Website on Ross A. Baker</title>
+    <link>https://rossabaker.com/configs/website/</link>
+    <description>Recent content in Website on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 24 Aug 2022 15:04:00 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/configs/website/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>HTML element sampler</title>
+      <link>https://rossabaker.com/configs/website/html-sampler/</link>
+      <pubDate>Sun, 05 Nov 2023 23:04:07 -0500</pubDate>
+      <guid>https://rossabaker.com/configs/website/html-sampler/</guid>
+      <description>This is a sampler of HTML elements used to develop the CSS. Examples are adapted from the MDN HTML Elements Reference, whose code samples are dedicated to the public domain. Content sectioning Address Contact the author of this page:&#xA;ross@example.com&#xA;(317) 555-2368 Article Weather forecast for Seattle 03 March 2018 Rain.&#xA;04 March 2018 Periods of rain.&#xA;05 March 2018 Heavy rain.&#xA;Aside Salamanders are a group of amphibians with a lizard-like appearance, including short legs and a tail in both larval and adult forms.</description>
+    </item>
+    <item>
+      <title>Webcrawler configuration</title>
+      <link>https://rossabaker.com/configs/website/webcrawlers/</link>
+      <pubDate>Wed, 09 Aug 2023 20:31:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/webcrawlers/</guid>
+      <description>RFC9309 defines the Robots Exclusion Protocol, wherein a file is served at /robots.txt to configure the behavior of automated clients, or webcrawlers.&#xA;The most malicious actors will ignore this file. It&amp;rsquo;s more petulant than effective, but I&amp;rsquo;m not one to pass up a chance to express my contempt in conformance with an RFC.&#xA;Search engines # Generally, I like my content to be indexed and discoverable via search engines, and I welcome most crawlers.</description>
+    </item>
+    <item>
+      <title>Build website with Nix</title>
+      <link>https://rossabaker.com/configs/website/build/</link>
+      <pubDate>Thu, 01 Sep 2022 16:54:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/build/</guid>
+      <description>The website is just another package within our flake.&#xA;Export script # export.el is a small Emacs script that finds the Org file and exports its contents with ox-hugo.&#xA;MIT&#xA;(require &amp;#39;ob-dot) (require &amp;#39;ob-shell) (require &amp;#39;rab-ox-hugo) (rab/ox-hugo-mode) (with-current-buffer (find-file-noselect &amp;#34;src/org/cromulent.org&amp;#34;) (let ((org-confirm-babel-evaluate nil)) (org-babel-tangle) (org-hugo-export-wim-to-md t))) Nix derivation # The build first runs the export script to tangle the files and export to Hugo sources. Hugo is then run to create a public/ directory.</description>
+    </item>
+    <item>
+      <title>Hugo configuration</title>
+      <link>https://rossabaker.com/configs/website/hugo/</link>
+      <pubDate>Thu, 01 Sep 2022 16:48:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/hugo/</guid>
+      <description>&lt;p&gt;Hugo can be configured with either TOML or YAML.  I spent my weirdness&#xA;budget on a literate config, so let&amp;rsquo;s stick to the default.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>An improved CSS baseline</title>
+      <link>https://rossabaker.com/configs/website/style/</link>
+      <pubDate>Tue, 30 Aug 2022 14:26:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/style/</guid>
+      <description>Default browser renderings have converged in a way that mostly obsoletes the venerable resets of yore. Consistency does not imply optimality. There is room to improve the defaults without relying on classes or HTML structures particular to any project. The rules here are implemented on rossabaker.com, but could be exported to start new projects.&#xA;Variables # Some values in this reconditioning are configurable, and will be defined as :root: variables with a --cromulent- prefix.</description>
+    </item>
+  </channel>
+</rss>

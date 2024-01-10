@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>indieweb on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/indieweb/</link>
+    <description>Recent content in indieweb on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 06 Aug 2023 21:30:00 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/indieweb/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Todo</title>
+      <link>https://rossabaker.com/todo/</link>
+      <pubDate>Sun, 06 Aug 2023 21:30:00 +0000</pubDate>
+      <guid>https://rossabaker.com/todo/</guid>
+      <description>On the IndieWeb, we are taught to focus on our own itches. In Org Mode, we have TODO items. They&amp;rsquo;re two sides of the same coin, and either seems more fun than struggling with JIRA.&#xA;These are not yet prioritized.&#xA;TODO Improve typography. # I foolishly started from scratch.&#xA;TODO Finish descriptions on all my pages. # TODO Post my Twitter and Facebook archives. # TODO Automate synchronization of notes. # TODO Clean up tags # Particularly coming out of the social media archives.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110549266792297906/</link>
+      <pubDate>Thu, 15 Jun 2023 16:52:22 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110549266792297906/</guid>
+      <description>Favorite link checkers? Lychee works great, but insists on reading /etc/resolv.conf, even in offline mode, which doesn&amp;#39;t work in my CI.&#xA;#indieweb</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109595380738434617/</link>
+      <pubDate>Thu, 29 Dec 2022 05:46:36 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109595380738434617/</guid>
+      <description>Post-disaster #Introduction:&#xA;I am best known for #Scala, #Typelevel, and #http4s. I geek out over #Emacs, #Nix, and the #Indieweb. I&amp;#39;m probably a #Bayesian.&#xA;I live in #Indianapolis, #Indiana with a #Dachshund, #Coonhound, #TuxedoCat, and a freshwater #Aquarium or five. I offset my #Jogging with #BBQ. I coach youth #Soccer and attend North United #Methodist Church.&#xA;This is a #SelfHosted sequel after a Terraform disaster. Boosts appreciated to relocate my peeps.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/indieweb.social/rossabaker/109306144082815818/</link>
+      <pubDate>Tue, 08 Nov 2022 03:49:55 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/indieweb.social/rossabaker/109306144082815818/</guid>
+      <description>How I archived toots from my prior instance to my personal Hugo site:&#xA;https://rossabaker.com/projects/toot-archive/&#xA;#Indieweb #PESOS #OwnYourData #Hugo #ScalaCLI #Typelevel</description>
+    </item>
+    <item>
+      <title>Archive your toots to Hugo</title>
+      <link>https://rossabaker.com/projects/toot-archive/</link>
+      <pubDate>Mon, 07 Nov 2022 22:37:00 +0000</pubDate>
+      <guid>https://rossabaker.com/projects/toot-archive/</guid>
+      <description>An important Indieweb principle is to own your data. I tooted on mastodon.social sporadically for five years. The service is public, the protocol open, and the implementation open source. Still, it exists at the pleasure of its admins, with whom I have no contract.&#xA;After moving to another instance, I wanted to preserve my old content. We will use a technique called PESOS, or Publish Elsewhere, Syndicate to Own Site.</description>
+    </item>
+    <item>
+      <title>Notes</title>
+      <link>https://rossabaker.com/notes/</link>
+      <pubDate>Mon, 07 Nov 2022 09:53:00 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/</guid>
+      <description>This is my microblog. I archive new threads from various social networks here. Replies and boosts or retweets are out of scope. Content is archived here in the Indieweb spirit of owning your data.&#xA;Includes:&#xA;@rossabaker@mastodon.social account (April 2017 — November 2022) @rossabaker@indieweb.social account (November 2022) @ross@rossabaker.com account (November 2022 — present, periodically synchronized) </description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/indieweb.social/rossabaker/109299576723616335/</link>
+      <pubDate>Sun, 06 Nov 2022 23:59:45 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/indieweb.social/rossabaker/109299576723616335/</guid>
+      <description>I want to archive posts from siloed networks to my personal website. I thought LinkedIn would be an easy start. Too easy: in fourteen years, I never posted. Oops.&#xA;#Indieweb #PESOS</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/indieweb.social/rossabaker/109297137648123781/</link>
+      <pubDate>Sun, 06 Nov 2022 13:39:28 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/indieweb.social/rossabaker/109297137648123781/</guid>
+      <description>Custom short domain: yea or nay?&#xA;https://indieweb.org/short-domains&#xA;#IndieWeb #POSSE</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/indieweb.social/rossabaker/109289177971640231/</link>
+      <pubDate>Sat, 05 Nov 2022 03:55:13 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/indieweb.social/rossabaker/109289177971640231/</guid>
+      <description>I like the #IndiewebSocial vibe, but original toots on a stranger&amp;#39;s instance doesn&amp;#39;t feel particularly #Indieweb. 🤔</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/indieweb.social/rossabaker/109278029404970596/</link>
+      <pubDate>Thu, 03 Nov 2022 04:39:59 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/indieweb.social/rossabaker/109278029404970596/</guid>
+      <description>Skip the third-party server and self-host your PGP key via Web Key Directory (WKD)&#xA;Here&amp;#39;s how I did it with Hugo and Netlify:&#xA;https://rossabaker.com/configs/web-key-directory/&#xA;#pgp #wkd #indieweb #hugo #netlify</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/indieweb.social/rossabaker/109272136338915805/</link>
+      <pubDate>Wed, 02 Nov 2022 03:41:18 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/indieweb.social/rossabaker/109272136338915805/</guid>
+      <description>Imperfectly Indieweb:&#xA;How the collapse of Twitter and a trip to the Wayback Machine inspired me to go all in on the Indieweb.&#xA;https://rossabaker.com/blog/imperfectly-indieweb/&#xA;#blog #indieweb</description>
+    </item>
+    <item>
+      <title>Imperfectly Indieweb</title>
+      <link>https://rossabaker.com/blog/imperfectly-indieweb/</link>
+      <pubDate>Tue, 01 Nov 2022 23:17:00 +0000</pubDate>
+      <guid>https://rossabaker.com/blog/imperfectly-indieweb/</guid>
+      <description>Updated &amp;lt;2022-11-02 Wed&amp;gt;: some edits for concision&#xA;The asteroid hurtling toward Twitter last week forced many of us to look back on our digital lives. I reflected on my mistakes with perfectionism and proprietorship, and am looking to Indieweb for solutions.&#xA;Portrait of 1990s geekery # Figure 1: Dinosaur fossil by Nigel Holt, licensed under CC BY 2.0&#xA;The Wayback Machine has preserved my juvenilia. The soft tissue is gone, but here is the skeleton of a twentieth-century personal web page, the author not yet twenty.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/indieweb.social/rossabaker/109266011901701598/</link>
+      <pubDate>Tue, 01 Nov 2022 01:43:47 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/indieweb.social/rossabaker/109266011901701598/</guid>
+      <description>Post-move #reintroduction:&#xA;I&amp;#39;m a software engineer, mostly #Typelevel #Scala. I started #http4s and love #FP and #FOSS.&#xA;I&amp;#39;m getting into the #Indieweb, where I&amp;#39;ll #blog and share my #config, talks, and other projects. I geek out over #Emacs and #Nix. I&amp;#39;m probably also a #Bayesian.&#xA;I have a #dachshund, #coonhound, #tuxedoCat, and multiple freshwater #aquarium. I live in #Indianapolis, where I coach youth #soccer, attend North #UMC, and cheer on my beloved #Hoosiers.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/109238172634322913/</link>
+      <pubDate>Thu, 27 Oct 2022 03:43:53 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/109238172634322913/</guid>
+      <description>Thoughts in the quiet before the migration of the birds:&#xA;I&amp;#39;m working on spinning up a #blog. Big Algorithm has damaged my attention span, and I hope to restore it through longer form reading and writing. #indieweb concepts are resonating with me.</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>kubernetes on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/kubernetes/</link>
+    <description>Recent content in kubernetes on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 25 May 2023 16:14:36 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/kubernetes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110430209715669260/</link>
+      <pubDate>Thu, 25 May 2023 16:14:36 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110430209715669260/</guid>
+      <description>I was doing a good job taking this incident seriously until k8s started talking about &amp;quot;untolerated taint.&amp;quot;&#xA;#kubernetes</description>
+    </item>
+  </channel>
+</rss>

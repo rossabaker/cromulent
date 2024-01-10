@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>gpl on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/gpl/</link>
+    <description>Recent content in gpl on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 06 Nov 2022 10:40:00 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/gpl/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>License</title>
+      <link>https://rossabaker.com/license/</link>
+      <pubDate>Sun, 06 Nov 2022 10:40:00 +0000</pubDate>
+      <guid>https://rossabaker.com/license/</guid>
+      <description>Simple and strict # The work as a whole is distributed under the GNU General Public License v3.0 only (GPL-3.0-only). These license terms apply to rossabaker.com and its source repository.&#xA;This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>licensing on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/licensing/</link>
+    <description>Recent content in licensing on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 10 Sep 2023 01:23:00 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/licensing/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Ox-Hugo extensions</title>
+      <link>https://rossabaker.com/configs/emacs/rab-ox-hugo/</link>
+      <pubDate>Sun, 10 Sep 2023 01:23:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/emacs/rab-ox-hugo/</guid>
+      <description>Dependencies # GPL-3.0-only&#xA;(require &amp;#39;cl-macs) (require &amp;#39;ox-hugo) (require &amp;#39;s) Customization group # Needed because of our minor mode.&#xA;GPL-3.0-only&#xA;(defgroup rab/ox-hugo nil &amp;#34;Ross A. Baker&amp;#39;s Ox-Hugo extensions.&amp;#34; :group &amp;#39;org-export-hugo) Code licensing # We lightly customize Ox-Hugo by adding support for a :code-license header. The technique is inspired by Sacha Chua&amp;rsquo;s custom summary header.&#xA;When exporting, a source block is replaced with org-babel-exp-code-template, which is filled by org-fill-template. This enhancement will only work when the template propagates this header argument.</description>
+    </item>
+    <item>
+      <title>License</title>
+      <link>https://rossabaker.com/license/</link>
+      <pubDate>Sun, 06 Nov 2022 10:40:00 +0000</pubDate>
+      <guid>https://rossabaker.com/license/</guid>
+      <description>Simple and strict # The work as a whole is distributed under the GNU General Public License v3.0 only (GPL-3.0-only). These license terms apply to rossabaker.com and its source repository.&#xA;This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</description>
+    </item>
+  </channel>
+</rss>

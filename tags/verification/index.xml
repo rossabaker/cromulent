@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>verification on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/verification/</link>
+    <description>Recent content in verification on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 03 Nov 2022 16:30:11 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/verification/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/indieweb.social/rossabaker/109280822017249637/</link>
+      <pubDate>Thu, 03 Nov 2022 16:30:11 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/indieweb.social/rossabaker/109280822017249637/</guid>
+      <description>Found a great deal on identity verification at Keyoxide. $0/month, multiple services, wow!&#xA;https://keyoxide.org/wkd/ross%40rossabaker.com&#xA;#keyoxide #verification</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/indieweb.social/rossabaker/109266392054817144/</link>
+      <pubDate>Tue, 01 Nov 2022 03:20:27 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/indieweb.social/rossabaker/109266392054817144/</guid>
+      <description>To get the green #verification check in my profile, I had to edit my web address _after_ adding the rel=me link.</description>
+    </item>
+    <item>
+      <title>Contact</title>
+      <link>https://rossabaker.com/contact/</link>
+      <pubDate>Sun, 16 Oct 2022 15:37:00 +0000</pubDate>
+      <guid>https://rossabaker.com/contact/</guid>
+      <description>Direct communication # I can&amp;rsquo;t offer an SLA on response times, but I try to carry my Midwestern Nice online.&#xA;Email ross@rossabaker.com; optionally with PGP Matrix @ross:rossabaker.com ActivityPub1 @ross@rossabaker.com Pronouns # My pronouns are he / him / his, and I will respect yours.&#xA;Special topics # Open source inquiries # I would rather connect in public, where everyone can benefit from the discussion. Most of my open source is hosted on one of the following forges:</description>
+    </item>
+    <item>
+      <title>Public keys</title>
+      <link>https://rossabaker.com/public-keys/</link>
+      <pubDate>Wed, 14 Sep 2022 13:30:00 +0000</pubDate>
+      <guid>https://rossabaker.com/public-keys/</guid>
+      <description>PGP # My PGP public key is published to this domain via WKD, and can also be downloaded in binary and ASCII armored formats. Its fingerprint is:&#xA;pub rsa4096 2018-01-31 [SC] 904C153733DBB0106915C0BD975BE5BC29D92CA5 uid [ unknown] Ross A. Baker &amp;lt;ross@rossabaker.com&amp;gt; sub rsa4096 2018-01-31 [E] sub rsa4096 2022-11-21 [S] Verification # This key is notated with Ariadne Identity claims, which can be verified on Keyoxide.</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,2084 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Home page on Ross A. Baker</title>
+    <link>https://rossabaker.com/</link>
+    <description>Recent content in Home page on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 05 Sep 2022 00:30:00 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Continuous integration with Forgejo Actions and Nix</title>
+      <link>https://rossabaker.com/configs/forgejo-actions/</link>
+      <pubDate>Sun, 07 Jan 2024 10:40:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/forgejo-actions/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://forgejo.org/docs/v1.20/user/actions/&#34;&gt;Forgejo Actions&lt;/a&gt; is a continuous integration service, vaguely&#xA;compatible with GitHub Actions.  Builds require local runners,&#xA;typically containers.  Here, we create minimalistic containers geared&#xA;toward running Nix builds, so projects supply their logic and Actions&#xA;provides the compute.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>#code2023</title>
+      <link>https://rossabaker.com/blog/code-2023/</link>
+      <pubDate>Sun, 31 Dec 2023 00:00:00 +0000</pubDate>
+      <guid>https://rossabaker.com/blog/code-2023/</guid>
+      <description>In the Avian Period of social media, we had a late December tradition of enumerating the coding languages we used over the last year. Some people would aggregate them into a language ranking, which I never cared for. However, I thought they were great as a recommendation engine while browing specific developers.&#xA;Without further ado, my #code2023.&#xA;Languages used in 2023 # Awk Part of the old fart&amp;rsquo;s command line toolbox.</description>
+    </item>
+    <item>
+      <title>Opengist: a self-hosted pastebin with NixOS</title>
+      <link>https://rossabaker.com/configs/opengist/</link>
+      <pubDate>Sat, 23 Dec 2023 22:07:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/opengist/</guid>
+      <description>Opengist is a self-hosted pastebin. There is not yet support in Forgejo, so Opengist makes an excellent companion for those snippets that don&amp;rsquo;t quite merit their own repository.&#xA;My pastebin is hosted at paste.rossabaker.com.&#xA;Nix package # Opengist needs its frontend assets compiled with NPM, and then embeds them into a Go application. The compiled assets are added as an input to the upstream source.&#xA;MIT&#xA;{ pkgs, lib, src, .</description>
+    </item>
+    <item>
+      <title>Work laptop</title>
+      <link>https://rossabaker.com/configs/hosts/work-laptop/</link>
+      <pubDate>Fri, 08 Dec 2023 13:23:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/hosts/work-laptop/</guid>
+      <description>For understandable reasons, I can&amp;rsquo;t be as open with my work configuration. It depends on an internal flake and exposes internal tooling and addresses.&#xA;The work computer is the only reason I am running a Darwin machine, and as much general configuration as possible is exposed as darwinConfigurations.&#xA;If we are colleagues, reach out, and I will give you read access to a private repository of my full configuration.</description>
+    </item>
+    <item>
+      <title>Decentralized avatars with Nginx and Libravatar</title>
+      <link>https://rossabaker.com/configs/libravatar/</link>
+      <pubDate>Fri, 08 Dec 2023 09:10:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/libravatar/</guid>
+      <description>Libravatar is a decentralized alternative to Gravatar for displaying a profile picture. There are several implementations, but self-hosting can be as simple as a couple DNS records and a small Nginx configuration.&#xA;Deriving the images in advance # Avatar images can be prepared in advance. For any high-res image source, we need to accomplish three things:&#xA;Scale the image. The maximum size is 128x128. This is done with ImageMagick. Calculate an MD5 sum of the lowercased e-mail address.</description>
+    </item>
+    <item>
+      <title>Forwarding email with pobox.com</title>
+      <link>https://rossabaker.com/configs/email/</link>
+      <pubDate>Sun, 03 Dec 2023 23:59:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/email/</guid>
+      <description>I would love to self-host Email, but the oligopoly has won. I switched to Pobox when my forwarder became insufficient. This requires a handful of DNS records to route mail to our domain and fight spam.&#xA;DNS # CC-BY-SA-4.0&#xA;{ ... }: { imports = [ ./mx.nix ./spf.nix ./dkim.nix ]; } MX records # To deliver mail to my domain via Pobox, these MX records are required. It&amp;rsquo;s neat that they can be generated from Nix.</description>
+    </item>
+    <item>
+      <title>Declarative DNS with NixOS-DNS, OctoDNS, and Hetzner</title>
+      <link>https://rossabaker.com/configs/dns/</link>
+      <pubDate>Sun, 03 Dec 2023 21:26:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/dns/</guid>
+      <description>The services hosted at rossabaker.com require multiple DNS entries. They are declared in various parts of the Nix flake with NixOS-DNS, and synchronized to the name server with OctoDNS.&#xA;Choosing a host # rossabaker.com is registered with Namecheap, who has been a fine registrar and hosted the DNS for years. However, I don&amp;rsquo;t meet their requirements for API access. This was a frustrating discovery after getting their sandbox working, but I digress.</description>
+    </item>
+    <item>
+      <title>Automated certificate management with ACME</title>
+      <link>https://rossabaker.com/configs/acme/</link>
+      <pubDate>Sat, 02 Dec 2023 16:26:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/acme/</guid>
+      <description>The deeper one gets into self-hosting, the more subdomains need to be managed, usually with a certificate. abbr(Automatic Certificate Management Environment and NixOS combine to streamline this process to a few lines of code.&#xA;NixOS module # The configuration is almost straight out of the NixOS manual.&#xA;MIT&#xA;{ security.acme = { acceptTerms = true; defaults.email = &amp;#34;ross@rossabaker.com&amp;#34;; }; } Flake module # All Cromulent outputs are packaged as flake parts for consistent composition.</description>
+    </item>
+    <item>
+      <title>A self-hosted static site with NixOS and Nginx</title>
+      <link>https://rossabaker.com/configs/webserver/</link>
+      <pubDate>Sat, 02 Dec 2023 11:41:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/webserver/</guid>
+      <description>CC-BY-SA-4.0&#xA;Defines an HTTP server with Nginx, both for a static web site and reverse proxies for various services. I cut my teeth on Apache httpd, but nobody gets fired in the 2020s for picking Nginx. The needs are simple:&#xA;Host this static website Reverse proxies for various services Manage our certificates General configuration # The www user is used by CI to rsync the website content.&#xA;CC-BY-SA-4.0&#xA;{ config, .</description>
+    </item>
+    <item>
+      <title>December Adventure, 2023</title>
+      <link>https://rossabaker.com/blog/december-adventure-2023/</link>
+      <pubDate>Sat, 02 Dec 2023 01:02:00 +0000</pubDate>
+      <guid>https://rossabaker.com/blog/december-adventure-2023/</guid>
+      <description>Table of Contents Goal Daily log December 1 December 2 December 3 December 4 December 5 December 6 December 7 December 8 December 9 December 10 December 11 December 12 December 13 December 14 December 15 December 16 December 17 December 18 December 19 December 21 December 22 December 23 December 25 Retrospective Advent of Code is upon us again. I&amp;rsquo;m reminded of those paint and sip classes. You get to try something new and have fun with your friends, and both of those are great, but the end product looks a lot like everyone else&amp;rsquo;s.</description>
+    </item>
+    <item>
+      <title>Self-hosted Git with Forgejo</title>
+      <link>https://rossabaker.com/configs/forgejo/</link>
+      <pubDate>Fri, 01 Dec 2023 18:25:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/forgejo/</guid>
+      <description>Forgejo is a self-hosted git forge. More to say later.&#xA;NixOS module # MIT&#xA;{ config, ... }: let domain = &amp;#34;git.rossabaker.com&amp;#34;; in { services.forgejo = { enable = true; settings = { service = { DISABLE_REGISTRATION = true; }; server = { ROOT_URL = &amp;#34;https://${domain}/&amp;#34;; LANDING_PAGE = &amp;#34;explore&amp;#34;; }; }; }; services.nginx = { appendHttpConfig = &amp;#39;&amp;#39; map $uri $forgejo_access_log { default 1; /api/actions/runner.v1.RunnerService/FetchTask 0; } &amp;#39;&amp;#39;; }; services.nginx.virtualHosts.${domain} = { enableACME = true; forceSSL = true; locations.</description>
+    </item>
+    <item>
+      <title>Monitoring a NixOS server with Netdata Cloud</title>
+      <link>https://rossabaker.com/configs/netdata/</link>
+      <pubDate>Thu, 23 Nov 2023 22:45:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/netdata/</guid>
+      <description>&lt;p&gt;Now that I&amp;rsquo;m self-hosting several services, responsibility falls on me&#xA;to monitor them myself.  An easy way to cover the important bases on a&#xA;NixOS server is &lt;dfn&gt;Netdata&lt;/dfn&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>abe: a server for personal, self-hosted services</title>
+      <link>https://rossabaker.com/configs/hosts/abe/</link>
+      <pubDate>Sun, 19 Nov 2023 19:16:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/hosts/abe/</guid>
+      <description>abe is a dedicated server on Hetzner Robot. It&amp;rsquo;s not a revenue driver, so it was picked up on server auction to save a few Euro.&#xA;Provisioning # Ideally, the entire server would provisioned by OpenTofu, but Hetzner Robot instances aren&amp;rsquo;t as ephemeral as Hetzner Cloud. NixOS was installed from the rescue image with a Nix community script.&#xA;Base configuration # CC-BY-SA-4.0&#xA;{ config, pkgs, ... }: { imports = [ # Include the results of the hardware scan.</description>
+    </item>
+    <item>
+      <title>Tom Waits&#39; favorite albums</title>
+      <link>https://rossabaker.com/projects/playlists/tom-waits-favorite-albums/</link>
+      <pubDate>Tue, 07 Nov 2023 20:02:00 +0000</pubDate>
+      <guid>https://rossabaker.com/projects/playlists/tom-waits-favorite-albums/</guid>
+      <description>Elvis Costello &amp;amp; The Imposters&amp;rsquo; The Delivery Man isn&amp;rsquo;t his most successful album, commercially nor critically, but it ranks among my all-time favorites. It shouldn&amp;rsquo;t matter who else agrees, but I was delighted when none other than Tom Waits joined me in 2005.&#xA;I found myself discussing Emmylou Harris today on Mastodon, and the album came up. I recalled Waits&amp;rsquo; endorsement and couldn&amp;rsquo;t help but wonder what else I&amp;rsquo;d been missing, so I assembled a Spotify playlist.</description>
+    </item>
+    <item>
+      <title>HTML element sampler</title>
+      <link>https://rossabaker.com/configs/website/html-sampler/</link>
+      <pubDate>Sun, 05 Nov 2023 23:04:07 -0500</pubDate>
+      <guid>https://rossabaker.com/configs/website/html-sampler/</guid>
+      <description>This is a sampler of HTML elements used to develop the CSS. Examples are adapted from the MDN HTML Elements Reference, whose code samples are dedicated to the public domain. Content sectioning Address Contact the author of this page:&#xA;ross@example.com&#xA;(317) 555-2368 Article Weather forecast for Seattle 03 March 2018 Rain.&#xA;04 March 2018 Periods of rain.&#xA;05 March 2018 Heavy rain.&#xA;Aside Salamanders are a group of amphibians with a lizard-like appearance, including short legs and a tail in both larval and adult forms.</description>
+    </item>
+    <item>
+      <title>Nix binary caches</title>
+      <link>https://rossabaker.com/configs/nix-binary-caches/</link>
+      <pubDate>Tue, 03 Oct 2023 21:51:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/nix-binary-caches/</guid>
+      <description>Nix sits in a sweet spot between source and binary distribution. For esoterica, like personal projects or a patched versions of more popular application, source builds give us full control of our system. But most builds are not novel the world over, and we&amp;rsquo;d rather quickly fetch a binary than reminisce over our Gentoo days while glibc recompiles.&#xA;To realize a derivation, which is roughly Nixian for &amp;ldquo;build a package,&amp;rdquo; we:</description>
+    </item>
+    <item>
+      <title>Indianapolis Symphony Orchestra</title>
+      <link>https://rossabaker.com/projects/playlists/indianapolis-symphony-orchestra/</link>
+      <pubDate>Sun, 24 Sep 2023 21:32:00 +0000</pubDate>
+      <guid>https://rossabaker.com/projects/playlists/indianapolis-symphony-orchestra/</guid>
+      <description>I&amp;rsquo;m a season ticket holder to the Indianapolis Symphony Orchestra. As much as I enjoy the genre, I&amp;rsquo;m far from an expert. Starting with the 2023-24 season, I&amp;rsquo;m going to make playlists in advance and try to be a bit more familiar with the pieces.&#xA;2023-2024 Classical Series # September 29, 2023 # Event, Spotify playlist&#xA;Beethoven: Egmont Overture, Op.84 Puts: Contact Prokofiev: Symphony No. 5 in B-flat Major, Op.100 October 6, 2023 # Event, Spotify playlist</description>
+    </item>
+    <item>
+      <title>Cachix</title>
+      <link>https://rossabaker.com/configs/cachix/</link>
+      <pubDate>Tue, 19 Sep 2023 00:21:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/cachix/</guid>
+      <description>Cachix is a binary cache for Nix. Three Cachix instances are of particular interest to Cromulent users1.&#xA;Cromulent&amp;rsquo;s GitHub Actions publish Linux binaries to rossabaker.cachix.org. I help maintain Typelevel Nix, which publishes to typelevel.cachix.org. A handful of our flake dependencies publish to nix-community.cachix.org. Nix module # This module may be mixed into a NixOS, Nix-Darwin, or Home Manager configuration.&#xA;CC0-1.0&#xA;{ config, lib, ... }: let cfg = config.cromulent.cache.cachix; in { imports = [ .</description>
+    </item>
+    <item>
+      <title>Keyboard</title>
+      <link>https://rossabaker.com/configs/keyboard/</link>
+      <pubDate>Mon, 18 Sep 2023 23:53:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/keyboard/</guid>
+      <description>The Indiana University Computer Science Department used to be housed in Lindley Hall. In the basement was a cluster of machines called &amp;ldquo;The Burrow&amp;rdquo;. There were SparcStations, if memory serves with Sun Type 5 keyboards. In any case, they taught me that the good Lord intended Control to be to the immediate left of A.&#xA;MacOS # CC0-1.0&#xA;{ flake.darwinModules.keyboard = { system.keyboard = { enableKeyMapping = true; remapCapsLockToControl = true; }; }; } </description>
+    </item>
+    <item>
+      <title>PostgreSQL</title>
+      <link>https://rossabaker.com/configs/postgresql/</link>
+      <pubDate>Sat, 16 Sep 2023 23:13:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/postgresql/</guid>
+      <description>Running PostgreSQL on Darwin is not as smooth an experience as the NixOS module:&#xA;The nix-darwin module doesn&amp;rsquo;t create a dedicated postgres system user. Everything runs as the local user. It doesn&amp;rsquo;t create the data directory. It doesn&amp;rsquo;t set up the logs. The initdb call doesn&amp;rsquo;t work out of the box. It creates a postgres superuser, but because it&amp;rsquo;s peer authenticated and there&amp;rsquo;s no postgres system user. We fix all of those here.</description>
+    </item>
+    <item>
+      <title>Podman</title>
+      <link>https://rossabaker.com/configs/podman/</link>
+      <pubDate>Sat, 16 Sep 2023 22:51:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/podman/</guid>
+      <description>I don&amp;rsquo;t have enough interest nor expertise in containers to add much to the Podman vs. Docker debate. I chose Podman for two reasons:&#xA;Podman is configurable with Nix-Darwin. Podman&amp;rsquo;s daemonless architecture is one less running root. NixOS # Enabling Podman on NixOS can be reduced to a one-liner. The default storage is overlay.&#xA;CC-BY-SA-4.0&#xA;{ flake.nixosModules.podman = { virtualisation.podman.enable = true; }; } Nix-Darwin # There&amp;rsquo;s no Docker virtualization in Nix-Darwin 1, nor is there any virtualisation config at all.</description>
+    </item>
+    <item>
+      <title>Akka pins in Scala Steward</title>
+      <link>https://rossabaker.com/snips/akka-pins/</link>
+      <pubDate>Thu, 14 Sep 2023 22:32:00 +0000</pubDate>
+      <guid>https://rossabaker.com/snips/akka-pins/</guid>
+      <description>Akka&amp;rsquo;s move to the Business Source License puts an upper bound on the version many shops can freely run.1 Scala Steward paired with an unaware teammate or automation run amok risk an unintended and costly upgrade. This pins the versions of modules in the Akka, Akka-HTTP, and Alpakka repositories to the final Apache-licensed version.&#xA;Add the following to your repository&amp;rsquo;s .scala-steward.conf. If you use diy-steward, put it in .github/.scala-steward.conf.&#xA;CC0</description>
+    </item>
+    <item>
+      <title>Hyperlink</title>
+      <link>https://rossabaker.com/configs/hyperlink/</link>
+      <pubDate>Wed, 13 Sep 2023 23:36:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/hyperlink/</guid>
+      <description>Hyperlink is a command-line link checker. It is quite fast, and is used to test the generation of this web site.&#xA;This package has been a merged to nixpkgs and is no longer maintained in Cromulent.&#xA;GitHub Actions # </description>
+    </item>
+    <item>
+      <title>Lisp extensions</title>
+      <link>https://rossabaker.com/configs/emacs/rab-lisp/</link>
+      <pubDate>Tue, 12 Sep 2023 23:42:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/emacs/rab-lisp/</guid>
+      <description>Indentation # I would like my property lists to align not like this&#xA;GPL-3.0-only&#xA;(:prefix-map rab/git-map :prefix &amp;#34;C-c g&amp;#34;) but like this:&#xA;GPL-3.0-only&#xA;(:prefix-map rab/git-map :prefix &amp;#34;C-c g&amp;#34;) The answer is almost verbatim from Emacs Stack Exchange, but changed to my namespace. I also applied the &amp;ldquo;bonus,&amp;rdquo; because my primary itch is use-package bindings.&#xA;GPL-3.0-only&#xA;(defun rab/lisp-calculate-indent (&amp;amp;optional parse-start) &amp;#34;Add better indentation for quoted and backquoted lists.&amp;#34; ;; This line because `calculate-lisp-indent-last-sexp` was defined with `defvar` ;; with it&amp;#39;s value ommited, marking it special and only defining it locally.</description>
+    </item>
+    <item>
+      <title>Ox-Hugo extensions</title>
+      <link>https://rossabaker.com/configs/emacs/rab-ox-hugo/</link>
+      <pubDate>Sun, 10 Sep 2023 01:23:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/emacs/rab-ox-hugo/</guid>
+      <description>Dependencies # GPL-3.0-only&#xA;(require &amp;#39;cl-macs) (require &amp;#39;ox-hugo) (require &amp;#39;s) Customization group # Needed because of our minor mode.&#xA;GPL-3.0-only&#xA;(defgroup rab/ox-hugo nil &amp;#34;Ross A. Baker&amp;#39;s Ox-Hugo extensions.&amp;#34; :group &amp;#39;org-export-hugo) Code licensing # We lightly customize Ox-Hugo by adding support for a :code-license header. The technique is inspired by Sacha Chua&amp;rsquo;s custom summary header.&#xA;When exporting, a source block is replaced with org-babel-exp-code-template, which is filled by org-fill-template. This enhancement will only work when the template propagates this header argument.</description>
+    </item>
+    <item>
+      <title>Home Manager</title>
+      <link>https://rossabaker.com/configs/home-manager/</link>
+      <pubDate>Fri, 08 Sep 2023 16:59:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/home-manager/</guid>
+      <description>We prefer to keep a robust user environment along with a lean configurations for NixOS and nix-darwin. This keeps our environment maximally portable between those operating systems, as well as any other hosts that support the Nix package manager (e.g., Debian).&#xA;Base configuration # This is imported from preliterate times and should be broken up further.&#xA;MIT&#xA;{ moduleWithSystem, ... }: { flake.homeModules.base = moduleWithSystem( perSystem@{ pkgs, inputs&amp;#39; }: { # Curiously not a default of home-manager, but required once we # start configuring Nix otherwise.</description>
+    </item>
+    <item>
+      <title>Big Ten Fight Songs</title>
+      <link>https://rossabaker.com/projects/playlists/big-ten-fight-songs/</link>
+      <pubDate>Thu, 10 Aug 2023 13:11:00 +0000</pubDate>
+      <guid>https://rossabaker.com/projects/playlists/big-ten-fight-songs/</guid>
+      <description>I am a lifelong Midwesterner. Fight songs are a big deal in the Big Ten. I played the &amp;ldquo;Minnesota Rouser&amp;rdquo; in my high school band in Illinois. &amp;ldquo;Indiana Our Indiana&amp;rdquo; is objectively the best, as measured by the fact I have two degrees from there and zero degrees from anywhere else.&#xA;The conference isn&amp;rsquo;t as Midwestern as it used to be, but it&amp;rsquo;s nice to have the 9 10 11 13 17 other songs gathered to sing along with whenever someone scores on Purdue.</description>
+    </item>
+    <item>
+      <title>Security</title>
+      <link>https://rossabaker.com/security/</link>
+      <pubDate>Wed, 09 Aug 2023 22:01:00 +0000</pubDate>
+      <guid>https://rossabaker.com/security/</guid>
+      <description>I appreciate coordinated vulnerability disclosure. I will respond as quickly as possible to credible reports.&#xA;Open source # I collaborate on projects across multiple open source organizations. Most projects declare a SECURITY.md either in the organization&amp;rsquo;s profile or the project&amp;rsquo;s root directory.&#xA;Typelevel # Please see the Typelevel security policy.&#xA;http4s # Please see the http4s security policy.&#xA;Other concerns # If you have a concern with any of my projects and can&amp;rsquo;t find a relevant security policy, please contact me directly.</description>
+    </item>
+    <item>
+      <title>Webcrawler configuration</title>
+      <link>https://rossabaker.com/configs/website/webcrawlers/</link>
+      <pubDate>Wed, 09 Aug 2023 20:31:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/webcrawlers/</guid>
+      <description>RFC9309 defines the Robots Exclusion Protocol, wherein a file is served at /robots.txt to configure the behavior of automated clients, or webcrawlers.&#xA;The most malicious actors will ignore this file. It&amp;rsquo;s more petulant than effective, but I&amp;rsquo;m not one to pass up a chance to express my contempt in conformance with an RFC.&#xA;Search engines # Generally, I like my content to be indexed and discoverable via search engines, and I welcome most crawlers.</description>
+    </item>
+    <item>
+      <title>Todo</title>
+      <link>https://rossabaker.com/todo/</link>
+      <pubDate>Sun, 06 Aug 2023 21:30:00 +0000</pubDate>
+      <guid>https://rossabaker.com/todo/</guid>
+      <description>On the IndieWeb, we are taught to focus on our own itches. In Org Mode, we have TODO items. They&amp;rsquo;re two sides of the same coin, and either seems more fun than struggling with JIRA.&#xA;These are not yet prioritized.&#xA;TODO Improve typography. # I foolishly started from scratch.&#xA;TODO Finish descriptions on all my pages. # TODO Post my Twitter and Facebook archives. # TODO Automate synchronization of notes. # TODO Clean up tags # Particularly coming out of the social media archives.</description>
+    </item>
+    <item>
+      <title>Python home-manager module</title>
+      <link>https://rossabaker.com/configs/python/</link>
+      <pubDate>Fri, 28 Jul 2023 21:51:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/python/</guid>
+      <description>I have dabbled with Python for years, but have little production experience. I am used to not knowing what I&amp;rsquo;m doing, but the feeling is stronger in this module.&#xA;Package management # I am fighting hard to use Nix to manage my Python packages, but I don&amp;rsquo;t have time for a side quest while I&amp;rsquo;m getting comfortable with the language.&#xA;Micromamba # Micromamba is an alternative to Anaconda and Miniconda, neither of which installs cleanly on my Mac.</description>
+    </item>
+    <item>
+      <title>Devshell for Modern Time Series Forecasting with Python</title>
+      <link>https://rossabaker.com/configs/devshells/modern-time-series-forecasting-with-python/</link>
+      <pubDate>Tue, 25 Jul 2023 12:06:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/devshells/modern-time-series-forecasting-with-python/</guid>
+      <description>This doesn&amp;rsquo;t work at all. I have tabled this effort for now in grudging favor of Micromamba.&#xA;I&amp;rsquo;m reading Modern Time Series Forecasting with Python. The first thing it asks me to do is install Conda, but package managers other than Nix give me a rash. I&amp;rsquo;ve attempted to replicate its anaconda env to a devshell. Try it out like this:&#xA;MIT&#xA;nix develop git+https://git.rossabaker.com/ross/cromulent#modernTs This shell will only work with nixpkgs.</description>
+    </item>
+    <item>
+      <title>Finger me</title>
+      <link>https://rossabaker.com/projects/finger/</link>
+      <pubDate>Sun, 16 Jul 2023 22:51:00 +0000</pubDate>
+      <guid>https://rossabaker.com/projects/finger/</guid>
+      <description>Long ago, I stumbled across HyperTerminal on the family Windows 95 machine. I figured out how to dial into my mom-and-pop ISP with that, and had my first shell access on a multi-user machine. Magical. A friendly admin taught me a lot, including how to make a .plan on one of the great social networks of the day, Finger.&#xA;I can be fingered once again on Happy Net Box. Run this from your own shell:</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110630113824637305/</link>
+      <pubDate>Thu, 29 Jun 2023 23:32:50 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110630113824637305/</guid>
+      <description>I read a couple articles about Mississippi changing its flag some time back, and now Google thinks I&amp;#39;m a full on vexillology nerd. I hate to say, it might be right.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110629446475927630/</link>
+      <pubDate>Thu, 29 Jun 2023 20:43:07 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110629446475927630/</guid>
+      <description>Cache invalidation is one of the hard problems, but also not one a weather radar app should ignore.&#xA;Sincerely, The Other Side of the Derecho</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110622920961134511/</link>
+      <pubDate>Wed, 28 Jun 2023 17:03:36 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110622920961134511/</guid>
+      <description>Hang in there, Hoosiers. Severe weather is coming to wash away the smoke.&#xA;#Indianapolis #Indiana #inwx</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110606030638308658/</link>
+      <pubDate>Sun, 25 Jun 2023 17:28:10 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110606030638308658/</guid>
+      <description>The National Weather Service is good. Their choice to stream severe weather updates on Facebook Live is not good.&#xA;#NWS</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110605876716583436/</link>
+      <pubDate>Sun, 25 Jun 2023 16:49:01 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110605876716583436/</guid>
+      <description>Problem: for weeks, I&amp;#39;ve only been able to listen in Spanish on the Android MLB app. The English feed hangs indefinitely &amp;quot;Buffering&amp;quot;. This is a widely reported issue.&#xA;Solution: select the English station and hit the rewind 10 seconds button. It starts immediately.&#xA;I might keep a couple innings a day in Spanish to keep sharpening my skills!&#xA;#MLB #Android</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110591269306104377/</link>
+      <pubDate>Fri, 23 Jun 2023 02:54:10 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110591269306104377/</guid>
+      <description>sbt-dependency-submission is a nifty GitHub Action to report dependencies at build time for vulnerability scanning. It even sees your transitive dependencies. But it can be hard to debug why a dependency was submitted.&#xA;In ~/.sbt/1.0/sbt-dependency-submission.sbt:&#xA;```&#xA;addSbtPlugin(&amp;quot;ch.epfl.scala&amp;quot; % &amp;quot;sbt-github-dependency-submission&amp;quot; % &amp;quot;2.1.2&amp;quot;)&#xA;```&#xA;Now you can run `show githubDependencyManifest` to debug!&#xA;#Scala #Dependabot</description>
+    </item>
+    <item>
+      <title>Garnix</title>
+      <link>https://rossabaker.com/configs/garnix/</link>
+      <pubDate>Fri, 23 Jun 2023 00:26:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/garnix/</guid>
+      <description>This integration is paused while we await alternatives to GitHub.&#xA;I have an Apple M1 for work, which is not yet supported by GitHub Actions. That&amp;rsquo;s okay, because Garnix is a great alternative.&#xA;Continuous integration # On each push to GitHub, Garnix is triggered to build:&#xA;Our default dev shell Our default nix-darwin configuration Our default Home Manager configuration At this time, we only build for aarch64-darwin with Garnix.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110580226779246680/</link>
+      <pubDate>Wed, 21 Jun 2023 04:05:54 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110580226779246680/</guid>
+      <description>This found a stale nixpkgs reference in one of my flake dependencies because I got sloppy with my `inputs.nixpkgs.follows`.&#xA;https://github.com/DeterminateSystems/flake-checker&#xA;#Nix</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110573142401572978/</link>
+      <pubDate>Mon, 19 Jun 2023 22:04:15 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110573142401572978/</guid>
+      <description>Someone who I don&amp;#39;t often feel an age gap with blanked on my Dan Quayle reference and I could feel a few more hairs turning gray.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110557360283410231/</link>
+      <pubDate>Sat, 17 Jun 2023 03:10:39 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110557360283410231/</guid>
+      <description>Saw Sirena Huang play Mendelssohn&amp;#39;s Violin Concerto with the ISO tonight. Highly recommended. Indy, she does it again tomorrow night.&#xA;https://www.indianapolissymphony.org/event/a-midsummer-nights-dream/&#xA;#Indianapolis #ClassicalMusic</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110555919590824743/</link>
+      <pubDate>Fri, 16 Jun 2023 21:04:16 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110555919590824743/</guid>
+      <description>Ever need to transpose a large Markdown table? Me neither, until today. It&amp;#39;s just C-c C-c t. These are the flourishes that will likely keep me on Emacs until my ultimate C-x C-c.&#xA;#Emacs #Markdown</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110549266792297906/</link>
+      <pubDate>Thu, 15 Jun 2023 16:52:22 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110549266792297906/</guid>
+      <description>Favorite link checkers? Lychee works great, but insists on reading /etc/resolv.conf, even in offline mode, which doesn&amp;#39;t work in my CI.&#xA;#indieweb</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110543713011355538/</link>
+      <pubDate>Wed, 14 Jun 2023 17:19:59 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110543713011355538/</guid>
+      <description>One of my favorite NHL traditions is how they engrave your name on the Stanley Cup with an asterisk when your fans neglect to boo Gary Bettman.&#xA;#nhl #vgk</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110539985994110140/</link>
+      <pubDate>Wed, 14 Jun 2023 01:32:09 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110539985994110140/</guid>
+      <description>I don&amp;#39;t mean to insinuate my coonhound is dumb, but she has taught me so much about the phrase &amp;quot;barking up the wrong tree.&amp;quot;&#xA;#Coonhound</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110534567001842406/</link>
+      <pubDate>Tue, 13 Jun 2023 02:34:01 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110534567001842406/</guid>
+      <description>It&amp;#39;s not the repeated accusations of racism from people who don&amp;#39;t know my life that burn me out. I can easily file that away next to my monad transformers getting blamed for global warming.&#xA;But have you never been stuck working with such people? Would you do so for free? When you demand it of your maintainers, *that&amp;#39;s* how the joie de OSS dies. I have repeatedly seen it from the outside, and I feel it on the inside.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110534175754017858/</link>
+      <pubDate>Tue, 13 Jun 2023 00:54:32 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110534175754017858/</guid>
+      <description>I shaved 49 seconds off my previous PR of 38:15 on the neighborhood loop. I&amp;#39;m unsure whether it was my incandescent open source rage or the unseasonably low humidity, but I&amp;#39;m ready to go again.&#xA;#personal #running</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110527813700773086/</link>
+      <pubDate>Sun, 11 Jun 2023 21:56:34 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110527813700773086/</guid>
+      <description>You can filter usernames from other social networks and not see their quoted bullshit here.&#xA;#Protip</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110523049804463648/</link>
+      <pubDate>Sun, 11 Jun 2023 01:45:03 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110523049804463648/</guid>
+      <description>Dialect quizzes peg me to the north suburbs of Chicago, near the firefly-lightning bug divide. I call them either.&#xA;Whatever you call them, bioluminescence is enchanting. I could stare out the window all summer long.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110511242050235779/</link>
+      <pubDate>Thu, 08 Jun 2023 23:42:11 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110511242050235779/</guid>
+      <description>Kansas City brisket is legit. Its airport being called KCI when its code is MCI, and wondering whether you uberred to the right one is bad.&#xA;#KansasCity</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110499225181713865/</link>
+      <pubDate>Tue, 06 Jun 2023 20:46:08 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110499225181713865/</guid>
+      <description>I&amp;#39;ll be in three states today, and they each need a reminder.&#xA;#TransRightsAreHumanRights</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110498891336648304/</link>
+      <pubDate>Tue, 06 Jun 2023 19:21:14 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110498891336648304/</guid>
+      <description>Since Lemmy is having a moment: does it fix brigading? If not, could it?&#xA;#Lemmy</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110498443512295198/</link>
+      <pubDate>Tue, 06 Jun 2023 17:27:21 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110498443512295198/</guid>
+      <description>Everyone who leaves their chicken bones at the park will be reincarnated as a curious dog with a perforated intestine.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110486950481958144/</link>
+      <pubDate>Sun, 04 Jun 2023 16:44:31 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110486950481958144/</guid>
+      <description>For all the drawbacks to living in Indiana, we might as well embrace what&amp;#39;s good about it. That&amp;#39;s why I&amp;#39;m having a pork tenderloin for lunch the third day in a row.&#xA;#Indiana #PorkTenderloin</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110476452909464132/</link>
+      <pubDate>Fri, 02 Jun 2023 20:14:51 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110476452909464132/</guid>
+      <description>You won&amp;#39;t believe how much hateful content this one simple uBlock Origin rule filters:&#xA;```&#xA;||twitter.com^$all&#xA;```</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110475179739261355/</link>
+      <pubDate>Fri, 02 Jun 2023 14:51:04 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110475179739261355/</guid>
+      <description>Exciting development for the dozens of us Scala developers on Emacs: a new, tree-sitter mode!&#xA;https://github.com/KaranAhlawat/scala-ts-mode&#xA;#Scala #Emacs</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110463854208643451/</link>
+      <pubDate>Wed, 31 May 2023 14:50:50 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110463854208643451/</guid>
+      <description>My coonhound rarely bays, but this morning she discovered she sounds like a fire truck.&#xA;#Coonhound</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110452566509240659/</link>
+      <pubDate>Mon, 29 May 2023 15:00:13 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110452566509240659/</guid>
+      <description>10x your cantaloupe with fresh-ground black pepper.&#xA;#Cantaloupe</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110444200571846159/</link>
+      <pubDate>Sun, 28 May 2023 03:32:39 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110444200571846159/</guid>
+      <description>Those who complain loudest about drama in an open source community tend not to be its victims. The &amp;quot;shut up and code&amp;quot; chorus is so demotivating. Good luck, Rust.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110438691650337857/</link>
+      <pubDate>Sat, 27 May 2023 04:11:40 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110438691650337857/</guid>
+      <description>Clean URLs for a static website: yea or nay?</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110438646161983141/</link>
+      <pubDate>Sat, 27 May 2023 04:00:06 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110438646161983141/</guid>
+      <description>The `-&amp;gt;&amp;gt;` macro reminds me of my early days with chili crisp, in that I want to put it in everything.&#xA;https://github.com/magnars/dash.el#--x-optional-form-rest-more-1&#xA;#Emacs #ChiliCrisp</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110430209715669260/</link>
+      <pubDate>Thu, 25 May 2023 16:14:36 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110430209715669260/</guid>
+      <description>I was doing a good job taking this incident seriously until k8s started talking about &amp;quot;untolerated taint.&amp;quot;&#xA;#kubernetes</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110425685105522242/</link>
+      <pubDate>Wed, 24 May 2023 21:03:56 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110425685105522242/</guid>
+      <description>We had a light snow season, but can always count on the May flurries of cottonwood seeds.&#xA;#Indianapolis</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110407618272205793/</link>
+      <pubDate>Sun, 21 May 2023 16:29:18 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110407618272205793/</guid>
+      <description>In Extreme Programming, we picked a new pair programmer every day. I decided that was nonsense, and adopted Pete. We paired for the next nineteen years. He preferred the title &amp;quot;alpha&amp;quot; to &amp;quot;principal staff,&amp;quot; but he shared his opinions whether you wanted them or not. He logged off this morning. Rest easy, friend.&#xA;P.S., this is what he thought of YAML.&#xA;#TuxedoCat #RIP</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110398889172415498/</link>
+      <pubDate>Sat, 20 May 2023 03:29:22 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110398889172415498/</guid>
+      <description>On Usenet is a group called rec.sport.football.college. In its heyday a couple decades ago, a dramatic exit was punctuated with &amp;quot;adi-fuckin-os and unsubscribe.&amp;quot; It became &amp;quot;AFO&amp;amp;U&amp;quot; for short, and the few who never AFO&amp;amp;U&amp;#39;ed still use the term.&#xA;Programming community exits just don&amp;#39;t have the same panache.&#xA;#Usenet</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110398575094104518/</link>
+      <pubDate>Sat, 20 May 2023 02:09:30 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110398575094104518/</guid>
+      <description>Season finale tournament. We opened our three team group tonight, where just one advances. We threatened multiple times, but conceded a fluke goal. With 15 minutes to equalize, lightning cut short a 0-1 loss. Our league gives a fourth point for shutouts (WTF?), so now we must keep a clean sheet for any chance at the final. The math is brutal, but the team is inspiring, and I will miss them when it&amp;#39;s over.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110385276329207220/</link>
+      <pubDate>Wed, 17 May 2023 17:47:27 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110385276329207220/</guid>
+      <description>A lot sucks right now, but the Iowa Cubs are in town, I have a Polish sausage, it&amp;#39;s 75 degrees Fahrenheit, and I&amp;#39;m not at a computer.&#xA;#Baseball #Indianapolis</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110384813968543349/</link>
+      <pubDate>Wed, 17 May 2023 15:49:52 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110384813968543349/</guid>
+      <description>I don&amp;#39;t know who needs to hear this besides my coprophobic neighbors who confuse their lawn for the 12th green at Augusta, but many female dogs also squat to pee.&#xA;#Dogs #LawnCare #Urination</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110378714404672649/</link>
+      <pubDate>Tue, 16 May 2023 13:58:40 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110378714404672649/</guid>
+      <description>The frog, sick of the kind of anti-scorpion politics, hopped into the river with a scorpion on his back.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110369661885153820/</link>
+      <pubDate>Sun, 14 May 2023 23:36:29 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110369661885153820/</guid>
+      <description>What the world needs now&#xA;is another social network&#xA;like I need a hole in my head</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110364389666761105/</link>
+      <pubDate>Sun, 14 May 2023 01:15:41 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110364389666761105/</guid>
+      <description>Caution: cats-effect-3.5 broke both http4s-blaze and http4s-servlet backends. Working on it. http4s-ember-0.23.19 is fine.&#xA;#Scala #Typelevel #http4s</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110363471186597736/</link>
+      <pubDate>Sat, 13 May 2023 21:22:07 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110363471186597736/</guid>
+      <description>After a week of watching adults backbiting online, I watched a middle school soccer team lift each other up. Logging off and volunteering is good for the soul.&#xA;#Coaching</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110353396312274020/</link>
+      <pubDate>Fri, 12 May 2023 02:39:56 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110353396312274020/</guid>
+      <description>A short response on why there&amp;#39;s not a useful `Otel4s[Future]`, which is roughly the same reason most Typelevel libraries don&amp;#39;t provide `Future`-based implementations. It&amp;#39;s not spite.&#xA;https://github.com/typelevel/otel4s/issues/210#issuecomment-1545022660&#xA;#Scala #Typelevel #Otel4s</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110339641040472193/</link>
+      <pubDate>Tue, 09 May 2023 16:21:47 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110339641040472193/</guid>
+      <description>If you&amp;#39;re an absolute misanthrope, consider using `Provided` scope in your SBT builds.&#xA;#Scala</description>
+    </item>
+    <item>
+      <title>Scala configuration</title>
+      <link>https://rossabaker.com/configs/scala/</link>
+      <pubDate>Tue, 09 May 2023 09:27:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/scala/</guid>
+      <description>This configuration provides a module to Home Manager. It sets up a global SBT, a few plugins, and some gitignores relevant to Scala.&#xA;Sonatype credentials # This tells sbt where to look for our Sonatype credentials.&#xA;CC0-1.0&#xA;credentials += Credentials(Path.userHome / &amp;#34;.sbt&amp;#34; / &amp;#34;sonatype-credentials.properties&amp;#34;) Code Snippet 1: ~/.sbt/1.0/sonatype.sbt This will not work until a credentials file is added:&#xA;realm=Sonatype Nexus Repository Manager host=oss.sonatype.org user=&amp;lt;&amp;lt;username&amp;gt;&amp;gt; password=&amp;lt;&amp;lt;password&amp;gt;&amp;gt; Code Snippet 1: ~/.sbt/sonatype-credentials.properties This file contains a secret, and is not installed by our Nix derivation!</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110335977502260378/</link>
+      <pubDate>Tue, 09 May 2023 00:50:06 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110335977502260378/</guid>
+      <description>#DishonorForConnor :blackhawks: #SuckHardForBedard 🏒 #Blackhawks 🎉</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110334417390528885/</link>
+      <pubDate>Mon, 08 May 2023 18:13:21 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110334417390528885/</guid>
+      <description>Enough blather about the walled garden du jour. What&amp;#39;s your favorite Allman Brothers Band song? Here&amp;#39;s mine:&#xA;https://m.youtube.com/watch?t=52&amp;amp;v=tHcgmiQwEts&#xA;#TimelineCleanse #AllmanBrothersBand</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110322562265207188/</link>
+      <pubDate>Sat, 06 May 2023 15:58:26 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110322562265207188/</guid>
+      <description>That abrupt, sad fizzling sound an exhausted can makes when painting the soccer fields is my new theme music.&#xA;#Burnout</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110311460629394430/</link>
+      <pubDate>Thu, 04 May 2023 16:55:08 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110311460629394430/</guid>
+      <description>I just reviewed both the Apache 2 and MIT licenses. Great news: nothing compels us to collaborate with or otherwise support transphobes with our free labor!&#xA;#OpenSource</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110300533964703200/</link>
+      <pubDate>Tue, 02 May 2023 18:36:21 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110300533964703200/</guid>
+      <description>Happy birthday to this snoot. I hope the rest of him is having a good day, too.&#xA;#Dachshund</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110299850205819777/</link>
+      <pubDate>Tue, 02 May 2023 15:42:27 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110299850205819777/</guid>
+      <description>My take on pull request culture is &amp;quot;it depends,&amp;quot; but few people point out that sometimes it&amp;#39;s a regulatory compliance issue.&#xA;#Git</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110299279442503772/</link>
+      <pubDate>Tue, 02 May 2023 13:17:18 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110299279442503772/</guid>
+      <description>1. Voting isn&amp;#39;t enough.&#xA;2. You still need to do it every time.&#xA;3. Indiana, that&amp;#39;s today for city elections.&#xA;#Indiana #Indianapolis #IndyVotes</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110296554005554511/</link>
+      <pubDate>Tue, 02 May 2023 01:44:11 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110296554005554511/</guid>
+      <description>An Emacs package to make you do a nuisance math problem before opening your init file. https://github.com/localauthor/init-lock&#xA;I need one that makes me do a JIRA chore before I earn my treat.&#xA;#Emacs</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110290588245447135/</link>
+      <pubDate>Mon, 01 May 2023 00:27:01 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110290588245447135/</guid>
+      <description>It is almost May in Indiana, and already we need the annual reminder: the way professionals drive on a purpose-built oval is not how amateurs should drive in a residential neighborhood.&#xA;#Indiana</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110283306965961616/</link>
+      <pubDate>Sat, 29 Apr 2023 17:35:18 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110283306965961616/</guid>
+      <description>Played a strong soccer team and were 15 seconds from a scoreless draw before conceding. My poor taste in professional teams prepared me for this moment.&#xA;#Coaching #YouthSoccer</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110282464276693299/</link>
+      <pubDate>Sat, 29 Apr 2023 14:00:59 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110282464276693299/</guid>
+      <description>Scala&amp;#39;s binary compatibility verification (MiMa and friends) got so good and so focused upon, maintainers now underprice source and behavior breakage. We need an SBT plugin that says &amp;quot;This hurdle you&amp;#39;re placing will prevent us from patching Boogerbleed in 2Q 2024&amp;quot; or &amp;quot;This is the final straw for 47 enterprise developers.&amp;quot;&#xA;#Scala</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110278705093136235/</link>
+      <pubDate>Fri, 28 Apr 2023 22:04:59 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110278705093136235/</guid>
+      <description>Dependabot finds things we don&amp;#39;t, but vulnerability fatigue is real. We have a telemetry client that uses OkHttp. We don&amp;#39;t write Kotlin, we don&amp;#39;t use our telemetry client in a way that invokes Kotlin, and our client probably doesn&amp;#39;t use the vulnerable parts of Kotlin. But every Scala repo will be pinged about every Kotlin stdlib vulnerability because it&amp;#39;s dormant on the classpath.&#xA;#Security #Dependabot</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110273964161741934/</link>
+      <pubDate>Fri, 28 Apr 2023 01:59:18 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110273964161741934/</guid>
+      <description>Thank you for not fediblocking me in spite of my controversial server rule, &amp;quot;no ketchup on hot dogs.&amp;quot;</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110265874393829577/</link>
+      <pubDate>Wed, 26 Apr 2023 15:41:58 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110265874393829577/</guid>
+      <description>A quick article on building your Scala vocabulary by understanding common affixes. &amp;quot;bi-&amp;quot; is intuitive, but what&amp;#39;s &amp;quot;co-&amp;quot;? What are all those cryptic &amp;quot;-T&amp;quot;, &amp;quot;-K&amp;quot;, and underscore suffixes? Familiarity with these can help us find the function we&amp;#39;re looking for, and name the ones we write so they can be found.&#xA;https://rossabaker.com/blog/scala-affixes/&#xA;#Scala</description>
+    </item>
+    <item>
+      <title>Build your vocabulary with Scala affixes</title>
+      <link>https://rossabaker.com/blog/scala-affixes/</link>
+      <pubDate>Wed, 26 Apr 2023 09:28:00 +0000</pubDate>
+      <guid>https://rossabaker.com/blog/scala-affixes/</guid>
+      <description>A powerful way to build one&amp;rsquo;s vocabulary is to study prefixes and suffixes. In elementary school, we learn that bi- means two. We can see it in common words like bicycle and bilingual. As we progress through school into binomials and bivalence, we&amp;rsquo;re ready. It&amp;rsquo;s not perfect: is biennial twice a year or once every two years? Biryani isn&amp;rsquo;t two helpings of ryani. Still, they are surely worth studying.&#xA;A colleague in our Scala study group asked, &amp;ldquo;Can we do the same with Scala?</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110259416618105160/</link>
+      <pubDate>Tue, 25 Apr 2023 12:19:40 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110259416618105160/</guid>
+      <description>I don&amp;#39;t have a design, but I wish there were a way to keep a private system and home manager config with a private input in an otherwise public flake. I&amp;#39;m wrapping the public flake with a thin private flake, and the workflow hurts.&#xA;#Nix</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110240322811513636/</link>
+      <pubDate>Sat, 22 Apr 2023 03:23:51 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110240322811513636/</guid>
+      <description>```&#xA;// It recognizes this *: as a Tuple2 (1 *: 2 *: EmptyTuple): Tuple2[_, _]&#xA;// But then why not also a Product2?&#xA;(1 *: 2 *: EmptyTuple): Product2[_, _]&#xA;```&#xA;https://scastie.scala-lang.org/eRT8upcTQG6IvTkZrSArnQ&#xA;#Scala #Scala3</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110228013297348950/</link>
+      <pubDate>Wed, 19 Apr 2023 23:13:23 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110228013297348950/</guid>
+      <description>Uncharacteristically forgot my mask before kid&amp;#39;s appointment. &amp;quot;Finally unmasked! I&amp;#39;ve read all the science! If I get it again, I get it again. You know, I had a fever of 106 the first time?&amp;quot;&#xA;Cool story, bro. I&amp;#39;ve never had it, and I&amp;#39;ll be outside.&#xA;#Covid #MaskShaming</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110219946065535217/</link>
+      <pubDate>Tue, 18 Apr 2023 13:01:47 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110219946065535217/</guid>
+      <description>This complexity is the result of humankind straying from the light of sentences separated by two spaces.&#xA;[Edit: The package is a great idea and I plan to install it. The conventions that make it necessary were a bad idea!]&#xA;https://codeberg.org/martianh/sentex&#xA;#Typography #Emacs</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110216775524754314/</link>
+      <pubDate>Mon, 17 Apr 2023 23:35:28 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110216775524754314/</guid>
+      <description>I have never smoked marijuana, nor do I care to try. But the way the frisbee golfers toking up at the park laugh whenever I walk by with my wienerdog? I want to be that kind of happy.&#xA;#Marijuana #Dachshunds #Joy</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110210601934377777/</link>
+      <pubDate>Sun, 16 Apr 2023 21:25:27 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110210601934377777/</guid>
+      <description>Coached a 1-3 loss yesterday. We turned it around for a 6-0 win today. Not even computers can ruin my mood.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110200409777129664/</link>
+      <pubDate>Sat, 15 Apr 2023 02:13:27 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110200409777129664/</guid>
+      <description>You can carry a gun just about anywhere in Indiana. Bars. Playgrounds. But today, you couldn&amp;#39;t carry one downtown to where Trump, Pence, Braun and others addressed the NRA about more goddamn guns.&#xA;#NRA #2ndAmendment</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110200216005623046/</link>
+      <pubDate>Sat, 15 Apr 2023 01:24:10 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110200216005623046/</guid>
+      <description>Ever notice how `ls -h` returns binary units (i.e., 1K == 1024 bytes) and Emacs&amp;#39; `size-indication-mode` returns SI units (i.e., 1K == 1000 bytes)? Piffle! https://rossabaker.com/configs/emacs/#size-indication&#xA;#Emacs</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110191444910478415/</link>
+      <pubDate>Thu, 13 Apr 2023 12:13:34 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110191444910478415/</guid>
+      <description>Scala developers&amp;#39; contempt for Java interop is baffling, when that interop is the primary reason most of us are able to write Scala professionally.&#xA;#Scala #Java</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110183737511916375/</link>
+      <pubDate>Wed, 12 Apr 2023 03:33:28 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110183737511916375/</guid>
+      <description>There&amp;#39;s an underpopulated place in open source right now between the rabidity of the FSF and the foolishness of &amp;quot;join our Discord.&amp;quot; Where are the communities that will be relevant in a decade?&#xA;#OpenSource</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110177959407083873/</link>
+      <pubDate>Tue, 11 Apr 2023 03:04:01 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110177959407083873/</guid>
+      <description>&amp;quot;Monads for Elisp&amp;quot; 🤔 https://github.com/Fuco1/emacs-cats&#xA;#Emacs #FP</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110175725972676137/</link>
+      <pubDate>Mon, 10 Apr 2023 17:36:02 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110175725972676137/</guid>
+      <description>After another rigorous and thoughtful HTTP benchmark from my colleagues in the Scala Community, I&amp;#39;ve updated my business card with a new title.&#xA;#Scala #http4s</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110175552970095481/</link>
+      <pubDate>Mon, 10 Apr 2023 16:52:02 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110175552970095481/</guid>
+      <description>I was having a frustrating day until I realized I&amp;#39;m doing better than Q*bert.&#xA;https://youtu.be/aj4cs9b6W2Y&#xA;#QBert</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110171726005968512/</link>
+      <pubDate>Mon, 10 Apr 2023 00:38:47 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110171726005968512/</guid>
+      <description>Happy Easter, if that&amp;#39;s your jam.&#xA;Another spring tradition here is to get flowers in the color of whoever defeats Duke in the NCAA Basketball Tournament. I convinced Kid 2 that Duke&amp;#39;s tears are what makes the flowers grow. Still blooming!&#xA;#Easter #Grilling #CollegeBasketball</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110158094954284802/</link>
+      <pubDate>Fri, 07 Apr 2023 14:52:14 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110158094954284802/</guid>
+      <description>When you check &amp;quot;Format messages with markup&amp;quot; in Slack&amp;#39;s advanced settings, in addition to escaping the maw of its WYSIWYG editor, you can use Markdown link syntax!&#xA;#Slack #Markdown</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110144766326810510/</link>
+      <pubDate>Wed, 05 Apr 2023 06:22:35 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110144766326810510/</guid>
+      <description>Currently pulling an all-nighter because kid left chewing gum out, and now I have to keep vigil for xylitol poisoning in the wienerdog. The dog is doing well, but I am fading.&#xA;Time for a Diet Mountain Dew and some quality time with my Emacs config until dawn.&#xA;#Emacs #Dogs #AllNighter</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110136540351495533/</link>
+      <pubDate>Mon, 03 Apr 2023 19:30:37 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110136540351495533/</guid>
+      <description>Did I really read an article about Google, almighty $GOOG, cutting costs by removing staplers? Did they first consider replacing the Swingline with the Boston?&#xA;#Google #OfficeSpace</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110127359451030403/</link>
+      <pubDate>Sun, 02 Apr 2023 04:35:47 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110127359451030403/</guid>
+      <description>The violin soloist gets to tour with their favorite Italian instrument from Sixteen Dickety-Two, but the piano soloist has to play whatever&amp;#39;s there. I like to imagine violinists maintain elaborate Emacs configs, and pianists run Vim with no config because &amp;quot;it&amp;#39;s installed everywhere.&amp;quot;&#xA;#ClassicalMusic #Emacs #Vim</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110103605769521601/</link>
+      <pubDate>Tue, 28 Mar 2023 23:54:55 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110103605769521601/</guid>
+      <description>As a child, I didn&amp;#39;t have portable electronics to play with or siblings to fart on, so on long drives, I kept a checklist until I spotted a license plate from all 50 states. Hawai`i was last, but I saw them all.&#xA;Anyway, there&amp;#39;s a Nassau-Bahamas plate at the Indianapolis Menards if you hurry.&#xA;#Nostalgia</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110102579298152941/</link>
+      <pubDate>Tue, 28 Mar 2023 19:33:52 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110102579298152941/</guid>
+      <description>[checking polls] If I wanted wrong answers, I&amp;#39;d have gone back to Twitter.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110102465706858855/</link>
+      <pubDate>Tue, 28 Mar 2023 19:04:59 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110102465706858855/</guid>
+      <description>In semantic versioning, if you remove a declared dependency without altering your API, that is:&#xA;#SemVer</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110097921343455024/</link>
+      <pubDate>Mon, 27 Mar 2023 23:49:18 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110097921343455024/</guid>
+      <description>I&amp;#39;ve been doing some ML work lately, and in my darkest moments, YouTube Music tosses Van Morrison into my De La Soul radio, and I remember nobody knows what they&amp;#39;re doing.&#xA;#MachineLearning #Music</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110097238129482211/</link>
+      <pubDate>Mon, 27 Mar 2023 20:55:32 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110097238129482211/</guid>
+      <description>May Governor Holcomb relocate his soul, which flickers on and off, alongside his veto pen. And please consider a donation to ACLU of Indiana. We&amp;#39;ve got a long, terrible, and necessary fight ahead.&#xA;https://indianacapitalchronicle.com/2023/03/27/bill-eliminating-parents-medical-authority-for-their-children-heads-to-governor/&#xA;#Indiana #TransRightsAreHumanRights</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110093256698412846/</link>
+      <pubDate>Mon, 27 Mar 2023 04:03:01 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110093256698412846/</guid>
+      <description>Neat new Emacs 29 feature: `setopt` is like `setq`, but aware of any custom setters. A nice replacement for various ad hoc macros people have developed over the years.&#xA;#Emacs</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110090687241996416/</link>
+      <pubDate>Sun, 26 Mar 2023 17:09:34 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110090687241996416/</guid>
+      <description>I&amp;#39;m finally in the right place at the right time for the German Music Hour on the UIndy&amp;#39;s radio station. Hurry, you have 51 minutes left.&#xA;https://v7player.wostreaming.net/1071&#xA;#GermanMusic #Radio</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110089339292311154/</link>
+      <pubDate>Sun, 26 Mar 2023 11:26:46 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110089339292311154/</guid>
+      <description>Magic tricks that trade referential transparency for &amp;quot;direct syntax&amp;quot; are well trod in Scala, but it has never worn well beyond slide decks and tutorials, and I don&amp;#39;t anticipate it being different this time.&#xA;https://raw.githubusercontent.com/lampepfl/async/main/scalar-slides.pdf&#xA;#Scala</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110086526203970532/</link>
+      <pubDate>Sat, 25 Mar 2023 23:31:21 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110086526203970532/</guid>
+      <description>😖✋: Congress bans TikTok&#xA;😏 👉 : Congress bans TikTokky Spotify&#xA;#Spotify #UX</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110085127290841481/</link>
+      <pubDate>Sat, 25 Mar 2023 17:35:36 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110085127290841481/</guid>
+      <description>I maintain this should be the Indiana state flag. Run it right up the pole.&#xA;#Indiana #PorkTenderloin</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110069393122826179/</link>
+      <pubDate>Wed, 22 Mar 2023 22:54:11 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110069393122826179/</guid>
+      <description>Training no differently, in my mid-forties, I&amp;#39;ve reversed a few years of decline and knocked 90 seconds/mile off my running pace. I had thought I was just old now.&#xA;#Jogging #Aging</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110047446240718920/</link>
+      <pubDate>Sun, 19 Mar 2023 01:52:49 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110047446240718920/</guid>
+      <description>Spotify exploits artists, and its new, tiktokked interface is what I deserve as a subscriber.&#xA;#Spotify #SelfFlagellation</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110024316704431241/</link>
+      <pubDate>Tue, 14 Mar 2023 23:50:40 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110024316704431241/</guid>
+      <description>Write me a paragraph about being old enough to remember when Apple events were the most insufferable day on the Internet.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110004957253472428/</link>
+      <pubDate>Sat, 11 Mar 2023 13:47:18 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110004957253472428/</guid>
+      <description>Discord is pivoting from Privacy Nightmare to Privacy Nightmare With AI, but you can protect yourself with this one simple setting:&#xA;#Discord #Privacy</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109995840212765542/</link>
+      <pubDate>Thu, 09 Mar 2023 23:08:43 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109995840212765542/</guid>
+      <description>When someone is late to do the right thing, remember it&amp;#39;s not often that we were the first.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109982315467116519/</link>
+      <pubDate>Tue, 07 Mar 2023 13:49:12 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109982315467116519/</guid>
+      <description>How to dress for Texas</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109957443970458605/</link>
+      <pubDate>Fri, 03 Mar 2023 04:24:03 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109957443970458605/</guid>
+      <description>I&amp;#39;m an Emacs nerd and an Internet protocol nerd and OMG how did I not know about this?&#xA;https://github.com/galdor/rfc-mode&#xA;#Emacs</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109956613877717100/</link>
+      <pubDate>Fri, 03 Mar 2023 00:52:57 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109956613877717100/</guid>
+      <description>Happy De La Soul Eve to those who celebrate.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109945821181500937/</link>
+      <pubDate>Wed, 01 Mar 2023 03:08:13 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109945821181500937/</guid>
+      <description>Pre-pandemic me wouldn&amp;#39;t believe how excited he&amp;#39;ll be someday about 24-hour frizz control shampoo.&#xA;#Shampoo #FrizzControl</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109939639248090680/</link>
+      <pubDate>Tue, 28 Feb 2023 00:56:04 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109939639248090680/</guid>
+      <description>When we are sad, besides tweaking our Emacs, we barbecue. This one is healthier than my typical spread.&#xA;#BBQ #Food</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109939071337099163/</link>
+      <pubDate>Mon, 27 Feb 2023 22:31:39 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109939071337099163/</guid>
+      <description>A good barometer for how frustrated I am with everything else is how fast my init.el is changing.&#xA;#Emacs</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109933849044808126/</link>
+      <pubDate>Mon, 27 Feb 2023 00:23:33 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109933849044808126/</guid>
+      <description>Spending a few hours of my Sunday gathering tax forms to send to a CPA, whom I&amp;#39;ll pay a few hundred dollars to reassemble information the government mostly already has. &amp;quot;Taxation is theft&amp;quot; is silly, but the calculations sure feel like a heist.&#xA;#Taxes</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109933058385327805/</link>
+      <pubDate>Sun, 26 Feb 2023 21:02:28 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109933058385327805/</guid>
+      <description>The local pro hockey team, the Indy Fuel, came out to scrimmage with Indy Twisters special hockey this afternoon. What a fun surprise. 19 is my son.&#xA;#IndyFuel #IndyTwisters #SpecialHockey</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109923494939498500/</link>
+      <pubDate>Sat, 25 Feb 2023 04:30:22 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109923494939498500/</guid>
+      <description>Tonight the Indianapolis Symphony Orchestra performed Pavel Haas&amp;#39; unfinished symphony in its North American premier. It was unfinished because the composer was murdered in Auschwitz. Some premieres are moving, and some premieres are obscure for a reason. This was moving, and I hope it&amp;#39;s heard in your city someday.&#xA;#IndySymphony #Indianapolis #ClassicalMusic</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109923453893839656/</link>
+      <pubDate>Sat, 25 Feb 2023 04:19:55 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109923453893839656/</guid>
+      <description>Has anyone written a scalafix yet to disable this `boundary` nonsense?&#xA;#Scala</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109912128646769246/</link>
+      <pubDate>Thu, 23 Feb 2023 04:19:46 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109912128646769246/</guid>
+      <description>Running a single-user instance doesn&amp;#39;t preclude you from moderating according to your own rules. Blocking a user protects you, but Limit and Suspend in the moderation interface protect those who click through to your server. Use judiciously, but you don&amp;#39;t have to mirror hurtful content.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109910581669307340/</link>
+      <pubDate>Wed, 22 Feb 2023 21:46:21 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109910581669307340/</guid>
+      <description>This degree of cruelty is nothing new in Indiana, but it used to tend to die in committee.&#xA;https://indianacapitalchronicle.com/2023/02/22/anti-trans-medical-care-bill-passes-senate-committee/&#xA;#Indiana #Transmisia</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109905420181809690/</link>
+      <pubDate>Tue, 21 Feb 2023 23:53:43 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109905420181809690/</guid>
+      <description>Showed up to a Mardi Gras party in a church basement. Before I knew it, I was singing the German dative pronouns to the tune of the Blue Danube Waltz with a women thirty years my senior. &amp;quot;Aus außer bei mit, nach zeit, von zu.&amp;quot;&#xA;New Orleans, it isn&amp;#39;t.&#xA;#MardiGras #UMC</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109900814673646679/</link>
+      <pubDate>Tue, 21 Feb 2023 04:22:28 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109900814673646679/</guid>
+      <description>The Geek Feminism Wiki&amp;#39;s conference anti-harassment policy¹ has been an excellent starting point for years, but hasn&amp;#39;t been refreshed for the Covid-19 Era. As mandatory precautions subside, those who continue additional voluntary precautions are often subjected to &amp;quot;mask shaming.&amp;quot; Does this rise to a level of being called out in a Code of Conduct in 2023? Which events are doing a good job in this stage of the pandemic?&#xA;¹ https://geekfeminism.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109895096585604319/</link>
+      <pubDate>Mon, 20 Feb 2023 04:08:17 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109895096585604319/</guid>
+      <description>I&amp;#39;m a sucker for Emacs content. Blogs, videos, books, etc. But a quite surprising medium for this topic is a podcast!&#xA;https://www.discovering-emacs.com/&#xA;#Emacs</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109894567233702155/</link>
+      <pubDate>Mon, 20 Feb 2023 01:53:40 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109894567233702155/</guid>
+      <description>Please don&amp;#39;t rebase or force-push your pull requests, especially after an initial review. This forces the maintainers to review the entire PR again, instead of the changes since the previous review. The maintainers can still squash-merge or rebase-merge for a tidier history at their discretion.&#xA;#Git #CodeReview</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109877174855277763/</link>
+      <pubDate>Fri, 17 Feb 2023 00:10:33 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109877174855277763/</guid>
+      <description>Had a fun conversation with a @zachmccoy about graphing second derivatives with Prometheus, until we realized I did that with another backend a couple years before Prometheus came to prominence, and now One Derivative Is Enough For Anybody.&#xA;Also fondly remembering my third derivative, which was mostly useful so I could call it The Jerk Graph.&#xA;#Prometheus #Calculus</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109875999341097467/</link>
+      <pubDate>Thu, 16 Feb 2023 19:11:36 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109875999341097467/</guid>
+      <description>How is there no toggle to disable Apple Music, which I don&amp;#39;t use, from launching every time I connect my Bluetooth headphones. I don&amp;#39;t even have an Apple account.&#xA;Much as I applaud the idea of a desktop that &amp;quot;just works,&amp;quot; it comes at the expense of our ability to fix the things that just don&amp;#39;t.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109871379375791740/</link>
+      <pubDate>Wed, 15 Feb 2023 23:36:41 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109871379375791740/</guid>
+      <description>One of my first bosses taught me the value of saying &amp;quot;I don&amp;#39;t know&amp;quot; when you don&amp;#39;t. I wish the same from the bots.&#xA;#AI</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109853772704098766/</link>
+      <pubDate>Sun, 12 Feb 2023 20:59:05 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109853772704098766/</guid>
+      <description>If your fraud reporting department is closed on Sundays, maybe your fraud committing department shouldn&amp;#39;t be operating on Sundays.&#xA;#CapitalOne</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109853617745304563/</link>
+      <pubDate>Sun, 12 Feb 2023 20:19:40 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109853617745304563/</guid>
+      <description>The Joint Committee on Excellence in Professional Football and Strigiformes reminds you to camel case your hashtags.&#xA;#SuperBowl #SuperbOwl</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109853105912543655/</link>
+      <pubDate>Sun, 12 Feb 2023 18:09:30 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109853105912543655/</guid>
+      <description>It&amp;#39;s going to be delicious when GitHub&amp;#39;s AI renders GitHub uninhabitable with spammy pull requests, if and only if Open Source communities are prepared with an alternative.&#xA;#GitHub #OSS #AI #Enshittification</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109841991772222920/</link>
+      <pubDate>Fri, 10 Feb 2023 19:03:02 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109841991772222920/</guid>
+      <description>Instead of signing a CLA, can&amp;#39;t we all just wait for Copilot to launder it?&#xA;#GitHub #Copilot #OSS</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109840894714298344/</link>
+      <pubDate>Fri, 10 Feb 2023 14:24:02 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109840894714298344/</guid>
+      <description>I&amp;#39;m starting to get pull requests whose confidence, incorrectness, and irrelevance carry the stench of generative AI. Is there some hacktoberfest-like bullshit going on again at maintainers&amp;#39; expense, or is this just going to be the new normal?</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109834857410060081/</link>
+      <pubDate>Thu, 09 Feb 2023 12:48:40 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109834857410060081/</guid>
+      <description>Another reason this should be opt-in is so I can set `GOTELEMETRY=&amp;quot;for fuck&amp;#39;s sake&amp;quot;` and it would still be off because for fuck&amp;#39;s sake.&#xA;https://research.swtch.com/telemetry-intro&#xA;#Golang</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109833230264662747/</link>
+      <pubDate>Thu, 09 Feb 2023 05:54:52 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109833230264662747/</guid>
+      <description>Need to add one line to kid&amp;#39;s soccer league site that we are in Indiana, and all you Ohioans need to s/.com/.org/.&#xA;The custom theme from 2020 is too old for modern Hugo. Ugh. I pinned it with Nix, but that old nixpkgs doesn&amp;#39;t work on Apple Silicon. Upgrading the theme is a beast. Everything is terrible.&#xA;But change a version and a couple hashes, and I quickly rebuilt the precise old Hugo from source, which is now cached.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109832256826889128/</link>
+      <pubDate>Thu, 09 Feb 2023 01:47:19 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109832256826889128/</guid>
+      <description>http4s-jdk-client-0.9 and 1.0.0-M9 are out. They use fs2-3.6.0&amp;#39;s new integration with Java&amp;#39;s Flow to drop the depenedency on fs2-reactive-streams. This is a nice streamlining for projects that have dropped Java 8.&#xA;https://github.com/http4s/http4s-jdk-http-client/releases/tag/v0.9.0&#xA;#http4s #Typelevel #Scala</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109824950098770022/</link>
+      <pubDate>Tue, 07 Feb 2023 18:49:07 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109824950098770022/</guid>
+      <description>First public release of otel4s, an OpenTelemetry implementation for Cats Effect. otel4s aims to be a full and faithful impemenation of the OpenTelemetry Specification, built for the idioms of the Typelevel ecosystem.&#xA;https://github.com/typelevel/otel4s/discussions/121&#xA;#Otel4s #Typelevel #Scala #OpenTelemetry #CatsEffect</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109819777508731125/</link>
+      <pubDate>Mon, 06 Feb 2023 20:53:39 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109819777508731125/</guid>
+      <description>Tired of the fat cats in Washington, D.C. taxing us with `ThisBuild / scalafmtOnCompile := true`. I&amp;#39;ll format my Scala when I want.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109800958261054683/</link>
+      <pubDate>Fri, 03 Feb 2023 13:07:40 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109800958261054683/</guid>
+      <description>Look at self-care tips and have a belly laugh at the absurdity of being able to implement any of them.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109797414399585260/</link>
+      <pubDate>Thu, 02 Feb 2023 22:06:25 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109797414399585260/</guid>
+      <description>Society if this printed `1`:&#xA;```&#xA;statefulIO(0).flatMap {&#xA;(stateful: cats.mtl.Stateful[IO, Int]) =&amp;gt;&#xA;stateful.set(1).race(IO.never) &amp;gt;&amp;gt;&#xA;stateful.get.flatMap(IO.println)&#xA;}&#xA;```&#xA;#Typelevel #Scala</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109791567304409536/</link>
+      <pubDate>Wed, 01 Feb 2023 21:19:26 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109791567304409536/</guid>
+      <description>There&amp;#39;s a lot I resent about having to drive 25 miles outside a major city to see a nurse practitioner insurance will accept, but foremost, I resent the Uranus Fudge Factory billboards.&#xA;#Indiana</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109786036386251004/</link>
+      <pubDate>Tue, 31 Jan 2023 21:52:51 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109786036386251004/</guid>
+      <description>I understand why Slack doesn&amp;#39;t support blocking users, but I wish we could mute people who propose integrating OpenAI for an hour or two.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109775248030087751/</link>
+      <pubDate>Mon, 30 Jan 2023 00:09:13 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109775248030087751/</guid>
+      <description>Happy 21st birthday to Pete, patrolling the baby gate and sassing the young hounds it keeps on other side.&#xA;#TuxedoCat</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109762122429723504/</link>
+      <pubDate>Fri, 27 Jan 2023 16:31:13 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109762122429723504/</guid>
+      <description>If we talk on Matrix, I half-assed the self-hosting and got an unintentionally clean start, but I&amp;#39;m back!&#xA;Matrix is good. Self-hosting Synapse competently requires more dedication to chat than I have these days. Anyway:&#xA;https://matrix.to/#/@ross:rossabaker.com&#xA;#Matrix #Synapse</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109759781799528154/</link>
+      <pubDate>Fri, 27 Jan 2023 06:35:58 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109759781799528154/</guid>
+      <description>Anybody running NixOS on GCP free tier? I have hit a tipping point running nixos-rebuild on an ec2-micro. It otherwise runs my Synapse server like a champ.&#xA;#NixOS #GCP #Synapse #Matrix</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109757942537475021/</link>
+      <pubDate>Thu, 26 Jan 2023 22:48:13 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109757942537475021/</guid>
+      <description>How annoyed would you be if code constrained by `MonadError` or less needed `MonadCancelThrow` for tracing that you may or may not have enabled?&#xA;#Scala</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109752354187746419/</link>
+      <pubDate>Wed, 25 Jan 2023 23:07:01 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109752354187746419/</guid>
+      <description>I&amp;#39;m off Twitter. I avoid r/scala and Discord like var and null. I don&amp;#39;t read the contributors forum. I don&amp;#39;t engage on the core GitHubs. Still, I inferred the origin and nature of the latest drama.&#xA;I&amp;#39;m still having great fun with the language at work and in the outlying repos. Discussion on the Fediverse has been an oasis. But, for fuck&amp;#39;s sake.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109747212105028452/</link>
+      <pubDate>Wed, 25 Jan 2023 01:19:19 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109747212105028452/</guid>
+      <description>http4s-1.0.0-M39 is out. It&amp;#39;s the dev line, with the production fixes from 0.23.18.&#xA;This one is binary compatible with the last milestone, but if you need the satellite repos rereleased, speak up here:&#xA;https://github.com/http4s/http4s/discussions/6941&#xA;#Scala #Typelevel #http4s</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109740510632680621/</link>
+      <pubDate>Mon, 23 Jan 2023 20:55:03 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109740510632680621/</guid>
+      <description>There is now an org-level project with Good First Issue tickets across both Typelevel and affiliate projects.&#xA;https://github.com/orgs/typelevel/projects/1/&#xA;#Typelevel #Scala</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109740426441917010/</link>
+      <pubDate>Mon, 23 Jan 2023 20:33:38 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109740426441917010/</guid>
+      <description>If anyone wants to dip their toe into the waters of open source, this is an easy first pull request. I can explain more if it&amp;#39;s not clear what&amp;#39;s going on there. Please comment on the issue if you want to take it.&#xA;https://github.com/typelevel/otel4s/issues/87&#xA;#Scala #Typelevel #Otel4s</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109733674485760332/</link>
+      <pubDate>Sun, 22 Jan 2023 15:56:32 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109733674485760332/</guid>
+      <description>The concept of &amp;quot;monadic profunctors&amp;quot;¹ for codecs is beautiful:&#xA;```&#xA;data Codec r w c a = Codec&#xA;{ codecIn :: r a,&#xA;codecOut :: c → w a&#xA;}&#xA;```&#xA;A parser `r a` may have expensive optimizations in its functor ops (run once) and then fast on each parse. Printer `w a` may be the same, but depends on input `c`, and must be recreated on each run.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109713010957712376/</link>
+      <pubDate>Thu, 19 Jan 2023 00:21:31 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109713010957712376/</guid>
+      <description>Because I&amp;#39;m tired of being confused by object pools and their limitations and aliases, even though I&amp;#39;m supposed to be maintaining a couple:&#xA;https://github.com/typelevel/keypool/discussions/442&#xA;Corrections welcome.&#xA;#Scala #Typelevel</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109712708951143137/</link>
+      <pubDate>Wed, 18 Jan 2023 23:04:43 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109712708951143137/</guid>
+      <description>GitHub&amp;#39;s footnotes support seems limited to 9. Ask me how I know.[^1]&#xA;[^1] I made another big ass table.&#xA;#GitHub #Markdown</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109708377359311207/</link>
+      <pubDate>Wed, 18 Jan 2023 04:43:08 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109708377359311207/</guid>
+      <description>http4s-0.23.18 is out. Fixes a `StackOverflowError` that hit users with unusually small stacks, and a few optimizations hither and yon.&#xA;https://github.com/http4s/http4s/releases/tag/v0.23.18&#xA;#http4s #Typelevel #Scala</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109701366232166320/</link>
+      <pubDate>Mon, 16 Jan 2023 23:00:07 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109701366232166320/</guid>
+      <description>The next time someone wanks in my general direction about ChatGPT, I&amp;#39;m closing the tab and heading off to listen to Nick Cave.&#xA;https://www.theredhandfiles.com/chat-gpt-what-do-you-think/</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109679310125418733/</link>
+      <pubDate>Fri, 13 Jan 2023 01:30:57 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109679310125418733/</guid>
+      <description>Sometimes, Haskell documentation disappoints. Other times:&#xA;&amp;gt; Mnemonic: Clowns to the left (parameter of the Bifunctor), jokers to the right.&#xA;https://hackage.haskell.org/package/bifunctors-5.5.7/docs/Data-Bifunctor-Clown.html&#xA;#Haskell</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109677513970467422/</link>
+      <pubDate>Thu, 12 Jan 2023 17:54:10 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109677513970467422/</guid>
+      <description>http4s-twirl releases are out, courtesy of Kailuo Wang:&#xA;* 0.23.17 makes the jump from scala-xml-1 to scala-xml-2. Beware, binary breaking!&#xA;* 0.24.0-M1 is based on twirl-1.6 milestones for Scala 3 support.&#xA;Server-side templates are cool again.&#xA;#http4s #Typelevel #PlayTwirl</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109676627140428880/</link>
+      <pubDate>Thu, 12 Jan 2023 14:08:38 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109676627140428880/</guid>
+      <description>Faffing about with free invariant algebras to define HTTP codecs in a way that can be shared across backends. Computers can be fun sometimes.&#xA;https://github.com/http4s/http4s/pull/6917&#xA;#http4s #Typelevel #Scala</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109668797734851024/</link>
+      <pubDate>Wed, 11 Jan 2023 04:57:31 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109668797734851024/</guid>
+      <description>Coyoneda, to the tune of Handel&amp;#39;s Hallelujah Chorus&#xA;#FP #Dork</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109662081296446380/</link>
+      <pubDate>Tue, 10 Jan 2023 00:29:26 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109662081296446380/</guid>
+      <description>Old, but extraordinary essay on the fatigue of open source success: https://nolanlawson.com/2017/03/05/what-it-feels-like-to-be-an-open-source-maintainer/&#xA;#FOSS</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109661860459350840/</link>
+      <pubDate>Mon, 09 Jan 2023 23:33:16 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109661860459350840/</guid>
+      <description>It&amp;#39;s great how Nix lets you leave the beaten path, if you don&amp;#39;t mind being swallowed whole by quicksand now and then.&#xA;https://github.com/nix-community/emacs-overlay/issues/275#issuecomment-1376487302&#xA;#Nix #Emacs</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109646208592366719/</link>
+      <pubDate>Sat, 07 Jan 2023 05:12:48 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109646208592366719/</guid>
+      <description>Each Republican in the House has repeatedly voted an election denier for Speaker, even on the anniversary of an attempted coup d&amp;#39;état whose erstwhile leader is whipping the last few votes tonight. The gradations of sedition do not excuse the best of them as a &amp;quot;moderate.&amp;quot;&#xA;#USPolitics</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109643259623362940/</link>
+      <pubDate>Fri, 06 Jan 2023 16:42:50 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109643259623362940/</guid>
+      <description>Happy to welcome a pair of new http4s maintainers this week:&#xA;- @valencik has joined the Core team.&#xA;- @dhinojosa will be helping out with Servlet and Tomcat support.&#xA;👏 👏 #http4s #Scala #Servlet #Tomcat</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109638473522742759/</link>
+      <pubDate>Thu, 05 Jan 2023 20:25:40 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109638473522742759/</guid>
+      <description>https://github.com/settings/profile -&amp;gt; &amp;quot;Show Achievements on my profile&amp;quot; -&amp;gt; uncheck -&amp;gt; 😀 #GitHub #Degamification</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109637377251987951/</link>
+      <pubDate>Thu, 05 Jan 2023 15:46:52 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109637377251987951/</guid>
+      <description>GitHub is still an ethical trashfire, but this is a positive development:&#xA;https://docs.github.com/en/code-security/security-advisories/guidance-on-reporting-and-writing/privately-reporting-a-security-vulnerability&#xA;#GitHub #Security</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109634836702582371/</link>
+      <pubDate>Thu, 05 Jan 2023 05:00:47 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109634836702582371/</guid>
+      <description>The following http4s integrations are in need of a maintainer:&#xA;- http4s-async-http-client&#xA;- http4s-boopickle&#xA;- http4s-dropwizard-metrics&#xA;- http4s-okhttp-client&#xA;- http4s-tomcat&#xA;I&amp;#39;m trying to narrow my focus, but I will happily assist anyone who steps forward on these.&#xA;https://github.com/http4s/http4s/discussions/6908&#xA;#http4s #Scala</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109631425715706011/</link>
+      <pubDate>Wed, 04 Jan 2023 14:33:19 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109631425715706011/</guid>
+      <description>http4s security patches:&#xA;* 0.21.34&#xA;* 0.22.15&#xA;* 0.23.17&#xA;* 1.0.0-M38&#xA;We can talk about cool stuff later, but please patch ASAP if you&amp;#39;re parsing a User-Agent or Server header.&#xA;https://github.com/http4s/http4s/security/advisories/GHSA-54w6-vxfh-fw7f&#xA;#http4s #Typelevel #Scala</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109629361206246724/</link>
+      <pubDate>Wed, 04 Jan 2023 05:48:17 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109629361206246724/</guid>
+      <description>“It&amp;#39;s not the note you play that&amp;#39;s the wrong note, it&amp;#39;s the note you play afterwards that makes it right or wrong.” — Miles Davis, fed up reviewing a bunch of breaking changes on GitHub, probably&#xA;#FOSS</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109628831626640313/</link>
+      <pubDate>Wed, 04 Jan 2023 03:33:36 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109628831626640313/</guid>
+      <description>I need to either invest in a better GitHub notification system or divest several repositories.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109623590732461719/</link>
+      <pubDate>Tue, 03 Jan 2023 05:20:47 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109623590732461719/</guid>
+      <description>Journalists are neat. I even married one. But what this site needs is the local National Weather Service office.&#xA;#wx</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109611920533297462/</link>
+      <pubDate>Sun, 01 Jan 2023 03:52:54 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109611920533297462/</guid>
+      <description>Encroachment. Five yard penalty. Remains second down.&#xA;#dachshund</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109609238631727052/</link>
+      <pubDate>Sat, 31 Dec 2022 16:30:51 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109609238631727052/</guid>
+      <description>It was pointed out that I talk about dogs without visual evidence, so, here.&#xA;#dogs #coonhound #dachshund</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109607029298110367/</link>
+      <pubDate>Sat, 31 Dec 2022 07:08:59 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109607029298110367/</guid>
+      <description>Languages I wrote this year:&#xA;Awk&#xA;Bash&#xA;Emacs Lisp&#xA;Go&#xA;JavaScript&#xA;Nix&#xA;Perl&#xA;Python&#xA;R&#xA;Ruby&#xA;Scala&#xA;Sed&#xA;SQL&#xA;Stan&#xA;Terraform&#xA;TypeScript&#xA;#Code2022</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109598162569355203/</link>
+      <pubDate>Thu, 29 Dec 2022 17:34:04 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109598162569355203/</guid>
+      <description>Does anybody know a light, &amp;quot;archival&amp;quot; ActivityPub implementation to repost old content if I have a backup, but already moved on to a new instance? Goal is to not break URIs and not run a second, deprecated Mastodon.&#xA;#FediAdmin #AskFedi</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109597718693200875/</link>
+      <pubDate>Thu, 29 Dec 2022 15:41:11 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109597718693200875/</guid>
+      <description>Anybody know what happened to Pronoun Island (pronoun.is)?&#xA;#PronounIsland</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109595572742971572/</link>
+      <pubDate>Thu, 29 Dec 2022 06:35:26 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109595572742971572/</guid>
+      <description>Shoutout to NixOS. It couldn&amp;#39;t save me from my awful backup strategy, but it was the backbone of my configuration management, and I had a working Mastodon server again in minutes from scratch.&#xA;#MastoAdmin #NixOS</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109595423988191767/</link>
+      <pubDate>Thu, 29 Dec 2022 05:57:36 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109595423988191767/</guid>
+      <description>When I accidentally obliterated my instance, I set up with a new WEB_DOMAIN and the original LOCAL_DOMAIN, so my handle hasn&amp;#39;t changed.&#xA;When I imported a month-old backup of follows, I immediately got hundreds of my old followers back. I may have invented a backhanded Move command?&#xA;Don&amp;#39;t try this at home.&#xA;#MastoAdmin</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109595380738434617/</link>
+      <pubDate>Thu, 29 Dec 2022 05:46:36 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109595380738434617/</guid>
+      <description>Post-disaster #Introduction:&#xA;I am best known for #Scala, #Typelevel, and #http4s. I geek out over #Emacs, #Nix, and the #Indieweb. I&amp;#39;m probably a #Bayesian.&#xA;I live in #Indianapolis, #Indiana with a #Dachshund, #Coonhound, #TuxedoCat, and a freshwater #Aquarium or five. I offset my #Jogging with #BBQ. I coach youth #Soccer and attend North United #Methodist Church.&#xA;This is a #SelfHosted sequel after a Terraform disaster. Boosts appreciated to relocate my peeps.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109595269119337373/</link>
+      <pubDate>Thu, 29 Dec 2022 05:18:13 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109595269119337373/</guid>
+      <description>Today I learned Hetzner Cloud backups are associated with a single server instance. This is very bad news when you accidentally delete it.&#xA;#Hetzner #Fail</description>
+    </item>
+    <item>
+      <title>Nix Flake</title>
+      <link>https://rossabaker.com/configs/nix-flake/</link>
+      <pubDate>Sun, 25 Dec 2022 22:14:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/nix-flake/</guid>
+      <description>The Nix flake is the central nervous system of these configurations. It declaratively manages:&#xA;installed packages, on Linux and Darwin services, on Linux and Darwin user packages, including dot files, on Linux and Darwin custom software packages to run anywhere development environments for various projects DNS entries modules for building your own flakes Viewing the contents of the flake # The nix flake show command shows all the outputs of a flake:</description>
+    </item>
+    <item>
+      <title>Ox. Hugo. Why not both?</title>
+      <link>https://rossabaker.com/blog/ox-hugo-why-not-both/</link>
+      <pubDate>Tue, 22 Nov 2022 15:53:00 +0000</pubDate>
+      <guid>https://rossabaker.com/blog/ox-hugo-why-not-both/</guid>
+      <description>This site is built on a static site generator (SSG). They are a dime a dozen. I chose a less mainstream one, ox-hugo. After recently questioning that choice, I have new clarity on why it&amp;rsquo;s right for me.&#xA;The goal # I want to write and sometimes generate content in a markup language. The SSG generator should apply a template, create aggregate views (such as tags), and output a directory that can be served off a cloud CDN, self-hosted with open source like nginx, or even out of a local directory with a simple Rust binary.</description>
+    </item>
+    <item>
+      <title>WebFinger</title>
+      <link>https://rossabaker.com/configs/webfinger/</link>
+      <pubDate>Tue, 22 Nov 2022 00:14:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/webfinger/</guid>
+      <description>WebFinger, specified by RFC7033, is a discovery protocol over secure HTTP. It is used by Mastodon to map account identifiers to actor IDs.&#xA;This protocol is not to be confused with Finger.&#xA;The WebFinger query # To look up a Mastodon account, an HTTP GET request is constructed from the account ID. For account @ross@rossabaker.com, the WebFinger URI is https://rossabaker.com/.well-known/webfinger?resource=acct%3Aross%40rossabaker.com:&#xA;https:// always a secure HTTP request rossabaker.com the domain of the account /.</description>
+    </item>
+    <item>
+      <title>Scalatra in Action</title>
+      <link>https://rossabaker.com/projects/scalatra-in-action/</link>
+      <pubDate>Mon, 21 Nov 2022 21:03:00 +0000</pubDate>
+      <guid>https://rossabaker.com/projects/scalatra-in-action/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://www.manning.com/books/scalatra-in-action&#34;&gt;Scalatra in Action&lt;/a&gt; was written by &lt;a href=&#34;https://constructiveproof.com/&#34;&gt;Dave Hrycyszyn,&lt;/a&gt; Stefan Ollinger, and&#xA;me and covers the &lt;a href=&#34;https://scalatra.org/&#34;&gt;Scalatra micro-framework&lt;/a&gt; in depth.  Scalatra is a&#xA;port of Ruby&amp;rsquo;s Sinatra to Scala.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Self-hosting a Matrix home server with Synapse</title>
+      <link>https://rossabaker.com/configs/matrix/</link>
+      <pubDate>Mon, 21 Nov 2022 21:03:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/matrix/</guid>
+      <description>Matrix is a decentralized communication protocol. It is capable of many things, but I primarily use it for public chats on Open Source projects or private, end-to-end encrypted messaging.&#xA;Self-hosting # I am hosting Matrix on my dedicated Hetzner server. Requirements will vary by usage, but my Synapse server, a Python process, currently consumes about 350MB of RAM. Add on PostgreSQL and a reverse Nginx proxy, either of which might be shared with other services.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/indieweb.social/rossabaker/109306144082815818/</link>
+      <pubDate>Tue, 08 Nov 2022 03:49:55 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/indieweb.social/rossabaker/109306144082815818/</guid>
+      <description>How I archived toots from my prior instance to my personal Hugo site:&#xA;https://rossabaker.com/projects/toot-archive/&#xA;#Indieweb #PESOS #OwnYourData #Hugo #ScalaCLI #Typelevel</description>
+    </item>
+    <item>
+      <title>Archive your toots to Hugo</title>
+      <link>https://rossabaker.com/projects/toot-archive/</link>
+      <pubDate>Mon, 07 Nov 2022 22:37:00 +0000</pubDate>
+      <guid>https://rossabaker.com/projects/toot-archive/</guid>
+      <description>An important Indieweb principle is to own your data. I tooted on mastodon.social sporadically for five years. The service is public, the protocol open, and the implementation open source. Still, it exists at the pleasure of its admins, with whom I have no contract.&#xA;After moving to another instance, I wanted to preserve my old content. We will use a technique called PESOS, or Publish Elsewhere, Syndicate to Own Site.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/indieweb.social/rossabaker/109299845502357608/</link>
+      <pubDate>Mon, 07 Nov 2022 01:08:07 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/indieweb.social/rossabaker/109299845502357608/</guid>
+      <description>Had a nice chat out of the blue on #Matrix, another place to check out during the Internet&amp;#39;s Grand Reopening.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/indieweb.social/rossabaker/109299576723616335/</link>
+      <pubDate>Sun, 06 Nov 2022 23:59:45 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/indieweb.social/rossabaker/109299576723616335/</guid>
+      <description>I want to archive posts from siloed networks to my personal website. I thought LinkedIn would be an easy start. Too easy: in fourteen years, I never posted. Oops.&#xA;#Indieweb #PESOS</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/indieweb.social/rossabaker/109297975082479378/</link>
+      <pubDate>Sun, 06 Nov 2022 17:12:26 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/indieweb.social/rossabaker/109297975082479378/</guid>
+      <description>Miss you, Grandma.&#xA;#AllSaintsSunday</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/indieweb.social/rossabaker/109297665538751644/</link>
+      <pubDate>Sun, 06 Nov 2022 15:53:43 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/indieweb.social/rossabaker/109297665538751644/</guid>
+      <description>Thoughts on https://mastovue.glitch.me/#/? It solves the small-instance problem of search finding only federated content, but it seems abusive of larger instances.&#xA;#search #fediverse</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/indieweb.social/rossabaker/109297137648123781/</link>
+      <pubDate>Sun, 06 Nov 2022 13:39:28 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/indieweb.social/rossabaker/109297137648123781/</guid>
+      <description>Custom short domain: yea or nay?&#xA;https://indieweb.org/short-domains&#xA;#IndieWeb #POSSE</description>
+    </item>
+    <item>
+      <title>License</title>
+      <link>https://rossabaker.com/license/</link>
+      <pubDate>Sun, 06 Nov 2022 10:40:00 +0000</pubDate>
+      <guid>https://rossabaker.com/license/</guid>
+      <description>Simple and strict # The work as a whole is distributed under the GNU General Public License v3.0 only (GPL-3.0-only). These license terms apply to rossabaker.com and its source repository.&#xA;This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/indieweb.social/rossabaker/109292783734805794/</link>
+      <pubDate>Sat, 05 Nov 2022 19:12:13 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/indieweb.social/rossabaker/109292783734805794/</guid>
+      <description>The #dogs out searching the forest for this Fediverse everyone keeps talking about.&#xA;#coonhound #dachshund</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/indieweb.social/rossabaker/109289263356646510/</link>
+      <pubDate>Sat, 05 Nov 2022 04:16:56 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/indieweb.social/rossabaker/109289263356646510/</guid>
+      <description>If I&amp;#39;m the entire overlap of the Fediverse and Indianapolis Symphony Orchestra patrons, does that mean I get to create the hashtag?&#xA;Anyway, nice #Brahms Piano Conerto No. 2 tonight by the #IndySymphony and Stephen Hough.&#xA;#ClassicalMusic</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/indieweb.social/rossabaker/109289177971640231/</link>
+      <pubDate>Sat, 05 Nov 2022 03:55:13 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/indieweb.social/rossabaker/109289177971640231/</guid>
+      <description>I like the #IndiewebSocial vibe, but original toots on a stranger&amp;#39;s instance doesn&amp;#39;t feel particularly #Indieweb. 🤔</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/indieweb.social/rossabaker/109282026428290045/</link>
+      <pubDate>Thu, 03 Nov 2022 21:36:29 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/indieweb.social/rossabaker/109282026428290045/</guid>
+      <description>This is fun. Let&amp;#39;s all migrate off #Discord next.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/indieweb.social/rossabaker/109281278647520051/</link>
+      <pubDate>Thu, 03 Nov 2022 18:26:19 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/indieweb.social/rossabaker/109281278647520051/</guid>
+      <description>Where are all the #sports fans at? That&amp;#39;s the banter I&amp;#39;m missing most. I might spin off a more personal identity so I don&amp;#39;t alienate my fellow propellerheads.&#xA;#MLB #NFL #NBA #NHL #Soccer #CFB #CBB&#xA;#Cubs #Bears #Pacers #Blackhawks #Hoosiers #iufb #iubb</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/indieweb.social/rossabaker/109280822017249637/</link>
+      <pubDate>Thu, 03 Nov 2022 16:30:11 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/indieweb.social/rossabaker/109280822017249637/</guid>
+      <description>Found a great deal on identity verification at Keyoxide. $0/month, multiple services, wow!&#xA;https://keyoxide.org/wkd/ross%40rossabaker.com&#xA;#keyoxide #verification</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/indieweb.social/rossabaker/109280455333589492/</link>
+      <pubDate>Thu, 03 Nov 2022 14:56:56 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/indieweb.social/rossabaker/109280455333589492/</guid>
+      <description>Computers are fun again.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/indieweb.social/rossabaker/109278029404970596/</link>
+      <pubDate>Thu, 03 Nov 2022 04:39:59 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/indieweb.social/rossabaker/109278029404970596/</guid>
+      <description>Skip the third-party server and self-host your PGP key via Web Key Directory (WKD)&#xA;Here&amp;#39;s how I did it with Hugo and Netlify:&#xA;https://rossabaker.com/configs/web-key-directory/&#xA;#pgp #wkd #indieweb #hugo #netlify</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/indieweb.social/rossabaker/109277586548398134/</link>
+      <pubDate>Thu, 03 Nov 2022 02:47:22 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/indieweb.social/rossabaker/109277586548398134/</guid>
+      <description>Do you see different search results between instances? Here&amp;#39;s why:&#xA;https://github.com/mastodon/mastodon/issues/9529&#xA;#search #fedisplaining</description>
+    </item>
+    <item>
+      <title>Web Key Directory</title>
+      <link>https://rossabaker.com/configs/web-key-directory/</link>
+      <pubDate>Wed, 02 Nov 2022 23:39:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/web-key-directory/</guid>
+      <description>Web Key Directory (WKD) is a standard to map email addresses to PGP public keys over HTTPS. In this guide, we&amp;rsquo;ll configure WKD for our domain.&#xA;Motivation # Independence # Public keys are traditionally submitted to one or more public key servers. Some, like pgp.mit.edu, are federated1. Others, like keys.openpgp.org, are not2. In neither case can I control whether they&amp;rsquo;re here tomorrow.&#xA;Consistent with Indieweb principles, WKD lets us self-host our identity.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/indieweb.social/rossabaker/109272136338915805/</link>
+      <pubDate>Wed, 02 Nov 2022 03:41:18 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/indieweb.social/rossabaker/109272136338915805/</guid>
+      <description>Imperfectly Indieweb:&#xA;How the collapse of Twitter and a trip to the Wayback Machine inspired me to go all in on the Indieweb.&#xA;https://rossabaker.com/blog/imperfectly-indieweb/&#xA;#blog #indieweb</description>
+    </item>
+    <item>
+      <title>Imperfectly Indieweb</title>
+      <link>https://rossabaker.com/blog/imperfectly-indieweb/</link>
+      <pubDate>Tue, 01 Nov 2022 23:17:00 +0000</pubDate>
+      <guid>https://rossabaker.com/blog/imperfectly-indieweb/</guid>
+      <description>Updated &amp;lt;2022-11-02 Wed&amp;gt;: some edits for concision&#xA;The asteroid hurtling toward Twitter last week forced many of us to look back on our digital lives. I reflected on my mistakes with perfectionism and proprietorship, and am looking to Indieweb for solutions.&#xA;Portrait of 1990s geekery # Figure 1: Dinosaur fossil by Nigel Holt, licensed under CC BY 2.0&#xA;The Wayback Machine has preserved my juvenilia. The soft tissue is gone, but here is the skeleton of a twentieth-century personal web page, the author not yet twenty.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/indieweb.social/rossabaker/109270181650052462/</link>
+      <pubDate>Tue, 01 Nov 2022 19:24:12 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/indieweb.social/rossabaker/109270181650052462/</guid>
+      <description>My new instance appears to be more liberally federated than my prior one, and while the local timeline is nice, the federated timeline is leaking sewage. All is not lost: there&amp;#39;s a &amp;quot;block domain&amp;quot; option on the triple dots. #moderation</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/indieweb.social/rossabaker/109266510911512492/</link>
+      <pubDate>Tue, 01 Nov 2022 03:50:41 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/indieweb.social/rossabaker/109266510911512492/</guid>
+      <description>Monday night means #Emacs news!&#xA;https://sachachua.com/blog/category/emacs-news/</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/indieweb.social/rossabaker/109266392054817144/</link>
+      <pubDate>Tue, 01 Nov 2022 03:20:27 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/indieweb.social/rossabaker/109266392054817144/</guid>
+      <description>To get the green #verification check in my profile, I had to edit my web address _after_ adding the rel=me link.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/indieweb.social/rossabaker/109266011901701598/</link>
+      <pubDate>Tue, 01 Nov 2022 01:43:47 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/indieweb.social/rossabaker/109266011901701598/</guid>
+      <description>Post-move #reintroduction:&#xA;I&amp;#39;m a software engineer, mostly #Typelevel #Scala. I started #http4s and love #FP and #FOSS.&#xA;I&amp;#39;m getting into the #Indieweb, where I&amp;#39;ll #blog and share my #config, talks, and other projects. I geek out over #Emacs and #Nix. I&amp;#39;m probably also a #Bayesian.&#xA;I have a #dachshund, #coonhound, #tuxedoCat, and multiple freshwater #aquarium. I live in #Indianapolis, where I coach youth #soccer, attend North #UMC, and cheer on my beloved #Hoosiers.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/109265813093391983/</link>
+      <pubDate>Tue, 01 Nov 2022 00:53:13 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/109265813093391983/</guid>
+      <description>I&amp;#39;m going to take my talents to the Indieweb Social. #TheDecision&#xA;➡️ @rossabaker@indieweb.social</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/109263324814688660/</link>
+      <pubDate>Mon, 31 Oct 2022 14:20:25 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/109263324814688660/</guid>
+      <description>Microblogging is cool, but I have a renewed interest in #macroblogging. Hope to drop a post or two this week. Meanwhile, toot me your macroblogs. I&amp;#39;d like to blogroll like it&amp;#39;s the aughts.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/109262887588333557/</link>
+      <pubDate>Mon, 31 Oct 2022 12:29:14 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/109262887588333557/</guid>
+      <description>At today&amp;#39;s exchange Twitter heart exchange rate, if your toot gets five stars on Mastodon, you have to promote your Soundcloud. #goingviral</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/109258431069847065/</link>
+      <pubDate>Sun, 30 Oct 2022 17:35:53 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/109258431069847065/</guid>
+      <description>Kid Two asked me if I&amp;#39;m left Twix or right Twix. I&amp;#39;m actually bitwixual. #trickortreat</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/109254799000114077/</link>
+      <pubDate>Sun, 30 Oct 2022 02:12:12 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/109254799000114077/</guid>
+      <description>I admire the #CW tradition here. It&amp;#39;s a fair compromise between saying what needs to be said and not turning this into a doomscrollery for others.&#xA;Now I must avoid trivializing it by putting one on the score of the soccer game I coached today.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/109248036096298382/</link>
+      <pubDate>Fri, 28 Oct 2022 21:32:18 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/109248036096298382/</guid>
+      <description>&amp;quot;Worse is better&amp;quot; argumentation that falls flat with me in programming is finding traction with me in social networking.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/109247957033239615/</link>
+      <pubDate>Fri, 28 Oct 2022 21:12:11 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/109247957033239615/</guid>
+      <description>Why we can&amp;#39;t boost with a #ContentWarning: https://github.com/mastodon/mastodon/issues/2719</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/109247457337106842/</link>
+      <pubDate>Fri, 28 Oct 2022 19:05:07 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/109247457337106842/</guid>
+      <description>Another Mastodon feature I&amp;#39;m enjoying is coming back from a meeting to 7 notifications and not being filled with existential dread.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/109247164519192012/</link>
+      <pubDate>Fri, 28 Oct 2022 17:50:39 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/109247164519192012/</guid>
+      <description>I haven&amp;#39;t seen a single reposted Tic-Tac video today. My internet diet is already improved, and I feel great.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/109246323135977944/</link>
+      <pubDate>Fri, 28 Oct 2022 14:16:40 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/109246323135977944/</guid>
+      <description>Welcome! Mastodon&amp;#39;s filters are more flexible than what you may be used to. I set mine up early to keep the vibes good. #feditips&#xA;https://docs.joinmastodon.org/user/moderating/</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/109246235912674364/</link>
+      <pubDate>Fri, 28 Oct 2022 13:54:29 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/109246235912674364/</guid>
+      <description>I appreciate how and why #search is based on hashtags. But search shows longer, dormant hashtags over exact matches on active subjects.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/109245939449473656/</link>
+      <pubDate>Fri, 28 Oct 2022 12:39:06 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/109245939449473656/</guid>
+      <description>First impressions of #cohost :&#xA;Positive: Delightfully ungamified. I can&amp;#39;t see my own follower count. I don&amp;#39;t see heart counts on anyone&amp;#39;s posts. The incentives are good there.&#xA;Negative: I&amp;#39;m still an #foss hippie at heart. I&amp;#39;m skeptical how federation scales, I&amp;#39;m unlikely to ever hack on Mastodon source, I don&amp;#39;t know my operators here ... but what&amp;#39;s to stop another disastrous sale there?</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/109243703353528208/</link>
+      <pubDate>Fri, 28 Oct 2022 03:10:25 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/109243703353528208/</guid>
+      <description>Tomorrow, for the first time in a while, I&amp;#39;m going to wake up without #doomscrolling.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/109241028411388526/</link>
+      <pubDate>Thu, 27 Oct 2022 15:50:09 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/109241028411388526/</guid>
+      <description>I&amp;#39;m curious whether this article is meaningful to non-Emacs users. The benefits certainly are, but the nomenclature could be a hurdle.&#xA;https://www.masteringemacs.org/article/keyboard-shortcuts-every-command-line-hacker-should-know-about-gnu-readline&#xA;#Emacs #cli</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/109238196867869205/</link>
+      <pubDate>Thu, 27 Oct 2022 03:50:03 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/109238196867869205/</guid>
+      <description>Just blocked my first titty spam here. Finally feels like home.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/109238172634322913/</link>
+      <pubDate>Thu, 27 Oct 2022 03:43:53 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/109238172634322913/</guid>
+      <description>Thoughts in the quiet before the migration of the birds:&#xA;I&amp;#39;m working on spinning up a #blog. Big Algorithm has damaged my attention span, and I hope to restore it through longer form reading and writing. #indieweb concepts are resonating with me.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/109204335120626413/</link>
+      <pubDate>Fri, 21 Oct 2022 04:18:34 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/109204335120626413/</guid>
+      <description>Many people making #http4s #kleisli reform proposals that sound familiar. A brief history of the server abstraction: https://github.com/http4s/http4s/discussions/4846#discussioncomment-3930100</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/109203951565832906/</link>
+      <pubDate>Fri, 21 Oct 2022 02:41:01 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/109203951565832906/</guid>
+      <description>If you&amp;#39;re on a non-default home #instance, did the value you get from Mastodon increase as a result?</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/109179932742554558/</link>
+      <pubDate>Sun, 16 Oct 2022 20:52:43 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/109179932742554558/</guid>
+      <description>Found out today I&amp;#39;ve continued to get important DMs on #Gitter for the last 18 months. Sorry, I&amp;#39;m not logged in there anymore. More options at https://rossabaker.com/contact/.</description>
+    </item>
+    <item>
+      <title>Contact</title>
+      <link>https://rossabaker.com/contact/</link>
+      <pubDate>Sun, 16 Oct 2022 15:37:00 +0000</pubDate>
+      <guid>https://rossabaker.com/contact/</guid>
+      <description>Direct communication # I can&amp;rsquo;t offer an SLA on response times, but I try to carry my Midwestern Nice online.&#xA;Email ross@rossabaker.com; optionally with PGP Matrix @ross:rossabaker.com ActivityPub1 @ross@rossabaker.com Pronouns # My pronouns are he / him / his, and I will respect yours.&#xA;Special topics # Open source inquiries # I would rather connect in public, where everyone can benefit from the discussion. Most of my open source is hosted on one of the following forges:</description>
+    </item>
+    <item>
+      <title>Home page template</title>
+      <link>https://rossabaker.com/configs/website/templates/home/</link>
+      <pubDate>Wed, 12 Oct 2022 00:05:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/templates/home/</guid>
+      <description>&lt;p&gt;The home page is rendered as a paginated list.  We want branch bundles,&#xA;so we have to exclude the home page, taxonomies, and terms from the&#xA;pages.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Public keys</title>
+      <link>https://rossabaker.com/public-keys/</link>
+      <pubDate>Wed, 14 Sep 2022 13:30:00 +0000</pubDate>
+      <guid>https://rossabaker.com/public-keys/</guid>
+      <description>PGP # My PGP public key is published to this domain via WKD, and can also be downloaded in binary and ASCII armored formats. Its fingerprint is:&#xA;pub rsa4096 2018-01-31 [SC] 904C153733DBB0106915C0BD975BE5BC29D92CA5 uid [ unknown] Ross A. Baker &amp;lt;ross@rossabaker.com&amp;gt; sub rsa4096 2018-01-31 [E] sub rsa4096 2022-11-21 [S] Verification # This key is notated with Ariadne Identity claims, which can be verified on Keyoxide.</description>
+    </item>
+    <item>
+      <title>Contact info templates</title>
+      <link>https://rossabaker.com/configs/website/templates/contact-info/</link>
+      <pubDate>Mon, 12 Sep 2022 22:11:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/templates/contact-info/</guid>
+      <description>&lt;p&gt;Contact info is rendered in two places: in the &lt;a href=&#34;https://rossabaker.com/configs/website/templates/footer/&#34;&gt;footer template&lt;/a&gt; and on the&#xA;&lt;a href=&#34;https://rossabaker.com/about/&#34;&gt;about page&lt;/a&gt;.  They share a common definition.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Running up the score in Scrabble</title>
+      <link>https://rossabaker.com/blog/running-up-the-score-in-scrabble/</link>
+      <pubDate>Mon, 12 Sep 2022 00:32:00 +0000</pubDate>
+      <guid>https://rossabaker.com/blog/running-up-the-score-in-scrabble/</guid>
+      <description>&lt;aside&gt;&#xA;&lt;p&gt;My grandmother recently passed away.  A lightly edited version of&#xA;this was read at her memorial service.&lt;/p&gt;&#xA;&lt;/aside&gt;&#xA;&lt;p&gt;Grandma and I had a tradition of playing Scrabble.  We used her&#xA;vintage set.  It still had score pads with games featuring players&#xA;further up the family tree.  It was intimidating.  I feared I might&#xA;draw a &amp;ldquo;þ&amp;rdquo; or &amp;ldquo;æ&amp;rdquo;, just like Chaucer used to play.  But it was indeed&#xA;the Modern English Alphabet Edition.  True to her meticulous nature,&#xA;it retained all its original pieces.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/108969813364928969/</link>
+      <pubDate>Fri, 09 Sep 2022 18:16:36 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/108969813364928969/</guid>
+      <description>Chagrined to realize that using #Hugo&amp;#39;s scheduled posts feature introduces an impurity into a #Nix build. I want my next computer to come without a system clock.</description>
+    </item>
+    <item>
+      <title>Heading rendering</title>
+      <link>https://rossabaker.com/configs/website/templates/heading-renderer/</link>
+      <pubDate>Sun, 04 Sep 2022 17:50:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/templates/heading-renderer/</guid>
+      <description>&lt;p&gt;We &lt;a href=&#34;https://gohugo.io/templates/render-hooks&#34;&gt;hook&lt;/a&gt; into the heading renderer to generate anchor targets for subheadings.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Article info</title>
+      <link>https://rossabaker.com/configs/website/templates/article-info/</link>
+      <pubDate>Fri, 02 Sep 2022 13:16:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/templates/article-info/</guid>
+      <description>&lt;p&gt;Article info appears at the bottom of every article and article&#xA;summary on the site.  It describes:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;The content type&lt;/li&gt;&#xA;&lt;li&gt;The date&lt;/li&gt;&#xA;&lt;li&gt;The modification date&lt;/li&gt;&#xA;&lt;li&gt;The category, usually one, prefixed with &lt;code&gt;@&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;The tags, usually many, prefixed with &lt;code&gt;#&lt;/code&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>Article summary</title>
+      <link>https://rossabaker.com/configs/website/templates/article-summary/</link>
+      <pubDate>Fri, 02 Sep 2022 13:12:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/templates/article-summary/</guid>
+      <description>&lt;p&gt;Provide a standard article summary for our various list templates.  It&#xA;includes the title, dates, category, tags, and either the page&#xA;description or summary.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Taxonomy term template</title>
+      <link>https://rossabaker.com/configs/website/templates/term/</link>
+      <pubDate>Fri, 02 Sep 2022 13:10:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/templates/term/</guid>
+      <description>&lt;p&gt;Taxonomy terms (e.g., &lt;code&gt;/categories/tech&lt;/code&gt;) are rendered in a simple&#xA;template that lists the article summaries in reverse order of modification.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Taxonomy tag cloud</title>
+      <link>https://rossabaker.com/configs/website/templates/terms/</link>
+      <pubDate>Fri, 02 Sep 2022 13:07:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/templates/terms/</guid>
+      <description>&lt;p&gt;This is the taxonomy list page, which is rendered as a tag cloud.  We&#xA;use it for categories and tags.  Terms are rendered in a font&#xA;proportional to the logarithm of its page count.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>List template</title>
+      <link>https://rossabaker.com/configs/website/templates/list/</link>
+      <pubDate>Fri, 02 Sep 2022 12:55:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/templates/list/</guid>
+      <description>&lt;p&gt;The list template renders for the home page, section listings,&#xA;taxonomies, and terms.  By default, we render our article summaries&#xA;in reverse order of modification.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Single-page template</title>
+      <link>https://rossabaker.com/configs/website/templates/single/</link>
+      <pubDate>Fri, 02 Sep 2022 12:53:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/templates/single/</guid>
+      <description>&lt;p&gt;Most pages on the site are &amp;ldquo;single pages&amp;rdquo;.  These are generally the&#xA;subtrees in the &lt;a href=&#34;https://git.rossabaker.com/ross/cromulent/src/branch/main/src/org/cromulent.org&#34;&gt;source&lt;/a&gt; with &lt;code&gt;EXPORT_FILE_NAME&lt;/code&gt; not equal to &lt;code&gt;_index&lt;/code&gt;.&#xA;Think of them as the articles.  Indeed, we mark them up in an&#xA;&lt;code&gt;&amp;lt;article&amp;gt;&lt;/code&gt; tag.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Talks template</title>
+      <link>https://rossabaker.com/configs/website/templates/talks/</link>
+      <pubDate>Fri, 02 Sep 2022 12:48:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/templates/talks/</guid>
+      <description>&lt;p&gt;Talks get their own single-page template based on custom front matter.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Header template</title>
+      <link>https://rossabaker.com/configs/website/templates/header/</link>
+      <pubDate>Fri, 02 Sep 2022 11:41:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/templates/header/</guid>
+      <description>&lt;p&gt;Our header is straightforward semantic HTML, with a &lt;code&gt;&amp;lt;h1&amp;gt;&lt;/code&gt;, &lt;code&gt;&amp;lt;p&amp;gt;&lt;/code&gt;,&#xA;&lt;code&gt;&amp;lt;nav&amp;gt;&lt;/code&gt;, etc.  It establishes the brand, and my brand is to be a&#xA;complete dweeb.  Therefore, we&amp;rsquo;re going to abuse CSS to render it as&#xA;an Emacs Lisp definition.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Footer template</title>
+      <link>https://rossabaker.com/configs/website/templates/footer/</link>
+      <pubDate>Fri, 02 Sep 2022 10:35:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/templates/footer/</guid>
+      <description>&lt;p&gt;The footer is a simple &lt;a href=&#34;http://microformats.org/wiki/hcard&#34;&gt;hCard&lt;/a&gt; with our name, pronouns, and socials.&#xA;Our social links will use the &lt;a href=&#34;https://microformats.org/wiki/rel-me&#34;&gt;rel-me microformat&lt;/a&gt; for verification.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Head template</title>
+      <link>https://rossabaker.com/configs/website/templates/head/</link>
+      <pubDate>Fri, 02 Sep 2022 10:29:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/templates/head/</guid>
+      <description>&lt;p&gt;This template defines our default &lt;code&gt;&amp;lt;head&amp;gt;&lt;/code&gt; element, and is not often&#xA;customized.  Most of it originated in &lt;a href=&#34;https://gitlab.com/hugo-mwe/hugo-mwe&#34;&gt;hugo-mwe&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Base template</title>
+      <link>https://rossabaker.com/configs/website/templates/base-template/</link>
+      <pubDate>Fri, 02 Sep 2022 09:17:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/templates/base-template/</guid>
+      <description>&lt;p&gt;This &lt;a href=&#34;https://gohugo.io/templates/base/&#34;&gt;base template&lt;/a&gt; defines the outermost HTML for single pages and&#xA;lists alike.  Nothing here is extraordinary.  It is a simple&#xA;foundation for semantic HTML.  It specifies four blocks:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://rossabaker.com/configs/website/templates/head/&#34;&gt;&lt;code&gt;head&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://rossabaker.com/configs/website/templates/header/&#34;&gt;&lt;code&gt;header&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;main&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://rossabaker.com/configs/website/templates/footer/&#34;&gt;&lt;code&gt;footer&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>Build website with Nix</title>
+      <link>https://rossabaker.com/configs/website/build/</link>
+      <pubDate>Thu, 01 Sep 2022 16:54:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/build/</guid>
+      <description>The website is just another package within our flake.&#xA;Export script # export.el is a small Emacs script that finds the Org file and exports its contents with ox-hugo.&#xA;MIT&#xA;(require &amp;#39;ob-dot) (require &amp;#39;ob-shell) (require &amp;#39;rab-ox-hugo) (rab/ox-hugo-mode) (with-current-buffer (find-file-noselect &amp;#34;src/org/cromulent.org&amp;#34;) (let ((org-confirm-babel-evaluate nil)) (org-babel-tangle) (org-hugo-export-wim-to-md t))) Nix derivation # The build first runs the export script to tangle the files and export to Hugo sources. Hugo is then run to create a public/ directory.</description>
+    </item>
+    <item>
+      <title>Hugo configuration</title>
+      <link>https://rossabaker.com/configs/website/hugo/</link>
+      <pubDate>Thu, 01 Sep 2022 16:48:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/hugo/</guid>
+      <description>&lt;p&gt;Hugo can be configured with either TOML or YAML.  I spent my weirdness&#xA;budget on a literate config, so let&amp;rsquo;s stick to the default.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Ross A. Baker</title>
+      <link>https://rossabaker.com/about/</link>
+      <pubDate>Wed, 31 Aug 2022 00:23:00 +0000</pubDate>
+      <guid>https://rossabaker.com/about/</guid>
+      <description>Ross A. Baker Name Ross A. Baker Occupation software engineer Style functional Pronouns he/him Interjections ope Personality BBQ $EDITOR Emacs HTML tag &amp;lt;dl&amp;gt; Number e Sandwich Italian beef, dipped MLB team Cubs NFL team Bears NHL team Blackhawks NBA team Pacers Disposition curmudgeonly Ross A. Baker (/​ɹɔs eɪ beɪ.kɚ/) is an American software engineer who is not notable enough for a Wikipedia article. He&amp;rsquo;s arguably not even notable enough for this article on an eponymous domain.</description>
+    </item>
+    <item>
+      <title>An improved CSS baseline</title>
+      <link>https://rossabaker.com/configs/website/style/</link>
+      <pubDate>Tue, 30 Aug 2022 14:26:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/style/</guid>
+      <description>Default browser renderings have converged in a way that mostly obsoletes the venerable resets of yore. Consistency does not imply optimality. There is room to improve the defaults without relying on classes or HTML structures particular to any project. The rules here are implemented on rossabaker.com, but could be exported to start new projects.&#xA;Variables # Some values in this reconditioning are configurable, and will be defined as :root: variables with a --cromulent- prefix.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/108908089147011046/</link>
+      <pubDate>Mon, 29 Aug 2022 20:39:19 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/108908089147011046/</guid>
+      <description>&amp;lt;dl&amp;gt; is the most underappreciated HTML tag.</description>
+    </item>
+    <item>
+      <title>Personal Weather Station</title>
+      <link>https://rossabaker.com/projects/personal-weather-station/</link>
+      <pubDate>Sun, 28 Aug 2022 21:03:00 +0000</pubDate>
+      <guid>https://rossabaker.com/projects/personal-weather-station/</guid>
+      <description>I run an Ambient Weather WS-1400-IP weather station in the Castleton neighborhood of Indianapolis and share its public dashboard. The anemometer is not raised high enough for accuracy, but the rest is reasonably accurate.&#xA;I learned on 2022-09-06 that the Indianapolis Metropolitan Airport is now publishing METAR data. That airport is just a mile away, and certainly has a more credible weather station, but it&amp;rsquo;s fun to compare to mine.</description>
+    </item>
+    <item>
+      <title>Configuring Git for literate programming</title>
+      <link>https://rossabaker.com/configs/git-repository/</link>
+      <pubDate>Wed, 24 Aug 2022 15:04:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/git-repository/</guid>
+      <description>My personal Git repository, Cromulent, contains the source for various projects, such as configurations and the contents of this website.&#xA;Due to literate programming, much of the source code &amp;ldquo;weaves&amp;rdquo; code and documentation in Org. Most tools aren&amp;rsquo;t Org interpreters, so the Org must be &amp;ldquo;tangled&amp;rdquo; 1 back into separate files for general consumption. This process requires a bit of extra care around Git.&#xA;Three types of files # Original sources # Original sources are the minimal set of files that can&amp;rsquo;t be derived from other sources as part of the build process.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/108856737656882754/</link>
+      <pubDate>Sat, 20 Aug 2022 18:59:57 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/108856737656882754/</guid>
+      <description>Abusing CSS content properties to make semantic HTML look like Emacs Lisp, as one does.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/108800627392442485/</link>
+      <pubDate>Wed, 10 Aug 2022 21:10:23 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/108800627392442485/</guid>
+      <description>Anybody have tooling to update nix flake inputs to the latest tagged revision?</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/108771951264686841/</link>
+      <pubDate>Fri, 05 Aug 2022 19:37:40 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/108771951264686841/</guid>
+      <description>TIL: Hiding diffs of generated code in git&#xA;https://medium.com/@clarkbw/managing-generated-files-in-github-1f1989c09dfd</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/108765121585044648/</link>
+      <pubDate>Thu, 04 Aug 2022 14:40:47 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/108765121585044648/</guid>
+      <description>ox-hugo or elisp all the way down? 🤔</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/108551263033693800/</link>
+      <pubDate>Mon, 27 Jun 2022 20:13:45 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/108551263033693800/</guid>
+      <description>A rudimentary scala-cli for #Emacs. Fires up an inferior REPL for those quick tasks that don&amp;#39;t need an sbt build. Medium-term goal: restore #Org #Babel support for #Scala.&#xA;https://github.com/rossabaker/scala-cli.el</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/108530702200211657/</link>
+      <pubDate>Fri, 24 Jun 2022 05:04:51 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/108530702200211657/</guid>
+      <description>Immutable builder pattern required parameters: constructor args or phantom types? #scala Gist: https://gist.github.com/rossabaker/3d696ad20ece5e4838add46159472a38&#xA;Context: https://github.com/http4s/http4s-servlet/pull/80</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/108519369287230063/</link>
+      <pubDate>Wed, 22 Jun 2022 05:02:45 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/108519369287230063/</guid>
+      <description>Published some #scalacheck generators for #scala-xml: https://github.com/typelevel/scalacheck-xml/releases/tag/v0.1.0</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/108370933212393280/</link>
+      <pubDate>Thu, 26 May 2022 23:53:30 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/108370933212393280/</guid>
+      <description>It&amp;#39;s important to have hobbies besides barbecue. For example, grilling.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/108365422108761599/</link>
+      <pubDate>Thu, 26 May 2022 00:31:57 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/108365422108761599/</guid>
+      <description>Favorite vendors for a basic mechanical keyboard? My WASD V3 is failing within a year.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/108336265759523962/</link>
+      <pubDate>Fri, 20 May 2022 20:57:07 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/108336265759523962/</guid>
+      <description>finger rossabaker@happynetbox.com&#xA;Thanks, @d6, for the reminder.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/108277669352049026/</link>
+      <pubDate>Tue, 10 May 2022 12:35:16 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/108277669352049026/</guid>
+      <description>otel4s: an #OpenTelemetry client for functional #Scala. Metrics only so far, highly experimental. Feeling cute, might delete later:&#xA;https://github.com/rossabaker/otel4s/</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/108251735633218543/</link>
+      <pubDate>Thu, 05 May 2022 22:39:59 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/108251735633218543/</guid>
+      <description>Been working on literate configurations. Some notes on how I set up a #Matrix&#xA;server on #GCP free tier with #Terraform and #NixOS: https://rossabaker.com/config/infrastructure/</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/108232936085199109/</link>
+      <pubDate>Mon, 02 May 2022 14:59:01 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/108232936085199109/</guid>
+      <description>Looking for examples of tangling a #Nix module from #orgmode, and using import-from-derivation on the result. End goal is a &amp;quot;literate flake&amp;quot;. I keep hitting infinite recursion.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/108213415345507410/</link>
+      <pubDate>Fri, 29 Apr 2022 04:14:38 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/108213415345507410/</guid>
+      <description>Choosing a static site generator:&#xA;1. sbt build ➡️ Laika&#xA;2. standalone ➡️ Hugo&#xA;3. joy of computing ➡️ LISP</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/108206241126781156/</link>
+      <pubDate>Wed, 27 Apr 2022 21:50:08 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/108206241126781156/</guid>
+      <description>New #matrix account just dropped: https://matrix.to/#/@ross:rossabaker.com. Built it on #gcp with #terraform and #nix.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/108201652544631013/</link>
+      <pubDate>Wed, 27 Apr 2022 02:23:12 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/108201652544631013/</guid>
+      <description>To help some of the newcomers make connections: name 5-7 things that interest you but aren&amp;#39;t in your profile, as tags so they are searchable. Then boost this post or repeat its instructions so others know to do the same.&#xA;#bayesian&#xA;#curling&#xA;#italianbeef&#xA;#zappa&#xA;#b1g&#xA;#coaching&#xA;Don&amp;#39;t forget to boost good posts with hashtags so that searchable posts make it out to more instances!</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/108196347588800056/</link>
+      <pubDate>Tue, 26 Apr 2022 03:54:05 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/108196347588800056/</guid>
+      <description>#introduction: I&amp;#39;m a software developer from #Indianapolis. I mostly write #Scala and #fp. I&amp;#39;m a contributor to #Typelevel and co-founder of #http4s. I nerd out over #Emacs and #Nix.&#xA;Also enjoy #bbq and freshwater #fishkeeping. I have a #dachshund and a #coonhound and a tuxedo #cat. A couple kids, too, but the pets get more clicks.&#xA;Pronouns are he/him.&#xA;Go Hoosiers. #GoIU #iufb #iubb #iums</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/108193148832785041/</link>
+      <pubDate>Mon, 25 Apr 2022 14:20:36 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/108193148832785041/</guid>
+      <description>I joined mastodon.social by default several years ago. Should I set up my escape hatch somewhere else?</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/107570476178756601/</link>
+      <pubDate>Wed, 05 Jan 2022 15:06:45 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/107570476178756601/</guid>
+      <description>Tech Twitter is getting tired. Going to check out Emacs Mastodon.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/107487793286953623/</link>
+      <pubDate>Wed, 22 Dec 2021 00:39:24 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/107487793286953623/</guid>
+      <description>@d6 Logged in for the first time in a year? Two? The first 15 toots I see are from you. Already seems nicer than the bird site.</description>
+    </item>
+    <item>
+      <title>The Scala Logs</title>
+      <link>https://rossabaker.com/talks/podcasts/scala-logs/</link>
+      <pubDate>Sat, 08 Feb 2020 00:00:00 +0000</pubDate>
+      <guid>https://rossabaker.com/talks/podcasts/scala-logs/</guid>
+      <description>It was my honor to join Zach McCoy on the first full episode of The Scala Logs, where we talked http4s, Haskell, and hockey.</description>
+    </item>
+    <item>
+      <title>Algebras in Scala</title>
+      <link>https://rossabaker.com/talks/algebras-in-scala/</link>
+      <pubDate>Mon, 02 Dec 2019 00:00:00 +0000</pubDate>
+      <guid>https://rossabaker.com/talks/algebras-in-scala/</guid>
+      <description>Scala developers like to talk about &amp;ldquo;algebras&amp;rdquo;. Or when they&amp;rsquo;re feeling particularly precious, &amp;ldquo;algebrae.&amp;rdquo; Ross gives an overview, and promises any references to &amp;ldquo;F-algebra&amp;rdquo; are not a taunt about your ninth grade report card.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/100545232417580203/</link>
+      <pubDate>Mon, 13 Aug 2018 22:14:52 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/100545232417580203/</guid>
+      <description>Where there is no content, there are no tired reaction gifs to respond to content.&#xA;[eddie_murphy.gif]</description>
+    </item>
+    <item>
+      <title>CoRecursive Episode #017</title>
+      <link>https://rossabaker.com/talks/podcasts/corecursive-17/</link>
+      <pubDate>Fri, 27 Jul 2018 00:00:00 +0000</pubDate>
+      <guid>https://rossabaker.com/talks/podcasts/corecursive-17/</guid>
+      <description>&lt;p&gt;I was interviewed by Adam Gordon Bell on the &lt;a href=&#34;https://corecursive.com/017-http4s-with-ross-baker/&#34;&gt;CoRecursive podcast&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/1504017/</link>
+      <pubDate>Mon, 03 Apr 2017 17:32:42 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/1504017/</guid>
+      <description>I can&amp;#39;t talk about the monoids or the sportsballs without boring the other half of my following, so I reply far more than I tweet. But separate accounts means no serendipitously stumbling across other shared interests. Twitter offers no good solution. Mastodon&amp;#39;s improvement is that my tale of woe fits into one toot.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/1426597/</link>
+      <pubDate>Sun, 02 Apr 2017 03:08:25 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/1426597/</guid>
+      <description>brb, importing all my Google+ circles</description>
+    </item>
+    <item>
+      <title>Akka IO and Netty</title>
+      <link>https://rossabaker.com/talks/akka-io-and-netty/</link>
+      <pubDate>Mon, 04 Nov 2013 00:00:00 +0000</pubDate>
+      <guid>https://rossabaker.com/talks/akka-io-and-netty/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Anorm</title>
+      <link>https://rossabaker.com/talks/anorm/</link>
+      <pubDate>Mon, 13 Aug 2012 00:00:00 +0000</pubDate>
+      <guid>https://rossabaker.com/talks/anorm/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

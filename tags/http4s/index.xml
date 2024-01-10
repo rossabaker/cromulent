@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>http4s on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/http4s/</link>
+    <description>Recent content in http4s on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 14 May 2023 01:15:41 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/http4s/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110364389666761105/</link>
+      <pubDate>Sun, 14 May 2023 01:15:41 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110364389666761105/</guid>
+      <description>Caution: cats-effect-3.5 broke both http4s-blaze and http4s-servlet backends. Working on it. http4s-ember-0.23.19 is fine.&#xA;#Scala #Typelevel #http4s</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110175725972676137/</link>
+      <pubDate>Mon, 10 Apr 2023 17:36:02 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110175725972676137/</guid>
+      <description>After another rigorous and thoughtful HTTP benchmark from my colleagues in the Scala Community, I&amp;#39;ve updated my business card with a new title.&#xA;#Scala #http4s</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109832256826889128/</link>
+      <pubDate>Thu, 09 Feb 2023 01:47:19 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109832256826889128/</guid>
+      <description>http4s-jdk-client-0.9 and 1.0.0-M9 are out. They use fs2-3.6.0&amp;#39;s new integration with Java&amp;#39;s Flow to drop the depenedency on fs2-reactive-streams. This is a nice streamlining for projects that have dropped Java 8.&#xA;https://github.com/http4s/http4s-jdk-http-client/releases/tag/v0.9.0&#xA;#http4s #Typelevel #Scala</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109747212105028452/</link>
+      <pubDate>Wed, 25 Jan 2023 01:19:19 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109747212105028452/</guid>
+      <description>http4s-1.0.0-M39 is out. It&amp;#39;s the dev line, with the production fixes from 0.23.18.&#xA;This one is binary compatible with the last milestone, but if you need the satellite repos rereleased, speak up here:&#xA;https://github.com/http4s/http4s/discussions/6941&#xA;#Scala #Typelevel #http4s</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109708377359311207/</link>
+      <pubDate>Wed, 18 Jan 2023 04:43:08 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109708377359311207/</guid>
+      <description>http4s-0.23.18 is out. Fixes a `StackOverflowError` that hit users with unusually small stacks, and a few optimizations hither and yon.&#xA;https://github.com/http4s/http4s/releases/tag/v0.23.18&#xA;#http4s #Typelevel #Scala</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109677513970467422/</link>
+      <pubDate>Thu, 12 Jan 2023 17:54:10 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109677513970467422/</guid>
+      <description>http4s-twirl releases are out, courtesy of Kailuo Wang:&#xA;* 0.23.17 makes the jump from scala-xml-1 to scala-xml-2. Beware, binary breaking!&#xA;* 0.24.0-M1 is based on twirl-1.6 milestones for Scala 3 support.&#xA;Server-side templates are cool again.&#xA;#http4s #Typelevel #PlayTwirl</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109676627140428880/</link>
+      <pubDate>Thu, 12 Jan 2023 14:08:38 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109676627140428880/</guid>
+      <description>Faffing about with free invariant algebras to define HTTP codecs in a way that can be shared across backends. Computers can be fun sometimes.&#xA;https://github.com/http4s/http4s/pull/6917&#xA;#http4s #Typelevel #Scala</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109643259623362940/</link>
+      <pubDate>Fri, 06 Jan 2023 16:42:50 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109643259623362940/</guid>
+      <description>Happy to welcome a pair of new http4s maintainers this week:&#xA;- @valencik has joined the Core team.&#xA;- @dhinojosa will be helping out with Servlet and Tomcat support.&#xA;👏 👏 #http4s #Scala #Servlet #Tomcat</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109634836702582371/</link>
+      <pubDate>Thu, 05 Jan 2023 05:00:47 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109634836702582371/</guid>
+      <description>The following http4s integrations are in need of a maintainer:&#xA;- http4s-async-http-client&#xA;- http4s-boopickle&#xA;- http4s-dropwizard-metrics&#xA;- http4s-okhttp-client&#xA;- http4s-tomcat&#xA;I&amp;#39;m trying to narrow my focus, but I will happily assist anyone who steps forward on these.&#xA;https://github.com/http4s/http4s/discussions/6908&#xA;#http4s #Scala</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109631425715706011/</link>
+      <pubDate>Wed, 04 Jan 2023 14:33:19 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109631425715706011/</guid>
+      <description>http4s security patches:&#xA;* 0.21.34&#xA;* 0.22.15&#xA;* 0.23.17&#xA;* 1.0.0-M38&#xA;We can talk about cool stuff later, but please patch ASAP if you&amp;#39;re parsing a User-Agent or Server header.&#xA;https://github.com/http4s/http4s/security/advisories/GHSA-54w6-vxfh-fw7f&#xA;#http4s #Typelevel #Scala</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109595380738434617/</link>
+      <pubDate>Thu, 29 Dec 2022 05:46:36 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109595380738434617/</guid>
+      <description>Post-disaster #Introduction:&#xA;I am best known for #Scala, #Typelevel, and #http4s. I geek out over #Emacs, #Nix, and the #Indieweb. I&amp;#39;m probably a #Bayesian.&#xA;I live in #Indianapolis, #Indiana with a #Dachshund, #Coonhound, #TuxedoCat, and a freshwater #Aquarium or five. I offset my #Jogging with #BBQ. I coach youth #Soccer and attend North United #Methodist Church.&#xA;This is a #SelfHosted sequel after a Terraform disaster. Boosts appreciated to relocate my peeps.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/indieweb.social/rossabaker/109266011901701598/</link>
+      <pubDate>Tue, 01 Nov 2022 01:43:47 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/indieweb.social/rossabaker/109266011901701598/</guid>
+      <description>Post-move #reintroduction:&#xA;I&amp;#39;m a software engineer, mostly #Typelevel #Scala. I started #http4s and love #FP and #FOSS.&#xA;I&amp;#39;m getting into the #Indieweb, where I&amp;#39;ll #blog and share my #config, talks, and other projects. I geek out over #Emacs and #Nix. I&amp;#39;m probably also a #Bayesian.&#xA;I have a #dachshund, #coonhound, #tuxedoCat, and multiple freshwater #aquarium. I live in #Indianapolis, where I coach youth #soccer, attend North #UMC, and cheer on my beloved #Hoosiers.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/109204335120626413/</link>
+      <pubDate>Fri, 21 Oct 2022 04:18:34 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/109204335120626413/</guid>
+      <description>Many people making #http4s #kleisli reform proposals that sound familiar. A brief history of the server abstraction: https://github.com/http4s/http4s/discussions/4846#discussioncomment-3930100</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/108196347588800056/</link>
+      <pubDate>Tue, 26 Apr 2022 03:54:05 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/108196347588800056/</guid>
+      <description>#introduction: I&amp;#39;m a software developer from #Indianapolis. I mostly write #Scala and #fp. I&amp;#39;m a contributor to #Typelevel and co-founder of #http4s. I nerd out over #Emacs and #Nix.&#xA;Also enjoy #bbq and freshwater #fishkeeping. I have a #dachshund and a #coonhound and a tuxedo #cat. A couple kids, too, but the pets get more clicks.&#xA;Pronouns are he/him.&#xA;Go Hoosiers. #GoIU #iufb #iubb #iums</description>
+    </item>
+    <item>
+      <title>The Scala Logs</title>
+      <link>https://rossabaker.com/talks/podcasts/scala-logs/</link>
+      <pubDate>Sat, 08 Feb 2020 00:00:00 +0000</pubDate>
+      <guid>https://rossabaker.com/talks/podcasts/scala-logs/</guid>
+      <description>It was my honor to join Zach McCoy on the first full episode of The Scala Logs, where we talked http4s, Haskell, and hockey.</description>
+    </item>
+    <item>
+      <title>CoRecursive Episode #017</title>
+      <link>https://rossabaker.com/talks/podcasts/corecursive-17/</link>
+      <pubDate>Fri, 27 Jul 2018 00:00:00 +0000</pubDate>
+      <guid>https://rossabaker.com/talks/podcasts/corecursive-17/</guid>
+      <description>&lt;p&gt;I was interviewed by Adam Gordon Bell on the &lt;a href=&#34;https://corecursive.com/017-http4s-with-ross-baker/&#34;&gt;CoRecursive podcast&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

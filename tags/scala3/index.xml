@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>scala3 on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/scala3/</link>
+    <description>Recent content in scala3 on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 22 Apr 2023 03:23:51 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/scala3/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110240322811513636/</link>
+      <pubDate>Sat, 22 Apr 2023 03:23:51 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110240322811513636/</guid>
+      <description>```&#xA;// It recognizes this *: as a Tuple2 (1 *: 2 *: EmptyTuple): Tuple2[_, _]&#xA;// But then why not also a Product2?&#xA;(1 *: 2 *: EmptyTuple): Product2[_, _]&#xA;```&#xA;https://scastie.scala-lang.org/eRT8upcTQG6IvTkZrSArnQ&#xA;#Scala #Scala3</description>
+    </item>
+  </channel>
+</rss>

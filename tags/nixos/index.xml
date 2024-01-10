@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>nixos on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/nixos/</link>
+    <description>Recent content in nixos on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 23 Jun 2023 00:26:00 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/nixos/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Garnix</title>
+      <link>https://rossabaker.com/configs/garnix/</link>
+      <pubDate>Fri, 23 Jun 2023 00:26:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/garnix/</guid>
+      <description>This integration is paused while we await alternatives to GitHub.&#xA;I have an Apple M1 for work, which is not yet supported by GitHub Actions. That&amp;rsquo;s okay, because Garnix is a great alternative.&#xA;Continuous integration # On each push to GitHub, Garnix is triggered to build:&#xA;Our default dev shell Our default nix-darwin configuration Our default Home Manager configuration At this time, we only build for aarch64-darwin with Garnix.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109759781799528154/</link>
+      <pubDate>Fri, 27 Jan 2023 06:35:58 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109759781799528154/</guid>
+      <description>Anybody running NixOS on GCP free tier? I have hit a tipping point running nixos-rebuild on an ec2-micro. It otherwise runs my Synapse server like a champ.&#xA;#NixOS #GCP #Synapse #Matrix</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109595572742971572/</link>
+      <pubDate>Thu, 29 Dec 2022 06:35:26 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109595572742971572/</guid>
+      <description>Shoutout to NixOS. It couldn&amp;#39;t save me from my awful backup strategy, but it was the backbone of my configuration management, and I had a working Mastodon server again in minutes from scratch.&#xA;#MastoAdmin #NixOS</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/108251735633218543/</link>
+      <pubDate>Thu, 05 May 2022 22:39:59 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/108251735633218543/</guid>
+      <description>Been working on literate configurations. Some notes on how I set up a #Matrix&#xA;server on #GCP free tier with #Terraform and #NixOS: https://rossabaker.com/config/infrastructure/</description>
+    </item>
+  </channel>
+</rss>

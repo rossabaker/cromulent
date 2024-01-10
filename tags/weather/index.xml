@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>weather on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/weather/</link>
+    <description>Recent content in weather on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 28 Aug 2022 21:03:00 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/weather/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Personal Weather Station</title>
+      <link>https://rossabaker.com/projects/personal-weather-station/</link>
+      <pubDate>Sun, 28 Aug 2022 21:03:00 +0000</pubDate>
+      <guid>https://rossabaker.com/projects/personal-weather-station/</guid>
+      <description>I run an Ambient Weather WS-1400-IP weather station in the Castleton neighborhood of Indianapolis and share its public dashboard. The anemometer is not raised high enough for accuracy, but the rest is reasonably accurate.&#xA;I learned on 2022-09-06 that the Indianapolis Metropolitan Airport is now publishing METAR data. That airport is just a mile away, and certainly has a more credible weather station, but it&amp;rsquo;s fun to compare to mine.</description>
+    </item>
+  </channel>
+</rss>

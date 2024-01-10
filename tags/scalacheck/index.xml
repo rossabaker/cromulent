@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>scalacheck on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/scalacheck/</link>
+    <description>Recent content in scalacheck on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 22 Jun 2022 05:02:45 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/scalacheck/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/108519369287230063/</link>
+      <pubDate>Wed, 22 Jun 2022 05:02:45 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/108519369287230063/</guid>
+      <description>Published some #scalacheck generators for #scala-xml: https://github.com/typelevel/scalacheck-xml/releases/tag/v0.1.0</description>
+    </item>
+  </channel>
+</rss>

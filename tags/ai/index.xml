@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ai on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/ai/</link>
+    <description>Recent content in ai on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 15 Feb 2023 23:36:41 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/ai/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109871379375791740/</link>
+      <pubDate>Wed, 15 Feb 2023 23:36:41 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109871379375791740/</guid>
+      <description>One of my first bosses taught me the value of saying &amp;quot;I don&amp;#39;t know&amp;quot; when you don&amp;#39;t. I wish the same from the bots.&#xA;#AI</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109853105912543655/</link>
+      <pubDate>Sun, 12 Feb 2023 18:09:30 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109853105912543655/</guid>
+      <description>It&amp;#39;s going to be delicious when GitHub&amp;#39;s AI renders GitHub uninhabitable with spammy pull requests, if and only if Open Source communities are prepared with an alternative.&#xA;#GitHub #OSS #AI #Enshittification</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,1867 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/</link>
+    <description>Recent content in Tags on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 07 Nov 2023 20:02:00 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>playlist</title>
+      <link>https://rossabaker.com/tags/playlist/</link>
+      <pubDate>Tue, 07 Nov 2023 20:02:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/playlist/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>classical-music</title>
+      <link>https://rossabaker.com/tags/classical-music/</link>
+      <pubDate>Sun, 24 Sep 2023 21:32:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/classical-music/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>indianapolis</title>
+      <link>https://rossabaker.com/tags/indianapolis/</link>
+      <pubDate>Sun, 24 Sep 2023 21:32:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/indianapolis/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>indy-symphony</title>
+      <link>https://rossabaker.com/tags/indy-symphony/</link>
+      <pubDate>Sun, 24 Sep 2023 21:32:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/indy-symphony/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>spotify</title>
+      <link>https://rossabaker.com/tags/spotify/</link>
+      <pubDate>Sun, 24 Sep 2023 21:32:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/spotify/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>cachix</title>
+      <link>https://rossabaker.com/tags/cachix/</link>
+      <pubDate>Tue, 19 Sep 2023 00:21:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/cachix/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>nix-darwin</title>
+      <link>https://rossabaker.com/tags/nix-darwin/</link>
+      <pubDate>Tue, 19 Sep 2023 00:21:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/nix-darwin/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>keyboard</title>
+      <link>https://rossabaker.com/tags/keyboard/</link>
+      <pubDate>Mon, 18 Sep 2023 23:53:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/keyboard/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>postgresql</title>
+      <link>https://rossabaker.com/tags/postgresql/</link>
+      <pubDate>Sat, 16 Sep 2023 23:13:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/postgresql/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>docker</title>
+      <link>https://rossabaker.com/tags/docker/</link>
+      <pubDate>Sat, 16 Sep 2023 22:51:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/docker/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>podman</title>
+      <link>https://rossabaker.com/tags/podman/</link>
+      <pubDate>Sat, 16 Sep 2023 22:51:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/podman/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>hyperlink</title>
+      <link>https://rossabaker.com/tags/hyperlink/</link>
+      <pubDate>Wed, 13 Sep 2023 23:36:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/hyperlink/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>validation</title>
+      <link>https://rossabaker.com/tags/validation/</link>
+      <pubDate>Wed, 13 Sep 2023 23:36:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/validation/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>emacs</title>
+      <link>https://rossabaker.com/tags/emacs/</link>
+      <pubDate>Tue, 12 Sep 2023 23:42:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/emacs/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>emacs-lisp</title>
+      <link>https://rossabaker.com/tags/emacs-lisp/</link>
+      <pubDate>Tue, 12 Sep 2023 23:42:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/emacs-lisp/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>licensing</title>
+      <link>https://rossabaker.com/tags/licensing/</link>
+      <pubDate>Sun, 10 Sep 2023 01:23:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/licensing/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>ox-hugo</title>
+      <link>https://rossabaker.com/tags/ox-hugo/</link>
+      <pubDate>Sun, 10 Sep 2023 01:23:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/ox-hugo/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>home-manager</title>
+      <link>https://rossabaker.com/tags/home-manager/</link>
+      <pubDate>Fri, 08 Sep 2023 16:59:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/home-manager/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>nix</title>
+      <link>https://rossabaker.com/tags/nix/</link>
+      <pubDate>Fri, 08 Sep 2023 16:59:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/nix/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>big-ten</title>
+      <link>https://rossabaker.com/tags/big-ten/</link>
+      <pubDate>Thu, 10 Aug 2023 13:11:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/big-ten/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>fight-songs</title>
+      <link>https://rossabaker.com/tags/fight-songs/</link>
+      <pubDate>Thu, 10 Aug 2023 13:11:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/fight-songs/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>midwest</title>
+      <link>https://rossabaker.com/tags/midwest/</link>
+      <pubDate>Thu, 10 Aug 2023 13:11:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/midwest/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>RFC9116</title>
+      <link>https://rossabaker.com/tags/rfc9116/</link>
+      <pubDate>Wed, 09 Aug 2023 22:01:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/rfc9116/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>security</title>
+      <link>https://rossabaker.com/tags/security/</link>
+      <pubDate>Wed, 09 Aug 2023 22:01:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/security/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>generative-ai</title>
+      <link>https://rossabaker.com/tags/generative-ai/</link>
+      <pubDate>Wed, 09 Aug 2023 20:31:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/generative-ai/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>rfc9309</title>
+      <link>https://rossabaker.com/tags/rfc9309/</link>
+      <pubDate>Wed, 09 Aug 2023 20:31:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/rfc9309/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>twitter</title>
+      <link>https://rossabaker.com/tags/twitter/</link>
+      <pubDate>Wed, 09 Aug 2023 20:31:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/twitter/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>webcrawlers</title>
+      <link>https://rossabaker.com/tags/webcrawlers/</link>
+      <pubDate>Wed, 09 Aug 2023 20:31:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/webcrawlers/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>website</title>
+      <link>https://rossabaker.com/tags/website/</link>
+      <pubDate>Wed, 09 Aug 2023 20:31:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/website/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>macos</title>
+      <link>https://rossabaker.com/tags/macos/</link>
+      <pubDate>Mon, 07 Aug 2023 09:48:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/macos/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>indieweb</title>
+      <link>https://rossabaker.com/tags/indieweb/</link>
+      <pubDate>Sun, 06 Aug 2023 21:30:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/indieweb/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>itches</title>
+      <link>https://rossabaker.com/tags/itches/</link>
+      <pubDate>Sun, 06 Aug 2023 21:30:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/itches/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>python</title>
+      <link>https://rossabaker.com/tags/python/</link>
+      <pubDate>Fri, 28 Jul 2023 21:51:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/python/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>finger</title>
+      <link>https://rossabaker.com/tags/finger/</link>
+      <pubDate>Sun, 16 Jul 2023 22:51:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/finger/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>nostalgia</title>
+      <link>https://rossabaker.com/tags/nostalgia/</link>
+      <pubDate>Sun, 16 Jul 2023 22:51:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/nostalgia/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>indiana</title>
+      <link>https://rossabaker.com/tags/indiana/</link>
+      <pubDate>Wed, 28 Jun 2023 17:03:36 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/indiana/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>inwx</title>
+      <link>https://rossabaker.com/tags/inwx/</link>
+      <pubDate>Wed, 28 Jun 2023 17:03:36 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/inwx/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>nws</title>
+      <link>https://rossabaker.com/tags/nws/</link>
+      <pubDate>Sun, 25 Jun 2023 17:28:10 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/nws/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>android</title>
+      <link>https://rossabaker.com/tags/android/</link>
+      <pubDate>Sun, 25 Jun 2023 16:49:01 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/android/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>mlb</title>
+      <link>https://rossabaker.com/tags/mlb/</link>
+      <pubDate>Sun, 25 Jun 2023 16:49:01 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/mlb/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>dependabot</title>
+      <link>https://rossabaker.com/tags/dependabot/</link>
+      <pubDate>Fri, 23 Jun 2023 02:54:10 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/dependabot/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>scala</title>
+      <link>https://rossabaker.com/tags/scala/</link>
+      <pubDate>Fri, 23 Jun 2023 02:54:10 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/scala/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>caching</title>
+      <link>https://rossabaker.com/tags/caching/</link>
+      <pubDate>Fri, 23 Jun 2023 00:26:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/caching/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>continuous-integration</title>
+      <link>https://rossabaker.com/tags/continuous-integration/</link>
+      <pubDate>Fri, 23 Jun 2023 00:26:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/continuous-integration/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>garnix</title>
+      <link>https://rossabaker.com/tags/garnix/</link>
+      <pubDate>Fri, 23 Jun 2023 00:26:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/garnix/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>nixos</title>
+      <link>https://rossabaker.com/tags/nixos/</link>
+      <pubDate>Fri, 23 Jun 2023 00:26:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/nixos/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>classicalmusic</title>
+      <link>https://rossabaker.com/tags/classicalmusic/</link>
+      <pubDate>Sat, 17 Jun 2023 03:10:39 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/classicalmusic/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>markdown</title>
+      <link>https://rossabaker.com/tags/markdown/</link>
+      <pubDate>Fri, 16 Jun 2023 21:04:16 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/markdown/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>nhl</title>
+      <link>https://rossabaker.com/tags/nhl/</link>
+      <pubDate>Wed, 14 Jun 2023 17:19:59 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/nhl/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>vgk</title>
+      <link>https://rossabaker.com/tags/vgk/</link>
+      <pubDate>Wed, 14 Jun 2023 17:19:59 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/vgk/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>coonhound</title>
+      <link>https://rossabaker.com/tags/coonhound/</link>
+      <pubDate>Wed, 14 Jun 2023 01:32:09 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/coonhound/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>burnout</title>
+      <link>https://rossabaker.com/tags/burnout/</link>
+      <pubDate>Tue, 13 Jun 2023 02:34:01 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/burnout/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>oss</title>
+      <link>https://rossabaker.com/tags/oss/</link>
+      <pubDate>Tue, 13 Jun 2023 02:34:01 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/oss/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>personal</title>
+      <link>https://rossabaker.com/tags/personal/</link>
+      <pubDate>Tue, 13 Jun 2023 00:54:32 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/personal/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>running</title>
+      <link>https://rossabaker.com/tags/running/</link>
+      <pubDate>Tue, 13 Jun 2023 00:54:32 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/running/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>protip</title>
+      <link>https://rossabaker.com/tags/protip/</link>
+      <pubDate>Sun, 11 Jun 2023 21:56:34 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/protip/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>kansascity</title>
+      <link>https://rossabaker.com/tags/kansascity/</link>
+      <pubDate>Thu, 08 Jun 2023 23:42:11 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/kansascity/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>transrightsarehumanrights</title>
+      <link>https://rossabaker.com/tags/transrightsarehumanrights/</link>
+      <pubDate>Tue, 06 Jun 2023 20:46:08 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/transrightsarehumanrights/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>lemmy</title>
+      <link>https://rossabaker.com/tags/lemmy/</link>
+      <pubDate>Tue, 06 Jun 2023 19:21:14 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/lemmy/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>porktenderloin</title>
+      <link>https://rossabaker.com/tags/porktenderloin/</link>
+      <pubDate>Sun, 04 Jun 2023 16:44:31 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/porktenderloin/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>cantaloupe</title>
+      <link>https://rossabaker.com/tags/cantaloupe/</link>
+      <pubDate>Mon, 29 May 2023 15:00:13 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/cantaloupe/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>chilicrisp</title>
+      <link>https://rossabaker.com/tags/chilicrisp/</link>
+      <pubDate>Sat, 27 May 2023 04:00:06 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/chilicrisp/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>kubernetes</title>
+      <link>https://rossabaker.com/tags/kubernetes/</link>
+      <pubDate>Thu, 25 May 2023 16:14:36 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/kubernetes/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>rip</title>
+      <link>https://rossabaker.com/tags/rip/</link>
+      <pubDate>Sun, 21 May 2023 16:29:18 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/rip/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>tuxedo-cat</title>
+      <link>https://rossabaker.com/tags/tuxedo-cat/</link>
+      <pubDate>Sun, 21 May 2023 16:29:18 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/tuxedo-cat/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>usenet</title>
+      <link>https://rossabaker.com/tags/usenet/</link>
+      <pubDate>Sat, 20 May 2023 03:29:22 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/usenet/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>youthsoccer</title>
+      <link>https://rossabaker.com/tags/youthsoccer/</link>
+      <pubDate>Sat, 20 May 2023 02:09:30 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/youthsoccer/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>baseball</title>
+      <link>https://rossabaker.com/tags/baseball/</link>
+      <pubDate>Wed, 17 May 2023 17:47:27 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/baseball/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>dogs</title>
+      <link>https://rossabaker.com/tags/dogs/</link>
+      <pubDate>Wed, 17 May 2023 15:49:52 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/dogs/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>lawncare</title>
+      <link>https://rossabaker.com/tags/lawncare/</link>
+      <pubDate>Wed, 17 May 2023 15:49:52 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/lawncare/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>urination</title>
+      <link>https://rossabaker.com/tags/urination/</link>
+      <pubDate>Wed, 17 May 2023 15:49:52 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/urination/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>http4s</title>
+      <link>https://rossabaker.com/tags/http4s/</link>
+      <pubDate>Sun, 14 May 2023 01:15:41 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/http4s/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>typelevel</title>
+      <link>https://rossabaker.com/tags/typelevel/</link>
+      <pubDate>Sun, 14 May 2023 01:15:41 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/typelevel/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>coaching</title>
+      <link>https://rossabaker.com/tags/coaching/</link>
+      <pubDate>Sat, 13 May 2023 21:22:07 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/coaching/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>otel4s</title>
+      <link>https://rossabaker.com/tags/otel4s/</link>
+      <pubDate>Fri, 12 May 2023 02:39:56 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/otel4s/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>gitignore</title>
+      <link>https://rossabaker.com/tags/gitignore/</link>
+      <pubDate>Tue, 09 May 2023 09:27:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/gitignore/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>sbt</title>
+      <link>https://rossabaker.com/tags/sbt/</link>
+      <pubDate>Tue, 09 May 2023 09:27:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/sbt/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>scala-cli</title>
+      <link>https://rossabaker.com/tags/scala-cli/</link>
+      <pubDate>Tue, 09 May 2023 09:27:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/scala-cli/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>blackhawks</title>
+      <link>https://rossabaker.com/tags/blackhawks/</link>
+      <pubDate>Tue, 09 May 2023 00:50:06 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/blackhawks/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>dishonorforconnor</title>
+      <link>https://rossabaker.com/tags/dishonorforconnor/</link>
+      <pubDate>Tue, 09 May 2023 00:50:06 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/dishonorforconnor/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>suckhardforbedard</title>
+      <link>https://rossabaker.com/tags/suckhardforbedard/</link>
+      <pubDate>Tue, 09 May 2023 00:50:06 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/suckhardforbedard/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>allmanbrothersband</title>
+      <link>https://rossabaker.com/tags/allmanbrothersband/</link>
+      <pubDate>Mon, 08 May 2023 18:13:21 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/allmanbrothersband/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>timelinecleanse</title>
+      <link>https://rossabaker.com/tags/timelinecleanse/</link>
+      <pubDate>Mon, 08 May 2023 18:13:21 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/timelinecleanse/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>opensource</title>
+      <link>https://rossabaker.com/tags/opensource/</link>
+      <pubDate>Thu, 04 May 2023 16:55:08 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/opensource/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>dachshund</title>
+      <link>https://rossabaker.com/tags/dachshund/</link>
+      <pubDate>Tue, 02 May 2023 18:36:21 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/dachshund/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>git</title>
+      <link>https://rossabaker.com/tags/git/</link>
+      <pubDate>Tue, 02 May 2023 15:42:27 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/git/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>indyvotes</title>
+      <link>https://rossabaker.com/tags/indyvotes/</link>
+      <pubDate>Tue, 02 May 2023 13:17:18 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/indyvotes/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>scala3</title>
+      <link>https://rossabaker.com/tags/scala3/</link>
+      <pubDate>Sat, 22 Apr 2023 03:23:51 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/scala3/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>covid</title>
+      <link>https://rossabaker.com/tags/covid/</link>
+      <pubDate>Wed, 19 Apr 2023 23:13:23 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/covid/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>maskshaming</title>
+      <link>https://rossabaker.com/tags/maskshaming/</link>
+      <pubDate>Wed, 19 Apr 2023 23:13:23 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/maskshaming/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>typography</title>
+      <link>https://rossabaker.com/tags/typography/</link>
+      <pubDate>Tue, 18 Apr 2023 13:01:47 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/typography/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>dachshunds</title>
+      <link>https://rossabaker.com/tags/dachshunds/</link>
+      <pubDate>Mon, 17 Apr 2023 23:35:28 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/dachshunds/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>joy</title>
+      <link>https://rossabaker.com/tags/joy/</link>
+      <pubDate>Mon, 17 Apr 2023 23:35:28 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/joy/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>marijuana</title>
+      <link>https://rossabaker.com/tags/marijuana/</link>
+      <pubDate>Mon, 17 Apr 2023 23:35:28 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/marijuana/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>2ndamendment</title>
+      <link>https://rossabaker.com/tags/2ndamendment/</link>
+      <pubDate>Sat, 15 Apr 2023 02:13:27 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/2ndamendment/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>nra</title>
+      <link>https://rossabaker.com/tags/nra/</link>
+      <pubDate>Sat, 15 Apr 2023 02:13:27 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/nra/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>java</title>
+      <link>https://rossabaker.com/tags/java/</link>
+      <pubDate>Thu, 13 Apr 2023 12:13:34 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/java/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>fp</title>
+      <link>https://rossabaker.com/tags/fp/</link>
+      <pubDate>Tue, 11 Apr 2023 03:04:01 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/fp/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>qbert</title>
+      <link>https://rossabaker.com/tags/qbert/</link>
+      <pubDate>Mon, 10 Apr 2023 16:52:02 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/qbert/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>collegebasketball</title>
+      <link>https://rossabaker.com/tags/collegebasketball/</link>
+      <pubDate>Mon, 10 Apr 2023 00:38:47 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/collegebasketball/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>easter</title>
+      <link>https://rossabaker.com/tags/easter/</link>
+      <pubDate>Mon, 10 Apr 2023 00:38:47 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/easter/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>grilling</title>
+      <link>https://rossabaker.com/tags/grilling/</link>
+      <pubDate>Mon, 10 Apr 2023 00:38:47 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/grilling/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>slack</title>
+      <link>https://rossabaker.com/tags/slack/</link>
+      <pubDate>Fri, 07 Apr 2023 14:52:14 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/slack/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>allnighter</title>
+      <link>https://rossabaker.com/tags/allnighter/</link>
+      <pubDate>Wed, 05 Apr 2023 06:22:35 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/allnighter/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>google</title>
+      <link>https://rossabaker.com/tags/google/</link>
+      <pubDate>Mon, 03 Apr 2023 19:30:37 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/google/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>officespace</title>
+      <link>https://rossabaker.com/tags/officespace/</link>
+      <pubDate>Mon, 03 Apr 2023 19:30:37 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/officespace/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>vim</title>
+      <link>https://rossabaker.com/tags/vim/</link>
+      <pubDate>Sun, 02 Apr 2023 04:35:47 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/vim/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>semver</title>
+      <link>https://rossabaker.com/tags/semver/</link>
+      <pubDate>Tue, 28 Mar 2023 19:04:59 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/semver/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>machinelearning</title>
+      <link>https://rossabaker.com/tags/machinelearning/</link>
+      <pubDate>Mon, 27 Mar 2023 23:49:18 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/machinelearning/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>music</title>
+      <link>https://rossabaker.com/tags/music/</link>
+      <pubDate>Mon, 27 Mar 2023 23:49:18 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/music/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>germanmusic</title>
+      <link>https://rossabaker.com/tags/germanmusic/</link>
+      <pubDate>Sun, 26 Mar 2023 17:09:34 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/germanmusic/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>radio</title>
+      <link>https://rossabaker.com/tags/radio/</link>
+      <pubDate>Sun, 26 Mar 2023 17:09:34 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/radio/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>ux</title>
+      <link>https://rossabaker.com/tags/ux/</link>
+      <pubDate>Sat, 25 Mar 2023 23:31:21 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/ux/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>aging</title>
+      <link>https://rossabaker.com/tags/aging/</link>
+      <pubDate>Wed, 22 Mar 2023 22:54:11 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/aging/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>jogging</title>
+      <link>https://rossabaker.com/tags/jogging/</link>
+      <pubDate>Wed, 22 Mar 2023 22:54:11 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/jogging/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>selfflagellation</title>
+      <link>https://rossabaker.com/tags/selfflagellation/</link>
+      <pubDate>Sun, 19 Mar 2023 01:52:49 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/selfflagellation/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>discord</title>
+      <link>https://rossabaker.com/tags/discord/</link>
+      <pubDate>Sat, 11 Mar 2023 13:47:18 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/discord/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>privacy</title>
+      <link>https://rossabaker.com/tags/privacy/</link>
+      <pubDate>Sat, 11 Mar 2023 13:47:18 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/privacy/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>frizzcontrol</title>
+      <link>https://rossabaker.com/tags/frizzcontrol/</link>
+      <pubDate>Wed, 01 Mar 2023 03:08:13 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/frizzcontrol/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>shampoo</title>
+      <link>https://rossabaker.com/tags/shampoo/</link>
+      <pubDate>Wed, 01 Mar 2023 03:08:13 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/shampoo/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>bbq</title>
+      <link>https://rossabaker.com/tags/bbq/</link>
+      <pubDate>Tue, 28 Feb 2023 00:56:04 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/bbq/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>food</title>
+      <link>https://rossabaker.com/tags/food/</link>
+      <pubDate>Tue, 28 Feb 2023 00:56:04 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/food/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>taxes</title>
+      <link>https://rossabaker.com/tags/taxes/</link>
+      <pubDate>Mon, 27 Feb 2023 00:23:33 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/taxes/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>indyfuel</title>
+      <link>https://rossabaker.com/tags/indyfuel/</link>
+      <pubDate>Sun, 26 Feb 2023 21:02:28 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/indyfuel/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>indytwisters</title>
+      <link>https://rossabaker.com/tags/indytwisters/</link>
+      <pubDate>Sun, 26 Feb 2023 21:02:28 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/indytwisters/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>specialhockey</title>
+      <link>https://rossabaker.com/tags/specialhockey/</link>
+      <pubDate>Sun, 26 Feb 2023 21:02:28 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/specialhockey/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>indysymphony</title>
+      <link>https://rossabaker.com/tags/indysymphony/</link>
+      <pubDate>Sat, 25 Feb 2023 04:30:22 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/indysymphony/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>transmisia</title>
+      <link>https://rossabaker.com/tags/transmisia/</link>
+      <pubDate>Wed, 22 Feb 2023 21:46:21 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/transmisia/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>mardigras</title>
+      <link>https://rossabaker.com/tags/mardigras/</link>
+      <pubDate>Tue, 21 Feb 2023 23:53:43 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/mardigras/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>umc</title>
+      <link>https://rossabaker.com/tags/umc/</link>
+      <pubDate>Tue, 21 Feb 2023 23:53:43 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/umc/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>conferences</title>
+      <link>https://rossabaker.com/tags/conferences/</link>
+      <pubDate>Tue, 21 Feb 2023 04:22:28 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/conferences/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>covid19</title>
+      <link>https://rossabaker.com/tags/covid19/</link>
+      <pubDate>Tue, 21 Feb 2023 04:22:28 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/covid19/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>codereview</title>
+      <link>https://rossabaker.com/tags/codereview/</link>
+      <pubDate>Mon, 20 Feb 2023 01:53:40 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/codereview/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>calculus</title>
+      <link>https://rossabaker.com/tags/calculus/</link>
+      <pubDate>Fri, 17 Feb 2023 00:10:33 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/calculus/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>prometheus</title>
+      <link>https://rossabaker.com/tags/prometheus/</link>
+      <pubDate>Fri, 17 Feb 2023 00:10:33 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/prometheus/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>ai</title>
+      <link>https://rossabaker.com/tags/ai/</link>
+      <pubDate>Wed, 15 Feb 2023 23:36:41 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/ai/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>capitalone</title>
+      <link>https://rossabaker.com/tags/capitalone/</link>
+      <pubDate>Sun, 12 Feb 2023 20:59:05 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/capitalone/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>superbowl</title>
+      <link>https://rossabaker.com/tags/superbowl/</link>
+      <pubDate>Sun, 12 Feb 2023 20:19:40 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/superbowl/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>enshittification</title>
+      <link>https://rossabaker.com/tags/enshittification/</link>
+      <pubDate>Sun, 12 Feb 2023 18:09:30 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/enshittification/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>github</title>
+      <link>https://rossabaker.com/tags/github/</link>
+      <pubDate>Sun, 12 Feb 2023 18:09:30 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/github/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>copilot</title>
+      <link>https://rossabaker.com/tags/copilot/</link>
+      <pubDate>Fri, 10 Feb 2023 19:03:02 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/copilot/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>golang</title>
+      <link>https://rossabaker.com/tags/golang/</link>
+      <pubDate>Thu, 09 Feb 2023 12:48:40 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/golang/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>hugo</title>
+      <link>https://rossabaker.com/tags/hugo/</link>
+      <pubDate>Thu, 09 Feb 2023 05:54:52 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/hugo/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>catseffect</title>
+      <link>https://rossabaker.com/tags/catseffect/</link>
+      <pubDate>Tue, 07 Feb 2023 18:49:07 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/catseffect/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>open-telemetry</title>
+      <link>https://rossabaker.com/tags/open-telemetry/</link>
+      <pubDate>Tue, 07 Feb 2023 18:49:07 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/open-telemetry/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>matrix</title>
+      <link>https://rossabaker.com/tags/matrix/</link>
+      <pubDate>Fri, 27 Jan 2023 16:31:13 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/matrix/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>synapse</title>
+      <link>https://rossabaker.com/tags/synapse/</link>
+      <pubDate>Fri, 27 Jan 2023 16:31:13 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/synapse/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>gcp</title>
+      <link>https://rossabaker.com/tags/gcp/</link>
+      <pubDate>Fri, 27 Jan 2023 06:35:58 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/gcp/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>haskell</title>
+      <link>https://rossabaker.com/tags/haskell/</link>
+      <pubDate>Sun, 22 Jan 2023 15:56:32 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/haskell/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>playtwirl</title>
+      <link>https://rossabaker.com/tags/playtwirl/</link>
+      <pubDate>Thu, 12 Jan 2023 17:54:10 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/playtwirl/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>dork</title>
+      <link>https://rossabaker.com/tags/dork/</link>
+      <pubDate>Wed, 11 Jan 2023 04:57:31 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/dork/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>foss</title>
+      <link>https://rossabaker.com/tags/foss/</link>
+      <pubDate>Tue, 10 Jan 2023 00:29:26 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/foss/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>uspolitics</title>
+      <link>https://rossabaker.com/tags/uspolitics/</link>
+      <pubDate>Sat, 07 Jan 2023 05:12:48 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/uspolitics/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>servlet</title>
+      <link>https://rossabaker.com/tags/servlet/</link>
+      <pubDate>Fri, 06 Jan 2023 16:42:50 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/servlet/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>tomcat</title>
+      <link>https://rossabaker.com/tags/tomcat/</link>
+      <pubDate>Fri, 06 Jan 2023 16:42:50 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/tomcat/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>degamification</title>
+      <link>https://rossabaker.com/tags/degamification/</link>
+      <pubDate>Thu, 05 Jan 2023 20:25:40 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/degamification/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>wx</title>
+      <link>https://rossabaker.com/tags/wx/</link>
+      <pubDate>Tue, 03 Jan 2023 05:20:47 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/wx/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>code2022</title>
+      <link>https://rossabaker.com/tags/code2022/</link>
+      <pubDate>Sat, 31 Dec 2022 07:08:59 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/code2022/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>askfedi</title>
+      <link>https://rossabaker.com/tags/askfedi/</link>
+      <pubDate>Thu, 29 Dec 2022 17:34:04 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/askfedi/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>fediadmin</title>
+      <link>https://rossabaker.com/tags/fediadmin/</link>
+      <pubDate>Thu, 29 Dec 2022 17:34:04 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/fediadmin/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>pronounisland</title>
+      <link>https://rossabaker.com/tags/pronounisland/</link>
+      <pubDate>Thu, 29 Dec 2022 15:41:11 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/pronounisland/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>mastoadmin</title>
+      <link>https://rossabaker.com/tags/mastoadmin/</link>
+      <pubDate>Thu, 29 Dec 2022 06:35:26 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/mastoadmin/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>aquarium</title>
+      <link>https://rossabaker.com/tags/aquarium/</link>
+      <pubDate>Thu, 29 Dec 2022 05:46:36 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/aquarium/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>bayesian</title>
+      <link>https://rossabaker.com/tags/bayesian/</link>
+      <pubDate>Thu, 29 Dec 2022 05:46:36 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/bayesian/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>introduction</title>
+      <link>https://rossabaker.com/tags/introduction/</link>
+      <pubDate>Thu, 29 Dec 2022 05:46:36 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/introduction/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>methodist</title>
+      <link>https://rossabaker.com/tags/methodist/</link>
+      <pubDate>Thu, 29 Dec 2022 05:46:36 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/methodist/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>pronouns</title>
+      <link>https://rossabaker.com/tags/pronouns/</link>
+      <pubDate>Thu, 29 Dec 2022 05:46:36 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/pronouns/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>selfhosted</title>
+      <link>https://rossabaker.com/tags/selfhosted/</link>
+      <pubDate>Thu, 29 Dec 2022 05:46:36 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/selfhosted/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>soccer</title>
+      <link>https://rossabaker.com/tags/soccer/</link>
+      <pubDate>Thu, 29 Dec 2022 05:46:36 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/soccer/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>fail</title>
+      <link>https://rossabaker.com/tags/fail/</link>
+      <pubDate>Thu, 29 Dec 2022 05:18:13 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/fail/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>hetzner</title>
+      <link>https://rossabaker.com/tags/hetzner/</link>
+      <pubDate>Thu, 29 Dec 2022 05:18:13 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/hetzner/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>org-mode</title>
+      <link>https://rossabaker.com/tags/org-mode/</link>
+      <pubDate>Tue, 22 Nov 2022 15:53:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/org-mode/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>mastodon</title>
+      <link>https://rossabaker.com/tags/mastodon/</link>
+      <pubDate>Tue, 22 Nov 2022 00:14:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/mastodon/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>netlify</title>
+      <link>https://rossabaker.com/tags/netlify/</link>
+      <pubDate>Tue, 22 Nov 2022 00:14:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/netlify/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>redirects</title>
+      <link>https://rossabaker.com/tags/redirects/</link>
+      <pubDate>Tue, 22 Nov 2022 00:14:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/redirects/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>webfinger</title>
+      <link>https://rossabaker.com/tags/webfinger/</link>
+      <pubDate>Tue, 22 Nov 2022 00:14:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/webfinger/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>book</title>
+      <link>https://rossabaker.com/tags/book/</link>
+      <pubDate>Mon, 21 Nov 2022 21:03:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/book/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>http</title>
+      <link>https://rossabaker.com/tags/http/</link>
+      <pubDate>Mon, 21 Nov 2022 21:03:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/http/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>scalate</title>
+      <link>https://rossabaker.com/tags/scalate/</link>
+      <pubDate>Mon, 21 Nov 2022 21:03:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/scalate/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>scalatra</title>
+      <link>https://rossabaker.com/tags/scalatra/</link>
+      <pubDate>Mon, 21 Nov 2022 21:03:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/scalatra/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>own-your-data</title>
+      <link>https://rossabaker.com/tags/own-your-data/</link>
+      <pubDate>Tue, 08 Nov 2022 03:49:55 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/own-your-data/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>pesos</title>
+      <link>https://rossabaker.com/tags/pesos/</link>
+      <pubDate>Tue, 08 Nov 2022 03:49:55 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/pesos/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>activity-streams</title>
+      <link>https://rossabaker.com/tags/activity-streams/</link>
+      <pubDate>Mon, 07 Nov 2022 22:37:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/activity-streams/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>circe</title>
+      <link>https://rossabaker.com/tags/circe/</link>
+      <pubDate>Mon, 07 Nov 2022 22:37:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/circe/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>fs2</title>
+      <link>https://rossabaker.com/tags/fs2/</link>
+      <pubDate>Mon, 07 Nov 2022 22:37:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/fs2/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>microblog</title>
+      <link>https://rossabaker.com/tags/microblog/</link>
+      <pubDate>Mon, 07 Nov 2022 09:53:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/microblog/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>all-saints-sunday</title>
+      <link>https://rossabaker.com/tags/all-saints-sunday/</link>
+      <pubDate>Sun, 06 Nov 2022 17:12:26 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/all-saints-sunday/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>fediverse</title>
+      <link>https://rossabaker.com/tags/fediverse/</link>
+      <pubDate>Sun, 06 Nov 2022 15:53:43 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/fediverse/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>search</title>
+      <link>https://rossabaker.com/tags/search/</link>
+      <pubDate>Sun, 06 Nov 2022 15:53:43 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/search/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>posse</title>
+      <link>https://rossabaker.com/tags/posse/</link>
+      <pubDate>Sun, 06 Nov 2022 13:39:28 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/posse/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>creative-commons</title>
+      <link>https://rossabaker.com/tags/creative-commons/</link>
+      <pubDate>Sun, 06 Nov 2022 10:40:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/creative-commons/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>gpl</title>
+      <link>https://rossabaker.com/tags/gpl/</link>
+      <pubDate>Sun, 06 Nov 2022 10:40:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/gpl/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>brahms</title>
+      <link>https://rossabaker.com/tags/brahms/</link>
+      <pubDate>Sat, 05 Nov 2022 04:16:56 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/brahms/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>indieweb-social</title>
+      <link>https://rossabaker.com/tags/indieweb-social/</link>
+      <pubDate>Sat, 05 Nov 2022 03:55:13 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/indieweb-social/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>bears</title>
+      <link>https://rossabaker.com/tags/bears/</link>
+      <pubDate>Thu, 03 Nov 2022 18:26:19 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/bears/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>cbb</title>
+      <link>https://rossabaker.com/tags/cbb/</link>
+      <pubDate>Thu, 03 Nov 2022 18:26:19 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/cbb/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>cfb</title>
+      <link>https://rossabaker.com/tags/cfb/</link>
+      <pubDate>Thu, 03 Nov 2022 18:26:19 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/cfb/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>cubs</title>
+      <link>https://rossabaker.com/tags/cubs/</link>
+      <pubDate>Thu, 03 Nov 2022 18:26:19 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/cubs/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>hoosiers</title>
+      <link>https://rossabaker.com/tags/hoosiers/</link>
+      <pubDate>Thu, 03 Nov 2022 18:26:19 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/hoosiers/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>iubb</title>
+      <link>https://rossabaker.com/tags/iubb/</link>
+      <pubDate>Thu, 03 Nov 2022 18:26:19 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/iubb/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>iufb</title>
+      <link>https://rossabaker.com/tags/iufb/</link>
+      <pubDate>Thu, 03 Nov 2022 18:26:19 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/iufb/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>nba</title>
+      <link>https://rossabaker.com/tags/nba/</link>
+      <pubDate>Thu, 03 Nov 2022 18:26:19 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/nba/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>nfl</title>
+      <link>https://rossabaker.com/tags/nfl/</link>
+      <pubDate>Thu, 03 Nov 2022 18:26:19 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/nfl/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>pacers</title>
+      <link>https://rossabaker.com/tags/pacers/</link>
+      <pubDate>Thu, 03 Nov 2022 18:26:19 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/pacers/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>sports</title>
+      <link>https://rossabaker.com/tags/sports/</link>
+      <pubDate>Thu, 03 Nov 2022 18:26:19 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/sports/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>keyoxide</title>
+      <link>https://rossabaker.com/tags/keyoxide/</link>
+      <pubDate>Thu, 03 Nov 2022 16:30:11 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/keyoxide/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>verification</title>
+      <link>https://rossabaker.com/tags/verification/</link>
+      <pubDate>Thu, 03 Nov 2022 16:30:11 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/verification/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>pgp</title>
+      <link>https://rossabaker.com/tags/pgp/</link>
+      <pubDate>Thu, 03 Nov 2022 04:39:59 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/pgp/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>wkd</title>
+      <link>https://rossabaker.com/tags/wkd/</link>
+      <pubDate>Thu, 03 Nov 2022 04:39:59 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/wkd/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>fedisplaining</title>
+      <link>https://rossabaker.com/tags/fedisplaining/</link>
+      <pubDate>Thu, 03 Nov 2022 02:47:22 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/fedisplaining/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>blog</title>
+      <link>https://rossabaker.com/tags/blog/</link>
+      <pubDate>Wed, 02 Nov 2022 03:41:18 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/blog/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>ageing</title>
+      <link>https://rossabaker.com/tags/ageing/</link>
+      <pubDate>Tue, 01 Nov 2022 23:17:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/ageing/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>facebook</title>
+      <link>https://rossabaker.com/tags/facebook/</link>
+      <pubDate>Tue, 01 Nov 2022 23:17:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/facebook/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>juvenilia</title>
+      <link>https://rossabaker.com/tags/juvenilia/</link>
+      <pubDate>Tue, 01 Nov 2022 23:17:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/juvenilia/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>perfectionism</title>
+      <link>https://rossabaker.com/tags/perfectionism/</link>
+      <pubDate>Tue, 01 Nov 2022 23:17:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/perfectionism/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>moderation</title>
+      <link>https://rossabaker.com/tags/moderation/</link>
+      <pubDate>Tue, 01 Nov 2022 19:24:12 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/moderation/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>config</title>
+      <link>https://rossabaker.com/tags/config/</link>
+      <pubDate>Tue, 01 Nov 2022 01:43:47 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/config/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>reintroduction</title>
+      <link>https://rossabaker.com/tags/reintroduction/</link>
+      <pubDate>Tue, 01 Nov 2022 01:43:47 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/reintroduction/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>the-decision</title>
+      <link>https://rossabaker.com/tags/the-decision/</link>
+      <pubDate>Tue, 01 Nov 2022 00:53:13 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/the-decision/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>macroblogging</title>
+      <link>https://rossabaker.com/tags/macroblogging/</link>
+      <pubDate>Mon, 31 Oct 2022 14:20:25 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/macroblogging/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>going-viral</title>
+      <link>https://rossabaker.com/tags/going-viral/</link>
+      <pubDate>Mon, 31 Oct 2022 12:29:14 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/going-viral/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>trick-or-treat</title>
+      <link>https://rossabaker.com/tags/trick-or-treat/</link>
+      <pubDate>Sun, 30 Oct 2022 17:35:53 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/trick-or-treat/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>content-warning</title>
+      <link>https://rossabaker.com/tags/content-warning/</link>
+      <pubDate>Sun, 30 Oct 2022 02:12:12 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/content-warning/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>feditips</title>
+      <link>https://rossabaker.com/tags/feditips/</link>
+      <pubDate>Fri, 28 Oct 2022 14:16:40 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/feditips/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>cohost</title>
+      <link>https://rossabaker.com/tags/cohost/</link>
+      <pubDate>Fri, 28 Oct 2022 12:39:06 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/cohost/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>doomscrolling</title>
+      <link>https://rossabaker.com/tags/doomscrolling/</link>
+      <pubDate>Fri, 28 Oct 2022 03:10:25 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/doomscrolling/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>cli</title>
+      <link>https://rossabaker.com/tags/cli/</link>
+      <pubDate>Thu, 27 Oct 2022 15:50:09 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/cli/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>kleisli</title>
+      <link>https://rossabaker.com/tags/kleisli/</link>
+      <pubDate>Fri, 21 Oct 2022 04:18:34 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/kleisli/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>instance</title>
+      <link>https://rossabaker.com/tags/instance/</link>
+      <pubDate>Fri, 21 Oct 2022 02:41:01 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/instance/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>gitter</title>
+      <link>https://rossabaker.com/tags/gitter/</link>
+      <pubDate>Sun, 16 Oct 2022 20:52:43 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/gitter/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>contact</title>
+      <link>https://rossabaker.com/tags/contact/</link>
+      <pubDate>Sun, 16 Oct 2022 15:37:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/contact/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>html</title>
+      <link>https://rossabaker.com/tags/html/</link>
+      <pubDate>Wed, 12 Oct 2022 00:05:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/html/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>keys</title>
+      <link>https://rossabaker.com/tags/keys/</link>
+      <pubDate>Wed, 14 Sep 2022 13:30:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/keys/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>eulogy</title>
+      <link>https://rossabaker.com/tags/eulogy/</link>
+      <pubDate>Mon, 12 Sep 2022 00:32:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/eulogy/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>grandma</title>
+      <link>https://rossabaker.com/tags/grandma/</link>
+      <pubDate>Mon, 12 Sep 2022 00:32:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/grandma/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>css</title>
+      <link>https://rossabaker.com/tags/css/</link>
+      <pubDate>Fri, 02 Sep 2022 13:16:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/css/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>tag-cloud</title>
+      <link>https://rossabaker.com/tags/tag-cloud/</link>
+      <pubDate>Fri, 02 Sep 2022 13:07:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/tag-cloud/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>taxonomy</title>
+      <link>https://rossabaker.com/tags/taxonomy/</link>
+      <pubDate>Fri, 02 Sep 2022 13:07:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/taxonomy/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>babel</title>
+      <link>https://rossabaker.com/tags/babel/</link>
+      <pubDate>Thu, 01 Sep 2022 16:54:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/babel/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>biography</title>
+      <link>https://rossabaker.com/tags/biography/</link>
+      <pubDate>Wed, 31 Aug 2022 00:23:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/biography/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>weather</title>
+      <link>https://rossabaker.com/tags/weather/</link>
+      <pubDate>Sun, 28 Aug 2022 21:03:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/weather/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>gitattributes</title>
+      <link>https://rossabaker.com/tags/gitattributes/</link>
+      <pubDate>Wed, 24 Aug 2022 15:04:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/gitattributes/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>org</title>
+      <link>https://rossabaker.com/tags/org/</link>
+      <pubDate>Mon, 27 Jun 2022 20:13:45 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/org/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>scalacheck</title>
+      <link>https://rossabaker.com/tags/scalacheck/</link>
+      <pubDate>Wed, 22 Jun 2022 05:02:45 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/scalacheck/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>terraform</title>
+      <link>https://rossabaker.com/tags/terraform/</link>
+      <pubDate>Thu, 05 May 2022 22:39:59 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/terraform/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>orgmode</title>
+      <link>https://rossabaker.com/tags/orgmode/</link>
+      <pubDate>Mon, 02 May 2022 14:59:01 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/orgmode/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>b1g</title>
+      <link>https://rossabaker.com/tags/b1g/</link>
+      <pubDate>Wed, 27 Apr 2022 02:23:12 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/b1g/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>curling</title>
+      <link>https://rossabaker.com/tags/curling/</link>
+      <pubDate>Wed, 27 Apr 2022 02:23:12 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/curling/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>italian-beef</title>
+      <link>https://rossabaker.com/tags/italian-beef/</link>
+      <pubDate>Wed, 27 Apr 2022 02:23:12 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/italian-beef/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>zappa</title>
+      <link>https://rossabaker.com/tags/zappa/</link>
+      <pubDate>Wed, 27 Apr 2022 02:23:12 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/zappa/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>cat</title>
+      <link>https://rossabaker.com/tags/cat/</link>
+      <pubDate>Tue, 26 Apr 2022 03:54:05 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/cat/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>fishkeeping</title>
+      <link>https://rossabaker.com/tags/fishkeeping/</link>
+      <pubDate>Tue, 26 Apr 2022 03:54:05 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/fishkeeping/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>iums</title>
+      <link>https://rossabaker.com/tags/iums/</link>
+      <pubDate>Tue, 26 Apr 2022 03:54:05 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/iums/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>hockey</title>
+      <link>https://rossabaker.com/tags/hockey/</link>
+      <pubDate>Sat, 08 Feb 2020 00:00:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/hockey/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>podcast</title>
+      <link>https://rossabaker.com/tags/podcast/</link>
+      <pubDate>Sat, 08 Feb 2020 00:00:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/podcast/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>scala-logs</title>
+      <link>https://rossabaker.com/tags/scala-logs/</link>
+      <pubDate>Sat, 08 Feb 2020 00:00:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/scala-logs/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>algebra</title>
+      <link>https://rossabaker.com/tags/algebra/</link>
+      <pubDate>Mon, 02 Dec 2019 00:00:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/algebra/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>indyscala</title>
+      <link>https://rossabaker.com/tags/indyscala/</link>
+      <pubDate>Mon, 02 Dec 2019 00:00:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/indyscala/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>corecursive</title>
+      <link>https://rossabaker.com/tags/corecursive/</link>
+      <pubDate>Fri, 27 Jul 2018 00:00:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/corecursive/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>functional-programming</title>
+      <link>https://rossabaker.com/tags/functional-programming/</link>
+      <pubDate>Fri, 27 Jul 2018 00:00:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/functional-programming/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>remote-work</title>
+      <link>https://rossabaker.com/tags/remote-work/</link>
+      <pubDate>Fri, 27 Jul 2018 00:00:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/remote-work/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>akka</title>
+      <link>https://rossabaker.com/tags/akka/</link>
+      <pubDate>Mon, 04 Nov 2013 00:00:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/akka/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>netty</title>
+      <link>https://rossabaker.com/tags/netty/</link>
+      <pubDate>Mon, 04 Nov 2013 00:00:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/netty/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>anorm</title>
+      <link>https://rossabaker.com/tags/anorm/</link>
+      <pubDate>Mon, 13 Aug 2012 00:00:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/anorm/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>sql</title>
+      <link>https://rossabaker.com/tags/sql/</link>
+      <pubDate>Mon, 13 Aug 2012 00:00:00 +0000</pubDate>
+      <guid>https://rossabaker.com/tags/sql/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

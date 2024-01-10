@@ -1,0 +1,25 @@
+/configs/managing-generated-sources-in-git /configs/git-repository
+
+/.well-known/webfinger https://social.rossabaker.com/.well-known/webfinger
+
+/projects/webfinger /configs/webfinger
+
+/configs/css /configs/website/style
+
+/configs/nix /configs/nix-flake
+
+/configs/darwin /configs/nix-darwin
+/configs/nix/darwin /configs/nix-darwin
+
+/configs/nix/devshells /configs/devshells
+
+/configs/nix/devshells/modern-time-series-forecasting-with-python /configs/devshells/modern-time-series-forecasting-with-python
+
+/configs/nix/hyperlink /configs/hyperlink
+
+/projects/matrix-home-server /configs/matrix
+
+/configs/web-directory /configs/web-key-directory
+/projects/web-key-directory /configs/web-key-directory
+
+/projects/december-adventure /blog/december-adventure-2023

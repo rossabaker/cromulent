@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ox-hugo on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/ox-hugo/</link>
+    <description>Recent content in ox-hugo on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 10 Sep 2023 01:23:00 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/ox-hugo/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Ox-Hugo extensions</title>
+      <link>https://rossabaker.com/configs/emacs/rab-ox-hugo/</link>
+      <pubDate>Sun, 10 Sep 2023 01:23:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/emacs/rab-ox-hugo/</guid>
+      <description>Dependencies # GPL-3.0-only&#xA;(require &amp;#39;cl-macs) (require &amp;#39;ox-hugo) (require &amp;#39;s) Customization group # Needed because of our minor mode.&#xA;GPL-3.0-only&#xA;(defgroup rab/ox-hugo nil &amp;#34;Ross A. Baker&amp;#39;s Ox-Hugo extensions.&amp;#34; :group &amp;#39;org-export-hugo) Code licensing # We lightly customize Ox-Hugo by adding support for a :code-license header. The technique is inspired by Sacha Chua&amp;rsquo;s custom summary header.&#xA;When exporting, a source block is replaced with org-babel-exp-code-template, which is filled by org-fill-template. This enhancement will only work when the template propagates this header argument.</description>
+    </item>
+    <item>
+      <title>Ox. Hugo. Why not both?</title>
+      <link>https://rossabaker.com/blog/ox-hugo-why-not-both/</link>
+      <pubDate>Tue, 22 Nov 2022 15:53:00 +0000</pubDate>
+      <guid>https://rossabaker.com/blog/ox-hugo-why-not-both/</guid>
+      <description>This site is built on a static site generator (SSG). They are a dime a dozen. I chose a less mainstream one, ox-hugo. After recently questioning that choice, I have new clarity on why it&amp;rsquo;s right for me.&#xA;The goal # I want to write and sometimes generate content in a markup language. The SSG generator should apply a template, create aggregate views (such as tags), and output a directory that can be served off a cloud CDN, self-hosted with open source like nginx, or even out of a local directory with a simple Rust binary.</description>
+    </item>
+    <item>
+      <title>Build website with Nix</title>
+      <link>https://rossabaker.com/configs/website/build/</link>
+      <pubDate>Thu, 01 Sep 2022 16:54:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/build/</guid>
+      <description>The website is just another package within our flake.&#xA;Export script # export.el is a small Emacs script that finds the Org file and exports its contents with ox-hugo.&#xA;MIT&#xA;(require &amp;#39;ob-dot) (require &amp;#39;ob-shell) (require &amp;#39;rab-ox-hugo) (rab/ox-hugo-mode) (with-current-buffer (find-file-noselect &amp;#34;src/org/cromulent.org&amp;#34;) (let ((org-confirm-babel-evaluate nil)) (org-babel-tangle) (org-hugo-export-wim-to-md t))) Nix derivation # The build first runs the export script to tangle the files and export to Hugo sources. Hugo is then run to create a public/ directory.</description>
+    </item>
+    <item>
+      <title>Hugo configuration</title>
+      <link>https://rossabaker.com/configs/website/hugo/</link>
+      <pubDate>Thu, 01 Sep 2022 16:48:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/website/hugo/</guid>
+      <description>&lt;p&gt;Hugo can be configured with either TOML or YAML.  I spent my weirdness&#xA;budget on a literate config, so let&amp;rsquo;s stick to the default.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

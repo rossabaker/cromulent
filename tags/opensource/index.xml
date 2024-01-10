@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>opensource on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/opensource/</link>
+    <description>Recent content in opensource on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 04 May 2023 16:55:08 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/opensource/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110311460629394430/</link>
+      <pubDate>Thu, 04 May 2023 16:55:08 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110311460629394430/</guid>
+      <description>I just reviewed both the Apache 2 and MIT licenses. Great news: nothing compels us to collaborate with or otherwise support transphobes with our free labor!&#xA;#OpenSource</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110183737511916375/</link>
+      <pubDate>Wed, 12 Apr 2023 03:33:28 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110183737511916375/</guid>
+      <description>There&amp;#39;s an underpopulated place in open source right now between the rabidity of the FSF and the foolishness of &amp;quot;join our Discord.&amp;quot; Where are the communities that will be relevant in a decade?&#xA;#OpenSource</description>
+    </item>
+  </channel>
+</rss>

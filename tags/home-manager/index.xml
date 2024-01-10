@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>home-manager on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/home-manager/</link>
+    <description>Recent content in home-manager on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 08 Sep 2023 16:59:00 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/home-manager/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Home Manager</title>
+      <link>https://rossabaker.com/configs/home-manager/</link>
+      <pubDate>Fri, 08 Sep 2023 16:59:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/home-manager/</guid>
+      <description>We prefer to keep a robust user environment along with a lean configurations for NixOS and nix-darwin. This keeps our environment maximally portable between those operating systems, as well as any other hosts that support the Nix package manager (e.g., Debian).&#xA;Base configuration # This is imported from preliterate times and should be broken up further.&#xA;MIT&#xA;{ moduleWithSystem, ... }: { flake.homeModules.base = moduleWithSystem( perSystem@{ pkgs, inputs&amp;#39; }: { # Curiously not a default of home-manager, but required once we # start configuring Nix otherwise.</description>
+    </item>
+    <item>
+      <title>Garnix</title>
+      <link>https://rossabaker.com/configs/garnix/</link>
+      <pubDate>Fri, 23 Jun 2023 00:26:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/garnix/</guid>
+      <description>This integration is paused while we await alternatives to GitHub.&#xA;I have an Apple M1 for work, which is not yet supported by GitHub Actions. That&amp;rsquo;s okay, because Garnix is a great alternative.&#xA;Continuous integration # On each push to GitHub, Garnix is triggered to build:&#xA;Our default dev shell Our default nix-darwin configuration Our default Home Manager configuration At this time, we only build for aarch64-darwin with Garnix.</description>
+    </item>
+    <item>
+      <title>Scala configuration</title>
+      <link>https://rossabaker.com/configs/scala/</link>
+      <pubDate>Tue, 09 May 2023 09:27:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/scala/</guid>
+      <description>This configuration provides a module to Home Manager. It sets up a global SBT, a few plugins, and some gitignores relevant to Scala.&#xA;Sonatype credentials # This tells sbt where to look for our Sonatype credentials.&#xA;CC0-1.0&#xA;credentials += Credentials(Path.userHome / &amp;#34;.sbt&amp;#34; / &amp;#34;sonatype-credentials.properties&amp;#34;) Code Snippet 1: ~/.sbt/1.0/sonatype.sbt This will not work until a credentials file is added:&#xA;realm=Sonatype Nexus Repository Manager host=oss.sonatype.org user=&amp;lt;&amp;lt;username&amp;gt;&amp;gt; password=&amp;lt;&amp;lt;password&amp;gt;&amp;gt; Code Snippet 1: ~/.sbt/sonatype-credentials.properties This file contains a secret, and is not installed by our Nix derivation!</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on Ross A. Baker</title>
+    <link>https://rossabaker.com/categories/</link>
+    <description>Recent content in Categories on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 07 Jan 2024 10:40:00 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>tech</title>
+      <link>https://rossabaker.com/categories/tech/</link>
+      <pubDate>Sun, 07 Jan 2024 10:40:00 +0000</pubDate>
+      <guid>https://rossabaker.com/categories/tech/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>sports</title>
+      <link>https://rossabaker.com/categories/sports/</link>
+      <pubDate>Thu, 10 Aug 2023 13:11:00 +0000</pubDate>
+      <guid>https://rossabaker.com/categories/sports/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>personal</title>
+      <link>https://rossabaker.com/categories/personal/</link>
+      <pubDate>Mon, 07 Nov 2022 09:53:00 +0000</pubDate>
+      <guid>https://rossabaker.com/categories/personal/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

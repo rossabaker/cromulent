@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>podman on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/podman/</link>
+    <description>Recent content in podman on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 16 Sep 2023 22:51:00 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/podman/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Podman</title>
+      <link>https://rossabaker.com/configs/podman/</link>
+      <pubDate>Sat, 16 Sep 2023 22:51:00 +0000</pubDate>
+      <guid>https://rossabaker.com/configs/podman/</guid>
+      <description>I don&amp;rsquo;t have enough interest nor expertise in containers to add much to the Podman vs. Docker debate. I chose Podman for two reasons:&#xA;Podman is configurable with Nix-Darwin. Podman&amp;rsquo;s daemonless architecture is one less running root. NixOS # Enabling Podman on NixOS can be reduced to a one-liner. The default storage is overlay.&#xA;CC-BY-SA-4.0&#xA;{ flake.nixosModules.podman = { virtualisation.podman.enable = true; }; } Nix-Darwin # There&amp;rsquo;s no Docker virtualization in Nix-Darwin 1, nor is there any virtualisation config at all.</description>
+    </item>
+  </channel>
+</rss>

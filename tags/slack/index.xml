@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>slack on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/slack/</link>
+    <description>Recent content in slack on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 07 Apr 2023 14:52:14 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/slack/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110158094954284802/</link>
+      <pubDate>Fri, 07 Apr 2023 14:52:14 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110158094954284802/</guid>
+      <description>When you check &amp;quot;Format messages with markup&amp;quot; in Slack&amp;#39;s advanced settings, in addition to escaping the maw of its WYSIWYG editor, you can use Markdown link syntax!&#xA;#Slack #Markdown</description>
+    </item>
+  </channel>
+</rss>

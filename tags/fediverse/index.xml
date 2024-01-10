@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>fediverse on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/fediverse/</link>
+    <description>Recent content in fediverse on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 06 Nov 2022 15:53:43 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/fediverse/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/indieweb.social/rossabaker/109297665538751644/</link>
+      <pubDate>Sun, 06 Nov 2022 15:53:43 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/indieweb.social/rossabaker/109297665538751644/</guid>
+      <description>Thoughts on https://mastovue.glitch.me/#/? It solves the small-instance problem of search finding only federated content, but it seems abusive of larger instances.&#xA;#search #fediverse</description>
+    </item>
+  </channel>
+</rss>

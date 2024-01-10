@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>calculus on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/calculus/</link>
+    <description>Recent content in calculus on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 17 Feb 2023 00:10:33 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/calculus/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109877174855277763/</link>
+      <pubDate>Fri, 17 Feb 2023 00:10:33 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109877174855277763/</guid>
+      <description>Had a fun conversation with a @zachmccoy about graphing second derivatives with Prometheus, until we realized I did that with another backend a couple years before Prometheus came to prominence, and now One Derivative Is Enough For Anybody.&#xA;Also fondly remembering my third derivative, which was mostly useful so I could call it The Jerk Graph.&#xA;#Prometheus #Calculus</description>
+    </item>
+  </channel>
+</rss>

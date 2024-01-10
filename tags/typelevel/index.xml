@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>typelevel on Ross A. Baker</title>
+    <link>https://rossabaker.com/tags/typelevel/</link>
+    <description>Recent content in typelevel on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 14 May 2023 01:15:41 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/tags/typelevel/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110364389666761105/</link>
+      <pubDate>Sun, 14 May 2023 01:15:41 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110364389666761105/</guid>
+      <description>Caution: cats-effect-3.5 broke both http4s-blaze and http4s-servlet backends. Working on it. http4s-ember-0.23.19 is fine.&#xA;#Scala #Typelevel #http4s</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/110353396312274020/</link>
+      <pubDate>Fri, 12 May 2023 02:39:56 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/110353396312274020/</guid>
+      <description>A short response on why there&amp;#39;s not a useful `Otel4s[Future]`, which is roughly the same reason most Typelevel libraries don&amp;#39;t provide `Future`-based implementations. It&amp;#39;s not spite.&#xA;https://github.com/typelevel/otel4s/issues/210#issuecomment-1545022660&#xA;#Scala #Typelevel #Otel4s</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109832256826889128/</link>
+      <pubDate>Thu, 09 Feb 2023 01:47:19 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109832256826889128/</guid>
+      <description>http4s-jdk-client-0.9 and 1.0.0-M9 are out. They use fs2-3.6.0&amp;#39;s new integration with Java&amp;#39;s Flow to drop the depenedency on fs2-reactive-streams. This is a nice streamlining for projects that have dropped Java 8.&#xA;https://github.com/http4s/http4s-jdk-http-client/releases/tag/v0.9.0&#xA;#http4s #Typelevel #Scala</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109824950098770022/</link>
+      <pubDate>Tue, 07 Feb 2023 18:49:07 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109824950098770022/</guid>
+      <description>First public release of otel4s, an OpenTelemetry implementation for Cats Effect. otel4s aims to be a full and faithful impemenation of the OpenTelemetry Specification, built for the idioms of the Typelevel ecosystem.&#xA;https://github.com/typelevel/otel4s/discussions/121&#xA;#Otel4s #Typelevel #Scala #OpenTelemetry #CatsEffect</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109797414399585260/</link>
+      <pubDate>Thu, 02 Feb 2023 22:06:25 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109797414399585260/</guid>
+      <description>Society if this printed `1`:&#xA;```&#xA;statefulIO(0).flatMap {&#xA;(stateful: cats.mtl.Stateful[IO, Int]) =&amp;gt;&#xA;stateful.set(1).race(IO.never) &amp;gt;&amp;gt;&#xA;stateful.get.flatMap(IO.println)&#xA;}&#xA;```&#xA;#Typelevel #Scala</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109747212105028452/</link>
+      <pubDate>Wed, 25 Jan 2023 01:19:19 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109747212105028452/</guid>
+      <description>http4s-1.0.0-M39 is out. It&amp;#39;s the dev line, with the production fixes from 0.23.18.&#xA;This one is binary compatible with the last milestone, but if you need the satellite repos rereleased, speak up here:&#xA;https://github.com/http4s/http4s/discussions/6941&#xA;#Scala #Typelevel #http4s</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109740510632680621/</link>
+      <pubDate>Mon, 23 Jan 2023 20:55:03 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109740510632680621/</guid>
+      <description>There is now an org-level project with Good First Issue tickets across both Typelevel and affiliate projects.&#xA;https://github.com/orgs/typelevel/projects/1/&#xA;#Typelevel #Scala</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109740426441917010/</link>
+      <pubDate>Mon, 23 Jan 2023 20:33:38 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109740426441917010/</guid>
+      <description>If anyone wants to dip their toe into the waters of open source, this is an easy first pull request. I can explain more if it&amp;#39;s not clear what&amp;#39;s going on there. Please comment on the issue if you want to take it.&#xA;https://github.com/typelevel/otel4s/issues/87&#xA;#Scala #Typelevel #Otel4s</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109713010957712376/</link>
+      <pubDate>Thu, 19 Jan 2023 00:21:31 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109713010957712376/</guid>
+      <description>Because I&amp;#39;m tired of being confused by object pools and their limitations and aliases, even though I&amp;#39;m supposed to be maintaining a couple:&#xA;https://github.com/typelevel/keypool/discussions/442&#xA;Corrections welcome.&#xA;#Scala #Typelevel</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109708377359311207/</link>
+      <pubDate>Wed, 18 Jan 2023 04:43:08 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109708377359311207/</guid>
+      <description>http4s-0.23.18 is out. Fixes a `StackOverflowError` that hit users with unusually small stacks, and a few optimizations hither and yon.&#xA;https://github.com/http4s/http4s/releases/tag/v0.23.18&#xA;#http4s #Typelevel #Scala</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109677513970467422/</link>
+      <pubDate>Thu, 12 Jan 2023 17:54:10 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109677513970467422/</guid>
+      <description>http4s-twirl releases are out, courtesy of Kailuo Wang:&#xA;* 0.23.17 makes the jump from scala-xml-1 to scala-xml-2. Beware, binary breaking!&#xA;* 0.24.0-M1 is based on twirl-1.6 milestones for Scala 3 support.&#xA;Server-side templates are cool again.&#xA;#http4s #Typelevel #PlayTwirl</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109676627140428880/</link>
+      <pubDate>Thu, 12 Jan 2023 14:08:38 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109676627140428880/</guid>
+      <description>Faffing about with free invariant algebras to define HTTP codecs in a way that can be shared across backends. Computers can be fun sometimes.&#xA;https://github.com/http4s/http4s/pull/6917&#xA;#http4s #Typelevel #Scala</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109631425715706011/</link>
+      <pubDate>Wed, 04 Jan 2023 14:33:19 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109631425715706011/</guid>
+      <description>http4s security patches:&#xA;* 0.21.34&#xA;* 0.22.15&#xA;* 0.23.17&#xA;* 1.0.0-M38&#xA;We can talk about cool stuff later, but please patch ASAP if you&amp;#39;re parsing a User-Agent or Server header.&#xA;https://github.com/http4s/http4s/security/advisories/GHSA-54w6-vxfh-fw7f&#xA;#http4s #Typelevel #Scala</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/social.rossabaker.com/ross/109595380738434617/</link>
+      <pubDate>Thu, 29 Dec 2022 05:46:36 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/social.rossabaker.com/ross/109595380738434617/</guid>
+      <description>Post-disaster #Introduction:&#xA;I am best known for #Scala, #Typelevel, and #http4s. I geek out over #Emacs, #Nix, and the #Indieweb. I&amp;#39;m probably a #Bayesian.&#xA;I live in #Indianapolis, #Indiana with a #Dachshund, #Coonhound, #TuxedoCat, and a freshwater #Aquarium or five. I offset my #Jogging with #BBQ. I coach youth #Soccer and attend North United #Methodist Church.&#xA;This is a #SelfHosted sequel after a Terraform disaster. Boosts appreciated to relocate my peeps.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/indieweb.social/rossabaker/109306144082815818/</link>
+      <pubDate>Tue, 08 Nov 2022 03:49:55 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/indieweb.social/rossabaker/109306144082815818/</guid>
+      <description>How I archived toots from my prior instance to my personal Hugo site:&#xA;https://rossabaker.com/projects/toot-archive/&#xA;#Indieweb #PESOS #OwnYourData #Hugo #ScalaCLI #Typelevel</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/indieweb.social/rossabaker/109266011901701598/</link>
+      <pubDate>Tue, 01 Nov 2022 01:43:47 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/indieweb.social/rossabaker/109266011901701598/</guid>
+      <description>Post-move #reintroduction:&#xA;I&amp;#39;m a software engineer, mostly #Typelevel #Scala. I started #http4s and love #FP and #FOSS.&#xA;I&amp;#39;m getting into the #Indieweb, where I&amp;#39;ll #blog and share my #config, talks, and other projects. I geek out over #Emacs and #Nix. I&amp;#39;m probably also a #Bayesian.&#xA;I have a #dachshund, #coonhound, #tuxedoCat, and multiple freshwater #aquarium. I live in #Indianapolis, where I coach youth #soccer, attend North #UMC, and cheer on my beloved #Hoosiers.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://rossabaker.com/notes/mastodon.social/rossabaker/108196347588800056/</link>
+      <pubDate>Tue, 26 Apr 2022 03:54:05 +0000</pubDate>
+      <guid>https://rossabaker.com/notes/mastodon.social/rossabaker/108196347588800056/</guid>
+      <description>#introduction: I&amp;#39;m a software developer from #Indianapolis. I mostly write #Scala and #fp. I&amp;#39;m a contributor to #Typelevel and co-founder of #http4s. I nerd out over #Emacs and #Nix.&#xA;Also enjoy #bbq and freshwater #fishkeeping. I have a #dachshund and a #coonhound and a tuxedo #cat. A couple kids, too, but the pets get more clicks.&#xA;Pronouns are he/him.&#xA;Go Hoosiers. #GoIU #iufb #iubb #iums</description>
+    </item>
+  </channel>
+</rss>

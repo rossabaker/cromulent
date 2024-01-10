@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Projects on Ross A. Baker</title>
+    <link>https://rossabaker.com/projects/</link>
+    <description>Recent content in Projects on Ross A. Baker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 07 Nov 2022 22:35:00 +0000</lastBuildDate>
+    <atom:link href="https://rossabaker.com/projects/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Finger me</title>
+      <link>https://rossabaker.com/projects/finger/</link>
+      <pubDate>Sun, 16 Jul 2023 22:51:00 +0000</pubDate>
+      <guid>https://rossabaker.com/projects/finger/</guid>
+      <description>Long ago, I stumbled across HyperTerminal on the family Windows 95 machine. I figured out how to dial into my mom-and-pop ISP with that, and had my first shell access on a multi-user machine. Magical. A friendly admin taught me a lot, including how to make a .plan on one of the great social networks of the day, Finger.&#xA;I can be fingered once again on Happy Net Box. Run this from your own shell:</description>
+    </item>
+    <item>
+      <title>Scalatra in Action</title>
+      <link>https://rossabaker.com/projects/scalatra-in-action/</link>
+      <pubDate>Mon, 21 Nov 2022 21:03:00 +0000</pubDate>
+      <guid>https://rossabaker.com/projects/scalatra-in-action/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://www.manning.com/books/scalatra-in-action&#34;&gt;Scalatra in Action&lt;/a&gt; was written by &lt;a href=&#34;https://constructiveproof.com/&#34;&gt;Dave Hrycyszyn,&lt;/a&gt; Stefan Ollinger, and&#xA;me and covers the &lt;a href=&#34;https://scalatra.org/&#34;&gt;Scalatra micro-framework&lt;/a&gt; in depth.  Scalatra is a&#xA;port of Ruby&amp;rsquo;s Sinatra to Scala.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Archive your toots to Hugo</title>
+      <link>https://rossabaker.com/projects/toot-archive/</link>
+      <pubDate>Mon, 07 Nov 2022 22:37:00 +0000</pubDate>
+      <guid>https://rossabaker.com/projects/toot-archive/</guid>
+      <description>An important Indieweb principle is to own your data. I tooted on mastodon.social sporadically for five years. The service is public, the protocol open, and the implementation open source. Still, it exists at the pleasure of its admins, with whom I have no contract.&#xA;After moving to another instance, I wanted to preserve my old content. We will use a technique called PESOS, or Publish Elsewhere, Syndicate to Own Site.</description>
+    </item>
+    <item>
+      <title>Personal Weather Station</title>
+      <link>https://rossabaker.com/projects/personal-weather-station/</link>
+      <pubDate>Sun, 28 Aug 2022 21:03:00 +0000</pubDate>
+      <guid>https://rossabaker.com/projects/personal-weather-station/</guid>
+      <description>I run an Ambient Weather WS-1400-IP weather station in the Castleton neighborhood of Indianapolis and share its public dashboard. The anemometer is not raised high enough for accuracy, but the rest is reasonably accurate.&#xA;I learned on 2022-09-06 that the Indianapolis Metropolitan Airport is now publishing METAR data. That airport is just a mile away, and certainly has a more credible weather station, but it&amp;rsquo;s fun to compare to mine.</description>
+    </item>
+  </channel>
+</rss>
